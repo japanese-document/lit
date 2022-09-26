@@ -61,7 +61,7 @@ function createDescription(html) {
 }
 
 function createURL(dir, name) {
-  return `${BASE_URL}/${dir.slice(6)}/${name}.html`
+  return `${BASE_URL}/${name}.html`
 }
 
 function createHTML(title, body, description, url, cssPath) {
