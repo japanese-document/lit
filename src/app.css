@@ -1,0 +1,57 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Meiryo,Hiragino Fixed,sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1000px 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.main {
+  padding: 1.25rem;
+  font-size: 16px;
+}
+
+footer {
+  padding: 1.25rem;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+:is(h1, h2, h3, h4, h5, h6) a {
+  color: initial;
+}
+
+
+/* MIT © GitHub */
+
+* {
+  --color-danger-fg: #cf222e;
+  --color-border-default: #d0d7de;
+  --color-border-muted: hsla(210,18%,87%,1);
+  --color-canvas-subtle: #f6f8fa;
+  --color-fg-default: #24292f;
+  --color-fg-muted: #57606a;
+  --color-neutral-muted: rgba(175,184,193,0.2);
+  --color-accent-emphasis: #0969da;
+  --color-accent-fg: #0969da;
+}
+
+code {
+  font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+}
