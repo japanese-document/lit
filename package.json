@@ -1,0 +1,30 @@
+{
+  "name": "lit",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "css:links": "sass --no-source-map node_modules/@primer/css/links/index.scss docs/links.css", 
+    "css:md": "sass --no-source-map node_modules/@primer/css/markdown/index.scss docs/markdown.css", 
+    "css:cat": "cat src/app.css docs/markdown.css docs/links.css > docs/app.css", 
+    "postcss:cat": "rm docs/markdown.css docs/links.css", 
+    "css": "npm run css:links && npm run css:md && npm run css:cat", 
+    "docs": "rm -rf docs && mkdir docs",
+    "predev": "npm run docs",
+    "dev": "node index.mjs --dev && npm run css",
+    "prebuild": "npm run docs",
+    "build": "node index.mjs && npm run css"
+  },
+  "engines": {
+    "node": ">=18.3.0"
+  },
+  "dependencies": {
+    "@primer/css": "^20.4.4",
+    "dompurify": "^2.4.0",
+    "glob": "^8.0.3",
+    "jsdom": "^20.0.0",
+    "marked": "^4.0.19"
+  },
+  "devDependencies": {
+    "sass": "^1.54.9"
+  }
+}
