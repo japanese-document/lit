@@ -2,7 +2,10 @@
 ---
 # Expressions
 
-Lit templates can include dynamic values called expressions. An expression can be any JavaScript expression. The expression is evaluated when the template is evaluated, and the result of the expression is included when the template renders. In a Lit component, this means whenever the `render` method is called.
+Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。
+エクスプレッションをJavaScriptの[式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E5%BC%8F)にすることもできます。
+エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。
+Litコンポーネントは`render`メソッドを実行する毎にこれをします。
 
 Expressions can only be placed in specific locations in the template, and how an expression is interpreted depends on where it appears. Expressions inside the element tag itself affect the element. Expressions inside the element's content, where child nodes go, render child nodes or text.
 
@@ -32,6 +35,7 @@ html`<div class=${highlightClass}></div>`
 
 ```js
 html`<div ?hidden=${!show}></div>`
+```
 
 * [Properties](#property-expressions)
 
