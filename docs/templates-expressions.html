@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-expressions.html" />
     <meta property="og:title" content="Expressions" />
-    <meta property="og:description" content="Lit templates can include dynamic values called expressions. An expression can be any JavaScript expression. The expression is evaluated when the template is evaluated, and the result of the expression is included when the template renders. In a Lit component, this means whenever the render method i" />
+    <meta property="og:description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。Expressions can only be placed in specific locations in the template, and how an expression is interpreted depend" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Lit templates can include dynamic values called expressions. An expression can be any JavaScript expression. The expression is evaluated when the template is evaluated, and the result of the expression is included when the template renders. In a Lit component, this means whenever the render method i" />
+    <meta name="description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。Expressions can only be placed in specific locations in the template, and how an expression is interpreted depend" />
     <title>Expressions</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -24,7 +24,10 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="Expressions"><a href="#Expressions">Expressions</a></h1>
-<p>Lit templates can include dynamic values called expressions. An expression can be any JavaScript expression. The expression is evaluated when the template is evaluated, and the result of the expression is included when the template renders. In a Lit component, this means whenever the <code>render</code> method is called.</p>
+<p>Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。
+エクスプレッションをJavaScriptの<a class="Link" href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E5%BC%8F">式</a>にすることもできます。
+エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。
+Litコンポーネントは<code>render</code>メソッドを実行する毎にこれをします。</p>
 <p>Expressions can only be placed in specific locations in the template, and how an expression is interpreted depends on where it appears. Expressions inside the element tag itself affect the element. Expressions inside the element's content, where child nodes go, render child nodes or text.</p>
 <p>Valid values for expressions differ based on where the expression occurs. Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types. In addition, all expressions can accept <em>directives</em>, which are special functions that customize the way an expression is processed and rendered. See <a class="Link" href="/docs/templates/custom-directives/">Custom directives</a> for more information.</p>
 <p>Here's a quick reference followed by more detailed information about each expression type.</p>
@@ -46,11 +49,11 @@
 <li><a class="Link" href="#boolean-attribute-expressions">Boolean Attributes</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;div ?hidden=${!show}&gt;&lt;/div&gt;`
-
-* [Properties](#property-expressions)
-
-```js
-html`&lt;input .value=${value}&gt;`
+</code></pre>
+<ul>
+<li><a class="Link" href="#property-expressions">Properties</a></li>
+</ul>
+<pre><code class="language-js">html`&lt;input .value=${value}&gt;`
 </code></pre>
 <ul>
 <li><a class="Link" href="#event-listener-expressions">Event listeners</a></li>
