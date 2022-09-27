@@ -1,3 +1,5 @@
+{ "header": {"name": "API", "order": 0}, "order": 0 }
+---
 # LitElement
 
 ## class LitElement
