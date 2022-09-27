@@ -24,6 +24,7 @@ const CSS_PATH = dev ? '/app.css?v=001' : '/lit/app.css?v=001'
 const BASE_URL = dev ? 'http://127.0.0.1:8000' : 'https://japanese-document.github.io/lit'
 const URL = '__URL__'
 const DESCRIPTION = /__DESCRIPTION__/g
+const SEPARATOR = /---(.*)/s
 const layout = fs.readFileSync('src/layout.html', 'utf8')
 const renderer = {
   link(href, _title, text) {
@@ -48,6 +49,11 @@ function getMarkDownFileNames() {
       return resolve(files)
     })
   })
+}
+
+function getMetaAndMd(content) {
+  const [meta, md] = content.split(SEPARATOR)
+  return [JSON.parse(meta), md.trim()]
 }
 
 function createTitle(md) {
@@ -79,9 +85,24 @@ async function createPage(md, title, url) {
   return html
 }
 
-function createIndexPage(pages) {
+function createIndexPage(_pages) {
+    const pages = _pages.reduce((p, _p) => {
+    const { order, name } = _p.meta.header
+    const { title, url } = _p
+    p[order] ??= {
+      name,
+      pages: [] 
+    }
+    p[order].pages.push({
+      title,
+      url
+    })
+    return p
+  }, [])
   const title = 'Lit'
-  const md = `# Lit\n${pages.map(p => `* [${p.title}](${p.url})`).join('\n')}`
+  const md = pages.reduce((md, p) => {
+    return `${md}\n## ${p.name}\n${p.pages.map(p => `* [${p.title}](${p.url})`).join('\n')}`
+  }, '# Lit\n')
   const body = marked.parse(md)
   const description = 'Lit'
   const html = createHTML(title, body, description, BASE_URL, CSS_PATH)
@@ -91,7 +112,8 @@ function createIndexPage(pages) {
 const markDownFileNames = await getMarkDownFileNames()
 const pages = []
 for (let markDownfileName of markDownFileNames) {
-  const md = await fs.promises.readFile(markDownfileName, 'utf8')
+  const content = await fs.promises.readFile(markDownfileName, 'utf8')
+  const [meta, md] = getMetaAndMd(content)
   const title = createTitle(md)
   const { name, dir } = path.parse(markDownfileName)
   const url = createURL(dir, name)
@@ -103,6 +125,7 @@ for (let markDownfileName of markDownFileNames) {
   const htmlFileName = `${dirPath}/${name}.html`
   await fs.promises.writeFile(htmlFileName, page)
   pages.push({
+    meta,
     title,
     url
   })
