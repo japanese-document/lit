@@ -85,14 +85,16 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <ul>
 <li>プリミティブ値</li>
 <li>センチネル値</li>
-<li><code>TemplateResult</code> objects created with the <code>html</code> function.</li>
+<li><code>html</code>関数によって生成される<code>TemplateResult</code>オブジェクト</li>
 <li>DOM nodes</li>
-<li>Arrays or iterables of any of the supported types</li>
+<li>サポートされている型の配列もしくはiterable</li>
 </ul>
 <h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>
-<p>Lit can render almost all <a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a> and converts them to strings when interpolated into text content.</p>
-<p>Numbers values like <code>5</code> will render the string <code>'5'</code>. Bigints are treated similarly.</p>
-<p>A boolean value <code>true</code> will render <code>'true'</code>, and <code>false</code> will render <code>'false'</code>, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see <a class="Link" href="/docs/templates/conditionals/">Conditionals</a>.</p>
+<p>Litはほとんどすべての<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a>をレンダリングすることができます。 
+そして、テキストコンテントに挿入される場合はそれらを文字列に変換します。</p>
+<p><code>5</code>のような数値は<code>'5'</code>の文字列にレンダリングされます。
+Bigintも同様に扱われます。</p>
+<p>A boolean value <code>true</code> will render <code>'true'</code>, and <code>false</code> will render <code>'false'</code>, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see <a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>.</p>
 <p>The empty string <code>''</code>, <code>null</code>, and <code>undefined</code> are specially treated and render nothing. See <a class="Link" href="#removing-child">Removing child content</a> for more information.</p>
 <p>Symbol values cannot be converted to strings and throw when placed in child expressions.</p>
 <h3 id="センチネル値"><a href="#センチネル値">センチネル値</a></h3>
