@@ -83,17 +83,19 @@ html`<main>${bodyText}</main>`
 
 * プリミティブ値
 * センチネル値
-* `TemplateResult` objects created with the `html` function.
+* `html`関数によって生成される`TemplateResult`オブジェクト
 * DOM nodes
-* Arrays or iterables of any of the supported types
+* サポートされている型の配列もしくはiterable
 
 ### プリミティブ値
 
-Lit can render almost all [プリミティブ値](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) and converts them to strings when interpolated into text content.
+Litはほとんどすべての[プリミティブ値](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)をレンダリングすることができます。 
+そして、テキストコンテントに挿入される場合はそれらを文字列に変換します。
 
-Numbers values like `5` will render the string `'5'`. Bigints are treated similarly.
+`5`のような数値は`'5'`の文字列にレンダリングされます。
+Bigintも同様に扱われます。
 
-A boolean value `true` will render `'true'`, and `false` will render `'false'`, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see [Conditionals](/docs/templates/conditionals/).
+A boolean value `true` will render `'true'`, and `false` will render `'false'`, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see [Conditionals](https://lit.dev/docs/templates/conditionals/).
 
 The empty string `''`, `null`, and `undefined` are specially treated and render nothing. See [Removing child content](#removing-child) for more information.
 
