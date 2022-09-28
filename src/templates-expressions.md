@@ -95,7 +95,8 @@ Litはほとんどすべての[プリミティブ値](https://developer.mozilla.
 `5`のような数値は`'5'`の文字列にレンダリングされます。
 Bigintも同様に扱われます。
 
-A boolean value `true` will render `'true'`, and `false` will render `'false'`, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see [Conditionals](https://lit.dev/docs/templates/conditionals/).
+booleanは`true`は`'true'`にレンダリングされます。`false`は`'false'`にレンダリングされます。でも、ふつうはbooleanでこういうことはしません。
+通常、booleanは条件として使われるます。詳しくは[Conditionals](https://lit.dev/docs/templates/conditionals/)見てください。
 
 The empty string `''`, `null`, and `undefined` are specially treated and render nothing. See [Removing child content](#removing-child) for more information.
 
