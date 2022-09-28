@@ -75,7 +75,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <p>This basic example shows a variety of different kinds of expressions.</p>
 <p>{% playground-example "docs/templates/expressions" "my-element.ts" %}</p>
 <p>The following sections describe each kind of expression in more detail. For more information about the structure of templates, see <a class="Link" href="#well-formed-html">Well-formed HTML</a> and <a class="Link" href="#expression-locations">Valid expression locations</a>.</p>
-<h2 id="Child_expressions_{_#child-expressions_}"><a href="#Child_expressions_{_#child-expressions_}">Child expressions { #child-expressions }</a></h2>
+<h2 id="Child_expressions"><a href="#Child_expressions">Child expressions</a></h2>
 <p>An expression that occurs between the start and end tags of an element can add child nodes to the element. For example:</p>
 <pre><code class="language-js">html`&lt;p&gt;Hello, ${name}&lt;/p&gt;`
 </code></pre>
@@ -128,11 +128,11 @@ const page = html`
 </code></pre>
 <h3 id="Arrays_or_iterables_of_any_of_the_supported_types"><a href="#Arrays_or_iterables_of_any_of_the_supported_types">Arrays or iterables of any of the supported types</a></h3>
 <p>An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array <code>map</code> method to create repeating templates and lists. For examples, see <a class="Link" href="/docs/templates/lists/">Lists</a>.</p>
-<h3 id="Removing_child_content_{#removing-child}"><a href="#Removing_child_content_{#removing-child}">Removing child content {#removing-child}</a></h3>
+<h3 id="Removing_child_content"><a href="#Removing_child_content">Removing child content</a></h3>
 <p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="/docs/api/templates/#nothing">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
 <p>Setting or removing child content is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
 <p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content. Rendering no node ensures the fallback content is rendered. See <a class="Link" href="/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
-<h2 id="Attribute_expressions_{#attribute-expressions_}"><a href="#Attribute_expressions_{#attribute-expressions_}">Attribute expressions {#attribute-expressions }</a></h2>
+<h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
 <p>In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.</p>
 <p>By default, an expression in the value of an attribute sets the attribute:</p>
 <pre><code class="language-js">html`&lt;div class=${this.textClass}&gt;Stylish text.&lt;/div&gt;`;
@@ -142,11 +142,11 @@ const page = html`
 <pre><code class="language-js">html`&lt;img src="/images/${this.image}"&gt;`;
 </code></pre>
 <p>Note, some primitive values are handled specially in attributes. Boolean values are converted to strings so, for example, <code>false</code> renders <code>'false'</code>. Both <code>undefined</code> and <code>null</code> render to an attribute as an empty string.</p>
-<h3 id="Boolean_attributes_{#boolean-attribute-expressions_}"><a href="#Boolean_attributes_{#boolean-attribute-expressions_}">Boolean attributes {#boolean-attribute-expressions }</a></h3>
+<h3 id="Boolean_attributes"><a href="#Boolean_attributes">Boolean attributes</a></h3>
 <p>To set a boolean attribute, use the <code>?</code> prefix with the attribute name. The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:</p>
 <pre><code class="language-js">html`&lt;div ?hidden=${!this.showAdditional}&gt;This text may be hidden.&lt;/div&gt;`;
 </code></pre>
-<h3 id="Removing_an_attribute_{_#removing-attribute_}"><a href="#Removing_an_attribute_{_#removing-attribute_}">Removing an attribute { #removing-attribute }</a></h3>
+<h3 id="Removing_an_attribute"><a href="#Removing_an_attribute">Removing an attribute</a></h3>
 <p>Sometimes you want to set an attribute only under certain conditions, and otherwise remove the attribute. For common "boolean attributes" like <code>disabled</code> and <code>hidden</code> where you want to set the attribute to an empty string for a truthy value and remove it otherwise, use a <a class="Link" href="#boolean-attribute-expressions">boolean attribute</a>. Sometimes, however, you might require a different condition for adding or removing an attribute. </p>
 <p>For example, consider:</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath}/${this.imageFile}"&gt;`;
@@ -164,7 +164,7 @@ const page = html`
 </code></pre>
 <p>In this example the <code>aria-label</code> attribute is rendered only if <code>this.ariaLabel</code> is not an empty string.</p>
 <p>Setting or removing an attribute is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
-<h2 id="Property_expressions_{#property-expressions}"><a href="#Property_expressions_{#property-expressions}">Property expressions {#property-expressions}</a></h2>
+<h2 id="Property_expressions"><a href="#Property_expressions">Property expressions</a></h2>
 <p>You can set a JavaScript property on an element using the <code>.</code> prefix and the property name:</p>
 <pre><code class="language-js">html`&lt;input .value=${this.itemCount}&gt;`;
 </code></pre>
@@ -173,7 +173,7 @@ const page = html`
 </code></pre>
 <p>Note that the property name in this example—<code>listItems</code>—is mixed case. Although HTML <em>attributes</em> are case-insensitive, Lit preserves the case for property names when it processes the template.</p>
 <p>For more information about component properties, see <a class="Link" href="/docs/components/properties/">Reactive properties</a>.</p>
-<h2 id="Event_listener_expressions_{#event-listener-expressions}"><a href="#Event_listener_expressions_{#event-listener-expressions}">Event listener expressions {#event-listener-expressions}</a></h2>
+<h2 id="Event_listener_expressions"><a href="#Event_listener_expressions">Event listener expressions</a></h2>
 <p>Templates can also include declarative event listeners. Use the prefix <code>@</code> followed by the event name. The expression should evaluate to an event listener.</p>
 <pre><code class="language-js">html`&lt;button @click=${this.clickHandler}&gt;Click Me!&lt;/button&gt;`;
 </code></pre>
@@ -185,7 +185,7 @@ const page = html`
 }
 </code></pre>
 <p>For more information about component events, see <a class="Link" href="/docs/components/events/">Events</a>.</p>
-<h2 id="Element_expressions_{#element-expressions}"><a href="#Element_expressions_{#element-expressions}">Element expressions {#element-expressions}</a></h2>
+<h2 id="Element_expressions"><a href="#Element_expressions">Element expressions</a></h2>
 <p>You can also add an expression that accesses an element instance, instead of a single property or attribute on an element:</p>
 <pre><code class="language-js">html`&lt;div ${myDirective()}&gt;&lt;/div&gt;`
 </code></pre>
@@ -194,7 +194,7 @@ const page = html`
 <pre><code class="language-js">html`&lt;button ${ref(this.myRef)}`;
 </code></pre>
 <p>See <a class="Link" href="/docs/templates/directives/#ref">ref</a> for more information.</p>
-<h2 id="Well-formed_HTML_{_#well-formed-html_}"><a href="#Well-formed_HTML_{_#well-formed-html_}">Well-formed HTML { #well-formed-html }</a></h2>
+<h2 id="Well-formed_HTML"><a href="#Well-formed_HTML">Well-formed HTML</a></h2>
 <p>Lit templates must be well-formed HTML. The templates are parsed by the browser's built-in HTML parser before any values are interpolated. Follow these rules for well-formed templates:</p>
 <ul>
 <li><p>Templates must be well-formed HTML when all expressions are replaced by empty values.</p>
@@ -214,7 +214,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <p>Because the browser's built-in parser is very lenient, most cases of malformed templates are not detectable at runtime, so you won't see  warnings—just templates that don't behave as you expect. We recommend using <a href="/docs/tools/development/#linting">linting tools</a> and <a href="/docs/tools/development/#ide-plugins">IDE plugins</a> to find issues in your templates during development.</p>
 </div>
 
-<h2 id="Valid_expression_locations_{_#expression-locations_}"><a href="#Valid_expression_locations_{_#expression-locations_}">Valid expression locations { #expression-locations }</a></h2>
+<h2 id="Valid_expression_locations"><a href="#Valid_expression_locations">Valid expression locations</a></h2>
 <p>Expressions <strong><em>can only occur</em></strong> where you can place attribute values and child elements in HTML.</p>
 <pre><code class="language-html">&lt;!-- attribute values --&gt;
 &lt;div label=${label}&gt;&lt;/div&gt;
@@ -228,7 +228,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <p>Element expressions can occur inside the opening tag after the tag name:</p>
 <pre><code class="language-html">&lt;div ${ref(elementReference)}&gt;&lt;/div&gt;
 </code></pre>
-<h3 id="Invalid_locations_{_#invalid-locations_}"><a href="#Invalid_locations_{_#invalid-locations_}">Invalid locations { #invalid-locations }</a></h3>
+<h3 id="Invalid_locations"><a href="#Invalid_locations">Invalid locations</a></h3>
 <p>Expressions should generally not appear in the following locations:</p>
 <ul>
 <li><p>Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.</p>
@@ -277,7 +277,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 </li>
 </ul>
 <p>Note that expressions in all the invalid cases above are valid when using <a class="Link" href="#static-expressions">static expressions</a>, although these should not be used for performance-sensitive updates due to the inefficiencies involved (see below).</p>
-<h2 id="Static_expressions_{_#static-expressions_}"><a href="#Static_expressions_{_#static-expressions_}">Static expressions { #static-expressions }</a></h2>
+<h2 id="Static_expressions"><a href="#Static_expressions">Static expressions</a></h2>
 <p>Static expressions return special values that are interpolated into the template <em>before</em> the template is processed as HTML by Lit. Because they become part of the template's static HTML, they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.</p>
 <p>To use static expressions, you must import a special version of the <code>html</code> or <code>svg</code> template tags from Lit's <code>static-html</code> module:</p>
 <pre><code class="language-ts">import {html, literal} from 'lit/static-html.js';

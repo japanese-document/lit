@@ -68,7 +68,7 @@ This basic example shows a variety of different kinds of expressions.
 
 The following sections describe each kind of expression in more detail. For more information about the structure of templates, see [Well-formed HTML](#well-formed-html) and [Valid expression locations](#expression-locations).
 
-## Child expressions { #child-expressions }
+## Child expressions
 
 An expression that occurs between the start and end tags of an element can add child nodes to the element. For example:
 
@@ -153,7 +153,7 @@ const page = html`
 
 An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists. For examples, see [Lists](/docs/templates/lists/).
 
-### Removing child content {#removing-child}
+### Removing child content
 
 The values `null`, `undefined`, the empty string `''`, and Lit's [nothing](/docs/api/templates/#nothing) sentinel value remove any previously rendered content and render no node.
 
@@ -161,7 +161,7 @@ Setting or removing child content is often done based on a condition. See [Condi
 
 Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a `slot` with fallback content. Rendering no node ensures the fallback content is rendered. See [fallback content](/docs/components/shadow-dom/#fallback) for more information.
 
-## Attribute expressions {#attribute-expressions }
+## Attribute expressions
 
 In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.
 
@@ -181,7 +181,7 @@ html`<img src="/images/${this.image}">`;
 
 Note, some primitive values are handled specially in attributes. Boolean values are converted to strings so, for example, `false` renders `'false'`. Both `undefined` and `null` render to an attribute as an empty string.
 
-### Boolean attributes {#boolean-attribute-expressions }
+### Boolean attributes
 
 To set a boolean attribute, use the `?` prefix with the attribute name. The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:
 
@@ -189,7 +189,7 @@ To set a boolean attribute, use the `?` prefix with the attribute name. The attr
 html`<div ?hidden=${!this.showAdditional}>This text may be hidden.</div>`;
 ```
 
-### Removing an attribute { #removing-attribute }
+### Removing an attribute
 
 Sometimes you want to set an attribute only under certain conditions, and otherwise remove the attribute. For common "boolean attributes" like `disabled` and `hidden` where you want to set the attribute to an empty string for a truthy value and remove it otherwise, use a [boolean attribute](#boolean-attribute-expressions). Sometimes, however, you might require a different condition for adding or removing an attribute. 
 
@@ -225,7 +225,7 @@ In this example the `aria-label` attribute is rendered only if `this.ariaLabel` 
 
 Setting or removing an attribute is often done based on a condition. See [Conditionally rendering nothing](/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
 
-## Property expressions {#property-expressions}
+## Property expressions
 
 You can set a JavaScript property on an element using the `.` prefix and the property name:
 
@@ -243,7 +243,7 @@ Note that the property name in this example—`listItems`—is mixed case. Altho
 
 For more information about component properties, see [Reactive properties](/docs/components/properties/).
 
-## Event listener expressions {#event-listener-expressions}
+## Event listener expressions
 
 Templates can also include declarative event listeners. Use the prefix `@` followed by the event name. The expression should evaluate to an event listener.
 
@@ -265,7 +265,7 @@ clickHandler() {
 
 For more information about component events, see [Events](/docs/components/events/).
 
-## Element expressions {#element-expressions}
+## Element expressions
 
 You can also add an expression that accesses an element instance, instead of a single property or attribute on an element:
 
@@ -283,7 +283,7 @@ html`<button ${ref(this.myRef)}`;
 
 See [ref](/docs/templates/directives/#ref) for more information.
 
-## Well-formed HTML { #well-formed-html }
+## Well-formed HTML
 
 Lit templates must be well-formed HTML. The templates are parsed by the browser's built-in HTML parser before any values are interpolated. Follow these rules for well-formed templates:
 
@@ -306,7 +306,7 @@ Because the browser's built-in parser is very lenient, most cases of malformed t
 
 </div>
 
-## Valid expression locations { #expression-locations }
+## Valid expression locations
 
 Expressions **_can only occur_** where you can place attribute values and child elements in HTML.
 
@@ -327,7 +327,7 @@ Element expressions can occur inside the opening tag after the tag name:
 <div ${ref(elementReference)}></div>
 ```
 
-### Invalid locations { #invalid-locations }
+### Invalid locations
 
 Expressions should generally not appear in the following locations:
 
@@ -384,7 +384,7 @@ Expressions should generally not appear in the following locations:
 
 Note that expressions in all the invalid cases above are valid when using [static expressions](#static-expressions), although these should not be used for performance-sensitive updates due to the inefficiencies involved (see below).
 
-## Static expressions { #static-expressions }
+## Static expressions
 
 Static expressions return special values that are interpolated into the template _before_ the template is processed as HTML by Lit. Because they become part of the template's static HTML, they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.
 
