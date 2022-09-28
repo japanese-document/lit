@@ -12,12 +12,12 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 要素タグ内にあるエクスプレッションはその要素に影響を与えます。
 要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。
 
-Valid values for expressions differ based on where the expression occurs.
+エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
 Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types.
 In addition, all expressions can accept _directives_, which are special functions that customize the way an expression is processed and rendered. 
 See [Custom directives](/docs/templates/custom-directives/) for more information.
 
-以下にクイックリファレンスと詳しい説明へのリンクを記載します。
+以下に各エクスプレッションのクイックリファレンスと詳しい説明へのリンクを記載します。
 
 
 * [Child nodes](#child-expressions)
