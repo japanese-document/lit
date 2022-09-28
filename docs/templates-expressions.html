@@ -75,27 +75,27 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <p>以下のセクションで各エクスプレッションの詳しい説明をします。
 テンプレートの構造のより詳しい説明は<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>と<a class="Link" href="#Valid_expression_locations">Valid expression locations</a>を見てください。</p>
 <h2 id="Child_expressions"><a href="#Child_expressions">Child expressions</a></h2>
-<p>An expression that occurs between the start and end tags of an element can add child nodes to the element. For example:</p>
+<p>要素のタグの始まりと終わりの間にあるエクスプレッションは要素に子Nodeを加えます。例えば、</p>
 <pre><code class="language-js">html`&lt;p&gt;Hello, ${name}&lt;/p&gt;`
 </code></pre>
-<p>Or:</p>
+<p>もしくは、</p>
 <pre><code class="language-js">html`&lt;main&gt;${bodyText}&lt;/main&gt;`
 </code></pre>
-<p>Expressions in the child position can take many kinds of values:</p>
+<p>この位置にあるエクスプレッションは以下の値を受け入れることができます。</p>
 <ul>
-<li>Primitive values</li>
-<li>Sentinel values</li>
+<li>プリミティブ値</li>
+<li>センチネル値</li>
 <li><code>TemplateResult</code> objects created with the <code>html</code> function.</li>
 <li>DOM nodes</li>
 <li>Arrays or iterables of any of the supported types</li>
 </ul>
-<h3 id="Primitive_values"><a href="#Primitive_values">Primitive values</a></h3>
-<p>Lit can render almost all <a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">primitive values</a> and converts them to strings when interpolated into text content.</p>
+<h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>
+<p>Lit can render almost all <a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a> and converts them to strings when interpolated into text content.</p>
 <p>Numbers values like <code>5</code> will render the string <code>'5'</code>. Bigints are treated similarly.</p>
 <p>A boolean value <code>true</code> will render <code>'true'</code>, and <code>false</code> will render <code>'false'</code>, but rendering a boolean like this is uncommon. Instead booleans are typically used in conditionals to render other appropriate values. For more on conditionals, see <a class="Link" href="/docs/templates/conditionals/">Conditionals</a>.</p>
 <p>The empty string <code>''</code>, <code>null</code>, and <code>undefined</code> are specially treated and render nothing. See <a class="Link" href="#removing-child">Removing child content</a> for more information.</p>
 <p>Symbol values cannot be converted to strings and throw when placed in child expressions.</p>
-<h3 id="Sentinel_values"><a href="#Sentinel_values">Sentinel values</a></h3>
+<h3 id="センチネル値"><a href="#センチネル値">センチネル値</a></h3>
 <p>Lit supplies a couple of special sentinel values that can be used in child expressions.</p>
 <p>The <code>noChange</code> sentinel value does not change the expression's existing value. It is typically used in custom directives. See <a class="Link" href="/docs/templates/custom-directives/#signaling-no-change">Signaling no change</a> for more information.</p>
 <p>The <code>nothing</code> sentinel renders nothing. See <a class="Link" href="#removing-child">Removing child content</a> for more information.</p>
