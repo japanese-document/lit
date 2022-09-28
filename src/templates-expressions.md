@@ -13,11 +13,12 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。
 
 エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
-Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types.
-In addition, all expressions can accept _directives_, which are special functions that customize the way an expression is processed and rendered. 
-See [Custom directives](/docs/templates/custom-directives/) for more information.
+一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型をサポートします。
+それに加えて、全てのエクスプレッションは_ディレクティブ_を受け入れることができます。
+ディレクディブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
+詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
-以下に各エクスプレッションのクイックリファレンスと詳しい説明へのリンクを記載します。
+以下に各エクスプレッションタイプのクイックリファレンスと詳しい説明へのリンクを記載します。
 
 
 * [Child nodes](#child-expressions)
