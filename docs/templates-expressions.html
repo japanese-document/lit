@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-expressions.html" />
     <meta property="og:title" content="Expressions" />
-    <meta property="og:description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。Expressions can only be placed in specific locations in the template, and how an expression is interpreted depend" />
+    <meta property="og:description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を${...}の形式で埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。エクスプレッションはテンプレートの特定の場所にのみ配置することができます。エクスプレッションがどう解釈されるかは、それがある場所で決まります。要素タグ内にあるエクスプレッションはその要素に影響を与えます。要" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。Expressions can only be placed in specific locations in the template, and how an expression is interpreted depend" />
+    <meta name="description" content="Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を${...}の形式で埋め込むことができます。エクスプレッションをJavaScriptの式にすることもできます。エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。Litコンポーネントはrenderメソッドを実行する毎にこれをします。エクスプレッションはテンプレートの特定の場所にのみ配置することができます。エクスプレッションがどう解釈されるかは、それがある場所で決まります。要素タグ内にあるエクスプレッションはその要素に影響を与えます。要" />
     <title>Expressions</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -24,12 +24,18 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="Expressions"><a href="#Expressions">Expressions</a></h1>
-<p>Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。
+<p>Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を<code>${...}</code>の形式で埋め込むことができます。
 エクスプレッションをJavaScriptの<a class="Link" href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E5%BC%8F">式</a>にすることもできます。
 エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。
 Litコンポーネントは<code>render</code>メソッドを実行する毎にこれをします。</p>
-<p>Expressions can only be placed in specific locations in the template, and how an expression is interpreted depends on where it appears. Expressions inside the element tag itself affect the element. Expressions inside the element's content, where child nodes go, render child nodes or text.</p>
-<p>Valid values for expressions differ based on where the expression occurs. Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types. In addition, all expressions can accept <em>directives</em>, which are special functions that customize the way an expression is processed and rendered. See <a class="Link" href="/docs/templates/custom-directives/">Custom directives</a> for more information.</p>
+<p>エクスプレッションはテンプレートの特定の場所にのみ配置することができます。
+エクスプレッションがどう解釈されるかは、それがある場所で決まります。
+要素タグ内にあるエクスプレッションはその要素に影響を与えます。
+要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。</p>
+<p>Valid values for expressions differ based on where the expression occurs.
+Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types.
+In addition, all expressions can accept <em>directives</em>, which are special functions that customize the way an expression is processed and rendered. 
+See <a class="Link" href="/docs/templates/custom-directives/">Custom directives</a> for more information.</p>
 <p>Here's a quick reference followed by more detailed information about each expression type.</p>
 <ul>
 <li><a class="Link" href="#child-expressions">Child nodes</a></li>
