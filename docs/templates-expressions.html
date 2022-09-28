@@ -39,7 +39,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
 <p>以下に各エクスプレッションタイプのクイックリファレンスと詳しい説明へのリンクを記載します。</p>
 <ul>
-<li><a class="Link" href="#child-expressions">Child nodes</a></li>
+<li><a class="Link" href="#Child_expressions">Child nodes</a></li>
 </ul>
 <pre><code class="language-js">html`
 &lt;h1&gt;Hello ${name}&lt;/h1&gt;
@@ -48,33 +48,32 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 &lt;/ul&gt;`
 </code></pre>
 <ul>
-<li><a class="Link" href="#attribute-expressions">Attributes</a></li>
+<li><a class="Link" href="#Attribute_expressions">Attributes</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;div class=${highlightClass}&gt;&lt;/div&gt;`
 </code></pre>
 <ul>
-<li><a class="Link" href="#boolean-attribute-expressions">Boolean Attributes</a></li>
+<li><a class="Link" href="#Boolean_attribute_expressions">Boolean Attributes</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;div ?hidden=${!show}&gt;&lt;/div&gt;`
 </code></pre>
 <ul>
-<li><a class="Link" href="#property-expressions">Properties</a></li>
+<li><a class="Link" href="#Property_expressions">Properties</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;input .value=${value}&gt;`
 </code></pre>
 <ul>
-<li><a class="Link" href="#event-listener-expressions">Event listeners</a></li>
+<li><a class="Link" href="#Event_listener_expressions">Event listeners</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;button @click=${this._clickHandler}&gt;Go&lt;/button&gt;`
 </code></pre>
 <ul>
-<li><a class="Link" href="#element-expressions">Element directives</a></li>
+<li><a class="Link" href="#Element_expressions">Element directives</a></li>
 </ul>
 <pre><code class="language-js">html`&lt;input ${ref(inputRef)}&gt;`
 </code></pre>
-<p>This basic example shows a variety of different kinds of expressions.</p>
-<p>{% playground-example "docs/templates/expressions" "my-element.ts" %}</p>
-<p>The following sections describe each kind of expression in more detail. For more information about the structure of templates, see <a class="Link" href="#well-formed-html">Well-formed HTML</a> and <a class="Link" href="#expression-locations">Valid expression locations</a>.</p>
+<p>以下のセクションで各エクスプレッションの詳しい説明をします。
+テンプレートの構造のより詳しい説明は<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>と<a class="Link" href="#Valid_expression_locations">Valid expression locations</a>を見てください。</p>
 <h2 id="Child_expressions"><a href="#Child_expressions">Child expressions</a></h2>
 <p>An expression that occurs between the start and end tags of an element can add child nodes to the element. For example:</p>
 <pre><code class="language-js">html`&lt;p&gt;Hello, ${name}&lt;/p&gt;`

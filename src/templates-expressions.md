@@ -21,7 +21,7 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 以下に各エクスプレッションタイプのクイックリファレンスと詳しい説明へのリンクを記載します。
 
 
-* [Child nodes](#child-expressions)
+* [Child nodes](#Child_expressions)
 
 ```js
 html`
@@ -31,42 +31,39 @@ html`
 </ul>`
 ```
 
-* [Attributes](#attribute-expressions)
+* [Attributes](#Attribute_expressions)
 
 
 ```js
 html`<div class=${highlightClass}></div>`
 ```
 
-* [Boolean Attributes](#boolean-attribute-expressions)
+* [Boolean Attributes](#Boolean_attribute_expressions)
 
 ```js
 html`<div ?hidden=${!show}></div>`
 ```
 
-* [Properties](#property-expressions)
+* [Properties](#Property_expressions)
 
 ```js
 html`<input .value=${value}>`
 ```
 
-* [Event listeners](#event-listener-expressions)
+* [Event listeners](#Event_listener_expressions)
 
 ```js
 html`<button @click=${this._clickHandler}>Go</button>`
 ```
 
-* [Element directives](#element-expressions)
+* [Element directives](#Element_expressions)
 
 ```js
 html`<input ${ref(inputRef)}>`
 ```
 
-This basic example shows a variety of different kinds of expressions.
-
-{% playground-example "docs/templates/expressions" "my-element.ts" %}
-
-The following sections describe each kind of expression in more detail. For more information about the structure of templates, see [Well-formed HTML](#well-formed-html) and [Valid expression locations](#expression-locations).
+以下のセクションで各エクスプレッションの詳しい説明をします。
+テンプレートの構造のより詳しい説明は[Well-formed HTML](#Well-formed_HTML)と[Valid expression locations](#Valid_expression_locations)を見てください。
 
 ## Child expressions
 
