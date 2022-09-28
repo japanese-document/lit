@@ -67,29 +67,29 @@ html`<input ${ref(inputRef)}>`
 
 ## Child expressions
 
-An expression that occurs between the start and end tags of an element can add child nodes to the element. For example:
+要素のタグの始まりと終わりの間にあるエクスプレッションは要素に子Nodeを加えます。例えば、
 
 ```js
 html`<p>Hello, ${name}</p>`
 ```
 
-Or:
+もしくは、
 
 ```js
 html`<main>${bodyText}</main>`
 ```
 
-Expressions in the child position can take many kinds of values:
+この位置にあるエクスプレッションは以下の値を受け入れることができます。
 
-* Primitive values
-* Sentinel values
+* プリミティブ値
+* センチネル値
 * `TemplateResult` objects created with the `html` function.
 * DOM nodes
 * Arrays or iterables of any of the supported types
 
-### Primitive values
+### プリミティブ値
 
-Lit can render almost all [primitive values](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) and converts them to strings when interpolated into text content.
+Lit can render almost all [プリミティブ値](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) and converts them to strings when interpolated into text content.
 
 Numbers values like `5` will render the string `'5'`. Bigints are treated similarly.
 
@@ -99,7 +99,7 @@ The empty string `''`, `null`, and `undefined` are specially treated and render 
 
 Symbol values cannot be converted to strings and throw when placed in child expressions.
 
-### Sentinel values
+### センチネル値
 
 Lit supplies a couple of special sentinel values that can be used in child expressions.
 
