@@ -2,14 +2,20 @@
 ---
 # Expressions
 
-Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を埋め込むことができます。
+Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を`${...}`の形式で埋め込むことができます。
 エクスプレッションをJavaScriptの[式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E5%BC%8F)にすることもできます。
 エクスプレッションはテンプレートが評価されるときに評価されます。そして、その結果はテンプレートのレンダリング結果に影響を与えます。
 Litコンポーネントは`render`メソッドを実行する毎にこれをします。
 
-Expressions can only be placed in specific locations in the template, and how an expression is interpreted depends on where it appears. Expressions inside the element tag itself affect the element. Expressions inside the element's content, where child nodes go, render child nodes or text.
+エクスプレッションはテンプレートの特定の場所にのみ配置することができます。
+エクスプレッションがどう解釈されるかは、それがある場所で決まります。
+要素タグ内にあるエクスプレッションはその要素に影響を与えます。
+要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。
 
-Valid values for expressions differ based on where the expression occurs. Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types. In addition, all expressions can accept _directives_, which are special functions that customize the way an expression is processed and rendered. See [Custom directives](/docs/templates/custom-directives/) for more information.
+Valid values for expressions differ based on where the expression occurs.
+Generally all expressions accept primitive values like strings and numbers, and some expressions support additional value types.
+In addition, all expressions can accept _directives_, which are special functions that customize the way an expression is processed and rendered. 
+See [Custom directives](/docs/templates/custom-directives/) for more information.
 
 Here's a quick reference followed by more detailed information about each expression type.
 
