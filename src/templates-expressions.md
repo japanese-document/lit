@@ -17,7 +17,7 @@ Generally all expressions accept primitive values like strings and numbers, and 
 In addition, all expressions can accept _directives_, which are special functions that customize the way an expression is processed and rendered. 
 See [Custom directives](/docs/templates/custom-directives/) for more information.
 
-Here's a quick reference followed by more detailed information about each expression type.
+以下にクイックリファレンスと詳しい説明へのリンクを記載します。
 
 
 * [Child nodes](#child-expressions)
