@@ -115,7 +115,7 @@ const page = html`
   &lt;main&gt;...&lt;/main&gt;
 `;
 </code></pre>
-<p>This means you can use plain JavaScript to create conditional templates, repeating templates, and more.</p>
+<p>これは素のJavaScriptを使って条件分岐のあるテンプレートや繰り返しがあるテンプレート等を生成することができることを意味します。</p>
 <pre><code class="language-js">html`
   ${this.user.isloggedIn
       ? html`Welcome ${this.user.name}`
@@ -123,8 +123,8 @@ const page = html`
   }
 `;
 </code></pre>
-<p>For more on conditionals, see <a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>.</p>
-<p>For more on using JavaScript to create repeating templates, see <a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>.</p>
+<p>条件分岐のあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>にあります。</p>
+<p>繰り返しがあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>にあります。</p>
 <h3 id="DOM_nodes"><a href="#DOM_nodes">DOM nodes</a></h3>
 <p>Any DOM node can be passed to a child expression. Typically DOM nodes should be rendered by specifying a template using <code>html</code>, but a DOM node can be directly rendered like this when needed. The node is attached to the DOM tree at that point, and so removed from any current parent:</p>
 <pre><code class="language-js">const div = document.createElement('div');
