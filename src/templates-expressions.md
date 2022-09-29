@@ -127,7 +127,7 @@ const page = html`
 `;
 ```
 
-This means you can use plain JavaScript to create conditional templates, repeating templates, and more.
+これは素のJavaScriptを使って条件分岐のあるテンプレートや繰り返しがあるテンプレート等を生成することができることを意味します。
 
 ```js
 html`
@@ -138,9 +138,9 @@ html`
 `;
 ```
 
-For more on conditionals, see [Conditionals](https://lit.dev/docs/templates/conditionals/).
+条件分岐のあるテンプレートに関する詳しい説明は[Conditionals](https://lit.dev/docs/templates/conditionals/)にあります。
 
-For more on using JavaScript to create repeating templates, see [Lists](https://lit.dev/docs/templates/lists/).
+繰り返しがあるテンプレートに関する詳しい説明は[Lists](https://lit.dev/docs/templates/lists/)にあります。
 
 ### DOM nodes
 
