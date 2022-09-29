@@ -123,8 +123,8 @@ const page = html`
   }
 `;
 </code></pre>
-<p>For more on conditionals, see <a class="Link" href="/docs/templates/conditionals/">Conditionals</a>.</p>
-<p>For more on using JavaScript to create repeating templates, see <a class="Link" href="/docs/templates/lists/">Lists</a>.</p>
+<p>For more on conditionals, see <a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>.</p>
+<p>For more on using JavaScript to create repeating templates, see <a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>.</p>
 <h3 id="DOM_nodes"><a href="#DOM_nodes">DOM nodes</a></h3>
 <p>Any DOM node can be passed to a child expression. Typically DOM nodes should be rendered by specifying a template using <code>html</code>, but a DOM node can be directly rendered like this when needed. The node is attached to the DOM tree at that point, and so removed from any current parent:</p>
 <pre><code class="language-js">const div = document.createElement('div');
@@ -134,11 +134,11 @@ const page = html`
 `;
 </code></pre>
 <h3 id="Arrays_or_iterables_of_any_of_the_supported_types"><a href="#Arrays_or_iterables_of_any_of_the_supported_types">Arrays or iterables of any of the supported types</a></h3>
-<p>An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array <code>map</code> method to create repeating templates and lists. For examples, see <a class="Link" href="/docs/templates/lists/">Lists</a>.</p>
+<p>An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array <code>map</code> method to create repeating templates and lists. For examples, see <a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>.</p>
 <h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
-<p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="/docs/api/templates/#nothing">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
-<p>Setting or 子コンテンツの削除 is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
-<p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content. Rendering no node ensures the fallback content is rendered. See <a class="Link" href="/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
+<p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="https://lit.dev/docs/api/templates/#nothing">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
+<p>Setting or 子コンテンツの削除 is often done based on a condition. See <a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
+<p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content. Rendering no node ensures the fallback content is rendered. See <a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
 <h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
 <p>In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.</p>
 <p>By default, an expression in the value of an attribute sets the attribute:</p>
@@ -159,18 +159,18 @@ const page = html`
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath}/${this.imageFile}"&gt;`;
 </code></pre>
 <p>If <code>this.imagePath</code> or <code>this.imageFile</code> is not defined, the <code>src</code> attribute should not be set or an invalid network request will occur.</p>
-<p>Lit's <a class="Link" href="/docs/api/templates/#nothing">nothing</a> sentinel value addresses this by removing the attribute when any expression in the attribute value evaluates to <code>nothing</code>.</p>
+<p>Lit's <a class="Link" href="https://lit.dev/docs/api/templates/#nothing">nothing</a> sentinel value addresses this by removing the attribute when any expression in the attribute value evaluates to <code>nothing</code>.</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath ?? nothing}/${this.imageFile ?? nothing}"&gt;`;
 </code></pre>
 <p>In this example <strong>both</strong> the <code>this.imagePath</code> and <code>this.imageFile</code> properties must be defined for the <code>src</code> attribute to be set. The <code>??</code> <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator">nullish coalescing operator</a> returns the right-hand value if the left-hand value is <code>null</code> or <code>undefined</code>.</p>
-<p>Lit also provides an <a class="Link" href="/docs/api/directives/#ifDefined">ifDefined</a> directive which is sugar for <code>value ?? nothing</code>.</p>
+<p>Lit also provides an <a class="Link" href="https://lit.dev/docs/api/directives/#ifDefined">ifDefined</a> directive which is sugar for <code>value ?? nothing</code>.</p>
 <pre><code class="language-js">html`&lt;img src="/images/${ifDefined(this.imagePath)}/${ifDefined(this.imageFile)}"&gt;`;
 </code></pre>
 <p>You might also want to remove the attribute if the value is not truthy so that values of <code>false</code> or empty string <code>''</code> remove the attribute. For example, consider an element that has default value for <code>this.ariaLabel</code> of empty string <code>''</code>:</p>
 <pre><code class="language-js">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
 <p>In this example the <code>aria-label</code> attribute is rendered only if <code>this.ariaLabel</code> is not an empty string.</p>
-<p>Setting or removing an attribute is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
+<p>Setting or removing an attribute is often done based on a condition. See <a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
 <h2 id="Property_expressions"><a href="#Property_expressions">Property expressions</a></h2>
 <p>You can set a JavaScript property on an element using the <code>.</code> prefix and the property name:</p>
 <pre><code class="language-js">html`&lt;input .value=${this.itemCount}&gt;`;
@@ -179,7 +179,7 @@ const page = html`
 <pre><code class="language-js">html`&lt;my-list .listItems=${this.items}&gt;&lt;/my-list&gt;`;
 </code></pre>
 <p>Note that the property name in this example—<code>listItems</code>—is mixed case. Although HTML <em>attributes</em> are case-insensitive, Lit preserves the case for property names when it processes the template.</p>
-<p>For more information about component properties, see <a class="Link" href="/docs/components/properties/">Reactive properties</a>.</p>
+<p>For more information about component properties, see <a class="Link" href="https://lit.dev/docs/components/properties/">Reactive properties</a>.</p>
 <h2 id="Event_listener_expressions"><a href="#Event_listener_expressions">Event listener expressions</a></h2>
 <p>Templates can also include declarative event listeners. Use the prefix <code>@</code> followed by the event name. The expression should evaluate to an event listener.</p>
 <pre><code class="language-js">html`&lt;button @click=${this.clickHandler}&gt;Click Me!&lt;/button&gt;`;
@@ -191,16 +191,16 @@ const page = html`
   this.clickCount++;
 }
 </code></pre>
-<p>For more information about component events, see <a class="Link" href="/docs/components/events/">Events</a>.</p>
+<p>For more information about component events, see <a class="Link" href="https://lit.dev/docs/components/events/">Events</a>.</p>
 <h2 id="Element_expressions"><a href="#Element_expressions">Element expressions</a></h2>
 <p>You can also add an expression that accesses an element instance, instead of a single property or attribute on an element:</p>
 <pre><code class="language-js">html`&lt;div ${myDirective()}&gt;&lt;/div&gt;`
 </code></pre>
-<p>Element expressions only work with <a class="Link" href="/docs/templates/directives/">directives</a>. Any other value type in an element expression is ignored.</p>
+<p>Element expressions only work with <a class="Link" href="https://lit.dev/docs/templates/directives/">directives</a>. Any other value type in an element expression is ignored.</p>
 <p>One built-in directive that can be used in an element expression is the <code>ref</code> directive. It provides a reference to the rendered element.</p>
 <pre><code class="language-js">html`&lt;button ${ref(this.myRef)}`;
 </code></pre>
-<p>See <a class="Link" href="/docs/templates/directives/#ref">ref</a> for more information.</p>
+<p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#ref">ref</a> for more information.</p>
 <h2 id="Well-formed_HTML"><a href="#Well-formed_HTML">Well-formed HTML</a></h2>
 <p>Lit templates must be well-formed HTML. The templates are parsed by the browser's built-in HTML parser before any values are interpolated. Follow these rules for well-formed templates:</p>
 <ul>
