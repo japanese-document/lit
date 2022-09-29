@@ -96,14 +96,19 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 Bigintも同様に扱われます。</p>
 <p>booleanは<code>true</code>は<code>'true'</code>にレンダリングされます。<code>false</code>は<code>'false'</code>にレンダリングされます。でも、ふつうはbooleanでこういうことはしません。
 通常、booleanは条件として使われるます。詳しくは<a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>見てください。</p>
-<p>The empty string <code>''</code>, <code>null</code>, and <code>undefined</code> are specially treated and render nothing. See <a class="Link" href="#removing-child">Removing child content</a> for more information.</p>
-<p>Symbol values cannot be converted to strings and throw when placed in child expressions.</p>
+<p>空文字(<code>''</code>)、<code>null</code>、<code>undefined</code>は特別な意味を持ちます。
+そして、それらは何もレンダリングしません。
+詳しくは<a class="Link" href="#子コンテンツの削除">子コンテンツの削除</a>を見てください。</p>
+<p><code>Symbol</code>は文字列に変換されません。child expressionに置かれた場合、例外が発生します。</p>
 <h3 id="センチネル値"><a href="#センチネル値">センチネル値</a></h3>
-<p>Lit supplies a couple of special sentinel values that can be used in child expressions.</p>
-<p>The <code>noChange</code> sentinel value does not change the expression's existing value. It is typically used in custom directives. See <a class="Link" href="/docs/templates/custom-directives/#signaling-no-change">Signaling no change</a> for more information.</p>
-<p>The <code>nothing</code> sentinel renders nothing. See <a class="Link" href="#removing-child">Removing child content</a> for more information.</p>
+<p>Litはchild expressionに使うことができるいくつかの特別なセンチネル値を提供します。</p>
+<p><code>noChange</code>センチネル値はエクスプレッションの既存の値を変更しません。
+これは通常、カスタムディレクティブで使われます。
+詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/#signaling-no-change">Signaling no change</a>を見てください。</p>
+<p><code>nothing</code>センチネルは何もレンダリングしません。
+詳しくは<a class="Link" href="#子コンテンツの削除">子コンテンツの削除</a>を見てください。</p>
 <h3 id="Templates"><a href="#Templates">Templates</a></h3>
-<p>Since an expression in the child position can return a <code>TemplateResult</code> you can nest and compose templates:</p>
+<p>エクスプレッション内に<code>TemplateResult</code>を返すエクスプレッションを配置することができるので、テンプレートをネストしたり組み合わせたりすることができます。</p>
 <pre><code class="language-js">const nav = html`&lt;nav&gt;...&lt;/nav&gt;`;
 const page = html`
   ${nav}
@@ -130,9 +135,9 @@ const page = html`
 </code></pre>
 <h3 id="Arrays_or_iterables_of_any_of_the_supported_types"><a href="#Arrays_or_iterables_of_any_of_the_supported_types">Arrays or iterables of any of the supported types</a></h3>
 <p>An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array <code>map</code> method to create repeating templates and lists. For examples, see <a class="Link" href="/docs/templates/lists/">Lists</a>.</p>
-<h3 id="Removing_child_content"><a href="#Removing_child_content">Removing child content</a></h3>
+<h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
 <p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="/docs/api/templates/#nothing">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
-<p>Setting or removing child content is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
+<p>Setting or 子コンテンツの削除 is often done based on a condition. See <a class="Link" href="/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
 <p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content. Rendering no node ensures the fallback content is rendered. See <a class="Link" href="/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
 <h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
 <p>In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.</p>

@@ -98,21 +98,26 @@ Bigintも同様に扱われます。
 booleanは`true`は`'true'`にレンダリングされます。`false`は`'false'`にレンダリングされます。でも、ふつうはbooleanでこういうことはしません。
 通常、booleanは条件として使われるます。詳しくは[Conditionals](https://lit.dev/docs/templates/conditionals/)見てください。
 
-The empty string `''`, `null`, and `undefined` are specially treated and render nothing. See [Removing child content](#removing-child) for more information.
+空文字(`''`)、`null`、`undefined`は特別な意味を持ちます。
+そして、それらは何もレンダリングしません。
+詳しくは[子コンテンツの削除](#子コンテンツの削除)を見てください。
 
-Symbol values cannot be converted to strings and throw when placed in child expressions.
+`Symbol`は文字列に変換されません。child expressionに置かれた場合、例外が発生します。
 
 ### センチネル値
 
-Lit supplies a couple of special sentinel values that can be used in child expressions.
+Litはchild expressionに使うことができるいくつかの特別なセンチネル値を提供します。
 
-The `noChange` sentinel value does not change the expression's existing value. It is typically used in custom directives. See [Signaling no change](/docs/templates/custom-directives/#signaling-no-change) for more information.
+`noChange`センチネル値はエクスプレッションの既存の値を変更しません。
+これは通常、カスタムディレクティブで使われます。
+詳しくは[Signaling no change](https://lit.dev/docs/templates/custom-directives/#signaling-no-change)を見てください。
 
-The `nothing` sentinel renders nothing. See [Removing child content](#removing-child) for more information.
+`nothing`センチネルは何もレンダリングしません。
+詳しくは[子コンテンツの削除](#子コンテンツの削除)を見てください。
 
 ### Templates
 
-Since an expression in the child position can return a `TemplateResult` you can nest and compose templates:
+エクスプレッション内に`TemplateResult`を返すエクスプレッションを配置することができるので、テンプレートをネストしたり組み合わせたりすることができます。
 
 ```js
 const nav = html`<nav>...</nav>`;
@@ -153,11 +158,11 @@ const page = html`
 
 An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists. For examples, see [Lists](/docs/templates/lists/).
 
-### Removing child content
+### 子コンテンツの削除
 
 The values `null`, `undefined`, the empty string `''`, and Lit's [nothing](/docs/api/templates/#nothing) sentinel value remove any previously rendered content and render no node.
 
-Setting or removing child content is often done based on a condition. See [Conditionally rendering nothing](/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
+Setting or 子コンテンツの削除 is often done based on a condition. See [Conditionally rendering nothing](/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
 
 Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a `slot` with fallback content. Rendering no node ensures the fallback content is rendered. See [fallback content](/docs/components/shadow-dom/#fallback) for more information.
 
