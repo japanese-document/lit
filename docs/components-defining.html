@@ -47,7 +47,7 @@ customElements.define('simple-greeting', SimpleGreeting);
 <code>ReactiveElement</code>は<code>HTMLElement</code>を継承してリアクティブプロパティを実装しています。</p>
 <p><img alt="lit-element-inheritance.png" src="https://japanese-document.github.io/lit/images/lit-element-inheritance.png"></p>
 <h2 id="TypeScriptの型を提供する"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
-<p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推測します。
+<p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
 例えば、<code>document.createElement('img')</code>は<code>src: string</code>プロパティを持つ<code>HTMLImageElement</code>を返します。
 Custom elementsは以下のように<code>HTMLElementTagNameMap</code>に加えることによってbuilt-in要素と同じように取り扱われます。</p>
 <pre><code class="language-ts">@customElement('my-element')
