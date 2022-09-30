@@ -43,7 +43,7 @@ import { LitElement } from 'lit'
 #### static disableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
 
 指定した警告カテゴリーを無効にします。
-このメソッドはdevelopmentビルドにのみ存在するので、以下のように使用する必要があります。
+このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。
 
 ```
 // すべてのReactiveElementのサブクラスで無効にします。
@@ -61,7 +61,7 @@ developmentビルドでのみ使うことができます。
 #### static enableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
 
 指定した警告カテゴリーを有効にします。
-このメソッドはdevelopmentビルドにのみ存在するので、以下のように使用する必要があります。
+このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。
 
 ```
 // すべてのReactiveElementのサブクラスで有効にします。
@@ -156,7 +156,7 @@ class MyElement extends LitElement {
 その場合、`super.createProperty()`を実行する必要があります。
 このメソッドは使用するディスクリプタ(descriptor)を取得するために内部で`getPropertyDescriptor()`を使います。
 プロパティが取得またはセットされる動作を変更するには`getPropertyDescriptor()`をオーバーライドします。
-プロパティのオプションを変更するには以下のように実装します。
+プロパティのオプションを変更するには下記のように実装します。
 
 ```
 static createProperty(name, options) {

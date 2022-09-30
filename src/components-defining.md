@@ -43,7 +43,7 @@ const greeting = document.createElement('simple-greeting');
 
 TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
 例えば、`document.createElement('img')`は`src: string`プロパティを持つ`HTMLImageElement`を返します。
-Custom elementsは以下のように`HTMLElementTagNameMap`に加えることによってbuilt-in要素と同じように取り扱われます。
+Custom elementsは下記のように`HTMLElementTagNameMap`に加えることによってbuilt-in要素と同じように取り扱われます。
 
 ```ts
 @customElement('my-element')
