@@ -41,7 +41,7 @@ const greeting = document.createElement('simple-greeting');
 
 ## TypeScriptの型を提供する
 
-TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推測します。
+TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
 例えば、`document.createElement('img')`は`src: string`プロパティを持つ`HTMLImageElement`を返します。
 Custom elementsは以下のように`HTMLElementTagNameMap`に加えることによってbuilt-in要素と同じように取り扱われます。
 

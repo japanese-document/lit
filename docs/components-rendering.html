@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/components-rendering.html" />
+    <meta property="og:title" content="レンダリング" />
+    <meta property="og:description" content="レンダリングはコンポーネントにテンプレートを追加することで定義します。テンプレートには_エクスプレッション(expressions)_を含めることができます。それは動的なコンテンツのプレースフォルダです。以下のように、Litコンポーネントにrender()メソッドを追加することによってテンプレートを追加します。import {LitElement, html} from 'lit';import {customElement} from 'lit/decorators.js';@customElement('my-element')class MyElement extends LitElem" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="レンダリングはコンポーネントにテンプレートを追加することで定義します。テンプレートには_エクスプレッション(expressions)_を含めることができます。それは動的なコンテンツのプレースフォルダです。以下のように、Litコンポーネントにrender()メソッドを追加することによってテンプレートを追加します。import {LitElement, html} from 'lit';import {customElement} from 'lit/decorators.js';@customElement('my-element')class MyElement extends LitElem" />
+    <title>レンダリング</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="side"></div>
+    <main class="main markdown-body">
+      <h1 id="レンダリング"><a href="#レンダリング">レンダリング</a></h1>
+<p>レンダリングはコンポーネントにテンプレートを追加することで定義します。
+テンプレートには_エクスプレッション(expressions)_を含めることができます。
+それは動的なコンテンツのプレースフォルダです。</p>
+<p>以下のように、Litコンポーネントに<code>render()</code>メソッドを追加することによってテンプレートを追加します。</p>
+<pre><code>import {LitElement, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  render(){
+    return html`&lt;p&gt;Hello from my template.&lt;/p&gt;`;
+  }
+}
+</code></pre>
+<p>Write your template in HTML inside a JavaScript <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">tagged template literal</a> using Lit's <code>html</code> tag function.</p>
+<p>Lit templates can include JavaScript <em>expressions</em>. You can use expressions to set text content, attributes, properties, and event listeners. The <code>render()</code> method can also include any JavaScript—for example, you can create local variables for use in expressions.</p>
+<p>Typically, the component's <code>render()</code> method returns a single <code>TemplateResult</code> object (the same type returned by the <code>html</code> tag function). However, it can return anything that Lit can render:</p>
+<ul>
+<li>Primitive values like string, number, or boolean.</li>
+<li><code>TemplateResult</code> objects created by the <code>html</code> function.</li>
+<li>DOM Nodes.</li>
+<li>Arrays or iterables of any of the supported types.</li>
+</ul>
+<p>For more information about writing templates, see <a class="Link" href="/docs/templates/overview/">Templates</a>.</p>
+<h2 id="Writing_a_good_render()_method"><a href="#Writing_a_good_render()_method">Writing a good render() method</a></h2>
+<p>To take best advantage of Lit's functional rendering model, your <code>render()</code> method should follow these guidelines:</p>
+<ul>
+<li>Avoid changing the component's state.</li>
+<li>Avoid producing any side effects.</li>
+<li>Use only the component's properties as input.</li>
+<li>Return the same result when given the same property values.</li>
+</ul>
+<p>Following these guidelines keeps the template deterministic, and makes it easier to reason about the code.</p>
+<p>In most cases you should avoid making DOM updates outside of <code>render()</code>. Instead, express the component's template as a function of its state, and capture its state in properties.</p>
+<p>For example, if your component needs to update its UI when it receives an event, have the event listener set a reactive property that is used in <code>render()</code>, rather than manipulate the DOM directly.</p>
+<p>For more information, see <a class="Link" href="/docs/components/properties/">Reactive properties</a>.</p>
+<h2 id="Composing_templates"><a href="#Composing_templates">Composing templates</a></h2>
+<p>You can compose Lit templates from other templates. The following example composes a template for a component called <code>&lt;my-page&gt;</code> from smaller templates for the page's header, footer, and main content:</p>
+<p>{% playground-example "docs/templates/compose" "my-page.ts" %}</p>
+<p>In this example, the individual templates are defined as instance methods, so a subclass could extend this component and override one or more templates.</p>
+<p>{% todo %}</p>
+<p>Move example to composition section, add xref.</p>
+<p>{% endtodo %}</p>
+<p>You can also compose templates by importing other elements and using them in your template:</p>
+<p>{% playground-ide "docs/templates/composeimports" %}</p>
+<h2 id="When_templates_render"><a href="#When_templates_render">When templates render</a></h2>
+<p>A Lit component renders its template initially when it's added to the DOM on a page. After the initial render, any change to the component's reactive properties triggers an update cycle, re-rendering the component.</p>
+<p>Lit batches updates to maximize performance and efficiency. Setting multiple properties at once triggers only one update, performed asynchronously at microtask timing.</p>
+<p>During an update, only the parts of the DOM that change are re-rendered. Although Lit templates look like string interpolation, Lit parses and creates static HTML once, and then only updates changed values in expressions after that, making updates very efficient.</p>
+<p>For more information about the update cycle, see <a class="Link" href="/docs/components/properties/#when-properties-change">What happens when properties change</a>.</p>
+<h2 id="DOM_encapsulation"><a href="#DOM_encapsulation">DOM encapsulation</a></h2>
+<p>Lit uses shadow DOM to encapsulate the DOM a component renders. Shadow DOM lets an element create its own, isolated DOM tree that's separate from the main document tree. It's a core feature of the web components specifications that enables interoperability, style encapsulation, and other benefits.</p>
+<p>For more information about shadow DOM, see <a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
+</a> on Web Fundamentals.</p>
+<p>For more information about working with shadow DOM in your component, see <a class="Link" href="/docs/components/shadow-dom/">Working with shadow DOM</a>.</p>
+<h2 id="See_also"><a href="#See_also">See also</a></h2>
+<ul>
+<li><a class="Link" href="/docs/components/shadow-dom/">Shadow DOM</a></li>
+<li><a class="Link" href="/docs/templates/overview/">Templates overview</a></li>
+<li><a class="Link" href="/docs/templates/expressions/">Template expressions</a></li>
+</ul>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="side"></div>
+    <div class="side"></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+    <div class="side"></div>
+  </body>
+</html>
