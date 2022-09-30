@@ -40,8 +40,12 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>上記のようにLitの<code>html</code>タグ関数を使って、JavaScriptの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">tagged template literal</a>にHTMLを記述します。</p>
-<p>Lit templates can include JavaScript <em>expressions</em>. You can use expressions to set text content, attributes, properties, and event listeners. The <code>render()</code> method can also include any JavaScript—for example, you can create local variables for use in expressions.</p>
-<p>Typically, the component's <code>render()</code> method returns a single <code>TemplateResult</code> object (the same type returned by the <code>html</code> tag function). However, it can return anything that Lit can render:</p>
+<p>LitテンプレートにJavaScriptの式を含めることができます。
+エクスプレッションを使って要素にテキストコンテンツ、属性、プロパティ、イベントリスナをセットすることができます。
+<code>render()</code>メソッドにJavaScriptの処理を記述することもできます。
+例えば、エクスプレッションで使うローカル変数を作成することができます。</p>
+<p>通常、Litコンポーネントの<code>render()</code>メソッドは<code>TemplateResult</code>オブジェクト(<code>html</code>タグ関数の戻り値と同じ型)を1つ返します。
+それ以外にも、<code>render()</code>メソッドはLitがレンダリング可能な下記の値を返すことができます。</p>
 <ul>
 <li>Primitive values like string, number, or boolean.</li>
 <li><code>TemplateResult</code> objects created by the <code>html</code> function.</li>
@@ -84,7 +88,7 @@ class MyElement extends LitElement {
 <ul>
 <li><a class="Link" href="/docs/components/shadow-dom/">Shadow DOM</a></li>
 <li><a class="Link" href="/docs/templates/overview/">Templates overview</a></li>
-<li><a class="Link" href="/docs/templates/expressions/">Template expressions</a></li>
+<li><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Template expressions</a></li>
 </ul>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
