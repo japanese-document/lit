@@ -37,6 +37,8 @@ const greeting = document.createElement('simple-greeting');
 正確には、`LitElement`は`ReactiveElement`を継承しています。
 `ReactiveElement`は`HTMLElement`を継承してリアクティブプロパティを実装しています。
 
+![lit-element-inheritance.png](https://japanese-document.github.io/lit/images/lit-element-inheritance.png)
+
 ## TypeScriptの型を提供する
 
 TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推測します。
