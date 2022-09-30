@@ -23,9 +23,13 @@ class MyElement extends LitElement {
 
 上記のようにLitの`html`タグ関数を使って、JavaScriptの[tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)にHTMLを記述します。
 
-Lit templates can include JavaScript _expressions_. You can use expressions to set text content, attributes, properties, and event listeners. The `render()` method can also include any JavaScript—for example, you can create local variables for use in expressions.
+LitテンプレートにJavaScriptの式を含めることができます。
+エクスプレッションを使って要素にテキストコンテンツ、属性、プロパティ、イベントリスナをセットすることができます。
+`render()`メソッドにJavaScriptの処理を記述することもできます。
+例えば、エクスプレッションで使うローカル変数を作成することができます。
 
-Typically, the component's `render()` method returns a single `TemplateResult` object (the same type returned by the `html` tag function). However, it can return anything that Lit can render:
+通常、Litコンポーネントの`render()`メソッドは`TemplateResult`オブジェクト(`html`タグ関数の戻り値と同じ型)を1つ返します。
+それ以外にも、`render()`メソッドはLitがレンダリング可能な下記の値を返すことができます。
 
 *   Primitive values like string, number, or boolean.
 *   `TemplateResult` objects created by the `html` function.
@@ -93,7 +97,7 @@ For more information about working with shadow DOM in your component, see [Worki
 
 * [Shadow DOM](/docs/components/shadow-dom/)
 * [Templates overview](/docs/templates/overview/)
-* [Template expressions](/docs/templates/expressions/)
+* [Template expressions](https://japanese-document.github.io/lit/templates-expressions.html)
 
 ---
 
