@@ -1,3 +1,4 @@
+/** The MIT License Copyright (c) 2022 38elements */
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseArgs } from 'node:util'
