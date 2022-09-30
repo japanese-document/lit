@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-defining.html" />
     <meta property="og:title" content="定義 " />
-    <meta property="og:description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }The @customElement decorator is shorthand for calling customElements.define, which registers a custom element class with the browser and associates " />
+    <meta property="og:description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }@customElementデコレータはcustomElements.defineを実行する処理の省略した表現です。これはCustom Element classをブラウザに登録します。そして、要素名(この場合はsimple-greeting)をそれに関連付けます。JavaScriptを使ってい" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }The @customElement decorator is shorthand for calling customElements.define, which registers a custom element class with the browser and associates " />
+    <meta name="description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }@customElementデコレータはcustomElements.defineを実行する処理の省略した表現です。これはCustom Element classをブラウザに登録します。そして、要素名(この場合はsimple-greeting)をそれに関連付けます。JavaScriptを使ってい" />
     <title>定義 </title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -28,27 +28,27 @@
 <pre><code class="language-ts">@customElement('simple-greeting')
 export class SimpleGreeting extends LitElement { /* ... */ }
 </code></pre>
-<p>The <code>@customElement</code> decorator is shorthand for calling <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define"><code>customElements.define</code></a>, which registers a custom element class with the browser and associates it with an element name (in this case, <code>simple-greeting</code>).</p>
-<p>If you're using JavaScript, or if you're not using decorators, you can call <code>define()</code> directly:</p>
+<p><code>@customElement</code>デコレータは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define"><code>customElements.define</code></a>を実行する処理の省略した表現です。
+これはCustom Element classをブラウザに登録します。そして、要素名(この場合は<code>simple-greeting</code>)をそれに関連付けます。</p>
+<p>JavaScriptを使っていたりデコレータを使わない場合は直接<code>defined()</code>を実行します。</p>
 <pre><code class="language-js">export class SimpleGreeting extends LitElement { /* ... */  }
 customElements.define('simple-greeting', SimpleGreeting);
 </code></pre>
-<h2 id="A_Lit_component_is_an_HTML_element"><a href="#A_Lit_component_is_an_HTML_element">A Lit component is an HTML element</a></h2>
-<p>When you define a Lit component, you're defining a <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom HTML element</a>. So you can use the new element like you'd use any built-in element:</p>
+<h2 id="LitコンポーネントはHTML要素です"><a href="#LitコンポーネントはHTML要素です">LitコンポーネントはHTML要素です</a></h2>
+<p>Litコンポーネントを定義すると<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements</a>が定義されます。
+つまり、その定義された要素はbuilt-in要素のように使うことができます。</p>
 <pre><code class="language-html">&lt;simple-greeting name="Markup"&gt;&lt;/simple-greeting&gt;
 </code></pre>
 <pre><code class="language-js">const greeting = document.createElement('simple-greeting');
 </code></pre>
-<p>The <code>LitElement</code> base class is a subclass of <code>HTMLElement</code>, so a Lit component inherits all of the standard <code>HTMLElement</code> properties and methods.</p>
-<p>Specifically, <code>LitElement</code> inherits from <code>ReactiveElement</code>, which implements reactive properties, and in turn inherits from <code>HTMLElement</code>.</p>
-<img src="/images/docs/components/lit-element-inheritance.png" class="centered-image" alt="Inheritance diagram showing LitElement inheriting from ReactiveElement, which in turn inherits from HTMLElement. LitElement is responsible for templating; ReactiveElement is responsible for managing reactive properties and attributes; HTMLElement is the standard DOM interface shared by all native HTML elements and custom elements.">
-
-<h2 id="Providing_good_TypeScript_typings_{#typescript-typings}"><a href="#Providing_good_TypeScript_typings_{#typescript-typings}">Providing good TypeScript typings {#typescript-typings}</a></h2>
-<p>TypeScript will infer the class of an HTML element returned from certain DOM
-APIs based on the tag name. For example, <code>document.createElement('img')</code> returns
-an <code>HTMLImageElement</code> instance with a <code>src: string</code> property.</p>
-<p>Custom elements can get this same treatment by adding to the
-<code>HTMLElementTagNameMap</code> as follows:</p>
+<p><code>LitElement</code>クラスは<code>HTMLElement</code>のサブクラスです。
+だから、LitコンポーネントはWeb標準の<code>HTMLElement</code>のプロパティとメソッドをすべて継承します。
+正確には、<code>LitElement</code>は<code>ReactiveElement</code>を継承しています。
+<code>ReactiveElement</code>は<code>HTMLElement</code>を継承してリアクティブプロパティを実装しています。</p>
+<h2 id="TypeScriptの型を提供する"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
+<p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推測します。
+例えば、<code>document.createElement('img')</code>は<code>src: string</code>プロパティを持つ<code>HTMLImageElement</code>を返します。
+Custom elementsは以下のように<code>HTMLElementTagNameMap</code>に加えることによってbuilt-in要素と同じように取り扱われます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 export class MyElement extends LitElement {
   @property({type: Number})
@@ -62,13 +62,12 @@ declare global {
   }
 }
 </code></pre>
-<p>By doing this, the following code properly type-checks:</p>
+<p>これによって、以下のコードは適切に型チェックされます。</p>
 <pre><code class="language-ts">const myElement = document.createElement('my-element');
 myElement.aNumber = 10;
 </code></pre>
-<p>We recommend adding an <code>HTMLElementTagNameMap</code> entry for all elements authored
-in TypeScript, and ensuring you publish your <code>.d.ts</code> typings in your npm
-package.</p>
+<p>TypeScriptで定義したすべての要素を<code>HTMLElementTagNameMap</code>に追加することや
+npmにパッケージ公開する際は必ず<code>.d.ts</code>でそれらを提供することを推奨します。</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>

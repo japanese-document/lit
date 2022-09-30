@@ -9,18 +9,20 @@ Litコンポーネントは`LitElement`を拡張したクラスを生成して�
 export class SimpleGreeting extends LitElement { /* ... */ }
 ```
 
-The `@customElement` decorator is shorthand for calling [`customElements.define`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define), which registers a custom element class with the browser and associates it with an element name (in this case, `simple-greeting`).
+`@customElement`デコレータは[`customElements.define`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define)を実行する処理の省略した表現です。
+これはCustom Element classをブラウザに登録します。そして、要素名(この場合は`simple-greeting`)をそれに関連付けます。
 
-If you're using JavaScript, or if you're not using decorators, you can call `define()` directly:
+JavaScriptを使っていたりデコレータを使わない場合は直接`defined()`を実行します。
 
 ```js
 export class SimpleGreeting extends LitElement { /* ... */  }
 customElements.define('simple-greeting', SimpleGreeting);
 ```
 
-## A Lit component is an HTML element
+## LitコンポーネントはHTML要素です
 
-When you define a Lit component, you're defining a [custom HTML element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). So you can use the new element like you'd use any built-in element:
+Litコンポーネントを定義すると[custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)が定義されます。
+つまり、その定義された要素はbuilt-in要素のように使うことができます。
 
 ```html
 <simple-greeting name="Markup"></simple-greeting>
@@ -30,20 +32,16 @@ When you define a Lit component, you're defining a [custom HTML element](https:/
 const greeting = document.createElement('simple-greeting');
 ```
 
-The `LitElement` base class is a subclass of `HTMLElement`, so a Lit component inherits all of the standard `HTMLElement` properties and methods.
+`LitElement`クラスは`HTMLElement`のサブクラスです。
+だから、LitコンポーネントはWeb標準の`HTMLElement`のプロパティとメソッドをすべて継承します。
+正確には、`LitElement`は`ReactiveElement`を継承しています。
+`ReactiveElement`は`HTMLElement`を継承してリアクティブプロパティを実装しています。
 
-Specifically, `LitElement` inherits from `ReactiveElement`, which implements reactive properties, and in turn inherits from `HTMLElement`.
+## TypeScriptの型を提供する
 
-<img alt="Inheritance diagram showing LitElement inheriting from ReactiveElement, which in turn inherits from HTMLElement. LitElement is responsible for templating; ReactiveElement is responsible for managing reactive properties and attributes; HTMLElement is the standard DOM interface shared by all native HTML elements and custom elements." class="centered-image" src="/images/docs/components/lit-element-inheritance.png">
-
-## Providing good TypeScript typings {#typescript-typings}
-
-TypeScript will infer the class of an HTML element returned from certain DOM
-APIs based on the tag name. For example, `document.createElement('img')` returns
-an `HTMLImageElement` instance with a `src: string` property.
-
-Custom elements can get this same treatment by adding to the
-`HTMLElementTagNameMap` as follows:
+TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推測します。
+例えば、`document.createElement('img')`は`src: string`プロパティを持つ`HTMLImageElement`を返します。
+Custom elementsは以下のように`HTMLElementTagNameMap`に加えることによってbuilt-in要素と同じように取り扱われます。
 
 ```ts
 @customElement('my-element')
@@ -60,16 +58,15 @@ declare global {
 }
 ```
 
-By doing this, the following code properly type-checks:
+これによって、以下のコードは適切に型チェックされます。
 
 ```ts
 const myElement = document.createElement('my-element');
 myElement.aNumber = 10;
 ```
 
-We recommend adding an `HTMLElementTagNameMap` entry for all elements authored
-in TypeScript, and ensuring you publish your `.d.ts` typings in your npm
-package.
+TypeScriptで定義したすべての要素を`HTMLElementTagNameMap`に追加することや
+npmにパッケージ公開する際は必ず`.d.ts`でそれらを提供することを推奨します。
 
 ---
 
