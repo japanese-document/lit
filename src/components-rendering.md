@@ -3,10 +3,10 @@
 # レンダリング
 
 レンダリングはコンポーネントにテンプレートを追加することで定義します。
-テンプレートには_エクスプレッション(expressions)_を含めることができます。
+テンプレートにはエクスプレッション(expressions)を含めることができます。
 それは動的なコンテンツのプレースフォルダです。
 
-以下のように、Litコンポーネントに`render()`メソッドを追加することによってテンプレートを追加します。
+下記のように、Litコンポーネントに`render()`メソッドを追加することによってテンプレートを追加します。
 
 ```
 import {LitElement, html} from 'lit';
@@ -21,7 +21,7 @@ class MyElement extends LitElement {
 }
 ```
 
-Write your template in HTML inside a JavaScript [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) using Lit's `html` tag function.
+上記のようにLitの`html`タグ関数を使って、JavaScriptの[tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)にHTMLを記述します。
 
 Lit templates can include JavaScript _expressions_. You can use expressions to set text content, attributes, properties, and event listeners. The `render()` method can also include any JavaScript—for example, you can create local variables for use in expressions.
 

@@ -48,7 +48,7 @@
 <h3 id="Dev_mode"><a href="#Dev_mode">Dev mode</a></h3>
 <h4 id="static_disableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_disableWarning___(warningKind__WarningKind)_=>_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを無効にします。
-このメソッドはdevelopmentビルドにのみ存在するので、以下のように使用する必要があります。</p>
+このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで無効にします。
 ReactiveElement.disableWarning?.('migration');
 
@@ -60,7 +60,7 @@ MyElement.disableWarning?.('migration');
 developmentビルドでのみ使うことができます。</p>
 <h4 id="static_enableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_enableWarning___(warningKind__WarningKind)_=>_void">static enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを有効にします。
-このメソッドはdevelopmentビルドにのみ存在するので、以下のように使用する必要があります。</p>
+このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで有効にします。
 ReactiveElement.enableWarning?.('migration');
 
@@ -126,7 +126,7 @@ MyElement.enableWarning?.('migration');
 その場合、<code>super.createProperty()</code>を実行する必要があります。
 このメソッドは使用するディスクリプタ(descriptor)を取得するために内部で<code>getPropertyDescriptor()</code>を使います。
 プロパティが取得またはセットされる動作を変更するには<code>getPropertyDescriptor()</code>をオーバーライドします。
-プロパティのオプションを変更するには以下のように実装します。</p>
+プロパティのオプションを変更するには下記のように実装します。</p>
 <pre><code>static createProperty(name, options) {
   options = Object.assign(options, {myOption: true});
   super.createProperty(name, options);
