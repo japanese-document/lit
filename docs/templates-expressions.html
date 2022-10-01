@@ -83,11 +83,11 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 </code></pre>
 <p>この位置にあるエクスプレッションは以下の値を受け入れることができます。</p>
 <ul>
-<li>プリミティブ値</li>
-<li>センチネル値</li>
-<li><code>html</code>関数によって生成される<code>TemplateResult</code>オブジェクト</li>
-<li>DOM nodes</li>
-<li>サポートされている型の配列もしくはiterable</li>
+<li>string、number、boolean等のプリミティブ値</li>
+<li><code>html</code>関数で生成される<code>TemplateResult</code>オブジェクト</li>
+<li>DOM Nodes</li>
+<li>センチネル値(<a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
+<li>サポートされている型の配列もしくはiterables</li>
 </ul>
 <h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>
 <p>Litはほとんどすべての<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a>をレンダリングすることができます。 
@@ -126,7 +126,10 @@ const page = html`
 <p>条件分岐のあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>にあります。</p>
 <p>繰り返しがあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>にあります。</p>
 <h3 id="DOM_nodes"><a href="#DOM_nodes">DOM nodes</a></h3>
-<p>Any DOM node can be passed to a child expression. Typically DOM nodes should be rendered by specifying a template using <code>html</code>, but a DOM node can be directly rendered like this when needed. The node is attached to the DOM tree at that point, and so removed from any current parent:</p>
+<p>DOM Nodeはchild expressionに渡すことができます。
+通常、DOM Nodeは<code>html</code>を使ったテンプレートを記述することでレンダリングされます。
+しかし、必要な時は下記のようにDOM Nodeを直接レンダリングすることができます。
+この時、現在の親Nodeから削除されて、NodeはDOMツリーに取り付けられます。</p>
 <pre><code class="language-js">const div = document.createElement('div');
 const page = html`
   ${div}

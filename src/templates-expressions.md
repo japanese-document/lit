@@ -81,11 +81,11 @@ html`<main>${bodyText}</main>`
 
 この位置にあるエクスプレッションは以下の値を受け入れることができます。
 
-* プリミティブ値
-* センチネル値
-* `html`関数によって生成される`TemplateResult`オブジェクト
-* DOM nodes
-* サポートされている型の配列もしくはiterable
+*   string、number、boolean等のプリミティブ値
+*   `html`関数で生成される`TemplateResult`オブジェクト
+*   DOM Nodes
+*   センチネル値([`nothing`](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
+*   サポートされている型の配列もしくはiterables
 
 ### プリミティブ値
 
@@ -144,7 +144,10 @@ html`
 
 ### DOM nodes
 
-Any DOM node can be passed to a child expression. Typically DOM nodes should be rendered by specifying a template using `html`, but a DOM node can be directly rendered like this when needed. The node is attached to the DOM tree at that point, and so removed from any current parent:
+DOM Nodeはchild expressionに渡すことができます。
+通常、DOM Nodeは`html`を使ったテンプレートを記述することでレンダリングされます。
+しかし、必要な時は下記のようにDOM Nodeを直接レンダリングすることができます。
+この時、現在の親Nodeから削除されて、NodeはDOMツリーに取り付けられます。
 
 ```js
 const div = document.createElement('div');
