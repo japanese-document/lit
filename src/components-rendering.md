@@ -28,15 +28,20 @@ LitテンプレートにJavaScriptの式を含めることができます。
 `render()`メソッドにJavaScriptの処理を記述することもできます。
 例えば、エクスプレッションで使うローカル変数を作成することができます。
 
+## レンダリング可能な値
+
 通常、Litコンポーネントの`render()`メソッドは`TemplateResult`オブジェクト(`html`タグ関数の戻り値と同じ型)を1つ返します。
 それ以外にも、`render()`メソッドはLitがレンダリング可能な下記の値を返すことができます。
 
-*   Primitive values like string, number, or boolean.
-*   `TemplateResult` objects created by the `html` function.
-*   DOM Nodes.
-*   Arrays or iterables of any of the supported types.
+*   string、number、boolean等のプリミティブ値
+*   `html`関数で生成される`TemplateResult`オブジェクト
+*   DOM Nodes
+*   センチネル値([`nothing`](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
+*   サポートされている型の配列もしくはiterables
 
-For more information about writing templates, see [Templates](/docs/templates/overview/).
+This is *almost identical* to the set of values that can be rendered to a Lit [child expression](/docs/templates/expressions/#child-expressions).
+The one difference is that a child expression can render an `SVGTemplateResult`, returned by the [`svg`](/docs/api/templates/#svg) function.
+This kind of template result can only be rendered as the descendant of an `<svg>` element.
 
 ## Writing a good render() method
 
