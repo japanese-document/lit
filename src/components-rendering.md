@@ -36,14 +36,15 @@ LitテンプレートにJavaScriptの式を含めることができます。
 *   string、number、boolean等のプリミティブ値
 *   `html`関数で生成される`TemplateResult`オブジェクト
 *   DOM Nodes
-*   センチネル値([`nothing`](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
+*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
 *   サポートされている型の配列もしくはiterables
 
-This is *almost identical* to the set of values that can be rendered to a Lit [child expression](/docs/templates/expressions/#child-expressions).
-The one difference is that a child expression can render an `SVGTemplateResult`, returned by the [`svg`](/docs/api/templates/#svg) function.
-This kind of template result can only be rendered as the descendant of an `<svg>` element.
+これは[child expressions](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)にセットできる値とほぼ同じです。
+1点だけある違いはchild expressionsは`SVGTemplateResult`をレンダリングすることができます。
+これは[`svg`](https://lit.dev/docs/api/templates/#svg)で生成します。
+`SVGTemplateResult`は`<svg>`要素の子要素としてのみレンダリングすることができます。
 
-## Writing a good render() method
+## render()メソッドのベストプラクティス
 
 To take best advantage of Lit's functional rendering model, your `render()` method should follow these guidelines:
 

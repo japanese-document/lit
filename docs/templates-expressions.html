@@ -34,7 +34,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。</p>
 <p>エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
 一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型をサポートします。
-それに加えて、全てのエクスプレッションは_ディレクティブ_を受け入れることができます。
+それに加えて、全てのエクスプレッションはディレクティブを受け入れることができます。
 ディレクディブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
 <p>以下に各エクスプレッションタイプのクイックリファレンスと詳しい説明へのリンクを記載します。</p>
@@ -85,8 +85,9 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <ul>
 <li>string、number、boolean等のプリミティブ値</li>
 <li><code>html</code>関数で生成される<code>TemplateResult</code>オブジェクト</li>
+<li><code>svg</code>関数で生成される<code>SVGTemplateResult</code>オブジェクト</li>
 <li>DOM Nodes</li>
-<li>センチネル値(<a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
+<li>センチネル値(<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
 <li>サポートされている型の配列もしくはiterables</li>
 </ul>
 <h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>

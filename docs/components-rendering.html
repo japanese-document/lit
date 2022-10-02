@@ -51,13 +51,14 @@ class MyElement extends LitElement {
 <li>string、number、boolean等のプリミティブ値</li>
 <li><code>html</code>関数で生成される<code>TemplateResult</code>オブジェクト</li>
 <li>DOM Nodes</li>
-<li>センチネル値(<a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
+<li>センチネル値(<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
 <li>サポートされている型の配列もしくはiterables</li>
 </ul>
-<p>This is <em>almost identical</em> to the set of values that can be rendered to a Lit <a class="Link" href="/docs/templates/expressions/#child-expressions">child expression</a>.
-The one difference is that a child expression can render an <code>SVGTemplateResult</code>, returned by the <a class="Link" href="/docs/api/templates/#svg"><code>svg</code></a> function.
-This kind of template result can only be rendered as the descendant of an <code>&lt;svg&gt;</code> element.</p>
-<h2 id="Writing_a_good_render()_method"><a href="#Writing_a_good_render()_method">Writing a good render() method</a></h2>
+<p>これは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">child expressions</a>にセットできる値とほぼ同じです。
+1点だけある違いはchild expressionsは<code>SVGTemplateResult</code>をレンダリングすることができます。
+これは<a class="Link" href="https://lit.dev/docs/api/templates/#svg"><code>svg</code></a>で生成します。
+<code>SVGTemplateResult</code>は<code>&lt;svg&gt;</code>要素の子要素としてのみレンダリングすることができます。</p>
+<h2 id="render()メソッドのベストプラクティス"><a href="#render()メソッドのベストプラクティス">render()メソッドのベストプラクティス</a></h2>
 <p>To take best advantage of Lit's functional rendering model, your <code>render()</code> method should follow these guidelines:</p>
 <ul>
 <li>Avoid changing the component's state.</li>

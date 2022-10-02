@@ -30,7 +30,6 @@ import { nothing } from 'lit';
 child expressionsでは、`undefined`、`null`、`''`、`nothing`はNodeをレンダリングしません。
 (全部が同じ動作をします。)
 attribute expressionsでは`nothing`は属性を削除しますが、`undefined`と`null`は空文字をレンダリングします。
-In  `nothing` becomes `undefined`.
 `property expressions`では`nothing`は`undefined`になります。
 `nothing`の動作は他と異なり一貫性があるので、他のfalseになるような値よりも`nothing`を使うことを推奨します。
 

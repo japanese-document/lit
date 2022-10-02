@@ -14,7 +14,7 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 
 エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
 一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型をサポートします。
-それに加えて、全てのエクスプレッションは_ディレクティブ_を受け入れることができます。
+それに加えて、全てのエクスプレッションはディレクティブを受け入れることができます。
 ディレクディブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
 詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
@@ -83,8 +83,9 @@ html`<main>${bodyText}</main>`
 
 *   string、number、boolean等のプリミティブ値
 *   `html`関数で生成される`TemplateResult`オブジェクト
+*   `svg`関数で生成される`SVGTemplateResult`オブジェクト
 *   DOM Nodes
-*   センチネル値([`nothing`](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
+*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
 *   サポートされている型の配列もしくはiterables
 
 ### プリミティブ値
