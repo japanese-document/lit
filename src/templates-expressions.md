@@ -157,9 +157,11 @@ const page = html`
 `;
 ```
 
-### Arrays or iterables of any of the supported types
+### サポートされている型の配列もしくはiterables
 
-An expression can also return an array or iterable of any of the supported types, in any combination. You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists. For examples, see [Lists](https://lit.dev/docs/templates/lists/).
+An expression can also return an array or iterable of any of the supported types, in any combination.
+You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists.
+For examples, see [Lists](https://lit.dev/docs/templates/lists/).
 
 ### 子コンテンツの削除
 
