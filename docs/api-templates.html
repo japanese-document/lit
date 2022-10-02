@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/api-templates.html" />
     <meta property="og:title" content="Templates" />
-    <meta property="og:description" content="function htmlimportimport { html } from 'lit';html(strings: TemplateStringsArray, values: Array): TemplateResulthtmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。const header = (t" />
+    <meta property="og:description" content="html(strings: TemplateStringsArray, values: Array): TemplateResultimportimport { html } from 'lit';htmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。const header = (title: string)" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="function htmlimportimport { html } from 'lit';html(strings: TemplateStringsArray, values: Array): TemplateResulthtmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。const header = (t" />
+    <meta name="description" content="html(strings: TemplateStringsArray, values: Array): TemplateResultimportimport { html } from 'lit';htmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。const header = (title: string)" />
     <title>Templates</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -24,25 +24,25 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="Templates"><a href="#Templates">Templates</a></h1>
-<h2 id="function_html"><a href="#function_html">function html</a></h2>
+<h2 id="html(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">html(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
 <h3 id="import"><a href="#import">import</a></h3>
 <pre><code>import { html } from 'lit';
 </code></pre>
-<h3 id="html(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">html(strings: TemplateStringsArray, values: Array): TemplateResult</a></h3>
 <p>htmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。
 LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。
 レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。</p>
 <pre><code>const header = (title: string) =&gt; html`&lt;h1&gt;${title}&lt;/h1&gt;`;
 </code></pre>
-<h2 id="value_nothing"><a href="#value_nothing">value nothing</a></h2>
+<h3 id="nothing__symbol"><a href="#nothing__symbol">nothing: symbol</a></h3>
 <h3 id="inport"><a href="#inport">inport</a></h3>
 <pre><code>import { nothing } from 'lit';
 </code></pre>
-<h3 id="nothing__symbol"><a href="#nothing__symbol">nothing: symbol</a></h3>
-<p>Prefer using <code>nothing</code> over other falsy values as it provides a consistent behavior between various expression binding contexts.
-In child expressions, <code>undefined</code>, <code>null</code>, <code>''</code>, and <code>nothing</code> all behave the same and render no nodes.
-In attribute expressions, <code>nothing</code> removes the attribute, while <code>undefined</code> and <code>null</code> will render an empty string.
-In property expressions <code>nothing</code> becomes <code>undefined</code>.</p>
+<p>child expressionsでは、<code>undefined</code>、<code>null</code>、<code>''</code>、<code>nothing</code>はNodeをレンダリングしません。
+(全部が同じ動作をします。)
+attribute expressionsでは<code>nothing</code>は属性を削除しますが、<code>undefined</code>と<code>null</code>は空文字をレンダリングします。
+In  <code>nothing</code> becomes <code>undefined</code>.
+<code>property expressions</code>では<code>nothing</code>は<code>undefined</code>になります。
+<code>nothing</code>の動作は他と異なり一貫性があるので、他のfalseになるような値よりも<code>nothing</code>を使うことを推奨します。</p>
 <pre><code>const button = html`${
  user.isAdmin
    ? html`&lt;button&gt;DELETE&lt;/button&gt;`

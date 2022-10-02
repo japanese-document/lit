@@ -2,7 +2,7 @@
 ---
 # Templates
 
-## function html
+## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult<T> 
 
 ### import
 
@@ -10,7 +10,6 @@
 import { html } from 'lit';
 ```
 
-### html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult<T> 
 
 htmlタグはレンダリングされるDOMを抽象化した値(TemplateResult)を返します。
 LitコンポーネントはLitテンプレートがレンダリングされるまで何も処理を行いません。
@@ -20,7 +19,7 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 const header = (title: string) => html`<h1>${title}</h1>`;
 ```
 
-## value nothing
+### nothing: symbol
 
 ### inport
 
@@ -28,12 +27,12 @@ const header = (title: string) => html`<h1>${title}</h1>`;
 import { nothing } from 'lit';
 ```
 
-### nothing: symbol
-
-Prefer using `nothing` over other falsy values as it provides a consistent behavior between various expression binding contexts.
-In child expressions, `undefined`, `null`, `''`, and `nothing` all behave the same and render no nodes.
-In attribute expressions, `nothing` removes the attribute, while `undefined` and `null` will render an empty string.
-In property expressions `nothing` becomes `undefined`.
+child expressionsでは、`undefined`、`null`、`''`、`nothing`はNodeをレンダリングしません。
+(全部が同じ動作をします。)
+attribute expressionsでは`nothing`は属性を削除しますが、`undefined`と`null`は空文字をレンダリングします。
+In  `nothing` becomes `undefined`.
+`property expressions`では`nothing`は`undefined`になります。
+`nothing`の動作は他と異なり一貫性があるので、他のfalseになるような値よりも`nothing`を使うことを推奨します。
 
 ```
 const button = html`${
