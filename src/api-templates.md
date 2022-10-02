@@ -19,7 +19,7 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 const header = (title: string) => html`<h1>${title}</h1>`;
 ```
 
-### nothing: symbol
+## nothing: symbol
 
 ### inport
 
