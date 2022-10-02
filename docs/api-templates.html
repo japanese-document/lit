@@ -40,7 +40,6 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 <p>child expressionsでは、<code>undefined</code>、<code>null</code>、<code>''</code>、<code>nothing</code>はNodeをレンダリングしません。
 (全部が同じ動作をします。)
 attribute expressionsでは<code>nothing</code>は属性を削除しますが、<code>undefined</code>と<code>null</code>は空文字をレンダリングします。
-In  <code>nothing</code> becomes <code>undefined</code>.
 <code>property expressions</code>では<code>nothing</code>は<code>undefined</code>になります。
 <code>nothing</code>の動作は他と異なり一貫性があるので、他のfalseになるような値よりも<code>nothing</code>を使うことを推奨します。</p>
 <pre><code>const button = html`${
