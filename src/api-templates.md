@@ -19,3 +19,26 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 ```
 const header = (title: string) => html`<h1>${title}</h1>`;
 ```
+
+## value nothing
+
+### inport
+
+```
+import { nothing } from 'lit';
+```
+
+### nothing: symbol
+
+Prefer using `nothing` over other falsy values as it provides a consistent behavior between various expression binding contexts.
+In child expressions, `undefined`, `null`, `''`, and `nothing` all behave the same and render no nodes.
+In attribute expressions, `nothing` removes the attribute, while `undefined` and `null` will render an empty string.
+In property expressions `nothing` becomes `undefined`.
+
+```
+const button = html`${
+ user.isAdmin
+   ? html`<button>DELETE</button>`
+   : nothing
+}`;
+```

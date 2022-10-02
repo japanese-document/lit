@@ -34,6 +34,21 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。</p>
 <pre><code>const header = (title: string) =&gt; html`&lt;h1&gt;${title}&lt;/h1&gt;`;
 </code></pre>
+<h2 id="value_nothing"><a href="#value_nothing">value nothing</a></h2>
+<h3 id="inport"><a href="#inport">inport</a></h3>
+<pre><code>import { nothing } from 'lit';
+</code></pre>
+<h3 id="nothing__symbol"><a href="#nothing__symbol">nothing: symbol</a></h3>
+<p>Prefer using <code>nothing</code> over other falsy values as it provides a consistent behavior between various expression binding contexts.
+In child expressions, <code>undefined</code>, <code>null</code>, <code>''</code>, and <code>nothing</code> all behave the same and render no nodes.
+In attribute expressions, <code>nothing</code> removes the attribute, while <code>undefined</code> and <code>null</code> will render an empty string.
+In property expressions <code>nothing</code> becomes <code>undefined</code>.</p>
+<pre><code>const button = html`${
+ user.isAdmin
+   ? html`&lt;button&gt;DELETE&lt;/button&gt;`
+   : nothing
+}`;
+</code></pre>
 
     </main>
     <div class="side"></div>
