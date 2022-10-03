@@ -44,26 +44,30 @@ LitテンプレートにJavaScriptの式を含めることができます。
 これは[`svg`](https://lit.dev/docs/api/templates/#svg)で生成します。
 `SVGTemplateResult`は`<svg>`要素の子要素としてのみレンダリングすることができます。
 
-## render()メソッドのベストプラクティス
+## render()メソッドの注意点
 
-To take best advantage of Lit's functional rendering model, your `render()` method should follow these guidelines:
+Litのレンダリング機構を活用するためには、
+`render()`メソッドは以下のガイドラインに従う必要があります。
 
-* Avoid changing the component's state.
-* Avoid producing any side effects.
-* Use only the component's properties as input.
-* Return the same result when given the same property values.
+* `render()`メソッドでコンポーネントのステート(state)を変更しない。
+* `render()`メソッドで副作用(side effects)を発生させない。
+* 入力にはコンポーネントのプロパティのみを使う。
+* 同じプロパティの場合、同じ結果を返す。
 
-Following these guidelines keeps the template deterministic, and makes it easier to reason about the code.
+このガイドラインに従うとテンプレートは参照等価性を保つことができます。
+そして、コードを理解しやすくなります。
 
-In most cases you should avoid making DOM updates outside of `render()`. Instead, express the component's template as a function of its state, and capture its state in properties.
+ほどんどの場合、`render()`以外でDOMの更新をすることは避けるべきです。
+代わりにコンポーネントのステートをプロパティに保存して、テンプレートでそれらが反映されるようにします。
 
-For example, if your component needs to update its UI when it receives an event, have the event listener set a reactive property that is used in `render()`, rather than manipulate the DOM directly.
+例えば、コンポーネントがイベントを受け取ってUIにそれを反映したい場合、イベントリスナで直接DOMを操作するのではなくリアクティブプロパティに値をセットしてそれを`render()`で使います。
 
-For more information, see [Reactive properties](/docs/components/properties/).
+詳しくは[リアクティブプロパティ](https://lit.dev/docs/components/properties/)を見てください。
 
-## Composing templates
+## テンプレートを組み合わせる
 
-You can compose Lit templates from other templates. The following example composes a template for a component called `<my-page>` from smaller templates for the page's header, footer, and main content:
+テンプレートを組み合わせてテンプレートを作成できます。
+The following example composes a template for a component called `<my-page>` from smaller templates for the page's header, footer, and main content:
 
 {% playground-example "docs/templates/compose" "my-page.ts" %}
 
@@ -88,7 +92,7 @@ Lit batches updates to maximize performance and efficiency. Setting multiple pro
 
 During an update, only the parts of the DOM that change are re-rendered. Although Lit templates look like string interpolation, Lit parses and creates static HTML once, and then only updates changed values in expressions after that, making updates very efficient.
 
-For more information about the update cycle, see [What happens when properties change](/docs/components/properties/#when-properties-change).
+For more information about the update cycle, see [What happens when properties change](https://lit.dev/docs/components/properties/#when-properties-change).
 
 ## DOM encapsulation
 
@@ -97,12 +101,12 @@ Lit uses shadow DOM to encapsulate the DOM a component renders. Shadow DOM lets 
 For more information about shadow DOM, see [Shadow DOM v1: Self-Contained Web Components
 ](https://developers.google.com/web/fundamentals/web-components/shadowdom) on Web Fundamentals.
 
-For more information about working with shadow DOM in your component, see [Working with shadow DOM](/docs/components/shadow-dom/).
+For more information about working with shadow DOM in your component, see [Working with shadow DOM](https://lit.dev/docs/components/shadow-dom/).
 
 ## See also
 
-* [Shadow DOM](/docs/components/shadow-dom/)
-* [Templates overview](/docs/templates/overview/)
+* [Shadow DOM](https://lit.dev/docs/components/shadow-dom/)
+* [Templates overview](https://lit.dev/docs/templates/overview/)
 * [Template expressions](https://japanese-document.github.io/lit/templates-expressions.html)
 
 ---
