@@ -67,9 +67,44 @@ Litのレンダリング機構を活用するためには、
 ## テンプレートを組み合わせる
 
 テンプレートを組み合わせてテンプレートを作成できます。
-The following example composes a template for a component called `<my-page>` from smaller templates for the page's header, footer, and main content:
+以下の例は`<my-page>`コンポーネントのテンプレートはヘッダー、フッター、メインコンテントのテンプレートを組み合わせて作られています。
 
-{% playground-example "docs/templates/compose" "my-page.ts" %}
+```
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+
+@customElement('my-page')
+class MyPage extends LitElement {
+
+  @property({attribute: false})
+  article = {
+    title: 'My Nifty Article',
+    text: 'Some witty text.',
+  };
+
+  headerTemplate() {
+    return html`<header>${this.article.title}</header>`;
+  }
+
+  articleTemplate() {
+    return html`<article>${this.article.text}</article>`;
+  }
+
+  footerTemplate() {
+    return html`<footer>Your footer here.</footer>`;
+  }
+
+  render() {
+    return html`
+      ${this.headerTemplate()}
+      ${this.articleTemplate()}
+      ${this.footerTemplate()}
+    `;
+  }
+}
+```
+
 
 In this example, the individual templates are defined as instance methods, so a subclass could extend this component and override one or more templates.
 

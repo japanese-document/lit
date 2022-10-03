@@ -75,8 +75,41 @@ class MyElement extends LitElement {
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/components/properties/">リアクティブプロパティ</a>を見てください。</p>
 <h2 id="テンプレートを組み合わせる"><a href="#テンプレートを組み合わせる">テンプレートを組み合わせる</a></h2>
 <p>テンプレートを組み合わせてテンプレートを作成できます。
-The following example composes a template for a component called <code>&lt;my-page&gt;</code> from smaller templates for the page's header, footer, and main content:</p>
-<p>{% playground-example "docs/templates/compose" "my-page.ts" %}</p>
+以下の例は<code>&lt;my-page&gt;</code>コンポーネントのテンプレートはヘッダー、フッター、メインコンテントのテンプレートを組み合わせて作られています。</p>
+<pre><code>import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+
+@customElement('my-page')
+class MyPage extends LitElement {
+
+  @property({attribute: false})
+  article = {
+    title: 'My Nifty Article',
+    text: 'Some witty text.',
+  };
+
+  headerTemplate() {
+    return html`&lt;header&gt;${this.article.title}&lt;/header&gt;`;
+  }
+
+  articleTemplate() {
+    return html`&lt;article&gt;${this.article.text}&lt;/article&gt;`;
+  }
+
+  footerTemplate() {
+    return html`&lt;footer&gt;Your footer here.&lt;/footer&gt;`;
+  }
+
+  render() {
+    return html`
+      ${this.headerTemplate()}
+      ${this.articleTemplate()}
+      ${this.footerTemplate()}
+    `;
+  }
+}
+</code></pre>
 <p>In this example, the individual templates are defined as instance methods, so a subclass could extend this component and override one or more templates.</p>
 <p>{% todo %}</p>
 <p>Move example to composition section, add xref.</p>
