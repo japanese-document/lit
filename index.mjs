@@ -73,7 +73,7 @@ function createURL(dir, name) {
 
 function createHTML(title, body, description, url, cssPath) {
   const html = layout
-    .replaceAll(TITLE, DOMPurify.sanitize(title)).replace(BODY, DOMPurify.sanitize(body))
+    .replaceAll(TITLE, `${DOMPurify.sanitize(title)} - Lit`).replace(BODY, DOMPurify.sanitize(body))
     .replaceAll(DESCRIPTION, DOMPurify.sanitize(description)).replace(URL, DOMPurify.sanitize(url))
     .replace(CSS, DOMPurify.sanitize(cssPath))
   return html
@@ -100,12 +100,12 @@ function createIndexPage(_pages) {
     })
     return p
   }, [])
-  const title = 'Lit'
+  const title = 'もくじ'
   const md = pages.reduce((md, p) => {
     return `${md}\n## ${p.name}\n${p.pages.map(p => `* [${p.title}](${p.url})`).join('\n')}`
-  }, '# Lit\n')
+  }, '# もくじ\n')
   const body = marked.parse(md)
-  const description = 'Lit'
+  const description = 'もくじ'
   const html = createHTML(title, body, description, BASE_URL, CSS_PATH)
   return html
 }

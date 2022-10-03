@@ -1,6 +1,6 @@
 { "header": {"name": "Components", "order": 0}, "order": 0 }
 ---
-# 定義 
+# 定義
 
 Litコンポーネントは`LitElement`を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。
 
