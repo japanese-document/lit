@@ -58,20 +58,24 @@ class MyElement extends LitElement {
 1点だけある違いはchild expressionsは<code>SVGTemplateResult</code>をレンダリングすることができます。
 これは<a class="Link" href="https://lit.dev/docs/api/templates/#svg"><code>svg</code></a>で生成します。
 <code>SVGTemplateResult</code>は<code>&lt;svg&gt;</code>要素の子要素としてのみレンダリングすることができます。</p>
-<h2 id="render()メソッドのベストプラクティス"><a href="#render()メソッドのベストプラクティス">render()メソッドのベストプラクティス</a></h2>
-<p>To take best advantage of Lit's functional rendering model, your <code>render()</code> method should follow these guidelines:</p>
+<h2 id="render()メソッドの注意点"><a href="#render()メソッドの注意点">render()メソッドの注意点</a></h2>
+<p>Litのレンダリング機構を活用するためには、
+<code>render()</code>メソッドは以下のガイドラインに従う必要があります。</p>
 <ul>
-<li>Avoid changing the component's state.</li>
-<li>Avoid producing any side effects.</li>
-<li>Use only the component's properties as input.</li>
-<li>Return the same result when given the same property values.</li>
+<li><code>render()</code>メソッドでコンポーネントのステート(state)を変更しない。</li>
+<li><code>render()</code>メソッドで副作用(side effects)を発生させない。</li>
+<li>入力にはコンポーネントのプロパティのみを使う。</li>
+<li>同じプロパティの場合、同じ結果を返す。</li>
 </ul>
-<p>Following these guidelines keeps the template deterministic, and makes it easier to reason about the code.</p>
-<p>In most cases you should avoid making DOM updates outside of <code>render()</code>. Instead, express the component's template as a function of its state, and capture its state in properties.</p>
-<p>For example, if your component needs to update its UI when it receives an event, have the event listener set a reactive property that is used in <code>render()</code>, rather than manipulate the DOM directly.</p>
-<p>For more information, see <a class="Link" href="/docs/components/properties/">Reactive properties</a>.</p>
-<h2 id="Composing_templates"><a href="#Composing_templates">Composing templates</a></h2>
-<p>You can compose Lit templates from other templates. The following example composes a template for a component called <code>&lt;my-page&gt;</code> from smaller templates for the page's header, footer, and main content:</p>
+<p>このガイドラインに従うとテンプレートは参照等価性を保つことができます。
+そして、コードを理解しやすくなります。</p>
+<p>ほどんどの場合、<code>render()</code>以外でDOMの更新をすることは避けるべきです。
+代わりにコンポーネントのステートをプロパティに保存して、テンプレートでそれらが反映されるようにします。</p>
+<p>例えば、コンポーネントがイベントを受け取ってUIにそれを反映したい場合、イベントリスナで直接DOMを操作するのではなくリアクティブプロパティに値をセットしてそれを<code>render()</code>で使います。</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/docs/components/properties/">リアクティブプロパティ</a>を見てください。</p>
+<h2 id="テンプレートを組み合わせる"><a href="#テンプレートを組み合わせる">テンプレートを組み合わせる</a></h2>
+<p>テンプレートを組み合わせてテンプレートを作成できます。
+The following example composes a template for a component called <code>&lt;my-page&gt;</code> from smaller templates for the page's header, footer, and main content:</p>
 <p>{% playground-example "docs/templates/compose" "my-page.ts" %}</p>
 <p>In this example, the individual templates are defined as instance methods, so a subclass could extend this component and override one or more templates.</p>
 <p>{% todo %}</p>
@@ -83,16 +87,16 @@ class MyElement extends LitElement {
 <p>A Lit component renders its template initially when it's added to the DOM on a page. After the initial render, any change to the component's reactive properties triggers an update cycle, re-rendering the component.</p>
 <p>Lit batches updates to maximize performance and efficiency. Setting multiple properties at once triggers only one update, performed asynchronously at microtask timing.</p>
 <p>During an update, only the parts of the DOM that change are re-rendered. Although Lit templates look like string interpolation, Lit parses and creates static HTML once, and then only updates changed values in expressions after that, making updates very efficient.</p>
-<p>For more information about the update cycle, see <a class="Link" href="/docs/components/properties/#when-properties-change">What happens when properties change</a>.</p>
+<p>For more information about the update cycle, see <a class="Link" href="https://lit.dev/docs/components/properties/#when-properties-change">What happens when properties change</a>.</p>
 <h2 id="DOM_encapsulation"><a href="#DOM_encapsulation">DOM encapsulation</a></h2>
 <p>Lit uses shadow DOM to encapsulate the DOM a component renders. Shadow DOM lets an element create its own, isolated DOM tree that's separate from the main document tree. It's a core feature of the web components specifications that enables interoperability, style encapsulation, and other benefits.</p>
 <p>For more information about shadow DOM, see <a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
 </a> on Web Fundamentals.</p>
-<p>For more information about working with shadow DOM in your component, see <a class="Link" href="/docs/components/shadow-dom/">Working with shadow DOM</a>.</p>
+<p>For more information about working with shadow DOM in your component, see <a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Working with shadow DOM</a>.</p>
 <h2 id="See_also"><a href="#See_also">See also</a></h2>
 <ul>
-<li><a class="Link" href="/docs/components/shadow-dom/">Shadow DOM</a></li>
-<li><a class="Link" href="/docs/templates/overview/">Templates overview</a></li>
+<li><a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Shadow DOM</a></li>
+<li><a class="Link" href="https://lit.dev/docs/templates/overview/">Templates overview</a></li>
 <li><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Template expressions</a></li>
 </ul>
 <hr>
