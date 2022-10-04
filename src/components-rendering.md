@@ -156,13 +156,13 @@ class MyPage extends LitElement {
 
 ## テンプレートがレンダリングされるタイミング
 
-LitコンポーネントはページのDOMに追加されると最初にテンプレートをレンダリングします。
-After the initial render,
-any change to the component's reactive properties triggers an update cycle,
-re-rendering the component.
+初回のレンダリングの後、
+コンポーネントのリアクティブプロパティが変更されると更新サイクルが始動して、
+コンポーネントが再レンダリングされます。
 
-Lit batches updates to maximize performance and efficiency.
-Setting multiple properties at once triggers only one update, performed asynchronously at microtask timing.
+Litはパフォーマンスと効率を最大化するために更新を1回にまとめます。
+1度に複数のプロパティをセットしても、更新は1回のみ発動します。
+その更新は[microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)で非同期的に実行されます。
 
 During an update, only the parts of the DOM that change are re-rendered.
 Although Lit templates look like string interpolation, Lit parses and creates static HTML once,
