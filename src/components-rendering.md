@@ -164,11 +164,12 @@ Litはパフォーマンスと効率を最大化するために更新を1回に�
 1度に複数のプロパティをセットしても、更新は1回のみ発動します。
 その更新は[microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)で非同期的に実行されます。
 
-During an update, only the parts of the DOM that change are re-rendered.
-Although Lit templates look like string interpolation, Lit parses and creates static HTML once,
-and then only updates changed values in expressions after that, making updates very efficient.
+更新は変更されている部分のみが再レンダリングされます。
+Litテンプレートは文字列に値を埋め込んでいるだけに見えますが、
+Litはそれを解析して静的なHTMLを1回生成します。
+それ以降は更新を効率的にするためにエクスプレッション内の変更された値のみを更新します。
 
-For more information about the update cycle, see [What happens when properties change](https://lit.dev/docs/components/properties/#when-properties-change).
+更新サイクルの詳細は[What happens when properties change](https://lit.dev/docs/components/properties/#when-properties-change)を見てください。
 
 ## DOM encapsulation
 
