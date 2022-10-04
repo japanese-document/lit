@@ -106,26 +106,67 @@ class MyPage extends LitElement {
 ```
 
 
-In this example, the individual templates are defined as instance methods, so a subclass could extend this component and override one or more templates.
+上記の例では、各テンプレートはインスタンスメソッドで定義されています。
+このコンポーネントのサブクラスは1つ以上のテンプレートをオーバーライドすることができます。
 
-{% todo %}
+下記のように要素をテンプレートに配置してテンプレートを作成することもできます。
 
-Move example to composition section, add xref.
+```
+import {LitElement, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
-{% endtodo %}
+@customElement('my-header')
+class MyHeader extends LitElement {
+  render() {
+    return html`
+      <header>header</header>
+    `;
+  }
+}
 
-You can also compose templates by importing other elements and using them in your template:
+@customElement('my-article')
+class MyArticle extends LitElement {
+  render() {
+    return html`
+      <article>article</article>
+    `;
+  }
+}
 
-{% playground-ide "docs/templates/composeimports" %}
+@customElement('my-footer')
+class MyFooter extends LitElement {
+  render() {
+    return html`
+      <footer>footer</footer>
+    `;
+  }
+}
 
+@customElement('my-page')
+class MyPage extends LitElement {
+  render() {
+    return html`
+      <my-header></my-header>
+      <my-article></my-article>
+      <my-footer></my-footer>
+    `;
+  }
+}
+```
 
-## When templates render
+## テンプレートがレンダリングされるタイミング
 
-A Lit component renders its template initially when it's added to the DOM on a page. After the initial render, any change to the component's reactive properties triggers an update cycle, re-rendering the component.
+LitコンポーネントはページのDOMに追加されると最初にテンプレートをレンダリングします。
+After the initial render,
+any change to the component's reactive properties triggers an update cycle,
+re-rendering the component.
 
-Lit batches updates to maximize performance and efficiency. Setting multiple properties at once triggers only one update, performed asynchronously at microtask timing.
+Lit batches updates to maximize performance and efficiency.
+Setting multiple properties at once triggers only one update, performed asynchronously at microtask timing.
 
-During an update, only the parts of the DOM that change are re-rendered. Although Lit templates look like string interpolation, Lit parses and creates static HTML once, and then only updates changed values in expressions after that, making updates very efficient.
+During an update, only the parts of the DOM that change are re-rendered.
+Although Lit templates look like string interpolation, Lit parses and creates static HTML once,
+and then only updates changed values in expressions after that, making updates very efficient.
 
 For more information about the update cycle, see [What happens when properties change](https://lit.dev/docs/components/properties/#when-properties-change).
 
