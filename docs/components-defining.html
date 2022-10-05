@@ -24,7 +24,7 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="定義"><a href="#定義">定義</a></h1>
-<p>Litコンポーネントは<code>LitElement</code>を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。</p>
+<p>Litコンポーネントは<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a>を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。</p>
 <pre><code class="language-ts">@customElement('simple-greeting')
 export class SimpleGreeting extends LitElement { /* ... */ }
 </code></pre>
@@ -44,7 +44,7 @@ customElements.define('simple-greeting', SimpleGreeting);
 <p><code>LitElement</code>クラスは<code>HTMLElement</code>のサブクラスです。
 だから、LitコンポーネントはWeb標準の<code>HTMLElement</code>のプロパティとメソッドをすべて継承します。
 正確には、<code>LitElement</code>は<code>ReactiveElement</code>を継承しています。
-<code>ReactiveElement</code>は<code>HTMLElement</code>を継承してリアクティブプロパティを実装しています。</p>
+<code>ReactiveElement</code>は<code>HTMLElement</code>を継承して<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を実装しています。</p>
 <p><img alt="lit-element-inheritance.png" src="https://japanese-document.github.io/lit/images/lit-element-inheritance.png"></p>
 <h2 id="TypeScriptの型を提供する"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
 <p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。

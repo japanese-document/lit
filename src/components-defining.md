@@ -2,7 +2,7 @@
 ---
 # 定義
 
-Litコンポーネントは`LitElement`を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。
+Litコンポーネントは[LitElement](https://japanese-document.github.io/lit/api-LitElement.html)を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。
 
 ```ts
 @customElement('simple-greeting')
@@ -35,7 +35,7 @@ const greeting = document.createElement('simple-greeting');
 `LitElement`クラスは`HTMLElement`のサブクラスです。
 だから、LitコンポーネントはWeb標準の`HTMLElement`のプロパティとメソッドをすべて継承します。
 正確には、`LitElement`は`ReactiveElement`を継承しています。
-`ReactiveElement`は`HTMLElement`を継承してリアクティブプロパティを実装しています。
+`ReactiveElement`は`HTMLElement`を継承して[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を実装しています。
 
 ![lit-element-inheritance.png](https://japanese-document.github.io/lit/images/lit-element-inheritance.png)
 

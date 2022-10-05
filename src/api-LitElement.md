@@ -205,7 +205,7 @@ class MyElement extends LitElement {
 
 #### static properties: [PropertyDeclarations](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclarations)
 
-リアクティブプロパティを構成するマップです。
+[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を構成するマップです。
 それのキーはプロパティ名です。
 値はプロパティオプション(`PropertyDeclaration`)です。
 リアクティブプロパティに値をセットすると、要素が更新されてレンダリングされます。

@@ -62,7 +62,7 @@ Litのレンダリング機構を活用するためには、
 
 例えば、コンポーネントがイベントを受け取ってUIにそれを反映したい場合、イベントリスナで直接DOMを操作するのではなくリアクティブプロパティに値をセットしてそれを`render()`で使います。
 
-詳しくは[リアクティブプロパティ](https://lit.dev/docs/components/properties/)を見てください。
+詳しくは[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を見てください。
 
 ## テンプレートを組み合わせる
 
