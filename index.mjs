@@ -94,10 +94,10 @@ function createIndexPage(_pages) {
       name,
       pages: [] 
     }
-    p[order].pages.push({
+    p[order].pages[_p.meta.order] = {
       title,
       url
-    })
+    }
     return p
   }, [])
   const title = 'もくじ'
