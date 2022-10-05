@@ -162,25 +162,27 @@ class MyPage extends LitElement {
 
 Litはパフォーマンスと効率を最大化するために更新を1回にまとめます。
 1度に複数のプロパティをセットしても、更新は1回のみ発動します。
-その更新は[microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)で非同期的に実行されます。
+更新は[microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)で非同期的に実行されます。
 
 更新は変更されている部分のみが再レンダリングされます。
 Litテンプレートは文字列に値を埋め込んでいるだけに見えますが、
 Litはそれを解析して静的なHTMLを1回生成します。
-それ以降は更新を効率的にするためにエクスプレッション内の変更された値のみを更新します。
+それ以降は効率的に更新するためにエクスプレッション内の変更された値のみを更新します。
 
 更新サイクルの詳細は[What happens when properties change](https://lit.dev/docs/components/properties/#when-properties-change)を見てください。
 
-## DOM encapsulation
+## DOMのカプセル化
 
-Lit uses shadow DOM to encapsulate the DOM a component renders. Shadow DOM lets an element create its own, isolated DOM tree that's separate from the main document tree. It's a core feature of the web components specifications that enables interoperability, style encapsulation, and other benefits.
+LitはコンポーネントがレンダリングしたDOMをShadow DOMを使ってカプセル化します。
+Shadow DOMはメインのdocumentツリーとは別の独立したDOMツリーを持ちます。
+Shadow DOMはweb componentsのコア機能の1つです。Shadow DOMは相互運用性(interoperability)やスタイルのカプセル化等の利益をもたらします。
 
-For more information about shadow DOM, see [Shadow DOM v1: Self-Contained Web Components
-](https://developers.google.com/web/fundamentals/web-components/shadowdom) on Web Fundamentals.
+Shadow DOMの詳しい内容は[Shadow DOM v1: Self-Contained Web Components
+](https://developers.google.com/web/fundamentals/web-components/shadowdom)にあります。
 
-For more information about working with shadow DOM in your component, see [Working with shadow DOM](https://lit.dev/docs/components/shadow-dom/).
+コンポーネントでのShadow DOMの動作ついての詳細は[Working with shadow DOM](https://lit.dev/docs/components/shadow-dom/)を見てください。
 
-## See also
+## 関連情報
 
 * [Shadow DOM](https://lit.dev/docs/components/shadow-dom/)
 * [Templates overview](https://lit.dev/docs/templates/overview/)

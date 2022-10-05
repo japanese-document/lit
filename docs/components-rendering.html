@@ -160,18 +160,20 @@ class MyPage extends LitElement {
 コンポーネントが再レンダリングされます。</p>
 <p>Litはパフォーマンスと効率を最大化するために更新を1回にまとめます。
 1度に複数のプロパティをセットしても、更新は1回のみ発動します。
-その更新は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask</a>で非同期的に実行されます。</p>
+更新は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask</a>で非同期的に実行されます。</p>
 <p>更新は変更されている部分のみが再レンダリングされます。
 Litテンプレートは文字列に値を埋め込んでいるだけに見えますが、
 Litはそれを解析して静的なHTMLを1回生成します。
-それ以降は更新を効率的にするためにエクスプレッション内の変更された値のみを更新します。</p>
+それ以降は効率的に更新するためにエクスプレッション内の変更された値のみを更新します。</p>
 <p>更新サイクルの詳細は<a class="Link" href="https://lit.dev/docs/components/properties/#when-properties-change">What happens when properties change</a>を見てください。</p>
-<h2 id="DOM_encapsulation"><a href="#DOM_encapsulation">DOM encapsulation</a></h2>
-<p>Lit uses shadow DOM to encapsulate the DOM a component renders. Shadow DOM lets an element create its own, isolated DOM tree that's separate from the main document tree. It's a core feature of the web components specifications that enables interoperability, style encapsulation, and other benefits.</p>
-<p>For more information about shadow DOM, see <a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
-</a> on Web Fundamentals.</p>
-<p>For more information about working with shadow DOM in your component, see <a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Working with shadow DOM</a>.</p>
-<h2 id="See_also"><a href="#See_also">See also</a></h2>
+<h2 id="DOMのカプセル化"><a href="#DOMのカプセル化">DOMのカプセル化</a></h2>
+<p>LitはコンポーネントがレンダリングしたDOMをShadow DOMを使ってカプセル化します。
+Shadow DOMはメインのdocumentツリーとは別の独立したDOMツリーを持ちます。
+Shadow DOMはweb componentsのコア機能の1つです。Shadow DOMは相互運用性(interoperability)やスタイルのカプセル化等の利益をもたらします。</p>
+<p>Shadow DOMの詳しい内容は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
+</a>にあります。</p>
+<p>コンポーネントでのShadow DOMの動作ついての詳細は<a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Working with shadow DOM</a>を見てください。</p>
+<h2 id="関連情報"><a href="#関連情報">関連情報</a></h2>
 <ul>
 <li><a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Shadow DOM</a></li>
 <li><a class="Link" href="https://lit.dev/docs/templates/overview/">Templates overview</a></li>
