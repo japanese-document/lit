@@ -23,12 +23,13 @@ class MyElement extends LitElement {
 
 Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。
 
-*   **Reactive updates**. Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 
-*   **Attribute handling**. デフォルトでLitはプロパティに対応するオブザーブ(observe)な要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。
-*   **Superclass properties**. Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 
-*   **Element upgrade**. If a Lit component is defined after the element is already in the DOM, Lit handles upgrade logic, ensuring that any properties set on an element before it was upgraded trigger the correct reactive side effects when the element upgrades.
+*   **Reactive updates** Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 
+*   **Attribute handling** デフォルトでLitはプロパティに対応するオブザーブ(observe)な要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。
+*   **Superclass properties** Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 
+*   **Element upgrade** コンポーネントに対応したcustom elementが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litは要素にコンポーネントを適用します。
+要素にセットされているプロパティや属性をコンポーネントに反映します。
 
-## Public properties and internal state
+## パブリックプロパティとインターナルステート   
 
 Public properties are part of the component's public API. In general, public properties—especially public reactive properties—should be treated as _input_.
 
