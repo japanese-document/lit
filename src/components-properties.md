@@ -21,11 +21,11 @@ class MyElement extends LitElement {
 }
 ```
 
-Lit manages your reactive properties and their corresponding attributes. In particular:
+Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。
 
-*   **Reactive updates**. Lit generates a getter/setter pair for each reactive property. When a reactive property changes, the component schedules an update.
-*   **Attribute handling**. By default, Lit sets up an observed attribute corresponding to the property, and updates the property when the attribute changes. Property values can also, optionally, be _reflected_ back to the attribute.
-*   **Superclass properties**. Lit automatically applies property options declared by a superclass. You don't need to redeclare properties unless you want to change options.
+*   **Reactive updates**. Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 
+*   **Attribute handling**. デフォルトでLitはプロパティに対応するオブザーブ(observe)な要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。
+*   **Superclass properties**. Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 
 *   **Element upgrade**. If a Lit component is defined after the element is already in the DOM, Lit handles upgrade logic, ensuring that any properties set on an element before it was upgraded trigger the correct reactive side effects when the element upgrades.
 
 ## Public properties and internal state
