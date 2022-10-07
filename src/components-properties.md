@@ -31,13 +31,16 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 
 ## パブリックプロパティとインターナルステート   
 
-Public properties are part of the component's public API. In general, public properties—especially public reactive properties—should be treated as _input_.
+パブリックプロパティはコンポーネントのパブリックAPIの一部です。
+一般的に、パブリックプロパティ、その中でもリアクティブプロパティは入力として扱われます。
 
-The component shouldn't change its own public properties, except in response to user input. For example, a menu component might have a public `selected` property that can be initialized to a given value by the owner of the element, but that is updated by the component itself when the user selects an item. In these instances, the component should dispatch an event to indicate to the component's owner that the `selected` property changed. See [Dispatching events](/docs/components/events/#dispatching-events) for more details.
+The component shouldn't change its own public properties, except in response to user input.
+For example, a menu component might have a public `selected` property that can be initialized to a given value by the owner of the element,
+but that is updated by the component itself when the user selects an item.
+In these instances, the component should dispatch an event to indicate to the component's owner that the `selected` property changed.
+See [Dispatching events](/docs/components/events/#dispatching-events) for more details.
 
 Lit also supports _internal reactive state_. Internal reactive state refers to reactive properties that _aren't_ part of the component's API. These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.
-
-{% switchable-sample %}
 
 ```ts
 @state()
@@ -54,9 +57,6 @@ constructor()
   this._counter = 0;
 }
 ```
-
-{% endswitchable-sample %}
-
 The component manipulates its own internal reactive state.
 In some cases, internal reactive state may be initialized from public properties—for example, if there is an expensive transformation between the user-visible property and the internal state.
 

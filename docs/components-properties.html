@@ -47,10 +47,14 @@
 要素にセットされているプロパティや属性をコンポーネントに反映します。</li>
 </ul>
 <h2 id="パブリックプロパティとインターナルステート"><a href="#パブリックプロパティとインターナルステート">パブリックプロパティとインターナルステート</a></h2>
-<p>Public properties are part of the component's public API. In general, public properties—especially public reactive properties—should be treated as <em>input</em>.</p>
-<p>The component shouldn't change its own public properties, except in response to user input. For example, a menu component might have a public <code>selected</code> property that can be initialized to a given value by the owner of the element, but that is updated by the component itself when the user selects an item. In these instances, the component should dispatch an event to indicate to the component's owner that the <code>selected</code> property changed. See <a class="Link" href="/docs/components/events/#dispatching-events">Dispatching events</a> for more details.</p>
+<p>パブリックプロパティはコンポーネントのパブリックAPIの一部です。
+一般的に、パブリックプロパティ、その中でもリアクティブプロパティは入力として扱われます。</p>
+<p>The component shouldn't change its own public properties, except in response to user input.
+For example, a menu component might have a public <code>selected</code> property that can be initialized to a given value by the owner of the element,
+but that is updated by the component itself when the user selects an item.
+In these instances, the component should dispatch an event to indicate to the component's owner that the <code>selected</code> property changed.
+See <a class="Link" href="/docs/components/events/#dispatching-events">Dispatching events</a> for more details.</p>
 <p>Lit also supports <em>internal reactive state</em>. Internal reactive state refers to reactive properties that <em>aren't</em> part of the component's API. These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@state()
 private _counter = 0;
 </code></pre>
@@ -63,7 +67,6 @@ constructor()
   this._counter = 0;
 }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>The component manipulates its own internal reactive state.
 In some cases, internal reactive state may be initialized from public properties—for example, if there is an expensive transformation between the user-visible property and the internal state.</p>
 <p>As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
