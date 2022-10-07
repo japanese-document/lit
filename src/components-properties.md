@@ -34,11 +34,11 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 パブリックプロパティはコンポーネントのパブリックAPIの一部です。
 一般的に、パブリックプロパティ、その中でもリアクティブプロパティは入力として扱われます。
 
-The component shouldn't change its own public properties, except in response to user input.
-For example, a menu component might have a public `selected` property that can be initialized to a given value by the owner of the element,
-but that is updated by the component itself when the user selects an item.
-In these instances, the component should dispatch an event to indicate to the component's owner that the `selected` property changed.
-See [Dispatching events](/docs/components/events/#dispatching-events) for more details.
+ユーザの入力に対応する以外でコンポーネントのパブリックプロパティを変更するべきではありません。
+例えばメニューコンポーネントに`selected`プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
+しかし、ユーザが項目を指定した場合はコンポーネントが`selected`プロパティを更新するべきです。
+この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があります。
+詳しくは[Dispatching events](/docs/components/events/#dispatching-events)を見てください。
 
 Lit also supports _internal reactive state_. Internal reactive state refers to reactive properties that _aren't_ part of the component's API. These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.
 
