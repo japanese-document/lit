@@ -160,7 +160,7 @@ const page = html`
 
 ### サポートされている型の配列もしくはiterables
 
-An expression can also return an array or iterable of any of the supported types, in any combination.
+エクスプレッションはサポートされている型を格納する配列、iterable、それらの組み合わせを返すことができます。
 You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists.
 For examples, see [Lists](https://lit.dev/docs/templates/lists/).
 
