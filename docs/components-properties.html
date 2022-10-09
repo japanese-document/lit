@@ -55,8 +55,8 @@
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があります。
 詳しくは<a class="Link" href="/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
 <p>Litはインターナルリアクティブステート(internal reactive state)をサポートします。
-Internal reactive state refers to reactive properties that <em>aren't</em> part of the component's API.
-These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.</p>
+インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
+このプロパティは対応する要素の属性を持ちません。通常、TypeScriptではprotectedもしはprivateにします。</p>
 <pre><code class="language-ts">@state()
 private _counter = 0;
 </code></pre>
@@ -69,9 +69,11 @@ constructor()
   this._counter = 0;
 }
 </code></pre>
-<p>The component manipulates its own internal reactive state.
-In some cases, internal reactive state may be initialized from public properties—for example, if there is an expensive transformation between the user-visible property and the internal state.</p>
-<p>As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
+<p>コンポーネントはインターナルリアクティブステートを扱います。
+In some cases, internal reactive state may be initialized from public properties.
+for example,
+if there is an expensive transformation between the user-visible property and the internal state.</p>
+<p>As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see <a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>.</p>
 <h2 id="Public_reactive_properties_{#declare}"><a href="#Public_reactive_properties_{#declare}">Public reactive properties {#declare}</a></h2>
 <p>Declare your element's public reactive properties using decorators or the static <code>properties</code> field.</p>
 <p>In either case, you can pass an options object to configure features for the property.</p>
@@ -192,7 +194,7 @@ For more information, see <a class="Link" href="#haschanged">Customizing change 
 </dd>
 
 <p>Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.</p>
-<h2 id="Internal_reactive_state"><a href="#Internal_reactive_state">Internal reactive state</a></h2>
+<h2 id="インターナルリアクティブステート"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
 <p><em>Internal reactive state</em> refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.</p>
 <p>Use the <code>@state</code> decorator to declare internal reactive state:</p>
 <pre><code class="language-ts">@state()

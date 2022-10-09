@@ -41,8 +41,8 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 詳しくは[Dispatching events](/docs/components/events/#dispatching-events)を見てください。
 
 Litはインターナルリアクティブステート(internal reactive state)をサポートします。
-Internal reactive state refers to reactive properties that _aren't_ part of the component's API.
-These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.
+インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
+このプロパティは対応する要素の属性を持ちません。通常、TypeScriptではprotectedもしはprivateにします。
 
 ```ts
 @state()
@@ -59,10 +59,13 @@ constructor()
   this._counter = 0;
 }
 ```
-The component manipulates its own internal reactive state.
-In some cases, internal reactive state may be initialized from public properties—for example, if there is an expensive transformation between the user-visible property and the internal state.
 
-As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see [Internal reactive state](#internal-reactive-state).
+コンポーネントはインターナルリアクティブステートを扱います。
+In some cases, internal reactive state may be initialized from public properties.
+for example,
+if there is an expensive transformation between the user-visible property and the internal state.
+
+As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see [インターナルリアクティブステート](#インターナルリアクティブステート).
 
 ## Public reactive properties {#declare}
 
@@ -224,7 +227,7 @@ When using TypeScript, this field should generally match the TypeScript type dec
 
 Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.
 
-## Internal reactive state
+## インターナルリアクティブステート
 
 *Internal reactive state* refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.
 
