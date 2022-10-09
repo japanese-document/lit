@@ -41,7 +41,7 @@
 <p>Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。</p>
 <ul>
 <li><strong>Reactive updates</strong> Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 </li>
-<li><strong>Attribute handling</strong> デフォルトでLitはプロパティに対応するオブザーブ(observe)な要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。</li>
+<li><strong>Attribute handling</strong> デフォルトでLitはプロパティに対応するオブザーブ(observe)される要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。</li>
 <li><strong>Superclass properties</strong> Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 </li>
 <li><strong>Element upgrade</strong> コンポーネントに対応したcustom elementが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litは要素にコンポーネントを適用します。
 要素にセットされているプロパティや属性をコンポーネントに反映します。</li>
@@ -54,7 +54,9 @@
 しかし、ユーザが項目を指定した場合はコンポーネントが<code>selected</code>プロパティを更新するべきです。
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があります。
 詳しくは<a class="Link" href="/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
-<p>Lit also supports <em>internal reactive state</em>. Internal reactive state refers to reactive properties that <em>aren't</em> part of the component's API. These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.</p>
+<p>Litはインターナルリアクティブステート(internal reactive state)をサポートします。
+Internal reactive state refers to reactive properties that <em>aren't</em> part of the component's API.
+These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.</p>
 <pre><code class="language-ts">@state()
 private _counter = 0;
 </code></pre>
