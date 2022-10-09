@@ -161,12 +161,12 @@ const page = html`
 ### サポートされている型の配列もしくはiterables
 
 エクスプレッションはサポートされている型を格納する配列、iterable、それらの組み合わせを返すことができます。
-You can use this feature along with standard JavaScript like the Array `map` method to create repeating templates and lists.
-For examples, see [Lists](https://lit.dev/docs/templates/lists/).
+つまり、`Array.map()`を使って繰り返し表現を生成することができます。
+詳しくは[リスト](https://lit.dev/docs/templates/lists/)を見てください。
 
 ### 子コンテンツの削除
 
-The values `null`, `undefined`, the empty string `''`, and Lit's [nothing](https://lit.dev/docs/api/templates/#nothing) sentinel value remove any previously rendered content and render no node.
+The values `null`, `undefined`, the empty string `''`, and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value remove any previously rendered content and render no node.
 
 Setting or 子コンテンツの削除 is often done based on a condition. See [Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
 

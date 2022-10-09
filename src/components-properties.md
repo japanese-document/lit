@@ -24,7 +24,7 @@ class MyElement extends LitElement {
 Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。
 
 *   **Reactive updates** Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 
-*   **Attribute handling** デフォルトでLitはプロパティに対応するオブザーブ(observe)な要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。
+*   **Attribute handling** デフォルトでLitはプロパティに対応するオブザーブ(observe)される要素の属性をセットアップします。そして、属性が変更されるとプロパティを更新します。オプションの設定でプロパティの値を属性に反映することができます。
 *   **Superclass properties** Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 
 *   **Element upgrade** コンポーネントに対応したcustom elementが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litは要素にコンポーネントを適用します。
 要素にセットされているプロパティや属性をコンポーネントに反映します。
@@ -40,7 +40,9 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があります。
 詳しくは[Dispatching events](/docs/components/events/#dispatching-events)を見てください。
 
-Lit also supports _internal reactive state_. Internal reactive state refers to reactive properties that _aren't_ part of the component's API. These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.
+Litはインターナルリアクティブステート(internal reactive state)をサポートします。
+Internal reactive state refers to reactive properties that _aren't_ part of the component's API.
+These properties don't have a corresponding attribute, and are typically marked protected or private in TypeScript.
 
 ```ts
 @state()

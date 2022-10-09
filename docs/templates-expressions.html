@@ -139,10 +139,10 @@ const page = html`
 </code></pre>
 <h3 id="サポートされている型の配列もしくはiterables"><a href="#サポートされている型の配列もしくはiterables">サポートされている型の配列もしくはiterables</a></h3>
 <p>エクスプレッションはサポートされている型を格納する配列、iterable、それらの組み合わせを返すことができます。
-You can use this feature along with standard JavaScript like the Array <code>map</code> method to create repeating templates and lists.
-For examples, see <a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>.</p>
+つまり、<code>Array.map()</code>を使って繰り返し表現を生成することができます。
+詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/">リスト</a>を見てください。</p>
 <h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
-<p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="https://lit.dev/docs/api/templates/#nothing">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
+<p>The values <code>null</code>, <code>undefined</code>, the empty string <code>''</code>, and Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value remove any previously rendered content and render no node.</p>
 <p>Setting or 子コンテンツの削除 is often done based on a condition. See <a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
 <p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content. Rendering no node ensures the fallback content is rendered. See <a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
 <h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
