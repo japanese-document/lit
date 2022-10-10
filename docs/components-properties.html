@@ -70,11 +70,9 @@ constructor()
 }
 </code></pre>
 <p>コンポーネントはインターナルリアクティブステートを扱います。
-In some cases, internal reactive state may be initialized from public properties.
-for example,
-if there is an expensive transformation between the user-visible property and the internal state.</p>
-<p>As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see <a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>.</p>
-<h2 id="Public_reactive_properties_{#declare}"><a href="#Public_reactive_properties_{#declare}">Public reactive properties {#declare}</a></h2>
+パブリックプロパティと同様にインターナルリアクティブステートを更新すると更新サイクルが発動します。
+詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
+<h2 id="パブリックリアクティブプロパティ"><a href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></h2>
 <p>Declare your element's public reactive properties using decorators or the static <code>properties</code> field.</p>
 <p>In either case, you can pass an options object to configure features for the property.</p>
 <h3 id="Declaring_properties_with_decorators_{#declare-with-decorators}"><a href="#Declaring_properties_with_decorators_{#declare-with-decorators}">Declaring properties with decorators {#declare-with-decorators}</a></h3>

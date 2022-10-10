@@ -61,13 +61,10 @@ constructor()
 ```
 
 コンポーネントはインターナルリアクティブステートを扱います。
-In some cases, internal reactive state may be initialized from public properties.
-for example,
-if there is an expensive transformation between the user-visible property and the internal state.
+パブリックプロパティと同様にインターナルリアクティブステートを更新すると更新サイクルが発動します。
+詳しくは[インターナルリアクティブステート](#インターナルリアクティブステート)を見てください。
 
-As with public reactive properties, updating internal reactive state triggers an update cycle. For more information, see [インターナルリアクティブステート](#インターナルリアクティブステート).
-
-## Public reactive properties {#declare}
+## パブリックリアクティブプロパティ
 
 Declare your element's public reactive properties using decorators or the static `properties` field.
 
