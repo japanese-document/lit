@@ -66,13 +66,13 @@ constructor()
 
 ## パブリックリアクティブプロパティ
 
-Declare your element's public reactive properties using decorators or the static `properties` field.
+要素のリアクティブプロパティはデコレータもしくは`static properties`を使って宣言します。
 
-In either case, you can pass an options object to configure features for the property.
+いづれの場合も、オプションオブジェクトを渡すことでプロパティの動作を変更することができます。
 
-### Declaring properties with decorators {#declare-with-decorators}
+### デコレータでプロパティを設定する
 
-Use the `@property` decorator with a class field declaration to declare a reactive property.
+下記のように`@property`デコレータをクラスフィールドの宣言に付与することでリアクティブプロパティを宣言します。
 
 ```ts
 class MyElement extends LitElement {
@@ -84,7 +84,8 @@ class MyElement extends LitElement {
 }
 ```
 
-The argument to the `@property`  decorators is an [options object](#property-options). Omitting the argument is equivalent to specifying the default value for all options.
+`@property`デコレータの引数は[プロパティオプション](#プロパティオプション)です。
+Omitting the argument is equivalent to specifying the default value for all options.
 
 <div class="alert alert-info">
 
@@ -92,7 +93,7 @@ The argument to the `@property`  decorators is an [options object](#property-opt
 
 </div>
 
-### Declaring properties in a static properties class field
+### static propertiesフィールドでプロパティを設定する
 
 To declare properties in a static `properties` class field:
 
@@ -143,7 +144,7 @@ plugins = [
 
 For information about using class fields with **decorators**, see [Avoiding issues with class fields and decorators](/docs/components/decorators/#avoiding-issues-with-class-fields).
 
-### Property options
+### プロパティオプション
 
 The options object can have the following properties:
 
