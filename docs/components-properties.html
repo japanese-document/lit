@@ -73,10 +73,10 @@ constructor()
 パブリックプロパティと同様にインターナルリアクティブステートを更新すると更新サイクルが発動します。
 詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
 <h2 id="パブリックリアクティブプロパティ"><a href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></h2>
-<p>Declare your element's public reactive properties using decorators or the static <code>properties</code> field.</p>
-<p>In either case, you can pass an options object to configure features for the property.</p>
-<h3 id="Declaring_properties_with_decorators_{#declare-with-decorators}"><a href="#Declaring_properties_with_decorators_{#declare-with-decorators}">Declaring properties with decorators {#declare-with-decorators}</a></h3>
-<p>Use the <code>@property</code> decorator with a class field declaration to declare a reactive property.</p>
+<p>要素のリアクティブプロパティはデコレータもしくは<code>static properties</code>を使って宣言します。</p>
+<p>いづれの場合も、オプションオブジェクトを渡すことでプロパティの動作を変更することができます。</p>
+<h3 id="デコレータでプロパティを設定する"><a href="#デコレータでプロパティを設定する">デコレータでプロパティを設定する</a></h3>
+<p>下記のように<code>@property</code>デコレータをクラスフィールドの宣言に付与することでリアクティブプロパティを宣言します。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   @property({type: String})
   mode: string;
@@ -85,13 +85,14 @@ constructor()
   data = {};
 }
 </code></pre>
-<p>The argument to the <code>@property</code>  decorators is an <a class="Link" href="#property-options">options object</a>. Omitting the argument is equivalent to specifying the default value for all options.</p>
+<p><code>@property</code>デコレータの引数は<a class="Link" href="#プロパティオプション">プロパティオプション</a>です。
+Omitting the argument is equivalent to specifying the default value for all options.</p>
 <div class="alert alert-info">
 
 <p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you'll need to use a compiler like Babel or the TypeScript compiler to use decorators. See <a class="Link" href="/docs/components/decorators/#enabling-decorators">Enabling decorators</a> for details.</p>
 </div>
 
-<h3 id="Declaring_properties_in_a_static_properties_class_field"><a href="#Declaring_properties_in_a_static_properties_class_field">Declaring properties in a static properties class field</a></h3>
+<h3 id="static_propertiesフィールドでプロパティを設定する"><a href="#static_propertiesフィールドでプロパティを設定する">static propertiesフィールドでプロパティを設定する</a></h3>
 <p>To declare properties in a static <code>properties</code> class field:</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   static properties = {
@@ -129,7 +130,7 @@ plugins = [
 ];
 </code></pre>
 <p>For information about using class fields with <strong>decorators</strong>, see <a class="Link" href="/docs/components/decorators/#avoiding-issues-with-class-fields">Avoiding issues with class fields and decorators</a>.</p>
-<h3 id="Property_options"><a href="#Property_options">Property options</a></h3>
+<h3 id="プロパティオプション"><a href="#プロパティオプション">プロパティオプション</a></h3>
 <p>The options object can have the following properties:</p>
 <dl>
 <dt>
