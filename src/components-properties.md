@@ -85,17 +85,11 @@ class MyElement extends LitElement {
 ```
 
 `@property`デコレータの引数は[プロパティオプション](#プロパティオプション)です。
-Omitting the argument is equivalent to specifying the default value for all options.
-
-<div class="alert alert-info">
-
-**Using decorators.** Decorators are a proposed JavaScript feature, so you'll need to use a compiler like Babel or the TypeScript compiler to use decorators. See [Enabling decorators](/docs/components/decorators/#enabling-decorators) for details.
-
-</div>
+プロパティオプションを渡さないと全てのオプションのデフォルト値が適用されます。
 
 ### static propertiesフィールドでプロパティを設定する
 
-To declare properties in a static `properties` class field:
+下記のように`static properties`を使ってプロパティを設定します。
 
 ```js
 class MyElement extends LitElement {
@@ -111,117 +105,42 @@ class MyElement extends LitElement {
 }
 ```
 
-An empty option object is equivalent to specifying the default value for all options.
-
-### Avoiding issues with class fields when declaring properties {#avoiding-issues-with-class-fields}
-
-[Class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) have a problematic interaction with reactive properties. Class fields are defined on the element instance. Reactive properties are defined as accessors on the element prototype. According to the rules of JavaScript, an instance property takes precedence over and effectively hides a prototype property. This means that reactive property accessors do not function when class fields are used. When a property is set, the element does not update.
-
-In **JavaScript** you **must not use class fields** when declaring reactive properties. Instead, properties must be initialized in the element constructor:
-
-```js
-constructor() {
-  super();
-  this.data = {};
-}
-```
-
-For **TypeScript**, you **may use class fields** for declaring reactive properties as long as you use one of these patterns:
-* Set the `useDefineForClassFields` setting in your `tsconfig` to `false`. Note, this is not required for some configurations of TypeScript, but it's recommended to explicitly set it to `false`.
-* Add the `declare` keyword on the field, and put the field's initializer in the constructor.
-
-When compiling JavaScript with **Babel**, you **may use class fields** for declaring reactive properties as long as you set `setPublicClassFields` to `true` in the `assumptions` config of your `babelrc`. Note, for older versions of Babel, you also need to include the plugin `@babel/plugin-proposal-class-properties`:
-
-```js
-assumptions = {
-  "setPublicClassFields": true
-};
-
-plugins = [
-  ["@babel/plugin-proposal-class-properties"],
-];
-```
-
-For information about using class fields with **decorators**, see [Avoiding issues with class fields and decorators](/docs/components/decorators/#avoiding-issues-with-class-fields).
+空のオプションオブジェクト(`{}`)が渡された場合はデフォルトのオプションが適用されます。
 
 ### プロパティオプション
 
-The options object can have the following properties:
+オプションオブジェクトに以下のプロパティを設定することができます。
 
-<dl>
-<dt>
-
-`attribute`
-
-</dt>
-<dd>
+#### attribute
 
 Whether the property is associated with an attribute, or a custom name for the associated attribute. Default: true. If `attribute` is false, the `converter`, `reflect` and `type` options are ignored. For more information, see [Setting the attribute name](#observed-attributes).
 
-</dd>
-<dt>
-
-`converter`
-
-</dt>
-<dd>
+#### converter
 
 A [custom converter](#conversion-converter) for converting between properties and attributes. If unspecified, use the [default attribute converter](#conversion-type).
 
-</dd>
-<dt>
-
-`hasChanged`
-
-</dt>
-<dd>
+#### hasChanged
 
 A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (`newValue !== oldValue`) to determine whether the property value has changed.
 For more information, see [Customizing change detection](#haschanged).
 
-</dd>
-<dt>
-
-`noAccessor`
-
-</dt>
-<dd>
+#### noAccessor
 
 Set to true to avoid generating the default property accessors. This option is rarely necessary. Default: false. For more information, see [Preventing Lit from generating a property accessor](#accessors-noaccessor).
 
-</dd>
-<dt>
-
-`reflect`
-
-</dt>
-<dd>
+#### reflect
 
 Whether property value is reflected back to the associated attribute. Default: false. For more information, see [Enabling attribute reflection](#reflected-attributes).
 
-</dd>
-<dt>
-
-`state`
-
-</dt>
-<dd>
+#### state
 
 Set to true to declare the property as _internal reactive state_. Internal reactive state triggers updates like public reactive properties, but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component. Equivalent to using the `@state` decorator. Default: false. For more information, see [Internal reactive state](#internal-reactive-state).
 
-</dd>
-<dt>
-
-`type`
-
-</dt>
-<dd>
+#### type
 
 When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If `converter` is set, this field is passed to the converter. If `type` is unspecified, the default converter treats it as `type: String`. See [Using the default converter](#conversion-type).
 
 When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the `type` option is used by the Lit's _runtime_ for string serialization/deserialization, and should not be confused with a _type-checking_ mechanism.
-
-</dd>
 
 Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.
 

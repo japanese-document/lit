@@ -86,14 +86,9 @@ constructor()
 }
 </code></pre>
 <p><code>@property</code>デコレータの引数は<a class="Link" href="#プロパティオプション">プロパティオプション</a>です。
-Omitting the argument is equivalent to specifying the default value for all options.</p>
-<div class="alert alert-info">
-
-<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you'll need to use a compiler like Babel or the TypeScript compiler to use decorators. See <a class="Link" href="/docs/components/decorators/#enabling-decorators">Enabling decorators</a> for details.</p>
-</div>
-
+プロパティオプションを渡さないと全てのオプションのデフォルト値が適用されます。</p>
 <h3 id="static_propertiesフィールドでプロパティを設定する"><a href="#static_propertiesフィールドでプロパティを設定する">static propertiesフィールドでプロパティを設定する</a></h3>
-<p>To declare properties in a static <code>properties</code> class field:</p>
+<p>下記のように<code>static properties</code>を使ってプロパティを設定します。</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   static properties = {
     mode: {type: String},
@@ -106,92 +101,25 @@ Omitting the argument is equivalent to specifying the default value for all opti
   }
 }
 </code></pre>
-<p>An empty option object is equivalent to specifying the default value for all options.</p>
-<h3 id="Avoiding_issues_with_class_fields_when_declaring_properties_{#avoiding-issues-with-class-fields}"><a href="#Avoiding_issues_with_class_fields_when_declaring_properties_{#avoiding-issues-with-class-fields}">Avoiding issues with class fields when declaring properties {#avoiding-issues-with-class-fields}</a></h3>
-<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields">Class fields</a> have a problematic interaction with reactive properties. Class fields are defined on the element instance. Reactive properties are defined as accessors on the element prototype. According to the rules of JavaScript, an instance property takes precedence over and effectively hides a prototype property. This means that reactive property accessors do not function when class fields are used. When a property is set, the element does not update.</p>
-<p>In <strong>JavaScript</strong> you <strong>must not use class fields</strong> when declaring reactive properties. Instead, properties must be initialized in the element constructor:</p>
-<pre><code class="language-js">constructor() {
-  super();
-  this.data = {};
-}
-</code></pre>
-<p>For <strong>TypeScript</strong>, you <strong>may use class fields</strong> for declaring reactive properties as long as you use one of these patterns:</p>
-<ul>
-<li>Set the <code>useDefineForClassFields</code> setting in your <code>tsconfig</code> to <code>false</code>. Note, this is not required for some configurations of TypeScript, but it's recommended to explicitly set it to <code>false</code>.</li>
-<li>Add the <code>declare</code> keyword on the field, and put the field's initializer in the constructor.</li>
-</ul>
-<p>When compiling JavaScript with <strong>Babel</strong>, you <strong>may use class fields</strong> for declaring reactive properties as long as you set <code>setPublicClassFields</code> to <code>true</code> in the <code>assumptions</code> config of your <code>babelrc</code>. Note, for older versions of Babel, you also need to include the plugin <code>@babel/plugin-proposal-class-properties</code>:</p>
-<pre><code class="language-js">assumptions = {
-  "setPublicClassFields": true
-};
-
-plugins = [
-  ["@babel/plugin-proposal-class-properties"],
-];
-</code></pre>
-<p>For information about using class fields with <strong>decorators</strong>, see <a class="Link" href="/docs/components/decorators/#avoiding-issues-with-class-fields">Avoiding issues with class fields and decorators</a>.</p>
+<p>空のオプションオブジェクト(<code>{}</code>)が渡された場合はデフォルトのオプションが適用されます。</p>
 <h3 id="プロパティオプション"><a href="#プロパティオプション">プロパティオプション</a></h3>
-<p>The options object can have the following properties:</p>
-<dl>
-<dt>
-
-<p><code>attribute</code></p>
-</dt>
-<dd>
-
+<p>オプションオブジェクトに以下のプロパティを設定することができます。</p>
+<h4 id="attribute"><a href="#attribute">attribute</a></h4>
 <p>Whether the property is associated with an attribute, or a custom name for the associated attribute. Default: true. If <code>attribute</code> is false, the <code>converter</code>, <code>reflect</code> and <code>type</code> options are ignored. For more information, see <a class="Link" href="#observed-attributes">Setting the attribute name</a>.</p>
-</dd>
-<dt>
-
-<p><code>converter</code></p>
-</dt>
-<dd>
-
+<h4 id="converter"><a href="#converter">converter</a></h4>
 <p>A <a class="Link" href="#conversion-converter">custom converter</a> for converting between properties and attributes. If unspecified, use the <a class="Link" href="#conversion-type">default attribute converter</a>.</p>
-</dd>
-<dt>
-
-<p><code>hasChanged</code></p>
-</dt>
-<dd>
-
+<h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
 <p>A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (<code>newValue !== oldValue</code>) to determine whether the property value has changed.
 For more information, see <a class="Link" href="#haschanged">Customizing change detection</a>.</p>
-</dd>
-<dt>
-
-<p><code>noAccessor</code></p>
-</dt>
-<dd>
-
+<h4 id="noAccessor"><a href="#noAccessor">noAccessor</a></h4>
 <p>Set to true to avoid generating the default property accessors. This option is rarely necessary. Default: false. For more information, see <a class="Link" href="#accessors-noaccessor">Preventing Lit from generating a property accessor</a>.</p>
-</dd>
-<dt>
-
-<p><code>reflect</code></p>
-</dt>
-<dd>
-
+<h4 id="reflect"><a href="#reflect">reflect</a></h4>
 <p>Whether property value is reflected back to the associated attribute. Default: false. For more information, see <a class="Link" href="#reflected-attributes">Enabling attribute reflection</a>.</p>
-</dd>
-<dt>
-
-<p><code>state</code></p>
-</dt>
-<dd>
-
+<h4 id="state"><a href="#state">state</a></h4>
 <p>Set to true to declare the property as <em>internal reactive state</em>. Internal reactive state triggers updates like public reactive properties, but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component. Equivalent to using the <code>@state</code> decorator. Default: false. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
-</dd>
-<dt>
-
-<p><code>type</code></p>
-</dt>
-<dd>
-
+<h4 id="type"><a href="#type">type</a></h4>
 <p>When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If <code>converter</code> is set, this field is passed to the converter. If <code>type</code> is unspecified, the default converter treats it as <code>type: String</code>. See <a class="Link" href="#conversion-type">Using the default converter</a>.</p>
 <p>When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the <code>type</code> option is used by the Lit's <em>runtime</em> for string serialization/deserialization, and should not be confused with a <em>type-checking</em> mechanism.</p>
-</dd>
-
 <p>Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.</p>
 <h2 id="インターナルリアクティブステート"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
 <p><em>Internal reactive state</em> refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.</p>
@@ -549,7 +477,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
-</dl>
+
     </main>
     <div class="side"></div>
     <div class="side"></div>
