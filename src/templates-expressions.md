@@ -166,11 +166,14 @@ const page = html`
 
 ### 子コンテンツの削除
 
-The values `null`, `undefined`, the empty string `''`, and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value remove any previously rendered content and render no node.
+`null`、`undefined`、空文字列(`''`)、Litの[nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)センチネル値は、1つ前のレンダリングされたコンテンツを削除します。そして、Nodeをレンダリングしません。
 
-Setting or 子コンテンツの削除 is often done based on a condition. See [Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
+子コンテンツのセットもしくは削除はよく条件分岐によって行われます。
+詳しくは[Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)を見てください。
 
-Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a `slot` with fallback content. Rendering no node ensures the fallback content is rendered. See [fallback content](https://lit.dev/docs/components/shadow-dom/#fallback) for more information.
+Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a `slot` with fallback content.
+Rendering no node ensures the fallback content is rendered.
+See [fallback content](https://lit.dev/docs/components/shadow-dom/#fallback) for more information.
 
 ## Attribute expressions
 
