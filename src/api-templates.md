@@ -40,3 +40,20 @@ const button = html`${
    : nothing
 }`;
 ```
+## render(value: unknown, container: [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) | [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), options?: [RenderOptions](https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions))): [RootPart](https://lit.dev/docs/api/misc/#RootPart)
+
+### Import
+
+```
+import { render } from 'lit';
+```
+
+Renders a value, usually a lit-html TemplateResult, to the container.
+This example renders the text "Hello, Zoe!" inside a paragraph tag, appending it to the container document.body.
+
+```
+import {html, render} from 'lit';
+
+const name = "Zoe";
+render(html`<p>Hello, ${name}!</p>`, document.body);
+```

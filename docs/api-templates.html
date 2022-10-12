@@ -48,6 +48,17 @@ attribute expressionsでは<code>nothing</code>は属性を削除しますが、
    : nothing
 }`;
 </code></pre>
+<h2 id="render(value__unknown,_container__HTMLElement_|_DocumentFragment,_options___RenderOptions))__RootPart"><a href="#render(value__unknown,_container__HTMLElement_|_DocumentFragment,_options___RenderOptions))__RootPart">render(value: unknown, container: </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragment</a>, options?: <a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions">RenderOptions</a>)): <a class="Link" href="https://lit.dev/docs/api/misc/#RootPart">RootPart</a></h2>
+<h3 id="Import"><a href="#Import">Import</a></h3>
+<pre><code>import { render } from 'lit';
+</code></pre>
+<p>Renders a value, usually a lit-html TemplateResult, to the container.
+This example renders the text "Hello, Zoe!" inside a paragraph tag, appending it to the container document.body.</p>
+<pre><code>import {html, render} from 'lit';
+
+const name = "Zoe";
+render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
+</code></pre>
 
     </main>
     <div class="side"></div>
