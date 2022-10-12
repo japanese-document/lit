@@ -168,16 +168,15 @@ const page = html`
 
 `null`、`undefined`、空文字列(`''`)、Litの[nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)センチネル値は、1つ前のレンダリングされたコンテンツを削除します。そして、Nodeをレンダリングしません。
 
-子コンテンツのセットもしくは削除はよく条件分岐によって行われます。
+子コンテンツの配置もしくは削除はよく条件分岐によって行われます。
 詳しくは[Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)を見てください。
 
-Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a `slot` with fallback content.
-Rendering no node ensures the fallback content is rendered.
-See [fallback content](https://lit.dev/docs/components/shadow-dom/#fallback) for more information.
+フォールバックコンテンツを持つ`slot`に対応するコンテンツがない場合、フォールバックコンテンツがレンダリングされます。
+詳しくは[fallback content](https://lit.dev/docs/components/shadow-dom/#fallback)を見てください。
 
 ## Attribute expressions
 
-In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.
+エクスプレッションを使って要素の属性やプロパティをセットすることができます。
 
 By default, an expression in the value of an attribute sets the attribute:
 

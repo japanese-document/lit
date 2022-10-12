@@ -143,13 +143,12 @@ const page = html`
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/">リスト</a>を見てください。</p>
 <h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
 <p><code>null</code>、<code>undefined</code>、空文字列(<code>''</code>)、Litの<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a>センチネル値は、1つ前のレンダリングされたコンテンツを削除します。そして、Nodeをレンダリングしません。</p>
-<p>子コンテンツのセットもしくは削除はよく条件分岐によって行われます。
+<p>子コンテンツの配置もしくは削除はよく条件分岐によって行われます。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a>を見てください。</p>
-<p>Rendering no node can be important when an expression is a child of an element with Shadow DOM that includes a <code>slot</code> with fallback content.
-Rendering no node ensures the fallback content is rendered.
-See <a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a> for more information.</p>
+<p>フォールバックコンテンツを持つ<code>slot</code>に対応するコンテンツがない場合、フォールバックコンテンツがレンダリングされます。
+詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a>を見てください。</p>
 <h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
-<p>In addition to using expressions to add child nodes, you can use them to set an elements's attributes and properties, too.</p>
+<p>エクスプレッションを使って要素の属性やプロパティをセットすることができます。</p>
 <p>By default, an expression in the value of an attribute sets the attribute:</p>
 <pre><code class="language-js">html`&lt;div class=${this.textClass}&gt;Stylish text.&lt;/div&gt;`;
 </code></pre>
