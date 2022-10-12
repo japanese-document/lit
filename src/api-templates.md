@@ -40,7 +40,7 @@ const button = html`${
    : nothing
 }`;
 ```
-## render(value: unknown, container: [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) | [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), options?: [RenderOptions](https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions))): [RootPart](https://lit.dev/docs/api/misc/#RootPart)
+## render(value: unknown, container: [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) | [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), options?: [RenderOptions](https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions)): [RootPart](https://lit.dev/docs/api/misc/#RootPart)
 
 ### Import
 
