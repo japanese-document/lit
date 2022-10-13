@@ -149,16 +149,20 @@ const page = html`
 詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a>を見てください。</p>
 <h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
 <p>エクスプレッションを使って要素の属性やプロパティをセットすることができます。</p>
-<p>By default, an expression in the value of an attribute sets the attribute:</p>
+<p>デフォルトでは属性の値にエクスプレッションがあるとそれが属性の値になります。</p>
 <pre><code class="language-js">html`&lt;div class=${this.textClass}&gt;Stylish text.&lt;/div&gt;`;
 </code></pre>
-<p>Since attribute values are always strings, the expression should return a value that can be converted into a string.</p>
-<p>If the expression makes up the entire attribute value, you can leave off the quotes. If the expression makes up only part of the attribute value, you need to quote the entire value:</p>
+<p>属性の値は必ず文字列なので、エクスプレッションは文字列に変換することができる値を返す必要があります。</p>
+<p>上記のようにエクスプレッションが属性の値全体の場合、属性の値を<code>"</code>で囲むことを省略できます。
+下記のようにエクスプレッションが属性の値の一部の場合、属性の値を<code>"</code>で囲む必要があります。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.image}"&gt;`;
 </code></pre>
-<p>Note, some primitive values are handled specially in attributes. Boolean values are converted to strings so, for example, <code>false</code> renders <code>'false'</code>. Both <code>undefined</code> and <code>null</code> render to an attribute as an empty string.</p>
+<p>一部のプリミティブ値は属性にセットされると特殊な評価をされます。
+Booleanは文字列に変換されます。例えば、<code>false</code>は<code>'false'</code>に変換されます。
+<code>undefined</code>と<code>null</code>は空文字<code>""</code>としてレンダリングされます。</p>
 <h3 id="Boolean_attributes"><a href="#Boolean_attributes">Boolean attributes</a></h3>
-<p>To set a boolean attribute, use the <code>?</code> prefix with the attribute name. The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:</p>
+<p>To set a boolean attribute, use the <code>?</code> prefix with the attribute name.
+The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:</p>
 <pre><code class="language-js">html`&lt;div ?hidden=${!this.showAdditional}&gt;This text may be hidden.&lt;/div&gt;`;
 </code></pre>
 <h3 id="Removing_an_attribute"><a href="#Removing_an_attribute">Removing an attribute</a></h3>
