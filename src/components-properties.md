@@ -40,7 +40,7 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があります。
 詳しくは[Dispatching events](https://lit.dev/docs/components/events/#dispatching-events)を見てください。
 
-Litはインターナルリアクティブステート(internal reactive state)をサポートします。
+Litにはインターナルリアクティブステート(internal reactive state)機能があります。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
 このプロパティは対応する要素の属性を持ちません。通常、TypeScriptではprotectedもしはprivateにします。
 
