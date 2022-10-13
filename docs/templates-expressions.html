@@ -181,20 +181,20 @@ falseになる値がセットされると属性は削除されます。</p>
 <p><a class="Link" href="https://lit.dev/docs/api/directives/#ifDefined">ifDefined</a>ディレクティブは<code>value ?? nothing</code>と等価です。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${ifDefined(this.imagePath)}/${ifDefined(this.imageFile)}"&gt;`;
 </code></pre>
-<p>You might also want to remove the attribute if the value is not truthy so that values of <code>false</code> or empty string <code>''</code> remove the attribute. For example, consider an element that has default value for <code>this.ariaLabel</code> of empty string <code>''</code>:</p>
+<p>エクスプレッションの値が<code>false</code>や空文字(<code>''</code>)の場合に属性を削除したい場合は以下のようにします。</p>
 <pre><code class="language-js">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
-<p>In this example the <code>aria-label</code> attribute is rendered only if <code>this.ariaLabel</code> is not an empty string.</p>
-<p>Setting or removing an attribute is often done based on a condition. See <a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a> for more information.</p>
 <h2 id="Property_expressions"><a href="#Property_expressions">Property expressions</a></h2>
-<p>You can set a JavaScript property on an element using the <code>.</code> prefix and the property name:</p>
+<p>プロパティ名の先頭に<code>.</code>を付けるとプロパティにJavaScriptの値ままセットすることができます。</p>
 <pre><code class="language-js">html`&lt;input .value=${this.itemCount}&gt;`;
 </code></pre>
-<p>You can use this syntax to pass complex data down the tree to subcomponents. For example, if you have a <code>my-list</code> component with a <code>listItems</code> property, you could pass it an array of objects:</p>
+<p>この構文を使うと子コンポーネントに複雑なデータを渡すことができます。
+下記の例では、<code>listItems</code>プロパティを持つ<code>my-list</code>コンポーネントにオブジェクトの配列を渡すことができます。</p>
 <pre><code class="language-js">html`&lt;my-list .listItems=${this.items}&gt;&lt;/my-list&gt;`;
 </code></pre>
-<p>Note that the property name in this example—<code>listItems</code>—is mixed case. Although HTML <em>attributes</em> are case-insensitive, Lit preserves the case for property names when it processes the template.</p>
-<p>For more information about component properties, see <a class="Link" href="https://lit.dev/docs/components/properties/">Reactive properties</a>.</p>
+<p>この例ではプロパティ名に<code>listItems</code>のように大文字と小文字が混在している点に注意してください。
+HTMLは大文字と小文字を区別しませんが、Litはテンプレートを処理する際にプロパティ名の大文字と小文字を区別します。</p>
+<p>コンポーネントのプロパティに関する詳しい情報は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
 <h2 id="Event_listener_expressions"><a href="#Event_listener_expressions">Event listener expressions</a></h2>
 <p>Templates can also include declarative event listeners. Use the prefix <code>@</code> followed by the event name. The expression should evaluate to an event listener.</p>
 <pre><code class="language-js">html`&lt;button @click=${this.clickHandler}&gt;Click Me!&lt;/button&gt;`;

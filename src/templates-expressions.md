@@ -234,33 +234,31 @@ html`<img src="/images/${this.imagePath ?? nothing}/${this.imageFile ?? nothing}
 html`<img src="/images/${ifDefined(this.imagePath)}/${ifDefined(this.imageFile)}">`;
 ```
 
-You might also want to remove the attribute if the value is not truthy so that values of `false` or empty string `''` remove the attribute. For example, consider an element that has default value for `this.ariaLabel` of empty string `''`:
+エクスプレッションの値が`false`や空文字(`''`)の場合に属性を削除したい場合は以下のようにします。
 
 ```js
 html`<button aria-label="${this.ariaLabel || nothing}"></button>`
 ```
 
-In this example the `aria-label` attribute is rendered only if `this.ariaLabel` is not an empty string.
-
-Setting or removing an attribute is often done based on a condition. See [Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing) for more information.
-
 ## Property expressions
 
-You can set a JavaScript property on an element using the `.` prefix and the property name:
+プロパティ名の先頭に`.`を付けるとプロパティにJavaScriptの値ままセットすることができます。
 
 ```js
 html`<input .value=${this.itemCount}>`;
 ```
 
-You can use this syntax to pass complex data down the tree to subcomponents. For example, if you have a `my-list` component with a `listItems` property, you could pass it an array of objects:
+この構文を使うと子コンポーネントに複雑なデータを渡すことができます。
+下記の例では、`listItems`プロパティを持つ`my-list`コンポーネントにオブジェクトの配列を渡すことができます。
 
 ```js
 html`<my-list .listItems=${this.items}></my-list>`;
 ```
 
-Note that the property name in this example—`listItems`—is mixed case. Although HTML *attributes* are case-insensitive, Lit preserves the case for property names when it processes the template.
+この例ではプロパティ名に`listItems`のように大文字と小文字が混在している点に注意してください。
+HTMLは大文字と小文字を区別しませんが、Litはテンプレートを処理する際にプロパティ名の大文字と小文字を区別します。
 
-For more information about component properties, see [Reactive properties](https://lit.dev/docs/components/properties/).
+コンポーネントのプロパティに関する詳しい情報は[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を見てください。
 
 ## Event listener expressions
 

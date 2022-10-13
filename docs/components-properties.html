@@ -54,7 +54,7 @@
 しかし、ユーザが項目を指定した場合はコンポーネントが<code>selected</code>プロパティを更新するべきです。
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があります。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
-<p>Litはインターナルリアクティブステート(internal reactive state)をサポートします。
+<p>Litにはインターナルリアクティブステート(internal reactive state)機能があります。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
 このプロパティは対応する要素の属性を持ちません。通常、TypeScriptではprotectedもしはprivateにします。</p>
 <pre><code class="language-ts">@state()
