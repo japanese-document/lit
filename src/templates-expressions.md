@@ -178,25 +178,29 @@ const page = html`
 
 エクスプレッションを使って要素の属性やプロパティをセットすることができます。
 
-By default, an expression in the value of an attribute sets the attribute:
+デフォルトでは属性の値にエクスプレッションがあるとそれが属性の値になります。
 
 ```js
 html`<div class=${this.textClass}>Stylish text.</div>`;
 ```
 
-Since attribute values are always strings, the expression should return a value that can be converted into a string.
+属性の値は必ず文字列なので、エクスプレッションは文字列に変換することができる値を返す必要があります。
 
-If the expression makes up the entire attribute value, you can leave off the quotes. If the expression makes up only part of the attribute value, you need to quote the entire value:
+上記のようにエクスプレッションが属性の値全体の場合、属性の値を`"`で囲むことを省略できます。
+下記のようにエクスプレッションが属性の値の一部の場合、属性の値を`"`で囲む必要があります。
 
 ```js
 html`<img src="/images/${this.image}">`;
 ```
 
-Note, some primitive values are handled specially in attributes. Boolean values are converted to strings so, for example, `false` renders `'false'`. Both `undefined` and `null` render to an attribute as an empty string.
+一部のプリミティブ値は属性にセットされると特殊な評価をされます。
+Booleanは文字列に変換されます。例えば、`false`は`'false'`に変換されます。
+`undefined`と`null`は空文字`""`としてレンダリングされます。
 
 ### Boolean attributes
 
-To set a boolean attribute, use the `?` prefix with the attribute name. The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:
+To set a boolean attribute, use the `?` prefix with the attribute name.
+The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:
 
 ```js
 html`<div ?hidden=${!this.showAdditional}>This text may be hidden.</div>`;

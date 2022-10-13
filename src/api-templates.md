@@ -48,8 +48,8 @@ const button = html`${
 import { render } from 'lit';
 ```
 
-Renders a value, usually a lit-html TemplateResult, to the container.
-This example renders the text "Hello, Zoe!" inside a paragraph tag, appending it to the container document.body.
+`value`(ほとんどの場合、lit-htmlのTemplateResult)を`container`にレンダリングします。
+下記の例では"Hello, Zoe!"をコンテンツとして持つpタグを`document.body`内に追加します。
 
 ```
 import {html, render} from 'lit';
