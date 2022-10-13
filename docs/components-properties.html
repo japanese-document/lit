@@ -53,7 +53,7 @@
 例えばメニューコンポーネントに<code>selected</code>プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
 しかし、ユーザが項目を指定した場合はコンポーネントが<code>selected</code>プロパティを更新するべきです。
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があります。
-詳しくは<a class="Link" href="/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
+詳しくは<a class="Link" href="https://lit.dev/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
 <p>Litはインターナルリアクティブステート(internal reactive state)をサポートします。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
 このプロパティは対応する要素の属性を持ちません。通常、TypeScriptではprotectedもしはprivateにします。</p>
@@ -105,9 +105,13 @@ constructor()
 <h3 id="プロパティオプション"><a href="#プロパティオプション">プロパティオプション</a></h3>
 <p>オプションオブジェクトに以下のプロパティを設定することができます。</p>
 <h4 id="attribute"><a href="#attribute">attribute</a></h4>
-<p>Whether the property is associated with an attribute, or a custom name for the associated attribute. Default: true. If <code>attribute</code> is false, the <code>converter</code>, <code>reflect</code> and <code>type</code> options are ignored. For more information, see <a class="Link" href="#observed-attributes">Setting the attribute name</a>.</p>
+<p>プロパティに関連した属性を有効にするか、またはその属性名を変更したい場合はその属性名を渡します。
+デフォルトはtrueです。
+<code>attribute</code>をfalseにすると<code>converter</code>、<code>reflect</code>、<code>type</code>オプションは無視されます。
+詳しくは<a class="Link" href="#属性名を設定する">属性名を設定する</a>を見てください。</p>
 <h4 id="converter"><a href="#converter">converter</a></h4>
-<p>A <a class="Link" href="#conversion-converter">custom converter</a> for converting between properties and attributes. If unspecified, use the <a class="Link" href="#conversion-type">default attribute converter</a>.</p>
+<p><a class="Link" href="#カスタムコンバータ">カスタムコンバータ</a> for converting between properties and attributes.
+If unspecified, use the <a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>.</p>
 <h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
 <p>A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (<code>newValue !== oldValue</code>) to determine whether the property value has changed.
 For more information, see <a class="Link" href="#haschanged">Customizing change detection</a>.</p>
@@ -174,7 +178,7 @@ this.requestUpdate();
 <p><strong>In general, using top-down data flow with immutable objects is best for most applications.</strong> It ensures that every component that needs to render a new value does (and does so as efficiently as possible, since parts of the data tree that didn't change won't cause components that rely on them to update).</p>
 <p>Mutating data directly and calling <code>requestUpdate()</code> should be considered an advanced use case. In this case, you (or some other system) need to identify all the components that use the mutated data and call <code>requestUpdate()</code> on each one. When those components are spread across an application, this gets hard to manage. Not doing so robustly means that you might modify an object that's rendered in two parts of your application, but only have one part update.</p>
 <p>In simple cases, when you know that a given piece of data is only used in a single component, it should be safe to mutate the data and call <code>requestUpdate()</code>, if you prefer.</p>
-<h2 id="Attributes_{#attributes}"><a href="#Attributes_{#attributes}">Attributes {#attributes}</a></h2>
+<h2 id="Attributes"><a href="#Attributes">Attributes</a></h2>
 <p>While properties are great for receiving JavaScript data as input, attributes are the standard way HTML allows configuring elements from <em>markup</em>, without needing to use JavaScript to set properties. Providing both a property <em>and</em> attribute interface for their reactive properties is a key way Lit components can be useful in a wide variety of environments, including those rendered without a client-side templating engine, such as static HTML pages served from CMSs.</p>
 <p>By default, Lit sets up an observed attribute corresponding to each public reactive property, and updates the property when the attribute changes. Property values can also, optionally, be <em>reflected</em> (written back to the attribute).</p>
 <p>While element properties can be of any type, attributes are always strings. This impacts the <a class="Link" href="#observed-attributes">observed attributes</a> and <a class="Link" href="#reflected-attributes">reflected attributes</a> of non-string properties:</p>
@@ -184,7 +188,7 @@ this.requestUpdate();
 <li><p>To <strong>reflect</strong> an attribute (set an attribute from a property), the property value must be converted to a string.</p>
 </li>
 </ul>
-<h3 id="Setting_the_attribute_name_{#observed-attributes}"><a href="#Setting_the_attribute_name_{#observed-attributes}">Setting the attribute name {#observed-attributes}</a></h3>
+<h3 id="属性名を設定する"><a href="#属性名を設定する">属性名を設定する</a></h3>
 <p>By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:</p>
 <p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// observed attribute name is "myvalue"
@@ -240,7 +244,7 @@ constructor() {
 <p>An observed attribute can be used to provide an initial value for a property from markup. For example:</p>
 <pre><code class="language-html">&lt;my-element myvalue="99"&gt;&lt;/my-element&gt;
 </code></pre>
-<h3 id="Using_the_default_converter_{#conversion-type}"><a href="#Using_the_default_converter_{#conversion-type}">Using the default converter {#conversion-type}</a></h3>
+<h3 id="デフォルトコンバータ"><a href="#デフォルトコンバータ">デフォルトコンバータ</a></h3>
 <p>Lit has a default converter that handles <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Array</code>, and <code>Object</code> property types.</p>
 <p>To use the default converter, specify the <code>type</code> option in your property declaration:</p>
 <p>{% switchable-sample %}</p>
@@ -308,7 +312,7 @@ constructor() {
 <td align="left">If property is defined and non-null, set the attribute to <code>JSON.stringify(propertyValue)</code>.<br>If property is null or undefined, remove the attribute.</td>
 </tr>
 </tbody></table>
-<h3 id="Providing_a_custom_converter_{#conversion-converter}"><a href="#Providing_a_custom_converter_{#conversion-converter}">Providing a custom converter {#conversion-converter}</a></h3>
+<h3 id="カスタムコンバータ"><a href="#カスタムコンバータ">カスタムコンバータ</a></h3>
 <p>You can specify a custom property converter in your property declaration with the <code>converter</code> option:</p>
 <pre><code class="language-js">myProp: {
   converter: // Custom property converter
