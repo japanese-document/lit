@@ -195,38 +195,40 @@ html`<img src="/images/${this.image}">`;
 
 一部のプリミティブ値は属性にセットされると特殊な評価をされます。
 Booleanは文字列に変換されます。例えば、`false`は`'false'`に変換されます。
-`undefined`と`null`は空文字`""`としてレンダリングされます。
+`undefined`と`null`は空文字(`""`)としてレンダリングされます。
 
 ### Boolean attributes
 
-To set a boolean attribute, use the `?` prefix with the attribute name.
-The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:
+下記のように属性名の先頭に`?`を付けるとboolean attributesになります。
+エクスプレッションにtrueになる値がセットされると属性は配置されます。
+falseになる値がセットされると属性は削除されます。
 
 ```js
 html`<div ?hidden=${!this.showAdditional}>This text may be hidden.</div>`;
 ```
 
-### Removing an attribute
+### 属性の削除
 
-Sometimes you want to set an attribute only under certain conditions, and otherwise remove the attribute. For common "boolean attributes" like `disabled` and `hidden` where you want to set the attribute to an empty string for a truthy value and remove it otherwise, use a [boolean attribute](#boolean-attribute-expressions). Sometimes, however, you might require a different condition for adding or removing an attribute. 
+`disabled`や`hidden`は[boolean attributes](#Boolean_attributes)で対応できます。しかし、属性の値を構成するデータの一部が欠けている場合に属性を削除したい場合があります。
 
-For example, consider:
+下記の例について考えてみましょう。
 
 ```js
 html`<img src="/images/${this.imagePath}/${this.imageFile}">`;
 ```
 
-If `this.imagePath` or `this.imageFile` is not defined, the `src` attribute should not be set or an invalid network request will occur.
-
-Lit's [nothing](https://lit.dev/docs/api/templates/#nothing) sentinel value addresses this by removing the attribute when any expression in the attribute value evaluates to `nothing`.
+`this.imagePath`もしくは`this.imageFile`が定義されていない場合に`src`属性を削除したいとします。
 
 ```js
 html`<img src="/images/${this.imagePath ?? nothing}/${this.imageFile ?? nothing}">`;
 ```
 
-In this example **both** the `this.imagePath` and `this.imageFile` properties must be defined for the `src` attribute to be set. The `??` [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) returns the right-hand value if the left-hand value is `null` or `undefined`.
+その場合は上記のように[nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)を使います。
+`nothing`が存在するとその属性は削除されます。
+`??`は[nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)です。
+これは左側の値が`null`もしくは`undefined`の場合、右側の値を返します。
 
-Lit also provides an [ifDefined](https://lit.dev/docs/api/directives/#ifDefined) directive which is sugar for `value ?? nothing`.
+[ifDefined](https://lit.dev/docs/api/directives/#ifDefined)ディレクティブは`value ?? nothing`と等価です。
 
 ```js
 html`<img src="/images/${ifDefined(this.imagePath)}/${ifDefined(this.imageFile)}">`;

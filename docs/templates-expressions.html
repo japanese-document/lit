@@ -159,23 +159,26 @@ const page = html`
 </code></pre>
 <p>一部のプリミティブ値は属性にセットされると特殊な評価をされます。
 Booleanは文字列に変換されます。例えば、<code>false</code>は<code>'false'</code>に変換されます。
-<code>undefined</code>と<code>null</code>は空文字<code>""</code>としてレンダリングされます。</p>
+<code>undefined</code>と<code>null</code>は空文字(<code>""</code>)としてレンダリングされます。</p>
 <h3 id="Boolean_attributes"><a href="#Boolean_attributes">Boolean attributes</a></h3>
-<p>To set a boolean attribute, use the <code>?</code> prefix with the attribute name.
-The attribute is added if the expression evaluates to a truthy value, removed if it evaluates to a falsy value:</p>
+<p>下記のように属性名の先頭に<code>?</code>を付けるとboolean attributesになります。
+エクスプレッションにtrueになる値がセットされると属性は配置されます。
+falseになる値がセットされると属性は削除されます。</p>
 <pre><code class="language-js">html`&lt;div ?hidden=${!this.showAdditional}&gt;This text may be hidden.&lt;/div&gt;`;
 </code></pre>
-<h3 id="Removing_an_attribute"><a href="#Removing_an_attribute">Removing an attribute</a></h3>
-<p>Sometimes you want to set an attribute only under certain conditions, and otherwise remove the attribute. For common "boolean attributes" like <code>disabled</code> and <code>hidden</code> where you want to set the attribute to an empty string for a truthy value and remove it otherwise, use a <a class="Link" href="#boolean-attribute-expressions">boolean attribute</a>. Sometimes, however, you might require a different condition for adding or removing an attribute. </p>
-<p>For example, consider:</p>
+<h3 id="属性の削除"><a href="#属性の削除">属性の削除</a></h3>
+<p><code>disabled</code>や<code>hidden</code>は<a class="Link" href="#Boolean_attributes">boolean attributes</a>で対応できます。しかし、属性の値を構成するデータの一部が欠けている場合に属性を削除したい場合があります。</p>
+<p>下記の例について考えてみましょう。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath}/${this.imageFile}"&gt;`;
 </code></pre>
-<p>If <code>this.imagePath</code> or <code>this.imageFile</code> is not defined, the <code>src</code> attribute should not be set or an invalid network request will occur.</p>
-<p>Lit's <a class="Link" href="https://lit.dev/docs/api/templates/#nothing">nothing</a> sentinel value addresses this by removing the attribute when any expression in the attribute value evaluates to <code>nothing</code>.</p>
+<p><code>this.imagePath</code>もしくは<code>this.imageFile</code>が定義されていない場合に<code>src</code>属性を削除したいとします。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath ?? nothing}/${this.imageFile ?? nothing}"&gt;`;
 </code></pre>
-<p>In this example <strong>both</strong> the <code>this.imagePath</code> and <code>this.imageFile</code> properties must be defined for the <code>src</code> attribute to be set. The <code>??</code> <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator">nullish coalescing operator</a> returns the right-hand value if the left-hand value is <code>null</code> or <code>undefined</code>.</p>
-<p>Lit also provides an <a class="Link" href="https://lit.dev/docs/api/directives/#ifDefined">ifDefined</a> directive which is sugar for <code>value ?? nothing</code>.</p>
+<p>その場合は上記のように<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a>を使います。
+<code>nothing</code>が存在するとその属性は削除されます。
+<code>??</code>は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator">nullish coalescing operator</a>です。
+これは左側の値が<code>null</code>もしくは<code>undefined</code>の場合、右側の値を返します。</p>
+<p><a class="Link" href="https://lit.dev/docs/api/directives/#ifDefined">ifDefined</a>ディレクティブは<code>value ?? nothing</code>と等価です。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${ifDefined(this.imagePath)}/${ifDefined(this.imageFile)}"&gt;`;
 </code></pre>
 <p>You might also want to remove the attribute if the value is not truthy so that values of <code>false</code> or empty string <code>''</code> remove the attribute. For example, consider an element that has default value for <code>this.ariaLabel</code> of empty string <code>''</code>:</p>
