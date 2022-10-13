@@ -38,7 +38,7 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 例えばメニューコンポーネントに`selected`プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
 しかし、ユーザが項目を指定した場合はコンポーネントが`selected`プロパティを更新するべきです。
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があります。
-詳しくは[Dispatching events](/docs/components/events/#dispatching-events)を見てください。
+詳しくは[Dispatching events](https://lit.dev/docs/components/events/#dispatching-events)を見てください。
 
 Litはインターナルリアクティブステート(internal reactive state)をサポートします。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
@@ -113,11 +113,15 @@ class MyElement extends LitElement {
 
 #### attribute
 
-Whether the property is associated with an attribute, or a custom name for the associated attribute. Default: true. If `attribute` is false, the `converter`, `reflect` and `type` options are ignored. For more information, see [Setting the attribute name](#observed-attributes).
+プロパティに関連した属性を有効にするか、またはその属性名を変更したい場合はその属性名を渡します。
+デフォルトはtrueです。
+`attribute`をfalseにすると`converter`、`reflect`、`type`オプションは無視されます。
+詳しくは[属性名を設定する](#属性名を設定する)を見てください。
 
 #### converter
 
-A [custom converter](#conversion-converter) for converting between properties and attributes. If unspecified, use the [default attribute converter](#conversion-type).
+[カスタムコンバータ](#カスタムコンバータ) for converting between properties and attributes.
+If unspecified, use the [デフォルトコンバータ](#デフォルトコンバータを使う).
 
 #### hasChanged
 
@@ -220,7 +224,7 @@ Mutating data directly and calling `requestUpdate()` should be considered an adv
 
 In simple cases, when you know that a given piece of data is only used in a single component, it should be safe to mutate the data and call `requestUpdate()`, if you prefer.
 
-## Attributes {#attributes}
+## Attributes
 
 While properties are great for receiving JavaScript data as input, attributes are the standard way HTML allows configuring elements from _markup_, without needing to use JavaScript to set properties. Providing both a property _and_ attribute interface for their reactive properties is a key way Lit components can be useful in a wide variety of environments, including those rendered without a client-side templating engine, such as static HTML pages served from CMSs.
 
@@ -232,7 +236,7 @@ While element properties can be of any type, attributes are always strings. This
 
   * To **reflect** an attribute (set an attribute from a property), the property value must be converted to a string.
 
-### Setting the attribute name {#observed-attributes}
+### 属性名を設定する
 
 By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:
 
@@ -314,7 +318,7 @@ An observed attribute can be used to provide an initial value for a property fro
 <my-element myvalue="99"></my-element>
 ```
 
-### Using the default converter {#conversion-type}
+### デフォルトコンバータを使う
 
 Lit has a default converter that handles `String`, `Number`, `Boolean`, `Array`, and `Object` property types.
 
@@ -366,7 +370,7 @@ For any case except `Boolean`, if the element doesn't have the corresponding att
 | `Object`, `Array` | If property is defined and non-null, set the attribute to `JSON.stringify(propertyValue)`.<br>If property is null or undefined, remove the attribute. |
 
 
-### Providing a custom converter {#conversion-converter}
+### カスタムコンバータ
 
 You can specify a custom property converter in your property declaration with the `converter` option:
 
