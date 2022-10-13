@@ -111,7 +111,7 @@ constructor()
 詳しくは<a class="Link" href="#属性名を設定する">属性名を設定する</a>を見てください。</p>
 <h4 id="converter"><a href="#converter">converter</a></h4>
 <p><a class="Link" href="#カスタムコンバータ">カスタムコンバータ</a> for converting between properties and attributes.
-If unspecified, use the <a class="Link" href="#デフォルトコンバータを使う">デフォルトコンバータ</a>.</p>
+If unspecified, use the <a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>.</p>
 <h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
 <p>A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (<code>newValue !== oldValue</code>) to determine whether the property value has changed.
 For more information, see <a class="Link" href="#haschanged">Customizing change detection</a>.</p>
@@ -244,7 +244,7 @@ constructor() {
 <p>An observed attribute can be used to provide an initial value for a property from markup. For example:</p>
 <pre><code class="language-html">&lt;my-element myvalue="99"&gt;&lt;/my-element&gt;
 </code></pre>
-<h3 id="デフォルトコンバータを使う"><a href="#デフォルトコンバータを使う">デフォルトコンバータを使う</a></h3>
+<h3 id="デフォルトコンバータ"><a href="#デフォルトコンバータ">デフォルトコンバータ</a></h3>
 <p>Lit has a default converter that handles <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Array</code>, and <code>Object</code> property types.</p>
 <p>To use the default converter, specify the <code>type</code> option in your property declaration:</p>
 <p>{% switchable-sample %}</p>

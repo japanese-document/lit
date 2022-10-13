@@ -121,7 +121,7 @@ class MyElement extends LitElement {
 #### converter
 
 [カスタムコンバータ](#カスタムコンバータ) for converting between properties and attributes.
-If unspecified, use the [デフォルトコンバータ](#デフォルトコンバータを使う).
+If unspecified, use the [デフォルトコンバータ](#デフォルトコンバータ).
 
 #### hasChanged
 
@@ -318,7 +318,7 @@ An observed attribute can be used to provide an initial value for a property fro
 <my-element myvalue="99"></my-element>
 ```
 
-### デフォルトコンバータを使う
+### デフォルトコンバータ
 
 Lit has a default converter that handles `String`, `Number`, `Boolean`, `Array`, and `Object` property types.
 
