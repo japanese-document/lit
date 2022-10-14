@@ -2,7 +2,7 @@
 ---
 # Templates
 
-## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult<T> 
+## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
 ### import
 
@@ -57,7 +57,7 @@ import {html, render} from 'lit';
 const name = "Zoe";
 render(html`<p>Hello, ${name}!</p>`, document.body);
 ```
-## svg(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult<T> 
+## svg(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
 ### import
 

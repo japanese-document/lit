@@ -41,7 +41,7 @@ LitテンプレートにJavaScriptの式を含めることができます。
 
 これは[child expressions](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)にセットできる値とほぼ同じです。
 1点だけある違いはchild expressionsは`SVGTemplateResult`をレンダリングすることができます。
-これは[`svg`](https://lit.dev/docs/api/templates/#svg)で生成します。
+これは[`svg`](https://japanese-document.github.io/lit/api-templates.html#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult)で生成します。
 `SVGTemplateResult`は`<svg>`要素の子要素としてのみレンダリングすることができます。
 
 ## render()メソッドの注意点
