@@ -120,21 +120,27 @@ class MyElement extends LitElement {
 
 #### converter
 
-[カスタムコンバータ](#カスタムコンバータ) for converting between properties and attributes.
-If unspecified, use the [デフォルトコンバータ](#デフォルトコンバータ).
+プロパティと属性を相互に変換するための[カスタムコンバータ](#カスタムコンバータ)を渡します。
+渡されない場合は[デフォルトコンバータ](#デフォルトコンバータ)を使います。
 
 #### hasChanged
 
-A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (`newValue !== oldValue`) to determine whether the property value has changed.
-For more information, see [Customizing change detection](#haschanged).
+プロパティがセットされる毎に実行されます。更新を発動するか判定します。
+デフォルトでは不等式(`newValue !== oldValue`)による判定を行います。
+詳しくは[更新判定の変更](#更新判定の変更)を見てください。
 
 #### noAccessor
 
-Set to true to avoid generating the default property accessors. This option is rarely necessary. Default: false. For more information, see [Preventing Lit from generating a property accessor](#accessors-noaccessor).
+Set to true to avoid generating the default property accessors.
+This option is rarely necessary.
+Default: false.
+For more information, see [Preventing Lit from generating a property accessor](#accessors-noaccessor).
 
 #### reflect
 
-Whether property value is reflected back to the associated attribute. Default: false. For more information, see [Enabling attribute reflection](#reflected-attributes).
+Whether property value is reflected back to the associated attribute.
+Default: false.
+For more information, see [Enabling attribute reflection](#reflected-attributes).
 
 #### state
 
@@ -529,7 +535,7 @@ static properties = {
 
 You don't need to set `noAccessor` when defining your own accessors.
 
-## Customizing change detection {#haschanged}
+## 更新判定の変更
 
 All reactive properties have a function, `hasChanged()`, which is called when the property is set.
 
