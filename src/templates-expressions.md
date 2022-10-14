@@ -262,17 +262,20 @@ HTMLは大文字と小文字を区別しませんが、Litはテンプレート�
 
 ## Event listener expressions
 
-Templates can also include declarative event listeners. Use the prefix `@` followed by the event name. The expression should evaluate to an event listener.
+イベント名の先頭に`@`をつけることで、
+テンプレートで宣言的にイベントリスナを設定することができます。
 
 ```js
 html`<button @click=${this.clickHandler}>Click Me!</button>`;
 ```
 
-This is similar to calling `addEventListener('click', this.clickHandler)` on the button element.
+これはbutton要素で`addEventListener('click', this.clickHandler)`を実行することに似ています。
 
-The event listener can be either a plain function, or an object with a `handleEvent` method — the same as the `listener` argument to the standard [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) method.
+設定するイベントリスナは素の関数もしくは`handleEvent`メソッドを持つオブジェクトです。
+それら関数は[addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)の第1引数と同じです。
 
-In a Lit component, the event listener is automatically bound to the component, so you can use the `this` value inside the handler to refer to the component instance.
+Litコンポーネントではコンポーネントはイベントリスナに自動的にバインド(bind)されます。
+イベントリスナ内の`this`はコンポーネントインスタンスを参照します。
 
 ```js
 clickHandler() {
@@ -280,7 +283,7 @@ clickHandler() {
 }
 ```
 
-For more information about component events, see [Events](https://lit.dev/docs/components/events/).
+コンポーネントイベントに関する詳しい情報は[イベント](https://lit.dev/docs/components/events/)を見てください。
 
 ## Element expressions
 

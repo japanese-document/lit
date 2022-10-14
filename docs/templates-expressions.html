@@ -196,17 +196,20 @@ falseになる値がセットされると属性は削除されます。</p>
 HTMLは大文字と小文字を区別しませんが、Litはテンプレートを処理する際にプロパティ名の大文字と小文字を区別します。</p>
 <p>コンポーネントのプロパティに関する詳しい情報は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
 <h2 id="Event_listener_expressions"><a href="#Event_listener_expressions">Event listener expressions</a></h2>
-<p>Templates can also include declarative event listeners. Use the prefix <code>@</code> followed by the event name. The expression should evaluate to an event listener.</p>
+<p>イベント名の先頭に<code>@</code>をつけることで、
+テンプレートで宣言的にイベントリスナを設定することができます。</p>
 <pre><code class="language-js">html`&lt;button @click=${this.clickHandler}&gt;Click Me!&lt;/button&gt;`;
 </code></pre>
-<p>This is similar to calling <code>addEventListener('click', this.clickHandler)</code> on the button element.</p>
-<p>The event listener can be either a plain function, or an object with a <code>handleEvent</code> method — the same as the <code>listener</code> argument to the standard <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener</code></a> method.</p>
-<p>In a Lit component, the event listener is automatically bound to the component, so you can use the <code>this</code> value inside the handler to refer to the component instance.</p>
+<p>これはbutton要素で<code>addEventListener('click', this.clickHandler)</code>を実行することに似ています。</p>
+<p>設定するイベントリスナは素の関数もしくは<code>handleEvent</code>メソッドを持つオブジェクトです。
+それら関数は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a>の第1引数と同じです。</p>
+<p>Litコンポーネントではコンポーネントはイベントリスナに自動的にバインド(bind)されます。
+イベントリスナ内の<code>this</code>はコンポーネントインスタンスを参照します。</p>
 <pre><code class="language-js">clickHandler() {
   this.clickCount++;
 }
 </code></pre>
-<p>For more information about component events, see <a class="Link" href="https://lit.dev/docs/components/events/">Events</a>.</p>
+<p>コンポーネントイベントに関する詳しい情報は<a class="Link" href="https://lit.dev/docs/components/events/">イベント</a>を見てください。</p>
 <h2 id="Element_expressions"><a href="#Element_expressions">Element expressions</a></h2>
 <p>You can also add an expression that accesses an element instance, instead of a single property or attribute on an element:</p>
 <pre><code class="language-js">html`&lt;div ${myDirective()}&gt;&lt;/div&gt;`
