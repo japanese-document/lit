@@ -110,15 +110,21 @@ constructor()
 <code>attribute</code>をfalseにすると<code>converter</code>、<code>reflect</code>、<code>type</code>オプションは無視されます。
 詳しくは<a class="Link" href="#属性名を設定する">属性名を設定する</a>を見てください。</p>
 <h4 id="converter"><a href="#converter">converter</a></h4>
-<p><a class="Link" href="#カスタムコンバータ">カスタムコンバータ</a> for converting between properties and attributes.
-If unspecified, use the <a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>.</p>
+<p>プロパティと属性を相互に変換するための<a class="Link" href="#カスタムコンバータ">カスタムコンバータ</a>を渡します。
+渡されない場合は<a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>を使います。</p>
 <h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
-<p>A function called whenever the property is set to determine if the property has changed, and should trigger an update. If unspecified, LitElement uses a strict inequality check (<code>newValue !== oldValue</code>) to determine whether the property value has changed.
-For more information, see <a class="Link" href="#haschanged">Customizing change detection</a>.</p>
+<p>プロパティがセットされる毎に実行されます。更新を発動するか判定します。
+デフォルトでは不等式(<code>newValue !== oldValue</code>)による判定を行います。
+詳しくは<a class="Link" href="#更新判定の変更">更新判定の変更</a>を見てください。</p>
 <h4 id="noAccessor"><a href="#noAccessor">noAccessor</a></h4>
-<p>Set to true to avoid generating the default property accessors. This option is rarely necessary. Default: false. For more information, see <a class="Link" href="#accessors-noaccessor">Preventing Lit from generating a property accessor</a>.</p>
+<p>Set to true to avoid generating the default property accessors.
+This option is rarely necessary.
+Default: false.
+For more information, see <a class="Link" href="#accessors-noaccessor">Preventing Lit from generating a property accessor</a>.</p>
 <h4 id="reflect"><a href="#reflect">reflect</a></h4>
-<p>Whether property value is reflected back to the associated attribute. Default: false. For more information, see <a class="Link" href="#reflected-attributes">Enabling attribute reflection</a>.</p>
+<p>Whether property value is reflected back to the associated attribute.
+Default: false.
+For more information, see <a class="Link" href="#reflected-attributes">Enabling attribute reflection</a>.</p>
 <h4 id="state"><a href="#state">state</a></h4>
 <p>Set to true to declare the property as <em>internal reactive state</em>. Internal reactive state triggers updates like public reactive properties, but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component. Equivalent to using the <code>@state</code> decorator. Default: false. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
 <h4 id="type"><a href="#type">type</a></h4>
@@ -422,7 +428,7 @@ get prop() { return this._prop; }
 };
 </code></pre>
 <p>You don't need to set <code>noAccessor</code> when defining your own accessors.</p>
-<h2 id="Customizing_change_detection_{#haschanged}"><a href="#Customizing_change_detection_{#haschanged}">Customizing change detection {#haschanged}</a></h2>
+<h2 id="更新判定の変更"><a href="#更新判定の変更">更新判定の変更</a></h2>
 <p>All reactive properties have a function, <code>hasChanged()</code>, which is called when the property is set.</p>
 <p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
 <p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison: <code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
