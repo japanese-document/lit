@@ -59,6 +59,16 @@ attribute expressionsでは<code>nothing</code>は属性を削除しますが、
 const name = "Zoe";
 render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
 </code></pre>
+<h2 id="svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a href="#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult">svg(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
+<h3 id="import"><a href="#import">import</a></h3>
+<pre><code>import { svg } from 'lit';
+</code></pre>
+<p>Interprets a template literal as an SVG fragment that can efficiently render to and update a container.
+The svg tag function should only be used for SVG fragments, or elements that would be contained inside an <code>&lt;svg&gt;</code> HTML element.
+A common error is placing an <code>&lt;svg&gt;</code> element in a template tagged with the svg tag function.
+The <code>&lt;svg&gt;</code> element is an HTML element and should be used within a template tagged with the <code>html</code> tag function.</p>
+<p>In LitElement usage, it's invalid to return an SVG fragment from the <code>render()</code> method,
+as the SVG fragment will be contained within the element's shadow root and thus cannot be used within an <code>&lt;svg&gt;</code> HTML element.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
