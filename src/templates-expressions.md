@@ -287,21 +287,23 @@ clickHandler() {
 
 ## Element expressions
 
-You can also add an expression that accesses an element instance, instead of a single property or attribute on an element:
+エクスプレッションで要素インスタンスにアクセスすることができます。
 
 ```js
 html`<div ${myDirective()}></div>`
 ```
 
-Element expressions only work with [directives](https://lit.dev/docs/templates/directives/). Any other value type in an element expression is ignored.
+Element expressionsには[ディレクティブ](https://lit.dev/docs/templates/directives/)のみ渡すことができます。
+それ以外の値が渡された場合は無視されます。
 
-One built-in directive that can be used in an element expression is the `ref` directive. It provides a reference to the rendered element.
+Element expressionで使うことができるビルドインディレクティブの1つに`ref`ディレクティブがあります。
+これはレンダリングされた要素の参照を取得することに使います。
 
 ```js
 html`<button ${ref(this.myRef)}`;
 ```
 
-See [ref](https://lit.dev/docs/templates/directives/#ref) for more information.
+詳しくは[ref](https://lit.dev/docs/templates/directives/#ref)を見てください。
 
 ## Well-formed HTML
 
