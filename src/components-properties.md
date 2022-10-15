@@ -1,4 +1,4 @@
-{ "header": {"name": "Components", "order": 0}, "order": 2 }
+{ "header": {"name": "コンポーネント", "order": 0}, "order": 2 }
 ---
 # リアクティブプロパティ
 

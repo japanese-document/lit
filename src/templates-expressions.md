@@ -1,4 +1,4 @@
-{ "header": {"name": "Templates", "order": 1}, "order": 0 }
+{ "header": {"name": "テンプレート", "order": 1}, "order": 0 }
 ---
 # Expressions
 
@@ -287,7 +287,7 @@ clickHandler() {
 
 ## Element expressions
 
-エクスプレッションで要素インスタンスにアクセスすることができます。
+Element expressionsで要素インスタンスにアクセスすることができます。
 
 ```js
 html`<div ${myDirective()}></div>`
@@ -307,7 +307,9 @@ html`<button ${ref(this.myRef)}`;
 
 ## Well-formed HTML
 
-Lit templates must be well-formed HTML. The templates are parsed by the browser's built-in HTML parser before any values are interpolated. Follow these rules for well-formed templates:
+Lit templates must be well-formed HTML.
+The templates are parsed by the browser's built-in HTML parser before any values are interpolated.
+Follow these rules for well-formed templates:
 
  *  Templates must be well-formed HTML when all expressions are replaced by empty values.
 
@@ -321,12 +323,6 @@ Lit templates must be well-formed HTML. The templates are parsed by the browser'
     // When joined, "more text" does not end up in .broken-div
     const template2 = html`${template1} more text. </div>`;
     ```
-
-<div class="alert alert-info">
-
-Because the browser's built-in parser is very lenient, most cases of malformed templates are not detectable at runtime, so you won't see  warnings—just templates that don't behave as you expect. We recommend using <a href="/docs/tools/development/#linting">linting tools</a> and <a href="/docs/tools/development/#ide-plugins">IDE plugins</a> to find issues in your templates during development.
-
-</div>
 
 ## Valid expression locations
 

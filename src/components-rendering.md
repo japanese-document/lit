@@ -1,4 +1,4 @@
-{ "header": {"name": "Components", "order": 0}, "order": 1 }
+{ "header": {"name": "コンポーネント", "order": 0}, "order": 1 }
 ---
 # レンダリング
 

@@ -120,8 +120,8 @@ MyElement.enableWarning?.('migration');
 <h3 id="Properties"><a href="#Properties">Properties</a></h3>
 <h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
 <p>要素の<code>prototype</code>にプロパティアクセサ(<code>name</code>)が存在していない場合、プロパティ(<code>name</code>)を追加して<code>options</code>を格納します。
-プロパティのセッターは更新時に<a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration.hasChanged">options.hasChanged()</a>を実行して更新を判断します。
-<a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration.hasChanged">options.hasChanged()</a>がない場合、参照の比較(<code>!==</code>)で判断します。
+プロパティのセッターは更新時に<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>を実行して更新を判断します。
+<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>がない場合、参照の比較(<code>!==</code>)で判断します。
 このメソッドをオーバーライドすると、プロパティの生成を変更することができます。
 その場合、<code>super.createProperty()</code>を実行する必要があります。
 このメソッドは使用するディスクリプタ(descriptor)を取得するために内部で<code>getPropertyDescriptor()</code>を使います。

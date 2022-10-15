@@ -1,6 +1,6 @@
 { "header": {"name": "API", "order": 2}, "order": 1 }
 ---
-# Templates
+# テンプレート
 
 ## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
