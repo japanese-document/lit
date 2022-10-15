@@ -150,8 +150,8 @@ class MyElement extends LitElement {
 #### static createProperty(name: PropertyKey, options?: [PropertyDeclaration](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration)<unknown, unknown>): void
 
 要素の`prototype`にプロパティアクセサ(`name`)が存在していない場合、プロパティ(`name`)を追加して`options`を格納します。
-プロパティのセッターは更新時に[options.hasChanged()](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration.hasChanged)を実行して更新を判断します。
-[options.hasChanged()](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration.hasChanged)がない場合、参照の比較(`!==`)で判断します。
+プロパティのセッターは更新時に[options.hasChanged()](https://japanese-document.github.io/lit/components-properties.html#hasChanged)を実行して更新を判断します。
+[options.hasChanged()](https://japanese-document.github.io/lit/components-properties.html#hasChanged)がない場合、参照の比較(`!==`)で判断します。
 このメソッドをオーバーライドすると、プロパティの生成を変更することができます。
 その場合、`super.createProperty()`を実行する必要があります。
 このメソッドは使用するディスクリプタ(descriptor)を取得するために内部で`getPropertyDescriptor()`を使います。
