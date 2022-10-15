@@ -156,7 +156,7 @@ MyElement.enableWarning?.('migration');
 }
 </code></pre>
 <h4 id="static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>"><a href="#static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>">static getPropertyOptions(name: PropertyKey): </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;</h4>
-<p>渡された<code>name</code>プロパティに関連した<a class="Link" href="https://lit.dev/docs/components/properties/#property-options">プロパティオプション</a>を返します。
+<p>渡された<code>name</code>プロパティに関連した<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>を返します。
 このオプションは<code>properties</code>や<code>@property</code>で<code>PropertyDeclaration</code>として定義されています。
 それから、<code>createProperty(...)</code>で登録されます。
 このメソッドは「final」と見なさなければなりません。
@@ -169,7 +169,7 @@ MyElement.enableWarning?.('migration');
 リアクティブプロパティに値をセットすると、要素が更新されてレンダリングされます。
 デフォルトではプロパティはパブリックフィールドです。
 だから、要素の属性やプロパティ変更することでコンポーネントのプロパティを変更することができます。
-<code>state: true</code>を<a class="Link" href="https://lit.dev/docs/components/properties/#property-options">プロパティオプション</a>にセットする、
+<code>state: true</code>を<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>にセットする、
 もしくは、<a class="Link" href="https://lit.dev/docs/api/decorators/#state">state</a>デコレータをセットすると要素の対応する属性をコンポーネントのプロパティに反映しません。</p>
 <h3 id="Rendering"><a href="#Rendering">Rendering</a></h3>
 <h4 id="createRenderRoot()__Element_|_ShadowRoot"><a href="#createRenderRoot()__Element_|_ShadowRoot">createRenderRoot(): </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a></h4>
@@ -247,7 +247,7 @@ lit-element 2.xとの後方互換性のために、<code>performUpdate()</code>�
 これはリアクティブプロパティのセットで更新を発動する以外の方法で更新を発動したいときに実行します。
 その場合、引数を渡してはいけません。
 また、プロパティセッタを自作するときも実行する必要があります。
-その場合、<a class="Link" href="https://lit.dev/docs/components/properties/#property-options">プロパティオプション</a>が確実に反映されるようにプロパティの<code>name</code>と<code>oldValue</code>を渡します。</p>
+その場合、<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>が確実に反映されるようにプロパティの<code>name</code>と<code>oldValue</code>を渡します。</p>
 <h4 id="scheduleUpdate()__void_|_Promise"><a href="#scheduleUpdate()__void_|_Promise">scheduleUpdate(): void | Promise</a></h4>
 <p>要素の更新をスケジューリングします。
 このメソッドをオーバーライドしてPromiseを返すことによって更新のタイミングを変更することができます。

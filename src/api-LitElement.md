@@ -196,7 +196,7 @@ class MyElement extends LitElement {
 
 #### static getPropertyOptions(name: PropertyKey): [PropertyDeclaration](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration)<unknown, unknown>
 
-渡された`name`プロパティに関連した[プロパティオプション](https://lit.dev/docs/components/properties/#property-options)を返します。
+渡された`name`プロパティに関連した[プロパティオプション](https://japanese-document.github.io/lit/components-properties.html#プロパティオプション)を返します。
 このオプションは`properties`や`@property`で`PropertyDeclaration`として定義されています。
 それから、`createProperty(...)`で登録されます。
 このメソッドは「final」と見なさなければなりません。
@@ -211,7 +211,7 @@ class MyElement extends LitElement {
 リアクティブプロパティに値をセットすると、要素が更新されてレンダリングされます。
 デフォルトではプロパティはパブリックフィールドです。
 だから、要素の属性やプロパティ変更することでコンポーネントのプロパティを変更することができます。
-`state: true`を[プロパティオプション](https://lit.dev/docs/components/properties/#property-options)にセットする、
+`state: true`を[プロパティオプション](https://japanese-document.github.io/lit/components-properties.html#プロパティオプション)にセットする、
 もしくは、[state](https://lit.dev/docs/api/decorators/#state)デコレータをセットすると要素の対応する属性をコンポーネントのプロパティに反映しません。
 
 ### Rendering
@@ -325,7 +325,7 @@ lit-element 2.xとの後方互換性のために、`performUpdate()`による更
 これはリアクティブプロパティのセットで更新を発動する以外の方法で更新を発動したいときに実行します。
 その場合、引数を渡してはいけません。
 また、プロパティセッタを自作するときも実行する必要があります。
-その場合、[プロパティオプション](https://lit.dev/docs/components/properties/#property-options)が確実に反映されるようにプロパティの`name`と`oldValue`を渡します。
+その場合、[プロパティオプション](https://japanese-document.github.io/lit/components-properties.html#プロパティオプション)が確実に反映されるようにプロパティの`name`と`oldValue`を渡します。
 
 #### scheduleUpdate(): void | Promise<unknown>
 
