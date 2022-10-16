@@ -307,24 +307,24 @@ html`<button ${ref(this.myRef)}`;
 
 ## Well-formed HTML
 
-Lit templates must be well-formed HTML.
-The templates are parsed by the browser's built-in HTML parser before any values are interpolated.
-Follow these rules for well-formed templates:
+Litテンプレートはwell-formed HTMLである必要があります。
+テンプレートは値が挿入される前にブラウザのビルドインHTMLパーサーでパースされます。
+有効なテンプレートであるためには下記のルールに従う必要があります。
 
- *  Templates must be well-formed HTML when all expressions are replaced by empty values.
+ * テンプレートは全てのエクスプレッションが空白になった時にwell-formed HTMLである必要があります。
 
- *  Templates can have multiple top-level elements and text.
+ * テンプレートは複数のテキストや要素をトップレベルに配置してもよいです。
 
- *  Templates _should not contain_ unclosed elements—they will be closed by the HTML parser.
+ * テンプレートにHTMLパーサーで補完される閉じてない要素を記述してはいけません。
 
     ```js
-    // HTML parser closes this div after "Some text"
+    // HTMLパーサーは"Some text"の後に</div>を追加します。
     const template1 = html`<div class="broken-div">Some text`;
-    // When joined, "more text" does not end up in .broken-div
+    // これを以下に追加すると壊れたHTMLになります。
     const template2 = html`${template1} more text. </div>`;
     ```
 
-## Valid expression locations
+## 正しいエクスプレッションの位置
 
 Expressions **_can only occur_** where you can place attribute values and child elements in HTML.
 
@@ -345,7 +345,7 @@ Element expressions can occur inside the opening tag after the tag name:
 <div ${ref(elementReference)}></div>
 ```
 
-### Invalid locations
+### 間違ったエクスプレッションの位置
 
 Expressions should generally not appear in the following locations:
 
