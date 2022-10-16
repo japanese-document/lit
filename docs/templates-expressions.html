@@ -222,23 +222,23 @@ HTMLは大文字と小文字を区別しませんが、Litはテンプレート�
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/directives/#ref">ref</a>を見てください。</p>
 <h2 id="Well-formed_HTML"><a href="#Well-formed_HTML">Well-formed HTML</a></h2>
-<p>Lit templates must be well-formed HTML.
-The templates are parsed by the browser's built-in HTML parser before any values are interpolated.
-Follow these rules for well-formed templates:</p>
+<p>Litテンプレートはwell-formed HTMLである必要があります。
+テンプレートは値が挿入される前にブラウザのビルドインHTMLパーサーでパースされます。
+有効なテンプレートであるためには下記のルールに従う必要があります。</p>
 <ul>
-<li><p>Templates must be well-formed HTML when all expressions are replaced by empty values.</p>
+<li><p>テンプレートは全てのエクスプレッションが空白になった時にwell-formed HTMLである必要があります。</p>
 </li>
-<li><p>Templates can have multiple top-level elements and text.</p>
+<li><p>テンプレートは複数のテキストや要素をトップレベルに配置してもよいです。</p>
 </li>
-<li><p>Templates <em>should not contain</em> unclosed elements—they will be closed by the HTML parser.</p>
-<pre><code class="language-js">// HTML parser closes this div after "Some text"
+<li><p>テンプレートにHTMLパーサーで補完される閉じてない要素を記述してはいけません。</p>
+<pre><code class="language-js">// HTMLパーサーは"Some text"の後に&lt;/div&gt;を追加します。
 const template1 = html`&lt;div class="broken-div"&gt;Some text`;
-// When joined, "more text" does not end up in .broken-div
+// これを以下に追加すると壊れたHTMLになります。
 const template2 = html`${template1} more text. &lt;/div&gt;`;
 </code></pre>
 </li>
 </ul>
-<h2 id="Valid_expression_locations"><a href="#Valid_expression_locations">Valid expression locations</a></h2>
+<h2 id="正しいエクスプレッションの位置"><a href="#正しいエクスプレッションの位置">正しいエクスプレッションの位置</a></h2>
 <p>Expressions <strong><em>can only occur</em></strong> where you can place attribute values and child elements in HTML.</p>
 <pre><code class="language-html">&lt;!-- attribute values --&gt;
 &lt;div label=${label}&gt;&lt;/div&gt;
@@ -252,7 +252,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <p>Element expressions can occur inside the opening tag after the tag name:</p>
 <pre><code class="language-html">&lt;div ${ref(elementReference)}&gt;&lt;/div&gt;
 </code></pre>
-<h3 id="Invalid_locations"><a href="#Invalid_locations">Invalid locations</a></h3>
+<h3 id="間違ったエクスプレッションの位置"><a href="#間違ったエクスプレッションの位置">間違ったエクスプレッションの位置</a></h3>
 <p>Expressions should generally not appear in the following locations:</p>
 <ul>
 <li><p>Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.</p>
