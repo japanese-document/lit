@@ -313,7 +313,7 @@ Litテンプレートはwell-formed HTMLである必要があります。
 
  * テンプレートは全てのエクスプレッションが空白になった時にwell-formed HTMLである必要があります。
 
- * テンプレートは複数のテキストや要素をトップレベルに配置してもよいです。
+ * 複数のテキストや要素をテンプレートのトップレベルに配置してもよいです。
 
  * テンプレートにHTMLパーサーで補完される閉じてない要素を記述してはいけません。
 
@@ -324,30 +324,30 @@ Litテンプレートはwell-formed HTMLである必要があります。
     const template2 = html`${template1} more text. </div>`;
     ```
 
-## 正しいエクスプレッションの位置
+## 適切なエクスプレッションの位置
 
-Expressions **_can only occur_** where you can place attribute values and child elements in HTML.
+エクスプレッションは属性の値もしくは子コンテンツの位置に置く必要があります。
 
 ```html
-<!-- attribute values -->
+<!-- 属性の値 -->
 <div label=${label}></div>
 <button ?disabled=${isDisabled}>Click me!</button>
 <input .value=${currentValue}>
 <button @click=${this.handleClick()}>
 
-<!-- child content -->
+<!-- 子コンテンツ -->
 <div>${textContent}</div>
 ```
 
-Element expressions can occur inside the opening tag after the tag name:
+Element expressionsは開始タグのタグ名の後に置く必要があります。
 
 ```html
 <div ${ref(elementReference)}></div>
 ```
 
-### 間違ったエクスプレッションの位置
+### 不適切なエクスプレッションの位置
 
-Expressions should generally not appear in the following locations:
+通常、エクスプレッションを下記の位置に配置してはいけません。
 
 * Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.
 
