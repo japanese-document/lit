@@ -13,7 +13,7 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。
 
 エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
-一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型をサポートします。
+一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型が使用可能です。
 それに加えて、全てのエクスプレッションはディレクティブを受け入れることができます。
 ディレクディブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
 詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
@@ -86,7 +86,7 @@ html`<main>${bodyText}</main>`
 *   `svg`関数で生成される`SVGTemplateResult`オブジェクト
 *   DOM Nodes
 *   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
-*   サポートされている型の配列もしくはiterables
+*   使用可能な型の配列もしくはiterables
 
 ### プリミティブ値
 
@@ -158,9 +158,9 @@ const page = html`
 `;
 ```
 
-### サポートされている型の配列もしくはiterables
+### 使用可能な型の配列もしくはiterables
 
-エクスプレッションはサポートされている型を格納する配列、iterable、それらの組み合わせを返すことができます。
+エクスプレッションは使用可能な型を格納する配列、iterable、それらの組み合わせを返すことができます。
 つまり、`Array.map()`を使って繰り返し表現を生成することができます。
 詳しくは[リスト](https://lit.dev/docs/templates/lists/)を見てください。
 
@@ -349,13 +349,13 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
 
 通常、エクスプレッションを下記の位置に配置してはいけません。
 
-* Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.
+* Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。開発者モードでエラーが発生します。
 
   ```html
-  <!-- ERROR -->
+  <!-- エラー -->
   <${tagName}></${tagName}>
 
-  <!-- ERROR -->
+  <!-- エラー -->
   <div ${attrName}=true></div>
   ```
 
