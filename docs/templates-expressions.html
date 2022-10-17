@@ -228,7 +228,7 @@ HTMLは大文字と小文字を区別しませんが、Litはテンプレート�
 <ul>
 <li><p>テンプレートは全てのエクスプレッションが空白になった時にwell-formed HTMLである必要があります。</p>
 </li>
-<li><p>テンプレートは複数のテキストや要素をトップレベルに配置してもよいです。</p>
+<li><p>複数のテキストや要素をテンプレートのトップレベルに配置してもよいです。</p>
 </li>
 <li><p>テンプレートにHTMLパーサーで補完される閉じてない要素を記述してはいけません。</p>
 <pre><code class="language-js">// HTMLパーサーは"Some text"の後に&lt;/div&gt;を追加します。
@@ -238,22 +238,22 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 </code></pre>
 </li>
 </ul>
-<h2 id="正しいエクスプレッションの位置"><a href="#正しいエクスプレッションの位置">正しいエクスプレッションの位置</a></h2>
-<p>Expressions <strong><em>can only occur</em></strong> where you can place attribute values and child elements in HTML.</p>
-<pre><code class="language-html">&lt;!-- attribute values --&gt;
+<h2 id="適切なエクスプレッションの位置"><a href="#適切なエクスプレッションの位置">適切なエクスプレッションの位置</a></h2>
+<p>エクスプレッションは属性の値もしくは子コンテンツの位置に置く必要があります。</p>
+<pre><code class="language-html">&lt;!-- 属性の値 --&gt;
 &lt;div label=${label}&gt;&lt;/div&gt;
 &lt;button ?disabled=${isDisabled}&gt;Click me!&lt;/button&gt;
 &lt;input .value=${currentValue}&gt;
 &lt;button @click=${this.handleClick()}&gt;
 
-&lt;!-- child content --&gt;
+&lt;!-- 子コンテンツ --&gt;
 &lt;div&gt;${textContent}&lt;/div&gt;
 </code></pre>
-<p>Element expressions can occur inside the opening tag after the tag name:</p>
+<p>Element expressionsは開始タグのタグ名の後に置く必要があります。</p>
 <pre><code class="language-html">&lt;div ${ref(elementReference)}&gt;&lt;/div&gt;
 </code></pre>
-<h3 id="間違ったエクスプレッションの位置"><a href="#間違ったエクスプレッションの位置">間違ったエクスプレッションの位置</a></h3>
-<p>Expressions should generally not appear in the following locations:</p>
+<h3 id="不適切なエクスプレッションの位置"><a href="#不適切なエクスプレッションの位置">不適切なエクスプレッションの位置</a></h3>
+<p>通常、エクスプレッションを下記の位置に配置してはいけません。</p>
 <ul>
 <li><p>Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.</p>
 <pre><code class="language-html">&lt;!-- ERROR --&gt;
