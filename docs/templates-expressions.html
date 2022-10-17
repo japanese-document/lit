@@ -33,7 +33,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 要素タグ内にあるエクスプレッションはその要素に影響を与えます。
 要素のコンテンツ内にあるエクスプレッションは子Nodeと同じような位置で子Nodeやテキストをレンダリングします。</p>
 <p>エクスプレッションの値が有効かどうかはエクスプレッションの位置によって異なります。
-一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型をサポートします。
+一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型が使用可能です。
 それに加えて、全てのエクスプレッションはディレクティブを受け入れることができます。
 ディレクディブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
@@ -88,7 +88,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <li><code>svg</code>関数で生成される<code>SVGTemplateResult</code>オブジェクト</li>
 <li>DOM Nodes</li>
 <li>センチネル値(<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
-<li>サポートされている型の配列もしくはiterables</li>
+<li>使用可能な型の配列もしくはiterables</li>
 </ul>
 <h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>
 <p>Litはほとんどすべての<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a>をレンダリングすることができます。 
@@ -137,8 +137,8 @@ const page = html`
   &lt;p&gt;This is some text&lt;/p&gt;
 `;
 </code></pre>
-<h3 id="サポートされている型の配列もしくはiterables"><a href="#サポートされている型の配列もしくはiterables">サポートされている型の配列もしくはiterables</a></h3>
-<p>エクスプレッションはサポートされている型を格納する配列、iterable、それらの組み合わせを返すことができます。
+<h3 id="使用可能な型の配列もしくはiterables"><a href="#使用可能な型の配列もしくはiterables">使用可能な型の配列もしくはiterables</a></h3>
+<p>エクスプレッションは使用可能な型を格納する配列、iterable、それらの組み合わせを返すことができます。
 つまり、<code>Array.map()</code>を使って繰り返し表現を生成することができます。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/">リスト</a>を見てください。</p>
 <h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
@@ -255,11 +255,11 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <h3 id="不適切なエクスプレッションの位置"><a href="#不適切なエクスプレッションの位置">不適切なエクスプレッションの位置</a></h3>
 <p>通常、エクスプレッションを下記の位置に配置してはいけません。</p>
 <ul>
-<li><p>Where tag or attribute names would appear. Lit does not support dynamically changing values in this position and will error in development mode.</p>
-<pre><code class="language-html">&lt;!-- ERROR --&gt;
+<li><p>Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。開発者モードでエラーが発生します。</p>
+<pre><code class="language-html">&lt;!-- エラー --&gt;
 &lt;${tagName}&gt;&lt;/${tagName}&gt;
 
-&lt;!-- ERROR --&gt;
+&lt;!-- エラー --&gt;
 &lt;div ${attrName}=true&gt;&lt;/div&gt;
 </code></pre>
 </li>

@@ -37,7 +37,7 @@ LitテンプレートにJavaScriptの式を含めることができます。
 *   `html`関数で生成される`TemplateResult`オブジェクト
 *   DOM Nodes
 *   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change))
-*   サポートされている型の配列もしくはiterables
+*   使用可能な型の配列もしくはiterables
 
 これは[child expressions](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)にセットできる値とほぼ同じです。
 1点だけある違いはchild expressionsは`SVGTemplateResult`をレンダリングすることができます。
