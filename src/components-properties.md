@@ -131,10 +131,10 @@ class MyElement extends LitElement {
 
 #### noAccessor
 
-Set to true to avoid generating the default property accessors.
-This option is rarely necessary.
-Default: false.
-For more information, see [Preventing Lit from generating a property accessor](#accessors-noaccessor).
+trueをセットするとデフォルトのプロパティアクセサを生成しません。
+このオプションを使うことはほとんどありません。
+デフォルトはfalseです。
+詳しくは[noAccessorオプション](#noAccessorオプション)を見てください。
 
 #### reflect
 
@@ -521,7 +521,7 @@ In most cases, **you do not need to create custom property accessors.** To compu
 
 If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
 
-### Prevent Lit from generating a property accessor {#accessors-noaccessor}
+### noAccessorオプション
 
 In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.
 

@@ -117,10 +117,10 @@ constructor()
 デフォルトでは不等式(<code>newValue !== oldValue</code>)による判定を行います。
 詳しくは<a class="Link" href="#更新判定の変更">更新判定の変更</a>を見てください。</p>
 <h4 id="noAccessor"><a href="#noAccessor">noAccessor</a></h4>
-<p>Set to true to avoid generating the default property accessors.
-This option is rarely necessary.
-Default: false.
-For more information, see <a class="Link" href="#accessors-noaccessor">Preventing Lit from generating a property accessor</a>.</p>
+<p>trueをセットするとデフォルトのプロパティアクセサを生成しません。
+このオプションを使うことはほとんどありません。
+デフォルトはfalseです。
+詳しくは<a class="Link" href="#noAccessorオプション">noAccessorオプション</a>を見てください。</p>
 <h4 id="reflect"><a href="#reflect">reflect</a></h4>
 <p>Whether property value is reflected back to the associated attribute.
 Default: false.
@@ -420,7 +420,7 @@ get prop() { return this._prop; }
 <p>The setters that Lit generates automatically call <code>requestUpdate()</code>. If you write your own setter you must call <code>requestUpdate()</code> manually, supplying the property name and its old value.</p>
 <p>In most cases, <strong>you do not need to create custom property accessors.</strong> To compute values from existing properties, we recommend using the <a class="Link" href="/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a> callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the <a class="Link" href="/docs/components/lifecycle/#updated"><code>updated</code></a> callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.</p>
 <p>If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.</p>
-<h3 id="Prevent_Lit_from_generating_a_property_accessor_{#accessors-noaccessor}"><a href="#Prevent_Lit_from_generating_a_property_accessor_{#accessors-noaccessor}">Prevent Lit from generating a property accessor {#accessors-noaccessor}</a></h3>
+<h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
 <p>In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.</p>
 <p>To prevent Lit from generating a property accessor that overwrites the superclass's defined accessor, set <code>noAccessor</code> to <code>true</code> in the property declaration:</p>
 <pre><code class="language-js">static properties = {
