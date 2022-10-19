@@ -118,15 +118,19 @@ constructor()
 詳しくは<a class="Link" href="#更新判定の変更">更新判定の変更</a>を見てください。</p>
 <h4 id="noAccessor"><a href="#noAccessor">noAccessor</a></h4>
 <p>trueをセットするとデフォルトのプロパティアクセサを生成しません。
-このオプションを使うことはほとんどありません。
+このオプションを使うことはほとんどないでしょう。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#noAccessorオプション">noAccessorオプション</a>を見てください。</p>
 <h4 id="reflect"><a href="#reflect">reflect</a></h4>
-<p>Whether property value is reflected back to the associated attribute.
-Default: false.
-For more information, see <a class="Link" href="#reflected-attributes">Enabling attribute reflection</a>.</p>
+<p>trueをセットするとプロパティの値を関連したcustom elementの属性に反映します。
+デフォルトはfalseです。
+詳しくは<a class="Link" href="#reflectオプション">reflectオプション</a>を見てください。</p>
 <h4 id="state"><a href="#state">state</a></h4>
-<p>Set to true to declare the property as <em>internal reactive state</em>. Internal reactive state triggers updates like public reactive properties, but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component. Equivalent to using the <code>@state</code> decorator. Default: false. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
+<p>Set to true to declare the property as <em>internal reactive state</em>.
+Internal reactive state triggers updates like public reactive properties,
+but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component.
+Equivalent to using the <code>@state</code> decorator.
+Default: false. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
 <h4 id="type"><a href="#type">type</a></h4>
 <p>When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If <code>converter</code> is set, this field is passed to the converter. If <code>type</code> is unspecified, the default converter treats it as <code>type: String</code>. See <a class="Link" href="#conversion-type">Using the default converter</a>.</p>
 <p>When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the <code>type</code> option is used by the Lit's <em>runtime</em> for string serialization/deserialization, and should not be confused with a <em>type-checking</em> mechanism.</p>
@@ -348,7 +352,7 @@ constructor() {
 </code></pre>
 <p>If no <code>toAttribute</code> function is supplied for a reflected attribute, the attribute is set to the property value using the default converter.</p>
 <p>If <code>toAttribute</code> returns <code>null</code> or <code>undefined</code>, the attribute is removed.</p>
-<h3 id="Enabling_attribute_reflection_{#reflected-attributes}"><a href="#Enabling_attribute_reflection_{#reflected-attributes}">Enabling attribute reflection {#reflected-attributes}</a></h3>
+<h3 id="reflectオプション"><a href="#reflectオプション">reflectオプション</a></h3>
 <p>You can configure a property so that whenever it changes, its value is reflected to its <a class="Link" href="#observed-attributes">corresponding attribute</a>. Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like <code>querySelector</code>.</p>
 <p>For example:</p>
 <pre><code class="language-js">// Value of property "active" will reflect to attribute "active"

@@ -132,19 +132,23 @@ class MyElement extends LitElement {
 #### noAccessor
 
 trueをセットするとデフォルトのプロパティアクセサを生成しません。
-このオプションを使うことはほとんどありません。
+このオプションを使うことはほとんどないでしょう。
 デフォルトはfalseです。
 詳しくは[noAccessorオプション](#noAccessorオプション)を見てください。
 
 #### reflect
 
-Whether property value is reflected back to the associated attribute.
-Default: false.
-For more information, see [Enabling attribute reflection](#reflected-attributes).
+trueをセットするとプロパティの値を関連したcustom elementの属性に反映します。
+デフォルトはfalseです。
+詳しくは[reflectオプション](#reflectオプション)を見てください。
 
 #### state
 
-Set to true to declare the property as _internal reactive state_. Internal reactive state triggers updates like public reactive properties, but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component. Equivalent to using the `@state` decorator. Default: false. For more information, see [Internal reactive state](#internal-reactive-state).
+Set to true to declare the property as _internal reactive state_.
+Internal reactive state triggers updates like public reactive properties,
+but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component.
+Equivalent to using the `@state` decorator.
+Default: false. For more information, see [Internal reactive state](#internal-reactive-state).
 
 #### type
 
@@ -418,7 +422,7 @@ If no `toAttribute` function is supplied for a reflected attribute, the attribut
 
 If `toAttribute` returns `null` or `undefined`, the attribute is removed.
 
-### Enabling attribute reflection {#reflected-attributes}
+### reflectオプション
 
 You can configure a property so that whenever it changes, its value is reflected to its [corresponding attribute](#observed-attributes). Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like `querySelector`.
 
