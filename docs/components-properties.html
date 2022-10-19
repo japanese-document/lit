@@ -122,15 +122,17 @@ constructor()
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#noAccessorオプション">noAccessorオプション</a>を見てください。</p>
 <h4 id="reflect"><a href="#reflect">reflect</a></h4>
-<p>trueをセットするとプロパティの値を関連したcustom elementの属性に反映します。
+<p>trueをセットするとプロパティの値をcustom elementのプロパティに対応する属性に反映します。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#reflectオプション">reflectオプション</a>を見てください。</p>
 <h4 id="state"><a href="#state">state</a></h4>
-<p>Set to true to declare the property as <em>internal reactive state</em>.
-Internal reactive state triggers updates like public reactive properties,
-but Lit doesn't generate an attribute for it, and users shouldn't access it from outside the component.
-Equivalent to using the <code>@state</code> decorator.
-Default: false. For more information, see <a class="Link" href="#internal-reactive-state">Internal reactive state</a>.</p>
+<p>trueをセットするとプロパティはインターナルリアクティブステートになります。
+インターナルリアクティブステートはパブリックリアクティブプロパティのように更新を発動しますが、
+Litはプロパティに対応する属性を生成しません。
+そして、コンポーネント外側からプロパティにしてはいけません。
+このオプションは<code>@state</code>デコレータと同じ効果を付与します。
+デフォルトはfalseです。
+詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
 <h4 id="type"><a href="#type">type</a></h4>
 <p>When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If <code>converter</code> is set, this field is passed to the converter. If <code>type</code> is unspecified, the default converter treats it as <code>type: String</code>. See <a class="Link" href="#conversion-type">Using the default converter</a>.</p>
 <p>When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the <code>type</code> option is used by the Lit's <em>runtime</em> for string serialization/deserialization, and should not be confused with a <em>type-checking</em> mechanism.</p>
