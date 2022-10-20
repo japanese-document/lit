@@ -51,8 +51,8 @@
 一般的に、パブリックプロパティ、その中でもリアクティブプロパティは入力を扱います。</p>
 <p>ユーザの入力に対応する以外でコンポーネントのパブリックプロパティを変更するべきではありません。
 例えばメニューコンポーネントに<code>selected</code>プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
-しかし、ユーザが項目を指定した場合はコンポーネントが<code>selected</code>プロパティを更新するべきです。
-この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があります。
+ユーザが項目を指定した場合はコンポーネントが<code>selected</code>プロパティを更新するべきです。
+この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに<code>selected</code>プロパティが変更されたことを示す必要があるかもしれません。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/events/#dispatching-events">Dispatching events</a>を見てください。</p>
 <p>Litにはインターナルリアクティブステート(internal reactive state)機能があります。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
@@ -129,13 +129,21 @@ constructor()
 <p>trueをセットするとプロパティはインターナルリアクティブステートになります。
 インターナルリアクティブステートはパブリックリアクティブプロパティのように更新を発動しますが、
 Litはプロパティに対応する属性を生成しません。
-そして、コンポーネント外側からプロパティにしてはいけません。
+そして、コンポーネント外からインターナルリアクティブステートのプロパティにアクセスするべきではありません。
 このオプションは<code>@state</code>デコレータと同じ効果を付与します。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
 <h4 id="type"><a href="#type">type</a></h4>
-<p>When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If <code>converter</code> is set, this field is passed to the converter. If <code>type</code> is unspecified, the default converter treats it as <code>type: String</code>. See <a class="Link" href="#conversion-type">Using the default converter</a>.</p>
-<p>When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the <code>type</code> option is used by the Lit's <em>runtime</em> for string serialization/deserialization, and should not be confused with a <em>type-checking</em> mechanism.</p>
+<p>文字列である属性をプロパティに変換する際に
+Litのデフォルトのコンバータはその文字列の値を指定された型(<code>type</code>)に変換します。
+プロパティから属性に変換する場合は、その逆です。
+<code>converter</code>オプションがセットされている場合、
+このオプションの値は<code>converter</code>オプションに渡されます。
+セットされていない場合、デフォルトコンバータは<code>String</code>に変換します。
+詳しくは<a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>を見てください。</p>
+<p>When using TypeScript, this field should generally match the TypeScript type declared for the field.
+However, the <code>type</code> option is used by the Lit's <em>runtime</em> for string serialization/deserialization,
+and should not be confused with a <em>type-checking</em> mechanism.</p>
 <p>Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.</p>
 <h2 id="インターナルリアクティブステート"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
 <p><em>Internal reactive state</em> refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.</p>

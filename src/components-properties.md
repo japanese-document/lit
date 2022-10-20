@@ -36,8 +36,8 @@ Litはリアクティブプロパティとそれに関連した要素の属性�
 
 ユーザの入力に対応する以外でコンポーネントのパブリックプロパティを変更するべきではありません。
 例えばメニューコンポーネントに`selected`プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
-しかし、ユーザが項目を指定した場合はコンポーネントが`selected`プロパティを更新するべきです。
-この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があります。
+ユーザが項目を指定した場合はコンポーネントが`selected`プロパティを更新するべきです。
+この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があるかもしれません。
 詳しくは[Dispatching events](https://lit.dev/docs/components/events/#dispatching-events)を見てください。
 
 Litにはインターナルリアクティブステート(internal reactive state)機能があります。
@@ -147,16 +147,24 @@ trueをセットするとプロパティの値をcustom elementのプロパテ�
 trueをセットするとプロパティはインターナルリアクティブステートになります。
 インターナルリアクティブステートはパブリックリアクティブプロパティのように更新を発動しますが、
 Litはプロパティに対応する属性を生成しません。
-そして、コンポーネント外側からプロパティにしてはいけません。
+そして、コンポーネント外からインターナルリアクティブステートのプロパティにアクセスするべきではありません。
 このオプションは`@state`デコレータと同じ効果を付与します。
 デフォルトはfalseです。
 詳しくは[インターナルリアクティブステート](#インターナルリアクティブステート)を見てください。
 
 #### type
 
-When converting a string-valued attribute into a property, Lit's default attribute converter will parse the string into the type given, and vice-versa when reflecting a property to an attribute. If `converter` is set, this field is passed to the converter. If `type` is unspecified, the default converter treats it as `type: String`. See [Using the default converter](#conversion-type).
+文字列である属性をプロパティに変換する際に
+Litのデフォルトのコンバータはその文字列の値を指定された型(`type`)に変換します。
+プロパティから属性に変換する場合は、その逆です。
+`converter`オプションがセットされている場合、
+このオプションの値は`converter`オプションに渡されます。
+セットされていない場合、デフォルトコンバータは`String`に変換します。
+詳しくは[デフォルトコンバータ](#デフォルトコンバータ)を見てください。
 
-When using TypeScript, this field should generally match the TypeScript type declared for the field. However, the `type` option is used by the Lit's _runtime_ for string serialization/deserialization, and should not be confused with a _type-checking_ mechanism.
+When using TypeScript, this field should generally match the TypeScript type declared for the field.
+However, the `type` option is used by the Lit's _runtime_ for string serialization/deserialization,
+and should not be confused with a _type-checking_ mechanism.
 
 Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.
 
