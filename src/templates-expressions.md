@@ -349,7 +349,7 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
 
 通常、エクスプレッションを下記の位置に配置してはいけません。
 
-* Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。開発者モードでエラーが発生します。
+* Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。developmentモードでエラーが発生します。
 
   ```html
   <!-- エラー -->
@@ -359,17 +359,19 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
   <div ${attrName}=true></div>
   ```
 
-* Inside `<template>` element content (attribute expressions on the template element itself are allowed). Lit does not recurse into template content to dynamically update expressions and will error in development mode.
+* `<tempalte>`の子コンテンツ(template要素のattribute expressionsは可能)
 
   ```html
-  <!-- ERROR -->
+  <!-- エラー -->
   <template>${content}</template>
 
   <!-- OK -->
   <template id="${attrValue}">static content ok</template>
   ```
 
-* Inside `<textarea>` element content (attribute expressions on the textarea element itself are allowed). Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the `.value` property of textarea.
+* Inside `<textarea>` element content (attribute expressions on the textarea element itself are allowed).
+Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the `.value` property of textarea.
+
   ```html
   <!-- BEWARE -->
   <textarea>${content}</textarea>
@@ -382,6 +384,7 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
   ```
 
 * Similarly, inside elements with the `contenteditable` attribute. Instead, bind to the `.innerText` property of the element.
+
   ```html
   <!-- BEWARE -->
   <div contenteditable>${content}</div>
@@ -394,6 +397,7 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
   ```
 
 * Inside HTML comments. Lit will not update expressions in comments, and the expressions will instead be rendered with a Lit token string. However, this will not break subsequent expressions, so commenting out blocks of HTML during development that may contain expressions is safe.
+
   ```html
   <!-- will not update: ${value} -->
   ```

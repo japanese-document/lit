@@ -255,7 +255,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <h3 id="不適切なエクスプレッションの位置"><a href="#不適切なエクスプレッションの位置">不適切なエクスプレッションの位置</a></h3>
 <p>通常、エクスプレッションを下記の位置に配置してはいけません。</p>
 <ul>
-<li><p>Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。開発者モードでエラーが発生します。</p>
+<li><p>Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。developmentモードでエラーが発生します。</p>
 <pre><code class="language-html">&lt;!-- エラー --&gt;
 &lt;${tagName}&gt;&lt;/${tagName}&gt;
 
@@ -263,15 +263,16 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 &lt;div ${attrName}=true&gt;&lt;/div&gt;
 </code></pre>
 </li>
-<li><p>Inside <code>&lt;template&gt;</code> element content (attribute expressions on the template element itself are allowed). Lit does not recurse into template content to dynamically update expressions and will error in development mode.</p>
-<pre><code class="language-html">&lt;!-- ERROR --&gt;
+<li><p><code>&lt;tempalte&gt;</code>の子コンテンツ(template要素のattribute expressionsは可能)</p>
+<pre><code class="language-html">&lt;!-- エラー --&gt;
 &lt;template&gt;${content}&lt;/template&gt;
 
 &lt;!-- OK --&gt;
 &lt;template id="${attrValue}"&gt;static content ok&lt;/template&gt;
 </code></pre>
 </li>
-<li><p>Inside <code>&lt;textarea&gt;</code> element content (attribute expressions on the textarea element itself are allowed). Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the <code>.value</code> property of textarea.</p>
+<li><p>Inside <code>&lt;textarea&gt;</code> element content (attribute expressions on the textarea element itself are allowed).
+Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the <code>.value</code> property of textarea.</p>
 <pre><code class="language-html">&lt;!-- BEWARE --&gt;
 &lt;textarea&gt;${content}&lt;/textarea&gt;
 
