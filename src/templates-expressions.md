@@ -386,7 +386,8 @@ Litはdevelopmentモードで警告を出します。
   <textarea id="${attrValue}">static content ok</textarea>
   ```
 
-* Similarly, inside elements with the `contenteditable` attribute. Instead, bind to the `.innerText` property of the element.
+* `contenteditable`属性を持つ要素の子コンテンツ(要素のattribute expressionsは可能)
+代わりに`.innerText`プロパティを要素に付与します。
 
   ```html
   <!-- 注意 -->
@@ -399,7 +400,10 @@ Litはdevelopmentモードで警告を出します。
   <div contenteditable id="${attrValue}">static content ok</div>
   ```
 
-* Inside HTML comments. Lit will not update expressions in comments, and the expressions will instead be rendered with a Lit token string. However, this will not break subsequent expressions, so commenting out blocks of HTML during development that may contain expressions is safe.
+* コメントの内側。
+Litはコメント内のエクスプレッションをLit token string(例: `lit$6916837264$`)にレンダリングします。
+これによって他のエクスプレッションが壊れません。
+開発時にエクスプレッションをコメントアウトしても安全です。
 
   ```html
   <!-- will not update: ${value} -->
