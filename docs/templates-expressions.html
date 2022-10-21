@@ -238,7 +238,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 </code></pre>
 </li>
 </ul>
-<h2 id="適切なエクスプレッションの位置"><a href="#適切なエクスプレッションの位置">適切なエクスプレッションの位置</a></h2>
+<h2 id="有効なエクスプレッションの位置"><a href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a></h2>
 <p>エクスプレッションは属性の値もしくは子コンテンツの位置に置く必要があります。</p>
 <pre><code class="language-html">&lt;!-- 属性の値 --&gt;
 &lt;div label=${label}&gt;&lt;/div&gt;
@@ -252,7 +252,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <p>Element expressionsは開始タグのタグ名の後に置く必要があります。</p>
 <pre><code class="language-html">&lt;div ${ref(elementReference)}&gt;&lt;/div&gt;
 </code></pre>
-<h3 id="不適切なエクスプレッションの位置"><a href="#不適切なエクスプレッションの位置">不適切なエクスプレッションの位置</a></h3>
+<h3 id="無効なエクスプレッションの位置"><a href="#無効なエクスプレッションの位置">無効なエクスプレッションの位置</a></h3>
 <p>通常、エクスプレッションを下記の位置に配置してはいけません。</p>
 <ul>
 <li><p>Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。developmentモードでエラーが発生します。</p>
@@ -305,18 +305,21 @@ Litはコメント内のエクスプレッションをLit token string(例: <cod
 <pre><code class="language-html">&lt;!-- will not update: ${value} --&gt;
 </code></pre>
 </li>
-<li><p>Inside <code>&lt;style&gt;</code> elements when using the ShadyCSS polyfill. See <a class="Link" href="/docs/components/styles/#style-element">Expressions and style elements</a> for more details.</p>
+<li><p><a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss">ShadyCSS polyfill</a>を使っているときのstyle要素の内側。
+詳しくは<a class="Link" href="https://lit.dev/docs/components/styles/#style-element">Expressions and style elements</a>を見てください。</p>
 </li>
 </ul>
-<p>Note that expressions in all the invalid cases above are valid when using <a class="Link" href="#static-expressions">static expressions</a>, although these should not be used for performance-sensitive updates due to the inefficiencies involved (see below).</p>
+<p>上記の無効なエクスプレッションは<a class="Link" href="#Static_expressions">Static expressions</a>を使用した場合、有効になります。
+ただし、それは非効率であるのでパフォーマンスが重要な場面で使用しないでください。</p>
 <h2 id="Static_expressions"><a href="#Static_expressions">Static expressions</a></h2>
-<p>Static expressions return special values that are interpolated into the template <em>before</em> the template is processed as HTML by Lit. Because they become part of the template's static HTML, they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.</p>
+<p>Static expressions return special values that are interpolated into the template <em>before</em> the template is processed as HTML by Lit.
+Because they become part of the template's static HTML,
+they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.</p>
 <p>To use static expressions, you must import a special version of the <code>html</code> or <code>svg</code> template tags from Lit's <code>static-html</code> module:</p>
 <pre><code class="language-ts">import {html, literal} from 'lit/static-html.js';
 </code></pre>
 <p>The <code>static-html</code> module contains <code>html</code> and <code>svg</code> tag functions which support static expressions and should be used instead of the standard versions provided in the <code>lit</code> module. Use the <code>literal</code> tag function to create static expressions.</p>
 <p>You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on <a class="Link" href="#expression-locations">Valid expression locations</a> for details. For example, a <code>my-button</code> component might render a <code>&lt;button&gt;</code> tag, but a subclass might render an <code>&lt;a&gt;</code> tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">import {LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {html, literal} from 'lit/static-html.js';
@@ -336,51 +339,12 @@ class MyButton extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">import {LitElement} from 'lit';
-import {html, literal} from 'lit/static-html.js';
-
-class MyButton extends LitElement {
-  static properties = {
-    caption: {},
-    active: {type: Boolean},
-  };
-
-  tag = literal`button`;
-  activeAttribute = literal`active`;
-
-  constructor() {
-    super();
-    this.caption = 'Hello static';
-    this.active = false;
-  }
-
-  render() {
-    return html`
-      &lt;${this.tag} ${this.activeAttribute}?=${this.active}&gt;
-        &lt;p&gt;${this.caption}&lt;/p&gt;
-      &lt;/${this.tag}&gt;`;
-  }
-}
-customElements.define('my-button', MyButton);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-anchor')
 class MyAnchor extends MyButton {
   tag = literal`a`;
 }
 </code></pre>
-<pre><code class="language-js">class MyAnchor extends MyButton {
-  tag = literal`a`;
-}
-customElements.define('my-anchor', MyAnchor);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<div class="alert alert-warning">
-
 <p><strong>Changing the value of static expressions is expensive.</strong> Expressions using <code>literal</code> values should not change frequently, as they cause a new template to be re-parsed and each variation is held in memory.</p>
-</div>
-
 <p>In the example above, if the template re-renders and <code>this.caption</code> or <code>this.active</code> change, Lit updates the template efficiently, only changing the affected expressions. However, if <code>this.tag</code> or <code>this.activeAttribute</code> change, since they are static values tagged with <code>literal</code>, an entirely new template is created; the update is inefficient since the DOM is completely re-rendered. In addition, changing <code>literal</code> values passed to expressions increases memory use since each unique template is cached in memory to improve re-render performance.</p>
 <p>For these reasons, it's a good idea keep changes to expressions using <code>literal</code> to a minimum and avoid using reactive properties to change <code>literal</code> values, since reactive properties are intended to change.</p>
 <h3 id="Template_structure"><a href="#Template_structure">Template structure</a></h3>
@@ -394,7 +358,6 @@ customElements.define('my-anchor', MyAnchor);
 <p><strong>Only for trusted content.</strong> Note the use of <em>unsafe</em> in <code>unsafeStatic()</code>. The string passed to <code>unsafeStatic()</code> must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
 </div>
 
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-button')
 class MyButton extends LitElement {
   @property() caption = 'Hello static';
@@ -411,31 +374,6 @@ class MyButton extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyButton extends LitElement {
-  static properties = {
-    caption: {},
-    active: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.caption = 'Hello static';
-    this.active = false;
-  }
-
-  render() {
-    // These strings MUST be trusted, otherwise this is an XSS vulnerability
-    const tag = getTagName();
-    const activeAttribute = getActiveAttribute();
-    return html`
-      &lt;${unsafeStatic(tag)} ${unsafeStatic(activeAttribute)}?=${this.active}&gt;
-        &lt;p&gt;${this.caption}&lt;/p&gt;
-      &lt;/${unsafeStatic(tag)}&gt;`;
-  }
-}
-customElements.define('my-button', MyButton);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Note that the behavior of using <code>unsafeStatic</code> carries the same caveats as <code>literal</code>: because changing values causes a new template to be parsed and cached in memory, they should not change frequently.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
