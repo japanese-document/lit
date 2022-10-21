@@ -324,7 +324,7 @@ Litテンプレートはwell-formed HTMLである必要があります。
     const template2 = html`${template1} more text. </div>`;
     ```
 
-## 適切なエクスプレッションの位置
+## 有効なエクスプレッションの位置
 
 エクスプレッションは属性の値もしくは子コンテンツの位置に置く必要があります。
 
@@ -345,7 +345,7 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
 <div ${ref(elementReference)}></div>
 ```
 
-### 不適切なエクスプレッションの位置
+### 無効なエクスプレッションの位置
 
 通常、エクスプレッションを下記の位置に配置してはいけません。
 
@@ -409,13 +409,17 @@ Litはコメント内のエクスプレッションをLit token string(例: `lit
   <!-- will not update: ${value} -->
   ```
 
-* Inside `<style>` elements when using the ShadyCSS polyfill. See [Expressions and style elements](/docs/components/styles/#style-element) for more details.
+* [ShadyCSS polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss)を使っているときのstyle要素の内側。
+詳しくは[Expressions and style elements](https://lit.dev/docs/components/styles/#style-element)を見てください。
 
-Note that expressions in all the invalid cases above are valid when using [static expressions](#static-expressions), although these should not be used for performance-sensitive updates due to the inefficiencies involved (see below).
+上記の無効なエクスプレッションは[Static expressions](#Static_expressions)を使用した場合、有効になります。
+ただし、それは非効率であるのでパフォーマンスが重要な場面で使用しないでください。
 
 ## Static expressions
 
-Static expressions return special values that are interpolated into the template _before_ the template is processed as HTML by Lit. Because they become part of the template's static HTML, they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.
+Static expressions return special values that are interpolated into the template _before_ the template is processed as HTML by Lit.
+Because they become part of the template's static HTML,
+they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.
 
 To use static expressions, you must import a special version of the `html` or `svg` template tags from Lit's `static-html` module:
 
@@ -426,8 +430,6 @@ import {html, literal} from 'lit/static-html.js';
 The `static-html` module contains `html` and `svg` tag functions which support static expressions and should be used instead of the standard versions provided in the `lit` module. Use the `literal` tag function to create static expressions.
 
 You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on [Valid expression locations](#expression-locations) for details. For example, a `my-button` component might render a `<button>` tag, but a subclass might render an `<a>` tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.
-
-{% switchable-sample %}
 
 ```ts
 import {LitElement} from 'lit';
@@ -450,39 +452,6 @@ class MyButton extends LitElement {
 }
 ```
 
-```js
-import {LitElement} from 'lit';
-import {html, literal} from 'lit/static-html.js';
-
-class MyButton extends LitElement {
-  static properties = {
-    caption: {},
-    active: {type: Boolean},
-  };
-
-  tag = literal`button`;
-  activeAttribute = literal`active`;
-
-  constructor() {
-    super();
-    this.caption = 'Hello static';
-    this.active = false;
-  }
-
-  render() {
-    return html`
-      <${this.tag} ${this.activeAttribute}?=${this.active}>
-        <p>${this.caption}</p>
-      </${this.tag}>`;
-  }
-}
-customElements.define('my-button', MyButton);
-```
-
-{% endswitchable-sample %}
-
-{% switchable-sample %}
-
 ```ts
 @customElement('my-anchor')
 class MyAnchor extends MyButton {
@@ -490,20 +459,7 @@ class MyAnchor extends MyButton {
 }
 ```
 
-```js
-class MyAnchor extends MyButton {
-  tag = literal`a`;
-}
-customElements.define('my-anchor', MyAnchor);
-```
-
-{% endswitchable-sample %}
-
-<div class="alert alert-warning">
-
 **Changing the value of static expressions is expensive.** Expressions using `literal` values should not change frequently, as they cause a new template to be re-parsed and each variation is held in memory.
-
-</div>
 
 In the example above, if the template re-renders and `this.caption` or `this.active` change, Lit updates the template efficiently, only changing the affected expressions. However, if `this.tag` or `this.activeAttribute` change, since they are static values tagged with `literal`, an entirely new template is created; the update is inefficient since the DOM is completely re-rendered. In addition, changing `literal` values passed to expressions increases memory use since each unique template is cached in memory to improve re-render performance.
 
@@ -527,8 +483,6 @@ import {html, unsafeStatic} from 'lit/static-html.js';
 
 </div>
 
-{% switchable-sample %}
-
 ```ts
 @customElement('my-button')
 class MyButton extends LitElement {
@@ -546,34 +500,6 @@ class MyButton extends LitElement {
   }
 }
 ```
-
-```js
-class MyButton extends LitElement {
-  static properties = {
-    caption: {},
-    active: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.caption = 'Hello static';
-    this.active = false;
-  }
-
-  render() {
-    // These strings MUST be trusted, otherwise this is an XSS vulnerability
-    const tag = getTagName();
-    const activeAttribute = getActiveAttribute();
-    return html`
-      <${unsafeStatic(tag)} ${unsafeStatic(activeAttribute)}?=${this.active}>
-        <p>${this.caption}</p>
-      </${unsafeStatic(tag)}>`;
-  }
-}
-customElements.define('my-button', MyButton);
-```
-
-{% endswitchable-sample %}
 
 Note that the behavior of using `unsafeStatic` carries the same caveats as `literal`: because changing values causes a new template to be parsed and cached in memory, they should not change frequently.
 
