@@ -369,11 +369,14 @@ Element expressionsは開始タグのタグ名の後に置く必要がありま�
   <template id="${attrValue}">static content ok</template>
   ```
 
-* Inside `<textarea>` element content (attribute expressions on the textarea element itself are allowed).
-Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the `.value` property of textarea.
+* `<textarea>`の子コンテンツ(textarea要素のattribute expressionsは可能)
+Litはtextareaの子コンテンツをレンダリングすることはできますが、
+textareaを編集するとLitが動的に更新するために使っているDOMへの参照が壊れます。
+Litはdevelopmentモードで警告を出します。
+代わりに`.value`プロパティをtextarea要素に付与します。
 
   ```html
-  <!-- BEWARE -->
+  <!-- 注意 -->
   <textarea>${content}</textarea>
 
   <!-- OK -->
@@ -386,7 +389,7 @@ Note that Lit can render content into textarea, however editing the textarea wil
 * Similarly, inside elements with the `contenteditable` attribute. Instead, bind to the `.innerText` property of the element.
 
   ```html
-  <!-- BEWARE -->
+  <!-- 注意 -->
   <div contenteditable>${content}</div>
 
   <!-- OK -->
