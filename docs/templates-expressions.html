@@ -271,9 +271,12 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 &lt;template id="${attrValue}"&gt;static content ok&lt;/template&gt;
 </code></pre>
 </li>
-<li><p>Inside <code>&lt;textarea&gt;</code> element content (attribute expressions on the textarea element itself are allowed).
-Note that Lit can render content into textarea, however editing the textarea will break references to the DOM that Lit uses to dynamically update, and Lit will warn in development mode. Instead, bind to the <code>.value</code> property of textarea.</p>
-<pre><code class="language-html">&lt;!-- BEWARE --&gt;
+<li><p><code>&lt;textarea&gt;</code>の子コンテンツ(textarea要素のattribute expressionsは可能)
+Litはtextareaの子コンテンツをレンダリングすることはできますが、
+textareaを編集するとLitが動的に更新するために使っているDOMへの参照が壊れます。
+Litはdevelopmentモードで警告を出します。
+代わりに<code>.value</code>プロパティをtextarea要素に付与します。</p>
+<pre><code class="language-html">&lt;!-- 注意 --&gt;
 &lt;textarea&gt;${content}&lt;/textarea&gt;
 
 &lt;!-- OK --&gt;
@@ -284,7 +287,7 @@ Note that Lit can render content into textarea, however editing the textarea wil
 </code></pre>
 </li>
 <li><p>Similarly, inside elements with the <code>contenteditable</code> attribute. Instead, bind to the <code>.innerText</code> property of the element.</p>
-<pre><code class="language-html">&lt;!-- BEWARE --&gt;
+<pre><code class="language-html">&lt;!-- 注意 --&gt;
 &lt;div contenteditable&gt;${content}&lt;/div&gt;
 
 &lt;!-- OK --&gt;
