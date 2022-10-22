@@ -73,7 +73,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <pre><code class="language-js">html`&lt;input ${ref(inputRef)}&gt;`
 </code></pre>
 <p>以下のセクションで各エクスプレッションの詳しい説明をします。
-テンプレートの構造のより詳しい説明は<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>と<a class="Link" href="#Valid_expression_locations">Valid expression locations</a>を見てください。</p>
+テンプレートの構造のより詳しい説明は<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>と<a class="Link" href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a>を見てください。</p>
 <h2 id="Child_expressions"><a href="#Child_expressions">Child expressions</a></h2>
 <p>要素のタグの始まりと終わりの間にあるエクスプレッションは要素に子Nodeを加えます。例えば、</p>
 <pre><code class="language-js">html`&lt;p&gt;Hello, ${name}&lt;/p&gt;`
@@ -310,15 +310,16 @@ Litはコメント内のエクスプレッションをLit token string(例: <cod
 </li>
 </ul>
 <p>上記の無効なエクスプレッションは<a class="Link" href="#Static_expressions">Static expressions</a>を使用した場合、有効になります。
-ただし、それは非効率であるのでパフォーマンスが重要な場面で使用しないでください。</p>
+ただし、それは非効率なのでパフォーマンスが重要な場面で使用しないでください。</p>
 <h2 id="Static_expressions"><a href="#Static_expressions">Static expressions</a></h2>
-<p>Static expressions return special values that are interpolated into the template <em>before</em> the template is processed as HTML by Lit.
-Because they become part of the template's static HTML,
-they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.</p>
-<p>To use static expressions, you must import a special version of the <code>html</code> or <code>svg</code> template tags from Lit's <code>static-html</code> module:</p>
+<p>LitがテンプレートをHTMLとして処理する前に、Static expressionsはテンプレートに埋め込まれる特別な値を返します。
+それはテンプレートの静的なHTMLの一部になるので、
+タグ名や属性名のような普通は配置することができない位置にエクスプレッションを配置することができます。</p>
+<p>static expressionsを使うには、<code>static-html</code>モジュールから特別なバージョンの<code>html</code>もしくは<code>svg</code>をimportする必要があります。</p>
 <pre><code class="language-ts">import {html, literal} from 'lit/static-html.js';
 </code></pre>
-<p>The <code>static-html</code> module contains <code>html</code> and <code>svg</code> tag functions which support static expressions and should be used instead of the standard versions provided in the <code>lit</code> module. Use the <code>literal</code> tag function to create static expressions.</p>
+<p>The <code>static-html</code> module contains <code>html</code> and <code>svg</code> tag functions which support static expressions and should be used instead of the standard versions provided in the <code>lit</code> module.
+Use the <code>literal</code> tag function to create static expressions.</p>
 <p>You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on <a class="Link" href="#expression-locations">Valid expression locations</a> for details. For example, a <code>my-button</code> component might render a <code>&lt;button&gt;</code> tag, but a subclass might render an <code>&lt;a&gt;</code> tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.</p>
 <pre><code class="language-ts">import {LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
