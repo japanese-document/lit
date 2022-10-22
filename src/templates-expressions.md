@@ -63,7 +63,7 @@ html`<input ${ref(inputRef)}>`
 ```
 
 以下のセクションで各エクスプレッションの詳しい説明をします。
-テンプレートの構造のより詳しい説明は[Well-formed HTML](#Well-formed_HTML)と[Valid expression locations](#Valid_expression_locations)を見てください。
+テンプレートの構造のより詳しい説明は[Well-formed HTML](#Well-formed_HTML)と[有効なエクスプレッションの位置](#有効なエクスプレッションの位置)を見てください。
 
 ## Child expressions
 
@@ -413,21 +413,22 @@ Litはコメント内のエクスプレッションをLit token string(例: `lit
 詳しくは[Expressions and style elements](https://lit.dev/docs/components/styles/#style-element)を見てください。
 
 上記の無効なエクスプレッションは[Static expressions](#Static_expressions)を使用した場合、有効になります。
-ただし、それは非効率であるのでパフォーマンスが重要な場面で使用しないでください。
+ただし、それは非効率なのでパフォーマンスが重要な場面で使用しないでください。
 
 ## Static expressions
 
-Static expressions return special values that are interpolated into the template _before_ the template is processed as HTML by Lit.
-Because they become part of the template's static HTML,
-they can be placed anywhere in the template - even where expressions would normally be disallowed, such as in attribute and tag names.
+LitがテンプレートをHTMLとして処理する前に、Static expressionsはテンプレートに埋め込まれる特別な値を返します。
+それはテンプレートの静的なHTMLの一部になるので、
+タグ名や属性名のような普通は配置することができない位置にエクスプレッションを配置することができます。
 
-To use static expressions, you must import a special version of the `html` or `svg` template tags from Lit's `static-html` module:
+static expressionsを使うには、`static-html`モジュールから特別なバージョンの`html`もしくは`svg`をimportする必要があります。
 
 ```ts
 import {html, literal} from 'lit/static-html.js';
 ```
 
-The `static-html` module contains `html` and `svg` tag functions which support static expressions and should be used instead of the standard versions provided in the `lit` module. Use the `literal` tag function to create static expressions.
+The `static-html` module contains `html` and `svg` tag functions which support static expressions and should be used instead of the standard versions provided in the `lit` module.
+Use the `literal` tag function to create static expressions.
 
 You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on [Valid expression locations](#expression-locations) for details. For example, a `my-button` component might render a `<button>` tag, but a subclass might render an `<a>` tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.
 
