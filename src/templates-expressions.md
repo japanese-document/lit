@@ -434,7 +434,7 @@ static expressionは低頻度で変更されるテンプレートの箇所や通
 詳しくは[有効なエクスプレッションの位置](#有効なエクスプレッションの位置)を見てください。
 例えば、`my-button`コンポーネントでは`<button>`タグをレンダリングしますが、そのサブクラスではそこを`<a>`タグに置き換えたい場合です。
 このHTMLタグは変更されません。更に通常のエクスプレッションではタグ名の位置に配置することはできません。
-だから、これはstatic expressionに適したユースケースです。
+だから、これはstatic expressionsに適したユースケースです。
 
 ```ts
 import {LitElement} from 'lit';
@@ -464,9 +464,18 @@ class MyAnchor extends MyButton {
 }
 ```
 
-**Changing the value of static expressions is expensive.** Expressions using `literal` values should not change frequently, as they cause a new template to be re-parsed and each variation is held in memory.
+static expressionsの値を変更することは高いコストを生じさせます。
+その変更はテンプレートの再パースを引き起こし、変更したstatic expressionsの値ごとの結果をメモリーに保存するため、
+`literal`の値を使っているエクスプレッションを高頻度で変更するべきではありません。
 
-In the example above, if the template re-renders and `this.caption` or `this.active` change, Lit updates the template efficiently, only changing the affected expressions. However, if `this.tag` or `this.activeAttribute` change, since they are static values tagged with `literal`, an entirely new template is created; the update is inefficient since the DOM is completely re-rendered. In addition, changing `literal` values passed to expressions increases memory use since each unique template is cached in memory to improve re-render performance.
+In the example above,
+if the template re-renders and `this.caption` or `this.active` change, Lit updates the template efficiently,
+only changing the affected expressions.
+However, if `this.tag` or `this.activeAttribute` change,
+since they are static values tagged with `literal`, an entirely new template is created;
+the update is inefficient since the DOM is completely re-rendered.
+In addition, changing `literal` values passed to expressions increases memory use
+since each unique template is cached in memory to improve re-render performance.
 
 For these reasons, it's a good idea keep changes to expressions using `literal` to a minimum and avoid using reactive properties to change `literal` values, since reactive properties are intended to change.
 
