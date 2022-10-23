@@ -324,7 +324,7 @@ Litはコメント内のエクスプレッションをLit token string(例: <cod
 詳しくは<a class="Link" href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a>を見てください。
 例えば、<code>my-button</code>コンポーネントでは<code>&lt;button&gt;</code>タグをレンダリングしますが、そのサブクラスではそこを<code>&lt;a&gt;</code>タグに置き換えたい場合です。
 このHTMLタグは変更されません。更に通常のエクスプレッションではタグ名の位置に配置することはできません。
-だから、これはstatic expressionに適したユースケースです。</p>
+だから、これはstatic expressionsに適したユースケースです。</p>
 <pre><code class="language-ts">import {LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {html, literal} from 'lit/static-html.js';
@@ -349,8 +349,17 @@ class MyAnchor extends MyButton {
   tag = literal`a`;
 }
 </code></pre>
-<p><strong>Changing the value of static expressions is expensive.</strong> Expressions using <code>literal</code> values should not change frequently, as they cause a new template to be re-parsed and each variation is held in memory.</p>
-<p>In the example above, if the template re-renders and <code>this.caption</code> or <code>this.active</code> change, Lit updates the template efficiently, only changing the affected expressions. However, if <code>this.tag</code> or <code>this.activeAttribute</code> change, since they are static values tagged with <code>literal</code>, an entirely new template is created; the update is inefficient since the DOM is completely re-rendered. In addition, changing <code>literal</code> values passed to expressions increases memory use since each unique template is cached in memory to improve re-render performance.</p>
+<p>static expressionsの値を変更することは高いコストを生じさせます。
+その変更はテンプレートの再パースを引き起こし、変更したstatic expressionsの値ごとの結果をメモリーに保存するため、
+<code>literal</code>の値を使っているエクスプレッションを高頻度で変更するべきではありません。</p>
+<p>In the example above,
+if the template re-renders and <code>this.caption</code> or <code>this.active</code> change, Lit updates the template efficiently,
+only changing the affected expressions.
+However, if <code>this.tag</code> or <code>this.activeAttribute</code> change,
+since they are static values tagged with <code>literal</code>, an entirely new template is created;
+the update is inefficient since the DOM is completely re-rendered.
+In addition, changing <code>literal</code> values passed to expressions increases memory use
+since each unique template is cached in memory to improve re-render performance.</p>
 <p>For these reasons, it's a good idea keep changes to expressions using <code>literal</code> to a minimum and avoid using reactive properties to change <code>literal</code> values, since reactive properties are intended to change.</p>
 <h3 id="Template_structure"><a href="#Template_structure">Template structure</a></h3>
 <p>After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the <a class="Link" href="#well-formed-html">Well-formed HTML</a> section for more information.</p>
