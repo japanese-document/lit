@@ -417,7 +417,7 @@ Litはコメント内のエクスプレッションをLit token string(例: `lit
 
 ## Static expressions
 
-LitがテンプレートをHTMLとして処理する前に、Static expressionsはテンプレートに埋め込まれる特別な値を返します。
+LitがテンプレートをHTMLとして処理する前に、static expressionsはテンプレートに埋め込まれる特別な値を返します。
 それはテンプレートの静的なHTMLの一部になるので、
 タグ名や属性名のような普通は配置することができない位置にエクスプレッションを配置することができます。
 
@@ -427,10 +427,14 @@ static expressionsを使うには、`static-html`モジュールから特別な�
 import {html, literal} from 'lit/static-html.js';
 ```
 
-The `static-html` module contains `html` and `svg` tag functions which support static expressions and should be used instead of the standard versions provided in the `lit` module.
-Use the `literal` tag function to create static expressions.
+`static-html`モジュールはstatic expressionsをサポートする`html`関数と`svg`関数を提供します。それらは`lit`モジュールが提供する通常版の代わりに使います。
+`literal`タグ関数を使ってstatic expressionを作成します。
 
-You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on [Valid expression locations](#expression-locations) for details. For example, a `my-button` component might render a `<button>` tag, but a subclass might render an `<a>` tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.
+static expressionは低頻度で変更されるテンプレートの箇所や通常版ではできないテンプレートのカスタマイズに使います。
+詳しくは[有効なエクスプレッションの位置](#有効なエクスプレッションの位置)を見てください。
+例えば、`my-button`コンポーネントでは`<button>`タグをレンダリングしますが、そのサブクラスではそこを`<a>`タグに置き換えたい場合です。
+このHTMLタグは変更されません。更に通常のエクスプレッションではタグ名の位置に配置することはできません。
+だから、これはstatic expressionに適したユースケースです。
 
 ```ts
 import {LitElement} from 'lit';

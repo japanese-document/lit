@@ -312,15 +312,19 @@ Litはコメント内のエクスプレッションをLit token string(例: <cod
 <p>上記の無効なエクスプレッションは<a class="Link" href="#Static_expressions">Static expressions</a>を使用した場合、有効になります。
 ただし、それは非効率なのでパフォーマンスが重要な場面で使用しないでください。</p>
 <h2 id="Static_expressions"><a href="#Static_expressions">Static expressions</a></h2>
-<p>LitがテンプレートをHTMLとして処理する前に、Static expressionsはテンプレートに埋め込まれる特別な値を返します。
+<p>LitがテンプレートをHTMLとして処理する前に、static expressionsはテンプレートに埋め込まれる特別な値を返します。
 それはテンプレートの静的なHTMLの一部になるので、
 タグ名や属性名のような普通は配置することができない位置にエクスプレッションを配置することができます。</p>
 <p>static expressionsを使うには、<code>static-html</code>モジュールから特別なバージョンの<code>html</code>もしくは<code>svg</code>をimportする必要があります。</p>
 <pre><code class="language-ts">import {html, literal} from 'lit/static-html.js';
 </code></pre>
-<p>The <code>static-html</code> module contains <code>html</code> and <code>svg</code> tag functions which support static expressions and should be used instead of the standard versions provided in the <code>lit</code> module.
-Use the <code>literal</code> tag function to create static expressions.</p>
-<p>You can use static expressions for configuration options that are unlikely to change or for customizing parts of the template you cannot with normal expressions - see the section on <a class="Link" href="#expression-locations">Valid expression locations</a> for details. For example, a <code>my-button</code> component might render a <code>&lt;button&gt;</code> tag, but a subclass might render an <code>&lt;a&gt;</code> tag, instead. This is a good place to use a static expression because the setting does not change frequently and customizing an HTML tag cannot be done with a normal expression.</p>
+<p><code>static-html</code>モジュールはstatic expressionsをサポートする<code>html</code>関数と<code>svg</code>関数を提供します。それらは<code>lit</code>モジュールが提供する通常版の代わりに使います。
+<code>literal</code>タグ関数を使ってstatic expressionを作成します。</p>
+<p>static expressionは低頻度で変更されるテンプレートの箇所や通常版ではできないテンプレートのカスタマイズに使います。
+詳しくは<a class="Link" href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a>を見てください。
+例えば、<code>my-button</code>コンポーネントでは<code>&lt;button&gt;</code>タグをレンダリングしますが、そのサブクラスではそこを<code>&lt;a&gt;</code>タグに置き換えたい場合です。
+このHTMLタグは変更されません。更に通常のエクスプレッションではタグ名の位置に配置することはできません。
+だから、これはstatic expressionに適したユースケースです。</p>
 <pre><code class="language-ts">import {LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {html, literal} from 'lit/static-html.js';
