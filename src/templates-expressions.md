@@ -468,14 +468,16 @@ static expressionsの値を変更することは高いコストを生じさせ�
 その変更はテンプレートの再パースを引き起こし、変更したstatic expressionsの値ごとの結果をメモリーに保存するため、
 `literal`の値を使っているエクスプレッションを高頻度で変更するべきではありません。
 
-In the example above,
-if the template re-renders and `this.caption` or `this.active` change, Lit updates the template efficiently,
-only changing the affected expressions.
-However, if `this.tag` or `this.activeAttribute` change,
-since they are static values tagged with `literal`, an entirely new template is created;
-the update is inefficient since the DOM is completely re-rendered.
-In addition, changing `literal` values passed to expressions increases memory use
-since each unique template is cached in memory to improve re-render performance.
+上記の例では
+`this.caption`もしくは`this.active`が変更された場合は
+影響を受けるエクスプレッションを変更するのでテンプレートを効率的に更新することができます。
+(テンプレートに存在するエクスプレッションの変更と見なされる)
+しかし、`this.tag`もしくは`this.activeAttribute`が変更された場合、
+それらは`literal`が付いているのでテンプレート内で静的な値と見なされます。
+だから、テンプレート全体が別の新しいテンプレートに置き換わったと見なされます。
+それでDOM全体が再レンダリングされるので、この更新は非効率です。
+それに加えて、エクスプレッションに渡される`literal`の値を変更することはメモリーの使用量を増加させます。
+再レンダリングのパフォーマンスを改善するためにテンプレートの構造ごとにそれをメモリーにキャッシュします
 
 For these reasons, it's a good idea keep changes to expressions using `literal` to a minimum and avoid using reactive properties to change `literal` values, since reactive properties are intended to change.
 
