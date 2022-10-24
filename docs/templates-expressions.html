@@ -361,10 +361,12 @@ class MyAnchor extends MyButton {
 だから、テンプレート全体が別の新しいテンプレートに置き換わったと見なされます。
 それでDOM全体が再レンダリングされるので、この更新は非効率です。
 それに加えて、エクスプレッションに渡される<code>literal</code>の値を変更することはメモリーの使用量を増加させます。
-再レンダリングのパフォーマンスを改善するためにテンプレートの構造ごとにそれをメモリーにキャッシュします</p>
-<p>For these reasons, it's a good idea keep changes to expressions using <code>literal</code> to a minimum and avoid using reactive properties to change <code>literal</code> values, since reactive properties are intended to change.</p>
+再レンダリングのパフォーマンスを改善するためにテンプレートの構造ごとにそれをメモリーにキャッシュします。</p>
+<p>これらの理由により、
+なるべく<code>literal</code>を使わないことを推奨します。
+そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに<code>literal</code>が付いた値を保存しないことを推奨します。</p>
 <h3 id="Template_structure"><a href="#Template_structure">Template structure</a></h3>
-<p>After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the <a class="Link" href="#well-formed-html">Well-formed HTML</a> section for more information.</p>
+<p>After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the <a class="Link" href="#Well-formed_HTML">Well-formed HTML</a> section for more information.</p>
 <h3 id="Non-literal_statics"><a href="#Non-literal_statics">Non-literal statics</a></h3>
 <p>In rare cases, you may need to interpolate static HTML into a template that is not defined in your script, and thus cannot be tagged with the <code>literal</code> function. For these cases, the <code>unsafeStatic()</code> function can be used to create static HTML based on strings from non-script sources.</p>
 <pre><code class="language-ts">import {html, unsafeStatic} from 'lit/static-html.js';

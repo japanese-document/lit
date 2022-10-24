@@ -477,13 +477,15 @@ static expressionsの値を変更することは高いコストを生じさせ�
 だから、テンプレート全体が別の新しいテンプレートに置き換わったと見なされます。
 それでDOM全体が再レンダリングされるので、この更新は非効率です。
 それに加えて、エクスプレッションに渡される`literal`の値を変更することはメモリーの使用量を増加させます。
-再レンダリングのパフォーマンスを改善するためにテンプレートの構造ごとにそれをメモリーにキャッシュします
+再レンダリングのパフォーマンスを改善するためにテンプレートの構造ごとにそれをメモリーにキャッシュします。
 
-For these reasons, it's a good idea keep changes to expressions using `literal` to a minimum and avoid using reactive properties to change `literal` values, since reactive properties are intended to change.
+これらの理由により、
+なるべく`literal`を使わないことを推奨します。
+そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに`literal`が付いた値を保存しないことを推奨します。
 
 ### Template structure
 
-After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the [Well-formed HTML](#well-formed-html) section for more information.
+After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the [Well-formed HTML](#Well-formed_HTML) section for more information.
 
 ### Non-literal statics
 
