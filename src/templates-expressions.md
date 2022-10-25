@@ -497,12 +497,7 @@ In rare cases, you may need to interpolate static HTML into a template that is n
 ```ts
 import {html, unsafeStatic} from 'lit/static-html.js';
 ```
-
-<div class="alert alert-warning">
-
 **Only for trusted content.** Note the use of _unsafe_ in `unsafeStatic()`. The string passed to `unsafeStatic()` must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
-
-</div>
 
 ```ts
 @customElement('my-button')

@@ -374,11 +374,7 @@ otherwise the dynamic expressions in the template might not function properly.
 <p>In rare cases, you may need to interpolate static HTML into a template that is not defined in your script, and thus cannot be tagged with the <code>literal</code> function. For these cases, the <code>unsafeStatic()</code> function can be used to create static HTML based on strings from non-script sources.</p>
 <pre><code class="language-ts">import {html, unsafeStatic} from 'lit/static-html.js';
 </code></pre>
-<div class="alert alert-warning">
-
 <p><strong>Only for trusted content.</strong> Note the use of <em>unsafe</em> in <code>unsafeStatic()</code>. The string passed to <code>unsafeStatic()</code> must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
-</div>
-
 <pre><code class="language-ts">@customElement('my-button')
 class MyButton extends LitElement {
   @property() caption = 'Hello static';
