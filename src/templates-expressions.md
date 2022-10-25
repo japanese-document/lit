@@ -483,9 +483,12 @@ static expressionsの値を変更することは高いコストを生じさせ�
 なるべく`literal`を使わないことを推奨します。
 そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに`literal`が付いた値を保存しないことを推奨します。
 
-### Template structure
+### テンプレートの構造
 
-After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the [Well-formed HTML](#Well-formed_HTML) section for more information.
+After static values have been interpolated,
+the template must be well-formed like normal Lit templates,
+otherwise the dynamic expressions in the template might not function properly.
+詳しくは[Well-formed HTML](#Well-formed_HTML)を見てください。
 
 ### Non-literal statics
 
@@ -494,12 +497,7 @@ In rare cases, you may need to interpolate static HTML into a template that is n
 ```ts
 import {html, unsafeStatic} from 'lit/static-html.js';
 ```
-
-<div class="alert alert-warning">
-
 **Only for trusted content.** Note the use of _unsafe_ in `unsafeStatic()`. The string passed to `unsafeStatic()` must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
-
-</div>
 
 ```ts
 @customElement('my-button')
