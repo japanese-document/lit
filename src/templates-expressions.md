@@ -483,9 +483,12 @@ static expressionsの値を変更することは高いコストを生じさせ�
 なるべく`literal`を使わないことを推奨します。
 そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに`literal`が付いた値を保存しないことを推奨します。
 
-### Template structure
+### テンプレートの構造
 
-After static values have been interpolated, the template must be well-formed like normal Lit templates, otherwise the dynamic expressions in the template might not function properly. See the [Well-formed HTML](#Well-formed_HTML) section for more information.
+After static values have been interpolated,
+the template must be well-formed like normal Lit templates,
+otherwise the dynamic expressions in the template might not function properly.
+詳しくは[Well-formed HTML](#Well-formed_HTML)を見てください。
 
 ### Non-literal statics
 
