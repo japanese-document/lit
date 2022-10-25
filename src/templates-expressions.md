@@ -485,9 +485,8 @@ static expressionsの値を変更することは高いコストを生じさせ�
 
 ### テンプレートの構造
 
-After static values have been interpolated,
-the template must be well-formed like normal Lit templates,
-otherwise the dynamic expressions in the template might not function properly.
+`literal`の値が埋め込まれた後のテンプレートは普通のLitテンプレートと同じようにWell-formed_HTMLである必要があります。
+そうしないと、テンプレート内の動的なエクスプレッションが適切に機能しない可能性があります。
 詳しくは[Well-formed HTML](#Well-formed_HTML)を見てください。
 
 ### Non-literal statics

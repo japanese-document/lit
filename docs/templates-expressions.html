@@ -366,9 +366,8 @@ class MyAnchor extends MyButton {
 なるべく<code>literal</code>を使わないことを推奨します。
 そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに<code>literal</code>が付いた値を保存しないことを推奨します。</p>
 <h3 id="テンプレートの構造"><a href="#テンプレートの構造">テンプレートの構造</a></h3>
-<p>After static values have been interpolated,
-the template must be well-formed like normal Lit templates,
-otherwise the dynamic expressions in the template might not function properly.
+<p><code>literal</code>の値が埋め込まれた後のテンプレートは普通のLitテンプレートと同じようにWell-formed_HTMLである必要があります。
+そうしないと、テンプレート内の動的なエクスプレッションが適切に機能しない可能性があります。
 詳しくは<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>を見てください。</p>
 <h3 id="Non-literal_statics"><a href="#Non-literal_statics">Non-literal statics</a></h3>
 <p>In rare cases, you may need to interpolate static HTML into a template that is not defined in your script, and thus cannot be tagged with the <code>literal</code> function. For these cases, the <code>unsafeStatic()</code> function can be used to create static HTML based on strings from non-script sources.</p>
