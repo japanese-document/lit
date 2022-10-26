@@ -491,12 +491,18 @@ static expressionsの値を変更することは高いコストを生じさせ�
 
 ### Non-literal statics
 
-In rare cases, you may need to interpolate static HTML into a template that is not defined in your script, and thus cannot be tagged with the `literal` function. For these cases, the `unsafeStatic()` function can be used to create static HTML based on strings from non-script sources.
+稀に、動的な値を静的なHTMLとしてテンプレートに埋め込みたい場合があります。その場合は`literal`を使うことができません。
+代わりに`unsafeStatic()`ディレクティブを使います。
 
 ```ts
 import {html, unsafeStatic} from 'lit/static-html.js';
 ```
-**Only for trusted content.** Note the use of _unsafe_ in `unsafeStatic()`. The string passed to `unsafeStatic()` must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
+信用できるコンテンツのみ`unsafeStatic()`に渡します。
+`unsafeStatic()`の`unsafe`という単語に注目してください。
+サニタイズなしに直接HTMLとして解釈されるので
+`unsafeStatic()`に渡される文字列に信頼できない文字列を渡してはいけません。
+信頼できない文字列の例はクエリーパラメータやユーザの入力から得た文字列です。
+このディレクティブでレンダリングされた信頼できない文字列によって[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)が引き起こされる可能性があります。
 
 ```ts
 @customElement('my-button')
