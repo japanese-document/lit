@@ -370,10 +370,16 @@ class MyAnchor extends MyButton {
 そうしないと、テンプレート内の動的なエクスプレッションが適切に機能しない可能性があります。
 詳しくは<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>を見てください。</p>
 <h3 id="Non-literal_statics"><a href="#Non-literal_statics">Non-literal statics</a></h3>
-<p>In rare cases, you may need to interpolate static HTML into a template that is not defined in your script, and thus cannot be tagged with the <code>literal</code> function. For these cases, the <code>unsafeStatic()</code> function can be used to create static HTML based on strings from non-script sources.</p>
+<p>稀に、動的な値を静的なHTMLとしてテンプレートに埋め込みたい場合があります。その場合は<code>literal</code>を使うことができません。
+代わりに<code>unsafeStatic()</code>ディレクティブを使います。</p>
 <pre><code class="language-ts">import {html, unsafeStatic} from 'lit/static-html.js';
 </code></pre>
-<p><strong>Only for trusted content.</strong> Note the use of <em>unsafe</em> in <code>unsafeStatic()</code>. The string passed to <code>unsafeStatic()</code> must be developer-controlled and not include untrusted content, because it will be parsed directly as HTML with no sanitization. Examples of untrusted content include query string parameters and values from user inputs. Untrusted content rendered with this directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
+<p>信用できるコンテンツのみ<code>unsafeStatic()</code>に渡します。
+<code>unsafeStatic()</code>の<code>unsafe</code>という単語に注目してください。
+サニタイズなしに直接HTMLとして解釈されるので
+<code>unsafeStatic()</code>に渡される文字列に信頼できない文字列を渡してはいけません。
+信頼できない文字列の例はクエリーパラメータやユーザの入力から得た文字列です。
+このディレクティブでレンダリングされた信頼できない文字列によって<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>が引き起こされる可能性があります。</p>
 <pre><code class="language-ts">@customElement('my-button')
 class MyButton extends LitElement {
   @property() caption = 'Hello static';
