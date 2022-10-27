@@ -497,7 +497,7 @@ static expressionsの値を変更することは高いコストを生じさせ�
 ```ts
 import {html, unsafeStatic} from 'lit/static-html.js';
 ```
-信用できるコンテンツのみ`unsafeStatic()`に渡します。
+信頼できるコンテンツのみ`unsafeStatic()`に渡します。
 `unsafeStatic()`の`unsafe`という単語に注目してください。
 サニタイズなしに直接HTMLとして解釈されるので
 `unsafeStatic()`に渡される文字列に信頼できない文字列を渡してはいけません。
@@ -511,7 +511,7 @@ class MyButton extends LitElement {
   @property({type: Boolean}) active = false;
 
   render() {
-    // These strings MUST be trusted, otherwise this is an XSS vulnerability
+    // これらは信頼できる文字列でなければならない、そうでなければXSSの脆弱性があります。
     const tag = getTagName();
     const activeAttribute = getActiveAttribute();
     return html`
@@ -522,7 +522,8 @@ class MyButton extends LitElement {
 }
 ```
 
-Note that the behavior of using `unsafeStatic` carries the same caveats as `literal`: because changing values causes a new template to be parsed and cached in memory, they should not change frequently.
+`unsafeStatic`を使う際は`literal`と同じ注意事項があります。
+値の変更はテンプレートのパースとメモリーへのキャッシュを引き起こすので、頻繁に変更するべきではありません。
 
 ---
 
