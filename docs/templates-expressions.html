@@ -374,7 +374,7 @@ class MyAnchor extends MyButton {
 代わりに<code>unsafeStatic()</code>ディレクティブを使います。</p>
 <pre><code class="language-ts">import {html, unsafeStatic} from 'lit/static-html.js';
 </code></pre>
-<p>信用できるコンテンツのみ<code>unsafeStatic()</code>に渡します。
+<p>信頼できるコンテンツのみ<code>unsafeStatic()</code>に渡します。
 <code>unsafeStatic()</code>の<code>unsafe</code>という単語に注目してください。
 サニタイズなしに直接HTMLとして解釈されるので
 <code>unsafeStatic()</code>に渡される文字列に信頼できない文字列を渡してはいけません。
@@ -386,7 +386,7 @@ class MyButton extends LitElement {
   @property({type: Boolean}) active = false;
 
   render() {
-    // These strings MUST be trusted, otherwise this is an XSS vulnerability
+    // これらは信頼できる文字列でなければならない、そうでなければXSSの脆弱性があります。
     const tag = getTagName();
     const activeAttribute = getActiveAttribute();
     return html`
@@ -396,7 +396,8 @@ class MyButton extends LitElement {
   }
 }
 </code></pre>
-<p>Note that the behavior of using <code>unsafeStatic</code> carries the same caveats as <code>literal</code>: because changing values causes a new template to be parsed and cached in memory, they should not change frequently.</p>
+<p><code>unsafeStatic</code>を使う際は<code>literal</code>と同じ注意事項があります。
+値の変更はテンプレートのパースとメモリーへのキャッシュを引き起こすので、頻繁に変更するべきではありません。</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
