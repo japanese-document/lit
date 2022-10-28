@@ -162,7 +162,7 @@ Litのデフォルトのコンバータはその文字列の値を指定され�
 セットされていない場合、デフォルトコンバータは`String`に変換します。
 詳しくは[デフォルトコンバータ](#デフォルトコンバータ)を見てください。
 
-When using TypeScript, this field should generally match the TypeScript type declared for the field.
+TypeScriptを使う場合は、このオプションはフィールドの型と一致させる必要があります。
 However, the `type` option is used by the Lit's _runtime_ for string serialization/deserialization,
 and should not be confused with a _type-checking_ mechanism.
 
