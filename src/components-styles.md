@@ -1,6 +1,6 @@
 { "header": {"name": "コンポーネント", "order": 0}, "order": 3 }
 ---
-# レンダリング
+# スタイル
 
 コンポーネントのテンプレートはshadow rootにレンダリングされます。
 The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.
