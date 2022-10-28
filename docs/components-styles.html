@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/components-styles.html" />
+    <meta property="og:title" content="レンダリング - Lit" />
+    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful n" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful n" />
+    <title>レンダリング - Lit</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="side"></div>
+    <main class="main markdown-body">
+      <h1 id="レンダリング"><a href="#レンダリング">レンダリング</a></h1>
+<p>コンポーネントのテンプレートはshadow rootにレンダリングされます。
+The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.</p>
+<p>Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful not to accidentally style elements outside of your component, either ancestors or children of your component. This might involve writing long, cumbersome to use class names. By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.</p>
+<h2 id="Adding_styles_to_your_component_{#add-styles}"><a href="#Adding_styles_to_your_component_{#add-styles}">Adding styles to your component {#add-styles}</a></h2>
+<p>You define scoped styles in the static <code>styles</code> class field using the tagged template literal <code>css</code> function. Defining styles this way results in the most optimal performance:</p>
+<p>{% playground-example "docs/components/style/basic" "my-element.ts" %}</p>
+<p>The styles you add to your component are <em>scoped</em> using shadow DOM. For a quick overview, see <a class="Link" href="#shadow-dom">Shadow DOM</a>.</p>
+<p>The value of the static <code>styles</code> class field can be:</p>
+<ul>
+<li><p>A single tagged template literal.</p>
+<pre><code class="language-js">static styles = css`...`;
+</code></pre>
+</li>
+<li><p>An array of tagged template literals.</p>
+<pre><code class="language-js">static styles = [ css`...`, css`...`];
+</code></pre>
+</li>
+</ul>
+<p>The static <code>styles</code> class field is <em>almost always</em> the best way to add styles to your component, but there are some use cases you can't handle this way—for example, customizing styles per instance. For alternate ways to add styles, see <a class="Link" href="#styles-in-the-template">Defining scoped styles in the template</a>.</p>
+<h3 id="Using_expressions_in_static_styles_{#expressions}"><a href="#Using_expressions_in_static_styles_{#expressions}">Using expressions in static styles {#expressions}</a></h3>
+<p>Static styles apply to all instances of a component. Any expressions in CSS are evaluated <strong>once</strong>, then reused for all instances.</p>
+<p>For tree-based or per-instance style customization, use CSS custom properties to allow elements to be <a class="Link" href="#theming">themed</a>.</p>
+<p>To prevent Lit components from evaluating potentially malicious code, the <code>css</code> tag only allows nested expressions that are themselves <code>css</code> tagged strings or numbers.</p>
+<pre><code class="language-js">const mainColor = css`red`;
+...
+static styles = css`
+  div { color: ${mainColor} }
+`;
+</code></pre>
+<p>This restriction exists to protect applications from security vulnerabilities whereby malicious styles, or even malicious code, can be injected from untrusted sources such as URL parameters or database values.</p>
+<p>If you must use an expression in a <code>css</code> literal that is not itself a <code>css</code> literal, <strong>and</strong> you are confident that the expression is from a fully trusted source such as a constant defined in your own code, then you can wrap the expression with the <code>unsafeCSS</code> function:</p>
+<pre><code class="language-js">const mainColor = 'red';
+...
+static styles = css`
+  div { color: ${unsafeCSS(mainColor)} }
+`;
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>Only use the <code>unsafeCSS</code> tag with trusted input.</strong> Injecting unsanitized CSS is a security risk. For example, malicious CSS can "phone home" by adding an image URL that points to a third-party server.</p>
+</div>
+
+<h3 id="Inheriting_styles_from_a_superclass"><a href="#Inheriting_styles_from_a_superclass">Inheriting styles from a superclass</a></h3>
+<p>Using an array of tagged template literals, a component can inherit the styles from a superclass, and add its own styles:</p>
+<p>{% playground-ide "docs/components/style/superstyles" %}</p>
+<p>You can also use <code>super.styles</code> to reference the superclass's styles property in JavaScript. If you're using TypeScript, we recommend avoiding <code>super.styles</code> since the compiler doesn't always convert it correctly. Explicitly referencing the superclass, as shown in the example, avoids this issue.</p>
+<p>When writing components intended to be subclassed in TypeScript, the <code>static styles</code> field should be explicitly typed as <code>CSSResultGroup</code> to allow flexibility for users to override <code>styles</code> with an array:</p>
+<pre><code class="language-ts">// Prevent typescript from narrowing the type of `styles` to `CSSResult`
+// so that subclassers can assign e.g. `[SuperElement.styles, css`...`]`;
+static styles: CSSResultGroup = css`...`;
+</code></pre>
+<h3 id="Sharing_styles"><a href="#Sharing_styles">Sharing styles</a></h3>
+<p>You can share styles between components by creating a module that exports tagged styles:</p>
+<pre><code class="language-js">export const buttonStyles = css`
+  .blue-button {
+    color: white;
+    background-color: blue;
+  }
+  .blue-button:disabled {
+    background-color: grey;
+  }`;
+</code></pre>
+<p>Your element can then import the styles and add them to its static <code>styles</code> class field:</p>
+<pre><code class="language-js">import { buttonStyles } from './button-styles.js';
+
+class MyElement extends LitElement {
+  static styles = [
+    buttonStyles,
+    css`
+      :host { display: block;
+        border: 1px solid black;
+      }`
+  ];
+}
+</code></pre>
+<h3 id="Using_unicode_escapes_in_styles"><a href="#Using_unicode_escapes_in_styles">Using unicode escapes in styles</a></h3>
+<p>CSS's unicode escape sequence is a backslash followed by four or six hex digits: for example, <code>\2022</code> for a bullet character. This similar to the format of JavaScript's deprecated <em>octal</em> escape sequences, so using these sequences in a <code>css</code> tagged template literal causes an error.</p>
+<p>There are two work-arounds for adding a unicode escape to your styles:</p>
+<ul>
+<li>Add a second backslash (for example, <code>\\2022</code>).</li>
+<li>Use the JavaScript escape sequence, starting with <code>\u</code> (for example, <code>\u2022</code>).</li>
+</ul>
+<pre><code class="language-js">static styles = css`
+  div::before {
+    content: '\u2022';
+  }
+</code></pre>
+<h2 id="Shadow_DOM_styling_overview_{#shadow-dom}"><a href="#Shadow_DOM_styling_overview_{#shadow-dom}">Shadow DOM styling overview {#shadow-dom}</a></h2>
+<p>This section gives a brief overview of shadow DOM styling.</p>
+<p>Styles you add to a component can affect:</p>
+<ul>
+<li><a class="Link" href="#shadowroot">The shadow tree</a> (your component's rendered template).</li>
+<li><a class="Link" href="#host">The component itself</a>.</li>
+<li><a class="Link" href="#slotted">The component's children</a>.</li>
+</ul>
+<h3 id="Styling_the_shadow_tree_{#shadowroot}"><a href="#Styling_the_shadow_tree_{#shadowroot}">Styling the shadow tree {#shadowroot}</a></h3>
+<p>Lit templates are rendered into a shadow tree by default. Styles scoped to an element's shadow tree don't affect the main document or other shadow trees. Similarly, with the exception of <a class="Link" href="#inheritance">inherited CSS properties</a>, document-level styles don't affect the contents of a shadow tree.</p>
+<p>When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
+<h3 id="Styling_the_component_itself_{#host}"><a href="#Styling_the_component_itself_{#host}">Styling the component itself {#host}</a></h3>
+<p>You can style the component itself using special <code>:host</code> selectors. (The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
+<p>To create default styles for the host element, use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
+<ul>
+<li><code>:host</code> selects the host element.</li>
+<li><code>:host(<var>selector</var>)</code> selects the host element, but only if the host element matches <em>selector</em>.</li>
+</ul>
+<p>{% playground-example "docs/components/style/host" "my-element.ts" %}</p>
+<p>Note that the host element can be affected by styles from outside the shadow tree, as well, so you should consider the styles you set in <code>:host</code> and <code>:host()</code> rules as <em>default styles</em> that can be overridden by the user. For example:</p>
+<pre><code class="language-css">my-element {
+  display: inline-block;
+}
+</code></pre>
+<h3 id="Styling_the_component's_children_{#slotted}"><a href="#Styling_the_component's_children_{#slotted}">Styling the component's children {#slotted}</a></h3>
+<p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children). To render children, your template needs to include one or more <code>&lt;slot&gt;</code> elements, as described in <a class="Link" href="/docs/components/shadow-dom/#slots">Render children with the slot element</a>.</p>
+<p>The <code>&lt;slot&gt;</code> element acts as a placeholder in a shadow tree where the host element's children are displayed.</p>
+<p>Use the <code>::slotted()</code> CSS pseudo-element to select children that are included in your template via <code>&lt;slot&gt;</code>s.</p>
+<ul>
+<li><code>::slotted(*)</code> matches all slotted elements.</li>
+<li><code>::slotted(p)</code> matches slotted paragraphs.</li>
+<li><code>p ::slotted(*)</code> matches slotted elements where the <code>&lt;slot&gt;</code> is a descendant of a paragraph element.</li>
+</ul>
+<p>{% playground-example "docs/components/style/slottedselector" "my-element.ts" %}</p>
+<p>Note that <strong>only direct slotted children</strong> can be styled with <code>::slotted()</code>.</p>
+<pre><code class="language-html">&lt;my-element&gt;
+  &lt;div&gt;Stylable with ::slotted()&lt;/div&gt;
+&lt;/my-element&gt;
+
+&lt;my-element&gt;
+  &lt;div&gt;&lt;p&gt;Not stylable with ::slotted()&lt;/p&gt;&lt;/div&gt;
+&lt;/my-element&gt;
+</code></pre>
+<p>Also, children can be styled from outside the shadow tree, so you should regard your <code>::slotted()</code> styles as default styles that can be overridden.</p>
+<pre><code class="language-css">my-element &gt; div {
+  /* Outside style targetting a slotted child can override ::slotted() styles */
+}
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>Limitations in the ShadyCSS polyfill around slotted content.</strong> See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for details on how to use the <code>::slotted()</code> syntax in a polyfill-friendly way.</p>
+</div>
+
+<h2 id="Defining_scoped_styles_in_the_template_{#styles-in-the-template}"><a href="#Defining_scoped_styles_in_the_template_{#styles-in-the-template}">Defining scoped styles in the template {#styles-in-the-template}</a></h2>
+<p>We recommend using the <a class="Link" href="#add-styles">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
+<ul>
+<li>Add styles using a <a class="Link" href="#style-element"><code>&lt;style&gt;</code> element</a>.</li>
+<li>Add styles using an <a class="Link" href="#external-stylesheet">external style sheet</a> (not recommended).</li>
+</ul>
+<p>Each of these techniques has its own set of advantages and drawbacks.</p>
+<h3 id="In_a_style_element_{#style-element}"><a href="#In_a_style_element_{#style-element}">In a style element {#style-element}</a></h3>
+<p>Typically, styles are placed in the <a class="Link" href="#add-styles">static <code>styles</code> class field</a>; however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>. Sometimes, you might need to customize styles <strong>per instance</strong>. For this, we recommend using CSS properties to create <a class="Link" href="#theming">themable elements</a>. Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template. These are updated per instance.</p>
+<pre><code class="language-js">render() {
+  return html`
+    &lt;style&gt;
+      /* updated per instance */
+    &lt;/style&gt;
+    &lt;div&gt;template content&lt;/div&gt;
+  `;
+}
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>Limitations in the ShadyCSS polyfill around per instance styling.</strong> Per instance styling is not supported using the ShadyCSS polyfill. See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for details.</p>
+</div>
+
+<h4 id="Expressions_and_style_elements"><a href="#Expressions_and_style_elements">Expressions and style elements</a></h4>
+<p>Using expressions inside style elements has some important limitations and performance issues.</p>
+<pre><code class="language-js">render() {
+  return html`
+    &lt;style&gt;
+      :host {
+        /* Warning: this approach has limitations &amp; performance issues! */
+        color: ${myColor}
+      }
+    &lt;/style&gt;
+    &lt;div&gt;template content&lt;/div&gt;
+  `;
+}
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>Limitations in the ShadyCSS polyfill around expressions.</strong> Expressions in <code>&lt;style&gt;</code> elements won't update per instance in ShadyCSS, due to limitations of the ShadyCSS polyfill. In addition, <code>&lt;style&gt;</code> nodes may not be passed as expression values when using the ShadyCSS polyfill. See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for more information.</p>
+</div>
+
+<p>Evaluating an expression inside a <code>&lt;style&gt;</code> element is extremely inefficient. When any text inside a <code>&lt;style&gt;</code> element changes, the browser must re-parse the whole <code>&lt;style&gt;</code> element, resulting in unnecessary work.</p>
+<p>To mitigate this cost, separate styles that require per-instance evaluation from those that don't.</p>
+<pre><code class="language-js">  static styles = css`/* ... */`;
+  render() {
+    const redStyle = html`&lt;style&gt; :host { color: red; } &lt;/style&gt;`;
+    return html`${this.red ? redStyle : ''}`
+</code></pre>
+<h3 id="Import_an_external_stylesheet_(not_recommended)_{#external-stylesheet}"><a href="#Import_an_external_stylesheet_(not_recommended)_{#external-stylesheet}">Import an external stylesheet (not recommended) {#external-stylesheet}</a></h3>
+<p>While you can include an external style sheet in your template with a <code>&lt;link&gt;</code>, we do not recommend this approach. Instead, styles should be placed in the <a class="Link" href="#add-styles">static <code>styles</code> class field</a>.</p>
+<div class="alert alert-info">
+
+<p><strong>External stylesheet caveats.</strong></p>
+<ul>
+<li>The <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS polyfill</a> doesn't support external style sheets.</li>
+<li>External styles can cause a flash-of-unstyled-content (FOUC) while they load.</li>
+<li>The URL in the <code>href</code> attribute is relative to the <strong>main document</strong>. This is okay if you're building an app and your asset URLs are well-known, but avoid using external style sheets when building a reusable element.</li>
+</ul>
+</div>
+
+<h2 id="Dynamic_classes_and_styles"><a href="#Dynamic_classes_and_styles">Dynamic classes and styles</a></h2>
+<p>One way to make styles dynamic is to add expressions to the <code>class</code> or <code>style</code> attributes in your template.</p>
+<p>Lit offers two directives, <code>classMap</code> and <code>styleMap</code>, to conveniently apply classes and styles in HTML templates.</p>
+<p>For more information on these and other directives, see the documentation on <a class="Link" href="/docs/templates/directives/">built-in directives</a>.</p>
+<p>To use <code>styleMap</code> and/or <code>classMap</code>:</p>
+<ol>
+<li><p>Import <code>classMap</code> and/or <code>styleMap</code>:</p>
+<pre><code class="language-js">import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
+</code></pre>
+</li>
+<li><p>Use <code>classMap</code> and/or <code>styleMap</code> in your element template:</p>
+</li>
+</ol>
+<p>{% playground-example "docs/components/style/maps" "my-element.ts" %}</p>
+<p>See <a class="Link" href="/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
+<h2 id="Theming_{#theming}"><a href="#Theming_{#theming}">Theming {#theming}</a></h2>
+<p>By using <a class="Link" href="#inheritance">CSS inheritance</a> and <a class="Link" href="#customprops">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
+<p>{% playground-example "docs/components/style/theming" "my-element.ts" %}</p>
+<h3 id="CSS_inheritance_{#inheritance}"><a href="#CSS_inheritance_{#inheritance}">CSS inheritance {#inheritance}</a></h3>
+<p>CSS inheritance lets parent and host elements propagate certain CSS properties to their descendants.</p>
+<p>Not all CSS properties inherit. Inherited CSS properties include:</p>
+<ul>
+<li><code>color</code></li>
+<li><code>font-family</code> and other <code>font-*</code> properties</li>
+<li>All CSS custom properties (<code>--*</code>)</li>
+</ul>
+<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">CSS Inheritance on MDN</a> for more information.</p>
+<p>You can use CSS inheritance to set styles on an ancestor element that are inherited by its descendants:</p>
+<pre><code class="language-html">&lt;style&gt;
+html {
+  color: green;
+}
+&lt;/style&gt;
+&lt;my-element&gt;
+  #shadow-root
+    Will be green
+&lt;/my-element&gt;
+</code></pre>
+<h3 id="CSS_custom_properties_{#customprops}"><a href="#CSS_custom_properties_{#customprops}">CSS custom properties {#customprops}</a></h3>
+<p>All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.</p>
+<p>The following component sets its background color to a CSS variable. The CSS variable uses the value of <code>--my-background</code> if it's been set by a selector matching an ancestor in the DOM tree, and otherwise defaults to <code>yellow</code>:</p>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static styles = css`
+    :host {
+      background-color: var(--my-background, yellow);
+    }
+  `;
+  render() {
+    return html`&lt;p&gt;Hello world&lt;/p&gt;`;
+  }
+}
+</code></pre>
+<p>Users of this component can set the value of <code>--my-background</code>, using the <code>my-element</code> tag as a CSS selector:</p>
+<pre><code class="language-html">&lt;style&gt;
+  my-element {
+    --my-background: rgb(67, 156, 144);
+  }
+&lt;/style&gt;
+&lt;my-element&gt;&lt;/my-element&gt;
+</code></pre>
+<p><code>--my-background</code> is configurable per instance of <code>my-element</code>:</p>
+<pre><code class="language-html">&lt;style&gt;
+  my-element {
+    --my-background: rgb(67, 156, 144);
+  }
+  my-element.stuff {
+    --my-background: #111111;
+  }
+&lt;/style&gt;
+&lt;my-element&gt;&lt;/my-element&gt;
+&lt;my-element class="stuff"&gt;&lt;/my-element&gt;
+</code></pre>
+<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties on MDN</a> for more information.</p>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="side"></div>
+    <div class="side"></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+    <div class="side"></div>
+  </body>
+</html>
