@@ -163,10 +163,10 @@ Litのデフォルトのコンバータはその文字列の値を指定され�
 詳しくは[デフォルトコンバータ](#デフォルトコンバータ)を見てください。
 
 TypeScriptを使う場合は、このオプションはフィールドの型と一致させる必要があります。
-However, the `type` option is used by the Lit's _runtime_ for string serialization/deserialization,
-and should not be confused with a _type-checking_ mechanism.
+`type`オプションはLitのランタイムではシリアライズとデシリアライズに使われます。
+TypeScriptの型チェックと混同しないように注意してください。
 
-Omitting the options object or specifying an empty options object is equivalent to specifying the default value for all options.
+オプションオブジェクトを指定しないもしくは空のオプションオブジェクトを指定することは、すべてのオプションにデフォルトの値を指定することと等価です。
 
 ## インターナルリアクティブステート
 
