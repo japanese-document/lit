@@ -2,10 +2,16 @@
 ---
 # スタイル
 
-コンポーネントのテンプレートはshadow rootにレンダリングされます。
-The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.
+コンポーネントのテンプレートは[shadow root](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot)にレンダリングされます。
+コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。
+つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。
 
-Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful not to accidentally style elements outside of your component, either ancestors or children of your component. This might involve writing long, cumbersome to use class names. By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.
+[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)によってスタイルのカプセル化がされます。
+If Lit did not use Shadow DOM,
+you would have to be extremely careful not to accidentally style elements outside of your component,
+either ancestors or children of your component.
+This might involve writing long, cumbersome to use class names.
+By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.
 
 ## Adding styles to your component {#add-styles}
 
@@ -291,7 +297,7 @@ One way to make styles dynamic is to add expressions to the `class` or `style` a
 
 Lit offers two directives, `classMap` and `styleMap`, to conveniently apply classes and styles in HTML templates.
 
-For more information on these and other directives, see the documentation on [built-in directives](/docs/templates/directives/).
+For more information on these and other directives, see the documentation on [built-in directives](https://lit.dev/docs/templates/directives/).
 
 To use `styleMap` and/or `classMap`:
 
@@ -306,7 +312,7 @@ To use `styleMap` and/or `classMap`:
 
 {% playground-example "docs/components/style/maps" "my-element.ts" %}
 
-See [classMap](/docs/templates/directives/#classmap) and [styleMap](/docs/templates/directives/#stylemap) for more information.
+See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMap](https://lit.dev/docs/templates/directives/#stylemap) for more information.
 
 ## Theming {#theming}
 
