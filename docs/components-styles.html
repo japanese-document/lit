@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-styles.html" />
     <meta property="og:title" content="スタイル - Lit" />
-    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful n" />
+    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。If Lit did not use Shadow DOM,you would have to be extremely careful not to accidentally style elements outside of your component,either ancest" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful n" />
+    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。If Lit did not use Shadow DOM,you would have to be extremely careful not to accidentally style elements outside of your component,either ancest" />
     <title>スタイル - Lit</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -24,9 +24,15 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="スタイル"><a href="#スタイル">スタイル</a></h1>
-<p>コンポーネントのテンプレートはshadow rootにレンダリングされます。
-The styles you add to your component are automatically scoped to the shadow root and only affect elements in the component's shadow root.</p>
-<p>Shadow DOM provides strong encapsulation for styling. If Lit did not use Shadow DOM, you would have to be extremely careful not to accidentally style elements outside of your component, either ancestors or children of your component. This might involve writing long, cumbersome to use class names. By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.</p>
+<p>コンポーネントのテンプレートは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow root</a>にレンダリングされます。
+コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。
+つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Shadow DOM</a>によってスタイルのカプセル化がされます。
+If Lit did not use Shadow DOM,
+you would have to be extremely careful not to accidentally style elements outside of your component,
+either ancestors or children of your component.
+This might involve writing long, cumbersome to use class names.
+By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.</p>
 <h2 id="Adding_styles_to_your_component_{#add-styles}"><a href="#Adding_styles_to_your_component_{#add-styles}">Adding styles to your component {#add-styles}</a></h2>
 <p>You define scoped styles in the static <code>styles</code> class field using the tagged template literal <code>css</code> function. Defining styles this way results in the most optimal performance:</p>
 <p>{% playground-example "docs/components/style/basic" "my-element.ts" %}</p>
@@ -228,7 +234,7 @@ class MyElement extends LitElement {
 <h2 id="Dynamic_classes_and_styles"><a href="#Dynamic_classes_and_styles">Dynamic classes and styles</a></h2>
 <p>One way to make styles dynamic is to add expressions to the <code>class</code> or <code>style</code> attributes in your template.</p>
 <p>Lit offers two directives, <code>classMap</code> and <code>styleMap</code>, to conveniently apply classes and styles in HTML templates.</p>
-<p>For more information on these and other directives, see the documentation on <a class="Link" href="/docs/templates/directives/">built-in directives</a>.</p>
+<p>For more information on these and other directives, see the documentation on <a class="Link" href="https://lit.dev/docs/templates/directives/">built-in directives</a>.</p>
 <p>To use <code>styleMap</code> and/or <code>classMap</code>:</p>
 <ol>
 <li><p>Import <code>classMap</code> and/or <code>styleMap</code>:</p>
@@ -240,7 +246,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 </li>
 </ol>
 <p>{% playground-example "docs/components/style/maps" "my-element.ts" %}</p>
-<p>See <a class="Link" href="/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
+<p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
 <h2 id="Theming_{#theming}"><a href="#Theming_{#theming}">Theming {#theming}</a></h2>
 <p>By using <a class="Link" href="#inheritance">CSS inheritance</a> and <a class="Link" href="#customprops">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
 <p>{% playground-example "docs/components/style/theming" "my-element.ts" %}</p>
