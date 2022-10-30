@@ -54,16 +54,18 @@ export class MyElement extends LitElement {
 概要は<a class="Link" href="#Shadow_DOM">Shadow DOM</a>を見てください。</p>
 <p><code>static styles</code>クラスフィールドを下記のように記述します。</p>
 <ul>
-<li><p>A single tagged template literal.</p>
+<li><p>タグが付いたテンプレート1つ</p>
 <pre><code class="language-js">static styles = css`...`;
 </code></pre>
 </li>
-<li><p>An array of tagged template literals.</p>
+<li><p>タグが付いたテンプレートの配列</p>
 <pre><code class="language-js">static styles = [ css`...`, css`...`];
 </code></pre>
 </li>
 </ul>
-<p>The static <code>styles</code> class field is <em>almost always</em> the best way to add styles to your component, but there are some use cases you can't handle this way—for example, customizing styles per instance. For alternate ways to add styles, see <a class="Link" href="#styles-in-the-template">Defining scoped styles in the template</a>.</p>
+<p>ほとんどの場合、<code>static styles</code>クラスフィールドを使う方法はコンポーネントのスタイルを定義するベストプラクティスです。
+インスタンス毎にスタイルを変更するようなユースケースでは、この方法では達成することができません。
+スタイルを追加する別の方法は<a class="Link" href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a>を見てください。</p>
 <h3 id="Using_expressions_in_static_styles_{#expressions}"><a href="#Using_expressions_in_static_styles_{#expressions}">Using expressions in static styles {#expressions}</a></h3>
 <p>Static styles apply to all instances of a component. Any expressions in CSS are evaluated <strong>once</strong>, then reused for all instances.</p>
 <p>For tree-based or per-instance style customization, use CSS custom properties to allow elements to be <a class="Link" href="#theming">themed</a>.</p>
@@ -185,7 +187,7 @@ class MyElement extends LitElement {
 <p><strong>Limitations in the ShadyCSS polyfill around slotted content.</strong> See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for details on how to use the <code>::slotted()</code> syntax in a polyfill-friendly way.</p>
 </div>
 
-<h2 id="Defining_scoped_styles_in_the_template_{#styles-in-the-template}"><a href="#Defining_scoped_styles_in_the_template_{#styles-in-the-template}">Defining scoped styles in the template {#styles-in-the-template}</a></h2>
+<h2 id="テンプレート内で適用範囲が限定されているスタイルを定義する"><a href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a></h2>
 <p>We recommend using the <a class="Link" href="#add-styles">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
 <ul>
 <li>Add styles using a <a class="Link" href="#style-element"><code>&lt;style&gt;</code> element</a>.</li>
