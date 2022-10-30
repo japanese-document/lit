@@ -7,21 +7,37 @@
 つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。
 
 [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)によってスタイルのカプセル化がされます。
-If Lit did not use Shadow DOM,
-you would have to be extremely careful not to accidentally style elements outside of your component,
-either ancestors or children of your component.
-This might involve writing long, cumbersome to use class names.
-By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.
+LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。
+そのためにクラス名を長くて面倒な物にしないといけないかもしれません。
+Shadow DOMを使うことによって、
+Litはコンポーネントにセレクタ記述したセレクタはすべてコンポーネントのshadow root内の要素にのみ適用します。
 
-## Adding styles to your component {#add-styles}
+## コンポーネントにスタイルを加える
 
-You define scoped styles in the static `styles` class field using the tagged template literal `css` function. Defining styles this way results in the most optimal performance:
+`static styles`クラスフィールドに`css`タグ関数を付けでCSSを記述することで適用範囲が限定されているスタイルを定義します。
+この方法でスタイルを定義することでパフォーマンスが最適化されます。
 
-{% playground-example "docs/components/style/basic" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
-The styles you add to your component are _scoped_ using shadow DOM. For a quick overview, see [Shadow DOM](#shadow-dom).
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    p {
+      color: green;
+    }
+  `;
+  protected render() {
+    return html`<p>I am green!</p>`;
+  }
+}
+```
 
-The value of the static `styles` class field can be:
+コンポーネントに追加されたスタイルはShadow DOMによって適用範囲が限定されます。
+概要は[Shadow DOM](#Shadow_DOM)を見てください。
+
+`static styles`クラスフィールドを下記のように記述します。
 
 *   A single tagged template literal.
 
@@ -135,7 +151,7 @@ static styles = css`
   }
 ```
 
-## Shadow DOM styling overview {#shadow-dom}
+## Shadow DOM
 
 This section gives a brief overview of shadow DOM styling.
 
@@ -146,7 +162,7 @@ Styles you add to a component can affect:
 * [The component's children](#slotted).
 
 
-### Styling the shadow tree {#shadowroot}
+### Shadow Root
 
 Lit templates are rendered into a shadow tree by default. Styles scoped to an element's shadow tree don't affect the main document or other shadow trees. Similarly, with the exception of [inherited CSS properties](#inheritance), document-level styles don't affect the contents of a shadow tree.
 
