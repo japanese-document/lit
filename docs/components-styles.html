@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-styles.html" />
     <meta property="og:title" content="スタイル - Lit" />
-    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。If Lit did not use Shadow DOM,you would have to be extremely careful not to accidentally style elements outside of your component,either ancest" />
+    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、Litはコンポー" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。If Lit did not use Shadow DOM,you would have to be extremely careful not to accidentally style elements outside of your component,either ancest" />
+    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、Litはコンポー" />
     <title>スタイル - Lit</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -28,16 +28,31 @@
 コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。
 つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。</p>
 <p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Shadow DOM</a>によってスタイルのカプセル化がされます。
-If Lit did not use Shadow DOM,
-you would have to be extremely careful not to accidentally style elements outside of your component,
-either ancestors or children of your component.
-This might involve writing long, cumbersome to use class names.
-By using Shadow DOM, Lit ensures whatever selector you write only apply to elements in your Lit component's shadow root.</p>
-<h2 id="Adding_styles_to_your_component_{#add-styles}"><a href="#Adding_styles_to_your_component_{#add-styles}">Adding styles to your component {#add-styles}</a></h2>
-<p>You define scoped styles in the static <code>styles</code> class field using the tagged template literal <code>css</code> function. Defining styles this way results in the most optimal performance:</p>
-<p>{% playground-example "docs/components/style/basic" "my-element.ts" %}</p>
-<p>The styles you add to your component are <em>scoped</em> using shadow DOM. For a quick overview, see <a class="Link" href="#shadow-dom">Shadow DOM</a>.</p>
-<p>The value of the static <code>styles</code> class field can be:</p>
+LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。
+そのためにクラス名を長くて面倒な物にしないといけないかもしれません。
+Shadow DOMを使うことによって、
+Litはコンポーネントにセレクタ記述したセレクタはすべてコンポーネントのshadow root内の要素にのみ適用します。</p>
+<h2 id="コンポーネントにスタイルを加える"><a href="#コンポーネントにスタイルを加える">コンポーネントにスタイルを加える</a></h2>
+<p><code>static styles</code>クラスフィールドに<code>css</code>タグ関数を付けでCSSを記述することで適用範囲が限定されているスタイルを定義します。
+この方法でスタイルを定義することでパフォーマンスが最適化されます。</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    p {
+      color: green;
+    }
+  `;
+  protected render() {
+    return html`&lt;p&gt;I am green!&lt;/p&gt;`;
+  }
+}
+</code></pre>
+<p>コンポーネントに追加されたスタイルはShadow DOMによって適用範囲が限定されます。
+概要は<a class="Link" href="#Shadow_DOM">Shadow DOM</a>を見てください。</p>
+<p><code>static styles</code>クラスフィールドを下記のように記述します。</p>
 <ul>
 <li><p>A single tagged template literal.</p>
 <pre><code class="language-js">static styles = css`...`;
@@ -117,7 +132,7 @@ class MyElement extends LitElement {
     content: '\u2022';
   }
 </code></pre>
-<h2 id="Shadow_DOM_styling_overview_{#shadow-dom}"><a href="#Shadow_DOM_styling_overview_{#shadow-dom}">Shadow DOM styling overview {#shadow-dom}</a></h2>
+<h2 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h2>
 <p>This section gives a brief overview of shadow DOM styling.</p>
 <p>Styles you add to a component can affect:</p>
 <ul>
@@ -125,7 +140,7 @@ class MyElement extends LitElement {
 <li><a class="Link" href="#host">The component itself</a>.</li>
 <li><a class="Link" href="#slotted">The component's children</a>.</li>
 </ul>
-<h3 id="Styling_the_shadow_tree_{#shadowroot}"><a href="#Styling_the_shadow_tree_{#shadowroot}">Styling the shadow tree {#shadowroot}</a></h3>
+<h3 id="Shadow_Root"><a href="#Shadow_Root">Shadow Root</a></h3>
 <p>Lit templates are rendered into a shadow tree by default. Styles scoped to an element's shadow tree don't affect the main document or other shadow trees. Similarly, with the exception of <a class="Link" href="#inheritance">inherited CSS properties</a>, document-level styles don't affect the contents of a shadow tree.</p>
 <p>When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
 <h3 id="Styling_the_component_itself_{#host}"><a href="#Styling_the_component_itself_{#host}">Styling the component itself {#host}</a></h3>
