@@ -39,20 +39,21 @@ export class MyElement extends LitElement {
 
 `static styles`クラスフィールドを下記のように記述します。
 
-*   A single tagged template literal.
+* タグが付いたテンプレート1つ
 
     ```js
     static styles = css`...`;
     ```
 
-*   An array of tagged template literals.
+* タグが付いたテンプレートの配列
 
     ```js
     static styles = [ css`...`, css`...`];
     ```
 
-The static `styles` class field is _almost always_ the best way to add styles to your component, but there are some use cases you can't handle this way—for example, customizing styles per instance. For alternate ways to add styles, see [Defining scoped styles in the template](#styles-in-the-template).
-
+ほとんどの場合、`static styles`クラスフィールドを使う方法はコンポーネントのスタイルを定義するベストプラクティスです。
+インスタンス毎にスタイルを変更するようなユースケースでは、この方法では達成することができません。
+スタイルを追加する別の方法は[テンプレート内で適用範囲が限定されているスタイルを定義する](#テンプレート内で適用範囲が限定されているスタイルを定義する)を見てください。
 
 ### Using expressions in static styles {#expressions}
 
@@ -227,7 +228,7 @@ my-element > div {
 
 </div>
 
-## Defining scoped styles in the template {#styles-in-the-template}
+## テンプレート内で適用範囲が限定されているスタイルを定義する
 
 We recommend using the [static `styles` class field](#add-styles) for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:
 
