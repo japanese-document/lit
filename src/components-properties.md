@@ -170,16 +170,19 @@ TypeScriptの型チェックと混同しないように注意してください�
 
 ## インターナルリアクティブステート
 
-*Internal reactive state* refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.
+インターナルリアクティブステートはコンポーネントのpublicなAPIではないリアクティブプロパティです。
+このプロパティは対応する要素の属性を持ちません。
+そして、コンポーネントの外側からアクセスされることを意図していません。
+インターナルリアクティブステートはコンポーネントの内部でのみ使用されるべきです。
 
-Use the `@state` decorator to declare internal reactive state:
+下記のように`@state`デコレータを付与することによってインターナルリアクティブステートになります。
 
 ```ts
 @state()
 protected _active = false;
 ```
 
-Using the static `properties` class field, you can declare internal reactive state by using the `state: true` option.
+`static properties`クラスフィールドを使う場合は、プロパティオプションに`state: true`をセットするとインターナルリアクティブステートになります。
 
 ```js
 static properties = {
@@ -191,7 +194,9 @@ constructor() {
 }
 ```
 
-Internal reactive state shouldn't be referenced from outside the component. In TypeScript, these properties should be marked as private or protected. We also recommend using a convention like a leading underscore (`_`) to identify private or protected properties for JavaScript users.
+Internal reactive state shouldn't be referenced from outside the component.
+In TypeScript, these properties should be marked as private or protected.
+We also recommend using a convention like a leading underscore (`_`) to identify private or protected properties for JavaScript users.
 
 Internal reactive state works just like public reactive properties, except that there is no attribute associated with the property. **The only option you can specify for internal reactive state is the `hasChanged` function.**
 
