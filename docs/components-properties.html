@@ -146,12 +146,15 @@ Litのデフォルトのコンバータはその文字列の値を指定され�
 TypeScriptの型チェックと混同しないように注意してください。</p>
 <p>オプションオブジェクトを指定しないもしくは空のオプションオブジェクトを指定することは、すべてのオプションにデフォルトの値を指定することと等価です。</p>
 <h2 id="インターナルリアクティブステート"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
-<p><em>Internal reactive state</em> refers to reactive properties that are  not part of the component's public API. These state properties don't have corresponding attributes, and aren't intended to be used from outside the component. Internal reactive state should be set by the component itself.</p>
-<p>Use the <code>@state</code> decorator to declare internal reactive state:</p>
+<p>インターナルリアクティブステートはコンポーネントのpublicなAPIではないリアクティブプロパティです。
+このプロパティは対応する要素の属性を持ちません。
+そして、コンポーネントの外側からアクセスされることを意図していません。
+インターナルリアクティブステートはコンポーネントの内部でのみ使用されるべきです。</p>
+<p>下記のように<code>@state</code>デコレータを付与することによってインターナルリアクティブステートになります。</p>
 <pre><code class="language-ts">@state()
 protected _active = false;
 </code></pre>
-<p>Using the static <code>properties</code> class field, you can declare internal reactive state by using the <code>state: true</code> option.</p>
+<p><code>static properties</code>クラスフィールドを使う場合は、プロパティオプションに<code>state: true</code>をセットするとインターナルリアクティブステートになります。</p>
 <pre><code class="language-js">static properties = {
   _active: {state: true}
 };
@@ -160,7 +163,9 @@ constructor() {
   this._active = false;
 }
 </code></pre>
-<p>Internal reactive state shouldn't be referenced from outside the component. In TypeScript, these properties should be marked as private or protected. We also recommend using a convention like a leading underscore (<code>_</code>) to identify private or protected properties for JavaScript users.</p>
+<p>Internal reactive state shouldn't be referenced from outside the component.
+In TypeScript, these properties should be marked as private or protected.
+We also recommend using a convention like a leading underscore (<code>_</code>) to identify private or protected properties for JavaScript users.</p>
 <p>Internal reactive state works just like public reactive properties, except that there is no attribute associated with the property. <strong>The only option you can specify for internal reactive state is the <code>hasChanged</code> function.</strong></p>
 <p>The <code>@state</code> decorator can also serve as a hint to a code minifier that the property name can be changed during minification.</p>
 <h2 id="What_happens_when_properties_change_{#when-properties-change}"><a href="#What_happens_when_properties_change_{#when-properties-change}">What happens when properties change {#when-properties-change}</a></h2>
