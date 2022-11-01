@@ -194,13 +194,15 @@ constructor() {
 }
 ```
 
-Internal reactive state shouldn't be referenced from outside the component.
-In TypeScript, these properties should be marked as private or protected.
-We also recommend using a convention like a leading underscore (`_`) to identify private or protected properties for JavaScript users.
+インターナルリアクティブステートはコンポーネントの外部から参照されるべきではありません。
+TypeScriptではprivateもしくはprotectedを付けるべきです。
+JavaScriptでは上記のようにprivateもしくはprotectedであるプロパティと認識できるように`_`をプロパティ名の先頭につけることを推奨します。
 
-Internal reactive state works just like public reactive properties, except that there is no attribute associated with the property. **The only option you can specify for internal reactive state is the `hasChanged` function.**
+プロパティに関連した属性を持たないことを除いて、
+インターナルリアクティブステートはパブリックリアクティブプロパティと同じ動作をします。
+インターナルリアクティブステートに指定することができるプロパティオプションは`hasChanged`のみです。
 
-The `@state` decorator can also serve as a hint to a code minifier that the property name can be changed during minification.
+`@state`デコレータはminifierにプロパティ名が変更可能であるというヒントを与えます。
 
 ## What happens when properties change {#when-properties-change}
 
@@ -222,7 +224,7 @@ There are many ways to hook into and modify the reactive update cycle. For more 
 
 For more information about property change detection, see [Customizing change detection](#haschanged).
 
-### Mutating object and array properties {#mutating-properties}
+### プロパティでオブジェクトと配列を扱う際の注意点
 
 Mutating an object or array doesn't change the object reference, so it won't trigger an update. You can handle object and array properties in one of two ways:
 
