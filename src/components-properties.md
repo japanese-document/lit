@@ -204,9 +204,10 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 
 `@state`デコレータはminifierにプロパティ名が変更可能であるというヒントを与えます。
 
-## What happens when properties change {#when-properties-change}
+## プロパティが変更されると何が起きるか 
 
-A property change can trigger a reactive update cycle, which causes the component to re-render its template.
+A property change can trigger a reactive update cycle,
+which causes the component to re-render its template.
 
 When a property changes, the following sequence occurs:
 
@@ -218,15 +219,17 @@ When a property changes, the following sequence occurs:
 1.  If the property change is detected, an update is scheduled asynchronously. If an update is already scheduled, only a single update is executed.
 1.  The component's `update` method is called, reflecting changed properties to attributes and re-rendering the component's templates.
 
-Note that if you mutate an object or array property, it won't trigger an update, because the object itself hasn't changed. For more information, see [Mutating object and array properties](#mutating-properties).
+Note that if you mutate an object or array property, it won't trigger an update, because the object itself hasn't changed. For more information, see [プロパティでオブジェクトと配列を扱う際の注意点](#プロパティでオブジェクトと配列を扱う際の注意点).
 
-There are many ways to hook into and modify the reactive update cycle. For more information, see [Reactive update cycle](/docs/components/lifecycle/#reactive-update-cycle).
+There are many ways to hook into and modify the reactive update cycle. For more information, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle).
 
 For more information about property change detection, see [Customizing change detection](#haschanged).
 
 ### プロパティでオブジェクトと配列を扱う際の注意点
 
-Mutating an object or array doesn't change the object reference, so it won't trigger an update. You can handle object and array properties in one of two ways:
+Mutating an object or array doesn't change the object reference,
+so it won't trigger an update.
+You can handle object and array properties in one of two ways:
 
 -   **Immutable data pattern.** Treat objects and arrays as immutable. For example, to remove an item from `myArray`, construct a new array:
 
@@ -538,7 +541,7 @@ To use custom property accessors with the `@property` or `@state` decorators, pu
 
 The setters that Lit generates automatically call `requestUpdate()`. If you write your own setter you must call `requestUpdate()` manually, supplying the property name and its old value.
 
-In most cases, **you do not need to create custom property accessors.** To compute values from existing properties, we recommend using the [`willUpdate`](/docs/components/lifecycle/#willupdate) callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the [`updated`](/docs/components/lifecycle/#updated) callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.
+In most cases, **you do not need to create custom property accessors.** To compute values from existing properties, we recommend using the [`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate) callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the [`updated`](https://lit.dev/docs/components/lifecycle/#updated) callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.
 
 If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
 
@@ -560,7 +563,7 @@ You don't need to set `noAccessor` when defining your own accessors.
 
 All reactive properties have a function, `hasChanged()`, which is called when the property is set.
 
-`hasChanged` compares the property's old and new values, and evaluates whether or not the property has changed. If `hasChanged()` returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see [Reactive update cycle](/docs/components/lifecycle/#reactive-update-cycle) .
+`hasChanged` compares the property's old and new values, and evaluates whether or not the property has changed. If `hasChanged()` returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle) .
 
 The default implementation of `hasChanged()` uses a strict inequality comparison: `hasChanged()` returns `true` if `newVal !== oldVal`.
 

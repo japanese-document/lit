@@ -170,8 +170,9 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 インターナルリアクティブステートはパブリックリアクティブプロパティと同じ動作をします。
 インターナルリアクティブステートに指定することができるプロパティオプションは<code>hasChanged</code>のみです。</p>
 <p><code>@state</code>デコレータはminifierにプロパティ名が変更可能であるというヒントを与えます。</p>
-<h2 id="What_happens_when_properties_change_{#when-properties-change}"><a href="#What_happens_when_properties_change_{#when-properties-change}">What happens when properties change {#when-properties-change}</a></h2>
-<p>A property change can trigger a reactive update cycle, which causes the component to re-render its template.</p>
+<h2 id="プロパティが変更されると何が起きるか"><a href="#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a></h2>
+<p>A property change can trigger a reactive update cycle,
+which causes the component to re-render its template.</p>
 <p>When a property changes, the following sequence occurs:</p>
 <ol>
 <li>The property's setter is called.</li>
@@ -184,11 +185,13 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 <li>If the property change is detected, an update is scheduled asynchronously. If an update is already scheduled, only a single update is executed.</li>
 <li>The component's <code>update</code> method is called, reflecting changed properties to attributes and re-rendering the component's templates.</li>
 </ol>
-<p>Note that if you mutate an object or array property, it won't trigger an update, because the object itself hasn't changed. For more information, see <a class="Link" href="#mutating-properties">Mutating object and array properties</a>.</p>
-<p>There are many ways to hook into and modify the reactive update cycle. For more information, see <a class="Link" href="/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a>.</p>
+<p>Note that if you mutate an object or array property, it won't trigger an update, because the object itself hasn't changed. For more information, see <a class="Link" href="#プロパティでオブジェクトと配列を扱う際の注意点">プロパティでオブジェクトと配列を扱う際の注意点</a>.</p>
+<p>There are many ways to hook into and modify the reactive update cycle. For more information, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a>.</p>
 <p>For more information about property change detection, see <a class="Link" href="#haschanged">Customizing change detection</a>.</p>
 <h3 id="プロパティでオブジェクトと配列を扱う際の注意点"><a href="#プロパティでオブジェクトと配列を扱う際の注意点">プロパティでオブジェクトと配列を扱う際の注意点</a></h3>
-<p>Mutating an object or array doesn't change the object reference, so it won't trigger an update. You can handle object and array properties in one of two ways:</p>
+<p>Mutating an object or array doesn't change the object reference,
+so it won't trigger an update.
+You can handle object and array properties in one of two ways:</p>
 <ul>
 <li><p><strong>Immutable data pattern.</strong> Treat objects and arrays as immutable. For example, to remove an item from <code>myArray</code>, construct a new array:</p>
 <pre><code class="language-js">this.myArray = this.myArray.filter((_, i) =&gt; i !== indexToRemove);
@@ -439,7 +442,7 @@ get prop() { return this._prop; }
 <p>{% endswitchable-sample %}</p>
 <p>To use custom property accessors with the <code>@property</code> or <code>@state</code> decorators, put the decorator on the getter, as shown above.</p>
 <p>The setters that Lit generates automatically call <code>requestUpdate()</code>. If you write your own setter you must call <code>requestUpdate()</code> manually, supplying the property name and its old value.</p>
-<p>In most cases, <strong>you do not need to create custom property accessors.</strong> To compute values from existing properties, we recommend using the <a class="Link" href="/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a> callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the <a class="Link" href="/docs/components/lifecycle/#updated"><code>updated</code></a> callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.</p>
+<p>In most cases, <strong>you do not need to create custom property accessors.</strong> To compute values from existing properties, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a> callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a> callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.</p>
 <p>If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.</p>
 <h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
 <p>In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.</p>
@@ -451,7 +454,7 @@ get prop() { return this._prop; }
 <p>You don't need to set <code>noAccessor</code> when defining your own accessors.</p>
 <h2 id="更新判定の変更"><a href="#更新判定の変更">更新判定の変更</a></h2>
 <p>All reactive properties have a function, <code>hasChanged()</code>, which is called when the property is set.</p>
-<p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
+<p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
 <p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison: <code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
 <p>To customize <code>hasChanged()</code> for a property, specify it as a property option:</p>
 <p>{% switchable-sample %}</p>
