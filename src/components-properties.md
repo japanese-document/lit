@@ -127,7 +127,7 @@ class MyElement extends LitElement {
 
 プロパティがセットされる毎に実行されます。更新を発動するか判定します。
 デフォルトでは不等式(`newValue !== oldValue`)による判定を行います。
-詳しくは[更新判定の変更](#更新判定の変更)を見てください。
+詳しくは[変更判定の変更](#変更判定の変更)を見てください。
 
 #### noAccessor
 
@@ -206,24 +206,26 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 
 ## プロパティが変更されると何が起きるか 
 
-A property change can trigger a reactive update cycle,
-which causes the component to re-render its template.
+プロパティの変更はリアクティブアップデートサイクル(reactive update cycle)を発動します。
+それはコンポーネントがテンプレートを再レンダリングすることを引き起こします。
 
-When a property changes, the following sequence occurs:
+プロパティが変更されると、下記の順番で処理が実行されます。
 
-1.  The property's setter is called.
-1.  The setter calls the component's `requestUpdate` method.
-1.  The property's old and new values are compared.
-    -  By default Lit uses a strict inequality test to determine if the value has changed (that is `newValue !== oldValue`).
-    -  If the property has a `hasChanged` function, it's called with the property's old and new values.
-1.  If the property change is detected, an update is scheduled asynchronously. If an update is already scheduled, only a single update is executed.
-1.  The component's `update` method is called, reflecting changed properties to attributes and re-rendering the component's templates.
+1. プロパティのセッタが実行されます。
+1. プロパティのセッタがコンポーネントの`requestUpdate`メソッドを実行します。
+1. プロパティの変更前の値と変更後の値を比較します。
+    - デフォルトでは`newValue !== oldValue`のように比較します。
+    - プロパティに`hasChanged`オプションがセットされている場合、 `hasChanged`関数はプロパティの変更前の値と変更後の値を引数にします。
+1. プロパティが変更されたと判定された場合、非同期的に更新がスケジュールされます。既に更新がスケジュールされていた場合はまとめて1回だけ更新が実行されます。
+1. コンポーネントの`update`メソッドが実行されます。(変更されたプロパティが属性に反映されます。コンポーネントのテンプレートが再レンダリングされます。)
 
-Note that if you mutate an object or array property, it won't trigger an update, because the object itself hasn't changed. For more information, see [プロパティでオブジェクトと配列を扱う際の注意点](#プロパティでオブジェクトと配列を扱う際の注意点).
+プロパティの値がオブジェクトもしくは配列の場合、それ自体を変更しないと更新が発動しません。
+詳しくは[プロパティでオブジェクトと配列を扱う際の注意点](#プロパティでオブジェクトと配列を扱う際の注意点)を見てください。
 
-There are many ways to hook into and modify the reactive update cycle. For more information, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle).
+There are many ways to hook into and modify the reactive update cycle.
+詳しくは[Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
 
-For more information about property change detection, see [Customizing change detection](#haschanged).
+プロパティの変更判定の詳しい情報は[変更判定の変更](#変更判定の変更)を見てください。
 
 ### プロパティでオブジェクトと配列を扱う際の注意点
 
@@ -559,7 +561,7 @@ static properties = {
 
 You don't need to set `noAccessor` when defining your own accessors.
 
-## 更新判定の変更
+## 変更判定の変更
 
 All reactive properties have a function, `hasChanged()`, which is called when the property is set.
 
