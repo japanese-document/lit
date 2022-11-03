@@ -4,7 +4,7 @@
 
 Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。
 リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブな更新サイクルが発動され、コンポーネントが再レンダリングされます。
-そして、オプションの設定によって要素の属性を読み書きすることが可能です。
+そして、[オプションの設定](#attribute)によって要素の属性を読み書きすることが可能です。
 
 ```ts
 class MyElement extends LitElement {
@@ -219,36 +219,41 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 1. プロパティが変更されたと判定された場合、非同期的に更新がスケジュールされます。既に更新がスケジュールされていた場合はまとめて1回だけ更新が実行されます。
 1. コンポーネントの`update`メソッドが実行されます。(変更されたプロパティが属性に反映されます。コンポーネントのテンプレートが再レンダリングされます。)
 
-プロパティの値がオブジェクトもしくは配列の場合、それ自体を変更しないと更新が発動しません。
+プロパティの値がオブジェクトもしくは配列の場合、それ自体を置き換えないと更新が発動しません。
 詳しくは[プロパティでオブジェクトと配列を扱う際の注意点](#プロパティでオブジェクトと配列を扱う際の注意点)を見てください。
 
-There are many ways to hook into and modify the reactive update cycle.
-詳しくは[Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
+リアクティブアップデートサイクルのフックは多数あります。それらを変更することができます。
+詳しくは[リアクティブアップデートサイクル](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
 
 プロパティの変更判定の詳しい情報は[変更判定の変更](#変更判定の変更)を見てください。
 
 ### プロパティでオブジェクトと配列を扱う際の注意点
 
-Mutating an object or array doesn't change the object reference,
-so it won't trigger an update.
-You can handle object and array properties in one of two ways:
+プロパティの値がオブジェクトもしくは配列の場合、その参照を変更しないと更新は発動しません。
+プロパティの値がオブジェクトもしくは配列の場合、下記の2つの方法で操作することができます。
 
--   **Immutable data pattern.** Treat objects and arrays as immutable. For example, to remove an item from `myArray`, construct a new array:
+#### 値の置き換える
 
-    ```js
-    this.myArray = this.myArray.filter((_, i) => i !== indexToRemove);
-    ```
+オブジェクトや配列をイミュータブル(immutable)として扱います。
+下記のように、`myArray`から要素を削除する場合に新しい配列を作成します。
 
-    While this example is simple, it's often helpful to use a library like [Immer](https://immerjs.github.io/immer/) to manage immutable data. This can help avoid tricky boilerplate code when setting deeply nested objects.
+```js
+this.myArray = this.myArray.filter((_, i) => i !== indexToRemove);
+```
 
--   **Manually triggering an update.** Mutate the data and `requestUpdate()` to trigger an update directly. For example:
+この例ではシンプルなデータを扱っていますが、
+複雑なオブジェクトを扱う場合は[Immer](https://immerjs.github.io/immer/)のようなイミュータブルにデータを扱うためのライブラリを使うと可読性を保つことができるかもしれません。
 
-    ```js
-    this.myArray.splice(indexToRemove, 1);
-    this.requestUpdate();
-    ```
+#### 手動で更新を発動する 
 
-    When called with no arguments, `requestUpdate()` schedules an update, without calling a `hasChanged()` function. But note that `requestUpdate()` only causes the _current_ component to update. That is, if a component uses the code shown above, **and** the component passes `this.myArray` to a subcomponent, the subcomponent will detect that the array reference hasn't changed, so it won't update.
+Mutate the data and `requestUpdate()` to trigger an update directly. For example:
+
+```js
+this.myArray.splice(indexToRemove, 1);
+this.requestUpdate();
+```
+
+When called with no arguments, `requestUpdate()` schedules an update, without calling a `hasChanged()` function. But note that `requestUpdate()` only causes the _current_ component to update. That is, if a component uses the code shown above, **and** the component passes `this.myArray` to a subcomponent, the subcomponent will detect that the array reference hasn't changed, so it won't update.
 
 **In general, using top-down data flow with immutable objects is best for most applications.** It ensures that every component that needs to render a new value does (and does so as efficiently as possible, since parts of the data tree that didn't change won't cause components that rely on them to update).
 
@@ -256,7 +261,7 @@ Mutating data directly and calling `requestUpdate()` should be considered an adv
 
 In simple cases, when you know that a given piece of data is only used in a single component, it should be safe to mutate the data and call `requestUpdate()`, if you prefer.
 
-## Attributes
+## 属性
 
 While properties are great for receiving JavaScript data as input, attributes are the standard way HTML allows configuring elements from _markup_, without needing to use JavaScript to set properties. Providing both a property _and_ attribute interface for their reactive properties is a key way Lit components can be useful in a wide variety of environments, including those rendered without a client-side templating engine, such as static HTML pages served from CMSs.
 
