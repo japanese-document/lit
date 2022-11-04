@@ -201,11 +201,14 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 <p>この例ではシンプルなデータを扱っていますが、
 複雑なオブジェクトを扱う場合は<a class="Link" href="https://immerjs.github.io/immer/">Immer</a>のようなイミュータブルにデータを扱うためのライブラリを使うと可読性を保つことができるかもしれません。</p>
 <h4 id="手動で更新を発動する"><a href="#手動で更新を発動する">手動で更新を発動する</a></h4>
-<p>Mutate the data and <code>requestUpdate()</code> to trigger an update directly. For example:</p>
+<p>下記のようにデータを変更して直接的に更新を発動するために<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration%3Cunknown,_unknown%3E)__void">requestUpdate()</a>を実行します。</p>
 <pre><code class="language-js">this.myArray.splice(indexToRemove, 1);
 this.requestUpdate();
 </code></pre>
-<p>When called with no arguments, <code>requestUpdate()</code> schedules an update, without calling a <code>hasChanged()</code> function. But note that <code>requestUpdate()</code> only causes the <em>current</em> component to update. That is, if a component uses the code shown above, <strong>and</strong> the component passes <code>this.myArray</code> to a subcomponent, the subcomponent will detect that the array reference hasn't changed, so it won't update.</p>
+<p><code>requestUpdate()</code>が引数無しで実行されると<code>hasChanged()</code>関数をスキップして更新がスケジュールされます。
+<code>requestUpdate()</code>を実行したコンポーネントのみが更新されることに注意してください。
+例えば、上記のコードでは<code>this.myArray</code>を子コンポーネントのプロパティに渡すと参照が変わらないので変更を検知できません。
+だから、子コンポーネントは更新されません。</p>
 <p><strong>In general, using top-down data flow with immutable objects is best for most applications.</strong> It ensures that every component that needs to render a new value does (and does so as efficiently as possible, since parts of the data tree that didn't change won't cause components that rely on them to update).</p>
 <p>Mutating data directly and calling <code>requestUpdate()</code> should be considered an advanced use case. In this case, you (or some other system) need to identify all the components that use the mutated data and call <code>requestUpdate()</code> on each one. When those components are spread across an application, this gets hard to manage. Not doing so robustly means that you might modify an object that's rendered in two parts of your application, but only have one part update.</p>
 <p>In simple cases, when you know that a given piece of data is only used in a single component, it should be safe to mutate the data and call <code>requestUpdate()</code>, if you prefer.</p>

@@ -246,14 +246,17 @@ this.myArray = this.myArray.filter((_, i) => i !== indexToRemove);
 
 #### 手動で更新を発動する 
 
-Mutate the data and `requestUpdate()` to trigger an update directly. For example:
+下記のようにデータを変更して直接的に更新を発動するために[requestUpdate()](https://japanese-document.github.io/lit/api-LitElement.html#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration%3Cunknown,_unknown%3E)__void)を実行します。
 
 ```js
 this.myArray.splice(indexToRemove, 1);
 this.requestUpdate();
 ```
 
-When called with no arguments, `requestUpdate()` schedules an update, without calling a `hasChanged()` function. But note that `requestUpdate()` only causes the _current_ component to update. That is, if a component uses the code shown above, **and** the component passes `this.myArray` to a subcomponent, the subcomponent will detect that the array reference hasn't changed, so it won't update.
+`requestUpdate()`が引数無しで実行されると`hasChanged()`関数をスキップして更新がスケジュールされます。
+`requestUpdate()`を実行したコンポーネントのみが更新されることに注意してください。
+例えば、上記のコードでは`this.myArray`を子コンポーネントのプロパティに渡すと参照が変わらないので変更を検知できません。
+だから、子コンポーネントは更新されません。
 
 **In general, using top-down data flow with immutable objects is best for most applications.** It ensures that every component that needs to render a new value does (and does so as efficiently as possible, since parts of the data tree that didn't change won't cause components that rely on them to update).
 
