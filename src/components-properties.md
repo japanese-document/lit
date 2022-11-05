@@ -258,11 +258,18 @@ this.requestUpdate();
 例えば、上記のコードでは`this.myArray`を子コンポーネントのプロパティに渡すと参照が変わらないので変更を検知できません。
 だから、子コンポーネントは更新されません。
 
-**In general, using top-down data flow with immutable objects is best for most applications.** It ensures that every component that needs to render a new value does (and does so as efficiently as possible, since parts of the data tree that didn't change won't cause components that rely on them to update).
+一般的にほとんどのアプリケーションではイミュータブルオブジェクトをバケツリレーで受け渡すことが最善の方法です。
+そうすることで必要なコンポーネントが確実に新しい値をレンダリングできるようになります。
+(これによって、変更されたデータに依存しているコンポーネントのみが変更され、アプリケーション全体を更新するよりは効率的です。)
 
-Mutating data directly and calling `requestUpdate()` should be considered an advanced use case. In this case, you (or some other system) need to identify all the components that use the mutated data and call `requestUpdate()` on each one. When those components are spread across an application, this gets hard to manage. Not doing so robustly means that you might modify an object that's rendered in two parts of your application, but only have one part update.
+データを変更して`requestUpdate()`を実行する方法は上級者向けです。
+In this case, you (or some other system) need to identify all the components that use the mutated data and call `requestUpdate()` on each one.
+When those components are spread across an application, this gets hard to manage.
+Not doing so robustly means that you might modify an object that's rendered in two parts of your application,
+but only have one part update.
 
-In simple cases, when you know that a given piece of data is only used in a single component, it should be safe to mutate the data and call `requestUpdate()`, if you prefer.
+In simple cases, when you know that a given piece of data is only used in a single component,
+it should be safe to mutate the data and call `requestUpdate()`, if you prefer.
 
 ## 属性
 
