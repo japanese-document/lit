@@ -263,7 +263,8 @@ this.requestUpdate();
 (これによって、変更されたデータに依存しているコンポーネントのみが変更され、アプリケーション全体を更新するよりは効率的です。)
 
 データを変更して`requestUpdate()`を実行する方法は上級者向けです。
-In this case, you (or some other system) need to identify all the components that use the mutated data and call `requestUpdate()` on each one.
+この方法では、
+データを変更するすべてのコンポーネントを特定して、各コンポーネントで`requestUpdate()`を実行する必要があります。
 When those components are spread across an application, this gets hard to manage.
 Not doing so robustly means that you might modify an object that's rendered in two parts of your application,
 but only have one part update.
