@@ -265,7 +265,7 @@ this.requestUpdate();
 データを変更して`requestUpdate()`を実行する方法は上級者向けです。
 この方法では、
 データを変更するすべてのコンポーネントを特定して、各コンポーネントで`requestUpdate()`を実行する必要があります。
-When those components are spread across an application, this gets hard to manage.
+このようなコンポーネントがアプリケーションに広がっている場合、管理が大変です。
 Not doing so robustly means that you might modify an object that's rendered in two parts of your application,
 but only have one part update.
 
