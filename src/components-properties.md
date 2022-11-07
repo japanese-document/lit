@@ -116,7 +116,7 @@ class MyElement extends LitElement {
 プロパティに関連した属性を有効にするか、またはその属性名を変更したい場合はその属性名を渡します。
 デフォルトはtrueです。
 `attribute`をfalseにすると`converter`、`reflect`、`type`オプションは無視されます。
-詳しくは[属性名を設定する](#属性名を設定する)を見てください。
+詳しくは[attributeオプション](#attributeオプション)を見てください。
 
 #### converter
 
@@ -265,26 +265,26 @@ this.requestUpdate();
 データを変更して`requestUpdate()`を実行する方法は上級者向けです。
 この方法では、
 データを変更するすべてのコンポーネントを特定して、各コンポーネントで`requestUpdate()`を実行する必要があります。
+そうしないと、コンポーネントが期待通り更新されないかもしれません。
 このようなコンポーネントがアプリケーションに広がっている場合、管理が大変です。
-Not doing so robustly means that you might modify an object that's rendered in two parts of your application,
-but only have one part update.
-
-In simple cases, when you know that a given piece of data is only used in a single component,
-it should be safe to mutate the data and call `requestUpdate()`, if you prefer.
 
 ## 属性
 
-While properties are great for receiving JavaScript data as input, attributes are the standard way HTML allows configuring elements from _markup_, without needing to use JavaScript to set properties. Providing both a property _and_ attribute interface for their reactive properties is a key way Lit components can be useful in a wide variety of environments, including those rendered without a client-side templating engine, such as static HTML pages served from CMSs.
+JavaScriptのコードでコンポーネントへの入力として要素のプロパティにJavaScriptのデータをセットすることができます。
+マークアップ内でコンポーネントへの入力として要素の属性に値をセットすることができます。
+リアクティブプロパティに対してプロパティと属性の両方のインターファイスを提供することによって、
+JavaScriptのコード内だけでなくサーバー側のウェブアプリケーションフレームワークのテンプレート等の静的なHTMLでLitコンポーネントを使用することを可能にします。
+デフォルトでLitは各パブリックリアクティブプロパティに対応する属性を監視します。そして、属性が変更されるとそれに対応するプロパティが更新されます。
+reflectオプションをセットするとプロパティが変更されると属性に反映されます。
 
-By default, Lit sets up an observed attribute corresponding to each public reactive property, and updates the property when the attribute changes. Property values can also, optionally, be _reflected_ (written back to the attribute).
-
-While element properties can be of any type, attributes are always strings. This impacts the [observed attributes](#observed-attributes) and [reflected attributes](#reflected-attributes) of non-string properties:
+While element properties can be of any type, attributes are always strings.
+This impacts the [属性からデータを取得する](#attributeオプション) and [属性にデータを反映する](#reflectオプション) of non-string properties:
 
   * To **observe** an attribute (set a property from an attribute), the attribute value must be converted from a string to match the property type.
 
   * To **reflect** an attribute (set an attribute from a property), the property value must be converted to a string.
 
-### 属性名を設定する
+### attributeオプション
 
 By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:
 
