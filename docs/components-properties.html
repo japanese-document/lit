@@ -226,13 +226,12 @@ this.requestUpdate();
 JavaScriptのコード内だけでなくサーバー側のウェブアプリケーションフレームワークのテンプレートが出力する静的なHTML等でLitコンポーネントを使用することを可能にします。
 デフォルトでLitは各パブリックリアクティブプロパティに対応する属性を監視します。そして、属性が変更されるとそれに対応するプロパティが更新されます。
 reflectオプションをセットするとプロパティが変更されると属性に反映されます。</p>
-<p>While element properties can be of any type, attributes are always strings.
-This impacts the <a class="Link" href="#attributeオプション">属性からデータを取得する</a> and <a class="Link" href="#reflectオプション">属性にデータを反映する</a> of non-string properties:</p>
+<p>要素のプロパティやコンポーネントのプロパティの場合は素のJavaScriptのデータがコンポーネントのプロパティに渡されますが、
+要素の属性の場合は文字列がコンポーネントのプロパティに渡されます。
+これは要素の属性とコンポーネントのプロパティ間の相互変換に影響を与えます。</p>
 <ul>
-<li><p>To <strong>observe</strong> an attribute (set a property from an attribute), the attribute value must be converted from a string to match the property type.</p>
-</li>
-<li><p>To <strong>reflect</strong> an attribute (set an attribute from a property), the property value must be converted to a string.</p>
-</li>
+<li>要素の属性の値をコンポーネントのプロパティにセットする際は属性の値はプロパティの型に合わせて変換する必要があります。</li>
+<li>コンポーネントのプロパティを要素の属性にセットする際はプロパティの値を文字列に変換する必要があります。</li>
 </ul>
 <h3 id="attributeオプション"><a href="#attributeオプション">attributeオプション</a></h3>
 <p>By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:</p>

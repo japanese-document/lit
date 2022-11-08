@@ -279,12 +279,12 @@ JavaScriptのコード内だけでなくサーバー側のウェブアプリケ�
 デフォルトでLitは各パブリックリアクティブプロパティに対応する属性を監視します。そして、属性が変更されるとそれに対応するプロパティが更新されます。
 reflectオプションをセットするとプロパティが変更されると属性に反映されます。
 
-While element properties can be of any type, attributes are always strings.
-This impacts the [属性からデータを取得する](#attributeオプション) and [属性にデータを反映する](#reflectオプション) of non-string properties:
+要素のプロパティやコンポーネントのプロパティの場合は素のJavaScriptのデータがコンポーネントのプロパティに渡されますが、
+要素の属性の場合は文字列がコンポーネントのプロパティに渡されます。
+これは要素の属性とコンポーネントのプロパティ間の相互変換に影響を与えます。
 
-  * To **observe** an attribute (set a property from an attribute), the attribute value must be converted from a string to match the property type.
-
-  * To **reflect** an attribute (set an attribute from a property), the property value must be converted to a string.
+* 要素の属性の値をコンポーネントのプロパティにセットする際は属性の値はプロパティの型に合わせて変換する必要があります。
+* コンポーネントのプロパティを要素の属性にセットする際はプロパティの値を文字列に変換する必要があります。
 
 ### attributeオプション
 
