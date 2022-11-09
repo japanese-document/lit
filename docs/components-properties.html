@@ -265,14 +265,13 @@ constructor() {
   this.myName = 'Ogden'
 }
 </code></pre>
-<p>To prevent an observed attribute from being created for a property, set <code>attribute</code> to <code>false</code>.
-The property will not be initialized from attributes in markup, and attribute changes won't affect it.</p>
-<p>{% switchable-sample %}</p>
-<pre><code class="language-ts">// No observed attribute for this property
+<p>コンポーネントのプロパティと相互変換する要素の属性を作成しない場合は<code>attribute</code>オプションに<code>false</code>を指定します。
+そうするとプロパティは属性の値によって初期化されません。そして、属性の値が変化してもプロパティの値は変化しません。</p>
+<pre><code class="language-ts">// プロパティと相互変換する属性を作成しません。
 @property({ attribute: false })
 myData = {};
 </code></pre>
-<pre><code class="language-js">// No observed attribute for this property
+<pre><code class="language-js">// プロパティと相互変換する属性を作成しません。
 static properties = {
   myData: { attribute: false },
 };
@@ -282,8 +281,7 @@ constructor() {
   this.myData = {};
 }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>Internal reactive state never has an associated attribute.</p>
+<p>インターナルリアクティブステートは要素の属性の影響をまったく受けません。</p>
 <p>An observed attribute can be used to provide an initial value for a property from markup. For example:</p>
 <pre><code class="language-html">&lt;my-element myvalue="99"&gt;&lt;/my-element&gt;
 </code></pre>

@@ -330,19 +330,17 @@ constructor() {
 }
 ```
 
-To prevent an observed attribute from being created for a property, set `attribute` to `false`.
-The property will not be initialized from attributes in markup, and attribute changes won't affect it.
-
-{% switchable-sample %}
+コンポーネントのプロパティと相互変換する要素の属性を作成しない場合は`attribute`オプションに`false`を指定します。
+そうするとプロパティは属性の値によって初期化されません。そして、属性の値が変化してもプロパティの値は変化しません。
 
 ```ts
-// No observed attribute for this property
+// プロパティと相互変換する属性を作成しません。
 @property({ attribute: false })
 myData = {};
 ```
 
 ```js
-// No observed attribute for this property
+// プロパティと相互変換する属性を作成しません。
 static properties = {
   myData: { attribute: false },
 };
@@ -353,9 +351,7 @@ constructor() {
 }
 ```
 
-{% endswitchable-sample %}
-
-Internal reactive state never has an associated attribute.
+インターナルリアクティブステートは要素の属性の影響をまったく受けません。
 
 An observed attribute can be used to provide an initial value for a property from markup. For example:
 
