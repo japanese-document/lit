@@ -234,13 +234,13 @@ reflectオプションをセットするとプロパティが変更されると�
 <li>コンポーネントのプロパティを要素の属性にセットする際はプロパティの値を文字列に変換する必要があります。</li>
 </ul>
 <h3 id="attributeオプション"><a href="#attributeオプション">attributeオプション</a></h3>
-<p>By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:</p>
-<p>{% switchable-sample %}</p>
-<pre><code class="language-ts">// observed attribute name is "myvalue"
+<p>デフォルトでLitはすべてのパブリックリアクティブプロパティに対応する属性を作成します。
+プロパティ名をすべて小文字にしたものが相互変換する属性名になります。</p>
+<pre><code class="language-ts">// 相互変換する属性名はmyvalueになります。
 @property({ type: Number })
 myValue = 0;
 </code></pre>
-<pre><code class="language-js">// observed attribute name is "myvalue"
+<pre><code class="language-js">// 相互変換する属性名はmyvalueになります。
 static properties = {
   myValue: { type: Number },
 };
@@ -250,14 +250,12 @@ constructor() {
   this.myValue = 0;
 }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>To create an observed attribute with a different name, set <code>attribute</code> to a string:</p>
-<p>{% switchable-sample %}</p>
-<pre><code class="language-ts">// Observed attribute will be called my-name
+<p><code>attribute</code>オプションに文字列を渡すと相互変換する属性名を違う名前にすることができます。</p>
+<pre><code class="language-ts">// 相互変換する属性名はmy-nameになります。
 @property({ attribute: 'my-name' })
 myName = 'Ogden';
 </code></pre>
-<pre><code class="language-js">// Observed attribute will be called my-name
+<pre><code class="language-js">// 相互変換する属性名はmy-nameになります。
 static properties = {
   myName: { attribute: 'my-name' },
 };
@@ -267,8 +265,8 @@ constructor() {
   this.myName = 'Ogden'
 }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>To prevent an observed attribute from being created for a property, set <code>attribute</code> to <code>false</code>. The property will not be initialized from attributes in markup, and attribute changes won't affect it.</p>
+<p>To prevent an observed attribute from being created for a property, set <code>attribute</code> to <code>false</code>.
+The property will not be initialized from attributes in markup, and attribute changes won't affect it.</p>
 <p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// No observed attribute for this property
 @property({ attribute: false })

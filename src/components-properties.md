@@ -288,18 +288,17 @@ reflectオプションをセットするとプロパティが変更されると�
 
 ### attributeオプション
 
-By default, Lit creates a corresponding observed attribute for all public reactive properties. The name of the observed attribute is the property name, lowercased:
-
-{% switchable-sample %}
+デフォルトでLitはすべてのパブリックリアクティブプロパティに対応する属性を作成します。
+プロパティ名をすべて小文字にしたものが相互変換する属性名になります。
 
 ```ts
-// observed attribute name is "myvalue"
+// 相互変換する属性名はmyvalueになります。
 @property({ type: Number })
 myValue = 0;
 ```
 
 ```js
-// observed attribute name is "myvalue"
+// 相互変換する属性名はmyvalueになります。
 static properties = {
   myValue: { type: Number },
 };
@@ -310,20 +309,17 @@ constructor() {
 }
 ```
 
-{% endswitchable-sample %}
+`attribute`オプションに文字列を渡すと相互変換する属性名を違う名前にすることができます。
 
-To create an observed attribute with a different name, set `attribute` to a string:
-
-{% switchable-sample %}
 
 ```ts
-// Observed attribute will be called my-name
+// 相互変換する属性名はmy-nameになります。
 @property({ attribute: 'my-name' })
 myName = 'Ogden';
 ```
 
 ```js
-// Observed attribute will be called my-name
+// 相互変換する属性名はmy-nameになります。
 static properties = {
   myName: { attribute: 'my-name' },
 };
@@ -334,9 +330,8 @@ constructor() {
 }
 ```
 
-{% endswitchable-sample %}
-
-To prevent an observed attribute from being created for a property, set `attribute` to `false`. The property will not be initialized from attributes in markup, and attribute changes won't affect it.
+To prevent an observed attribute from being created for a property, set `attribute` to `false`.
+The property will not be initialized from attributes in markup, and attribute changes won't affect it.
 
 {% switchable-sample %}
 
