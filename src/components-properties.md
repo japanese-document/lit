@@ -353,7 +353,7 @@ constructor() {
 
 インターナルリアクティブステートは要素の属性の影響をまったく受けません。
 
-An observed attribute can be used to provide an initial value for a property from markup. For example:
+下記のようにマークアップで相互変換する属性に値をセットすることによってコンポーネントのプロパティの初期値をセットすることができます。
 
 ```html
 <my-element myvalue="99"></my-element>
