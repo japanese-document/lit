@@ -361,11 +361,9 @@ constructor() {
 
 ### デフォルトコンバータ
 
-Lit has a default converter that handles `String`, `Number`, `Boolean`, `Array`, and `Object` property types.
+Litのデフォルトコンバータは`String`、`Number`、`Boolean`、`Array`、`Object`をプロパティの型として取り扱います。
 
 To use the default converter, specify the `type` option in your property declaration:
-
-{% switchable-sample %}
 
 ```ts
 // Use the default converter
@@ -384,8 +382,6 @@ constructor() {
   this.count = 0;
 }
 ```
-
-{% endswitchable-sample %}
 
 If you don't specify a type _or_ a custom converter for a property, it behaves as if you'd specified `type: String`.
 

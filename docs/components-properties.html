@@ -286,9 +286,8 @@ constructor() {
 <pre><code class="language-html">&lt;my-element myvalue="99"&gt;&lt;/my-element&gt;
 </code></pre>
 <h3 id="デフォルトコンバータ"><a href="#デフォルトコンバータ">デフォルトコンバータ</a></h3>
-<p>Lit has a default converter that handles <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Array</code>, and <code>Object</code> property types.</p>
+<p>Litのデフォルトコンバータは<code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Array</code>、<code>Object</code>をプロパティの型として取り扱います。</p>
 <p>To use the default converter, specify the <code>type</code> option in your property declaration:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// Use the default converter
 @property({ type: Number })
 count = 0;
@@ -303,7 +302,6 @@ constructor() {
   this.count = 0;
 }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>If you don't specify a type <em>or</em> a custom converter for a property, it behaves as if you'd specified <code>type: String</code>.</p>
 <p>The tables below shows how the default converter handles conversion for each type.</p>
 <p><strong>From attribute to property</strong></p>
