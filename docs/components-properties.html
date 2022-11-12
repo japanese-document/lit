@@ -287,12 +287,12 @@ constructor() {
 </code></pre>
 <h3 id="デフォルトコンバータ"><a href="#デフォルトコンバータ">デフォルトコンバータ</a></h3>
 <p>Litのデフォルトコンバータは<code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Array</code>、<code>Object</code>をプロパティの型として取り扱います。</p>
-<p>To use the default converter, specify the <code>type</code> option in your property declaration:</p>
-<pre><code class="language-ts">// Use the default converter
+<p>デフォルトコンバータを使うには、プロパティに<code>type</code>プロパティオプションをセットします。</p>
+<pre><code class="language-ts">// デフォルトコンバータを使います。
 @property({ type: Number })
 count = 0;
 </code></pre>
-<pre><code class="language-js">// Use the default converter
+<pre><code class="language-js">// デフォルトコンバータを使います。
 static properties = {
   count: { type: Number },
 };
@@ -302,14 +302,15 @@ constructor() {
   this.count = 0;
 }
 </code></pre>
-<p>If you don't specify a type <em>or</em> a custom converter for a property, it behaves as if you'd specified <code>type: String</code>.</p>
-<p>The tables below shows how the default converter handles conversion for each type.</p>
-<p><strong>From attribute to property</strong></p>
+<p>デフォルトコンバータもしくはカスタムカスタムコンバータをプロパティにセットしない場合、
+デフォルトで<code>type: String</code>がセットされます。</p>
+<p>各デフォルトコンバータの動作を下記の表で説明します。</p>
+<h4 id="要素の属性からコンポーネントのプロパティへ"><a href="#要素の属性からコンポーネントのプロパティへ">要素の属性からコンポーネントのプロパティへ</a></h4>
 <table>
 <thead>
 <tr>
-<th align="left">Type</th>
-<th align="left">Conversion</th>
+<th align="left">型</th>
+<th align="left">変換</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -330,12 +331,12 @@ constructor() {
 </tr>
 </tbody></table>
 <p>For any case except <code>Boolean</code>, if the element doesn't have the corresponding attribute, the property keeps its default value, or <code>undefined</code> if no default is set.</p>
-<p><strong>From property to attribute</strong></p>
+<h4 id="コンポーネントのプロパティから要素の属性へ"><a href="#コンポーネントのプロパティから要素の属性へ">コンポーネントのプロパティから要素の属性へ</a></h4>
 <table>
 <thead>
 <tr>
-<th align="left">Type</th>
-<th align="left">Conversion</th>
+<th align="left">型</th>
+<th align="left">変換</th>
 </tr>
 </thead>
 <tbody><tr>

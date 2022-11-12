@@ -363,16 +363,16 @@ constructor() {
 
 Litのデフォルトコンバータは`String`、`Number`、`Boolean`、`Array`、`Object`をプロパティの型として取り扱います。
 
-To use the default converter, specify the `type` option in your property declaration:
+デフォルトコンバータを使うには、プロパティに`type`プロパティオプションをセットします。
 
 ```ts
-// Use the default converter
+// デフォルトコンバータを使います。
 @property({ type: Number })
 count = 0;
 ```
 
 ```js
-// Use the default converter
+// デフォルトコンバータを使います。
 static properties = {
   count: { type: Number },
 };
@@ -383,13 +383,14 @@ constructor() {
 }
 ```
 
-If you don't specify a type _or_ a custom converter for a property, it behaves as if you'd specified `type: String`.
+デフォルトコンバータもしくはカスタムカスタムコンバータをプロパティにセットしない場合、
+デフォルトで`type: String`がセットされます。
 
-The tables below shows how the default converter handles conversion for each type.
+各デフォルトコンバータの動作を下記の表で説明します。
 
-**From attribute to property**
+#### 要素の属性からコンポーネントのプロパティへ
 
-| Type    | Conversion |
+| 型 | 変換 |
 |:--------|:-----------|
 | `String`  | If the element has the corresponding attribute, set the property to the attribute value. |
 | `Number`  | If the element has the corresponding attribute, set the property to `Number(attributeValue)`. |
@@ -398,9 +399,9 @@ The tables below shows how the default converter handles conversion for each typ
 
 For any case except `Boolean`, if the element doesn't have the corresponding attribute, the property keeps its default value, or `undefined` if no default is set.
 
-**From property to attribute**
+#### コンポーネントのプロパティから要素の属性へ
 
-| Type    | Conversion |
+| 型 | 変換 |
 |:--------|:-----------|
 | `String`, `Number` | If property is defined and non-null, set the attribute to the property value.<br>If property is null or undefined, remove the attribute. |
 | `Boolean` | If property is truthy, create the attribute and set its value to an empty string. <br>If property is falsy, remove the attribute |
