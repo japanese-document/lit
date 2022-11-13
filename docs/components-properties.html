@@ -41,7 +41,7 @@
 <p>Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。</p>
 <ul>
 <li><strong>Reactive updates</strong> Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 </li>
-<li><strong>Attribute handling</strong> デフォルトでLitはコンポーネントのプロパティに対応した相互変換される要素の属性を用意します。そして、その属性が変更されるとそれに対応するプロパティを更新します。プロパティオプションの設定でプロパティの値を属性に反映することができます。</li>
+<li><strong>Attribute handling</strong> デフォルトでLitはコンポーネントのプロパティと対を成す要素の属性を用意します。そして、その属性が変更されるとそれに対応するプロパティを更新します。プロパティオプションの設定でプロパティの値を属性に反映することができます。</li>
 <li><strong>Superclass properties</strong> Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 </li>
 <li><strong>Element upgrade</strong> コンポーネントに対応しているcustom elementsが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litはcustom elementsにコンポーネントを適用します。
 custom elementsにセットされているプロパティや属性をコンポーネントに反映します。</li>
@@ -315,19 +315,19 @@ constructor() {
 </thead>
 <tbody><tr>
 <td align="left"><code>String</code></td>
-<td align="left">If the element has the corresponding attribute, set the property to the attribute value.</td>
+<td align="left">要素に対応する属性があると、プロパティにその属性の値をセットします。</td>
 </tr>
 <tr>
 <td align="left"><code>Number</code></td>
-<td align="left">If the element has the corresponding attribute, set the property to <code>Number(attributeValue)</code>.</td>
+<td align="left">要素に対応する属性があると、プロパティに<code>Number(attributeValue)</code>をセットします。</td>
 </tr>
 <tr>
 <td align="left"><code>Boolean</code></td>
-<td align="left">If the element has the corresponding attribute, set the property to true.<br>If not, set the property to false.</td>
+<td align="left">要素に対応する属性があると、プロパティに<code>true</code>をセットします。<br>そうでない場合、プロパティに<code>false</code>をセットします。</td>
 </tr>
 <tr>
 <td align="left"><code>Object</code>, <code>Array</code></td>
-<td align="left">If the element has the corresponding attribute, set the property value to <code>JSON.parse(attributeValue)</code>.</td>
+<td align="left">要素に対応する属性があると、プロパティに<code>JSON.parse(attributeValue)</code>をセットします。</td>
 </tr>
 </tbody></table>
 <p>For any case except <code>Boolean</code>, if the element doesn't have the corresponding attribute, the property keeps its default value, or <code>undefined</code> if no default is set.</p>

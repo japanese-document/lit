@@ -24,7 +24,7 @@ class MyElement extends LitElement {
 Litはリアクティブプロパティとそれに関連した要素の属性を取り扱います。
 
 *   **Reactive updates** Litは各リアクティブプロパティ毎にゲッタ/セッタのペアを生成します。リアクティブプロパティが変更されると、コンポーネントは更新をスケジューリングします。 
-*   **Attribute handling** デフォルトでLitはコンポーネントのプロパティに対応した相互変換される要素の属性を用意します。そして、その属性が変更されるとそれに対応するプロパティを更新します。プロパティオプションの設定でプロパティの値を属性に反映することができます。
+*   **Attribute handling** デフォルトでLitはコンポーネントのプロパティと対を成す要素の属性を用意します。そして、その属性が変更されるとそれに対応するプロパティを更新します。プロパティオプションの設定でプロパティの値を属性に反映することができます。
 *   **Superclass properties** Litはスーパークラスで設定したプロパティオプションを自動的に適用します。そのオプションを変更したい場合を除いて再度プロパティを定義する必要はありません。 
 *   **Element upgrade** コンポーネントに対応しているcustom elementsが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litはcustom elementsにコンポーネントを適用します。
 custom elementsにセットされているプロパティや属性をコンポーネントに反映します。
@@ -392,10 +392,10 @@ constructor() {
 
 | 型 | 変換 |
 |:--------|:-----------|
-| `String`  | If the element has the corresponding attribute, set the property to the attribute value. |
-| `Number`  | If the element has the corresponding attribute, set the property to `Number(attributeValue)`. |
-| `Boolean` | If the element has the corresponding attribute, set the property to true.<br>If not, set the property to false. |
-| `Object`, `Array` | If the element has the corresponding attribute, set the property value to `JSON.parse(attributeValue)`. |
+| `String`  | 要素に対応する属性があると、プロパティにその属性の値をセットします。 |
+| `Number`  | 要素に対応する属性があると、プロパティに`Number(attributeValue)`をセットします。 |
+| `Boolean` | 要素に対応する属性があると、プロパティに`true`をセットします。<br>そうでない場合、プロパティに`false`をセットします。 |
+| `Object`, `Array` | 要素に対応する属性があると、プロパティに`JSON.parse(attributeValue)`をセットします。 |
 
 For any case except `Boolean`, if the element doesn't have the corresponding attribute, the property keeps its default value, or `undefined` if no default is set.
 
