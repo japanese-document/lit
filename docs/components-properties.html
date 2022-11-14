@@ -330,7 +330,9 @@ constructor() {
 <td align="left">要素に対応する属性があると、プロパティに<code>JSON.parse(attributeValue)</code>をセットします。</td>
 </tr>
 </tbody></table>
-<p>For any case except <code>Boolean</code>, if the element doesn't have the corresponding attribute, the property keeps its default value, or <code>undefined</code> if no default is set.</p>
+<p><code>Boolean</code>以外の場合で 
+要素に対応する属性がない場合、
+プロパティはデフォルトの値もしくはデフォルトの値がセットされていない場合は<code>undefined</code>になります。</p>
 <h4 id="コンポーネントのプロパティから要素の属性へ"><a href="#コンポーネントのプロパティから要素の属性へ">コンポーネントのプロパティから要素の属性へ</a></h4>
 <table>
 <thead>
