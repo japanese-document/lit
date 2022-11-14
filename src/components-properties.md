@@ -397,7 +397,9 @@ constructor() {
 | `Boolean` | 要素に対応する属性があると、プロパティに`true`をセットします。<br>そうでない場合、プロパティに`false`をセットします。 |
 | `Object`, `Array` | 要素に対応する属性があると、プロパティに`JSON.parse(attributeValue)`をセットします。 |
 
-For any case except `Boolean`, if the element doesn't have the corresponding attribute, the property keeps its default value, or `undefined` if no default is set.
+`Boolean`以外の場合で 
+要素に対応する属性がない場合、
+プロパティはデフォルトの値もしくはデフォルトの値がセットされていない場合は`undefined`になります。
 
 #### コンポーネントのプロパティから要素の属性へ
 
