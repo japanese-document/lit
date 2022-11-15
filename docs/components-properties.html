@@ -343,11 +343,11 @@ constructor() {
 </thead>
 <tbody><tr>
 <td align="left"><code>String</code>, <code>Number</code></td>
-<td align="left">プロパティが定義されていてnullでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、属性を削除します。</td>
+<td align="left">プロパティがnullもしくはundefinedでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、属性を削除します。</td>
 </tr>
 <tr>
 <td align="left"><code>Boolean</code></td>
-<td align="left">If property is truthy, create the attribute and set its value to an empty string. <br>If property is falsy, remove the attribute</td>
+<td align="left">プロパティの値がtrueになる値の場合、要素に空の属性を作成します。 <br>プロパティの値がfalseに値の場合、要素から属性を削除します。</td>
 </tr>
 <tr>
 <td align="left"><code>Object</code>, <code>Array</code></td>
