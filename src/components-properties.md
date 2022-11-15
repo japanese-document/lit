@@ -405,7 +405,7 @@ constructor() {
 
 | 型 | 変換 |
 |:--------|:-----------|
-| `String`, `Number` | If property is defined and non-null, set the attribute to the property value.<br>If property is null or undefined, remove the attribute. |
+| `String`, `Number` | プロパティが定義されていてnullでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、属性を削除します。 |
 | `Boolean` | If property is truthy, create the attribute and set its value to an empty string. <br>If property is falsy, remove the attribute |
 | `Object`, `Array` | If property is defined and non-null, set the attribute to `JSON.stringify(propertyValue)`.<br>If property is null or undefined, remove the attribute. |
 
