@@ -110,7 +110,7 @@ constructor()
 <code>attribute</code>をfalseにすると<code>converter</code>、<code>reflect</code>、<code>type</code>オプションは無視されます。
 詳しくは<a class="Link" href="#attributeオプション">attributeオプション</a>を見てください。</p>
 <h4 id="converter"><a href="#converter">converter</a></h4>
-<p>プロパティと属性を相互に変換するための<a class="Link" href="#カスタムコンバータ">カスタムコンバータ</a>を渡します。
+<p>プロパティと属性を相互に変換するための<a class="Link" href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a>を渡します。
 渡されない場合は<a class="Link" href="#デフォルトコンバータ">デフォルトコンバータ</a>を使います。</p>
 <h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
 <p>プロパティがセットされる毎に実行されます。更新を発動するか判定します。
@@ -186,11 +186,11 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 <li>コンポーネントの<code>update</code>メソッドが実行されます。(変更されたプロパティが属性に反映されます。コンポーネントのテンプレートが再レンダリングされます。)</li>
 </ol>
 <p>プロパティの値がオブジェクトもしくは配列の場合、それ自体を置き換えないと更新が発動しません。
-詳しくは<a class="Link" href="#プロパティでオブジェクトと配列を扱う際の注意点">プロパティでオブジェクトと配列を扱う際の注意点</a>を見てください。</p>
+詳しくは<a class="Link" href="#プロパティでオブジェクトや配列を扱う際の注意点">プロパティでオブジェクトや配列を扱う際の注意点</a>を見てください。</p>
 <p>リアクティブアップデートサイクルのフックは多数あります。それらを変更することができます。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">リアクティブアップデートサイクル</a>を見てください。</p>
 <p>プロパティの変更判定の詳しい情報は<a class="Link" href="#変更判定の変更">変更判定の変更</a>を見てください。</p>
-<h3 id="プロパティでオブジェクトと配列を扱う際の注意点"><a href="#プロパティでオブジェクトと配列を扱う際の注意点">プロパティでオブジェクトと配列を扱う際の注意点</a></h3>
+<h3 id="プロパティでオブジェクトや配列を扱う際の注意点"><a href="#プロパティでオブジェクトや配列を扱う際の注意点">プロパティでオブジェクトや配列を扱う際の注意点</a></h3>
 <p>プロパティの値がオブジェクトもしくは配列の場合、その参照を変更しないと更新は発動しません。
 プロパティの値がオブジェクトもしくは配列の場合、下記の2つの方法で操作することができます。</p>
 <h4 id="値の置き換える"><a href="#値の置き換える">値の置き換える</a></h4>
@@ -302,7 +302,7 @@ constructor() {
   this.count = 0;
 }
 </code></pre>
-<p>デフォルトコンバータもしくはカスタムカスタムコンバータをプロパティにセットしない場合、
+<p>デフォルトコンバータもしくはカスタムカスタムプロパティコンバータをプロパティにセットしない場合、
 デフォルトで<code>type: String</code>がセットされます。</p>
 <p>各デフォルトコンバータの動作を下記の表で説明します。</p>
 <h4 id="要素の属性からコンポーネントのプロパティへ"><a href="#要素の属性からコンポーネントのプロパティへ">要素の属性からコンポーネントのプロパティへ</a></h4>
@@ -343,7 +343,7 @@ constructor() {
 </thead>
 <tbody><tr>
 <td align="left"><code>String</code>, <code>Number</code></td>
-<td align="left">プロパティがnullもしくはundefinedでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、属性を削除します。</td>
+<td align="left">プロパティがnullもしくはundefinedでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、要素から属性を削除します。</td>
 </tr>
 <tr>
 <td align="left"><code>Boolean</code></td>
@@ -351,25 +351,26 @@ constructor() {
 </tr>
 <tr>
 <td align="left"><code>Object</code>, <code>Array</code></td>
-<td align="left">If property is defined and non-null, set the attribute to <code>JSON.stringify(propertyValue)</code>.<br>If property is null or undefined, remove the attribute.</td>
+<td align="left">プロパティがnullもしくはundefinedでない場合、属性に<code>JSON.stringify(propertyValue)</code>をセットします。<br>プロパティの値がnullもしくはundefinedの場合、要素から属性を削除します。</td>
 </tr>
 </tbody></table>
-<h3 id="カスタムコンバータ"><a href="#カスタムコンバータ">カスタムコンバータ</a></h3>
-<p>You can specify a custom property converter in your property declaration with the <code>converter</code> option:</p>
+<h3 id="カスタムプロパティコンバータ"><a href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a></h3>
+<p>カスタムプロパティコンバータはプロパティの宣言時にプロパティオプションの<code>converter</code>オプションでセットすることができます。</p>
 <pre><code class="language-js">myProp: {
-  converter: // Custom property converter
+  converter: // カスタムプロパティコンバータ
 }
 </code></pre>
-<p><code>converter</code> can be an object or a function. If it is an object, it can have keys for <code>fromAttribute</code> and <code>toAttribute</code>:</p>
+<p><code>converter</code>オプションにはオブジェクト(object)もしくは関数をセットすることができます。
+オブジェクトをセットする場合、下記のように<code>fromAttribute</code>と<code>toAttribute</code>を設定することができます。</p>
 <pre><code class="language-js">prop1: {
   converter: {
     fromAttribute: (value, type) =&gt; {
-      // `value` is a string
-      // Convert it to a value of type `type` and return it
+      // `value`は文字列です。
+      // それを`type`型に変換して返します。
     },
     toAttribute: (value, type) =&gt; {
-      // `value` is of type `type`
-      // Convert it to a string and return it
+      // `value` は`type`型です。
+      // それを文字列に変換して返します。
     }
   }
 }

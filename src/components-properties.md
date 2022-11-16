@@ -120,7 +120,7 @@ class MyElement extends LitElement {
 
 #### converter
 
-プロパティと属性を相互に変換するための[カスタムコンバータ](#カスタムコンバータ)を渡します。
+プロパティと属性を相互に変換するための[カスタムプロパティコンバータ](#カスタムプロパティコンバータ)を渡します。
 渡されない場合は[デフォルトコンバータ](#デフォルトコンバータ)を使います。
 
 #### hasChanged
@@ -220,14 +220,14 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 1. コンポーネントの`update`メソッドが実行されます。(変更されたプロパティが属性に反映されます。コンポーネントのテンプレートが再レンダリングされます。)
 
 プロパティの値がオブジェクトもしくは配列の場合、それ自体を置き換えないと更新が発動しません。
-詳しくは[プロパティでオブジェクトと配列を扱う際の注意点](#プロパティでオブジェクトと配列を扱う際の注意点)を見てください。
+詳しくは[プロパティでオブジェクトや配列を扱う際の注意点](#プロパティでオブジェクトや配列を扱う際の注意点)を見てください。
 
 リアクティブアップデートサイクルのフックは多数あります。それらを変更することができます。
 詳しくは[リアクティブアップデートサイクル](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
 
 プロパティの変更判定の詳しい情報は[変更判定の変更](#変更判定の変更)を見てください。
 
-### プロパティでオブジェクトと配列を扱う際の注意点
+### プロパティでオブジェクトや配列を扱う際の注意点
 
 プロパティの値がオブジェクトもしくは配列の場合、その参照を変更しないと更新は発動しません。
 プロパティの値がオブジェクトもしくは配列の場合、下記の2つの方法で操作することができます。
@@ -383,7 +383,7 @@ constructor() {
 }
 ```
 
-デフォルトコンバータもしくはカスタムカスタムコンバータをプロパティにセットしない場合、
+デフォルトコンバータもしくはカスタムカスタムプロパティコンバータをプロパティにセットしない場合、
 デフォルトで`type: String`がセットされます。
 
 各デフォルトコンバータの動作を下記の表で説明します。
@@ -405,33 +405,34 @@ constructor() {
 
 | 型 | 変換 |
 |:--------|:-----------|
-| `String`, `Number` | プロパティがnullもしくはundefinedでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、属性を削除します。 |
+| `String`, `Number` | プロパティがnullもしくはundefinedでない場合、属性にプロパティの値をセットします。<br>プロパティの値がnullもしくはundefinedの場合、要素から属性を削除します。 |
 | `Boolean` | プロパティの値がtrueになる値の場合、要素に空の属性を作成します。 <br>プロパティの値がfalseに値の場合、要素から属性を削除します。 |
-| `Object`, `Array` | If property is defined and non-null, set the attribute to `JSON.stringify(propertyValue)`.<br>If property is null or undefined, remove the attribute. |
+| `Object`, `Array` | プロパティがnullもしくはundefinedでない場合、属性に`JSON.stringify(propertyValue)`をセットします。<br>プロパティの値がnullもしくはundefinedの場合、要素から属性を削除します。 |
 
+### カスタムプロパティコンバータ
 
-### カスタムコンバータ
-
-You can specify a custom property converter in your property declaration with the `converter` option:
+カスタムプロパティコンバータはプロパティの宣言時にプロパティオプションの`converter`オプションでセットすることができます。
 
 ```js
 myProp: {
-  converter: // Custom property converter
+  converter: // カスタムプロパティコンバータ
 }
 ```
 
-`converter` can be an object or a function. If it is an object, it can have keys for `fromAttribute` and `toAttribute`:
+`converter`オプションにはオブジェクト(object)もしくは関数をセットすることができます。
+オブジェクトをセットする場合、下記のように`fromAttribute`と`toAttribute`を設定することができます。
+
 
 ```js
 prop1: {
   converter: {
     fromAttribute: (value, type) => {
-      // `value` is a string
-      // Convert it to a value of type `type` and return it
+      // `value`は文字列です。
+      // それを`type`型に変換して返します。
     },
     toAttribute: (value, type) => {
-      // `value` is of type `type`
-      // Convert it to a string and return it
+      // `value` は`type`型です。
+      // それを文字列に変換して返します。
     }
   }
 }
