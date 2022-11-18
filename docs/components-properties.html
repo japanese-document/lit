@@ -386,21 +386,42 @@ constructor() {
 <p><code>toAttribute</code>をセットされていないプロパティは、デフォルトのコンバータが適用されます。</p>
 <p><code>toAttribute</code>が<code>null</code>もしくは<code>undefined</code>を返すと属性が削除されます。</p>
 <h3 id="reflectオプション"><a href="#reflectオプション">reflectオプション</a></h3>
-<p>You can configure a property so that whenever it changes, its value is reflected to its <a class="Link" href="#attributeオプション">corresponding attribute</a>. Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like <code>querySelector</code>.</p>
-<p>For example:</p>
-<pre><code class="language-js">// Value of property "active" will reflect to attribute "active"
-active: {reflect: true}
+<p>コンポーネントのプロパティが変更されると、それに<a class="Link" href="#attributeオプション">対応する要素の属性</a>に反映できるように設定することができます。
+反映された要素の属性はCSSセレクタに使うことができるので便利です。</p>
+<pre><code class="language-js">// nameプロパティの値は属性に反映されます。
+name: {reflect: true}
 </code></pre>
-<p>When the property changes, Lit sets the corresponding attribute value as described in <a class="Link" href="#デフォルトプロパティコンバータ">Using the default converter</a> or <a class="Link" href="#カスタムプロパティコンバータ">Providing a custom converter</a>.</p>
-<p>{% playground-example "properties/attributereflect" "my-element.ts" %}</p>
+<p>プロパティが変更されると、
+Litは<a class="Link" href="#デフォルトプロパティコンバータ">デフォルトプロパティコンバータ</a>もしくは<a class="Link" href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a>を使ってプロパティの値を変換します。その値を属性にセットします。</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property({type: Boolean, reflect: true})
+  active: boolean = false;
+
+  static styles = css`
+    :host {
+      display: inline-block;
+    }
+
+    :host([active]) {
+      border: 1px solid red;
+    }`;
+
+  render() {
+    return html`
+      &lt;span&gt;Active: ${this.active}&lt;/span&gt;
+      &lt;button @click="${() =&gt; this.active = !this.active}"&gt;Toggle active&lt;/button&gt;
+    `;
+  }
+}
+</code></pre>
 <p>Attributes should generally be considered input to the element from its owner, rather than under control of the element itself, so reflecting properties to attributes should be done sparingly. It's necessary today for cases like styling and accessibility, but this is likely to change as the platform adds features like the <a class="Link" href="https://wicg.github.io/custom-state-pseudo-class/"><code>:state</code> pseudo selector</a> and the <a class="Link" href="https://wicg.github.io/aom/spec/">Accessibility Object Model</a>, which fill these gaps.</p>
 <p>Reflecting properties of type object or array is not recommended. This can cause large objects to serialize to the DOM which can result in poor performance.</p>
-<div class="alert alert-info">
-
 <p><strong>Lit tracks reflection state during updates.</strong> You may have realized that if property changes are reflected to an attribute and attribute changes update the property, it has the potential to create an infinite loop. However, Lit tracks when properties and attributes are set specifically to prevent this from happening</p>
-</div>
-
-<h2 id="Custom_property_accessors_{#accessors}"><a href="#Custom_property_accessors_{#accessors}">Custom property accessors {#accessors}</a></h2>
+<h2 id="カスタムプロパティアクセサ"><a href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></h2>
 <p>By default, LitElement generates a getter/setter pair for all reactive properties. The setter is invoked whenever you set the property:</p>
 <p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// Declare a property
@@ -424,7 +445,7 @@ this.greeting = 'Hola'; // invokes greeting's generated property accessor
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <p>Generated accessors automatically call <code>requestUpdate()</code>, initiating an update if one has not already begun.</p>
-<h3 id="Creating_custom_property_accessors_{#accessors-custom}"><a href="#Creating_custom_property_accessors_{#accessors-custom}">Creating custom property accessors {#accessors-custom}</a></h3>
+<h3 id="カスタムプロパティアクセサを作成する"><a href="#カスタムプロパティアクセサを作成する">カスタムプロパティアクセサを作成する</a></h3>
 <p>To specify how getting and setting works for a property, you can define your own getter/setter pair. For example:</p>
 <p>{% switchable-sample %}</p>
 <pre><code class="language-ts">private _prop = 0;
