@@ -455,30 +455,51 @@ myProp: {
 
 ### reflectオプション
 
-You can configure a property so that whenever it changes, its value is reflected to its [corresponding attribute](#attributeオプション). Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like `querySelector`.
-
-For example:
+コンポーネントのプロパティが変更されると、それに[対応する要素の属性](#attributeオプション)に反映できるように設定することができます。
+反映された要素の属性はCSSセレクタに使うことができるので便利です。
 
 ```js
-// Value of property "active" will reflect to attribute "active"
-active: {reflect: true}
+// nameプロパティの値は属性に反映されます。
+name: {reflect: true}
 ```
 
-When the property changes, Lit sets the corresponding attribute value as described in [Using the default converter](#デフォルトプロパティコンバータ) or [Providing a custom converter](#カスタムプロパティコンバータ).
+プロパティが変更されると、
+Litは[デフォルトプロパティコンバータ](#デフォルトプロパティコンバータ)もしくは[カスタムプロパティコンバータ](#カスタムプロパティコンバータ)を使ってプロパティの値を変換します。その値を属性にセットします。
 
-{% playground-example "properties/attributereflect" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property({type: Boolean, reflect: true})
+  active: boolean = false;
+
+  static styles = css`
+    :host {
+      display: inline-block;
+    }
+
+    :host([active]) {
+      border: 1px solid red;
+    }`;
+
+  render() {
+    return html`
+      <span>Active: ${this.active}</span>
+      <button @click="${() => this.active = !this.active}">Toggle active</button>
+    `;
+  }
+}
+```
 
 Attributes should generally be considered input to the element from its owner, rather than under control of the element itself, so reflecting properties to attributes should be done sparingly. It's necessary today for cases like styling and accessibility, but this is likely to change as the platform adds features like the [`:state` pseudo selector](https://wicg.github.io/custom-state-pseudo-class/) and the [Accessibility Object Model](https://wicg.github.io/aom/spec/), which fill these gaps.
 
 Reflecting properties of type object or array is not recommended. This can cause large objects to serialize to the DOM which can result in poor performance.
 
-<div class="alert alert-info">
-
 **Lit tracks reflection state during updates.** You may have realized that if property changes are reflected to an attribute and attribute changes update the property, it has the potential to create an infinite loop. However, Lit tracks when properties and attributes are set specifically to prevent this from happening
 
-</div>
-
-## Custom property accessors {#accessors}
+## カスタムプロパティアクセサ
 
 By default, LitElement generates a getter/setter pair for all reactive properties. The setter is invoked whenever you set the property:
 
@@ -511,7 +532,7 @@ this.greeting = 'Hola'; // invokes greeting's generated property accessor
 
 Generated accessors automatically call `requestUpdate()`, initiating an update if one has not already begun.
 
-### Creating custom property accessors {#accessors-custom}
+### カスタムプロパティアクセサを作成する
 
 To specify how getting and setting works for a property, you can define your own getter/setter pair. For example:
 
