@@ -121,7 +121,7 @@ class MyElement extends LitElement {
 #### converter
 
 プロパティと属性を相互に変換するための[カスタムプロパティコンバータ](#カスタムプロパティコンバータ)を渡します。
-渡されない場合は[デフォルトコンバータ](#デフォルトコンバータ)を使います。
+渡されない場合は[デフォルトプロパティコンバータ](#デフォルトプロパティコンバータ)を使います。
 
 #### hasChanged
 
@@ -159,8 +159,8 @@ Litのデフォルトのコンバータはその文字列の値を指定され�
 プロパティから属性に変換する場合は、その逆です。
 `converter`オプションがセットされている場合、
 このオプションの値は`converter`オプションに渡されます。
-セットされていない場合、デフォルトコンバータは`String`に変換します。
-詳しくは[デフォルトコンバータ](#デフォルトコンバータ)を見てください。
+セットされていない場合、デフォルトプロパティコンバータは`String`に変換します。
+詳しくは[デフォルトプロパティコンバータ](#デフォルトプロパティコンバータ)を見てください。
 
 TypeScriptを使う場合は、このオプションはフィールドの型と一致させる必要があります。
 `type`オプションはLitのランタイムではシリアライズとデシリアライズに使われます。
@@ -359,20 +359,20 @@ constructor() {
 <my-element myvalue="99"></my-element>
 ```
 
-### デフォルトコンバータ
+### デフォルトプロパティコンバータ
 
-Litのデフォルトコンバータは`String`、`Number`、`Boolean`、`Array`、`Object`をプロパティの型として取り扱います。
+Litのデフォルトプロパティコンバータは`String`、`Number`、`Boolean`、`Array`、`Object`をプロパティの型として取り扱います。
 
-デフォルトコンバータを使うには、プロパティに`type`プロパティオプションをセットします。
+デフォルトプロパティコンバータを使うには、プロパティに`type`プロパティオプションをセットします。
 
 ```ts
-// デフォルトコンバータを使います。
+// デフォルトプロパティコンバータを使います。
 @property({ type: Number })
 count = 0;
 ```
 
 ```js
-// デフォルトコンバータを使います。
+// デフォルトプロパティコンバータを使います。
 static properties = {
   count: { type: Number },
 };
@@ -383,10 +383,10 @@ constructor() {
 }
 ```
 
-デフォルトコンバータもしくはカスタムカスタムプロパティコンバータをプロパティにセットしない場合、
+デフォルトプロパティコンバータもしくはカスタムプロパティコンバータをプロパティにセットしない場合、
 デフォルトで`type: String`がセットされます。
 
-各デフォルトコンバータの動作を下記の表で説明します。
+各デフォルトプロパティコンバータの動作を下記の表で説明します。
 
 #### 要素の属性からコンポーネントのプロパティへ
 
@@ -438,24 +438,24 @@ prop1: {
 }
 ```
 
-If `converter` is a function, it is used in place of `fromAttribute`:
+`converter`が関数の場合、その関数は上記の`fromAttribute`の役割を行います。
 
 ```js
 myProp: {
   converter: (value, type) => {
-    // `value` is a string
-    // Convert it to a value of type `type` and return it
+      // `value`は文字列です。
+      // それを`type`型に変換して返します。
   }
 }
 ```
 
-If no `toAttribute` function is supplied for a reflected attribute, the attribute is set to the property value using the default converter.
+`toAttribute`をセットされていないプロパティは、デフォルトのコンバータが適用されます。
 
-If `toAttribute` returns `null` or `undefined`, the attribute is removed.
+`toAttribute`が`null`もしくは`undefined`を返すと属性が削除されます。
 
 ### reflectオプション
 
-You can configure a property so that whenever it changes, its value is reflected to its [corresponding attribute](#observed-attributes). Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like `querySelector`.
+You can configure a property so that whenever it changes, its value is reflected to its [corresponding attribute](#attributeオプション). Reflected attributes are useful because attributes are visible to CSS, and to DOM APIs like `querySelector`.
 
 For example:
 
@@ -464,7 +464,7 @@ For example:
 active: {reflect: true}
 ```
 
-When the property changes, Lit sets the corresponding attribute value as described in [Using the default converter](#conversion-type) or [Providing a custom converter](#conversion-converter).
+When the property changes, Lit sets the corresponding attribute value as described in [Using the default converter](#デフォルトプロパティコンバータ) or [Providing a custom converter](#カスタムプロパティコンバータ).
 
 {% playground-example "properties/attributereflect" "my-element.ts" %}
 
