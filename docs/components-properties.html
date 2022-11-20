@@ -418,9 +418,14 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Attributes should generally be considered input to the element from its owner, rather than under control of the element itself, so reflecting properties to attributes should be done sparingly. It's necessary today for cases like styling and accessibility, but this is likely to change as the platform adds features like the <a class="Link" href="https://wicg.github.io/custom-state-pseudo-class/"><code>:state</code> pseudo selector</a> and the <a class="Link" href="https://wicg.github.io/aom/spec/">Accessibility Object Model</a>, which fill these gaps.</p>
-<p>Reflecting properties of type object or array is not recommended. This can cause large objects to serialize to the DOM which can result in poor performance.</p>
-<p><strong>Lit tracks reflection state during updates.</strong> You may have realized that if property changes are reflected to an attribute and attribute changes update the property, it has the potential to create an infinite loop. However, Lit tracks when properties and attributes are set specifically to prevent this from happening</p>
+<p>一般的に属性は要素への外部からの入力とみなされます。だから、要素の内部に保持されているプロパティの値を属性に反映する際は注意する必要があります。
+今はスタイルやアクセシビリティのためにそうすることが必要です。
+将来、<a class="Link" href="https://wicg.github.io/custom-state-pseudo-class/"><code>:state</code> pseudo selector</a>と<a class="Link" href="https://wicg.github.io/aom/spec/">Accessibility Object Model</a>がサポートされれば、そのために属性を反映する必要はなくなります。</p>
+<p>大きいオブジェクトのシリアライズはパフォーマンスの低下をもたらす原因になるので、
+型がオブジェクトもしくは配列のプロパティを属性に反映することはお勧めしません。</p>
+<p>更新している間、Litはステートの反映を確認します。
+プロパティの変更が属性に反映されて、属性の変更がプロパティを更新することで無限ループが発生する可能性があると不安に思うかもしれません。
+これを防ぐために、Litはプロパティや属性がセットされると確認します。</p>
 <h2 id="カスタムプロパティアクセサ"><a href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></h2>
 <p>By default, LitElement generates a getter/setter pair for all reactive properties. The setter is invoked whenever you set the property:</p>
 <p>{% switchable-sample %}</p>
