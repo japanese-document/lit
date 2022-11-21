@@ -427,16 +427,16 @@ class MyElement extends LitElement {
 プロパティの変更が属性に反映されて、属性の変更がプロパティを更新することで無限ループが発生する可能性があると不安に思うかもしれません。
 これを防ぐために、Litはプロパティや属性がセットされると確認します。</p>
 <h2 id="カスタムプロパティアクセサ"><a href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></h2>
-<p>By default, LitElement generates a getter/setter pair for all reactive properties. The setter is invoked whenever you set the property:</p>
-<p>{% switchable-sample %}</p>
-<pre><code class="language-ts">// Declare a property
+<p>デフォルトでLitElementはすべてのリアクティブプロパティに対してセッタ/ゲッタのペアを生成します。
+プロパティをセットする毎にセッタが実行されます。</p>
+<pre><code class="language-ts">// プロパティの宣言
 @property()
 greeting: string = 'Hello';
 ...
-// Later, set the property
-this.greeting = 'Hola'; // invokes greeting's generated property accessor
+// 後にプロパティをセットします。
+this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサを実行します。
 </code></pre>
-<pre><code class="language-js">// Declare a property
+<pre><code class="language-js">// プロパティの宣言
 static properties = {
   greeting: {},
 }
@@ -445,14 +445,13 @@ constructor() {
   this.greeting = 'Hello';
 }
 ...
-// Later, set the property
-this.greeting = 'Hola'; // invokes greeting's generated property accessor
+// 後にプロパティをセットします。
+this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサを実行します。
 </code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>Generated accessors automatically call <code>requestUpdate()</code>, initiating an update if one has not already begun.</p>
+<p>生成されたアクセサは自動的に<code>requestUpdate()</code>を実行します。
+そして、更新中でない場合、更新を開始します。</p>
 <h3 id="カスタムプロパティアクセサを作成する"><a href="#カスタムプロパティアクセサを作成する">カスタムプロパティアクセサを作成する</a></h3>
-<p>To specify how getting and setting works for a property, you can define your own getter/setter pair. For example:</p>
-<p>{% switchable-sample %}</p>
+<p>下記のようにプロパティのゲッタとセッタを変更することで、プロパティを取得する処理やセットする処理を変更することができます。</p>
 <pre><code class="language-ts">private _prop = 0;
 
 set prop(val: number) {
@@ -478,7 +477,6 @@ set prop(val) {
 
 get prop() { return this._prop; }
 </code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>To use custom property accessors with the <code>@property</code> or <code>@state</code> decorators, put the decorator on the getter, as shown above.</p>
 <p>The setters that Lit generates automatically call <code>requestUpdate()</code>. If you write your own setter you must call <code>requestUpdate()</code> manually, supplying the property name and its old value.</p>
 <p>In most cases, <strong>you do not need to create custom property accessors.</strong> To compute values from existing properties, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a> callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a> callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.</p>
