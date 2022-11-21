@@ -506,21 +506,20 @@ class MyElement extends LitElement {
 
 ## カスタムプロパティアクセサ
 
-By default, LitElement generates a getter/setter pair for all reactive properties. The setter is invoked whenever you set the property:
-
-{% switchable-sample %}
+デフォルトでLitElementはすべてのリアクティブプロパティに対してセッタ/ゲッタのペアを生成します。
+プロパティをセットする毎にセッタが実行されます。
 
 ```ts
-// Declare a property
+// プロパティの宣言
 @property()
 greeting: string = 'Hello';
 ...
-// Later, set the property
-this.greeting = 'Hola'; // invokes greeting's generated property accessor
+// 後にプロパティをセットします。
+this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサを実行します。
 ```
 
 ```js
-// Declare a property
+// プロパティの宣言
 static properties = {
   greeting: {},
 }
@@ -529,19 +528,16 @@ constructor() {
   this.greeting = 'Hello';
 }
 ...
-// Later, set the property
-this.greeting = 'Hola'; // invokes greeting's generated property accessor
+// 後にプロパティをセットします。
+this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサを実行します。
 ```
 
-{% endswitchable-sample %}
-
-Generated accessors automatically call `requestUpdate()`, initiating an update if one has not already begun.
+生成されたアクセサは自動的に`requestUpdate()`を実行します。
+そして、更新中でない場合、更新を開始します。
 
 ### カスタムプロパティアクセサを作成する
 
-To specify how getting and setting works for a property, you can define your own getter/setter pair. For example:
-
-{% switchable-sample %}
+下記のようにプロパティのゲッタとセッタを変更することで、プロパティを取得する処理やセットする処理を変更することができます。
 
 ```ts
 private _prop = 0;
@@ -571,8 +567,6 @@ set prop(val) {
 
 get prop() { return this._prop; }
 ```
-
-{% endswitchable-sample %}
 
 To use custom property accessors with the `@property` or `@state` decorators, put the decorator on the getter, as shown above.
 
