@@ -568,11 +568,14 @@ set prop(val) {
 get prop() { return this._prop; }
 ```
 
-To use custom property accessors with the `@property` or `@state` decorators, put the decorator on the getter, as shown above.
+`@property`や`@state`と一緒にカスタムプロパティアクセサを設定する際は、上記のようにゲッタにデコレータを配置します。
 
-The setters that Lit generates automatically call `requestUpdate()`. If you write your own setter you must call `requestUpdate()` manually, supplying the property name and its old value.
+Litが生成したセッタは自動的に`requestUpdate()`を実行します。
+セッタを変更する場合、上記のようにプロパティ名とその変更前の値を`requestUpdate()`を渡して実行する必要があります。
 
-In most cases, **you do not need to create custom property accessors.** To compute values from existing properties, we recommend using the [`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate) callback, which allows you to set values during the update cycle without triggering an additional update. To perform a custom action after the element updates, we recommend using the [`updated`](https://lit.dev/docs/components/lifecycle/#updated) callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.
+ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
+To compute values from existing properties, we recommend using the [`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate) callback, which allows you to set values during the update cycle without triggering an additional update.
+To perform a custom action after the element updates, we recommend using the [`updated`](https://lit.dev/docs/components/lifecycle/#updated) callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.
 
 If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
 
