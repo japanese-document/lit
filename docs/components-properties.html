@@ -481,9 +481,10 @@ get prop() { return this._prop; }
 <p>Litが生成したセッタは自動的に<code>requestUpdate()</code>を実行します。
 セッタを変更する場合、上記のようにプロパティ名とその変更前の値を<code>requestUpdate()</code>を渡して実行する必要があります。</p>
 <p>ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
-To compute values from existing properties, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a> callback, which allows you to set values during the update cycle without triggering an additional update.
-To perform a custom action after the element updates, we recommend using the <a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a> callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.</p>
-<p>If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.</p>
+変更後のプロパティを使った処理を行う場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a>コールバックを使うことを推奨します。この方法では更新サイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
+要素が更新された後に実行される処理を変更したい場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a>コールバックを使うことを推奨します。</p>
+<p>If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors.
+If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.</p>
 <h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
 <p>In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.</p>
 <p>To prevent Lit from generating a property accessor that overwrites the superclass's defined accessor, set <code>noAccessor</code> to <code>true</code> in the property declaration:</p>
