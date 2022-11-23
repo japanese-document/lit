@@ -574,10 +574,11 @@ Litが生成したセッタは自動的に`requestUpdate()`を実行します。
 セッタを変更する場合、上記のようにプロパティ名とその変更前の値を`requestUpdate()`を渡して実行する必要があります。
 
 ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
-To compute values from existing properties, we recommend using the [`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate) callback, which allows you to set values during the update cycle without triggering an additional update.
-To perform a custom action after the element updates, we recommend using the [`updated`](https://lit.dev/docs/components/lifecycle/#updated) callback. A custom setter can be used in rare cases when it's important to synchronously validate any value the user sets.
+変更後のプロパティを使った処理を行う場合は[`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate)コールバックを使うことを推奨します。この方法では更新サイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
+要素が更新された後に実行される処理を変更したい場合は[`updated`](https://lit.dev/docs/components/lifecycle/#updated)コールバックを使うことを推奨します。
 
-If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors. If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
+If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors.
+If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
 
 ### noAccessorオプション
 
