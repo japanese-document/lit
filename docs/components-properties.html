@@ -483,8 +483,8 @@ get prop() { return this._prop; }
 <p>ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
 変更後のプロパティを使った処理を行う場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a>コールバックを使うことを推奨します。この方法では更新サイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
 要素が更新された後に実行される処理を変更したい場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a>コールバックを使うことを推奨します。</p>
-<p>If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors.
-If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.</p>
+<p>クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
+クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。</p>
 <h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
 <p>In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.</p>
 <p>To prevent Lit from generating a property accessor that overwrites the superclass's defined accessor, set <code>noAccessor</code> to <code>true</code> in the property declaration:</p>
@@ -498,7 +498,6 @@ If your class does not define accessors for a property, Lit will generate them, 
 <p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
 <p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison: <code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
 <p>To customize <code>hasChanged()</code> for a property, specify it as a property option:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@property({
   hasChanged(newVal: string, oldVal: string) {
     return newVal?.toLowerCase() !== oldVal?.toLowerCase();
@@ -514,7 +513,6 @@ myProp: string | undefined;
   }
 };
 </code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>In the following example, <code>hasChanged()</code> only returns true for odd values.</p>
 <p>{% playground-example "properties/haschanged" "my-element.ts" %}</p>
 <hr>

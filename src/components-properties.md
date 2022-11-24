@@ -577,8 +577,8 @@ Litが生成したセッタは自動的に`requestUpdate()`を実行します。
 変更後のプロパティを使った処理を行う場合は[`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate)コールバックを使うことを推奨します。この方法では更新サイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
 要素が更新された後に実行される処理を変更したい場合は[`updated`](https://lit.dev/docs/components/lifecycle/#updated)コールバックを使うことを推奨します。
 
-If your class defines its own accessors for a property, Lit will not overwrite them with generated accessors.
-If your class does not define accessors for a property, Lit will generate them, even if a superclass has defined the property or accessors.
+クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
+クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。
 
 ### noAccessorオプション
 
@@ -604,8 +604,6 @@ The default implementation of `hasChanged()` uses a strict inequality comparison
 
 To customize `hasChanged()` for a property, specify it as a property option:
 
-{% switchable-sample %}
-
 ```ts
 @property({
   hasChanged(newVal: string, oldVal: string) {
@@ -624,8 +622,6 @@ static properties = {
   }
 };
 ```
-
-{% endswitchable-sample %}
 
 In the following example, `hasChanged()` only returns true for odd values.
 
