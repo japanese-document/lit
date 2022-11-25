@@ -486,15 +486,15 @@ get prop() { return this._prop; }
 <p>クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
 クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。</p>
 <h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
-<p>In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.</p>
-<p>To prevent Lit from generating a property accessor that overwrites the superclass's defined accessor, set <code>noAccessor</code> to <code>true</code> in the property declaration:</p>
+<p>クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。
+この場合でスーパークラスで定義されたアクセサを使うには<code>noAccessor</code>に<code>true</code>をセットします。</p>
 <pre><code class="language-js">static properties = {
   myProp: { type: Number, noAccessor: true }
 };
 </code></pre>
-<p>You don't need to set <code>noAccessor</code> when defining your own accessors.</p>
+<p>クラスでアクセサを定義している場合、<code>noAccessor</code>をセットする必要はありません。</p>
 <h2 id="変更判定の変更"><a href="#変更判定の変更">変更判定の変更</a></h2>
-<p>All reactive properties have a function, <code>hasChanged()</code>, which is called when the property is set.</p>
+<p>リアクティブプロパティに値をセットすると<code>hasChanged()</code>が実行されます。</p>
 <p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
 <p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison: <code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
 <p>To customize <code>hasChanged()</code> for a property, specify it as a property option:</p>
