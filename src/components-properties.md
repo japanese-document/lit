@@ -582,9 +582,8 @@ Litが生成したセッタは自動的に`requestUpdate()`を実行します。
 
 ### noAccessorオプション
 
-In rare cases, a subclass may need to change or add property options for a property that exists on its superclass.
-
-To prevent Lit from generating a property accessor that overwrites the superclass's defined accessor, set `noAccessor` to `true` in the property declaration:
+クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。
+この場合でスーパークラスで定義されたアクセサを使うには`noAccessor`に`true`をセットします。
 
 ```js
 static properties = {
@@ -592,11 +591,11 @@ static properties = {
 };
 ```
 
-You don't need to set `noAccessor` when defining your own accessors.
+クラスでアクセサを定義している場合、`noAccessor`をセットする必要はありません。
 
 ## 変更判定の変更
 
-All reactive properties have a function, `hasChanged()`, which is called when the property is set.
+リアクティブプロパティに値をセットすると`hasChanged()`が実行されます。
 
 `hasChanged` compares the property's old and new values, and evaluates whether or not the property has changed. If `hasChanged()` returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle) .
 
