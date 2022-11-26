@@ -597,9 +597,12 @@ static properties = {
 
 リアクティブプロパティに値をセットすると`hasChanged()`が実行されます。
 
-`hasChanged` compares the property's old and new values, and evaluates whether or not the property has changed. If `hasChanged()` returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle) .
+`hasChanged`はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
+`hasChanged()`がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
+For more information on updates, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle) .
 
-The default implementation of `hasChanged()` uses a strict inequality comparison: `hasChanged()` returns `true` if `newVal !== oldVal`.
+The default implementation of `hasChanged()` uses a strict inequality comparison:
+`hasChanged()` returns `true` if `newVal !== oldVal`.
 
 To customize `hasChanged()` for a property, specify it as a property option:
 
@@ -624,7 +627,34 @@ static properties = {
 
 In the following example, `hasChanged()` only returns true for odd values.
 
-{% playground-example "properties/haschanged" "my-element.ts" %}
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property({
+    // only update for odd values of newVal.
+    hasChanged(newVal: number, oldVal: number) {
+      const hasChanged: boolean = newVal % 2 == 1;
+      console.log(`${newVal}, ${oldVal}, ${hasChanged}`);
+      return hasChanged;
+    },
+  })
+  value: number = 1;
+
+  render() {
+    return html`
+      <p>${this.value}</p>
+      <button @click="${this.getNewVal}">Get new value</button>
+    `;
+  }
+
+  getNewVal() {
+    this.value = Math.floor(Math.random() * 100);
+  }
+}
+```
 
 ---
 

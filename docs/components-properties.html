@@ -495,8 +495,11 @@ get prop() { return this._prop; }
 <p>クラスでアクセサを定義している場合、<code>noAccessor</code>をセットする必要はありません。</p>
 <h2 id="変更判定の変更"><a href="#変更判定の変更">変更判定の変更</a></h2>
 <p>リアクティブプロパティに値をセットすると<code>hasChanged()</code>が実行されます。</p>
-<p><code>hasChanged</code> compares the property's old and new values, and evaluates whether or not the property has changed. If <code>hasChanged()</code> returns true, Lit starts an element update if one is not already scheduled. For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
-<p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison: <code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
+<p><code>hasChanged</code>はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
+<code>hasChanged()</code>がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
+For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
+<p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison:
+<code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
 <p>To customize <code>hasChanged()</code> for a property, specify it as a property option:</p>
 <pre><code class="language-ts">@property({
   hasChanged(newVal: string, oldVal: string) {
@@ -514,7 +517,33 @@ myProp: string | undefined;
 };
 </code></pre>
 <p>In the following example, <code>hasChanged()</code> only returns true for odd values.</p>
-<p>{% playground-example "properties/haschanged" "my-element.ts" %}</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property({
+    // only update for odd values of newVal.
+    hasChanged(newVal: number, oldVal: number) {
+      const hasChanged: boolean = newVal % 2 == 1;
+      console.log(`${newVal}, ${oldVal}, ${hasChanged}`);
+      return hasChanged;
+    },
+  })
+  value: number = 1;
+
+  render() {
+    return html`
+      &lt;p&gt;${this.value}&lt;/p&gt;
+      &lt;button @click="${this.getNewVal}"&gt;Get new value&lt;/button&gt;
+    `;
+  }
+
+  getNewVal() {
+    this.value = Math.floor(Math.random() * 100);
+  }
+}
+</code></pre>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
