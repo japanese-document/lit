@@ -599,12 +599,11 @@ static properties = {
 
 `hasChanged`はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
 `hasChanged()`がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
-For more information on updates, see [Reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle) .
+更新に関する詳しい情報は[リアクティブアップデートサイクル](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
 
-The default implementation of `hasChanged()` uses a strict inequality comparison:
-`hasChanged()` returns `true` if `newVal !== oldVal`.
+`hasChanged()`のデフォルトの実装は`newVal !== oldVal`です。
 
-To customize `hasChanged()` for a property, specify it as a property option:
+下記のようにプロパティオプションに関数をセットすることで`hasChanged()`を変更することができます。
 
 ```ts
 @property({
@@ -625,7 +624,7 @@ static properties = {
 };
 ```
 
-In the following example, `hasChanged()` only returns true for odd values.
+下記の例では`hasChanged()`は奇数の場合のみtrueを返します。
 
 ```ts
 import {LitElement, html} from 'lit';
@@ -634,7 +633,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('my-element')
 class MyElement extends LitElement {
   @property({
-    // only update for odd values of newVal.
+    // newValが奇数の場合のみ更新されます。
     hasChanged(newVal: number, oldVal: number) {
       const hasChanged: boolean = newVal % 2 == 1;
       console.log(`${newVal}, ${oldVal}, ${hasChanged}`);

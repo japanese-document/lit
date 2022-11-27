@@ -497,10 +497,9 @@ get prop() { return this._prop; }
 <p>リアクティブプロパティに値をセットすると<code>hasChanged()</code>が実行されます。</p>
 <p><code>hasChanged</code>はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
 <code>hasChanged()</code>がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
-For more information on updates, see <a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a> .</p>
-<p>The default implementation of <code>hasChanged()</code> uses a strict inequality comparison:
-<code>hasChanged()</code> returns <code>true</code> if <code>newVal !== oldVal</code>.</p>
-<p>To customize <code>hasChanged()</code> for a property, specify it as a property option:</p>
+更新に関する詳しい情報は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">リアクティブアップデートサイクル</a>を見てください。</p>
+<p><code>hasChanged()</code>のデフォルトの実装は<code>newVal !== oldVal</code>です。</p>
+<p>下記のようにプロパティオプションに関数をセットすることで<code>hasChanged()</code>を変更することができます。</p>
 <pre><code class="language-ts">@property({
   hasChanged(newVal: string, oldVal: string) {
     return newVal?.toLowerCase() !== oldVal?.toLowerCase();
@@ -516,14 +515,14 @@ myProp: string | undefined;
   }
 };
 </code></pre>
-<p>In the following example, <code>hasChanged()</code> only returns true for odd values.</p>
+<p>下記の例では<code>hasChanged()</code>は奇数の場合のみtrueを返します。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
 @customElement('my-element')
 class MyElement extends LitElement {
   @property({
-    // only update for odd values of newVal.
+    // newValが奇数の場合のみ更新されます。
     hasChanged(newVal: number, oldVal: number) {
       const hasChanged: boolean = newVal % 2 == 1;
       console.log(`${newVal}, ${oldVal}, ${hasChanged}`);
