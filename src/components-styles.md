@@ -55,11 +55,11 @@ export class MyElement extends LitElement {
 インスタンス毎にスタイルを変更するようなユースケースでは、この方法では達成することができません。
 スタイルを追加する別の方法は[テンプレート内で適用範囲が限定されているスタイルを定義する](#テンプレート内で適用範囲が限定されているスタイルを定義する)を見てください。
 
-### Using expressions in static styles {#expressions}
+### static styles内でエクスプレッションを使う
 
 Static styles apply to all instances of a component. Any expressions in CSS are evaluated **once**, then reused for all instances.
 
-For tree-based or per-instance style customization, use CSS custom properties to allow elements to be [themed](#theming).
+For tree-based or per-instance style customization, use CSS custom properties to allow elements to be [themed](#テーマ).
 
 To prevent Lit components from evaluating potentially malicious code, the `css` tag only allows nested expressions that are themselves `css` tagged strings or numbers.
 
@@ -331,7 +331,7 @@ To use `styleMap` and/or `classMap`:
 
 See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMap](https://lit.dev/docs/templates/directives/#stylemap) for more information.
 
-## Theming {#theming}
+## テーマ
 
 By using [CSS inheritance](#inheritance) and [CSS variables and custom properties](#customprops) together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:
 

@@ -66,9 +66,9 @@ export class MyElement extends LitElement {
 <p>ほとんどの場合、<code>static styles</code>クラスフィールドを使う方法はコンポーネントのスタイルを定義するベストプラクティスです。
 インスタンス毎にスタイルを変更するようなユースケースでは、この方法では達成することができません。
 スタイルを追加する別の方法は<a class="Link" href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a>を見てください。</p>
-<h3 id="Using_expressions_in_static_styles_{#expressions}"><a href="#Using_expressions_in_static_styles_{#expressions}">Using expressions in static styles {#expressions}</a></h3>
+<h3 id="static_styles内でエクスプレッションを使う"><a href="#static_styles内でエクスプレッションを使う">static styles内でエクスプレッションを使う</a></h3>
 <p>Static styles apply to all instances of a component. Any expressions in CSS are evaluated <strong>once</strong>, then reused for all instances.</p>
-<p>For tree-based or per-instance style customization, use CSS custom properties to allow elements to be <a class="Link" href="#theming">themed</a>.</p>
+<p>For tree-based or per-instance style customization, use CSS custom properties to allow elements to be <a class="Link" href="#テーマ">themed</a>.</p>
 <p>To prevent Lit components from evaluating potentially malicious code, the <code>css</code> tag only allows nested expressions that are themselves <code>css</code> tagged strings or numbers.</p>
 <pre><code class="language-js">const mainColor = css`red`;
 ...
@@ -264,7 +264,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 </ol>
 <p>{% playground-example "docs/components/style/maps" "my-element.ts" %}</p>
 <p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
-<h2 id="Theming_{#theming}"><a href="#Theming_{#theming}">Theming {#theming}</a></h2>
+<h2 id="テーマ"><a href="#テーマ">テーマ</a></h2>
 <p>By using <a class="Link" href="#inheritance">CSS inheritance</a> and <a class="Link" href="#customprops">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
 <p>{% playground-example "docs/components/style/theming" "my-element.ts" %}</p>
 <h3 id="CSS_inheritance_{#inheritance}"><a href="#CSS_inheritance_{#inheritance}">CSS inheritance {#inheritance}</a></h3>
