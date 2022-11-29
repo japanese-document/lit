@@ -335,7 +335,27 @@ See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMa
 
 By using [CSS inheritance](#inheritance) and [CSS variables and custom properties](#customprops) together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:
 
-{% playground-example "docs/components/style/theming" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    :host {
+      color: var(--my-element-text-color, black);
+      background: var(--my-element-background-color, white);
+      font-family: var(--my-element-font-family, Roboto);
+      display: block;
+      padding: 8px;
+      margin: 8px;
+    }
+  `;
+  protected render() {
+    return html`<div>Hello World</div>`;
+  }
+}
+```
 
 ### CSS inheritance {#inheritance}
 
