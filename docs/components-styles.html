@@ -266,7 +266,26 @@ import { styleMap } from 'lit/directives/style-map.js';
 <p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
 <h2 id="テーマ"><a href="#テーマ">テーマ</a></h2>
 <p>By using <a class="Link" href="#inheritance">CSS inheritance</a> and <a class="Link" href="#customprops">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
-<p>{% playground-example "docs/components/style/theming" "my-element.ts" %}</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    :host {
+      color: var(--my-element-text-color, black);
+      background: var(--my-element-background-color, white);
+      font-family: var(--my-element-font-family, Roboto);
+      display: block;
+      padding: 8px;
+      margin: 8px;
+    }
+  `;
+  protected render() {
+    return html`&lt;div&gt;Hello World&lt;/div&gt;`;
+  }
+}
+</code></pre>
 <h3 id="CSS_inheritance_{#inheritance}"><a href="#CSS_inheritance_{#inheritance}">CSS inheritance {#inheritance}</a></h3>
 <p>CSS inheritance lets parent and host elements propagate certain CSS properties to their descendants.</p>
 <p>Not all CSS properties inherit. Inherited CSS properties include:</p>
