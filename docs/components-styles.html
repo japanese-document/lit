@@ -31,7 +31,7 @@
 LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。
 そのためにクラス名を長くて面倒な物にしないといけないかもしれません。
 Shadow DOMを使うことによって、
-Litはコンポーネントにセレクタ記述したセレクタはすべてコンポーネントのshadow root内の要素にのみ適用します。</p>
+Litはコンポーネントにセレクタ記述したセレクタをすべてコンポーネントのshadow root内の要素にのみ適用します。</p>
 <h2 id="コンポーネントにスタイルを加える"><a href="#コンポーネントにスタイルを加える">コンポーネントにスタイルを加える</a></h2>
 <p><code>static styles</code>クラスフィールドに<code>css</code>タグ関数を付けでCSSを記述することで適用範囲が限定されているスタイルを定義します。
 この方法でスタイルを定義することでパフォーマンスが最適化されます。</p>
@@ -67,13 +67,16 @@ export class MyElement extends LitElement {
 インスタンス毎にスタイルを変更するようなユースケースでは、この方法では達成することができません。
 スタイルを追加する別の方法は<a class="Link" href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a>を見てください。</p>
 <h3 id="static_styles内でエクスプレッションを使う"><a href="#static_styles内でエクスプレッションを使う">static styles内でエクスプレッションを使う</a></h3>
-<p>Static styles apply to all instances of a component. Any expressions in CSS are evaluated <strong>once</strong>, then reused for all instances.</p>
-<p>For tree-based or per-instance style customization, use CSS custom properties to allow elements to be <a class="Link" href="#テーマ">themed</a>.</p>
-<p>To prevent Lit components from evaluating potentially malicious code, the <code>css</code> tag only allows nested expressions that are themselves <code>css</code> tagged strings or numbers.</p>
+<p><code>static styles</code>はコンポーネントクラスのすべてのインスタンスに適用されます。
+cssタグ内のエクスプレッションは一度だけ評価されます。そして、それらはすべてのインスタンスに使われます。</p>
+<p>DOMツリー毎もしくはインスタンス毎のスタイルの変更は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSSカスタムプロパティ</a>を使って要素に<a class="Link" href="#テーマ">themed</a>を適用できるようにします。</p>
+<p>Litコンポーネントが悪意のあるコードを実行する可能性を排除するために、
+<code>css</code>タグは下記のようにエクスプレッションにcssタグが付与された文字列または数値のみを受け付けます。</p>
 <pre><code class="language-js">const mainColor = css`red`;
+const fontSize = 20;
 ...
 static styles = css`
-  div { color: ${mainColor} }
+  div { color: ${mainColor}; font-size: ${fontSize}px }
 `;
 </code></pre>
 <p>This restriction exists to protect applications from security vulnerabilities whereby malicious styles, or even malicious code, can be injected from untrusted sources such as URL parameters or database values.</p>
