@@ -10,7 +10,7 @@
 LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。
 そのためにクラス名を長くて面倒な物にしないといけないかもしれません。
 Shadow DOMを使うことによって、
-Litはコンポーネントにセレクタ記述したセレクタはすべてコンポーネントのshadow root内の要素にのみ適用します。
+Litはコンポーネントにセレクタ記述したセレクタをすべてコンポーネントのshadow root内の要素にのみ適用します。
 
 ## コンポーネントにスタイルを加える
 
@@ -57,17 +57,20 @@ export class MyElement extends LitElement {
 
 ### static styles内でエクスプレッションを使う
 
-Static styles apply to all instances of a component. Any expressions in CSS are evaluated **once**, then reused for all instances.
+`static styles`はコンポーネントクラスのすべてのインスタンスに適用されます。
+cssタグ内のエクスプレッションは一度だけ評価されます。そして、それらはすべてのインスタンスに使われます。
 
-For tree-based or per-instance style customization, use CSS custom properties to allow elements to be [themed](#テーマ).
+DOMツリー毎もしくはインスタンス毎のスタイルの変更は[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)を使って要素に[themed](#テーマ)を適用できるようにします。
 
-To prevent Lit components from evaluating potentially malicious code, the `css` tag only allows nested expressions that are themselves `css` tagged strings or numbers.
+Litコンポーネントが悪意のあるコードを実行する可能性を排除するために、
+`css`タグは下記のようにエクスプレッションにcssタグが付与された文字列または数値のみを受け付けます。
 
 ```js
 const mainColor = css`red`;
+const fontSize = 20;
 ...
 static styles = css`
-  div { color: ${mainColor} }
+  div { color: ${mainColor}; font-size: ${fontSize}px }
 `;
 ```
 
