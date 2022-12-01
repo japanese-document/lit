@@ -70,13 +70,13 @@ const mainColor = css`red`;
 const fontSize = 20;
 ...
 static styles = css`
-  div { color: ${mainColor}; font-size: ${fontSize}px }
+  div { color: ${mainColor}; font-size: ${fontSize}px; }
 `;
 ```
 
-This restriction exists to protect applications from security vulnerabilities whereby malicious styles, or even malicious code, can be injected from untrusted sources such as URL parameters or database values.
+この制限はURLパラメータやデータベースの値のような信頼できない所から取得した悪意のあるスタイルやコードを埋め込むことによるセキュリティ面の脆弱性からアプリケーションを保護するための物です。
 
-If you must use an expression in a `css` literal that is not itself a `css` literal, **and** you are confident that the expression is from a fully trusted source such as a constant defined in your own code, then you can wrap the expression with the `unsafeCSS` function:
+あなた自身で定義した定数のように信頼できる値の場合、下記のように値を`unsafeCSS`関数に渡してエクスプレッションにセットすることができます。
 
 ```js
 const mainColor = 'red';
@@ -86,11 +86,9 @@ static styles = css`
 `;
 ```
 
-<div class="alert alert-info">
-
-**Only use the `unsafeCSS` tag with trusted input.** Injecting unsanitized CSS is a security risk. For example, malicious CSS can "phone home" by adding an image URL that points to a third-party server.
-
-</div>
+Only use the `unsafeCSS` tag with trusted input.
+Injecting unsanitized CSS is a security risk.
+For example, malicious CSS can "phone home" by adding an image URL that points to a third-party server.
 
 ### Inheriting styles from a superclass
 
