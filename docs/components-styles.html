@@ -89,11 +89,41 @@ static styles = css`
 </code></pre>
 <p><code>unsafeCSS</code>関数には信頼できる入力のみ渡します。
 サニタイズされていないCSSを挿入することはセキュリティリスクになります。</p>
-<h3 id="Inheriting_styles_from_a_superclass"><a href="#Inheriting_styles_from_a_superclass">Inheriting styles from a superclass</a></h3>
-<p>Using an array of tagged template literals, a component can inherit the styles from a superclass, and add its own styles:</p>
-<p>{% playground-ide "docs/components/style/superstyles" %}</p>
-<p>You can also use <code>super.styles</code> to reference the superclass's styles property in JavaScript. If you're using TypeScript, we recommend avoiding <code>super.styles</code> since the compiler doesn't always convert it correctly. Explicitly referencing the superclass, as shown in the example, avoids this issue.</p>
-<p>When writing components intended to be subclassed in TypeScript, the <code>static styles</code> field should be explicitly typed as <code>CSSResultGroup</code> to allow flexibility for users to override <code>styles</code> with an array:</p>
+<h3 id="スーパークラスのスタイルを継承する"><a href="#スーパークラスのスタイルを継承する">スーパークラスのスタイルを継承する</a></h3>
+<p>下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことでスーパークラスのスタイルを継承してそれ自身のスタイルを追加することができます。</p>
+<pre><code class="language-ts">import {LitElement, html, css, CSSResultGroup} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('super-element')
+export class SuperElement extends LitElement {
+  static styles = css`
+    div {
+      border: 1px solid gray;
+      padding: 8px;
+    }
+  ` as CSSResultGroup;
+  protected render() {
+    return html`
+      &lt;div&gt;Content&lt;/div&gt;
+    `;
+  }
+}
+
+@customElement('my-element')
+export class MyElement extends SuperElement {
+  static styles = [
+    SuperElement.styles,
+    css`div {
+      color: red;
+    }`
+  ];
+}
+</code></pre>
+<p>You can also use <code>super.styles</code> to reference the superclass's styles property in JavaScript.
+If you're using TypeScript, we recommend avoiding <code>super.styles</code> since the compiler doesn't always convert it correctly.
+Explicitly referencing the superclass, as shown in the example, avoids this issue.</p>
+<p>When writing components intended to be subclassed in TypeScript,
+the <code>static styles</code> field should be explicitly typed as <code>CSSResultGroup</code> to allow flexibility for users to override <code>styles</code> with an array:</p>
 <pre><code class="language-ts">// Prevent typescript from narrowing the type of `styles` to `CSSResult`
 // so that subclassers can assign e.g. `[SuperElement.styles, css`...`]`;
 static styles: CSSResultGroup = css`...`;

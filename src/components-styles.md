@@ -89,15 +89,46 @@ static styles = css`
 `unsafeCSS`関数には信頼できる入力のみ渡します。
 サニタイズされていないCSSを挿入することはセキュリティリスクになります。
 
-### Inheriting styles from a superclass
+### スーパークラスのスタイルを継承する 
 
-Using an array of tagged template literals, a component can inherit the styles from a superclass, and add its own styles:
+下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことでスーパークラスのスタイルを継承してそれ自身のスタイルを追加することができます。
 
-{% playground-ide "docs/components/style/superstyles" %}
+```ts
+import {LitElement, html, css, CSSResultGroup} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
-You can also use `super.styles` to reference the superclass's styles property in JavaScript. If you're using TypeScript, we recommend avoiding `super.styles` since the compiler doesn't always convert it correctly. Explicitly referencing the superclass, as shown in the example, avoids this issue.
+@customElement('super-element')
+export class SuperElement extends LitElement {
+  static styles = css`
+    div {
+      border: 1px solid gray;
+      padding: 8px;
+    }
+  ` as CSSResultGroup;
+  protected render() {
+    return html`
+      <div>Content</div>
+    `;
+  }
+}
 
-When writing components intended to be subclassed in TypeScript, the `static styles` field should be explicitly typed as `CSSResultGroup` to allow flexibility for users to override `styles` with an array:
+@customElement('my-element')
+export class MyElement extends SuperElement {
+  static styles = [
+    SuperElement.styles,
+    css`div {
+      color: red;
+    }`
+  ];
+}
+```
+
+You can also use `super.styles` to reference the superclass's styles property in JavaScript.
+If you're using TypeScript, we recommend avoiding `super.styles` since the compiler doesn't always convert it correctly.
+Explicitly referencing the superclass, as shown in the example, avoids this issue.
+
+When writing components intended to be subclassed in TypeScript,
+the `static styles` field should be explicitly typed as `CSSResultGroup` to allow flexibility for users to override `styles` with an array:
 
 ```ts
 // Prevent typescript from narrowing the type of `styles` to `CSSResult`
