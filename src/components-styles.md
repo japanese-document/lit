@@ -86,9 +86,8 @@ static styles = css`
 `;
 ```
 
-Only use the `unsafeCSS` tag with trusted input.
-Injecting unsanitized CSS is a security risk.
-For example, malicious CSS can "phone home" by adding an image URL that points to a third-party server.
+`unsafeCSS`関数には信頼できる入力のみ渡します。
+サニタイズされていないCSSを挿入することはセキュリティリスクになります。
 
 ### Inheriting styles from a superclass
 

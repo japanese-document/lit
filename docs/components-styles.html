@@ -87,9 +87,8 @@ static styles = css`
   div { color: ${unsafeCSS(mainColor)} }
 `;
 </code></pre>
-<p>Only use the <code>unsafeCSS</code> tag with trusted input.
-Injecting unsanitized CSS is a security risk.
-For example, malicious CSS can "phone home" by adding an image URL that points to a third-party server.</p>
+<p><code>unsafeCSS</code>関数には信頼できる入力のみ渡します。
+サニタイズされていないCSSを挿入することはセキュリティリスクになります。</p>
 <h3 id="Inheriting_styles_from_a_superclass"><a href="#Inheriting_styles_from_a_superclass">Inheriting styles from a superclass</a></h3>
 <p>Using an array of tagged template literals, a component can inherit the styles from a superclass, and add its own styles:</p>
 <p>{% playground-ide "docs/components/style/superstyles" %}</p>
