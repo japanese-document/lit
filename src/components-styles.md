@@ -60,7 +60,7 @@ export class MyElement extends LitElement {
 `static styles`はコンポーネントクラスのすべてのインスタンスに適用されます。
 cssタグ内のエクスプレッションは一度だけ評価されます。そして、それらはすべてのインスタンスに使われます。
 
-DOMツリー毎もしくはインスタンス毎のスタイルの変更は[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)を使って要素に[themed](#テーマ)を適用できるようにします。
+DOMツリー毎もしくはインスタンス毎のスタイルの変更は[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)を使って要素に[テーマ](#テーマ)を適用できるようにします。
 
 Litコンポーネントが悪意のあるコードを実行する可能性を排除するために、
 `css`タグは下記のようにエクスプレッションにcssタグが付与された文字列または数値のみを受け付けます。
@@ -86,12 +86,12 @@ static styles = css`
 `;
 ```
 
+サニタイズされていないCSSを挿入することはセキュリティリスクになるので、
 `unsafeCSS`関数には信頼できる入力のみ渡します。
-サニタイズされていないCSSを挿入することはセキュリティリスクになります。
 
 ### スーパークラスのスタイルを継承する 
 
-下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことでスーパークラスのスタイルを継承してそれ自身のスタイルを追加することができます。
+下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことで、スーパークラスのスタイルを継承して、それ自身のスタイルを追加することができます。
 
 ```ts
 import {LitElement, html, css, CSSResultGroup} from 'lit';
@@ -123,22 +123,24 @@ export class MyElement extends SuperElement {
 }
 ```
 
-You can also use `super.styles` to reference the superclass's styles property in JavaScript.
-If you're using TypeScript, we recommend avoiding `super.styles` since the compiler doesn't always convert it correctly.
-Explicitly referencing the superclass, as shown in the example, avoids this issue.
+JavaScriptでは`super.styles`でスーパークラスの`styles`プロパティを参照することができます。
+TypeScriptを使う場合、
+コンパイラが常に正しく`super.styles`を変換するとは限らないので`super.styles`を使わないことを推奨します。
+この問題を避けるために上記の例のように明示的にスーパークラスの`styles`プロパティを参照します。
 
 When writing components intended to be subclassed in TypeScript,
-the `static styles` field should be explicitly typed as `CSSResultGroup` to allow flexibility for users to override `styles` with an array:
+TypeScriptでサブクラスに継承されることを意図したコンポーネントを記述する場合は、
+`static styles`フィールドに`CSSResultGroup`型を指定します。これによって、`styles`を配列でオーバーライドできるようになり柔軟になります。
 
 ```ts
-// Prevent typescript from narrowing the type of `styles` to `CSSResult`
-// so that subclassers can assign e.g. `[SuperElement.styles, css`...`]`;
+// TypeScriptが`styles`の型を`CSSResult`に限定することを防ぎます。
+// これでサブクラスが`[SuperElement.styles, css`...`]`のような値をセットすることができます。
 static styles: CSSResultGroup = css`...`;
 ```
 
-### Sharing styles
+### スタイルを共有する
 
-You can share styles between components by creating a module that exports tagged styles:
+タグ付けされたスタイルをexportしたモジュールを作成することによってコンポーネント間でスタイルを共有することができます。
 
 ```js
 export const buttonStyles = css`
