@@ -69,7 +69,7 @@ export class MyElement extends LitElement {
 <h3 id="static_styles内でエクスプレッションを使う"><a href="#static_styles内でエクスプレッションを使う">static styles内でエクスプレッションを使う</a></h3>
 <p><code>static styles</code>はコンポーネントクラスのすべてのインスタンスに適用されます。
 cssタグ内のエクスプレッションは一度だけ評価されます。そして、それらはすべてのインスタンスに使われます。</p>
-<p>DOMツリー毎もしくはインスタンス毎のスタイルの変更は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSSカスタムプロパティ</a>を使って要素に<a class="Link" href="#テーマ">themed</a>を適用できるようにします。</p>
+<p>DOMツリー毎もしくはインスタンス毎のスタイルの変更は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSSカスタムプロパティ</a>を使って要素に<a class="Link" href="#テーマ">テーマ</a>を適用できるようにします。</p>
 <p>Litコンポーネントが悪意のあるコードを実行する可能性を排除するために、
 <code>css</code>タグは下記のようにエクスプレッションにcssタグが付与された文字列または数値のみを受け付けます。</p>
 <pre><code class="language-js">const mainColor = css`red`;
@@ -87,10 +87,10 @@ static styles = css`
   div { color: ${unsafeCSS(mainColor)} }
 `;
 </code></pre>
-<p><code>unsafeCSS</code>関数には信頼できる入力のみ渡します。
-サニタイズされていないCSSを挿入することはセキュリティリスクになります。</p>
+<p>サニタイズされていないCSSを挿入することはセキュリティリスクになるので、
+<code>unsafeCSS</code>関数には信頼できる入力のみ渡します。</p>
 <h3 id="スーパークラスのスタイルを継承する"><a href="#スーパークラスのスタイルを継承する">スーパークラスのスタイルを継承する</a></h3>
-<p>下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことでスーパークラスのスタイルを継承してそれ自身のスタイルを追加することができます。</p>
+<p>下記のようにコンポーネントはタグ付けされたテンプレートリテラルの配列を使うことで、スーパークラスのスタイルを継承して、それ自身のスタイルを追加することができます。</p>
 <pre><code class="language-ts">import {LitElement, html, css, CSSResultGroup} from 'lit';
 import {customElement} from 'lit/decorators.js';
 
@@ -119,17 +119,19 @@ export class MyElement extends SuperElement {
   ];
 }
 </code></pre>
-<p>You can also use <code>super.styles</code> to reference the superclass's styles property in JavaScript.
-If you're using TypeScript, we recommend avoiding <code>super.styles</code> since the compiler doesn't always convert it correctly.
-Explicitly referencing the superclass, as shown in the example, avoids this issue.</p>
+<p>JavaScriptでは<code>super.styles</code>でスーパークラスの<code>styles</code>プロパティを参照することができます。
+TypeScriptを使う場合、
+コンパイラが常に正しく<code>super.styles</code>を変換するとは限らないので<code>super.styles</code>を使わないことを推奨します。
+この問題を避けるために上記の例のように明示的にスーパークラスの<code>styles</code>プロパティを参照します。</p>
 <p>When writing components intended to be subclassed in TypeScript,
-the <code>static styles</code> field should be explicitly typed as <code>CSSResultGroup</code> to allow flexibility for users to override <code>styles</code> with an array:</p>
-<pre><code class="language-ts">// Prevent typescript from narrowing the type of `styles` to `CSSResult`
-// so that subclassers can assign e.g. `[SuperElement.styles, css`...`]`;
+TypeScriptでサブクラスに継承されることを意図したコンポーネントを記述する場合は、
+<code>static styles</code>フィールドに<code>CSSResultGroup</code>型を指定します。これによって、<code>styles</code>を配列でオーバーライドできるようになり柔軟になります。</p>
+<pre><code class="language-ts">// TypeScriptが`styles`の型を`CSSResult`に限定することを防ぎます。
+// これでサブクラスが`[SuperElement.styles, css`...`]`のような値をセットすることができます。
 static styles: CSSResultGroup = css`...`;
 </code></pre>
-<h3 id="Sharing_styles"><a href="#Sharing_styles">Sharing styles</a></h3>
-<p>You can share styles between components by creating a module that exports tagged styles:</p>
+<h3 id="スタイルを共有する"><a href="#スタイルを共有する">スタイルを共有する</a></h3>
+<p>タグ付けされたスタイルをexportしたモジュールを作成することによってコンポーネント間でスタイルを共有することができます。</p>
 <pre><code class="language-js">export const buttonStyles = css`
   .blue-button {
     color: white;
