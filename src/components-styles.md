@@ -153,7 +153,7 @@ export const buttonStyles = css`
   }`;
 ```
 
-Your element can then import the styles and add them to its static `styles` class field:
+下記のようにスタイルをimportして`static styles`クラスフィールドにスタイルを追加することができます。
 
 ```js
 import { buttonStyles } from './button-styles.js';
@@ -169,14 +169,17 @@ class MyElement extends LitElement {
 }
 ```
 
-### Using unicode escapes in styles
+### スタイルでUnicodeエスケープを使う
 
-CSS's unicode escape sequence is a backslash followed by four or six hex digits: for example, `\2022` for a bullet character. This similar to the format of JavaScript's deprecated _octal_ escape sequences, so using these sequences in a `css` tagged template literal causes an error.
+CSSのUnicodeエスケープシーケンスはバックスラッシュの後に4桁もしくは6桁の16進数の数字の文字列です。
+例えば、"•"は`\2022`です。
+これはJavaScriptで非推奨の8進数のエスケープシーケンスのフォーマットに該当します。
+これらのシーケンスを`css`がタグ付けされたテンプレートリテラルで使うとエラーが発生します。
 
-There are two work-arounds for adding a unicode escape to your styles:
+スタイルにUnicodeエスケープを加える方法は下記の2つです。
 
-*   Add a second backslash (for example, `\\2022`).
-*   Use the JavaScript escape sequence, starting with `\u` (for example, `\u2022`).
+* 2つ目のバックスラッシュを加えます (例えば`\\2022`)。
+* 先頭に`\u`を付けてJavaScriptのエスケープシーケンスを使います (例えば`\u2022`)。
 
 ```js
 static styles = css`
