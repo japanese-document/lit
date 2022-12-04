@@ -141,7 +141,7 @@ static styles: CSSResultGroup = css`...`;
     background-color: grey;
   }`;
 </code></pre>
-<p>Your element can then import the styles and add them to its static <code>styles</code> class field:</p>
+<p>下記のようにスタイルをimportして<code>static styles</code>クラスフィールドにスタイルを追加することができます。</p>
 <pre><code class="language-js">import { buttonStyles } from './button-styles.js';
 
 class MyElement extends LitElement {
@@ -154,12 +154,15 @@ class MyElement extends LitElement {
   ];
 }
 </code></pre>
-<h3 id="Using_unicode_escapes_in_styles"><a href="#Using_unicode_escapes_in_styles">Using unicode escapes in styles</a></h3>
-<p>CSS's unicode escape sequence is a backslash followed by four or six hex digits: for example, <code>\2022</code> for a bullet character. This similar to the format of JavaScript's deprecated <em>octal</em> escape sequences, so using these sequences in a <code>css</code> tagged template literal causes an error.</p>
-<p>There are two work-arounds for adding a unicode escape to your styles:</p>
+<h3 id="スタイルでUnicodeエスケープを使う"><a href="#スタイルでUnicodeエスケープを使う">スタイルでUnicodeエスケープを使う</a></h3>
+<p>CSSのUnicodeエスケープシーケンスはバックスラッシュの後に4桁もしくは6桁の16進数の数字の文字列です。
+例えば、"•"は<code>\2022</code>です。
+これはJavaScriptで非推奨の8進数のエスケープシーケンスのフォーマットに該当します。
+これらのシーケンスを<code>css</code>がタグ付けされたテンプレートリテラルで使うとエラーが発生します。</p>
+<p>スタイルにUnicodeエスケープを加える方法は下記の2つです。</p>
 <ul>
-<li>Add a second backslash (for example, <code>\\2022</code>).</li>
-<li>Use the JavaScript escape sequence, starting with <code>\u</code> (for example, <code>\u2022</code>).</li>
+<li>2つ目のバックスラッシュを加えます (例えば<code>\\2022</code>)。</li>
+<li>先頭に<code>\u</code>を付けてJavaScriptのエスケープシーケンスを使います (例えば<code>\u2022</code>)。</li>
 </ul>
 <pre><code class="language-js">static styles = css`
   div::before {
