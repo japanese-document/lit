@@ -161,8 +161,8 @@ class MyElement extends LitElement {
 これらのシーケンスを<code>css</code>がタグ付けされたテンプレートリテラルで使うとエラーが発生します。</p>
 <p>スタイルにUnicodeエスケープを加える方法は下記の2つです。</p>
 <ul>
-<li>2つ目のバックスラッシュを加えます (例えば<code>\\2022</code>)。</li>
-<li>先頭に<code>\u</code>を付けてJavaScriptのエスケープシーケンスを使います (例えば<code>\u2022</code>)。</li>
+<li>2つ目のバックスラッシュを加えます (例: <code>\\2022</code>)。</li>
+<li>先頭に<code>\u</code>を付けてJavaScriptのエスケープシーケンスを使います (例: <code>\u2022</code>)。</li>
 </ul>
 <pre><code class="language-js">static styles = css`
   div::before {
@@ -170,17 +170,19 @@ class MyElement extends LitElement {
   }
 </code></pre>
 <h2 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h2>
-<p>This section gives a brief overview of shadow DOM styling.</p>
-<p>Styles you add to a component can affect:</p>
+<p>このセクションではShadow DOMにスタイルを設定する方法を説明します。</p>
+<p>コンポーネントに追加したスタイルは以下のコンポーネントの3つの部分に影響を与えます。</p>
 <ul>
-<li><a class="Link" href="#shadowroot">The shadow tree</a> (your component's rendered template).</li>
-<li><a class="Link" href="#host">The component itself</a>.</li>
-<li><a class="Link" href="#slotted">The component's children</a>.</li>
+<li><a class="Link" href="#Shadow_treeのスタイルを設定する">Shadow tree</a> (コンポーネントがレンダリングしたテンプレート)</li>
+<li><a class="Link" href="#コンポーネント自身のスタイルを設定する">コンポーネント自身</a></li>
+<li><a class="Link" href="#子要素のスタイルを設定する">子要素</a></li>
 </ul>
-<h3 id="Shadow_Root"><a href="#Shadow_Root">Shadow Root</a></h3>
-<p>Lit templates are rendered into a shadow tree by default. Styles scoped to an element's shadow tree don't affect the main document or other shadow trees. Similarly, with the exception of <a class="Link" href="#inheritance">inherited CSS properties</a>, document-level styles don't affect the contents of a shadow tree.</p>
+<h3 id="Shadow_treeのスタイルを設定する"><a href="#Shadow_treeのスタイルを設定する">Shadow treeのスタイルを設定する</a></h3>
+<p>Lit templates are rendered into a shadow tree by default.
+Styles scoped to an element's shadow tree don't affect the main document or other <a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree">shadow tree</a>.
+Similarly, with the exception of <a class="Link" href="#inheritance">inherited CSS properties</a>, document-level styles don't affect the contents of a shadow tree.</p>
 <p>When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
-<h3 id="Styling_the_component_itself_{#host}"><a href="#Styling_the_component_itself_{#host}">Styling the component itself {#host}</a></h3>
+<h3 id="コンポーネント自身のスタイルを設定する"><a href="#コンポーネント自身のスタイルを設定する">コンポーネント自身のスタイルを設定する</a></h3>
 <p>You can style the component itself using special <code>:host</code> selectors. (The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
 <p>To create default styles for the host element, use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
 <ul>
@@ -193,7 +195,7 @@ class MyElement extends LitElement {
   display: inline-block;
 }
 </code></pre>
-<h3 id="Styling_the_component's_children_{#slotted}"><a href="#Styling_the_component's_children_{#slotted}">Styling the component's children {#slotted}</a></h3>
+<h3 id="子要素のスタイルを設定する"><a href="#子要素のスタイルを設定する">子要素のスタイルを設定する</a></h3>
 <p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children). To render children, your template needs to include one or more <code>&lt;slot&gt;</code> elements, as described in <a class="Link" href="/docs/components/shadow-dom/#slots">Render children with the slot element</a>.</p>
 <p>The <code>&lt;slot&gt;</code> element acts as a placeholder in a shadow tree where the host element's children are displayed.</p>
 <p>Use the <code>::slotted()</code> CSS pseudo-element to select children that are included in your template via <code>&lt;slot&gt;</code>s.</p>

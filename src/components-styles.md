@@ -178,8 +178,8 @@ CSSのUnicodeエスケープシーケンスはバックスラッシュの後に4
 
 スタイルにUnicodeエスケープを加える方法は下記の2つです。
 
-* 2つ目のバックスラッシュを加えます (例えば`\\2022`)。
-* 先頭に`\u`を付けてJavaScriptのエスケープシーケンスを使います (例えば`\u2022`)。
+* 2つ目のバックスラッシュを加えます (例: `\\2022`)。
+* 先頭に`\u`を付けてJavaScriptのエスケープシーケンスを使います (例: `\u2022`)。
 
 ```js
 static styles = css`
@@ -190,22 +190,24 @@ static styles = css`
 
 ## Shadow DOM
 
-This section gives a brief overview of shadow DOM styling.
+このセクションではShadow DOMにスタイルを設定する方法を説明します。
 
-Styles you add to a component can affect:
+コンポーネントに追加したスタイルは以下のコンポーネントの3つの部分に影響を与えます。
 
-* [The shadow tree](#shadowroot) (your component's rendered template).
-* [The component itself](#host).
-* [The component's children](#slotted).
+* [Shadow tree](#Shadow_treeのスタイルを設定する) (コンポーネントがレンダリングしたテンプレート)
+* [コンポーネント自身](#コンポーネント自身のスタイルを設定する)
+* [子要素](#子要素のスタイルを設定する)
 
 
-### Shadow Root
+### Shadow treeのスタイルを設定する
 
-Lit templates are rendered into a shadow tree by default. Styles scoped to an element's shadow tree don't affect the main document or other shadow trees. Similarly, with the exception of [inherited CSS properties](#inheritance), document-level styles don't affect the contents of a shadow tree.
+Lit templates are rendered into a shadow tree by default.
+Styles scoped to an element's shadow tree don't affect the main document or other [shadow tree](https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree).
+Similarly, with the exception of [inherited CSS properties](#inheritance), document-level styles don't affect the contents of a shadow tree.
 
 When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: `input`, `*`, or `#my-element`.
 
-### Styling the component itself {#host}
+### コンポーネント自身のスタイルを設定する
 
 You can style the component itself using special `:host` selectors. (The element that owns, or "hosts" a shadow tree is called the _host element_.)
 
@@ -224,7 +226,7 @@ my-element {
 }
 ```
 
-### Styling the component's children {#slotted}
+### 子要素のスタイルを設定する
 
 Your component may accept children (like a `<ul>` element can have `<li>` children). To render children, your template needs to include one or more `<slot>` elements, as described in [Render children with the slot element](/docs/components/shadow-dom/#slots).
 
