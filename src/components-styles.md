@@ -128,7 +128,6 @@ TypeScriptを使う場合、
 コンパイラが常に正しく`super.styles`を変換するとは限らないので`super.styles`を使わないことを推奨します。
 この問題を避けるために上記の例のように明示的にスーパークラスの`styles`プロパティを参照します。
 
-When writing components intended to be subclassed in TypeScript,
 TypeScriptでサブクラスに継承されることを意図したコンポーネントを記述する場合は、
 `static styles`フィールドに`CSSResultGroup`型を指定します。これによって、`styles`を配列でオーバーライドできるようになり柔軟になります。
 
@@ -194,18 +193,20 @@ static styles = css`
 
 コンポーネントに追加したスタイルは以下のコンポーネントの3つの部分に影響を与えます。
 
-* [Shadow tree](#Shadow_treeのスタイルを設定する) (コンポーネントがレンダリングしたテンプレート)
+* [Shadow tree](#Shadow_treeのスタイルを設定する) (コンポーネントがテンプレートをレンダリングした物)
 * [コンポーネント自身](#コンポーネント自身のスタイルを設定する)
 * [子要素](#子要素のスタイルを設定する)
 
 
 ### Shadow treeのスタイルを設定する
 
-Lit templates are rendered into a shadow tree by default.
-Styles scoped to an element's shadow tree don't affect the main document or other [shadow tree](https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree).
-Similarly, with the exception of [inherited CSS properties](#inheritance), document-level styles don't affect the contents of a shadow tree.
+デフォルトでLitはテンプレートをShadow tree内にレンダリングします。
+要素の[shadow tree](https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree)に適用範囲を限定したスタイルはメインdocumentおよび他のshadow treeに影響を与えません。
+同様に[継承されるCSSプロパティ](#CSSを継承する)を除いて、document内のスタイルはshadow tree内のコンテンツに影響を与えません。
 
-When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: `input`, `*`, or `#my-element`.
+`static styles`で標準のCSSセレクタを使うと、コンポーネントのshadow tree内の要素のみマッチします。
+This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page;
+for example: `input`, `*`, or `#my-element`.
 
 ### コンポーネント自身のスタイルを設定する
 
@@ -395,7 +396,7 @@ export class MyElement extends LitElement {
 }
 ```
 
-### CSS inheritance {#inheritance}
+### CSSを継承する
 
 CSS inheritance lets parent and host elements propagate certain CSS properties to their descendants.
 

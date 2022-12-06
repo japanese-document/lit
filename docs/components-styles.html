@@ -123,8 +123,7 @@ export class MyElement extends SuperElement {
 TypeScriptを使う場合、
 コンパイラが常に正しく<code>super.styles</code>を変換するとは限らないので<code>super.styles</code>を使わないことを推奨します。
 この問題を避けるために上記の例のように明示的にスーパークラスの<code>styles</code>プロパティを参照します。</p>
-<p>When writing components intended to be subclassed in TypeScript,
-TypeScriptでサブクラスに継承されることを意図したコンポーネントを記述する場合は、
+<p>TypeScriptでサブクラスに継承されることを意図したコンポーネントを記述する場合は、
 <code>static styles</code>フィールドに<code>CSSResultGroup</code>型を指定します。これによって、<code>styles</code>を配列でオーバーライドできるようになり柔軟になります。</p>
 <pre><code class="language-ts">// TypeScriptが`styles`の型を`CSSResult`に限定することを防ぎます。
 // これでサブクラスが`[SuperElement.styles, css`...`]`のような値をセットすることができます。
@@ -173,15 +172,17 @@ class MyElement extends LitElement {
 <p>このセクションではShadow DOMにスタイルを設定する方法を説明します。</p>
 <p>コンポーネントに追加したスタイルは以下のコンポーネントの3つの部分に影響を与えます。</p>
 <ul>
-<li><a class="Link" href="#Shadow_treeのスタイルを設定する">Shadow tree</a> (コンポーネントがレンダリングしたテンプレート)</li>
+<li><a class="Link" href="#Shadow_treeのスタイルを設定する">Shadow tree</a> (コンポーネントがテンプレートをレンダリングした物)</li>
 <li><a class="Link" href="#コンポーネント自身のスタイルを設定する">コンポーネント自身</a></li>
 <li><a class="Link" href="#子要素のスタイルを設定する">子要素</a></li>
 </ul>
 <h3 id="Shadow_treeのスタイルを設定する"><a href="#Shadow_treeのスタイルを設定する">Shadow treeのスタイルを設定する</a></h3>
-<p>Lit templates are rendered into a shadow tree by default.
-Styles scoped to an element's shadow tree don't affect the main document or other <a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree">shadow tree</a>.
-Similarly, with the exception of <a class="Link" href="#inheritance">inherited CSS properties</a>, document-level styles don't affect the contents of a shadow tree.</p>
-<p>When you use standard CSS selectors, they only match elements in your component's shadow tree. This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page; for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
+<p>デフォルトでLitはテンプレートをShadow tree内にレンダリングします。
+要素の<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree">shadow tree</a>に適用範囲を限定したスタイルはメインdocumentおよび他のshadow treeに影響を与えません。
+同様に<a class="Link" href="#CSSを継承する">継承されるCSSプロパティ</a>を除いて、document内のスタイルはshadow tree内のコンテンツに影響を与えません。</p>
+<p><code>static styles</code>で標準のCSSセレクタを使うと、コンポーネントのshadow tree内の要素のみマッチします。
+This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page;
+for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
 <h3 id="コンポーネント自身のスタイルを設定する"><a href="#コンポーネント自身のスタイルを設定する">コンポーネント自身のスタイルを設定する</a></h3>
 <p>You can style the component itself using special <code>:host</code> selectors. (The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
 <p>To create default styles for the host element, use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
@@ -323,7 +324,7 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="CSS_inheritance_{#inheritance}"><a href="#CSS_inheritance_{#inheritance}">CSS inheritance {#inheritance}</a></h3>
+<h3 id="CSSを継承する"><a href="#CSSを継承する">CSSを継承する</a></h3>
 <p>CSS inheritance lets parent and host elements propagate certain CSS properties to their descendants.</p>
 <p>Not all CSS properties inherit. Inherited CSS properties include:</p>
 <ul>
