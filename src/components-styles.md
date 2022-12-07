@@ -205,14 +205,15 @@ static styles = css`
 同様に[継承されるCSSプロパティ](#CSSを継承する)を除いて、document内のスタイルはshadow tree内のコンテンツに影響を与えません。
 
 `static styles`で標準のCSSセレクタを使うと、コンポーネントのshadow tree内の要素のみマッチします。
-This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page;
-for example: `input`, `*`, or `#my-element`.
+これによって、意図せずページ内の要素にスタイルが適用されることを憂慮しなくてもよくなるので、シンプルなセレクタ(例: `input`、`*`、`#my-element`)を多用することができます。
 
 ### コンポーネント自身のスタイルを設定する
 
-You can style the component itself using special `:host` selectors. (The element that owns, or "hosts" a shadow tree is called the _host element_.)
+You can style the component itself using special `:host` selectors.
+(The element that owns, or "hosts" a shadow tree is called the _host element_.)
 
-To create default styles for the host element, use the `:host` CSS pseudo-class and `:host()` CSS pseudo-class function.
+To create default styles for the host element,
+use the `:host` CSS pseudo-class and `:host()` CSS pseudo-class function.
 
 *   `:host` selects the host element.
 *   <code>:host(<var>selector</var>)</code> selects the host element, but only if the host element matches _selector_.

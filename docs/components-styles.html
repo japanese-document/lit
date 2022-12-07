@@ -181,11 +181,12 @@ class MyElement extends LitElement {
 要素の<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Shadow_tree">shadow tree</a>に適用範囲を限定したスタイルはメインdocumentおよび他のshadow treeに影響を与えません。
 同様に<a class="Link" href="#CSSを継承する">継承されるCSSプロパティ</a>を除いて、document内のスタイルはshadow tree内のコンテンツに影響を与えません。</p>
 <p><code>static styles</code>で標準のCSSセレクタを使うと、コンポーネントのshadow tree内の要素のみマッチします。
-This means you can often use very simple selectors since you don't have to worry about them accidentally styling other parts of the page;
-for example: <code>input</code>, <code>*</code>, or <code>#my-element</code>.</p>
+これによって、意図せずページ内の要素にスタイルが適用されることを憂慮しなくてもよくなるので、シンプルなセレクタ(例: <code>input</code>、<code>*</code>、<code>#my-element</code>)を多用することができます。</p>
 <h3 id="コンポーネント自身のスタイルを設定する"><a href="#コンポーネント自身のスタイルを設定する">コンポーネント自身のスタイルを設定する</a></h3>
-<p>You can style the component itself using special <code>:host</code> selectors. (The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
-<p>To create default styles for the host element, use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
+<p>You can style the component itself using special <code>:host</code> selectors.
+(The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
+<p>To create default styles for the host element,
+use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
 <ul>
 <li><code>:host</code> selects the host element.</li>
 <li><code>:host(<var>selector</var>)</code> selects the host element, but only if the host element matches <em>selector</em>.</li>
