@@ -183,16 +183,37 @@ class MyElement extends LitElement {
 <p><code>static styles</code>で標準のCSSセレクタを使うと、コンポーネントのshadow tree内の要素のみマッチします。
 これによって、意図せずページ内の要素にスタイルが適用されることを憂慮しなくてもよくなるので、シンプルなセレクタ(例: <code>input</code>、<code>*</code>、<code>#my-element</code>)を多用することができます。</p>
 <h3 id="コンポーネント自身のスタイルを設定する"><a href="#コンポーネント自身のスタイルを設定する">コンポーネント自身のスタイルを設定する</a></h3>
-<p>You can style the component itself using special <code>:host</code> selectors.
-(The element that owns, or "hosts" a shadow tree is called the <em>host element</em>.)</p>
-<p>To create default styles for the host element,
-use the <code>:host</code> CSS pseudo-class and <code>:host()</code> CSS pseudo-class function.</p>
+<p>特別なセレクタである<code>:host</code>を使うと、コンポーネント自身のスタイルを設定することができます。
+(shadow treeを所有する要素をhost elementと呼びます。)</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host">:host</a> CSS pseudo-classもしくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host_function">:host()</a> CSS pseudo-class関数を使うと、host elementのデフォルトのスタイルをセットすることができます。</p>
 <ul>
-<li><code>:host</code> selects the host element.</li>
-<li><code>:host(<var>selector</var>)</code> selects the host element, but only if the host element matches <em>selector</em>.</li>
+<li><code>:host</code>はhost elementを対象にします。</li>
+<li><code>:host(selector)</code>は<code>selector</code>セレクタにマッチするhost elementのみを対象にします。</li>
 </ul>
-<p>{% playground-example "docs/components/style/host" "my-element.ts" %}</p>
-<p>Note that the host element can be affected by styles from outside the shadow tree, as well, so you should consider the styles you set in <code>:host</code> and <code>:host()</code> rules as <em>default styles</em> that can be overridden by the user. For example:</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators/custom-element.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      background-color: lightgray;
+      padding: 8px;
+    }
+    :host(.blue) {
+      background-color: aliceblue;
+      color: darkgreen;
+    }
+  `;
+  protected render() {
+    return html`Hello World`;
+  }
+}
+</code></pre>
+<p>Note that the host element can be affected by styles from outside the shadow tree,
+as well, so you should consider the styles you set in <code>:host</code> and <code>:host()</code> rules as <em>default styles</em> that can be overridden by the user.
+For example:</p>
 <pre><code class="language-css">my-element {
   display: inline-block;
 }

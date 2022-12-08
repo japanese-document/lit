@@ -209,18 +209,40 @@ static styles = css`
 
 ### コンポーネント自身のスタイルを設定する
 
-You can style the component itself using special `:host` selectors.
-(The element that owns, or "hosts" a shadow tree is called the _host element_.)
+特別なセレクタである`:host`を使うと、コンポーネント自身のスタイルを設定することができます。
+(shadow treeを所有する要素をhost elementと呼びます。)
 
-To create default styles for the host element,
-use the `:host` CSS pseudo-class and `:host()` CSS pseudo-class function.
+[:host](https://developer.mozilla.org/en-US/docs/Web/CSS/:host) CSS pseudo-classもしくは[:host()](https://developer.mozilla.org/en-US/docs/Web/CSS/:host_function) CSS pseudo-class関数を使うと、host elementのデフォルトのスタイルをセットすることができます。
 
-*   `:host` selects the host element.
-*   <code>:host(<var>selector</var>)</code> selects the host element, but only if the host element matches _selector_.
+* `:host`はhost elementを対象にします。
+* `:host(selector)`は`selector`セレクタにマッチするhost elementのみを対象にします。
 
-{% playground-example "docs/components/style/host" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators/custom-element.js';
 
-Note that the host element can be affected by styles from outside the shadow tree, as well, so you should consider the styles you set in `:host` and `:host()` rules as _default styles_ that can be overridden by the user. For example:
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      background-color: lightgray;
+      padding: 8px;
+    }
+    :host(.blue) {
+      background-color: aliceblue;
+      color: darkgreen;
+    }
+  `;
+  protected render() {
+    return html`Hello World`;
+  }
+}
+```
+
+Note that the host element can be affected by styles from outside the shadow tree,
+as well, so you should consider the styles you set in `:host` and `:host()` rules as _default styles_ that can be overridden by the user.
+For example:
 
 ```css
 my-element {
