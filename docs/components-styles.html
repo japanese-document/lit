@@ -211,15 +211,17 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Note that the host element can be affected by styles from outside the shadow tree,
-as well, so you should consider the styles you set in <code>:host</code> and <code>:host()</code> rules as <em>default styles</em> that can be overridden by the user.
-For example:</p>
+<p>host element自身のスタイルはshadow treeの外部から影響を受けることがあります。
+例えば、下記のようなスタイルは<code>:host</code>および<code>:host()</code>で設定されたスタイルを上書きします。
+つまり、<code>:host</code>および<code>:host()</code>で設定されたスタイルはデフォルトのスタイルと見なすことができます。</p>
 <pre><code class="language-css">my-element {
   display: inline-block;
 }
 </code></pre>
 <h3 id="子要素のスタイルを設定する"><a href="#子要素のスタイルを設定する">子要素のスタイルを設定する</a></h3>
-<p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children). To render children, your template needs to include one or more <code>&lt;slot&gt;</code> elements, as described in <a class="Link" href="/docs/components/shadow-dom/#slots">Render children with the slot element</a>.</p>
+<p>コンポーネントに(<code>&lt;ul&gt;</code>要素に<code>&lt;li&gt;</code>要素を配置するように)子コンポーネントを配置することができます。
+子コンポーネントをレンダリングするには、テンプレートに1つまたは複数の<code>&lt;slot&gt;</code>を配置する必要があります。
+詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#slots">slot要素を使って子コンポーネントをレンダリングする</a>を見てください。</p>
 <p>The <code>&lt;slot&gt;</code> element acts as a placeholder in a shadow tree where the host element's children are displayed.</p>
 <p>Use the <code>::slotted()</code> CSS pseudo-element to select children that are included in your template via <code>&lt;slot&gt;</code>s.</p>
 <ul>

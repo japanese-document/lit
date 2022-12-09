@@ -240,9 +240,9 @@ export class MyElement extends LitElement {
 }
 ```
 
-Note that the host element can be affected by styles from outside the shadow tree,
-as well, so you should consider the styles you set in `:host` and `:host()` rules as _default styles_ that can be overridden by the user.
-For example:
+host element自身のスタイルはshadow treeの外部から影響を受けることがあります。
+例えば、下記のようなスタイルは`:host`および`:host()`で設定されたスタイルを上書きします。
+つまり、`:host`および`:host()`で設定されたスタイルはデフォルトのスタイルと見なすことができます。
 
 ```css
 my-element {
@@ -252,15 +252,17 @@ my-element {
 
 ### 子要素のスタイルを設定する
 
-Your component may accept children (like a `<ul>` element can have `<li>` children). To render children, your template needs to include one or more `<slot>` elements, as described in [Render children with the slot element](/docs/components/shadow-dom/#slots).
+コンポーネントに(`<ul>`要素に`<li>`要素を配置するように)子コンポーネントを配置することができます。
+子コンポーネントをレンダリングするには、テンプレートに1つまたは複数の`<slot>`を配置する必要があります。
+詳しくは[slot要素を使って子コンポーネントをレンダリングする](https://lit.dev/docs/components/shadow-dom/#slots)を見てください。
 
 The `<slot>` element acts as a placeholder in a shadow tree where the host element's children are displayed.
 
 Use the `::slotted()` CSS pseudo-element to select children that are included in your template via `<slot>`s.
 
-*   `::slotted(*)` matches all slotted elements.
-*   `::slotted(p)` matches slotted paragraphs.
-*   `p ::slotted(*)` matches slotted elements where the `<slot>` is a descendant of a paragraph element.
+* `::slotted(*)` matches all slotted elements.
+* `::slotted(p)` matches slotted paragraphs.
+* `p ::slotted(*)` matches slotted elements where the `<slot>` is a descendant of a paragraph element.
 
 {% playground-example "docs/components/style/slottedselector" "my-element.ts" %}
 
