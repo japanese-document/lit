@@ -258,7 +258,7 @@ my-element {
 
 `<slot>`を使ってshadow tree内でhost elementの子要素が配置される位置を指定します。
 
-[::slotted()](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted) CSS pseudo-elementを使って`<slot>`内にある要素を対象とすることができます。
+[::slotted()](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted) CSS pseudo-elementを使って`<slot>`と置き換わる要素を指定することができます。
 
 * `::slotted(*)` すべての置き換わる要素にマッチします。
 * `::slotted(p)` 置き換わる要素が`<p>`の場合、マッチします。
@@ -296,17 +296,21 @@ export class MyElement extends LitElement {
 </my-element>
 ```
 
-Also, children can be styled from outside the shadow tree, so you should regard your `::slotted()` styles as default styles that can be overridden.
+Also, children can be styled from outside the shadow tree,
+so you should regard your  styles as default styles that can be overridden.
+
+`::slotted()`で設定したスタイルは下記のように上書きすることができます。
+つまり`::slotted()`で設定したスタイルはデフォルトのスタイルと見なすことができます。
 
 ```css
 my-element > div {
-  /* Outside style targetting a slotted child can override ::slotted() styles */
+  /* 置き換えられる子要素を外部のスタイルから対象にすることで::slotted()を使ってセットしたスタイルを上書きすることができます。 */
 }
 ```
 
 ## テンプレート内で適用範囲が限定されているスタイルを定義する
 
-We recommend using the [static `styles` class field](#add-styles) for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:
+We recommend using the [static `styles` class field](#コンポーネントにスタイルを加える) for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:
 
 *   Add styles using a [`<style>` element](#style-element).
 *   Add styles using an [external style sheet](#external-stylesheet) (not recommended).
@@ -315,7 +319,7 @@ Each of these techniques has its own set of advantages and drawbacks.
 
 ### In a style element {#style-element}
 
-Typically, styles are placed in the [static `styles` class field](#add-styles); however, the element's static `styles` are evaluated **once per class**. Sometimes, you might need to customize styles **per instance**. For this, we recommend using CSS properties to create [themable elements](#theming). Alternatively, you can also include `<style>` elements in a Lit template. These are updated per instance.
+Typically, styles are placed in the [static `styles` class field](#コンポーネントにスタイルを加える); however, the element's static `styles` are evaluated **once per class**. Sometimes, you might need to customize styles **per instance**. For this, we recommend using CSS properties to create [themable elements](#テーマ). Alternatively, you can also include `<style>` elements in a Lit template. These are updated per instance.
 
 ```js
 render() {
