@@ -214,8 +214,8 @@ static styles = css`
 
 [:host](https://developer.mozilla.org/en-US/docs/Web/CSS/:host) CSS pseudo-classもしくは[:host()](https://developer.mozilla.org/en-US/docs/Web/CSS/:host_function) CSS pseudo-class関数を使うと、host elementのデフォルトのスタイルをセットすることができます。
 
-* `:host`はhost elementを対象にします。
-* `:host(selector)`は`selector`セレクタにマッチするhost elementのみを対象にします。
+* `:host`はhost elementに対応します。
+* `:host(selector)`は`selector`セレクタにマッチするhost elementのみに対応します。
 
 ```ts
 import {LitElement, html, css} from 'lit';
@@ -256,17 +256,35 @@ my-element {
 子コンポーネントをレンダリングするには、テンプレートに1つまたは複数の`<slot>`を配置する必要があります。
 詳しくは[slot要素を使って子コンポーネントをレンダリングする](https://lit.dev/docs/components/shadow-dom/#slots)を見てください。
 
-The `<slot>` element acts as a placeholder in a shadow tree where the host element's children are displayed.
+`<slot>`を使ってshadow tree内でhost elementの子要素が配置される位置を指定します。
 
-Use the `::slotted()` CSS pseudo-element to select children that are included in your template via `<slot>`s.
+[::slotted()](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted) CSS pseudo-elementを使って`<slot>`内にある要素を対象とすることができます。
 
-* `::slotted(*)` matches all slotted elements.
-* `::slotted(p)` matches slotted paragraphs.
-* `p ::slotted(*)` matches slotted elements where the `<slot>` is a descendant of a paragraph element.
+* `::slotted(*)` すべての置き換わる要素にマッチします。
+* `::slotted(p)` 置き換わる要素が`<p>`の場合、マッチします。
+* `p ::slotted(*)` 置き換わる要素が`<p>`の子要素の場合、マッチします。
 
-{% playground-example "docs/components/style/slottedselector" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
-Note that **only direct slotted children** can be styled with `::slotted()`.
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    ::slotted(*) { font-family: Roboto; }
+    ::slotted(p) { color: blue; }
+    div ::slotted(*) { color: red; }
+  `;
+  protected render() {
+    return html`
+      <slot></slot>
+      <div><slot name="hi"></slot></div>
+    `;
+  }
+}
+```
+
+`::slotted()`でスタイルを設定することができる要素は`<slot>`と置き換わる要素のみであることに注意してください。
 
 ```html
 <my-element>
@@ -285,12 +303,6 @@ my-element > div {
   /* Outside style targetting a slotted child can override ::slotted() styles */
 }
 ```
-
-<div class="alert alert-info">
-
-**Limitations in the ShadyCSS polyfill around slotted content.** See the [ShadyCSS limitations](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations) for details on how to use the `::slotted()` syntax in a polyfill-friendly way.
-
-</div>
 
 ## テンプレート内で適用範囲が限定されているスタイルを定義する
 
