@@ -187,8 +187,8 @@ class MyElement extends LitElement {
 (shadow treeを所有する要素をhost elementと呼びます。)</p>
 <p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host">:host</a> CSS pseudo-classもしくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host_function">:host()</a> CSS pseudo-class関数を使うと、host elementのデフォルトのスタイルをセットすることができます。</p>
 <ul>
-<li><code>:host</code>はhost elementを対象にします。</li>
-<li><code>:host(selector)</code>は<code>selector</code>セレクタにマッチするhost elementのみを対象にします。</li>
+<li><code>:host</code>はhost elementに対応します。</li>
+<li><code>:host(selector)</code>は<code>selector</code>セレクタにマッチするhost elementのみに対応します。</li>
 </ul>
 <pre><code class="language-ts">import {LitElement, html, css} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -222,15 +222,32 @@ export class MyElement extends LitElement {
 <p>コンポーネントに(<code>&lt;ul&gt;</code>要素に<code>&lt;li&gt;</code>要素を配置するように)子コンポーネントを配置することができます。
 子コンポーネントをレンダリングするには、テンプレートに1つまたは複数の<code>&lt;slot&gt;</code>を配置する必要があります。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#slots">slot要素を使って子コンポーネントをレンダリングする</a>を見てください。</p>
-<p>The <code>&lt;slot&gt;</code> element acts as a placeholder in a shadow tree where the host element's children are displayed.</p>
-<p>Use the <code>::slotted()</code> CSS pseudo-element to select children that are included in your template via <code>&lt;slot&gt;</code>s.</p>
+<p><code>&lt;slot&gt;</code>を使ってshadow tree内でhost elementの子要素が配置される位置を指定します。</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted">::slotted()</a> CSS pseudo-elementを使って<code>&lt;slot&gt;</code>内にある要素を対象とすることができます。</p>
 <ul>
-<li><code>::slotted(*)</code> matches all slotted elements.</li>
-<li><code>::slotted(p)</code> matches slotted paragraphs.</li>
-<li><code>p ::slotted(*)</code> matches slotted elements where the <code>&lt;slot&gt;</code> is a descendant of a paragraph element.</li>
+<li><code>::slotted(*)</code> すべての置き換わる要素にマッチします。</li>
+<li><code>::slotted(p)</code> 置き換わる要素が<code>&lt;p&gt;</code>の場合、マッチします。</li>
+<li><code>p ::slotted(*)</code> 置き換わる要素が<code>&lt;p&gt;</code>の子要素の場合、マッチします。</li>
 </ul>
-<p>{% playground-example "docs/components/style/slottedselector" "my-element.ts" %}</p>
-<p>Note that <strong>only direct slotted children</strong> can be styled with <code>::slotted()</code>.</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    ::slotted(*) { font-family: Roboto; }
+    ::slotted(p) { color: blue; }
+    div ::slotted(*) { color: red; }
+  `;
+  protected render() {
+    return html`
+      &lt;slot&gt;&lt;/slot&gt;
+      &lt;div&gt;&lt;slot name="hi"&gt;&lt;/slot&gt;&lt;/div&gt;
+    `;
+  }
+}
+</code></pre>
+<p><code>::slotted()</code>でスタイルを設定することができる要素は<code>&lt;slot&gt;</code>と置き換わる要素のみであることに注意してください。</p>
 <pre><code class="language-html">&lt;my-element&gt;
   &lt;div&gt;Stylable with ::slotted()&lt;/div&gt;
 &lt;/my-element&gt;
@@ -244,11 +261,6 @@ export class MyElement extends LitElement {
   /* Outside style targetting a slotted child can override ::slotted() styles */
 }
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>Limitations in the ShadyCSS polyfill around slotted content.</strong> See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for details on how to use the <code>::slotted()</code> syntax in a polyfill-friendly way.</p>
-</div>
-
 <h2 id="テンプレート内で適用範囲が限定されているスタイルを定義する"><a href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a></h2>
 <p>We recommend using the <a class="Link" href="#add-styles">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
 <ul>
