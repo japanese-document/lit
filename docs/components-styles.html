@@ -223,7 +223,7 @@ export class MyElement extends LitElement {
 子コンポーネントをレンダリングするには、テンプレートに1つまたは複数の<code>&lt;slot&gt;</code>を配置する必要があります。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#slots">slot要素を使って子コンポーネントをレンダリングする</a>を見てください。</p>
 <p><code>&lt;slot&gt;</code>を使ってshadow tree内でhost elementの子要素が配置される位置を指定します。</p>
-<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted">::slotted()</a> CSS pseudo-elementを使って<code>&lt;slot&gt;</code>内にある要素を対象とすることができます。</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted">::slotted()</a> CSS pseudo-elementを使って<code>&lt;slot&gt;</code>と置き換わる要素を指定することができます。</p>
 <ul>
 <li><code>::slotted(*)</code> すべての置き換わる要素にマッチします。</li>
 <li><code>::slotted(p)</code> 置き換わる要素が<code>&lt;p&gt;</code>の場合、マッチします。</li>
@@ -256,20 +256,23 @@ export class MyElement extends LitElement {
   &lt;div&gt;&lt;p&gt;Not stylable with ::slotted()&lt;/p&gt;&lt;/div&gt;
 &lt;/my-element&gt;
 </code></pre>
-<p>Also, children can be styled from outside the shadow tree, so you should regard your <code>::slotted()</code> styles as default styles that can be overridden.</p>
+<p>Also, children can be styled from outside the shadow tree,
+so you should regard your  styles as default styles that can be overridden.</p>
+<p><code>::slotted()</code>で設定したスタイルは下記のように上書きすることができます。
+つまり<code>::slotted()</code>で設定したスタイルはデフォルトのスタイルと見なすことができます。</p>
 <pre><code class="language-css">my-element &gt; div {
-  /* Outside style targetting a slotted child can override ::slotted() styles */
+  /* 置き換えられる子要素を外部のスタイルから対象にすることで::slotted()を使ってセットしたスタイルを上書きすることができます。 */
 }
 </code></pre>
 <h2 id="テンプレート内で適用範囲が限定されているスタイルを定義する"><a href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a></h2>
-<p>We recommend using the <a class="Link" href="#add-styles">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
+<p>We recommend using the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
 <ul>
 <li>Add styles using a <a class="Link" href="#style-element"><code>&lt;style&gt;</code> element</a>.</li>
 <li>Add styles using an <a class="Link" href="#external-stylesheet">external style sheet</a> (not recommended).</li>
 </ul>
 <p>Each of these techniques has its own set of advantages and drawbacks.</p>
 <h3 id="In_a_style_element_{#style-element}"><a href="#In_a_style_element_{#style-element}">In a style element {#style-element}</a></h3>
-<p>Typically, styles are placed in the <a class="Link" href="#add-styles">static <code>styles</code> class field</a>; however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>. Sometimes, you might need to customize styles <strong>per instance</strong>. For this, we recommend using CSS properties to create <a class="Link" href="#theming">themable elements</a>. Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template. These are updated per instance.</p>
+<p>Typically, styles are placed in the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a>; however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>. Sometimes, you might need to customize styles <strong>per instance</strong>. For this, we recommend using CSS properties to create <a class="Link" href="#テーマ">themable elements</a>. Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template. These are updated per instance.</p>
 <pre><code class="language-js">render() {
   return html`
     &lt;style&gt;
