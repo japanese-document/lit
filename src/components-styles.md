@@ -312,15 +312,15 @@ my-element > div {
 テンプレートで適用範囲が限定されたスタイルを加える方法は下記の2つです。
 
 * [`<style>`要素](#style要素を使ってスタイルを定義する)を使ってスタイルを追加する。
-* [外部のスタイルシート](#外部のスタイルシートをインポートする(非推奨))を使ってスタイルを追加する。(非推奨).
+* [外部のスタイルシート](#外部のスタイルシートをインポートする(非推奨))を使ってスタイルを追加する。(非推奨)
 
 これらの方法はそれぞれ利点と欠点があります。
 
 ### style要素を使ってスタイルを定義する
 
-Typically, styles are placed in the [static `styles` class field](#コンポーネントにスタイルを加える);
-however, the element's static `styles` are evaluated **once per class**.
-Sometimes, you might need to customize styles **per instance**.
+通常、スタイルは[`static styles`クラスフィールド](#コンポーネントにスタイルを加える)に配置されます。
+`static styles`クラスフィールドはクラス毎に1度のみ評価されます。
+インスタンス毎にスタイルを設定する必要がある時もあるかもしれません。
 For this, we recommend using CSS properties to create [themable elements](#テーマ).
 Alternatively, you can also include `<style>` elements in a Lit template.
 These are updated per instance.

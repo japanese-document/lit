@@ -268,13 +268,13 @@ export class MyElement extends LitElement {
 テンプレートで適用範囲が限定されたスタイルを加える方法は下記の2つです。</p>
 <ul>
 <li><a class="Link" href="#style要素を使ってスタイルを定義する"><code>&lt;style&gt;</code>要素</a>を使ってスタイルを追加する。</li>
-<li><a class="Link" href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシート</a>を使ってスタイルを追加する。(非推奨).</li>
+<li><a class="Link" href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシート</a>を使ってスタイルを追加する。(非推奨)</li>
 </ul>
 <p>これらの方法はそれぞれ利点と欠点があります。</p>
 <h3 id="style要素を使ってスタイルを定義する"><a href="#style要素を使ってスタイルを定義する">style要素を使ってスタイルを定義する</a></h3>
-<p>Typically, styles are placed in the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a>;
-however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>.
-Sometimes, you might need to customize styles <strong>per instance</strong>.
+<p>通常、スタイルは<a class="Link" href="#コンポーネントにスタイルを加える"><code>static styles</code>クラスフィールド</a>に配置されます。
+<code>static styles</code>クラスフィールドはクラス毎に1度のみ評価されます。
+インスタンス毎にスタイルを設定する必要がある時もあるかもしれません。
 For this, we recommend using CSS properties to create <a class="Link" href="#テーマ">themable elements</a>.
 Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template.
 These are updated per instance.</p>
