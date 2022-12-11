@@ -256,8 +256,6 @@ export class MyElement extends LitElement {
   &lt;div&gt;&lt;p&gt;Not stylable with ::slotted()&lt;/p&gt;&lt;/div&gt;
 &lt;/my-element&gt;
 </code></pre>
-<p>Also, children can be styled from outside the shadow tree,
-so you should regard your  styles as default styles that can be overridden.</p>
 <p><code>::slotted()</code>で設定したスタイルは下記のように上書きすることができます。
 つまり<code>::slotted()</code>で設定したスタイルはデフォルトのスタイルと見なすことができます。</p>
 <pre><code class="language-css">my-element &gt; div {
@@ -265,14 +263,21 @@ so you should regard your  styles as default styles that can be overridden.</p>
 }
 </code></pre>
 <h2 id="テンプレート内で適用範囲が限定されているスタイルを定義する"><a href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a></h2>
-<p>We recommend using the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a> for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:</p>
+<p>パフォーマンスを最適化するために<a class="Link" href="#コンポーネントにスタイルを加える"><code>static styles</code>クラスフィールド</a>を使うことを推奨します。
+しかし、Litテンプレートでスタイルを定義したい時もあるでしょう。
+テンプレートで適用範囲が限定されたスタイルを加える方法は下記の2つです。</p>
 <ul>
-<li>Add styles using a <a class="Link" href="#style-element"><code>&lt;style&gt;</code> element</a>.</li>
-<li>Add styles using an <a class="Link" href="#external-stylesheet">external style sheet</a> (not recommended).</li>
+<li><a class="Link" href="#style要素を使ってスタイルを定義する"><code>&lt;style&gt;</code>要素</a>を使ってスタイルを追加する。</li>
+<li><a class="Link" href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシート</a>を使ってスタイルを追加する。(非推奨).</li>
 </ul>
-<p>Each of these techniques has its own set of advantages and drawbacks.</p>
-<h3 id="In_a_style_element_{#style-element}"><a href="#In_a_style_element_{#style-element}">In a style element {#style-element}</a></h3>
-<p>Typically, styles are placed in the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a>; however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>. Sometimes, you might need to customize styles <strong>per instance</strong>. For this, we recommend using CSS properties to create <a class="Link" href="#テーマ">themable elements</a>. Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template. These are updated per instance.</p>
+<p>これらの方法はそれぞれ利点と欠点があります。</p>
+<h3 id="style要素を使ってスタイルを定義する"><a href="#style要素を使ってスタイルを定義する">style要素を使ってスタイルを定義する</a></h3>
+<p>Typically, styles are placed in the <a class="Link" href="#コンポーネントにスタイルを加える">static <code>styles</code> class field</a>;
+however, the element's static <code>styles</code> are evaluated <strong>once per class</strong>.
+Sometimes, you might need to customize styles <strong>per instance</strong>.
+For this, we recommend using CSS properties to create <a class="Link" href="#テーマ">themable elements</a>.
+Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template.
+These are updated per instance.</p>
 <pre><code class="language-js">render() {
   return html`
     &lt;style&gt;
@@ -313,7 +318,7 @@ so you should regard your  styles as default styles that can be overridden.</p>
     const redStyle = html`&lt;style&gt; :host { color: red; } &lt;/style&gt;`;
     return html`${this.red ? redStyle : ''}`
 </code></pre>
-<h3 id="Import_an_external_stylesheet_(not_recommended)_{#external-stylesheet}"><a href="#Import_an_external_stylesheet_(not_recommended)_{#external-stylesheet}">Import an external stylesheet (not recommended) {#external-stylesheet}</a></h3>
+<h3 id="外部のスタイルシートをインポートする(非推奨)"><a href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシートをインポートする(非推奨)</a></h3>
 <p>While you can include an external style sheet in your template with a <code>&lt;link&gt;</code>, we do not recommend this approach. Instead, styles should be placed in the <a class="Link" href="#add-styles">static <code>styles</code> class field</a>.</p>
 <div class="alert alert-info">
 

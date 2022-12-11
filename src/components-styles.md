@@ -296,9 +296,6 @@ export class MyElement extends LitElement {
 </my-element>
 ```
 
-Also, children can be styled from outside the shadow tree,
-so you should regard your  styles as default styles that can be overridden.
-
 `::slotted()`で設定したスタイルは下記のように上書きすることができます。
 つまり`::slotted()`で設定したスタイルはデフォルトのスタイルと見なすことができます。
 
@@ -310,16 +307,23 @@ my-element > div {
 
 ## テンプレート内で適用範囲が限定されているスタイルを定義する
 
-We recommend using the [static `styles` class field](#コンポーネントにスタイルを加える) for optimal performance.  However, sometimes you may want to define styles in the Lit template. There are two ways to add scoped styles in the template:
+パフォーマンスを最適化するために[`static styles`クラスフィールド](#コンポーネントにスタイルを加える)を使うことを推奨します。
+しかし、Litテンプレートでスタイルを定義したい時もあるでしょう。
+テンプレートで適用範囲が限定されたスタイルを加える方法は下記の2つです。
 
-*   Add styles using a [`<style>` element](#style-element).
-*   Add styles using an [external style sheet](#external-stylesheet) (not recommended).
+* [`<style>`要素](#style要素を使ってスタイルを定義する)を使ってスタイルを追加する。
+* [外部のスタイルシート](#外部のスタイルシートをインポートする(非推奨))を使ってスタイルを追加する。(非推奨).
 
-Each of these techniques has its own set of advantages and drawbacks.
+これらの方法はそれぞれ利点と欠点があります。
 
-### In a style element {#style-element}
+### style要素を使ってスタイルを定義する
 
-Typically, styles are placed in the [static `styles` class field](#コンポーネントにスタイルを加える); however, the element's static `styles` are evaluated **once per class**. Sometimes, you might need to customize styles **per instance**. For this, we recommend using CSS properties to create [themable elements](#テーマ). Alternatively, you can also include `<style>` elements in a Lit template. These are updated per instance.
+Typically, styles are placed in the [static `styles` class field](#コンポーネントにスタイルを加える);
+however, the element's static `styles` are evaluated **once per class**.
+Sometimes, you might need to customize styles **per instance**.
+For this, we recommend using CSS properties to create [themable elements](#テーマ).
+Alternatively, you can also include `<style>` elements in a Lit template.
+These are updated per instance.
 
 ```js
 render() {
@@ -374,7 +378,7 @@ To mitigate this cost, separate styles that require per-instance evaluation from
 
 ```
 
-### Import an external stylesheet (not recommended) {#external-stylesheet}
+### 外部のスタイルシートをインポートする(非推奨)
 
 While you can include an external style sheet in your template with a `<link>`, we do not recommend this approach. Instead, styles should be placed in the [static `styles` class field](#add-styles).
 
