@@ -321,9 +321,9 @@ my-element > div {
 通常、スタイルは[`static styles`クラスフィールド](#コンポーネントにスタイルを加える)に配置されます。
 `static styles`クラスフィールドはクラス毎に1度のみ評価されます。
 インスタンス毎にスタイルを設定する必要がある時もあるかもしれません。
-For this, we recommend using CSS properties to create [themable elements](#テーマ).
-Alternatively, you can also include `<style>` elements in a Lit template.
-These are updated per instance.
+このために、CSS propertiesを使って[テーマ可能な要素](#テーマ)を作成することを推奨します。
+それか、`<style>`要素をLitテンプレート内に配置します。
+これらはインスタンス毎に更新されます。
 
 ```js
 render() {
@@ -336,22 +336,16 @@ render() {
 }
 ```
 
-<div class="alert alert-info">
+#### エクスプレッションとstyle要素
 
-**Limitations in the ShadyCSS polyfill around per instance styling.** Per instance styling is not supported using the ShadyCSS polyfill. See the [ShadyCSS limitations](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations) for details.
-
-</div>
-
-#### Expressions and style elements
-
-Using expressions inside style elements has some important limitations and performance issues.
+style要素内でエクスプレッションを使うことは重大なパフォーマンスの問題があります。
 
 ```js
 render() {
   return html`
     <style>
       :host {
-        /* Warning: this approach has limitations & performance issues! */
+        /* このアプローチは重大なパフォーマンスの問題があります。 */
         color: ${myColor}
       }
     </style>
@@ -360,13 +354,8 @@ render() {
 }
 ```
 
-<div class="alert alert-info">
-
-**Limitations in the ShadyCSS polyfill around expressions.** Expressions in `<style>` elements won't update per instance in ShadyCSS, due to limitations of the ShadyCSS polyfill. In addition, `<style>` nodes may not be passed as expression values when using the ShadyCSS polyfill. See the [ShadyCSS limitations](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations) for more information.
-
-</div>
-
-Evaluating an expression inside a `<style>` element is extremely inefficient. When any text inside a `<style>` element changes, the browser must re-parse the whole `<style>` element, resulting in unnecessary work.
+Evaluating an expression inside a `<style>` element is extremely inefficient.
+When any text inside a `<style>` element changes, the browser must re-parse the whole `<style>` element, resulting in unnecessary work.
 
 To mitigate this cost, separate styles that require per-instance evaluation from those that don't.
 

@@ -275,9 +275,9 @@ export class MyElement extends LitElement {
 <p>通常、スタイルは<a class="Link" href="#コンポーネントにスタイルを加える"><code>static styles</code>クラスフィールド</a>に配置されます。
 <code>static styles</code>クラスフィールドはクラス毎に1度のみ評価されます。
 インスタンス毎にスタイルを設定する必要がある時もあるかもしれません。
-For this, we recommend using CSS properties to create <a class="Link" href="#テーマ">themable elements</a>.
-Alternatively, you can also include <code>&lt;style&gt;</code> elements in a Lit template.
-These are updated per instance.</p>
+このために、CSS propertiesを使って<a class="Link" href="#テーマ">テーマ可能な要素</a>を作成することを推奨します。
+それか、<code>&lt;style&gt;</code>要素をLitテンプレート内に配置します。
+これらはインスタンス毎に更新されます。</p>
 <pre><code class="language-js">render() {
   return html`
     &lt;style&gt;
@@ -287,18 +287,13 @@ These are updated per instance.</p>
   `;
 }
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>Limitations in the ShadyCSS polyfill around per instance styling.</strong> Per instance styling is not supported using the ShadyCSS polyfill. See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for details.</p>
-</div>
-
-<h4 id="Expressions_and_style_elements"><a href="#Expressions_and_style_elements">Expressions and style elements</a></h4>
-<p>Using expressions inside style elements has some important limitations and performance issues.</p>
+<h4 id="エクスプレッションとstyle要素"><a href="#エクスプレッションとstyle要素">エクスプレッションとstyle要素</a></h4>
+<p>style要素内でエクスプレッションを使うことは重大なパフォーマンスの問題があります。</p>
 <pre><code class="language-js">render() {
   return html`
     &lt;style&gt;
       :host {
-        /* Warning: this approach has limitations &amp; performance issues! */
+        /* このアプローチは重大なパフォーマンスの問題があります。 */
         color: ${myColor}
       }
     &lt;/style&gt;
@@ -306,12 +301,8 @@ These are updated per instance.</p>
   `;
 }
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>Limitations in the ShadyCSS polyfill around expressions.</strong> Expressions in <code>&lt;style&gt;</code> elements won't update per instance in ShadyCSS, due to limitations of the ShadyCSS polyfill. In addition, <code>&lt;style&gt;</code> nodes may not be passed as expression values when using the ShadyCSS polyfill. See the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS limitations</a> for more information.</p>
-</div>
-
-<p>Evaluating an expression inside a <code>&lt;style&gt;</code> element is extremely inefficient. When any text inside a <code>&lt;style&gt;</code> element changes, the browser must re-parse the whole <code>&lt;style&gt;</code> element, resulting in unnecessary work.</p>
+<p>Evaluating an expression inside a <code>&lt;style&gt;</code> element is extremely inefficient.
+When any text inside a <code>&lt;style&gt;</code> element changes, the browser must re-parse the whole <code>&lt;style&gt;</code> element, resulting in unnecessary work.</p>
 <p>To mitigate this cost, separate styles that require per-instance evaluation from those that don't.</p>
 <pre><code class="language-js">  static styles = css`/* ... */`;
   render() {
