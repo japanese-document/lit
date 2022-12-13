@@ -329,7 +329,7 @@ my-element > div {
 render() {
   return html`
     <style>
-      /* updated per instance */
+      /* インスタンス毎に更新されます。 */
     </style>
     <div>template content</div>
   `;
@@ -354,10 +354,10 @@ render() {
 }
 ```
 
-Evaluating an expression inside a `<style>` element is extremely inefficient.
-When any text inside a `<style>` element changes, the browser must re-parse the whole `<style>` element, resulting in unnecessary work.
+`<style>`要素内でエクスプレッションを評価することはとても非効率です。
+`<style>`要素内のテキストが変更されると、ブラウザは`<style>`要素全体を再パース処理をします。
 
-To mitigate this cost, separate styles that require per-instance evaluation from those that don't.
+このコストを軽減するには、下記のようにインスタンス毎に評価する必要があるスタイルとそうでないスタイルに分割します。
 
 ```js
   static styles = css`/* ... */`;
@@ -406,7 +406,7 @@ See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMa
 
 ## テーマ
 
-By using [CSS inheritance](#inheritance) and [CSS variables and custom properties](#customprops) together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:
+By using [CSSを継承](#CSSを継承する) and [CSS variables and custom properties](#CSS_custom_properties) together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:
 
 ```ts
 import {LitElement, html, css} from 'lit';
@@ -456,7 +456,7 @@ html {
 </my-element>
 ```
 
-### CSS custom properties {#customprops}
+### CSS custom properties
 
 All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.
 
