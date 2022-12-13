@@ -281,7 +281,7 @@ export class MyElement extends LitElement {
 <pre><code class="language-js">render() {
   return html`
     &lt;style&gt;
-      /* updated per instance */
+      /* インスタンス毎に更新されます。 */
     &lt;/style&gt;
     &lt;div&gt;template content&lt;/div&gt;
   `;
@@ -301,9 +301,9 @@ export class MyElement extends LitElement {
   `;
 }
 </code></pre>
-<p>Evaluating an expression inside a <code>&lt;style&gt;</code> element is extremely inefficient.
-When any text inside a <code>&lt;style&gt;</code> element changes, the browser must re-parse the whole <code>&lt;style&gt;</code> element, resulting in unnecessary work.</p>
-<p>To mitigate this cost, separate styles that require per-instance evaluation from those that don't.</p>
+<p><code>&lt;style&gt;</code>要素内でエクスプレッションを評価することはとても非効率です。
+<code>&lt;style&gt;</code>要素内のテキストが変更されると、ブラウザは<code>&lt;style&gt;</code>要素全体を再パース処理をします。</p>
+<p>このコストを軽減するには、下記のようにインスタンス毎に評価する必要があるスタイルとそうでないスタイルに分割します。</p>
 <pre><code class="language-js">  static styles = css`/* ... */`;
   render() {
     const redStyle = html`&lt;style&gt; :host { color: red; } &lt;/style&gt;`;
@@ -338,7 +338,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 <p>{% playground-example "docs/components/style/maps" "my-element.ts" %}</p>
 <p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
 <h2 id="テーマ"><a href="#テーマ">テーマ</a></h2>
-<p>By using <a class="Link" href="#inheritance">CSS inheritance</a> and <a class="Link" href="#customprops">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
+<p>By using <a class="Link" href="#CSSを継承する">CSSを継承</a> and <a class="Link" href="#CSS_custom_properties">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
 <pre><code class="language-ts">import {LitElement, html, css} from 'lit';
 import {customElement} from 'lit/decorators.js';
 
@@ -379,7 +379,7 @@ html {
     Will be green
 &lt;/my-element&gt;
 </code></pre>
-<h3 id="CSS_custom_properties_{#customprops}"><a href="#CSS_custom_properties_{#customprops}">CSS custom properties {#customprops}</a></h3>
+<h3 id="CSS_custom_properties"><a href="#CSS_custom_properties">CSS custom properties</a></h3>
 <p>All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.</p>
 <p>The following component sets its background color to a CSS variable. The CSS variable uses the value of <code>--my-background</code> if it's been set by a selector matching an ancestor in the DOM tree, and otherwise defaults to <code>yellow</code>:</p>
 <pre><code class="language-js">class MyElement extends LitElement {
