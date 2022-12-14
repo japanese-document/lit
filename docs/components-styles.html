@@ -310,18 +310,15 @@ export class MyElement extends LitElement {
     return html`${this.red ? redStyle : ''}`
 </code></pre>
 <h3 id="外部のスタイルシートをインポートする(非推奨)"><a href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシートをインポートする(非推奨)</a></h3>
-<p>While you can include an external style sheet in your template with a <code>&lt;link&gt;</code>, we do not recommend this approach. Instead, styles should be placed in the <a class="Link" href="#add-styles">static <code>styles</code> class field</a>.</p>
-<div class="alert alert-info">
-
-<p><strong>External stylesheet caveats.</strong></p>
+<p><code>&lt;link&gt;</code>をテンプレート内に配置して外部のスタイルシートを使うことができますが、この方法は非推奨です。
+代わりに<a class="Link" href="#コンポーネントにスタイルを加える"><code>static styles</code>クラスフィールド</a>を使うべきです。</p>
+<h4 id="外部のスタイルシートを使う際の注意事項"><a href="#外部のスタイルシートを使う際の注意事項">外部のスタイルシートを使う際の注意事項</a></h4>
 <ul>
-<li>The <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS polyfill</a> doesn't support external style sheets.</li>
-<li>External styles can cause a flash-of-unstyled-content (FOUC) while they load.</li>
-<li>The URL in the <code>href</code> attribute is relative to the <strong>main document</strong>. This is okay if you're building an app and your asset URLs are well-known, but avoid using external style sheets when building a reusable element.</li>
+<li><a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS polyfill</a>は外部のスタイルシートをサポートしません。</li>
+<li>外部のスタイルシートはロード時にcause a flash-of-unstyled-content (FOUC)を引き起こす可能性があります。</li>
+<li><code>href</code>属性のURLはメインdocumentに相対的です。これは使用されるURL構造が分かっているときは問題ありません。不特定多数のURLで使用される場合は外部のスタイルシートを使うことは避けるべきです。</li>
 </ul>
-</div>
-
-<h2 id="Dynamic_classes_and_styles"><a href="#Dynamic_classes_and_styles">Dynamic classes and styles</a></h2>
+<h2 id="動的なclass属性とstyle属性"><a href="#動的なclass属性とstyle属性">動的なclass属性とstyle属性</a></h2>
 <p>One way to make styles dynamic is to add expressions to the <code>class</code> or <code>style</code> attributes in your template.</p>
 <p>Lit offers two directives, <code>classMap</code> and <code>styleMap</code>, to conveniently apply classes and styles in HTML templates.</p>
 <p>For more information on these and other directives, see the documentation on <a class="Link" href="https://lit.dev/docs/templates/directives/">built-in directives</a>.</p>
@@ -335,7 +332,30 @@ import { styleMap } from 'lit/directives/style-map.js';
 <li><p>Use <code>classMap</code> and/or <code>styleMap</code> in your element template:</p>
 </li>
 </ol>
-<p>{% playground-example "docs/components/style/maps" "my-element.ts" %}</p>
+<pre><code class="language-ts">import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {styleMap} from 'lit/directives/style-map.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    .someclass { border: 1px solid red; padding: 4px; }
+    .anotherclass { background-color: navy; }
+  `;
+  @property()
+  classes = { someclass: true, anotherclass: true };
+  @property()
+  styles = { color: 'lightgreen', fontFamily: 'Roboto' };
+  protected render() {
+    return html`
+      &lt;div class=${classMap(this.classes)} style=${styleMap(this.styles)}&gt;
+        Some content
+      &lt;/div&gt;
+    `;
+  }
+}
+</code></pre>
 <p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
 <h2 id="テーマ"><a href="#テーマ">テーマ</a></h2>
 <p>By using <a class="Link" href="#CSSを継承する">CSSを継承</a> and <a class="Link" href="#CSS_custom_properties">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
