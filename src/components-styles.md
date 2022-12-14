@@ -369,19 +369,16 @@ render() {
 
 ### 外部のスタイルシートをインポートする(非推奨)
 
-While you can include an external style sheet in your template with a `<link>`, we do not recommend this approach. Instead, styles should be placed in the [static `styles` class field](#add-styles).
+`<link>`をテンプレート内に配置して外部のスタイルシートを使うことができますが、この方法は非推奨です。
+代わりに[`static styles`クラスフィールド](#コンポーネントにスタイルを加える)を使うべきです。
 
-<div class="alert alert-info">
+#### 外部のスタイルシートを使う際の注意事項
 
-**External stylesheet caveats.**
+* [ShadyCSS polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations)は外部のスタイルシートをサポートしません。
+* 外部のスタイルシートはロード時にcause a flash-of-unstyled-content (FOUC)を引き起こす可能性があります。
+* `href`属性のURLはメインdocumentに相対的です。これは使用されるURL構造が分かっているときは問題ありません。不特定多数のURLで使用される場合は外部のスタイルシートを使うことは避けるべきです。
 
-*  The [ShadyCSS polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations) doesn't support external style sheets.
-*   External styles can cause a flash-of-unstyled-content (FOUC) while they load.
-*   The URL in the `href` attribute is relative to the **main document**. This is okay if you're building an app and your asset URLs are well-known, but avoid using external style sheets when building a reusable element.
-
-</div>
-
-## Dynamic classes and styles
+## 動的なclass属性とstyle属性
 
 One way to make styles dynamic is to add expressions to the `class` or `style` attributes in your template.
 
@@ -400,7 +397,31 @@ To use `styleMap` and/or `classMap`:
 
 2.  Use `classMap` and/or `styleMap` in your element template:
 
-{% playground-example "docs/components/style/maps" "my-element.ts" %}
+```ts
+import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {styleMap} from 'lit/directives/style-map.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  static styles = css`
+    .someclass { border: 1px solid red; padding: 4px; }
+    .anotherclass { background-color: navy; }
+  `;
+  @property()
+  classes = { someclass: true, anotherclass: true };
+  @property()
+  styles = { color: 'lightgreen', fontFamily: 'Roboto' };
+  protected render() {
+    return html`
+      <div class=${classMap(this.classes)} style=${styleMap(this.styles)}>
+        Some content
+      </div>
+    `;
+  }
+}
+```
 
 See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMap](https://lit.dev/docs/templates/directives/#stylemap) for more information.
 
