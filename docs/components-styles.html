@@ -316,7 +316,7 @@ export class MyElement extends LitElement {
 <ul>
 <li><a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations">ShadyCSS polyfill</a>は外部のスタイルシートをサポートしません。</li>
 <li>外部のスタイルシートはロード時にcause a flash-of-unstyled-content (FOUC)を引き起こす可能性があります。</li>
-<li><code>href</code>属性のURLはメインdocumentに相対的です。これは使用されるURL構造が分かっているときは問題ありません。不特定多数のURLで使用される場合は外部のスタイルシートを使うことは避けるべきです。</li>
+<li><code>href</code>属性のURLはメインdocumentに相対的です。これは使用されるURL構造を固定しているときは問題ありません。不特定のURL構造で使用されることを想定している場合、外部のスタイルシートを使うことは避けるべきです。</li>
 </ul>
 <h2 id="動的なclass属性とstyle属性"><a href="#動的なclass属性とstyle属性">動的なclass属性とstyle属性</a></h2>
 <p>One way to make styles dynamic is to add expressions to the <code>class</code> or <code>style</code> attributes in your template.</p>
@@ -356,7 +356,7 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>See <a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a> and <a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a> for more information.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/directives/#classmap">classMap</a>と<a class="Link" href="https://lit.dev/docs/templates/directives/#stylemap">styleMap</a>を見てください。</p>
 <h2 id="テーマ"><a href="#テーマ">テーマ</a></h2>
 <p>By using <a class="Link" href="#CSSを継承する">CSSを継承</a> and <a class="Link" href="#CSS_custom_properties">CSS variables and custom properties</a> together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:</p>
 <pre><code class="language-ts">import {LitElement, html, css} from 'lit';
