@@ -376,7 +376,7 @@ render() {
 
 * [ShadyCSS polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss#limitations)は外部のスタイルシートをサポートしません。
 * 外部のスタイルシートはロード時にcause a flash-of-unstyled-content (FOUC)を引き起こす可能性があります。
-* `href`属性のURLはメインdocumentに相対的です。これは使用されるURL構造が分かっているときは問題ありません。不特定多数のURLで使用される場合は外部のスタイルシートを使うことは避けるべきです。
+* `href`属性のURLはメインdocumentに相対的です。これは使用されるURL構造を固定しているときは問題ありません。不特定のURL構造で使用されることを想定している場合、外部のスタイルシートを使うことは避けるべきです。
 
 ## 動的なclass属性とstyle属性
 
@@ -423,7 +423,7 @@ export class MyElement extends LitElement {
 }
 ```
 
-See [classMap](https://lit.dev/docs/templates/directives/#classmap) and [styleMap](https://lit.dev/docs/templates/directives/#stylemap) for more information.
+詳しくは[classMap](https://lit.dev/docs/templates/directives/#classmap)と[styleMap](https://lit.dev/docs/templates/directives/#stylemap)を見てください。
 
 ## テーマ
 
