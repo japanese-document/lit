@@ -380,22 +380,22 @@ render() {
 
 ## 動的なclass属性とstyle属性
 
-One way to make styles dynamic is to add expressions to the `class` or `style` attributes in your template.
+スタイルを動的にする1つの方法はHTMLテンプレート内の`class`属性もしくは`style`属性の値をエクスプレッションを使ってセットすることです。
 
-Lit offers two directives, `classMap` and `styleMap`, to conveniently apply classes and styles in HTML templates.
+容易にHTMLテンプレート内の`class`属性もしくは`style`属性にエクスプレッションを使って値を適用できるように、Litは`classMap`と`styleMap`という２つのディレクティブを提供します。
 
-For more information on these and other directives, see the documentation on [built-in directives](https://lit.dev/docs/templates/directives/).
+詳しくは[ビルドインディレクティブ](https://lit.dev/docs/templates/directives/)を見てください。
 
-To use `styleMap` and/or `classMap`:
+以下は[classMap](https://lit.dev/docs/templates/directives/#classmap)と[styleMap](https://lit.dev/docs/templates/directives/#stylemap)の簡単な使い方の例です。
 
-1.  Import `classMap` and/or `styleMap`:
+1. importします。
 
-    ```js
-    import { classMap } from 'lit/directives/class-map.js';
-    import { styleMap } from 'lit/directives/style-map.js';
-    ```
+```ts
+import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
+```
 
-2.  Use `classMap` and/or `styleMap` in your element template:
+2. テンプレート内に配置します。
 
 ```ts
 import {LitElement, html, css} from 'lit';
@@ -427,7 +427,11 @@ export class MyElement extends LitElement {
 
 ## テーマ
 
-By using [CSSを継承](#CSSを継承する) and [CSS variables and custom properties](#CSS_custom_properties) together, it's easy to create themable elements. By applying css selectors to customize CSS custom properties, tree-based and per-instance theming is straightforward to apply. Here's an example:
+[CSSを継承](#CSSを継承する)と[CSS変数とカスタムプロパティ](#CSSカスタムプロパティ)を併用すると
+簡単にテーマ設定可能な要素を作成することができます。
+CSSカスタムプロパティの変更をCSSセレクタに適用することによって、
+ツリーベースおよびインスタンス毎のテーマを簡単に適用することができます。
+以下はその例です。
 
 ```ts
 import {LitElement, html, css} from 'lit';
@@ -453,15 +457,15 @@ export class MyElement extends LitElement {
 
 ### CSSを継承する
 
-CSS inheritance lets parent and host elements propagate certain CSS properties to their descendants.
+CSSの継承によって親要素およびhost elementsは特定のCSSプロパティをそれらの子孫のコンポーネントに適用することができます。
 
-Not all CSS properties inherit. Inherited CSS properties include:
+コンポーネントにすべてのCSSプロパティが継承されるわけではありません。下記のCSSプロパティのみが継承されます。
 
 * `color`
-* `font-family` and other `font-*` properties
-* All CSS custom properties (`--*`)
+* `font-family`とそれ以外の`font-*`プロパティ
+* すべてのCSSカスタムプロパティ(`--*`)
 
-See [CSS Inheritance on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) for more information.
+CSSの継承について詳しく知りたい場合は[CSSの継承](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance)を見てください。
 
 You can use CSS inheritance to set styles on an ancestor element that are inherited by its descendants:
 
@@ -477,7 +481,7 @@ html {
 </my-element>
 ```
 
-### CSS custom properties
+### CSSカスタムプロパティ
 
 All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.
 
@@ -522,7 +526,7 @@ Users of this component can set the value of `--my-background`, using the `my-el
 <my-element class="stuff"></my-element>
 ```
 
-See [CSS Custom Properties on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) for more information.
+詳しくは[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)を見てください。
 
 ---
 
