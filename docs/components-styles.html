@@ -384,14 +384,14 @@ export class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="CSSを継承する"><a href="#CSSを継承する">CSSを継承する</a></h3>
-<p>CSSの継承によって親要素およびhost elementsは特定のCSSプロパティをそれらの子孫のコンポーネントに適用することができます。</p>
-<p>コンポーネントにすべてのCSSプロパティが継承されるわけではありません。下記のCSSプロパティのみが継承されます。</p>
+<p>CSSの継承によって親要素およびhost elementsはそれらで設定されている特定のCSSプロパティをそれらの子孫の要素に適用することができます。</p>
+<p>すべてのCSSプロパティが継承されるわけではありません。下記のCSSプロパティのみが継承されます。</p>
 <ul>
 <li><code>color</code></li>
 <li><code>font-family</code>とそれ以外の<code>font-*</code>プロパティ</li>
 <li>すべてのCSSカスタムプロパティ(<code>--*</code>)</li>
 </ul>
-<p>CSSの継承について詳しく知りたい場合は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">CSSの継承</a>を見てください。</p>
+<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">CSSの継承</a>を見てください。</p>
 <p>You can use CSS inheritance to set styles on an ancestor element that are inherited by its descendants:</p>
 <pre><code class="language-html">&lt;style&gt;
 html {
