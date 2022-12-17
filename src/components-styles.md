@@ -467,7 +467,7 @@ CSSの継承によって親要素およびhost elementsはそれらで設定さ�
 
 詳しくは[CSSの継承](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance)を見てください。
 
-You can use CSS inheritance to set styles on an ancestor element that are inherited by its descendants:
+下記のようにCSSの継承を使って親要素にスタイルを設定することでそれを子孫の要素に適用することができます。
 
 ```html
 <style>
@@ -483,9 +483,11 @@ html {
 
 ### CSSカスタムプロパティ
 
-All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.
+すべてのCSSカスタムプロパティ(`--custom-property-name`)は継承されます。
+これを使って外部からコンポーネントのスタイルを変更することができます。
 
-The following component sets its background color to a CSS variable. The CSS variable uses the value of `--my-background` if it's been set by a selector matching an ancestor in the DOM tree, and otherwise defaults to `yellow`:
+下記のコンポーネントはCSS変数を`background-color`にセットしています。
+CSS変数はコンポーネントの先祖の要素で`--my-background`が設定されている場合はその値を使います。そうでない場合は`yellow`を使います。
 
 ```js
 class MyElement extends LitElement {
@@ -500,7 +502,7 @@ class MyElement extends LitElement {
 }
 ```
 
-Users of this component can set the value of `--my-background`, using the `my-element` tag as a CSS selector:
+下記のように`my-element`タグをCSSセレクタとして使ってコンポーネントに`--my-background`の値を適用することもできます。
 
 ```html
 <style>
@@ -511,7 +513,7 @@ Users of this component can set the value of `--my-background`, using the `my-el
 <my-element></my-element>
 ```
 
-`--my-background` is configurable per instance of `my-element`:
+下記のように`--my-background`を`my-element`のインスタンス毎に設定することができます。
 
 ```html
 <style>
