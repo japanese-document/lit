@@ -250,7 +250,7 @@ DOMがレンダリングされるNodeもしくはShadowRootです。
 
 `static styles`にセットされた値を引数(`styles`)にして、要素に適用するスタイルの配列を返します。
 このメソッドをオーバーライドしてスタイル管理システムに統合します。
-[サブクラスを積み重ねていくこと](https://lit.dev/docs/components/styles/#inheriting-styles-from-a-superclass)で`static styles`に重複が生じする可能性があります。
+[サブクラスを積み重ねていくこと](https://japanese-document.github.io/lit/components-styles.html#スーパークラスのスタイルを継承する)で`static styles`に重複が生じする可能性があります。
 それを防ぐために、ここで`styles`は末尾に格納されている値を優先的に残す方法で重複が削除されます。
 `styles`は末尾に格納されている値が優先的に要素に適用されます。
 
