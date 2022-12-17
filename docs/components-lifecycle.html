@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/components-lifecycle.html" />
+    <meta property="og:title" content="ライフサイクル - Lit" />
+    <meta property="og:description" content="Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.Standard custom element lifecycle { #custom-element-lifecycle }Lit components are standard custom elements and inherit the " />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.Standard custom element lifecycle { #custom-element-lifecycle }Lit components are standard custom elements and inherit the " />
+    <title>ライフサイクル - Lit</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="side"></div>
+    <main class="main markdown-body">
+      <h1 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h1>
+<p>Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.</p>
+<h2 id="Standard_custom_element_lifecycle_{_#custom-element-lifecycle_}"><a href="#Standard_custom_element_lifecycle_{_#custom-element-lifecycle_}">Standard custom element lifecycle { #custom-element-lifecycle }</a></h2>
+<p>Lit components are standard custom elements and inherit the custom element lifecycle methods. For information about the custom element lifecycle, see <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a> on MDN.</p>
+<div class="alert alert-info">
+
+<p>If you need to customize any of the standard custom element lifecycle methods, make sure to call the <code>super</code> implementation (such as <code>super.connectedCallback()</code>) so the standard Lit functionality is maintained.</p>
+</div>
+
+<h3 id="constructor()_{#constructor}"><a href="#constructor()_{#constructor}">constructor() {#constructor}</a></h3>
+<p>Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.</p>
+<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<p>Requests an asynchronous update using the <code>requestUpdate()</code> method, so when a Lit component gets upgraded, it performs an update immediately.</p>
+<p>Saves any properties already set on the element. This ensures values set before upgrade are maintained and correctly override defaults set by the component.</p>
+<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
+<p>Perform one time initialization tasks that must be done before the first <a class="Link" href="#reactive-update-cycle">update</a>. For example, when not using decorators, default values for properties can be set in the constructor, as shown in <a class="Link" href="/docs/components/properties/#declaring-properties-in-a-static-properties-field">Declaring properties in a static properties field</a>.</p>
+<pre><code class="language-js">constructor() {
+  super();
+  this.foo = 'foo';
+  this.bar = 'bar';
+}
+</code></pre>
+<h3 id="connectedCallback()_{#connectedcallback}"><a href="#connectedCallback()_{#connectedcallback}">connectedCallback() {#connectedcallback}</a></h3>
+<p>Invoked when a component is added to the document's DOM.</p>
+<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<p>Lit initiates the first element update cycle after the element is connected. In preparation for rendering, Lit also ensures the <code>renderRoot</code> (typically, its <code>shadowRoot</code>) is created.</p>
+<p>Once an element has connected to the document at least once, component updates will proceed regardless of the connection state of the element.</p>
+<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
+<p>In <code>connectedCallback()</code> you should setup tasks that should only occur when the element is connected to the document. The most common of these is adding event listeners to nodes external to the element, like a keydown event handler added to the window. Typically, anything done in <code>connectedCallback()</code> should be undone when the element is disconnected — for example, removing event listeners on window to prevent memory leaks.</p>
+<pre><code class="language-js">connectedCallback() {
+  super.connectedCallback()
+  addEventListener('keydown', this._handleKeydown);
+}
+</code></pre>
+<h3 id="disconnectedCallback()_{#disconnectedcallback}"><a href="#disconnectedCallback()_{#disconnectedcallback}">disconnectedCallback() {#disconnectedcallback}</a></h3>
+<p>Invoked when a component is removed from the document's DOM.</p>
+<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<p>Pauses the <a class="Link" href="#reactive-update-cycle">reactive update cycle</a>. It is resumed when the element is connected.</p>
+<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
+<p>This callback is the main signal to the element that it may no longer be used; as such, <code>disconnectedCallback()</code> should ensure that nothing is holding a reference to the element (such as event listeners added to nodes external to the element), so that it is free to be garbage collected. Because elements may be re-connected after being disconnected, as in the case of an element moving in the DOM or caching, any such references or listeners may need to be re-established via <code>connectedCallback()</code> so that the element continues functioning as expected in these scenarios. For example, remove event listeners to nodes external to the element, like a keydown event handler added to the window.</p>
+<pre><code class="language-js">disconnectedCallback() {
+  super.disconnectedCallback()
+  window.removeEventListener('keydown', this._handleKeydown);
+}
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>No need to remove internal event listeners.</strong> You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template. Unlike external event listeners, these won't prevent the component from being garbage collected.</p>
+</div>
+
+<h3 id="attributeChangedCallback()_{_%attributeChangedCallback_}"><a href="#attributeChangedCallback()_{_%attributeChangedCallback_}">attributeChangedCallback() { %attributeChangedCallback }</a></h3>
+<p>Invoked when one of the element’s <code>observedAttributes</code> changes.</p>
+<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<p>Lit uses this callback to sync changes in attributes to reactive properties. Specifically, when an attribute is set, the corresponding property is set. Lit also automatically sets up the element’s <code>observedAttributes</code> array to match the component’s list of reactive properties.</p>
+<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
+<p>You rarely need to implement this callback.</p>
+<h3 id="adoptedCallback()_{#adoptedcallback}"><a href="#adoptedCallback()_{#adoptedcallback}">adoptedCallback() {#adoptedcallback}</a></h3>
+<p>Invoked when a component is moved to a new document.</p>
+<div class="alert alert-info">
+
+<p>Be aware that <code>adoptedCallback</code> is not polyfilled.</p>
+</div>
+
+<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<p>Lit has no default behavior for this callback.</p>
+<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
+<p>This callback should only be used for advanced use cases when the element behavior should change when it changes documents.</p>
+<h2 id="Reactive_update_cycle_{_#reactive-update-cycle_}"><a href="#Reactive_update_cycle_{_#reactive-update-cycle_}">Reactive update cycle { #reactive-update-cycle }</a></h2>
+<p>In addition to the standard custom element lifecycle, Lit components also implement a reactive update cycle.</p>
+<p>The reactive update cycle is triggered when a reactive property changes or when the <code>requestUpdate()</code> method is explicitly called. Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested, but before the update starts, all of the changes are captured in the same update.</p>
+<p>Updates happen at microtask timing, which means they occur before the browser paints the next frame to the screen. See <a class="Link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Jake Archibald's article</a> on microtasks for more information about browser timing.</p>
+<p>At a high level, the reactive update cycle is:</p>
+<ol>
+<li>An update is scheduled when one or more properties change or when <code>requestUpdate()</code> is called.</li>
+<li>The update is performed prior to the next frame being painted.<ol>
+<li>Reflecting attributes are set.</li>
+<li>The component’s render method is called to update its internal DOM.</li>
+</ol>
+</li>
+<li>The update is completed and the <code>updateComplete</code> promise is resolved.</li>
+</ol>
+<p>In more detail, it looks like this:</p>
+<p><strong>Pre-Update</strong></p>
+<img src="/images/docs/components/update-1.jpg" class="centered-image">
+
+<p><img src="/images/docs/components/update-2.jpg" class="centered-image"></p>
+
+<p><strong>Update</strong></p>
+<img src="/images/docs/components/update-3.jpg" class="centered-image">
+
+<p><strong>Post-Update</strong></p>
+<img src="/images/docs/components/update-4.jpg" class="centered-image">
+
+<h3 id="The_changedProperties_map_{#changed-properties}"><a href="#The_changedProperties_map_{#changed-properties}">The changedProperties map {#changed-properties}</a></h3>
+<p>Many reactive update methods receive a <code>Map</code> of changed properties. The <code>Map</code> keys are the property names and its values are the <strong>previous</strong> property values. You can always find the current property values using <code>this.<var>property</var></code> or <code>this[<var>property</var>]</code>.</p>
+<h4 id="TypeScript_types_for_changedProperties"><a href="#TypeScript_types_for_changedProperties">TypeScript types for changedProperties</a></h4>
+<p>If you're using TypeScript and you want strong type checking for the <code>changedProperties</code> map, you can use <code>PropertyValues&lt;this&gt;</code>, which infers the correct type for each property name. </p>
+<pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
+...
+  shouldUpdate(changedProperties: PropertyValues&lt;this&gt;) {
+    ...
+  }
+</code></pre>
+<p>If you're less concerned with strong typing—or you're only checking the property names, not the previous values—you could use a less restrictive type like <code>Map&lt;string, any&gt;</code>.</p>
+<p>Note that <code>PropertyValues&lt;this&gt;</code> doesn't recognize <code>protected</code> or <code>private</code> properties. If you're checking any <code>protected</code> or <code>private</code> properties, you'll need to use a less restrictive type.</p>
+<h4 id="Changing_properties_during_an_update_{#changing-properties-during-an-update}"><a href="#Changing_properties_during_an_update_{#changing-properties-during-an-update}">Changing properties during an update {#changing-properties-during-an-update}</a></h4>
+<p>Changing a property <em>during</em> the update  (up to and including the <code>render()</code> method) updates the <code>changedProperties</code> map, but <strong>doesn't</strong> trigger a new update. Changing a property <em>after</em> <code>render()</code> (for example, in the <code>updated()</code> method) triggers a new update cycle, and the changed property is added to a new <code>changedProperties</code> map to be used for the next cycle.</p>
+<h3 id="Triggering_an_update_{#reactive-update-cycle-triggering}"><a href="#Triggering_an_update_{#reactive-update-cycle-triggering}">Triggering an update {#reactive-update-cycle-triggering}</a></h3>
+<p>An update is triggered when a reactive property changes or the <code>requestUpdate()</code> method is called. Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a <strong>single update</strong>.</p>
+<h4 id="hasChanged()_{#haschanged}"><a href="#hasChanged()_{#haschanged}">hasChanged() {#haschanged}</a></h4>
+<p>Called when a reactive property is set. By default <code>hasChanged()</code> does a strict equality check and if it returns <code>true</code>, an update is scheduled. See <a class="Link" href="/docs/components/properties/#haschanged">configuring <code>hasChanged()</code></a> for more information.</p>
+<h4 id="requestUpdate()_{#requestUpdate}"><a href="#requestUpdate()_{#requestUpdate}">requestUpdate() {#requestUpdate}</a></h4>
+<p>Call <code>requestUpdate()</code> to schedule an explicit update. This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call <code>requestUpdate()</code> every second.</p>
+<pre><code class="language-js">connectedCallback() {
+  super.connectedCallback();
+  this._timerInterval = setInterval(() =&gt; this.requestUpdate(), 1000);
+}
+
+disconnectedCallback() {
+  super.disconnectedCallback();
+  clearInterval(this._timerInterval);
+}
+</code></pre>
+<p>The list of properties that have changed is stored in a <code>changedProperties</code> map that’s passed to subsequent lifecycle methods. The map keys are the property names and its values are the previous property values.</p>
+<p>Optionally, you can pass a property name and a previous value when calling <code>requestUpdate()</code>, which will be stored in the <code>changedProperties</code> map. This can be useful if you implement a custom getter and setter for a property. See <a class="Link" href="/docs/components/properties/">Reactive properties</a> for more information about implementing custom getters and setters.</p>
+<pre><code class="language-js">  this.requestUpdate('state', this._previousState);
+</code></pre>
+<h3 id="Performing_an_update_{#reactive-update-cycle-performing}"><a href="#Performing_an_update_{#reactive-update-cycle-performing}">Performing an update {#reactive-update-cycle-performing}</a></h3>
+<p>When an update is performed, the <code>performUpdate()</code> method is called. This method calls a number of other lifecycle methods.</p>
+<p>Any changes that would normally trigger an update which occur <strong>while</strong> a component is updating do <strong>not schedule a new update</strong>. This is done so that property values can be computed during the update process. Properties changed during the update <strong>are reflected in the <code>changedProperties</code> map</strong>, so subsequent lifecycle methods can act on the changes.</p>
+<h4 id="shouldUpdate()_{#shouldupdate}"><a href="#shouldUpdate()_{#shouldupdate}">shouldUpdate() {#shouldupdate}</a></h4>
+<p>Called to determine whether an update cycle is required.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+</tr>
+<tr>
+<td>Updates</td>
+<td>No. Property changes inside this method do not trigger an element update.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Not necessary.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>No.</td>
+</tr>
+</tbody></table>
+<p>If <code>shouldUpdate()</code> returns <code>true</code>, which it does by default, then the update proceeds normally. If it returns <code>false</code>, the rest of the update cycle will not be called but the <code>updateComplete</code> Promise is still resolved.</p>
+<p>You can implement <code>shouldUpdate()</code> to specify which property changes should cause updates. Use the map of <code>changedProperties</code> to compare current and previous values.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">shouldUpdate(changedProperties: Map&lt;string, any&gt;) {
+  // Only update element if prop1 changed.
+  return changedProperties.has('prop1'); 
+}
+</code></pre>
+<pre><code class="language-js">shouldUpdate(changedProperties) {
+  // Only update element if prop1 changed.
+  return changedProperties.has('prop1');
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h4 id="willUpdate()_{#willupdate}"><a href="#willUpdate()_{#willupdate}">willUpdate() {#willupdate}</a></h4>
+<p>Called before <code>update()</code> to compute values needed during the update.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and values that are the corresponding previous values.</td>
+</tr>
+<tr>
+<td>Updates?</td>
+<td>No. Property changes inside this method do not trigger an element update.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Not necessary.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>Yes.</td>
+</tr>
+</tbody></table>
+<p>Implement <code>willUpdate()</code> to compute property values that depend on other properties and are used in the rest of the update process.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">willUpdate(changedProperties: PropertyValues&lt;this&gt;) {
+  // only need to check changed properties for an expensive computation.
+  if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
+    this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
+  }
+}
+
+render() {
+  return html`SHA: ${this.sha}`;
+}
+</code></pre>
+<pre><code class="language-js">willUpdate(changedProperties) {
+  // only need to check changed properties for an expensive computation.
+  if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
+    this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
+  }
+}
+
+render() {
+  return html`SHA: ${this.sha}`;
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h4 id="update()_{#update}"><a href="#update()_{#update}">update() {#update}</a></h4>
+<p>Called to update the component's DOM.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+</tr>
+<tr>
+<td>Updates?</td>
+<td>No. Property changes inside this method do not trigger an element update.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Yes. Without a super call, the element’s attributes and template will not update.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>No.</td>
+</tr>
+</tbody></table>
+<p>Reflects property values to attributes and calls <code>render()</code> to update the component’s internal DOM.</p>
+<p>Generally, you should not need to implement this method.</p>
+<h4 id="render()_{#render}"><a href="#render()_{#render}">render() {#render}</a></h4>
+<p>Called by <code>update()</code> and should be implemented to return a renderable result (such as a <code>TemplateResult</code>) used to render the component's DOM.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>Updates?</td>
+<td>No. Property changes inside this method do not trigger an element update.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Not necessary.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>Yes.</td>
+</tr>
+</tbody></table>
+<p>The <code>render()</code> method has no arguments, but typically it references component properties. See <a class="Link" href="/docs/components/rendering/">Rendering</a> for more information.</p>
+<pre><code class="language-js">render() {
+  const header = `&lt;header&gt;${this.header}&lt;/header&gt;`;
+  const content = `&lt;section&gt;${this.content}&lt;/section&gt;`;
+  return html`${header}${content}`;
+}
+</code></pre>
+<h3 id="Completing_an_update_{#reactive-update-cycle-completing}"><a href="#Completing_an_update_{#reactive-update-cycle-completing}">Completing an update {#reactive-update-cycle-completing}</a></h3>
+<p>After <code>update()</code> is called to render changes to the component's DOM, you can perform actions on the component's DOM using these methods.</p>
+<h4 id="firstUpdated()_{#firstupdated}"><a href="#firstUpdated()_{#firstupdated}">firstUpdated() {#firstupdated}</a></h4>
+<p>Called after the component's DOM has been updated the first time, immediately before <a class="Link" href="#updated"><code>updated()</code></a> is called.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+</tr>
+<tr>
+<td>Updates?</td>
+<td>Yes. Property changes inside this method schedule a new update cycle.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Not necessary.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>No.</td>
+</tr>
+</tbody></table>
+<p>Implement <code>firstUpdated()</code> to perform one-time work after the component's DOM has been created. Some examples might include focusing a particular rendered element or adding a <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">IntersectionObserver</a> to an element.</p>
+<pre><code class="language-js">firstUpdated() {
+  this.renderRoot.getElementById('my-text-area').focus();
+}
+</code></pre>
+<h4 id="updated()_{#updated}"><a href="#updated()_{#updated}">updated() {#updated}</a></h4>
+<p>Called whenever the component’s update finishes and the element's DOM has been updated and rendered.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arguments</td>
+<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+</tr>
+<tr>
+<td>Updates?</td>
+<td>Yes. Property changes inside this method trigger an element update.</td>
+</tr>
+<tr>
+<td>Call super?</td>
+<td>Not necessary.</td>
+</tr>
+<tr>
+<td>Called on server?</td>
+<td>No.</td>
+</tr>
+</tbody></table>
+<p>Implement <code>updated()</code> to perform tasks that use element DOM after an update. For example, code that performs animation may need to measure the element DOM.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">updated(changedProperties: Map&lt;string, any&gt;) {
+  if (changedProperties.has('collapsed')) {
+    this._measureDOM();
+  }
+}
+</code></pre>
+<pre><code class="language-js">updated(changedProperties) {
+  if (changedProperties.has('collapsed')) {
+    this._measureDOM();
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h4 id="updateComplete_{#updatecomplete}"><a href="#updateComplete_{#updatecomplete}">updateComplete {#updatecomplete}</a></h4>
+<p>The <code>updateComplete</code> Promise resolves when the element has finished updating. Use <code>updateComplete</code> to wait for an update. The resolved value is a Boolean indicating if the element has finished updating. It will be <code>true</code> if there are no pending updates after the update cycle has finished.</p>
+<p>It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> Promise before firing the event.</p>
+<pre><code class="language-js">async _loginClickHandler() {
+  this.loggedIn = true;
+  // Wait for `loggedIn` state to be rendered to the DOM
+  await this.updateComplete;
+  this.dispatchEvent(new Event('login'));
+}
+</code></pre>
+<p>Also, when writing tests you can await the <code>updateComplete</code> Promise before making assertions about the component’s DOM.</p>
+<p>The <code>updateComplete</code> promise rejects if there's an unhandled error during the update cycle. For more information, see <a class="Link" href="#errors-in-the-update-cycle">Handling errors in the update cycle</a>.</p>
+<h3 id="Handling_errors_in_the_update_cycle_{#errors-in-the-update-cycle}"><a href="#Handling_errors_in_the_update_cycle_{#errors-in-the-update-cycle}">Handling errors in the update cycle {#errors-in-the-update-cycle}</a></h3>
+<p>If you have an uncaught exception in a lifecycle method like <code>render()</code> or <code>update()</code>, it  causes the <code>updateComplete</code> promise to reject.
+If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a <code>try</code>/<code>catch</code> statement.</p>
+<p>You may also want to use a <code>try</code>/<code>catch</code> if you're awaiting the <code>updateComplete</code> promise:</p>
+<pre><code class="language-js">try {
+  await this.updateComplete;
+} catch (e) {
+  /* handle error */
+}
+</code></pre>
+<p>In some cases, code may throw in unexpected places. As a fallback, you can add a handler for <code>window.onunhandledrejection</code> to catch these issues. For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.</p>
+<pre><code class="language-js">window.onunhandledrejection = function(e) {
+  /* handle error *
+}
+</code></pre>
+<h3 id="Implementing_additional_customization_{#reactive-update-cycle-customizing}"><a href="#Implementing_additional_customization_{#reactive-update-cycle-customizing}">Implementing additional customization {#reactive-update-cycle-customizing}</a></h3>
+<p>This section covers some less-common methods for customizing the update cycle.</p>
+<h4 id="scheduleUpdate()_{#scheduleupdate}"><a href="#scheduleUpdate()_{#scheduleupdate}">scheduleUpdate() {#scheduleupdate}</a></h4>
+<p>Override <code>scheduleUpdate()</code> to customize the timing of the update. <code>scheduleUpdate()</code> is called when an update is about to be performed, and by default it calls <code>performUpdate()</code> immediately. Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
+<p>For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">protected override async scheduleUpdate(): Promise&lt;void&gt; {
+  await new Promise((resolve) =&gt; setTimeout(resolve));
+  super.scheduleUpdate();
+}
+</code></pre>
+<pre><code class="language-js">async scheduleUpdate() {
+  await new Promise((resolve) =&gt; setTimeout(resolve));
+  super.scheduleUpdate();
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>If you override <code>scheduleUpdate()</code>, it's your responsibility to call <code>super.scheduleUpdate()</code> to perform the pending update.</p>
+<p>{% aside "info" %}</p>
+<p>Async function optional.</p>
+<p>This example shows an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async function</a> which <em>implicitly</em> returns a promise. You can also write <code>scheduleUpdate()</code> as a function that <em>explictly</em> returns a <code>Promise</code>. In either case, the <strong>next</strong> update doesn't start until the promise returned by <code>scheduleUpdate()</code> resolves. </p>
+<p>{% endaside %}</p>
+<h4 id="performUpdate()__{#performupdate}"><a href="#performUpdate()__{#performupdate}">performUpdate()  {#performupdate}</a></h4>
+<p>Implements the reactive update cycle, calling the other methods, like <code>shouldUpdate()</code>, <code>update()</code>, and <code>updated()</code>.</p>
+<p>Call <code>performUpdate()</code> to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call <code>requestUpdate()</code> followed by `performUpdate() to force a synchronous update.)</p>
+<p>{% aside "info" %}</p>
+<p>Use <code>scheduleUpdate()</code> to customize scheduling.</p>
+<p>If you want to customize how updates are scheduled, override <code>scheduleUpdate()</code>. Previously, we recommended overriding <code>performUpdate()</code> for this purpose. That continues to work, but it makes it more difficult to call <code>performUpdate()</code> to process a pending update synchronously. </p>
+<p>{% endaside %}</p>
+<h4 id="hasUpdated__{#hasupdated}"><a href="#hasUpdated__{#hasupdated}">hasUpdated  {#hasupdated}</a></h4>
+<p>The <code>hasUpdated</code> property returns true if the component has updated at least once. You can use <code>hasUpdated</code> in any of the lifecycle methods to perform work only if the component has not yet updated.</p>
+<h4 id="getUpdateComplete()_{#getUpdateComplete}"><a href="#getUpdateComplete()_{#getUpdateComplete}">getUpdateComplete() {#getUpdateComplete}</a></h4>
+<p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method. For example, it may be useful to await the update of a child element. First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
+<div class="alert alert-info">
+
+<p>It's recommended to override the <code>getUpdateComplete()</code> method instead of the <code>updateComplete</code> getter to ensure compatibility with users who are using TypeScript's ES5 output (see <a class="Link" href="https://github.com/microsoft/TypeScript/issues/338">TypeScript#338</a>).</p>
+</div>
+
+<pre><code class="language-js">class MyElement extends LitElement {
+  async getUpdateComplete() {
+    await super.getUpdateComplete();
+    await this._myChild.updateComplete;
+  }
+}
+</code></pre>
+<h2 id="External_lifecycle_hooks__controllers_and_decorators"><a href="#External_lifecycle_hooks__controllers_and_decorators">External lifecycle hooks: controllers and decorators</a></h2>
+<p>In addition to component classes implementing lifecycle callbacks, external code, such as <a class="Link" href="/docs/components/decorators/">decorators</a> may need to hook into a component's lifecycle.</p>
+<p>Lit offers two concepts for external code to integrate with the reactive update lifecycle: <code>static addInitializer()</code> and <code>addController()</code>:</p>
+<h4 id="static_addInitializer()_{#addInitializer}"><a href="#static_addInitializer()_{#addInitializer}">static addInitializer() {#addInitializer}</a></h4>
+<p><code>addInitializer()</code> allows code that has access to a Lit class definition to run code when instances of the class are constructed.</p>
+<p>This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call <code>addInitializer()</code>. It will be common to use this to add a <a class="Link" href="/docs/composition/controllers/">reactive controller</a> so decorators can hook into the component lifecycle:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">// A TypeScript decorator
+const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
+  const ctor = proto.constructor as typeof ReactiveElement;
+
+  ctor.addInitializer((instance: ReactiveElement) =&gt; {
+    // This is run during construction of the element
+    new MyController(instance);
+  });
+};
+</code></pre>
+<pre><code class="language-js">// A Babel "Stage 2" decorator
+const myDecorator = (descriptor) =&gt; {
+  ...descriptor,
+  finisher(ctor) {
+    ctor.addInitializer((instance) =&gt; {
+      // This is run during construction of the element
+      new MyController(instance);
+    });
+  },
+};
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Decorating a field will then cause each instance to run an initializer
+that adds a controller:</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  @myDecorator foo;
+}
+</code></pre>
+<p>Initializers are stored per-constructor. Adding an initializer to a
+subclass does not add it to a superclass. Since initializers are run in
+constructors, initializers will run in order of the class hierarchy,
+starting with superclasses and progressing to the instance's class.</p>
+<h4 id="addController()_{#addController}"><a href="#addController()_{#addController}">addController() {#addController}</a></h4>
+<p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the <a class="Link" href="/docs/composition/controllers/">Reactive Controller</a> docs for more information.</p>
+<h4 id="removeController()_{#removeController}"><a href="#removeController()_{#removeController}">removeController() {#removeController}</a></h4>
+<p><code>removeController()</code> removes a reactive controller so it no longer receives lifecycle callbacks from this component.</p>
+<h2 id="Server-side_reactive_update_cycle_{#server-reactive-update-cycle}"><a href="#Server-side_reactive_update_cycle_{#server-reactive-update-cycle}">Server-side reactive update cycle {#server-reactive-update-cycle}</a></h2>
+<div class="alert alert-info">
+
+<p>Lit's <a class="Link" href="/docs/ssr/overview/">server-side rendering package</a> is currently under active development so the following information is subject to change.</p>
+</div>
+
+<p>Not all of the update cycle is called when rendering Lit on the server. The following methods are called on the server.</p>
+<img src="/images/docs/components/update-server.jpg" class="centered-image">
+
+<p></p>
+
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="side"></div>
+    <div class="side"></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+    <div class="side"></div>
+  </body>
+</html>
