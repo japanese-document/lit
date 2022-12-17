@@ -229,13 +229,13 @@ class MyElement extends LitElement {
 #### renderRoot(): [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) | [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot)
 
 DOMがレンダリングされるNodeもしくはShadowRootです。
-デフォルトはオープンなShadowRootです。
+デフォルトは`open`なShadowRootです。
 
 #### static shadowRootOptions: [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters)
 
 `attachShadow`を実行する時に使われるオプションです。
 このプロパティはShadowRootのオプションを変更するためにあります。
-(`{mode: 'closed'}`とするとShadowRootは閉じた物になります。)
+(`{mode: 'closed'}`とするとShadowRootは[closed](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode)になります。)
 このオプションは`createRenderRoot`で使われます。
 `createRenderRoot`を変更する場合、できるだけこのオプションを適用するべきです。
 
