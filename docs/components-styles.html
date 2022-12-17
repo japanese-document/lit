@@ -391,8 +391,8 @@ export class MyElement extends LitElement {
 <li><code>font-family</code>とそれ以外の<code>font-*</code>プロパティ</li>
 <li>すべてのCSSカスタムプロパティ(<code>--*</code>)</li>
 </ul>
-<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">CSSの継承</a>を見てください。</p>
-<p>You can use CSS inheritance to set styles on an ancestor element that are inherited by its descendants:</p>
+<p>CSSの継承について詳しく知りたい場合は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">CSSの継承</a>を見てください。</p>
+<p>下記のようにCSSの継承を使って親要素にスタイルを設定することでそれを子孫の要素に適用することができます。</p>
 <pre><code class="language-html">&lt;style&gt;
 html {
   color: green;
@@ -404,8 +404,10 @@ html {
 &lt;/my-element&gt;
 </code></pre>
 <h3 id="CSSカスタムプロパティ"><a href="#CSSカスタムプロパティ">CSSカスタムプロパティ</a></h3>
-<p>All CSS custom properties (<code>--<var>custom-property-name</var></code>) inherit. You can use this to make your component's styles configurable from outside.</p>
-<p>The following component sets its background color to a CSS variable. The CSS variable uses the value of <code>--my-background</code> if it's been set by a selector matching an ancestor in the DOM tree, and otherwise defaults to <code>yellow</code>:</p>
+<p>すべてのCSSカスタムプロパティ(<code>--custom-property-name</code>)は継承されます。
+これを使って外部からコンポーネントのスタイルを変更することができます。</p>
+<p>下記のコンポーネントはCSS変数を<code>background-color</code>にセットしています。
+CSS変数はコンポーネントの先祖の要素で<code>--my-background</code>が設定されている場合はその値を使います。そうでない場合は<code>yellow</code>を使います。</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   static styles = css`
     :host {
@@ -417,7 +419,7 @@ html {
   }
 }
 </code></pre>
-<p>Users of this component can set the value of <code>--my-background</code>, using the <code>my-element</code> tag as a CSS selector:</p>
+<p>下記のように<code>my-element</code>タグをCSSセレクタとして使ってコンポーネントに<code>--my-background</code>の値を適用することもできます。</p>
 <pre><code class="language-html">&lt;style&gt;
   my-element {
     --my-background: rgb(67, 156, 144);
@@ -425,7 +427,7 @@ html {
 &lt;/style&gt;
 &lt;my-element&gt;&lt;/my-element&gt;
 </code></pre>
-<p><code>--my-background</code> is configurable per instance of <code>my-element</code>:</p>
+<p>下記のように<code>--my-background</code>を<code>my-element</code>のインスタンス毎に設定することができます。</p>
 <pre><code class="language-html">&lt;style&gt;
   my-element {
     --my-background: rgb(67, 156, 144);
