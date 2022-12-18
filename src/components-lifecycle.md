@@ -2,10 +2,13 @@
 ---
 # ライフサイクル
 
-Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.
+LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。
+更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。
 
-## Standard custom element lifecycle { #custom-element-lifecycle }
-Lit components are standard custom elements and inherit the custom element lifecycle methods. For information about the custom element lifecycle, see [Using the lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks) on MDN.
+## custom elementsのライフサイクル
+
+Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
+custom elementsのライフサイクルの詳しい情報は[Using the lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks)を見てください。
 
 <div class="alert alert-info">
 
@@ -13,7 +16,7 @@ If you need to customize any of the standard custom element lifecycle methods, m
 
 </div>
 
-### constructor() {#constructor}
+### constructor()
 
 Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.
 
