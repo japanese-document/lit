@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-lifecycle.html" />
     <meta property="og:title" content="ライフサイクル - Lit" />
-    <meta property="og:description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。If you need to customize a" />
+    <meta property="og:description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのライ" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。If you need to customize a" />
+    <meta name="description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのライ" />
     <title>ライフサイクル - Lit</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -29,11 +29,8 @@
 <h2 id="custom_elementsのライフサイクル"><a href="#custom_elementsのライフサイクル">custom elementsのライフサイクル</a></h2>
 <p>Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
 custom elementsのライフサイクルの詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a>を見てください。</p>
-<div class="alert alert-info">
-
-<p>If you need to customize any of the standard custom element lifecycle methods, make sure to call the <code>super</code> implementation (such as <code>super.connectedCallback()</code>) so the standard Lit functionality is maintained.</p>
-</div>
-
+<p>コンポーネントでcustom elementsのライフサイクルメソッドをオーバーライドする場合、
+Litが正常に動作するために、そのメソッド内でそれに該当する<code>super</code>のメソッド(例: <code>super.connectedCallback()</code>)を実行しなければなりません。</p>
 <h3 id="constructor()"><a href="#constructor()">constructor()</a></h3>
 <p>Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
