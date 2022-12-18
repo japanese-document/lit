@@ -10,11 +10,8 @@ LitコンポーネントはWeb標準であるcustom elementsのライフサイ�
 Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
 custom elementsのライフサイクルの詳しい情報は[Using the lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks)を見てください。
 
-<div class="alert alert-info">
-
-If you need to customize any of the standard custom element lifecycle methods, make sure to call the `super` implementation (such as `super.connectedCallback()`) so the standard Lit functionality is maintained.
-
-</div>
+コンポーネントでcustom elementsのライフサイクルメソッドをオーバーライドする場合、
+Litが正常に動作するために、そのメソッド内でそれに該当する`super`のメソッド(例: `super.connectedCallback()`)を実行しなければなりません。
 
 ### constructor()
 
