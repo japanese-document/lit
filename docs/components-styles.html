@@ -168,6 +168,40 @@ class MyElement extends LitElement {
     content: '\u2022';
   }
 </code></pre>
+<h3 id="CSS_module_scriptsを使う"><a href="#CSS_module_scriptsを使う">CSS module scriptsを使う</a></h3>
+<p>CSS module scriptsを使うと<code>.css</code>ファイルをCSSStyleSheetインスタンスでimportすることができます。
+下記のように<code>static styles</code>クラスフィールドにCSSStyleSheetインスタンスをセットすることができます。</p>
+<p>index.html:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="module" src="./my-element.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;my-element&gt;&lt;/my-element&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>style.css:</p>
+<pre><code class="language-css">:host { color: green; }
+div {
+  border: solid red 1px;
+  padding: 30px;
+}
+</code></pre>
+<p>my-element.js:</p>
+<pre><code class="language-js">import { html, LitElement } from 'lit'
+import sheet from './style.css' assert { type: 'css' }
+
+class MyElement extends LitElement {
+  static styles = sheet
+  render() {
+    return html`&lt;div&gt;test&lt;/div&gt;`
+  }
+}
+
+customElements.define('my-element', MyElement)
+</code></pre>
 <h2 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h2>
 <p>このセクションではShadow DOMにスタイルを設定する方法を説明します。</p>
 <p>コンポーネントに追加したスタイルは以下のコンポーネントの3つの部分に影響を与えます。</p>

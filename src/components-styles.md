@@ -187,6 +187,51 @@ static styles = css`
   }
 ```
 
+### CSS module scriptsを使う
+
+CSS module scriptsを使うと`.css`ファイルをCSSStyleSheetインスタンスでimportすることができます。
+下記のように`static styles`クラスフィールドにCSSStyleSheetインスタンスをセットすることができます。
+
+index.html:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module" src="./my-element.js"></script>
+  </head>
+  <body>
+    <my-element></my-element>
+  </body>
+</html>
+```
+
+style.css:
+
+```css
+:host { color: green; }
+div {
+  border: solid red 1px;
+  padding: 30px;
+}
+```
+
+my-element.js:
+
+```js
+import { html, LitElement } from 'lit'
+import sheet from './style.css' assert { type: 'css' }
+
+class MyElement extends LitElement {
+  static styles = sheet
+  render() {
+    return html`<div>test</div>`
+  }
+}
+
+customElements.define('my-element', MyElement)
+```
+
 ## Shadow DOM
 
 このセクションではShadow DOMにスタイルを設定する方法を説明します。

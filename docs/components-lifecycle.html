@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-lifecycle.html" />
     <meta property="og:title" content="ライフサイクル - Lit" />
-    <meta property="og:description" content="Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.Standard custom element lifecycle { #custom-element-lifecycle }Lit components are standard custom elements and inherit the " />
+    <meta property="og:description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。If you need to customize a" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.Standard custom element lifecycle { #custom-element-lifecycle }Lit components are standard custom elements and inherit the " />
+    <meta name="description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。If you need to customize a" />
     <title>ライフサイクル - Lit</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -24,15 +24,17 @@
     <div class="side"></div>
     <main class="main markdown-body">
       <h1 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h1>
-<p>Lit components use the standard custom element lifecycle methods. In addition Lit introduces a reactive update cycle that renders changes to DOM when reactive properties change.</p>
-<h2 id="Standard_custom_element_lifecycle_{_#custom-element-lifecycle_}"><a href="#Standard_custom_element_lifecycle_{_#custom-element-lifecycle_}">Standard custom element lifecycle { #custom-element-lifecycle }</a></h2>
-<p>Lit components are standard custom elements and inherit the custom element lifecycle methods. For information about the custom element lifecycle, see <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a> on MDN.</p>
+<p>LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。
+更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。</p>
+<h2 id="custom_elementsのライフサイクル"><a href="#custom_elementsのライフサイクル">custom elementsのライフサイクル</a></h2>
+<p>Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
+custom elementsのライフサイクルの詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a>を見てください。</p>
 <div class="alert alert-info">
 
 <p>If you need to customize any of the standard custom element lifecycle methods, make sure to call the <code>super</code> implementation (such as <code>super.connectedCallback()</code>) so the standard Lit functionality is maintained.</p>
 </div>
 
-<h3 id="constructor()_{#constructor}"><a href="#constructor()_{#constructor}">constructor() {#constructor}</a></h3>
+<h3 id="constructor()"><a href="#constructor()">constructor()</a></h3>
 <p>Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
 <p>Requests an asynchronous update using the <code>requestUpdate()</code> method, so when a Lit component gets upgraded, it performs an update immediately.</p>
