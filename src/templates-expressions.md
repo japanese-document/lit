@@ -410,7 +410,6 @@ Litはコメント内のエクスプレッションをLit token string(例: `lit
   ```
 
 * [ShadyCSS polyfill](https://github.com/webcomponents/polyfills/tree/master/packages/shadycss)を使っているときのstyle要素の内側。
-詳しくは[Expressions and style elements](https://lit.dev/docs/components/styles/#style-element)を見てください。
 
 上記の無効なエクスプレッションは[Static expressions](#Static_expressions)を使用した場合、有効になります。
 ただし、それは非効率なのでパフォーマンスが重要な場面で使用しないでください。
