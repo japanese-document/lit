@@ -32,19 +32,24 @@ custom elementsのライフサイクルの詳しい情報は<a class="Link" href
 <p>コンポーネントでcustom elementsのライフサイクルメソッドをオーバーライドする場合、
 Litが正常に動作するために、そのメソッド内でそれに該当する<code>super</code>のメソッド(例: <code>super.connectedCallback()</code>)を実行しなければなりません。</p>
 <h3 id="constructor()"><a href="#constructor()">constructor()</a></h3>
-<p>Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.</p>
-<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
-<p>Requests an asynchronous update using the <code>requestUpdate()</code> method, so when a Lit component gets upgraded, it performs an update immediately.</p>
-<p>Saves any properties already set on the element. This ensures values set before upgrade are maintained and correctly override defaults set by the component.</p>
-<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
-<p>Perform one time initialization tasks that must be done before the first <a class="Link" href="#reactive-update-cycle">update</a>. For example, when not using decorators, default values for properties can be set in the constructor, as shown in <a class="Link" href="/docs/components/properties/#declaring-properties-in-a-static-properties-field">Declaring properties in a static properties field</a>.</p>
+<p>custom elements(Litコンポーネント)が生成される時に実行されます。
+既にDOMに要素が存在していてcustom elementsの定義がロードされた時(アップグレードされた時)も実行されます。</p>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<p><code>requestUpdate()</code>メソッドを実行して非同期更新をリクエストします。
+そうすることでLitコンポーネントにアップグレードされた時にすぐに更新されます。</p>
+<p>要素の既存のプロパティを保存します。
+これによって要素にセットされたプロパティの値が保持されます。そして、コンポーネントのデフォルトの値をそれで上書きすることができます。</p>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<p>最初の<a class="Link" href="#リアクティブアップデートサイクル">更新</a>の前に1回だけ実行する必要がある初期化処理を実行です。
+例えば、デコレータを使わない場合、<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#パブリックプロパティとインターナルステート"><code>static properties</code>クラスフィールドを使います</a>。
+その場合、constructor()内でデフォルトの値をセットします。</p>
 <pre><code class="language-js">constructor() {
   super();
   this.foo = 'foo';
   this.bar = 'bar';
 }
 </code></pre>
-<h3 id="connectedCallback()_{#connectedcallback}"><a href="#connectedCallback()_{#connectedcallback}">connectedCallback() {#connectedcallback}</a></h3>
+<h3 id="connectedCallback()"><a href="#connectedCallback()">connectedCallback()</a></h3>
 <p>Invoked when a component is added to the document's DOM.</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
 <p>Lit initiates the first element update cycle after the element is connected. In preparation for rendering, Lit also ensures the <code>renderRoot</code> (typically, its <code>shadowRoot</code>) is created.</p>
@@ -89,7 +94,7 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 <p>Lit has no default behavior for this callback.</p>
 <h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
 <p>This callback should only be used for advanced use cases when the element behavior should change when it changes documents.</p>
-<h2 id="Reactive_update_cycle_{_#reactive-update-cycle_}"><a href="#Reactive_update_cycle_{_#reactive-update-cycle_}">Reactive update cycle { #reactive-update-cycle }</a></h2>
+<h2 id="リアクティブアップデートサイクル"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></h2>
 <p>In addition to the standard custom element lifecycle, Lit components also implement a reactive update cycle.</p>
 <p>The reactive update cycle is triggered when a reactive property changes or when the <code>requestUpdate()</code> method is explicitly called. Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested, but before the update starts, all of the changes are captured in the same update.</p>
 <p>Updates happen at microtask timing, which means they occur before the browser paints the next frame to the screen. See <a class="Link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Jake Archibald's article</a> on microtasks for more information about browser timing.</p>
