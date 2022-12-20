@@ -15,17 +15,22 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 
 ### constructor()
 
-Called when an element is created. Also, it’s invoked when an existing element is upgraded, which happens when the definition for a custom element is loaded after the element is already in the DOM.
+custom elements(Litコンポーネント)が生成される時に実行されます。
+既にDOMに要素が存在していてcustom elementsの定義がロードされた時(アップグレードされた時)も実行されます。
 
-#### Lit behavior
+#### Litの動作
 
-Requests an asynchronous update using the `requestUpdate()` method, so when a Lit component gets upgraded, it performs an update immediately.
+`requestUpdate()`メソッドを実行して非同期更新をリクエストします。
+そうすることでLitコンポーネントにアップグレードされた時にすぐに更新されます。
 
-Saves any properties already set on the element. This ensures values set before upgrade are maintained and correctly override defaults set by the component.
+要素の既存のプロパティを保存します。
+これによって要素にセットされたプロパティの値が保持されます。そして、コンポーネントのデフォルトの値をそれで上書きすることができます。
 
-#### Use cases
+#### ユースケース
 
-Perform one time initialization tasks that must be done before the first [update](#reactive-update-cycle). For example, when not using decorators, default values for properties can be set in the constructor, as shown in [Declaring properties in a static properties field](/docs/components/properties/#declaring-properties-in-a-static-properties-field).
+最初の[更新](#リアクティブアップデートサイクル)の前に1回だけ実行する必要がある初期化処理を実行です。
+例えば、デコレータを使わない場合、[`static properties`クラスフィールドを使います](https://japanese-document.github.io/lit/components-properties.html#パブリックプロパティとインターナルステート)。
+その場合、constructor()内でデフォルトの値をセットします。
 
 ```js
 constructor() {
@@ -34,7 +39,8 @@ constructor() {
   this.bar = 'bar';
 }
 ```
-### connectedCallback() {#connectedcallback}
+
+### connectedCallback()
 
 Invoked when a component is added to the document's DOM.
 
@@ -109,7 +115,7 @@ Lit has no default behavior for this callback.
 
 This callback should only be used for advanced use cases when the element behavior should change when it changes documents.
 
-## Reactive update cycle { #reactive-update-cycle }
+## リアクティブアップデートサイクル
 
 In addition to the standard custom element lifecycle, Lit components also implement a reactive update cycle.
 
