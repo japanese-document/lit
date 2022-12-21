@@ -16,7 +16,7 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 ### constructor()
 
 custom elements(Litコンポーネント)が生成される時に実行されます。
-既にDOMに要素が存在していてcustom elementsの定義がロードされた時(アップグレードされた時)も実行されます。
+既にDOMにcustom elementsが存在していてcustom elements(Litコンポーネント)の定義がロードされた時(アップグレードされた時)も実行されます。
 
 #### Litの動作
 
@@ -42,17 +42,21 @@ constructor() {
 
 ### connectedCallback()
 
-Invoked when a component is added to the document's DOM.
+コンポーネントがdocumentのdocumentに接続された(追加された)時に実行されます。
 
-#### Lit behavior
+#### Litの動作
 
-Lit initiates the first element update cycle after the element is connected. In preparation for rendering, Lit also ensures the `renderRoot` (typically, its `shadowRoot`) is created.
+要素がdocumentに接続された後、Litは更新サイクルの一番目の処理を開始します。
+レンダリングをする前にLitは`renderRoot`(通常は`shadowRoot`)が生成済みか確認します。
 
-Once an element has connected to the document at least once, component updates will proceed regardless of the connection state of the element.
+1回でも要素がドキュメントに接続すると、コンポーネントの更新は接続状態に関係なく進みます。
 
-#### Use cases
+#### ユースケース
 
-In `connectedCallback()` you should setup tasks that should only occur when the element is connected to the document. The most common of these is adding event listeners to nodes external to the element, like a keydown event handler added to the window. Typically, anything done in `connectedCallback()` should be undone when the element is disconnected — for example, removing event listeners on window to prevent memory leaks.
+In `connectedCallback()` you should setup tasks that should only occur when the element is connected to the document.
+The most common of these is adding event listeners to nodes external to the element,
+like a keydown event handler added to the window. Typically,
+anything done in `connectedCallback()` should be undone when the element is disconnected — for example, removing event listeners on window to prevent memory leaks.
 
 ```js
 connectedCallback() {
