@@ -53,9 +53,10 @@ constructor() {
 
 #### ユースケース
 
-In `connectedCallback()` you should setup tasks that should only occur when the element is connected to the document.
+`connectedCallback()`には要素がdocumentに接続した時のみに実行したい処理を記述します。
 The most common of these is adding event listeners to nodes external to the element,
-like a keydown event handler added to the window. Typically,
+like a keydown event handler added to the window.
+Typically,
 anything done in `connectedCallback()` should be undone when the element is disconnected — for example, removing event listeners on window to prevent memory leaks.
 
 ```js
