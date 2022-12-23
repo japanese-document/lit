@@ -53,11 +53,9 @@ constructor() {
 
 #### ユースケース
 
-`connectedCallback()`には要素がdocumentに接続した時のみに実行したい処理を記述します。
-The most common of these is adding event listeners to nodes external to the element,
-like a keydown event handler added to the window.
-Typically,
-anything done in `connectedCallback()` should be undone when the element is disconnected — for example, removing event listeners on window to prevent memory leaks.
+`connectedCallback()`には要素がdocumentに接続した時のみ実行したい処理を記述します。
+これの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
+通常、要素がdocumentから切断された時は`connectedCallback()`で加えた何かを元に戻す必要があります。例えば、メモリーリークを防止するためにwindowに登録したイベントリスナを削除することです。
 
 ```js
 connectedCallback() {
@@ -65,17 +63,23 @@ connectedCallback() {
   addEventListener('keydown', this._handleKeydown);
 }
 ```
-### disconnectedCallback() {#disconnectedcallback}
+### disconnectedCallback()
 
-Invoked when a component is removed from the document's DOM.
+コンポーネントがdocumentのDOMツリーから削除されたら実行されます。
 
 #### Lit behavior
 
-Pauses the [reactive update cycle](#reactive-update-cycle). It is resumed when the element is connected.
+[リアクティブアップデートサイクル](#リアクティブアップデートサイクル)を一時停止します。 要素が接続されたら再開します。
 
 #### Use cases
 
-This callback is the main signal to the element that it may no longer be used; as such, `disconnectedCallback()` should ensure that nothing is holding a reference to the element (such as event listeners added to nodes external to the element), so that it is free to be garbage collected. Because elements may be re-connected after being disconnected, as in the case of an element moving in the DOM or caching, any such references or listeners may need to be re-established via `connectedCallback()` so that the element continues functioning as expected in these scenarios. For example, remove event listeners to nodes external to the element, like a keydown event handler added to the window.
+This callback is the main signal to the element that it may no longer be used;
+as such, `disconnectedCallback()` should ensure that nothing is holding a reference to the element (such as event listeners added to nodes external to the element),
+so that it is free to be garbage collected.
+Because elements may be re-connected after being disconnected,
+as in the case of an element moving in the DOM or caching,
+any such references or listeners may need to be re-established via `connectedCallback()` so that the element continues functioning as expected in these scenarios.
+For example, remove event listeners to nodes external to the element, like a keydown event handler added to the window.
 
 ```js
 disconnectedCallback() {
