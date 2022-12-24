@@ -57,7 +57,7 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 <p>1回でも要素がドキュメントに接続すると、コンポーネントの更新は接続状態に関係なく進みます。</p>
 <h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p><code>connectedCallback()</code>には要素がdocumentに接続した時のみ実行したい処理を記述します。
-これの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
+それの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
 通常、要素がdocumentから切断された時は<code>connectedCallback()</code>で加えた何かを元に戻す必要があります。例えば、メモリーリークを防止するためにwindowに登録したイベントリスナを削除することです。</p>
 <pre><code class="language-js">connectedCallback() {
   super.connectedCallback()
@@ -66,12 +66,12 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 </code></pre>
 <h3 id="disconnectedCallback()"><a href="#disconnectedCallback()">disconnectedCallback()</a></h3>
 <p>コンポーネントがdocumentのDOMツリーから削除されたら実行されます。</p>
-<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p><a class="Link" href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を一時停止します。 要素が接続されたら再開します。</p>
-<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
-<p>This callback is the main signal to the element that it may no longer be used;
-as such, <code>disconnectedCallback()</code> should ensure that nothing is holding a reference to the element (such as event listeners added to nodes external to the element),
-so that it is free to be garbage collected.
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<p>このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
+ガベージコレクションで要素を解放するために、
+<code>disconnectedCallback()</code>では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
 Because elements may be re-connected after being disconnected,
 as in the case of an element moving in the DOM or caching,
 any such references or listeners may need to be re-established via <code>connectedCallback()</code> so that the element continues functioning as expected in these scenarios.

@@ -54,7 +54,7 @@ constructor() {
 #### ユースケース
 
 `connectedCallback()`には要素がdocumentに接続した時のみ実行したい処理を記述します。
-これの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
+それの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
 通常、要素がdocumentから切断された時は`connectedCallback()`で加えた何かを元に戻す必要があります。例えば、メモリーリークを防止するためにwindowに登録したイベントリスナを削除することです。
 
 ```js
@@ -63,19 +63,20 @@ connectedCallback() {
   addEventListener('keydown', this._handleKeydown);
 }
 ```
+
 ### disconnectedCallback()
 
 コンポーネントがdocumentのDOMツリーから削除されたら実行されます。
 
-#### Lit behavior
+#### Litの動作
 
 [リアクティブアップデートサイクル](#リアクティブアップデートサイクル)を一時停止します。 要素が接続されたら再開します。
 
-#### Use cases
+#### ユースケース
 
-This callback is the main signal to the element that it may no longer be used;
-as such, `disconnectedCallback()` should ensure that nothing is holding a reference to the element (such as event listeners added to nodes external to the element),
-so that it is free to be garbage collected.
+このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
+ガベージコレクションで要素を解放するために、
+`disconnectedCallback()`では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
 Because elements may be re-connected after being disconnected,
 as in the case of an element moving in the DOM or caching,
 any such references or listeners may need to be re-established via `connectedCallback()` so that the element continues functioning as expected in these scenarios.
