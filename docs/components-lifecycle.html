@@ -72,21 +72,18 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 <p>このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
 ガベージコレクションで要素を解放するために、
 <code>disconnectedCallback()</code>では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
-Because elements may be re-connected after being disconnected,
-as in the case of an element moving in the DOM or caching,
-any such references or listeners may need to be re-established via <code>connectedCallback()</code> so that the element continues functioning as expected in these scenarios.
-For example, remove event listeners to nodes external to the element, like a keydown event handler added to the window.</p>
+例えば、<code>window</code>に追加されたkeydownイベントハンドラのように要素の外部のNodeからイベントリスナを削除します。
+要素がDOMツリー内を移動したりキャッシュされることによって、非接続になった後に再度接続することがあります。
+このため正常に動作するためにそのような参照もしくはイベントリスナは<code>connectedCallback()</code>で再度セットする必要があります。</p>
 <pre><code class="language-js">disconnectedCallback() {
   super.disconnectedCallback()
   window.removeEventListener('keydown', this._handleKeydown);
 }
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>No need to remove internal event listeners.</strong> You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template. Unlike external event listeners, these won't prevent the component from being garbage collected.</p>
-</div>
-
-<h3 id="attributeChangedCallback()_{_%attributeChangedCallback_}"><a href="#attributeChangedCallback()_{_%attributeChangedCallback_}">attributeChangedCallback() { %attributeChangedCallback }</a></h3>
+<p>要素の内部にあるイベントリスナーを削除する必要はありません。
+You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template.
+Unlike external event listeners, these won't prevent the component from being garbage collected.</p>
+<h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
 <p>Invoked when one of the element’s <code>observedAttributes</code> changes.</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
 <p>Lit uses this callback to sync changes in attributes to reactive properties. Specifically, when an attribute is set, the corresponding property is set. Lit also automatically sets up the element’s <code>observedAttributes</code> array to match the component’s list of reactive properties.</p>
