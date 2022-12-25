@@ -77,10 +77,9 @@ connectedCallback() {
 このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
 ガベージコレクションで要素を解放するために、
 `disconnectedCallback()`では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
-Because elements may be re-connected after being disconnected,
-as in the case of an element moving in the DOM or caching,
-any such references or listeners may need to be re-established via `connectedCallback()` so that the element continues functioning as expected in these scenarios.
-For example, remove event listeners to nodes external to the element, like a keydown event handler added to the window.
+例えば、`window`に追加されたkeydownイベントハンドラのように要素の外部のNodeからイベントリスナを削除します。
+要素がDOMツリー内を移動したりキャッシュされることによって、非接続になった後に再度接続することがあります。
+このため正常に動作するためにそのような参照もしくはイベントリスナは`connectedCallback()`で再度セットする必要があります。
 
 ```js
 disconnectedCallback() {
@@ -89,13 +88,11 @@ disconnectedCallback() {
 }
 ```
 
-<div class="alert alert-info">
+要素の内部にあるイベントリスナーを削除する必要はありません。
+You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template.
+Unlike external event listeners, these won't prevent the component from being garbage collected.
 
-**No need to remove internal event listeners.** You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template. Unlike external event listeners, these won't prevent the component from being garbage collected.
-
-</div>
-
-### attributeChangedCallback() { %attributeChangedCallback }
+### attributeChangedCallback()
 
 Invoked when one of the element’s `observedAttributes` changes.
 
