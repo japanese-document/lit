@@ -88,9 +88,8 @@ disconnectedCallback() {
 }
 ```
 
-要素の内部にあるイベントリスナーを削除する必要はありません。
-You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template.
-Unlike external event listeners, these won't prevent the component from being garbage collected.
+コンポーネント内のDOMに加えられた(テンプレート内で宣言的に加えられた物も含む)イベントリスナを削除する必要はありません。
+外部のNodeに追加されたイベントリスナとは違って、それはコンポーネントのガベージコレクションを妨げません。
 
 ### attributeChangedCallback()
 
