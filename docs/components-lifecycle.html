@@ -80,9 +80,8 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
   window.removeEventListener('keydown', this._handleKeydown);
 }
 </code></pre>
-<p>要素の内部にあるイベントリスナーを削除する必要はありません。
-You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template.
-Unlike external event listeners, these won't prevent the component from being garbage collected.</p>
+<p>コンポーネント内のDOMに加えられた(テンプレート内で宣言的に加えられた物も含む)イベントリスナを削除する必要はありません。
+外部のNodeに追加されたイベントリスナとは違って、それはコンポーネントのガベージコレクションを妨げません。</p>
 <h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
 <p>要素の<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array">observedAttributes</a>が1つでも変更された時に実行されます。</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
