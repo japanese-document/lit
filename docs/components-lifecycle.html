@@ -84,7 +84,7 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 You don't need to remove event listeners added on the component's own DOM—including those added declaratively in your template.
 Unlike external event listeners, these won't prevent the component from being garbage collected.</p>
 <h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
-<p>Invoked when one of the element’s <code>observedAttributes</code> changes.</p>
+<p>要素の<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array">observedAttributes</a>が1つでも変更された時に実行されます。</p>
 <h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
 <p>Lit uses this callback to sync changes in attributes to reactive properties. Specifically, when an attribute is set, the corresponding property is set. Lit also automatically sets up the element’s <code>observedAttributes</code> array to match the component’s list of reactive properties.</p>
 <h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>

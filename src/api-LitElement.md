@@ -31,7 +31,7 @@ import { LitElement } from 'lit'
 
 #### addController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void
 
-要素の[reactive update cycle](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)をフックする`ReactiveController`を登録します。
+要素の[リアクティブアップデートサイクル](https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル)をフックする`ReactiveController`を登録します。
 要素はライフサイクルのコールバックで登録したコントローラを自動的に呼び出します。
 
 #### removeController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void

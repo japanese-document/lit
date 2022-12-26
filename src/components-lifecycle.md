@@ -94,7 +94,7 @@ Unlike external event listeners, these won't prevent the component from being ga
 
 ### attributeChangedCallback()
 
-Invoked when one of the element’s `observedAttributes` changes.
+要素の[observedAttributes](https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array)が1つでも変更された時に実行されます。
 
 #### Lit behavior
 
