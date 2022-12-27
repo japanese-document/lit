@@ -84,11 +84,13 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 外部のNodeに追加されたイベントリスナとは違って、それはコンポーネントのガベージコレクションを妨げません。</p>
 <h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
 <p>要素の<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array">observedAttributes</a>が1つでも変更された時に実行されます。</p>
-<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
-<p>Lit uses this callback to sync changes in attributes to reactive properties. Specifically, when an attribute is set, the corresponding property is set. Lit also automatically sets up the element’s <code>observedAttributes</code> array to match the component’s list of reactive properties.</p>
-<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
-<p>You rarely need to implement this callback.</p>
-<h3 id="adoptedCallback()_{#adoptedcallback}"><a href="#adoptedCallback()_{#adoptedcallback}">adoptedCallback() {#adoptedcallback}</a></h3>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<p>Litはこのコールバックを属性の変更をリアクティブプロパティに同期することに使います。
+それは属性に値がセットされるとそれに対応するプロパティに値がセットされます。
+Litは自動的に要素の<code>observedAttributes</code>とコンポーネントのリアクティブプロパティがそれぞれ対応するようにします。</p>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<p>このコールバックを実装する機会はほどんどありません。</p>
+<h3 id="adoptedCallback()"><a href="#adoptedCallback()">adoptedCallback()</a></h3>
 <p>Invoked when a component is moved to a new document.</p>
 <div class="alert alert-info">
 

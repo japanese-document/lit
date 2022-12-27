@@ -95,15 +95,17 @@ disconnectedCallback() {
 
 要素の[observedAttributes](https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array)が1つでも変更された時に実行されます。
 
-#### Lit behavior
+#### Litの動作
 
-Lit uses this callback to sync changes in attributes to reactive properties. Specifically, when an attribute is set, the corresponding property is set. Lit also automatically sets up the element’s `observedAttributes` array to match the component’s list of reactive properties.
+Litはこのコールバックを属性の変更をリアクティブプロパティに同期することに使います。
+それは属性に値がセットされるとそれに対応するプロパティに値がセットされます。
+Litは自動的に要素の`observedAttributes`とコンポーネントのリアクティブプロパティがそれぞれ対応するようにします。
 
-#### Use cases
+#### ユースケース
 
-You rarely need to implement this callback.
+このコールバックを実装する機会はほどんどありません。
 
-### adoptedCallback() {#adoptedcallback}
+### adoptedCallback()
 
 Invoked when a component is moved to a new document.
 
