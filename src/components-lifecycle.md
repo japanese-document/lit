@@ -107,21 +107,17 @@ Litは自動的に要素の`observedAttributes`とコンポーネントのリア
 
 ### adoptedCallback()
 
-Invoked when a component is moved to a new document.
+コンポーネントが別のdocumentに移動したときに実行されます。
 
-<div class="alert alert-info">
+`adoptedCallback`はPolyfillにはないことに注意してください。
 
-Be aware that `adoptedCallback` is not polyfilled.
+#### Litの動作
 
-</div>
+デフォルトではLitはこのコールバックで何もしません。
 
-#### Lit behavior
+#### ユースケース
 
-Lit has no default behavior for this callback.
-
-#### Use cases
-
-This callback should only be used for advanced use cases when the element behavior should change when it changes documents.
+このコールバックはdocumentを移動した時に要素の動作を変更するような高度なユースケースに使われます。
 
 ## リアクティブアップデートサイクル
 
