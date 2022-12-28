@@ -91,16 +91,12 @@ Litは自動的に要素の<code>observedAttributes</code>とコンポーネン�
 <h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p>このコールバックを実装する機会はほどんどありません。</p>
 <h3 id="adoptedCallback()"><a href="#adoptedCallback()">adoptedCallback()</a></h3>
-<p>Invoked when a component is moved to a new document.</p>
-<div class="alert alert-info">
-
-<p>Be aware that <code>adoptedCallback</code> is not polyfilled.</p>
-</div>
-
-<h4 id="Lit_behavior"><a href="#Lit_behavior">Lit behavior</a></h4>
-<p>Lit has no default behavior for this callback.</p>
-<h4 id="Use_cases"><a href="#Use_cases">Use cases</a></h4>
-<p>This callback should only be used for advanced use cases when the element behavior should change when it changes documents.</p>
+<p>コンポーネントが別のdocumentに移動したときに実行されます。</p>
+<p><code>adoptedCallback</code>はPolyfillにはないことに注意してください。</p>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<p>デフォルトではLitはこのコールバックで何もしません。</p>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<p>このコールバックはdocumentを移動した時に要素の動作を変更するような高度なユースケースに使われます。</p>
 <h2 id="リアクティブアップデートサイクル"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></h2>
 <p>In addition to the standard custom element lifecycle, Lit components also implement a reactive update cycle.</p>
 <p>The reactive update cycle is triggered when a reactive property changes or when the <code>requestUpdate()</code> method is explicitly called. Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested, but before the update starts, all of the changes are captured in the same update.</p>
