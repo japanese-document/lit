@@ -121,9 +121,11 @@ Litは自動的に要素の`observedAttributes`とコンポーネントのリア
 
 ## リアクティブアップデートサイクル
 
-In addition to the standard custom element lifecycle, Lit components also implement a reactive update cycle.
+LitコンポーネントはWeb標準のcustom elementsのライフサイクルに加えてリアクティブアップデートサイクルを用意しています。
 
-The reactive update cycle is triggered when a reactive property changes or when the `requestUpdate()` method is explicitly called. Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested, but before the update starts, all of the changes are captured in the same update.
+The reactive update cycle is triggered when a reactive property changes or when the `requestUpdate()` method is explicitly called.
+Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested,
+but before the update starts, all of the changes are captured in the same update.
 
 Updates happen at microtask timing, which means they occur before the browser paints the next frame to the screen. See [Jake Archibald's article](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/) on microtasks for more information about browser timing.
 
