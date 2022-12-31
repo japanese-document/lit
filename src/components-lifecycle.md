@@ -186,7 +186,7 @@ An update is triggered when a reactive property changes or the `requestUpdate()`
 
 #### hasChanged() {#haschanged}
 
-Called when a reactive property is set. By default `hasChanged()` does a strict equality check and if it returns `true`, an update is scheduled. See [configuring `hasChanged()`](/docs/components/properties/#haschanged) for more information.
+Called when a reactive property is set. By default `hasChanged()` does a strict equality check and if it returns `true`, an update is scheduled. See [configuring `hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged) for more information.
 
 #### requestUpdate() {#requestUpdate}
 
@@ -206,7 +206,7 @@ disconnectedCallback() {
 
 The list of properties that have changed is stored in a `changedProperties` map that’s passed to subsequent lifecycle methods. The map keys are the property names and its values are the previous property values.
 
-Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map. This can be useful if you implement a custom getter and setter for a property. See [Reactive properties](/docs/components/properties/) for more information about implementing custom getters and setters.
+Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map. This can be useful if you implement a custom getter and setter for a property. See [Reactive properties](https://japanese-document.github.io/lit/components-properties.html) for more information about implementing custom getters and setters.
 
 ```js
   this.requestUpdate('state', this._previousState);
@@ -320,7 +320,7 @@ Called by `update()` and should be implemented to return a renderable result (su
 | Call super? | Not necessary. |
 | Called on server? | Yes. |
 
-The `render()` method has no arguments, but typically it references component properties. See [Rendering](/docs/components/rendering/) for more information.
+The `render()` method has no arguments, but typically it references component properties. See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
 
 ```js
 render() {
@@ -507,7 +507,7 @@ class MyElement extends LitElement {
 
 ## External lifecycle hooks: controllers and decorators
 
-In addition to component classes implementing lifecycle callbacks, external code, such as [decorators](/docs/components/decorators/) may need to hook into a component's lifecycle.
+In addition to component classes implementing lifecycle callbacks, external code, such as [decorators](https://lit.dev/docs/components/decorators/) may need to hook into a component's lifecycle.
 
 Lit offers two concepts for external code to integrate with the reactive update lifecycle: `static addInitializer()` and `addController()`:
 
@@ -515,7 +515,7 @@ Lit offers two concepts for external code to integrate with the reactive update 
 
 `addInitializer()` allows code that has access to a Lit class definition to run code when instances of the class are constructed.
 
-This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call `addInitializer()`. It will be common to use this to add a [reactive controller](/docs/composition/controllers/) so decorators can hook into the component lifecycle:
+This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call `addInitializer()`. It will be common to use this to add a [reactive controller](https://lit.dev/docs/composition/controllers/) so decorators can hook into the component lifecycle:
 
 {% switchable-sample %}
 
@@ -563,7 +563,7 @@ starting with superclasses and progressing to the instance's class.
 
 #### addController() {#addController}
 
-`addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the [Reactive Controller](/docs/composition/controllers/) docs for more information.
+`addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the [Reactive Controller](https://lit.dev/docs/composition/controllers/) docs for more information.
 
 #### removeController() {#removeController}
 
@@ -573,7 +573,7 @@ starting with superclasses and progressing to the instance's class.
 
 <div class="alert alert-info">
 
-Lit's [server-side rendering package](/docs/ssr/overview/) is currently under active development so the following information is subject to change.
+Lit's [server-side rendering package](https://lit.dev/docs/ssr/overview/) is currently under active development so the following information is subject to change.
 
 </div>
 
