@@ -99,10 +99,11 @@ Litは自動的に要素の<code>observedAttributes</code>とコンポーネン�
 <p>このコールバックはdocumentを移動した時に要素の動作を変更するような高度なユースケースに使われます。</p>
 <h2 id="リアクティブアップデートサイクル"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></h2>
 <p>LitコンポーネントはWeb標準のcustom elementsのライフサイクルに加えてリアクティブアップデートサイクルを用意しています。</p>
-<p>The reactive update cycle is triggered when a reactive property changes or when the <code>requestUpdate()</code> method is explicitly called.
-Lit performs updates asynchronously so property changes are batched — if more properties change after an update is requested,
-but before the update starts, all of the changes are captured in the same update.</p>
-<p>Updates happen at microtask timing, which means they occur before the browser paints the next frame to the screen. See <a class="Link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Jake Archibald's article</a> on microtasks for more information about browser timing.</p>
+<p>リアクティブアップデートサイクルはリアクティブプロパティが変更された時もしくは<code>requestUpdate()</code>メソッドが明示的に実行された時に発動します。
+Litは更新を非同期で行います。そして、プロパティの変更の反映はまとめて行われます。
+つまり、更新をリクエストした後に複数のプロパティが変更された場合、更新が始まる前だったら、すべての変更は同じ更新で反映されます。</p>
+<p>更新はmicrotaskのタイミング(ブラウザが次のフレームを画面に描画する前)で行われます。
+microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Jake Archibaldの記事</a>を見てください。</p>
 <p>At a high level, the reactive update cycle is:</p>
 <ol>
 <li>An update is scheduled when one or more properties change or when <code>requestUpdate()</code> is called.</li>
