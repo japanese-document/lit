@@ -104,17 +104,17 @@ Litは更新を非同期で行います。そして、プロパティの変更�
 つまり、更新をリクエストした後に複数のプロパティが変更された場合、更新が始まる前だったら、すべての変更は同じ更新で反映されます。</p>
 <p>更新はmicrotaskのタイミング(ブラウザが次のフレームを画面に描画する前)で行われます。
 microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Jake Archibaldの記事</a>を見てください。</p>
-<p>At a high level, the reactive update cycle is:</p>
+<p>端的に言うとリアクティブプロパティは下記のようになります。</p>
 <ol>
-<li>An update is scheduled when one or more properties change or when <code>requestUpdate()</code> is called.</li>
-<li>The update is performed prior to the next frame being painted.<ol>
-<li>Reflecting attributes are set.</li>
-<li>The component’s render method is called to update its internal DOM.</li>
+<li>1つ以上のプロパティが変更された時もしくは<code>requestUpdate()</code>が実行された時、更新がスケジュールされます。</li>
+<li>次のフレームが描画される前に更新が実行されます。<ol>
+<li>コンポーネントのプロパティが要素の属性に反映されます。</li>
+<li>コンポーネント内のDOMを更新するためにrenderメソッドが実行されます。</li>
 </ol>
 </li>
-<li>The update is completed and the <code>updateComplete</code> promise is resolved.</li>
+<li>更新が完了します。そして、<code>updateComplete</code>のPromiseが<code>resolve</code>されます。</li>
 </ol>
-<p>In more detail, it looks like this:</p>
+<p>詳細は下記のようになります。</p>
 <p><strong>Pre-Update</strong></p>
 <p><img alt="update-1" src="/lit/images/components-update-1.jpg"></p>
 <p><img alt="update-2" src="/lit/images/components-update-2.jpg"></p>
@@ -122,9 +122,11 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p><img alt="update-3" src="/lit/images/components-update-3.jpg"></p>
 <p><strong>Post-Update</strong></p>
 <p><img alt="update-4" src="/lit/images/components-update-4.jpg"></p>
-<h3 id="The_changedProperties_map_{#changed-properties}"><a href="#The_changedProperties_map_{#changed-properties}">The changedProperties map {#changed-properties}</a></h3>
-<p>Many reactive update methods receive a <code>Map</code> of changed properties. The <code>Map</code> keys are the property names and its values are the <strong>previous</strong> property values. You can always find the current property values using <code>this.<var>property</var></code> or <code>this[<var>property</var>]</code>.</p>
-<h4 id="TypeScript_types_for_changedProperties"><a href="#TypeScript_types_for_changedProperties">TypeScript types for changedProperties</a></h4>
+<h3 id="changedProperties"><a href="#changedProperties">changedProperties</a></h3>
+<p>Many reactive update methods receive a <code>Map</code> of changed properties.
+The <code>Map</code> keys are the property names and its values are the <strong>previous</strong> property values.
+You can always find the current property values using <code>this.property</code> or <code>this[property]</code>.</p>
+<h4 id="changedPropertiesの型"><a href="#changedPropertiesの型">changedPropertiesの型</a></h4>
 <p>If you're using TypeScript and you want strong type checking for the <code>changedProperties</code> map, you can use <code>PropertyValues&lt;this&gt;</code>, which infers the correct type for each property name. </p>
 <pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
 ...

@@ -130,15 +130,15 @@ Litは更新を非同期で行います。そして、プロパティの変更�
 更新はmicrotaskのタイミング(ブラウザが次のフレームを画面に描画する前)で行われます。
 microtaskの説明は[Jake Archibaldの記事](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)を見てください。
 
-At a high level, the reactive update cycle is:
+端的に言うとリアクティブプロパティは下記のようになります。
 
-1. An update is scheduled when one or more properties change or when `requestUpdate()` is called.
-1. The update is performed prior to the next frame being painted.
-    1. Reflecting attributes are set.
-    1. The component’s render method is called to update its internal DOM.
-1. The update is completed and the `updateComplete` promise is resolved.
+1. 1つ以上のプロパティが変更された時もしくは`requestUpdate()`が実行された時、更新がスケジュールされます。
+1. 次のフレームが描画される前に更新が実行されます。
+    1. コンポーネントのプロパティが要素の属性に反映されます。
+    1. コンポーネント内のDOMを更新するためにrenderメソッドが実行されます。
+1. 更新が完了します。そして、`updateComplete`のPromiseが`resolve`されます。
 
-In more detail, it looks like this:
+詳細は下記のようになります。
 
 **Pre-Update**
 
@@ -154,11 +154,13 @@ In more detail, it looks like this:
 
 ![update-4](/lit/images/components-update-4.jpg)
 
-### The changedProperties map {#changed-properties}
+### changedProperties
 
-Many reactive update methods receive a `Map` of changed properties. The `Map` keys are the property names and its values are the **previous** property values. You can always find the current property values using <code>this.<var>property</var></code> or <code>this[<var>property</var>]</code>.
+Many reactive update methods receive a `Map` of changed properties.
+The `Map` keys are the property names and its values are the **previous** property values.
+You can always find the current property values using `this.property` or `this[property]`.
 
-#### TypeScript types for changedProperties
+#### changedPropertiesの型
 
 If you're using TypeScript and you want strong type checking for the `changedProperties` map, you can use `PropertyValues<this>`, which infers the correct type for each property name. 
 
