@@ -142,17 +142,17 @@ In more detail, it looks like this:
 
 **Pre-Update**
 
-<img class="centered-image" src="/images/docs/components/update-1.jpg">
+<img class="centered-image" src="/lit/images/components/update-1.jpg">
 
-<p><img class="centered-image" src="/images/docs/components/update-2.jpg"></p>
+<p><img class="centered-image" src="/lit/images/components/update-2.jpg"></p>
 
 **Update**
 
-<img class="centered-image" src="/images/docs/components/update-3.jpg">
+<img class="centered-image" src="/lit/images/components/update-3.jpg">
 
 **Post-Update**
 
-<img class="centered-image" src="/images/docs/components/update-4.jpg">
+<img class="centered-image" src="/lit/images/components/update-4.jpg">
 
 ### The changedProperties map {#changed-properties}
 
@@ -577,7 +577,7 @@ Lit's [server-side rendering package](/docs/ssr/overview/) is currently under ac
 
 Not all of the update cycle is called when rendering Lit on the server. The following methods are called on the server.
 
-<img class="centered-image" src="/images/docs/components/update-server.jpg">
+<img class="centered-image" src="/lit/images/components/update-server.jpg">
 
 <p><!-- Add some space --></p>
 
