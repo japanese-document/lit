@@ -156,9 +156,9 @@ microtaskの説明は[Jake Archibaldの記事](https://jakearchibald.com/2015/ta
 
 ### changedProperties
 
-Many reactive update methods receive a `Map` of changed properties.
-The `Map` keys are the property names and its values are the **previous** property values.
-You can always find the current property values using `this.property` or `this[property]`.
+多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを`Map`で引数として受け取ります。
+`Map`のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
+現行のプロパティの値は`this.property`もしくは`this[property]`で取得することができます。
 
 #### changedPropertiesの型
 

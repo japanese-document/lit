@@ -123,9 +123,9 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p><strong>Post-Update</strong></p>
 <p><img alt="update-4" src="/lit/images/components-update-4.jpg"></p>
 <h3 id="changedProperties"><a href="#changedProperties">changedProperties</a></h3>
-<p>Many reactive update methods receive a <code>Map</code> of changed properties.
-The <code>Map</code> keys are the property names and its values are the <strong>previous</strong> property values.
-You can always find the current property values using <code>this.property</code> or <code>this[property]</code>.</p>
+<p>多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを<code>Map</code>で引数として受け取ります。
+<code>Map</code>のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
+現行のプロパティの値は<code>this.property</code>もしくは<code>this[property]</code>で取得することができます。</p>
 <h4 id="changedPropertiesの型"><a href="#changedPropertiesの型">changedPropertiesの型</a></h4>
 <p>If you're using TypeScript and you want strong type checking for the <code>changedProperties</code> map, you can use <code>PropertyValues&lt;this&gt;</code>, which infers the correct type for each property name. </p>
 <pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
