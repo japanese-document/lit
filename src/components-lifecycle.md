@@ -156,13 +156,13 @@ microtaskの説明は[Jake Archibaldの記事](https://jakearchibald.com/2015/ta
 
 ### changedProperties
 
-多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを`Map`で引数として受け取ります。
+多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを`Map`に格納した引数(`changedProperties`)として受け取ります。
 `Map`のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
 現行のプロパティの値は`this.property`もしくは`this[property]`で取得することができます。
 
 #### changedPropertiesの型
 
-If you're using TypeScript and you want strong type checking for the `changedProperties` map, you can use `PropertyValues<this>`, which infers the correct type for each property name. 
+TypeScriptで`changedProperties`に対して厳格な型チェックをしたい場合は`PropertyValues<this>`を使います。これは各プロパティ名に対して正確な型を推論します。
 
 ```ts
 import {LitElement, html, PropertyValues} from 'lit';
@@ -172,7 +172,8 @@ import {LitElement, html, PropertyValues} from 'lit';
   }
 ```
 
-If you're less concerned with strong typing—or you're only checking the property names, not the previous values—you could use a less restrictive type like `Map<string, any>`.
+If you're less concerned with strong typing—or you're only checking the property names,
+not the previous values—you could use a less restrictive type like `Map<string, any>`.
 
 Note that `PropertyValues<this>` doesn't recognize `protected` or `private` properties. If you're checking any `protected` or `private` properties, you'll need to use a less restrictive type.
 

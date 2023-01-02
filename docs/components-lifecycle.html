@@ -123,18 +123,19 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p><strong>Post-Update</strong></p>
 <p><img alt="update-4" src="/lit/images/components-update-4.jpg"></p>
 <h3 id="changedProperties"><a href="#changedProperties">changedProperties</a></h3>
-<p>多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを<code>Map</code>で引数として受け取ります。
+<p>多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを<code>Map</code>に格納した引数(<code>changedProperties</code>)として受け取ります。
 <code>Map</code>のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
 現行のプロパティの値は<code>this.property</code>もしくは<code>this[property]</code>で取得することができます。</p>
 <h4 id="changedPropertiesの型"><a href="#changedPropertiesの型">changedPropertiesの型</a></h4>
-<p>If you're using TypeScript and you want strong type checking for the <code>changedProperties</code> map, you can use <code>PropertyValues&lt;this&gt;</code>, which infers the correct type for each property name. </p>
+<p>TypeScriptで<code>changedProperties</code>に対して厳格な型チェックをしたい場合は<code>PropertyValues&lt;this&gt;</code>を使います。これは各プロパティ名に対して正確な型を推論します。</p>
 <pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
 ...
   shouldUpdate(changedProperties: PropertyValues&lt;this&gt;) {
     ...
   }
 </code></pre>
-<p>If you're less concerned with strong typing—or you're only checking the property names, not the previous values—you could use a less restrictive type like <code>Map&lt;string, any&gt;</code>.</p>
+<p>If you're less concerned with strong typing—or you're only checking the property names,
+not the previous values—you could use a less restrictive type like <code>Map&lt;string, any&gt;</code>.</p>
 <p>Note that <code>PropertyValues&lt;this&gt;</code> doesn't recognize <code>protected</code> or <code>private</code> properties. If you're checking any <code>protected</code> or <code>private</code> properties, you'll need to use a less restrictive type.</p>
 <h4 id="Changing_properties_during_an_update_{#changing-properties-during-an-update}"><a href="#Changing_properties_during_an_update_{#changing-properties-during-an-update}">Changing properties during an update {#changing-properties-during-an-update}</a></h4>
 <p>Changing a property <em>during</em> the update  (up to and including the <code>render()</code> method) updates the <code>changedProperties</code> map, but <strong>doesn't</strong> trigger a new update. Changing a property <em>after</em> <code>render()</code> (for example, in the <code>updated()</code> method) triggers a new update cycle, and the changed property is added to a new <code>changedProperties</code> map to be used for the next cycle.</p>
