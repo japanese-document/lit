@@ -172,10 +172,10 @@ import {LitElement, html, PropertyValues} from 'lit';
   }
 ```
 
-If you're less concerned with strong typing—or you're only checking the property names,
-not the previous values—you could use a less restrictive type like `Map<string, any>`.
+厳格な型が必要ないなら(プロパティ名だけチェックしてつ前の値はチェックしない)、`Map<string, any>`のような緩い型を使うこともできます。
 
-Note that `PropertyValues<this>` doesn't recognize `protected` or `private` properties. If you're checking any `protected` or `private` properties, you'll need to use a less restrictive type.
+Note that `PropertyValues<this>` doesn't recognize `protected` or `private` properties.
+If you're checking any `protected` or `private` properties, you'll need to use a less restrictive type.
 
 #### Changing properties during an update {#changing-properties-during-an-update}
 
