@@ -172,14 +172,17 @@ import {LitElement, html, PropertyValues} from 'lit';
   }
 ```
 
-厳格な型が必要ないなら(プロパティ名だけチェックしてつ前の値はチェックしない)、`Map<string, any>`のような緩い型を使うこともできます。
+厳格な型が必要ないなら(プロパティ名だけチェックして1つ前の値はチェックしない)、`Map<string, any>`のような緩い型を使うこともできます。
 
-Note that `PropertyValues<this>` doesn't recognize `protected` or `private` properties.
-If you're checking any `protected` or `private` properties, you'll need to use a less restrictive type.
+`PropertyValues<this>`は`protected`と`private`なプロパティを認識しません。
+`protected`と`private`なプロパティをチェックしたい場合は`Map<string, any>`のような緩い型を使います。
 
-#### Changing properties during an update {#changing-properties-during-an-update}
+#### 更新中のプロパティの変更
 
-Changing a property *during* the update  (up to and including the `render()` method) updates the `changedProperties` map, but **doesn't** trigger a new update. Changing a property _after_ `render()` (for example, in the `updated()` method) triggers a new update cycle, and the changed property is added to a new `changedProperties` map to be used for the next cycle.
+Changing a property *during* the update  (up to and including the `render()` method) updates the `changedProperties` map,
+but **doesn't** trigger a new update.
+Changing a property _after_ `render()` (for example, in the `updated()` method) triggers a new update cycle,
+and the changed property is added to a new `changedProperties` map to be used for the next cycle.
 
 ### Triggering an update {#reactive-update-cycle-triggering}
 
