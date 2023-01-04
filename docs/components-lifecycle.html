@@ -134,11 +134,14 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
     ...
   }
 </code></pre>
-<p>厳格な型が必要ないなら(プロパティ名だけチェックしてつ前の値はチェックしない)、<code>Map&lt;string, any&gt;</code>のような緩い型を使うこともできます。</p>
-<p>Note that <code>PropertyValues&lt;this&gt;</code> doesn't recognize <code>protected</code> or <code>private</code> properties.
-If you're checking any <code>protected</code> or <code>private</code> properties, you'll need to use a less restrictive type.</p>
-<h4 id="Changing_properties_during_an_update_{#changing-properties-during-an-update}"><a href="#Changing_properties_during_an_update_{#changing-properties-during-an-update}">Changing properties during an update {#changing-properties-during-an-update}</a></h4>
-<p>Changing a property <em>during</em> the update  (up to and including the <code>render()</code> method) updates the <code>changedProperties</code> map, but <strong>doesn't</strong> trigger a new update. Changing a property <em>after</em> <code>render()</code> (for example, in the <code>updated()</code> method) triggers a new update cycle, and the changed property is added to a new <code>changedProperties</code> map to be used for the next cycle.</p>
+<p>厳格な型が必要ないなら(プロパティ名だけチェックして1つ前の値はチェックしない)、<code>Map&lt;string, any&gt;</code>のような緩い型を使うこともできます。</p>
+<p><code>PropertyValues&lt;this&gt;</code>は<code>protected</code>と<code>private</code>なプロパティを認識しません。
+<code>protected</code>と<code>private</code>なプロパティをチェックしたい場合は<code>Map&lt;string, any&gt;</code>のような緩い型を使います。</p>
+<h4 id="更新中のプロパティの変更"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></h4>
+<p>Changing a property <em>during</em> the update  (up to and including the <code>render()</code> method) updates the <code>changedProperties</code> map,
+but <strong>doesn't</strong> trigger a new update.
+Changing a property <em>after</em> <code>render()</code> (for example, in the <code>updated()</code> method) triggers a new update cycle,
+and the changed property is added to a new <code>changedProperties</code> map to be used for the next cycle.</p>
 <h3 id="Triggering_an_update_{#reactive-update-cycle-triggering}"><a href="#Triggering_an_update_{#reactive-update-cycle-triggering}">Triggering an update {#reactive-update-cycle-triggering}</a></h3>
 <p>An update is triggered when a reactive property changes or the <code>requestUpdate()</code> method is called. Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a <strong>single update</strong>.</p>
 <h4 id="hasChanged()_{#haschanged}"><a href="#hasChanged()_{#haschanged}">hasChanged() {#haschanged}</a></h4>
