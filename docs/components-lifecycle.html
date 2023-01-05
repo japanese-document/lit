@@ -138,12 +138,12 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p><code>PropertyValues&lt;this&gt;</code>は<code>protected</code>と<code>private</code>なプロパティを認識しません。
 <code>protected</code>と<code>private</code>なプロパティをチェックしたい場合は<code>Map&lt;string, any&gt;</code>のような緩い型を使います。</p>
 <h4 id="更新中のプロパティの変更"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></h4>
-<p>Changing a property <em>during</em> the update  (up to and including the <code>render()</code> method) updates the <code>changedProperties</code> map,
-but <strong>doesn't</strong> trigger a new update.
-Changing a property <em>after</em> <code>render()</code> (for example, in the <code>updated()</code> method) triggers a new update cycle,
-and the changed property is added to a new <code>changedProperties</code> map to be used for the next cycle.</p>
-<h3 id="Triggering_an_update_{#reactive-update-cycle-triggering}"><a href="#Triggering_an_update_{#reactive-update-cycle-triggering}">Triggering an update {#reactive-update-cycle-triggering}</a></h3>
-<p>An update is triggered when a reactive property changes or the <code>requestUpdate()</code> method is called. Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a <strong>single update</strong>.</p>
+<p>更新中(<code>render()</code>メソッド完了まで)にプロパティを変更すると<code>changedProperties</code>は変更されますが、新たなアップデートサイクルを発動しません。
+<code>render()</code>メソッドの後(例: <code>updated</code>内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
+そして、変更されたプロパティは新たな<code>changedProperties</code>に反映されて次のアップデートサイクルで使われます。</p>
+<h3 id="更新の発動"><a href="#更新の発動">更新の発動</a></h3>
+<p>An update is triggered when a reactive property changes or the <code>requestUpdate()</code> method is called.
+Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a <strong>single update</strong>.</p>
 <h4 id="hasChanged()_{#haschanged}"><a href="#hasChanged()_{#haschanged}">hasChanged() {#haschanged}</a></h4>
 <p>Called when a reactive property is set. By default <code>hasChanged()</code> does a strict equality check and if it returns <code>true</code>, an update is scheduled. See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">configuring <code>hasChanged()</code></a> for more information.</p>
 <h4 id="requestUpdate()_{#requestUpdate}"><a href="#requestUpdate()_{#requestUpdate}">requestUpdate() {#requestUpdate}</a></h4>
