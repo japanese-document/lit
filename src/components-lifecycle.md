@@ -179,14 +179,14 @@ import {LitElement, html, PropertyValues} from 'lit';
 
 #### 更新中のプロパティの変更
 
-Changing a property *during* the update  (up to and including the `render()` method) updates the `changedProperties` map,
-but **doesn't** trigger a new update.
-Changing a property _after_ `render()` (for example, in the `updated()` method) triggers a new update cycle,
-and the changed property is added to a new `changedProperties` map to be used for the next cycle.
+更新中(`render()`メソッド完了まで)にプロパティを変更すると`changedProperties`は変更されますが、新たなアップデートサイクルを発動しません。
+`render()`メソッドの後(例: `updated`内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
+そして、変更されたプロパティは新たな`changedProperties`に反映されて次のアップデートサイクルで使われます。
 
-### Triggering an update {#reactive-update-cycle-triggering}
+### 更新の発動
 
-An update is triggered when a reactive property changes or the `requestUpdate()` method is called. Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a **single update**.
+An update is triggered when a reactive property changes or the `requestUpdate()` method is called.
+Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a **single update**.
 
 #### hasChanged() {#haschanged}
 
