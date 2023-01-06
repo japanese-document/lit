@@ -50,7 +50,7 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 }
 </code></pre>
 <h3 id="connectedCallback()"><a href="#connectedCallback()">connectedCallback()</a></h3>
-<p>コンポーネントがdocumentのdocumentに接続された(追加された)時に実行されます。</p>
+<p>コンポーネントがdocumentに接続された(追加された)時に実行されます。</p>
 <h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p>要素がdocumentに接続された後、Litは更新サイクルの一番目の処理を開始します。
 レンダリングをする前にLitは<code>renderRoot</code>(通常は<code>shadowRoot</code>)が生成済みか確認します。</p>
@@ -139,7 +139,7 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <code>protected</code>と<code>private</code>なプロパティをチェックしたい場合は<code>Map&lt;string, any&gt;</code>のような緩い型を使います。</p>
 <h4 id="更新中のプロパティの変更"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></h4>
 <p>更新中(<code>render()</code>メソッド完了まで)にプロパティを変更すると<code>changedProperties</code>は変更されますが、新たなアップデートサイクルを発動しません。
-<code>render()</code>メソッドの後(例: <code>updated</code>内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
+<code>render()</code>メソッドの後(例: <code>updated()</code>内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
 そして、変更されたプロパティは新たな<code>changedProperties</code>に反映されて次のアップデートサイクルで使われます。</p>
 <h3 id="更新の発動"><a href="#更新の発動">更新の発動</a></h3>
 <p>An update is triggered when a reactive property changes or the <code>requestUpdate()</code> method is called.

@@ -42,7 +42,7 @@ constructor() {
 
 ### connectedCallback()
 
-コンポーネントがdocumentのdocumentに接続された(追加された)時に実行されます。
+コンポーネントがdocumentに接続された(追加された)時に実行されます。
 
 #### Litの動作
 
@@ -180,7 +180,7 @@ import {LitElement, html, PropertyValues} from 'lit';
 #### 更新中のプロパティの変更
 
 更新中(`render()`メソッド完了まで)にプロパティを変更すると`changedProperties`は変更されますが、新たなアップデートサイクルを発動しません。
-`render()`メソッドの後(例: `updated`内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
+`render()`メソッドの後(例: `updated()`内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
 そして、変更されたプロパティは新たな`changedProperties`に反映されて次のアップデートサイクルで使われます。
 
 ### 更新の発動
