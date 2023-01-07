@@ -185,14 +185,17 @@ import {LitElement, html, PropertyValues} from 'lit';
 
 ### 更新の発動
 
-An update is triggered when a reactive property changes or the `requestUpdate()` method is called.
-Since updates are performed asynchronously, any and all changes that occur before the update is performed result in only a **single update**.
+リアクティブプロパティが変更される、もしくは`requestUpdate()`を実行すると更新が発動されます。
+更新は非同期で実行されるので、
+更新が実行される前に生じた変更はまとめて1回の更新で反映されます。
 
-#### hasChanged() {#haschanged}
+#### hasChanged()
 
-Called when a reactive property is set. By default `hasChanged()` does a strict equality check and if it returns `true`, an update is scheduled. See [configuring `hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged) for more information.
+Called when a reactive property is set.
+By default `hasChanged()` does a strict equality check and if it returns `true`, an update is scheduled.
+See [configuring `hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged) for more information.
 
-#### requestUpdate() {#requestUpdate}
+#### requestUpdate()
 
 Call `requestUpdate()` to schedule an explicit update. This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call `requestUpdate()` every second.
 
