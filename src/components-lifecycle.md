@@ -192,7 +192,7 @@ import {LitElement, html, PropertyValues} from 'lit';
 #### hasChanged()
 
 リアクティブプロパティに値がセットされた時に実行されます。
-デフォルトでは`hasChanged()`は`===`で比較します。そして、`true`を返した場合、更新がスケジュールされます。
+デフォルトでは`hasChanged()`は`!==`で比較します。そして、`true`を返した場合、更新がスケジュールされます。
 詳しくは[`hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged)を見てください。
 
 #### requestUpdate()
