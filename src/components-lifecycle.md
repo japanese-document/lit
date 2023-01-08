@@ -191,13 +191,14 @@ import {LitElement, html, PropertyValues} from 'lit';
 
 #### hasChanged()
 
-Called when a reactive property is set.
-By default `hasChanged()` does a strict equality check and if it returns `true`, an update is scheduled.
-See [configuring `hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged) for more information.
+リアクティブプロパティに値がセットされた時に実行されます。
+デフォルトでは`hasChanged()`は`===`で比較します。そして、`true`を返した場合、更新がスケジュールされます。
+詳しくは[`hasChanged()`](https://japanese-document.github.io/lit/components-properties.html#hasChanged)を見てください。
 
 #### requestUpdate()
 
-Call `requestUpdate()` to schedule an explicit update. This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call `requestUpdate()` every second.
+Call `requestUpdate()` to schedule an explicit update.
+This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call `requestUpdate()` every second.
 
 ```js
 connectedCallback() {

@@ -146,11 +146,12 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 更新は非同期で実行されるので、
 更新が実行される前に生じた変更はまとめて1回の更新で反映されます。</p>
 <h4 id="hasChanged()"><a href="#hasChanged()">hasChanged()</a></h4>
-<p>Called when a reactive property is set.
-By default <code>hasChanged()</code> does a strict equality check and if it returns <code>true</code>, an update is scheduled.
-See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">configuring <code>hasChanged()</code></a> for more information.</p>
+<p>リアクティブプロパティに値がセットされた時に実行されます。
+デフォルトでは<code>hasChanged()</code>は<code>===</code>で比較します。そして、<code>true</code>を返した場合、更新がスケジュールされます。
+詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged"><code>hasChanged()</code></a>を見てください。</p>
 <h4 id="requestUpdate()"><a href="#requestUpdate()">requestUpdate()</a></h4>
-<p>Call <code>requestUpdate()</code> to schedule an explicit update. This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call <code>requestUpdate()</code> every second.</p>
+<p>Call <code>requestUpdate()</code> to schedule an explicit update.
+This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call <code>requestUpdate()</code> every second.</p>
 <pre><code class="language-js">connectedCallback() {
   super.connectedCallback();
   this._timerInterval = setInterval(() =&gt; this.requestUpdate(), 1000);
