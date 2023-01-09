@@ -197,8 +197,9 @@ import {LitElement, html, PropertyValues} from 'lit';
 
 #### requestUpdate()
 
-Call `requestUpdate()` to schedule an explicit update.
-This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call `requestUpdate()` every second.
+`requestUpdate()`を実行すると明示的に更新をスケジュールすることができます。
+これはプロパティの変更によらずに要素を更新してレンダリングしたい場合に使います。
+例えば、タイマーコンポーネントは1秒ごとに`requestUpdate()`を実行します。
 
 ```js
 connectedCallback() {
@@ -212,15 +213,18 @@ disconnectedCallback() {
 }
 ```
 
-The list of properties that have changed is stored in a `changedProperties` map that’s passed to subsequent lifecycle methods. The map keys are the property names and its values are the previous property values.
+The list of properties that have changed is stored in a `changedProperties` map that’s passed to subsequent lifecycle methods.
+The map keys are the property names and its values are the previous property values.
 
-Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map. This can be useful if you implement a custom getter and setter for a property. See [Reactive properties](https://japanese-document.github.io/lit/components-properties.html) for more information about implementing custom getters and setters.
+Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map.
+This can be useful if you implement a custom getter and setter for a property.
+See [Reactive properties](https://japanese-document.github.io/lit/components-properties.html) for more information about implementing custom getters and setters.
 
 ```js
   this.requestUpdate('state', this._previousState);
 ```
 
-### Performing an update {#reactive-update-cycle-performing}
+### 更新の実行
 
 When an update is performed, the `performUpdate()` method is called. This method calls a number of other lifecycle methods.
 

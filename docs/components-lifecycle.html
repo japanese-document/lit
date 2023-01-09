@@ -150,8 +150,9 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 デフォルトでは<code>hasChanged()</code>は<code>!==</code>で比較します。そして、<code>true</code>を返した場合、更新がスケジュールされます。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged"><code>hasChanged()</code></a>を見てください。</p>
 <h4 id="requestUpdate()"><a href="#requestUpdate()">requestUpdate()</a></h4>
-<p>Call <code>requestUpdate()</code> to schedule an explicit update.
-This can be useful if you need the element to update and render when something not related to a property changes. For example, a timer component might call <code>requestUpdate()</code> every second.</p>
+<p><code>requestUpdate()</code>を実行すると明示的に更新をスケジュールすることができます。
+これはプロパティの変更によらずに要素を更新してレンダリングしたい場合に使います。
+例えば、タイマーコンポーネントは1秒ごとに<code>requestUpdate()</code>を実行します。</p>
 <pre><code class="language-js">connectedCallback() {
   super.connectedCallback();
   this._timerInterval = setInterval(() =&gt; this.requestUpdate(), 1000);
@@ -162,11 +163,14 @@ disconnectedCallback() {
   clearInterval(this._timerInterval);
 }
 </code></pre>
-<p>The list of properties that have changed is stored in a <code>changedProperties</code> map that’s passed to subsequent lifecycle methods. The map keys are the property names and its values are the previous property values.</p>
-<p>Optionally, you can pass a property name and a previous value when calling <code>requestUpdate()</code>, which will be stored in the <code>changedProperties</code> map. This can be useful if you implement a custom getter and setter for a property. See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">Reactive properties</a> for more information about implementing custom getters and setters.</p>
+<p>The list of properties that have changed is stored in a <code>changedProperties</code> map that’s passed to subsequent lifecycle methods.
+The map keys are the property names and its values are the previous property values.</p>
+<p>Optionally, you can pass a property name and a previous value when calling <code>requestUpdate()</code>, which will be stored in the <code>changedProperties</code> map.
+This can be useful if you implement a custom getter and setter for a property.
+See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">Reactive properties</a> for more information about implementing custom getters and setters.</p>
 <pre><code class="language-js">  this.requestUpdate('state', this._previousState);
 </code></pre>
-<h3 id="Performing_an_update_{#reactive-update-cycle-performing}"><a href="#Performing_an_update_{#reactive-update-cycle-performing}">Performing an update {#reactive-update-cycle-performing}</a></h3>
+<h3 id="更新の実行"><a href="#更新の実行">更新の実行</a></h3>
 <p>When an update is performed, the <code>performUpdate()</code> method is called. This method calls a number of other lifecycle methods.</p>
 <p>Any changes that would normally trigger an update which occur <strong>while</strong> a component is updating do <strong>not schedule a new update</strong>. This is done so that property values can be computed during the update process. Properties changed during the update <strong>are reflected in the <code>changedProperties</code> map</strong>, so subsequent lifecycle methods can act on the changes.</p>
 <h4 id="shouldUpdate()_{#shouldupdate}"><a href="#shouldUpdate()_{#shouldupdate}">shouldUpdate() {#shouldupdate}</a></h4>
