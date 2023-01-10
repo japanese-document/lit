@@ -163,8 +163,8 @@ disconnectedCallback() {
   clearInterval(this._timerInterval);
 }
 </code></pre>
-<p>The list of properties that have changed is stored in a <code>changedProperties</code> map that’s passed to subsequent lifecycle methods.
-The map keys are the property names and its values are the previous property values.</p>
+<p>変更されたプロパティのリストは<code>changedProperties</code> Mapに格納されます。それはこの後に実行されるライフサイクルメソッドに渡されます。
+そのMapのキーはプロパティ名です。そして、その値はひとつ前のプロパティの値です。</p>
 <p>Optionally, you can pass a property name and a previous value when calling <code>requestUpdate()</code>, which will be stored in the <code>changedProperties</code> map.
 This can be useful if you implement a custom getter and setter for a property.
 See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">Reactive properties</a> for more information about implementing custom getters and setters.</p>
