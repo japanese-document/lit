@@ -213,8 +213,8 @@ disconnectedCallback() {
 }
 ```
 
-The list of properties that have changed is stored in a `changedProperties` map that’s passed to subsequent lifecycle methods.
-The map keys are the property names and its values are the previous property values.
+変更されたプロパティのリストは`changedProperties` Mapに格納されます。それはこの後に実行されるライフサイクルメソッドに渡されます。
+そのMapのキーはプロパティ名です。そして、その値はひとつ前のプロパティの値です。
 
 Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map.
 This can be useful if you implement a custom getter and setter for a property.
