@@ -216,8 +216,8 @@ disconnectedCallback() {
 変更されたプロパティのリストは`changedProperties` Mapに格納されます。それはこの後に実行されるライフサイクルメソッドに渡されます。
 そのMapのキーはプロパティ名です。そして、その値はひとつ前のプロパティの値です。
 
-Optionally, you can pass a property name and a previous value when calling `requestUpdate()`, which will be stored in the `changedProperties` map.
-This can be useful if you implement a custom getter and setter for a property.
+`requestUpdate()`を実行する時にプロパティ名とその1つ前の値を渡すことでそれを`changedProperties` Mapに格納することができます。
+これはカスタムゲッタやセッタを実装する際に使います。
 See [Reactive properties](https://japanese-document.github.io/lit/components-properties.html) for more information about implementing custom getters and setters.
 
 ```js
