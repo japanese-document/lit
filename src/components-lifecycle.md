@@ -218,7 +218,7 @@ disconnectedCallback() {
 
 `requestUpdate()`を実行する時にプロパティ名とその1つ前の値を渡すことでそれを`changedProperties` Mapに格納することができます。
 これはカスタムゲッタやセッタを実装する際に使います。
-See [Reactive properties](https://japanese-document.github.io/lit/components-properties.html) for more information about implementing custom getters and setters.
+カスタムゲッタやセッタに関する詳しい情報は[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を見てください。
 
 ```js
   this.requestUpdate('state', this._previousState);
@@ -226,7 +226,7 @@ See [Reactive properties](https://japanese-document.github.io/lit/components-pro
 
 ### 更新の実行
 
-When an update is performed, the `performUpdate()` method is called. This method calls a number of other lifecycle methods.
+`performUpdate()`が更新を実行します。このメソッド内で複数のライフサイクルが実行されます。
 
 Any changes that would normally trigger an update which occur **while** a component is updating do **not schedule a new update**. This is done so that property values can be computed during the update process. Properties changed during the update **are reflected in the `changedProperties` map**, so subsequent lifecycle methods can act on the changes.
 
