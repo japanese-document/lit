@@ -140,17 +140,17 @@ microtaskの説明は[Jake Archibaldの記事](https://jakearchibald.com/2015/ta
 
 詳細は下記のようになります。
 
-**Pre-Update**
+**更新前**
 
 ![update-1](/lit/images/components-update-1.jpg)
 
 ![update-2](/lit/images/components-update-2.jpg)
 
-**Update**
+**更新**
 
 ![update-3](/lit/images/components-update-3.jpg)
 
-**Post-Update**
+**更新後**
 
 ![update-4](/lit/images/components-update-4.jpg)
 
@@ -228,24 +228,26 @@ disconnectedCallback() {
 
 `performUpdate()`が更新を実行します。このメソッド内で複数のライフサイクルが実行されます。
 
-Any changes that would normally trigger an update which occur **while** a component is updating do **not schedule a new update**. This is done so that property values can be computed during the update process. Properties changed during the update **are reflected in the `changedProperties` map**, so subsequent lifecycle methods can act on the changes.
+これは更新処理中にプロパティの値の計算を可能にするために、
+通常はコンポーネントの更新中に更新を発動する変更は新しい更新をスケジュールしません。
+更新中に変更されたプロパティは`changedProperties` Mapに反映されます。だから、その後のライフサイクルメソッドは変更を反映した処理を行うことができます。
 
-#### shouldUpdate() {#shouldupdate}
+#### shouldUpdate()
 
-Called to determine whether an update cycle is required.
+更新を実行するかどうか判断するために実行されます。
 
 | | |
 |-|-|
-| Arguments | `changedProperties`: `Map` with keys that are the names of changed properties and  values that are the corresponding previous values. |
-| Updates | No. Property changes inside this method do not trigger an element update. |
-| Call super? | Not necessary. |
-| Called on server? | No. |
+| 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
+| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| superを実行する必要があるか | 不要 |
+| サーバで実行されるか | いいえ |
 
-If `shouldUpdate()` returns `true`, which it does by default, then the update proceeds normally. If it returns `false`, the rest of the update cycle will not be called but the `updateComplete` Promise is still resolved.
+`shouldUpdate()`が`true`を返した場合(これがデフォルト)、更新が実行されます。
+If it returns `false`,
+the rest of the update cycle will not be called but the `updateComplete` Promise is still resolved.
 
 You can implement `shouldUpdate()` to specify which property changes should cause updates. Use the map of `changedProperties` to compare current and previous values.
-
-{% switchable-sample %}
 
 ```ts
 shouldUpdate(changedProperties: Map<string, any>) {
@@ -253,15 +255,6 @@ shouldUpdate(changedProperties: Map<string, any>) {
   return changedProperties.has('prop1'); 
 }
 ```
-
-```js
-shouldUpdate(changedProperties) {
-  // Only update element if prop1 changed.
-  return changedProperties.has('prop1');
-}
-```
-
-{% endswitchable-sample %}
 
 #### willUpdate() {#willupdate}
 
