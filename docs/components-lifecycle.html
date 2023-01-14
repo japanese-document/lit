@@ -202,8 +202,7 @@ disconnectedCallback() {
 </tr>
 </tbody></table>
 <p><code>shouldUpdate()</code>が<code>true</code>を返した場合(これがデフォルト)、更新が実行されます。
-If it returns <code>false</code>,
-the rest of the update cycle will not be called but the <code>updateComplete</code> Promise is still resolved.</p>
+<code>false</code>を返した場合は残りのアップデートサイクルは実行されませんが<code>updateComplete</code>のPromiseはresolveされます。</p>
 <p>You can implement <code>shouldUpdate()</code> to specify which property changes should cause updates. Use the map of <code>changedProperties</code> to compare current and previous values.</p>
 <pre><code class="language-ts">shouldUpdate(changedProperties: Map&lt;string, any&gt;) {
   // Only update element if prop1 changed.

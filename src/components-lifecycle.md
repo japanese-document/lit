@@ -244,8 +244,7 @@ disconnectedCallback() {
 | サーバで実行されるか | いいえ |
 
 `shouldUpdate()`が`true`を返した場合(これがデフォルト)、更新が実行されます。
-If it returns `false`,
-the rest of the update cycle will not be called but the `updateComplete` Promise is still resolved.
+`false`を返した場合は残りのアップデートサイクルは実行されませんが`updateComplete`のPromiseはresolveされます。
 
 You can implement `shouldUpdate()` to specify which property changes should cause updates. Use the map of `changedProperties` to compare current and previous values.
 
