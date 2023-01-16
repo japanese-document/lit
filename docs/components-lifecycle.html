@@ -203,14 +203,15 @@ disconnectedCallback() {
 </tbody></table>
 <p><code>shouldUpdate()</code>が<code>true</code>を返した場合(これがデフォルト)、更新が実行されます。
 <code>false</code>を返した場合は残りのアップデートサイクルは実行されませんが<code>updateComplete</code>のPromiseはresolveされます。</p>
-<p>You can implement <code>shouldUpdate()</code> to specify which property changes should cause updates. Use the map of <code>changedProperties</code> to compare current and previous values.</p>
+<p><code>shouldUpdate()</code>を実装すれば特定のプロパティが変更されたときのみ更新が発動するようにすることができます。
+現在の値と1つ前の値との比較は<code>changedProperties</code>を使います。</p>
 <pre><code class="language-ts">shouldUpdate(changedProperties: Map&lt;string, any&gt;) {
-  // Only update element if prop1 changed.
+  // prop1が変更された場合のみ更新されます。
   return changedProperties.has('prop1'); 
 }
 </code></pre>
-<h4 id="willUpdate()_{#willupdate}"><a href="#willUpdate()_{#willupdate}">willUpdate() {#willupdate}</a></h4>
-<p>Called before <code>update()</code> to compute values needed during the update.</p>
+<h4 id="willUpdate()"><a href="#willUpdate()">willUpdate()</a></h4>
+<p><code>update()</code>を実行する前に実行されます。更新で使用する値を生成する用途に使います。</p>
 <table>
 <thead>
 <tr>
@@ -219,26 +220,25 @@ disconnectedCallback() {
 </tr>
 </thead>
 <tbody><tr>
-<td>Arguments</td>
-<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and values that are the corresponding previous values.</td>
+<td>引数</td>
+<td><code>changedProperties</code>: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ<code>Map</code></td>
 </tr>
 <tr>
-<td>Updates?</td>
-<td>No. Property changes inside this method do not trigger an element update.</td>
+<td>更新は発動するか</td>
+<td>いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。</td>
 </tr>
 <tr>
-<td>Call super?</td>
-<td>Not necessary.</td>
+<td>superを実行する必要があるか</td>
+<td>不要</td>
 </tr>
 <tr>
-<td>Called on server?</td>
-<td>Yes.</td>
+<td>サーバで実行されるか</td>
+<td>はい</td>
 </tr>
 </tbody></table>
 <p>Implement <code>willUpdate()</code> to compute property values that depend on other properties and are used in the rest of the update process.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">willUpdate(changedProperties: PropertyValues&lt;this&gt;) {
-  // only need to check changed properties for an expensive computation.
+  // 必要な時だけ高コストな処理を実行するために変更されたプロパティを確認します。
   if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
     this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
   }
@@ -248,18 +248,6 @@ render() {
   return html`SHA: ${this.sha}`;
 }
 </code></pre>
-<pre><code class="language-js">willUpdate(changedProperties) {
-  // only need to check changed properties for an expensive computation.
-  if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
-    this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
-  }
-}
-
-render() {
-  return html`SHA: ${this.sha}`;
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h4 id="update()_{#update}"><a href="#update()_{#update}">update() {#update}</a></h4>
 <p>Called to update the component's DOM.</p>
 <table>

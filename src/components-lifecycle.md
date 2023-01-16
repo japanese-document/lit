@@ -246,33 +246,32 @@ disconnectedCallback() {
 `shouldUpdate()`が`true`を返した場合(これがデフォルト)、更新が実行されます。
 `false`を返した場合は残りのアップデートサイクルは実行されませんが`updateComplete`のPromiseはresolveされます。
 
-You can implement `shouldUpdate()` to specify which property changes should cause updates. Use the map of `changedProperties` to compare current and previous values.
+`shouldUpdate()`を実装すれば特定のプロパティが変更されたときのみ更新が発動するようにすることができます。
+現在の値と1つ前の値との比較は`changedProperties`を使います。
 
 ```ts
 shouldUpdate(changedProperties: Map<string, any>) {
-  // Only update element if prop1 changed.
+  // prop1が変更された場合のみ更新されます。
   return changedProperties.has('prop1'); 
 }
 ```
 
-#### willUpdate() {#willupdate}
+#### willUpdate()
 
-Called before `update()` to compute values needed during the update.
+`update()`を実行する前に実行されます。更新で使用する値を生成する用途に使います。
 
 | | |
 |-|-|
-| Arguments |  `changedProperties`: `Map` with keys that are the names of changed properties and values that are the corresponding previous values. |
-| Updates? | No. Property changes inside this method do not trigger an element update. |
-| Call super? | Not necessary. |
-| Called on server? | Yes. |
+| 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
+| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| superを実行する必要があるか | 不要 |
+| サーバで実行されるか | はい |
 
 Implement `willUpdate()` to compute property values that depend on other properties and are used in the rest of the update process.
 
-{% switchable-sample %}
-
 ```ts
 willUpdate(changedProperties: PropertyValues<this>) {
-  // only need to check changed properties for an expensive computation.
+  // 必要な時だけ高コストな処理を実行するために変更されたプロパティを確認します。
   if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
     this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
   }
@@ -282,21 +281,6 @@ render() {
   return html`SHA: ${this.sha}`;
 }
 ```
-
-```js
-willUpdate(changedProperties) {
-  // only need to check changed properties for an expensive computation.
-  if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
-    this.sha = computeSHA(`${this.firstName} ${this.lastName}`);
-  }
-}
-
-render() {
-  return html`SHA: ${this.sha}`;
-}
-```
-
-{% endswitchable-sample %}
 
 #### update() {#update}
 
