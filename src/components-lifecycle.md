@@ -267,7 +267,7 @@ shouldUpdate(changedProperties: Map<string, any>) {
 | superを実行する必要があるか | 不要 |
 | サーバで実行されるか | はい |
 
-Implement `willUpdate()` to compute property values that depend on other properties and are used in the rest of the update process.
+残りの更新プロセスで使われるプロパティの値を他のプロパティを使って生成する処理を`willUpdate()`に実装します。
 
 ```ts
 willUpdate(changedProperties: PropertyValues<this>) {
