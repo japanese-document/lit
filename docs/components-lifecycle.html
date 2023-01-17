@@ -236,7 +236,7 @@ disconnectedCallback() {
 <td>はい</td>
 </tr>
 </tbody></table>
-<p>Implement <code>willUpdate()</code> to compute property values that depend on other properties and are used in the rest of the update process.</p>
+<p>残りの更新プロセスで使われるプロパティの値を他のプロパティを使って生成する処理を<code>willUpdate()</code>に実装します。</p>
 <pre><code class="language-ts">willUpdate(changedProperties: PropertyValues&lt;this&gt;) {
   // 必要な時だけ高コストな処理を実行するために変更されたプロパティを確認します。
   if (changedProperties.has('firstName') || changedProperties.has('lastName')) {
