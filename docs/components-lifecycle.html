@@ -249,7 +249,7 @@ render() {
 }
 </code></pre>
 <h4 id="update()"><a href="#update()">update()</a></h4>
-<p>Called to update the component's DOM.</p>
+<p>コンポーネントのDOMを更新するために実行されます。</p>
 <table>
 <thead>
 <tr>
@@ -258,12 +258,12 @@ render() {
 </tr>
 </thead>
 <tbody><tr>
-<td>Arguments</td>
-<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+<td>引数</td>
+<td><code>changedProperties</code>: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ<code>Map</code></td>
 </tr>
 <tr>
-<td>Updates?</td>
-<td>No. Property changes inside this method do not trigger an element update.</td>
+<td>更新は発動するか</td>
+<td>いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。</td>
 </tr>
 <tr>
 <td>Call super?</td>
