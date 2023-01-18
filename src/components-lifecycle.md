@@ -284,12 +284,12 @@ render() {
 
 #### update()
 
-Called to update the component's DOM.
+コンポーネントのDOMを更新するために実行されます。
 
 | | |
 |-|-|
-| Arguments | `changedProperties`: `Map` with keys that are the names of changed properties and  values that are the corresponding previous values. |
-| Updates? | No. Property changes inside this method do not trigger an element update. |
+| 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
+| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
 | Call super? | Yes. Without a super call, the element’s attributes and template will not update. |
 | Called on server? | No. |
 
