@@ -264,7 +264,7 @@ shouldUpdate(changedProperties: Map<string, any>) {
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
 | 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
-| superを実行する必要があるか | 不要 |
+| superを実行する必要があるか | いいえ |
 | サーバで実行されるか | はい |
 
 残りの更新プロセスで使われるプロパティの値を他のプロパティを使って生成する処理を`willUpdate()`に実装します。
@@ -290,14 +290,14 @@ render() {
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
 | 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
-| Call super? | Yes. Without a super call, the element’s attributes and template will not update. |
-| Called on server? | No. |
+| superを実行する必要があるか | はい。要素の属性とテンプレートは更新されません。 |
+| サーバで実行されるか | いいえ |
 
-Reflects property values to attributes and calls `render()` to update the component’s internal DOM.
+プロパティの値を要素の属性に反映します。そして、`render()`でコンポーネント内のDOMを更新します。
 
-Generally, you should not need to implement this method.
+通常、このメソッドを実装することはありません。
 
-#### render() {#render}
+#### render()
 
 Called by `update()` and should be implemented to return a renderable result (such as a `TemplateResult`) used to render the component's DOM.
 

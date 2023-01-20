@@ -229,7 +229,7 @@ disconnectedCallback() {
 </tr>
 <tr>
 <td>superを実行する必要があるか</td>
-<td>不要</td>
+<td>いいえ</td>
 </tr>
 <tr>
 <td>サーバで実行されるか</td>
@@ -266,17 +266,17 @@ render() {
 <td>いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。</td>
 </tr>
 <tr>
-<td>Call super?</td>
-<td>Yes. Without a super call, the element’s attributes and template will not update.</td>
+<td>superを実行する必要があるか</td>
+<td>はい。要素の属性とテンプレートは更新されません。</td>
 </tr>
 <tr>
-<td>Called on server?</td>
-<td>No.</td>
+<td>サーバで実行されるか</td>
+<td>いいえ</td>
 </tr>
 </tbody></table>
-<p>Reflects property values to attributes and calls <code>render()</code> to update the component’s internal DOM.</p>
-<p>Generally, you should not need to implement this method.</p>
-<h4 id="render()_{#render}"><a href="#render()_{#render}">render() {#render}</a></h4>
+<p>プロパティの値を要素の属性に反映します。そして、<code>render()</code>でコンポーネント内のDOMを更新します。</p>
+<p>通常、このメソッドを実装することはありません。</p>
+<h4 id="render()"><a href="#render()">render()</a></h4>
 <p>Called by <code>update()</code> and should be implemented to return a renderable result (such as a <code>TemplateResult</code>) used to render the component's DOM.</p>
 <table>
 <thead>
