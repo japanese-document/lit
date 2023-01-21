@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"],
+    "sourceMap": false
+  },
+  "ts-node": {
+    "esm": true,
+    "swc": true,
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": [
+    "./scripts/**/*"
+  ]
+}
