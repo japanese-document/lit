@@ -68,7 +68,10 @@ a {
 /* index-menu */
 
 .index-menu {
+  position: fixed;
   padding: 1.25rem;
+  width: max-content;
+  margin-left: auto;
 }
 
 .index-menu p {
