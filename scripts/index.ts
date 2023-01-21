@@ -23,11 +23,11 @@ const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
 
 const pageLayout = fs.readFileSync(PAGE_LAYOUT, 'utf8')
-for (const markDownfileName of markDownFileNames) {
-  const content = await fs.promises.readFile(markDownfileName, 'utf8')
+for (const markDownFileName of markDownFileNames) {
+  const content = await fs.promises.readFile(markDownFileName, 'utf8')
   const [, md] = getMetaAndMd(content)
   const title = createTitle(md)
-  const { name, dir } = path.parse(markDownfileName)
+  const { name, dir } = path.parse(markDownFileName)
   const url = createURL(dir, name)
   const page = await createPage(pageLayout, md, title, url, indexMenu)
   const prefixDirCount = SOURCE_DIR.length + 1

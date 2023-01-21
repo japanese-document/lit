@@ -71,6 +71,9 @@ export function createDescription(html: string) {
 
 export function createURL(dir: string, name: string) {
   const prefixDirCount = SOURCE_DIR.length + 1
+  if (dir.length <= prefixDirCount) {
+    return `${BASE_URL}/${name}.html`
+  }
   return `${BASE_URL}/${dir.slice(prefixDirCount)}/${name}.html`
 }
 

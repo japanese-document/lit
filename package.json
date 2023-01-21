@@ -4,6 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "image": "cp -r src/images docs",
     "css:links": "sass --no-source-map node_modules/@primer/css/links/index.scss docs/links.css",
     "css:md": "sass --no-source-map node_modules/@primer/css/markdown/index.scss docs/markdown.css",
     "css:cat": "cat src/app.css docs/markdown.css docs/links.css > docs/app.css",
@@ -11,7 +12,7 @@
     "css": "npm run css:links && npm run css:md && npm run css:cat",
     "docs": "rm -rf docs && mkdir docs",
     "prebuild": "npm run docs",
-    "build": "ts-node scripts/index.ts && npm run css",
+    "build": "ts-node scripts/index.ts && npm run css && npm run image",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
     "test": "jest"
