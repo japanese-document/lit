@@ -296,7 +296,8 @@ render() {
 <p>プロパティの値を要素の属性に反映します。そして、<code>render()</code>でコンポーネント内のDOMを更新します。</p>
 <p>通常、このメソッドを実装することはありません。</p>
 <h4 id="render()"><a href="#render()">render()</a></h4>
-<p>Called by <code>update()</code> and should be implemented to return a renderable result (such as a <code>TemplateResult</code>) used to render the component's DOM.</p>
+<p><code>render()</code>は<code>update()</code>内で実行されます。
+<code>render()</code>はコンポーネントのDOMとしてレンダリングできる値(例: <code>TemplateResult</code>)を返すように実装する必要があります。</p>
 <table>
 <thead>
 <tr>
@@ -305,23 +306,24 @@ render() {
 </tr>
 </thead>
 <tbody><tr>
-<td>Arguments</td>
-<td>None.</td>
+<td>引数</td>
+<td>なし</td>
 </tr>
 <tr>
-<td>Updates?</td>
-<td>No. Property changes inside this method do not trigger an element update.</td>
+<td>更新は発動するか</td>
+<td>いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。</td>
 </tr>
 <tr>
-<td>Call super?</td>
-<td>Not necessary.</td>
+<td>superを実行する必要があるか</td>
+<td>いいえ</td>
 </tr>
 <tr>
-<td>Called on server?</td>
-<td>Yes.</td>
+<td>サーバで実行されるか</td>
+<td>はい</td>
 </tr>
 </tbody></table>
-<p>The <code>render()</code> method has no arguments, but typically it references component properties. See <a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">Rendering</a> for more information.</p>
+<p>The <code>render()</code> method has no arguments, but typically it references component properties.
+See <a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">Rendering</a> for more information.</p>
 <pre><code class="language-js">render() {
   const header = `&lt;header&gt;${this.header}&lt;/header&gt;`;
   const content = `&lt;section&gt;${this.content}&lt;/section&gt;`;
