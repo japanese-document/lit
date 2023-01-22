@@ -299,16 +299,18 @@ render() {
 
 #### render()
 
-Called by `update()` and should be implemented to return a renderable result (such as a `TemplateResult`) used to render the component's DOM.
+`render()`は`update()`内で実行されます。
+`render()`はコンポーネントのDOMとしてレンダリングできる値(例: `TemplateResult`)を返すように実装する必要があります。
 
 | | |
 |-|-|
-| Arguments | None. |
-| Updates? | No. Property changes inside this method do not trigger an element update. |
-| Call super? | Not necessary. |
-| Called on server? | Yes. |
+| 引数 | なし |
+| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| superを実行する必要があるか | いいえ |
+| サーバで実行されるか | はい |
 
-The `render()` method has no arguments, but typically it references component properties. See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
+The `render()` method has no arguments, but typically it references component properties.
+See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
 
 ```js
 render() {
