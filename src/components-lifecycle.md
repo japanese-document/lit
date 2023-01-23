@@ -240,7 +240,7 @@ disconnectedCallback() {
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
 | 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
-| superを実行する必要があるか | 不要 |
+| superを実行する必要があるか | いいえ |
 | サーバで実行されるか | いいえ |
 
 `shouldUpdate()`が`true`を返した場合(これがデフォルト)、更新が実行されます。
@@ -309,8 +309,9 @@ render() {
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | はい |
 
-The `render()` method has no arguments, but typically it references component properties.
-See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
+`render()`は引数を取りません。
+通常はコンポーネントのプロパティを使います。
+詳しくは[レンダリング](https://japanese-document.github.io/lit/components-rendering.html)を見てください。
 
 ```js
 render() {
