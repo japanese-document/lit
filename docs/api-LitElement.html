@@ -65,7 +65,7 @@
 <h4 id="removeController(controller__ReactiveController)__void"><a href="#removeController(controller__ReactiveController)__void">removeController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
 <p>要素から<code>ReactiveController</code>を削除します。</p>
 <h3 id="Dev_mode"><a href="#Dev_mode">Dev mode</a></h3>
-<h4 id="static_disableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_disableWarning___(warningKind__WarningKind)_=>_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
+<h4 id="static_disableWarning___(warningKind__WarningKind)___-_void"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを無効にします。
 このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで無効にします。
@@ -74,10 +74,10 @@ ReactiveElement.disableWarning?.('migration');
 // MyElementとそのサブクラスのみで無効にします。
 MyElement.disableWarning?.('migration');
 </code></pre>
-<h4 id="static_enabledWarnings___Array<WarningKind>"><a href="#static_enabledWarnings___Array<WarningKind>">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>&gt;</h4>
+<h4 id="static_enabledWarnings___Array-_WarningKind_-"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>&gt;</h4>
 <p>警告カテゴリーが格納されています。
 developmentビルドでのみ使うことができます。</p>
-<h4 id="static_enableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_enableWarning___(warningKind__WarningKind)_=>_void">static enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
+<h4 id="static_enableWarning___(warningKind__WarningKind)___-_void"><a href="#static_enableWarning___(warningKind__WarningKind)___-_void">static enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを有効にします。
 このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで有効にします。
@@ -137,7 +137,7 @@ MyElement.enableWarning?.('migration');
 このプロパティ名はClosure JS Compilerの最適化を壊さないように文字列にしています。
 詳しくは<code>@lit/reactive-element</code>を見てください。</p>
 <h3 id="Properties"><a href="#Properties">Properties</a></h3>
-<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
+<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
 <p>要素の<code>prototype</code>にプロパティアクセサ(<code>name</code>)が存在していない場合、プロパティ(<code>name</code>)を追加して<code>options</code>を格納します。
 プロパティのセッターは更新時に<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>を実行して更新を判断します。
 <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>がない場合、参照の比較(<code>!==</code>)で判断します。
@@ -154,7 +154,7 @@ MyElement.enableWarning?.('migration');
 <h4 id="static_elementProperties__PropertyDeclarationMap"><a href="#static_elementProperties__PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></h4>
 <p>スーパークラスを含むすべての要素プロパティのメモ化されたリストです。
 それはクラスが完成させる(finalize)時にサブクラスで遅延的に生成されます。</p>
-<h4 id="static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration<unknown,_unknown>)__undefined_|_PropertyDescriptor"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration<unknown,_unknown>)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): undefined | PropertyDescriptor</h4>
+<h4 id="static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): undefined | PropertyDescriptor</h4>
 <p><code>name</code>プロパティに対応するディスクリプタ(descriptor)を返します。
 ディスクリプタを返さない場合、そのプロパティはアクセサになりません。</p>
 <pre><code>class MyElement extends LitElement {
@@ -174,7 +174,7 @@ MyElement.enableWarning?.('migration');
   }
 }
 </code></pre>
-<h4 id="static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>"><a href="#static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>">static getPropertyOptions(name: PropertyKey): </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;</h4>
+<h4 id="static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration-_unknown,_unknown_-"><a href="#static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration-_unknown,_unknown_-">static getPropertyOptions(name: PropertyKey): </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;</h4>
 <p>渡された<code>name</code>プロパティに関連した<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>を返します。
 このオプションは<code>properties</code>や<code>@property</code>で<code>PropertyDeclaration</code>として定義されています。
 それから、<code>createProperty(...)</code>で登録されます。
@@ -207,10 +207,10 @@ MyElement.enableWarning?.('migration');
 このオプションは<code>createRenderRoot</code>で使われます。
 <code>createRenderRoot</code>を変更する場合、できるだけこのオプションを適用するべきです。</p>
 <h3 id="Styles"><a href="#Styles">Styles</a></h3>
-<h4 id="static_elementStyles__Array<CSSResultOrNative>"><a href="#static_elementStyles__Array<CSSResultOrNative>">static elementStyles: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
+<h4 id="static_elementStyles__Array-_CSSResultOrNative_-"><a href="#static_elementStyles__Array-_CSSResultOrNative_-">static elementStyles: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
 <p>すべての要素のスタイルのメモ化されたリストです。
 クラスを<code>finalize</code>するときにサブクラスで遅延的に生成されます。</p>
-<h4 id="static_finalizeStyles(styles___CSSResultGroup)__Array<CSSResultOrNative>"><a href="#static_finalizeStyles(styles___CSSResultGroup)__Array<CSSResultOrNative>">static finalizeStyles(styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a>): Array&lt;<a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
+<h4 id="static_finalizeStyles(styles___CSSResultGroup)__Array-_CSSResultOrNative_-"><a href="#static_finalizeStyles(styles___CSSResultGroup)__Array-_CSSResultOrNative_-">static finalizeStyles(styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a>): Array&lt;<a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
 <p><code>static styles</code>にセットされた値を引数(<code>styles</code>)にして、要素に適用するスタイルの配列を返します。
 このメソッドをオーバーライドしてスタイル管理システムに統合します。
 <a class="Link" href="https://japanese-document.github.io/lit/components-styles.html#スーパークラスのスタイルを継承する">サブクラスを積み重ねていくこと</a>で<code>static styles</code>に重複が生じする可能性があります。
@@ -261,7 +261,7 @@ lit-element 2.xでは<code>performUpdate()</code>をオーバーライドして�
 3.xでは代わりに<code>scheduleUpdate()</code>をオーバーライドすることで更新スケジュールを変更します。
 lit-element 2.xとの後方互換性のために、<code>performUpdate()</code>による更新のスケジューリングは引き続き行われます。
 しかし、<code>performUpdate()</code>を実行して同期的更新を実現することは難しいです。</p>
-<h4 id="requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration<unknown,_unknown>)__void"><a href="#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration<unknown,_unknown>)__void">requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration&lt;unknown, unknown&gt;): void</a></h4>
+<h4 id="requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration-_unknown,_unknown_-)__void"><a href="#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration-_unknown,_unknown_-)__void">requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration&lt;unknown, unknown&gt;): void</a></h4>
 <p>非同期的な更新を要求します。
 これはリアクティブプロパティのセットで更新を発動する以外の方法で更新を発動したいときに実行します。
 その場合、引数を渡してはいけません。
@@ -317,7 +317,7 @@ render() {
 <pre><code>import { RenderOptions } from 'lit';
 </code></pre>
 <h3 id="メソッドとプロパティ"><a href="#メソッドとプロパティ">メソッドとプロパティ</a></h3>
-<h4 id="creationScope___{importNode__(node__Node,_deep___boolean)_=>_Node}"><a href="#creationScope___{importNode__(node__Node,_deep___boolean)_=>_Node}">creationScope?: {importNode: (node: Node, deep?: boolean) =&gt; Node}</a></h4>
+<h4 id="creationScope___{importNode__(node__Node,_deep___boolean)___-_Node}"><a href="#creationScope___{importNode__(node__Node,_deep___boolean)___-_Node}">creationScope?: {importNode: (node: Node, deep?: boolean) =&gt; Node}</a></h4>
 <p>テンプレートの複製に使われるNodeです(このNodeの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode">importNode</a>が実行されます)。
 これは継承されたコンテキストとともにレンダリングされたDOMの<code>ownerDocument</code>をコントロールします。
 それはデフォルトではグローバルな<code>document</code>です。</p>

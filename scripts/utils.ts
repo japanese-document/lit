@@ -18,7 +18,10 @@ const renderer = {
   },
   heading(text: string, level: number) {
     const document = new window.DOMParser().parseFromString(text, 'text/html')
-    const href = document.body.textContent!.replaceAll(/(\s|\?|:)/g, '_')
+    const href = document.body.textContent!
+      .replaceAll(/(\s|\?|:|&|=|%|"|'|\/|@)/g, '_')
+      .replaceAll(/</g, '-_')
+      .replaceAll(/>/g, '_-')
     return `<h${level} id="${href}"><a href="#${href}">${text}</a></h${level}>\n`
   }
 }
