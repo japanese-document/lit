@@ -42,8 +42,8 @@
       </details>
     </div></div>
     <main class="main markdown-body">
-      <h1 id="テンプレート"><a href="#テンプレート">テンプレート</a></h1>
-<h2 id="html(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">html(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
+      <h1 id="%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88">テンプレート</a></h1>
+<h2 id="html(strings%3A%20TemplateStringsArray%2C%20values%3A%20Array%3Cunknown%3E)%3A%20TemplateResult"><a href="#html(strings%3A%20TemplateStringsArray%2C%20values%3A%20Array%3Cunknown%3E)%3A%20TemplateResult">html(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
 <h3 id="import"><a href="#import">import</a></h3>
 <pre><code>import { html } from 'lit';
 </code></pre>
@@ -52,7 +52,7 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 レンダリングする時、現行のレンダリングで使用したテンプレートが前回のレンダリング時に使用したものと同じ場合は要素を全部置き換えるのではなく差分のみ置き換えます。</p>
 <pre><code>const header = (title: string) =&gt; html`&lt;h1&gt;${title}&lt;/h1&gt;`;
 </code></pre>
-<h2 id="nothing__symbol"><a href="#nothing__symbol">nothing: symbol</a></h2>
+<h2 id="nothing%3A%20symbol"><a href="#nothing%3A%20symbol">nothing: symbol</a></h2>
 <h3 id="inport"><a href="#inport">inport</a></h3>
 <pre><code>import { nothing } from 'lit';
 </code></pre>
@@ -67,7 +67,7 @@ attribute expressionsでは<code>nothing</code>は属性を削除しますが、
    : nothing
 }`;
 </code></pre>
-<h2 id="render(value__unknown,_container__HTMLElement_|_DocumentFragment,_options___RenderOptions)__RootPart"><a href="#render(value__unknown,_container__HTMLElement_|_DocumentFragment,_options___RenderOptions)__RootPart">render(value: unknown, container: </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragment</a>, options?: <a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions">RenderOptions</a>): <a class="Link" href="https://lit.dev/docs/api/misc/#RootPart">RootPart</a></h2>
+<h2 id="render(value%3A%20unknown%2C%20container%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FHTMLElement%22%20class%3D%22Link%22%3EHTMLElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FDocumentFragment%22%20class%3D%22Link%22%3EDocumentFragment%3C%2Fa%3E%2C%20options%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Fjapanese-document.github.io%2Flit%2Fapi-LitElement.html%23type_RenderOptions%22%20class%3D%22Link%22%3ERenderOptions%3C%2Fa%3E)%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23RootPart%22%20class%3D%22Link%22%3ERootPart%3C%2Fa%3E"><a href="#render(value%3A%20unknown%2C%20container%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FHTMLElement%22%20class%3D%22Link%22%3EHTMLElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FDocumentFragment%22%20class%3D%22Link%22%3EDocumentFragment%3C%2Fa%3E%2C%20options%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Fjapanese-document.github.io%2Flit%2Fapi-LitElement.html%23type_RenderOptions%22%20class%3D%22Link%22%3ERenderOptions%3C%2Fa%3E)%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23RootPart%22%20class%3D%22Link%22%3ERootPart%3C%2Fa%3E">render(value: unknown, container: </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragment</a>, options?: <a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#type_RenderOptions">RenderOptions</a>): <a class="Link" href="https://lit.dev/docs/api/misc/#RootPart">RootPart</a></h2>
 <h3 id="Import"><a href="#Import">Import</a></h3>
 <pre><code>import { render } from 'lit';
 </code></pre>
@@ -78,7 +78,7 @@ attribute expressionsでは<code>nothing</code>は属性を削除しますが、
 const name = "Zoe";
 render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
 </code></pre>
-<h2 id="svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a href="#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult">svg(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
+<h2 id="svg(strings%3A%20TemplateStringsArray%2C%20values%3A%20Array%3Cunknown%3E)%3A%20TemplateResult"><a href="#svg(strings%3A%20TemplateStringsArray%2C%20values%3A%20Array%3Cunknown%3E)%3A%20TemplateResult">svg(strings: TemplateStringsArray, values: Array): TemplateResult</a></h2>
 <h3 id="import"><a href="#import">import</a></h3>
 <pre><code>import { svg } from 'lit';
 </code></pre>
@@ -90,7 +90,7 @@ The <code>&lt;svg&gt;</code> element is an HTML element and should be used withi
 as the SVG fragment will be contained within the element's shadow root and thus cannot be used within an <code>&lt;svg&gt;</code> HTML element.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h3 id="Japanese%20part"><a href="#Japanese%20part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
 <h3 id="Other"><a href="#Other">Other</a></h3>
