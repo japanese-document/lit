@@ -12,17 +12,21 @@ import {
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window as unknown as Window)
 
+export function createHash(text: string) {
+  const document = new window.DOMParser().parseFromString(text, 'text/html')
+  return document.body.textContent!
+    .replaceAll(/(\s|\?|:|&|=|%|"|'|\/|@)/g, '_')
+    .replaceAll(/</g, '-_')
+    .replaceAll(/>/g, '_-')
+}
+
 const renderer = {
   link(href: string, _title: string, text: string) {
     return `<a href="${href}" class="Link">${text}</a>`
   },
   heading(text: string, level: number) {
-    const document = new window.DOMParser().parseFromString(text, 'text/html')
-    const href = document.body.textContent!
-      .replaceAll(/(\s|\?|:|&|=|%|"|'|\/|@)/g, '_')
-      .replaceAll(/</g, '-_')
-      .replaceAll(/>/g, '_-')
-    return `<h${level} id="${href}"><a href="#${href}">${text}</a></h${level}>\n`
+    const hash = createHash(text) 
+    return `<h${level} id="${hash}"><a href="#${hash}">${text}</a></h${level}>\n`
   }
 }
 
