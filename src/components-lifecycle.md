@@ -310,7 +310,7 @@ render() {
 | サーバで実行されるか | はい |
 
 `render()`は引数を取りません。
-通常は下記のようにコンポーネントのプロパティを使います。
+通常はコンポーネントのプロパティを使います。
 詳しくは[レンダリング](https://japanese-document.github.io/lit/components-rendering.html)を見てください。
 
 ```js

@@ -93,7 +93,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 </code></pre>
 <p>以下のセクションで各エクスプレッションの詳しい説明をします。
 テンプレートの構造のより詳しい説明は<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>と<a class="Link" href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a>を見てください。</p>
-<h2 id="Child%20expressions"><a href="#Child%20expressions">Child expressions</a></h2>
+<h2 id="Child_expressions"><a href="#Child_expressions">Child expressions</a></h2>
 <p>要素のタグの始まりと終わりの間にあるエクスプレッションは要素に子Nodeを加えます。例えば、</p>
 <pre><code class="language-js">html`&lt;p&gt;Hello, ${name}&lt;/p&gt;`
 </code></pre>
@@ -109,7 +109,7 @@ Litコンポーネントは<code>render</code>メソッドを実行する毎に�
 <li>センチネル値(<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol"><code>nothing</code></a>と<a class="Link" href="https://lit.dev/docs/emplates/custom-directives/#signaling-no-change"><code>noChange</code></a>)</li>
 <li>使用可能な型の配列もしくはiterables</li>
 </ul>
-<h3 id="%E3%83%97%E3%83%AA%E3%83%9F%E3%83%86%E3%82%A3%E3%83%96%E5%80%A4"><a href="#%E3%83%97%E3%83%AA%E3%83%9F%E3%83%86%E3%82%A3%E3%83%96%E5%80%A4">プリミティブ値</a></h3>
+<h3 id="プリミティブ値"><a href="#プリミティブ値">プリミティブ値</a></h3>
 <p>Litはほとんどすべての<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">プリミティブ値</a>をレンダリングすることができます。 
 そして、テキストコンテントに挿入される場合はそれらを文字列に変換します。</p>
 <p><code>5</code>のような数値は<code>'5'</code>の文字列にレンダリングされます。
@@ -120,7 +120,7 @@ Bigintも同様に扱われます。</p>
 そして、それらは何もレンダリングしません。
 詳しくは<a class="Link" href="#子コンテンツの削除">子コンテンツの削除</a>を見てください。</p>
 <p><code>Symbol</code>は文字列に変換されません。child expressionに置かれた場合、例外が発生します。</p>
-<h3 id="%E3%82%BB%E3%83%B3%E3%83%81%E3%83%8D%E3%83%AB%E5%80%A4"><a href="#%E3%82%BB%E3%83%B3%E3%83%81%E3%83%8D%E3%83%AB%E5%80%A4">センチネル値</a></h3>
+<h3 id="センチネル値"><a href="#センチネル値">センチネル値</a></h3>
 <p>Litはchild expressionに使うことができるいくつかの特別なセンチネル値を提供します。</p>
 <p><code>noChange</code>センチネル値はエクスプレッションの既存の値を変更しません。
 これは通常、カスタムディレクティブで使われます。
@@ -145,7 +145,7 @@ const page = html`
 </code></pre>
 <p>条件分岐のあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/conditionals/">Conditionals</a>にあります。</p>
 <p>繰り返しがあるテンプレートに関する詳しい説明は<a class="Link" href="https://lit.dev/docs/templates/lists/">Lists</a>にあります。</p>
-<h3 id="DOM%20nodes"><a href="#DOM%20nodes">DOM nodes</a></h3>
+<h3 id="DOM_nodes"><a href="#DOM_nodes">DOM nodes</a></h3>
 <p>DOM Nodeはchild expressionに渡すことができます。
 通常、DOM Nodeは<code>html</code>を使ったテンプレートを記述することでレンダリングされます。
 しかし、必要な時は下記のようにDOM Nodeを直接レンダリングすることができます。
@@ -156,17 +156,17 @@ const page = html`
   &lt;p&gt;This is some text&lt;/p&gt;
 `;
 </code></pre>
-<h3 id="%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E5%9E%8B%E3%81%AE%E9%85%8D%E5%88%97%E3%82%82%E3%81%97%E3%81%8F%E3%81%AFiterables"><a href="#%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E5%9E%8B%E3%81%AE%E9%85%8D%E5%88%97%E3%82%82%E3%81%97%E3%81%8F%E3%81%AFiterables">使用可能な型の配列もしくはiterables</a></h3>
+<h3 id="使用可能な型の配列もしくはiterables"><a href="#使用可能な型の配列もしくはiterables">使用可能な型の配列もしくはiterables</a></h3>
 <p>エクスプレッションは使用可能な型を格納する配列、iterable、それらの組み合わせを返すことができます。
 つまり、<code>Array.map()</code>を使って繰り返し表現を生成することができます。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/">リスト</a>を見てください。</p>
-<h3 id="%E5%AD%90%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E5%89%8A%E9%99%A4"><a href="#%E5%AD%90%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E5%89%8A%E9%99%A4">子コンテンツの削除</a></h3>
+<h3 id="子コンテンツの削除"><a href="#子コンテンツの削除">子コンテンツの削除</a></h3>
 <p><code>null</code>、<code>undefined</code>、空文字列(<code>''</code>)、Litの<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a>センチネル値は、1つ前のレンダリングされたコンテンツを削除します。そして、Nodeをレンダリングしません。</p>
 <p>子コンテンツの配置もしくは削除はよく条件分岐によって行われます。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing">Conditionally rendering nothing</a>を見てください。</p>
 <p>フォールバックコンテンツを持つ<code>slot</code>に対応するコンテンツがない場合、フォールバックコンテンツがレンダリングされます。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/shadow-dom/#fallback">fallback content</a>を見てください。</p>
-<h2 id="Attribute%20expressions"><a href="#Attribute%20expressions">Attribute expressions</a></h2>
+<h2 id="Attribute_expressions"><a href="#Attribute_expressions">Attribute expressions</a></h2>
 <p>エクスプレッションを使って要素の属性やプロパティをセットすることができます。</p>
 <p>デフォルトでは属性の値にエクスプレッションがあるとそれが属性の値になります。</p>
 <pre><code class="language-js">html`&lt;div class=${this.textClass}&gt;Stylish text.&lt;/div&gt;`;
@@ -179,13 +179,13 @@ const page = html`
 <p>一部のプリミティブ値は属性にセットされると特殊な評価をされます。
 Booleanは文字列に変換されます。例えば、<code>false</code>は<code>'false'</code>に変換されます。
 <code>undefined</code>と<code>null</code>は空文字(<code>""</code>)としてレンダリングされます。</p>
-<h3 id="Boolean%20attributes"><a href="#Boolean%20attributes">Boolean attributes</a></h3>
+<h3 id="Boolean_attributes"><a href="#Boolean_attributes">Boolean attributes</a></h3>
 <p>下記のように属性名の先頭に<code>?</code>を付けるとboolean attributesになります。
 エクスプレッションにtrueになる値がセットされると属性は配置されます。
 falseになる値がセットされると属性は削除されます。</p>
 <pre><code class="language-js">html`&lt;div ?hidden=${!this.showAdditional}&gt;This text may be hidden.&lt;/div&gt;`;
 </code></pre>
-<h3 id="%E5%B1%9E%E6%80%A7%E3%81%AE%E5%89%8A%E9%99%A4"><a href="#%E5%B1%9E%E6%80%A7%E3%81%AE%E5%89%8A%E9%99%A4">属性の削除</a></h3>
+<h3 id="属性の削除"><a href="#属性の削除">属性の削除</a></h3>
 <p><code>disabled</code>や<code>hidden</code>は<a class="Link" href="#Boolean_attributes">boolean attributes</a>で対応できます。しかし、属性の値を構成するデータの一部が欠けている場合に属性を削除したい場合があります。</p>
 <p>下記の例について考えてみましょう。</p>
 <pre><code class="language-js">html`&lt;img src="/images/${this.imagePath}/${this.imageFile}"&gt;`;
@@ -203,7 +203,7 @@ falseになる値がセットされると属性は削除されます。</p>
 <p>エクスプレッションの値が<code>false</code>や空文字(<code>''</code>)の場合に属性を削除したい場合は以下のようにします。</p>
 <pre><code class="language-js">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
-<h2 id="Property%20expressions"><a href="#Property%20expressions">Property expressions</a></h2>
+<h2 id="Property_expressions"><a href="#Property_expressions">Property expressions</a></h2>
 <p>プロパティ名の先頭に<code>.</code>を付けるとプロパティにJavaScriptの値ままセットすることができます。</p>
 <pre><code class="language-js">html`&lt;input .value=${this.itemCount}&gt;`;
 </code></pre>
@@ -214,7 +214,7 @@ falseになる値がセットされると属性は削除されます。</p>
 <p>この例ではプロパティ名に<code>listItems</code>のように大文字と小文字が混在している点に注意してください。
 HTMLは大文字と小文字を区別しませんが、Litはテンプレートを処理する際にプロパティ名の大文字と小文字を区別します。</p>
 <p>コンポーネントのプロパティに関する詳しい情報は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
-<h2 id="Event%20listener%20expressions"><a href="#Event%20listener%20expressions">Event listener expressions</a></h2>
+<h2 id="Event_listener_expressions"><a href="#Event_listener_expressions">Event listener expressions</a></h2>
 <p>イベント名の先頭に<code>@</code>をつけることで、
 テンプレートで宣言的にイベントリスナを設定することができます。</p>
 <pre><code class="language-js">html`&lt;button @click=${this.clickHandler}&gt;Click Me!&lt;/button&gt;`;
@@ -229,7 +229,7 @@ HTMLは大文字と小文字を区別しませんが、Litはテンプレート�
 }
 </code></pre>
 <p>コンポーネントイベントに関する詳しい情報は<a class="Link" href="https://lit.dev/docs/components/events/">イベント</a>を見てください。</p>
-<h2 id="Element%20expressions"><a href="#Element%20expressions">Element expressions</a></h2>
+<h2 id="Element_expressions"><a href="#Element_expressions">Element expressions</a></h2>
 <p>Element expressionsで要素インスタンスにアクセスすることができます。</p>
 <pre><code class="language-js">html`&lt;div ${myDirective()}&gt;&lt;/div&gt;`
 </code></pre>
@@ -240,7 +240,7 @@ HTMLは大文字と小文字を区別しませんが、Litはテンプレート�
 <pre><code class="language-js">html`&lt;button ${ref(this.myRef)}`;
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/directives/#ref">ref</a>を見てください。</p>
-<h2 id="Well-formed%20HTML"><a href="#Well-formed%20HTML">Well-formed HTML</a></h2>
+<h2 id="Well-formed_HTML"><a href="#Well-formed_HTML">Well-formed HTML</a></h2>
 <p>Litテンプレートはwell-formed HTMLである必要があります。
 テンプレートは値が挿入される前にブラウザのビルドインHTMLパーサーでパースされます。
 有効なテンプレートであるためには下記のルールに従う必要があります。</p>
@@ -257,7 +257,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 </code></pre>
 </li>
 </ul>
-<h2 id="%E6%9C%89%E5%8A%B9%E3%81%AA%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BD%8D%E7%BD%AE"><a href="#%E6%9C%89%E5%8A%B9%E3%81%AA%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BD%8D%E7%BD%AE">有効なエクスプレッションの位置</a></h2>
+<h2 id="有効なエクスプレッションの位置"><a href="#有効なエクスプレッションの位置">有効なエクスプレッションの位置</a></h2>
 <p>エクスプレッションは属性の値もしくは子コンテンツの位置に置く必要があります。</p>
 <pre><code class="language-html">&lt;!-- 属性の値 --&gt;
 &lt;div label=${label}&gt;&lt;/div&gt;
@@ -271,7 +271,7 @@ const template2 = html`${template1} more text. &lt;/div&gt;`;
 <p>Element expressionsは開始タグのタグ名の後に置く必要があります。</p>
 <pre><code class="language-html">&lt;div ${ref(elementReference)}&gt;&lt;/div&gt;
 </code></pre>
-<h3 id="%E7%84%A1%E5%8A%B9%E3%81%AA%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BD%8D%E7%BD%AE"><a href="#%E7%84%A1%E5%8A%B9%E3%81%AA%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BD%8D%E7%BD%AE">無効なエクスプレッションの位置</a></h3>
+<h3 id="無効なエクスプレッションの位置"><a href="#無効なエクスプレッションの位置">無効なエクスプレッションの位置</a></h3>
 <p>通常、エクスプレッションを下記の位置に配置してはいけません。</p>
 <ul>
 <li><p>Litはタグ名や属性名の位置に動的に変化する値を配置することはできません。developmentモードでエラーが発生します。</p>
@@ -329,7 +329,7 @@ Litはコメント内のエクスプレッションをLit token string(例: <cod
 </ul>
 <p>上記の無効なエクスプレッションは<a class="Link" href="#Static_expressions">Static expressions</a>を使用した場合、有効になります。
 ただし、それは非効率なのでパフォーマンスが重要な場面で使用しないでください。</p>
-<h2 id="Static%20expressions"><a href="#Static%20expressions">Static expressions</a></h2>
+<h2 id="Static_expressions"><a href="#Static_expressions">Static expressions</a></h2>
 <p>LitがテンプレートをHTMLとして処理する前に、static expressionsはテンプレートに埋め込まれる特別な値を返します。
 それはテンプレートの静的なHTMLの一部になるので、
 タグ名や属性名のような普通は配置することができない位置にエクスプレッションを配置することができます。</p>
@@ -383,11 +383,11 @@ class MyAnchor extends MyButton {
 <p>これらの理由により、
 なるべく<code>literal</code>を使わないことを推奨します。
 そして、リアクティブプロパティは値が変更されることを前提としているのでリアクティブプロパティに<code>literal</code>が付いた値を保存しないことを推奨します。</p>
-<h3 id="%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E6%A7%8B%E9%80%A0"><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E6%A7%8B%E9%80%A0">テンプレートの構造</a></h3>
+<h3 id="テンプレートの構造"><a href="#テンプレートの構造">テンプレートの構造</a></h3>
 <p><code>literal</code>の値が埋め込まれた後のテンプレートは普通のLitテンプレートと同じようにWell-formed_HTMLである必要があります。
 そうしないと、テンプレート内の動的なエクスプレッションが適切に機能しない可能性があります。
 詳しくは<a class="Link" href="#Well-formed_HTML">Well-formed HTML</a>を見てください。</p>
-<h3 id="Non-literal%20statics"><a href="#Non-literal%20statics">Non-literal statics</a></h3>
+<h3 id="Non-literal_statics"><a href="#Non-literal_statics">Non-literal statics</a></h3>
 <p>稀に、動的な値を静的なHTMLとしてテンプレートに埋め込みたい場合があります。その場合は<code>literal</code>を使うことができません。
 代わりに<code>unsafeStatic()</code>ディレクティブを使います。</p>
 <pre><code class="language-ts">import {html, unsafeStatic} from 'lit/static-html.js';
@@ -418,7 +418,7 @@ class MyButton extends LitElement {
 値の変更はテンプレートのパースとメモリーへのキャッシュを引き起こすので、頻繁に変更するべきではありません。</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese%20part"><a href="#Japanese%20part">Japanese part</a></h3>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
 <h3 id="Other"><a href="#Other">Other</a></h3>

@@ -17,7 +17,8 @@ const renderer = {
     return `<a href="${href}" class="Link">${text}</a>`
   },
   heading(text: string, level: number) {
-    const href = encodeURIComponent(text) 
+    const document = new window.DOMParser().parseFromString(text, 'text/html')
+    const href = document.body.textContent!.replaceAll(/(\s|\?|:)/g, '_')
     return `<h${level} id="${href}"><a href="#${href}">${text}</a></h${level}>\n`
   }
 }

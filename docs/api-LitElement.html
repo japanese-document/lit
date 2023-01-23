@@ -43,7 +43,7 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="LitElement"><a href="#LitElement">LitElement</a></h1>
-<h2 id="class%20LitElement"><a href="#class%20LitElement">class LitElement</a></h2>
+<h2 id="class_LitElement"><a href="#class_LitElement">class LitElement</a></h2>
 <p>コンポーネントのプロパティ(properties)と属性(attributes)を取り扱い、lit-htmlテンプレートをレンダリングするコンポーネントのベースクラスです。
 コンポーネントは<code>LitElement</code>のサブクラスである必要があります。また、コンポーネントのテンプレートを返す<code>render</code>メソッドを実装する必要があります。
 プロパティは<code>properties</code>プロパティもしくは<code>property</code>デコレータを使って定義します。</p>
@@ -51,21 +51,21 @@
 <pre><code>import { LitElement } from 'lit'
 </code></pre>
 <h3 id="Attributes"><a href="#Attributes">Attributes</a></h3>
-<h4 id="attributeChangedCallback(name%3A%20string%2C%20_old%3A%20string%20%7C%20null%2C%20value%3A%20string%20%7C%20null)%3A%20void"><a href="#attributeChangedCallback(name%3A%20string%2C%20_old%3A%20string%20%7C%20null%2C%20value%3A%20string%20%7C%20null)%3A%20void">attributeChangedCallback(name: string, _old: string | null, value: string | null): void</a></h4>
+<h4 id="attributeChangedCallback(name__string,__old__string_|_null,_value__string_|_null)__void"><a href="#attributeChangedCallback(name__string,__old__string_|_null,_value__string_|_null)__void">attributeChangedCallback(name: string, _old: string | null, value: string | null): void</a></h4>
 <p>属性が変更された時、プロパティの値を同期します。
 具体的に言うと、属性がセットされるとそれに対応するプロパティの値はセットされます。
 このメソッドをオーバーライドする場合、<code>super.attributeChangedCallback(name, _old, value)</code>を実行する必要があります。
 <code>attributeChangedCallback</code>に関する詳しい内容はMDNの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a>にあります。</p>
-<h4 id="static%20observedAttributes%3A%20Array%3Cstring%3E"><a href="#static%20observedAttributes%3A%20Array%3Cstring%3E">static observedAttributes: Array</a></h4>
+<h4 id="static_observedAttributes__Array"><a href="#static_observedAttributes__Array">static observedAttributes: Array</a></h4>
 <p>登録されたプロパティに対応する属性のリストを返します。</p>
 <h3 id="Controllers"><a href="#Controllers">Controllers</a></h3>
-<h4 id="addController(controller%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fcontrollers%2F%23ReactiveController%22%20class%3D%22Link%22%3EReactiveController%3C%2Fa%3E)%3A%20void"><a href="#addController(controller%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fcontrollers%2F%23ReactiveController%22%20class%3D%22Link%22%3EReactiveController%3C%2Fa%3E)%3A%20void">addController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
+<h4 id="addController(controller__ReactiveController)__void"><a href="#addController(controller__ReactiveController)__void">addController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
 <p>要素の<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>をフックする<code>ReactiveController</code>を登録します。
 要素はライフサイクルのコールバックで登録したコントローラを自動的に呼び出します。</p>
-<h4 id="removeController(controller%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fcontrollers%2F%23ReactiveController%22%20class%3D%22Link%22%3EReactiveController%3C%2Fa%3E)%3A%20void"><a href="#removeController(controller%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fcontrollers%2F%23ReactiveController%22%20class%3D%22Link%22%3EReactiveController%3C%2Fa%3E)%3A%20void">removeController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
+<h4 id="removeController(controller__ReactiveController)__void"><a href="#removeController(controller__ReactiveController)__void">removeController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
 <p>要素から<code>ReactiveController</code>を削除します。</p>
-<h3 id="Dev%20mode"><a href="#Dev%20mode">Dev mode</a></h3>
-<h4 id="static%20disableWarning%3F%3A%20(warningKind%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E)%20%3D%26gt%3B%20void"><a href="#static%20disableWarning%3F%3A%20(warningKind%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E)%20%3D%26gt%3B%20void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
+<h3 id="Dev_mode"><a href="#Dev_mode">Dev mode</a></h3>
+<h4 id="static_disableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_disableWarning___(warningKind__WarningKind)_=>_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを無効にします。
 このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで無効にします。
@@ -74,10 +74,10 @@ ReactiveElement.disableWarning?.('migration');
 // MyElementとそのサブクラスのみで無効にします。
 MyElement.disableWarning?.('migration');
 </code></pre>
-<h4 id="static%20enabledWarnings%3F%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E%26gt%3B"><a href="#static%20enabledWarnings%3F%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E%26gt%3B">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>&gt;</h4>
+<h4 id="static_enabledWarnings___Array<WarningKind>"><a href="#static_enabledWarnings___Array<WarningKind>">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>&gt;</h4>
 <p>警告カテゴリーが格納されています。
 developmentビルドでのみ使うことができます。</p>
-<h4 id="static%20enableWarning%3F%3A%20(warningKind%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E)%20%3D%26gt%3B%20void"><a href="#static%20enableWarning%3F%3A%20(warningKind%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23WarningKind%22%20class%3D%22Link%22%3EWarningKind%3C%2Fa%3E)%20%3D%26gt%3B%20void">static enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
+<h4 id="static_enableWarning___(warningKind__WarningKind)_=>_void"><a href="#static_enableWarning___(warningKind__WarningKind)_=>_void">static enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>指定した警告カテゴリーを有効にします。
 このメソッドはdevelopmentビルドにのみ存在するので、下記のように使用する必要があります。</p>
 <pre><code>// すべてのReactiveElementのサブクラスで有効にします。
@@ -87,7 +87,7 @@ ReactiveElement.enableWarning?.('migration');
 MyElement.enableWarning?.('migration');
 </code></pre>
 <h3 id="Lifecycle"><a href="#Lifecycle">Lifecycle</a></h3>
-<h4 id="connectedCallback()%3A%20void"><a href="#connectedCallback()%3A%20void">connectedCallback(): void</a></h4>
+<h4 id="connectedCallback()__void"><a href="#connectedCallback()__void">connectedCallback(): void</a></h4>
 <p>要素がdocumentのDOMに追加された時に実行されます。
 <code>connectedCallback()</code>には要素がdocumentに追加された際に必要な処理のみ実装するべきです。
 それらで最も一般的なことは、windowにkeydownイベントを追加するような要素の外にあるNodeにイベントリスナを追加することです。</p>
@@ -97,7 +97,7 @@ MyElement.enableWarning?.('migration');
 }
 </code></pre>
 <p>たいてい、<code>connectedCallback()</code>で加えた変更は要素が削除される時に<code>disconnectedCallback()</code>で元に戻す必要があります。</p>
-<h4 id="disconnectedCallback()%3A%20void"><a href="#disconnectedCallback()%3A%20void">disconnectedCallback(): void</a></h4>
+<h4 id="disconnectedCallback()__void"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></h4>
 <p>要素がdocumentのDOMに削除された時に実行されます。
 このコールバックは要素が使用されなくなるかもしれないことを示す合図です。
 <code>disconnectedCallback()</code>ではガベージコレクションがうまくいくように外部の要素への参照(要素の外部に追加されたイベントリスナ等)を削除する必要があります。</p>
@@ -107,8 +107,8 @@ MyElement.enableWarning?.('migration');
 }
 </code></pre>
 <p>要素はDOMから削除された後、追加されることがあります。</p>
-<h3 id="%E3%81%9D%E3%81%AE%E4%BB%96"><a href="#%E3%81%9D%E3%81%AE%E4%BB%96">その他</a></h3>
-<h4 id="static%20addInitializer(initializer%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23Initializer%22%20class%3D%22Link%22%3EInitializer%3C%2Fa%3E)%3A%20void"><a href="#static%20addInitializer(initializer%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fmisc%2F%23Initializer%22%20class%3D%22Link%22%3EInitializer%3C%2Fa%3E)%3A%20void">static addInitializer(initializer: </a><a class="Link" href="https://lit.dev/docs/api/misc/#Initializer">Initializer</a>): void</h4>
+<h3 id="その他"><a href="#その他">その他</a></h3>
+<h4 id="static_addInitializer(initializer__Initializer)__void"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: </a><a class="Link" href="https://lit.dev/docs/api/misc/#Initializer">Initializer</a>): void</h4>
 <p>インスタンス生成時に実行されるイニシャライザ(initializer)をクラスに追加します。
 <code>ReactiveElement</code>のサブクラスに対して実行されるコードでデコレータのように<code>ReactiveController</code>のセットアップのようなインスタンスごとに処理する必要がある場合に便利です。</p>
 <pre><code>const myDecorator = (target: typeof ReactiveElement, key: string) =&gt; {
@@ -127,17 +127,17 @@ MyElement.enableWarning?.('migration');
 サブクラスにイニシャライザを追加してもスーパークラスには追加されません。
 イニシャライザはコンストラクタで実行されるので、クラス階層で実行されます。
 それはスーパークラスかインスタンスのクラスの順番で実行されます。</p>
-<h4 id="static%20finalize()%3A%20boolean"><a href="#static%20finalize()%3A%20boolean">static finalize(): boolean</a></h4>
+<h4 id="static_finalize()__boolean"><a href="#static_finalize()__boolean">static finalize(): boolean</a></h4>
 <p>登録したプロパティのプロパティアクセサを作成します。
 そして、要素のスタイルを設定します。
 スーパークラスに対しても同様の処理を行います。
 この処理を実行した場合はtrueを返します。</p>
-<h4 id="static%20finalized%3A%20boolean"><a href="#static%20finalized%3A%20boolean">static finalized: boolean</a></h4>
+<h4 id="static_finalized__boolean"><a href="#static_finalized__boolean">static finalized: boolean</a></h4>
 <p><code>finalize()</code>を実行していた場合、trueを返します。
 このプロパティ名はClosure JS Compilerの最適化を壊さないように文字列にしています。
 詳しくは<code>@lit/reactive-element</code>を見てください。</p>
 <h3 id="Properties"><a href="#Properties">Properties</a></h3>
-<h4 id="static%20createProperty(name%3A%20PropertyKey%2C%20options%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20void"><a href="#static%20createProperty(name%3A%20PropertyKey%2C%20options%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
+<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration<unknown,_unknown>)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
 <p>要素の<code>prototype</code>にプロパティアクセサ(<code>name</code>)が存在していない場合、プロパティ(<code>name</code>)を追加して<code>options</code>を格納します。
 プロパティのセッターは更新時に<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>を実行して更新を判断します。
 <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged">options.hasChanged()</a>がない場合、参照の比較(<code>!==</code>)で判断します。
@@ -151,10 +151,10 @@ MyElement.enableWarning?.('migration');
   super.createProperty(name, options);
 }
 </code></pre>
-<h4 id="static%20elementProperties%3A%20PropertyDeclarationMap"><a href="#static%20elementProperties%3A%20PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></h4>
+<h4 id="static_elementProperties__PropertyDeclarationMap"><a href="#static_elementProperties__PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></h4>
 <p>スーパークラスを含むすべての要素プロパティのメモ化されたリストです。
 それはクラスが完成させる(finalize)時にサブクラスで遅延的に生成されます。</p>
-<h4 id="static%20getPropertyDescriptor(name%3A%20PropertyKey%2C%20key%3A%20string%20%7C%20symbol%2C%20options%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20undefined%20%7C%20PropertyDescriptor"><a href="#static%20getPropertyDescriptor(name%3A%20PropertyKey%2C%20key%3A%20string%20%7C%20symbol%2C%20options%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20undefined%20%7C%20PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): undefined | PropertyDescriptor</h4>
+<h4 id="static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration<unknown,_unknown>)__undefined_|_PropertyDescriptor"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration<unknown,_unknown>)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): undefined | PropertyDescriptor</h4>
 <p><code>name</code>プロパティに対応するディスクリプタ(descriptor)を返します。
 ディスクリプタを返さない場合、そのプロパティはアクセサになりません。</p>
 <pre><code>class MyElement extends LitElement {
@@ -174,14 +174,14 @@ MyElement.enableWarning?.('migration');
   }
 }
 </code></pre>
-<h4 id="static%20getPropertyOptions(name%3A%20PropertyKey)%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B"><a href="#static%20getPropertyOptions(name%3A%20PropertyKey)%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclaration%22%20class%3D%22Link%22%3EPropertyDeclaration%3C%2Fa%3E%26lt%3Bunknown%2C%20unknown%26gt%3B">static getPropertyOptions(name: PropertyKey): </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;</h4>
+<h4 id="static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>"><a href="#static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration<unknown,_unknown>">static getPropertyOptions(name: PropertyKey): </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;</h4>
 <p>渡された<code>name</code>プロパティに関連した<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>を返します。
 このオプションは<code>properties</code>や<code>@property</code>で<code>PropertyDeclaration</code>として定義されています。
 それから、<code>createProperty(...)</code>で登録されます。
 このメソッドは「final」と見なさなければなりません。
 だから、オーバーライドしてはいけません。
 プロパティのオプションを変更する処理を加えたい場合、<code>createProperty</code>をオーバーライドします。</p>
-<h4 id="static%20properties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclarations%22%20class%3D%22Link%22%3EPropertyDeclarations%3C%2Fa%3E"><a href="#static%20properties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyDeclarations%22%20class%3D%22Link%22%3EPropertyDeclarations%3C%2Fa%3E">static properties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclarations">PropertyDeclarations</a></h4>
+<h4 id="static_properties__PropertyDeclarations"><a href="#static_properties__PropertyDeclarations">static properties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclarations">PropertyDeclarations</a></h4>
 <p><a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を構成するマップです。
 それのキーはプロパティ名です。
 値はプロパティオプション(<code>PropertyDeclaration</code>)です。
@@ -191,40 +191,40 @@ MyElement.enableWarning?.('migration');
 <code>state: true</code>を<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>にセットする、
 もしくは、<a class="Link" href="https://lit.dev/docs/api/decorators/#state">state</a>デコレータをセットすると要素の対応する属性をコンポーネントのプロパティに反映しません。</p>
 <h3 id="Rendering"><a href="#Rendering">Rendering</a></h3>
-<h4 id="createRenderRoot()%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%22%20class%3D%22Link%22%3EElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FShadowRoot%22%20class%3D%22Link%22%3EShadowRoot%3C%2Fa%3E"><a href="#createRenderRoot()%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%22%20class%3D%22Link%22%3EElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FShadowRoot%22%20class%3D%22Link%22%3EShadowRoot%3C%2Fa%3E">createRenderRoot(): </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a></h4>
-<h4 id="render()%3A%20unknown"><a href="#render()%3A%20unknown">render(): unknown</a></h4>
+<h4 id="createRenderRoot()__Element_|_ShadowRoot"><a href="#createRenderRoot()__Element_|_ShadowRoot">createRenderRoot(): </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a></h4>
+<h4 id="render()__unknown"><a href="#render()__unknown">render(): unknown</a></h4>
 <p>更新毎にレンダリングタスクを実行するために実行されます。
 このメソッドはlit-htmlの<code>ChildPart</code>でレンダリング可能な任意の値(通常、<code>TemplateResult</code>)を返すことが多いです。
 このメソッド内でプロパティをセットしても更新は発動されません。</p>
-<h4 id="readonly%20renderOptions%3A%20%3Ca%20href%3D%22%23RenderOptions%22%20class%3D%22Link%22%3ERenderOptions%3C%2Fa%3E"><a href="#readonly%20renderOptions%3A%20%3Ca%20href%3D%22%23RenderOptions%22%20class%3D%22Link%22%3ERenderOptions%3C%2Fa%3E">readonly renderOptions: </a><a class="Link" href="#RenderOptions">RenderOptions</a></h4>
-<h4 id="renderRoot()%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%22%20class%3D%22Link%22%3EElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FShadowRoot%22%20class%3D%22Link%22%3EShadowRoot%3C%2Fa%3E"><a href="#renderRoot()%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%22%20class%3D%22Link%22%3EElement%3C%2Fa%3E%20%7C%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FShadowRoot%22%20class%3D%22Link%22%3EShadowRoot%3C%2Fa%3E">renderRoot(): </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a></h4>
+<h4 id="readonly_renderOptions__RenderOptions"><a href="#readonly_renderOptions__RenderOptions">readonly renderOptions: </a><a class="Link" href="#RenderOptions">RenderOptions</a></h4>
+<h4 id="renderRoot()__Element_|_ShadowRoot"><a href="#renderRoot()__Element_|_ShadowRoot">renderRoot(): </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> | <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a></h4>
 <p>DOMがレンダリングされるNodeもしくはShadowRootです。
 デフォルトは<code>open</code>なShadowRootです。</p>
-<h4 id="static%20shadowRootOptions%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%2FattachShadow%23parameters%22%20class%3D%22Link%22%3EShadowRootInit%3C%2Fa%3E"><a href="#static%20shadowRootOptions%3A%20%3Ca%20href%3D%22https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FElement%2FattachShadow%23parameters%22%20class%3D%22Link%22%3EShadowRootInit%3C%2Fa%3E">static shadowRootOptions: </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a></h4>
+<h4 id="static_shadowRootOptions__ShadowRootInit"><a href="#static_shadowRootOptions__ShadowRootInit">static shadowRootOptions: </a><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a></h4>
 <p><code>attachShadow</code>を実行する時に使われるオプションです。
 このプロパティはShadowRootのオプションを変更するためにあります。
 (<code>{mode: 'closed'}</code>とするとShadowRootは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode">closed</a>になります。)
 このオプションは<code>createRenderRoot</code>で使われます。
 <code>createRenderRoot</code>を変更する場合、できるだけこのオプションを適用するべきです。</p>
 <h3 id="Styles"><a href="#Styles">Styles</a></h3>
-<h4 id="static%20elementStyles%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultOrNative%22%20class%3D%22Link%22%3ECSSResultOrNative%3C%2Fa%3E%26gt%3B"><a href="#static%20elementStyles%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultOrNative%22%20class%3D%22Link%22%3ECSSResultOrNative%3C%2Fa%3E%26gt%3B">static elementStyles: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
+<h4 id="static_elementStyles__Array<CSSResultOrNative>"><a href="#static_elementStyles__Array<CSSResultOrNative>">static elementStyles: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
 <p>すべての要素のスタイルのメモ化されたリストです。
 クラスを<code>finalize</code>するときにサブクラスで遅延的に生成されます。</p>
-<h4 id="static%20finalizeStyles(styles%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultGroup%22%20class%3D%22Link%22%3ECSSResultGroup%3C%2Fa%3E)%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultOrNative%22%20class%3D%22Link%22%3ECSSResultOrNative%3C%2Fa%3E%26gt%3B"><a href="#static%20finalizeStyles(styles%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultGroup%22%20class%3D%22Link%22%3ECSSResultGroup%3C%2Fa%3E)%3A%20Array%26lt%3B%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultOrNative%22%20class%3D%22Link%22%3ECSSResultOrNative%3C%2Fa%3E%26gt%3B">static finalizeStyles(styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a>): Array&lt;<a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
+<h4 id="static_finalizeStyles(styles___CSSResultGroup)__Array<CSSResultOrNative>"><a href="#static_finalizeStyles(styles___CSSResultGroup)__Array<CSSResultOrNative>">static finalizeStyles(styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a>): Array&lt;<a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultOrNative">CSSResultOrNative</a>&gt;</h4>
 <p><code>static styles</code>にセットされた値を引数(<code>styles</code>)にして、要素に適用するスタイルの配列を返します。
 このメソッドをオーバーライドしてスタイル管理システムに統合します。
 <a class="Link" href="https://japanese-document.github.io/lit/components-styles.html#スーパークラスのスタイルを継承する">サブクラスを積み重ねていくこと</a>で<code>static styles</code>に重複が生じする可能性があります。
 それを防ぐために、ここで<code>styles</code>は末尾に格納されている値を優先的に残す方法で重複が削除されます。
 <code>styles</code>は末尾に格納されている値が優先的に要素に適用されます。</p>
-<h4 id="static%20styles%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultGroup%22%20class%3D%22Link%22%3ECSSResultGroup%3C%2Fa%3E"><a href="#static%20styles%3F%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2Fstyles%2F%23CSSResultGroup%22%20class%3D%22Link%22%3ECSSResultGroup%3C%2Fa%3E">static styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a></h4>
+<h4 id="static_styles___CSSResultGroup"><a href="#static_styles___CSSResultGroup">static styles?: </a><a class="Link" href="https://lit.dev/docs/api/styles/#CSSResultGroup">CSSResultGroup</a></h4>
 <p>要素に適用されるスタイルの配列です。
 スタイルは<a class="Link" href="https://lit.dev/docs/api/styles/#css">css</a>タグ関数もしくは<a class="Link" href="https://wicg.github.io/construct-stylesheets/">Constructable Stylesheets</a>を使って定義するか、
 <a class="Link" href="https://web.dev/css-module-scripts/">CSS Module Scripts</a>を使ってimportする必要があります。</p>
 <h3 id="Updates"><a href="#Updates">Updates</a></h3>
-<h4 id="enableUpdating(_requestedUpdate%3A%20boolean)%3A%20void"><a href="#enableUpdating(_requestedUpdate%3A%20boolean)%3A%20void">enableUpdating(_requestedUpdate: boolean): void</a></h4>
+<h4 id="enableUpdating(_requestedUpdate__boolean)__void"><a href="#enableUpdating(_requestedUpdate__boolean)__void">enableUpdating(_requestedUpdate: boolean): void</a></h4>
 <p>このメソッドはfinalとみなし、オーバーライドしてはいけません。
 要素の最初の更新を発動する関数でオーバーライドされます。</p>
-<h4 id="firstUpdated(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void"><a href="#firstUpdated(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void">firstUpdated(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
+<h4 id="firstUpdated(_changedProperties__PropertyValues)__void"><a href="#firstUpdated(_changedProperties__PropertyValues)__void">firstUpdated(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
 <p>要素が最初に更新された時に実行されます。
 更新後の要素に対して1回だけ実行する処理を実装します。</p>
 <pre><code>firstUpdated() {
@@ -232,7 +232,7 @@ MyElement.enableWarning?.('migration');
 }
 </code></pre>
 <p>このメソッドでプロパティをセットすると進行している更新サイクルが完了した後、再び要素の更新が発動します。</p>
-<h4 id="getUpdateComplete()%3A%20Promise%3Cboolean%3E"><a href="#getUpdateComplete()%3A%20Promise%3Cboolean%3E">getUpdateComplete(): Promise</a></h4>
+<h4 id="getUpdateComplete()__Promise"><a href="#getUpdateComplete()__Promise">getUpdateComplete(): Promise</a></h4>
 <p><code>updateComplete</code>ゲッターが返すPromiseを返すメソッドです。
 TypeScriptのtargetがES5の場合、スーパークラスのゲッターを取得することができないので、
 <code>updateComplete</code>ゲッターをオーバーライドすることは安全でありません。
@@ -245,13 +245,13 @@ TypeScriptのtargetがES5の場合、スーパークラスのゲッターを取�
   }
 }
 </code></pre>
-<h4 id="hasUpdated%3A%20boolean"><a href="#hasUpdated%3A%20boolean">hasUpdated: boolean</a></h4>
+<h4 id="hasUpdated__boolean"><a href="#hasUpdated__boolean">hasUpdated: boolean</a></h4>
 <p>最初の更新の後、trueがセットされます。
 最初の更新の前に<code>renderRoot</code>が存在することを想定していません。</p>
-<h4 id="isUpdatePending%3A%20boolean"><a href="#isUpdatePending%3A%20boolean">isUpdatePending: boolean</a></h4>
+<h4 id="isUpdatePending__boolean"><a href="#isUpdatePending__boolean">isUpdatePending: boolean</a></h4>
 <p><code>requestUpdate()</code>が発動した結果、未解決の更新がある場合はtrueです。
 読み込みのみにするべきです。</p>
-<h4 id="performUpdate()%3A%20void%20%7C%20Promise%3Cunknown%3E"><a href="#performUpdate()%3A%20void%20%7C%20Promise%3Cunknown%3E">performUpdate(): void | Promise</a></h4>
+<h4 id="performUpdate()__void_|_Promise"><a href="#performUpdate()__void_|_Promise">performUpdate(): void | Promise</a></h4>
 <p>要素の更新を実行します。
 更新中に例外が発生した場合、<code>firstUpdated()</code>と<code>updated()</code>は実行されません。
 未解決の更新をすぐに反映したい場合は<code>performUpdate()</code>を実行します。
@@ -261,13 +261,13 @@ lit-element 2.xでは<code>performUpdate()</code>をオーバーライドして�
 3.xでは代わりに<code>scheduleUpdate()</code>をオーバーライドすることで更新スケジュールを変更します。
 lit-element 2.xとの後方互換性のために、<code>performUpdate()</code>による更新のスケジューリングは引き続き行われます。
 しかし、<code>performUpdate()</code>を実行して同期的更新を実現することは難しいです。</p>
-<h4 id="requestUpdate(name%3F%3A%20PropertyKey%2C%20oldValue%3F%3A%20unknown%2C%20options%3F%3A%20PropertyDeclaration%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20void"><a href="#requestUpdate(name%3F%3A%20PropertyKey%2C%20oldValue%3F%3A%20unknown%2C%20options%3F%3A%20PropertyDeclaration%26lt%3Bunknown%2C%20unknown%26gt%3B)%3A%20void">requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration&lt;unknown, unknown&gt;): void</a></h4>
+<h4 id="requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration<unknown,_unknown>)__void"><a href="#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration<unknown,_unknown>)__void">requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration&lt;unknown, unknown&gt;): void</a></h4>
 <p>非同期的な更新を要求します。
 これはリアクティブプロパティのセットで更新を発動する以外の方法で更新を発動したいときに実行します。
 その場合、引数を渡してはいけません。
 また、プロパティセッタを自作するときも実行する必要があります。
 その場合、<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティオプション">プロパティオプション</a>が確実に反映されるようにプロパティの<code>name</code>と<code>oldValue</code>を渡します。</p>
-<h4 id="scheduleUpdate()%3A%20void%20%7C%20Promise%3Cunknown%3E"><a href="#scheduleUpdate()%3A%20void%20%7C%20Promise%3Cunknown%3E">scheduleUpdate(): void | Promise</a></h4>
+<h4 id="scheduleUpdate()__void_|_Promise"><a href="#scheduleUpdate()__void_|_Promise">scheduleUpdate(): void | Promise</a></h4>
 <p>要素の更新をスケジューリングします。
 このメソッドをオーバーライドしてPromiseを返すことによって更新のタイミングを変更することができます。
 返されたPromiseが解決されるまで更新されません。
@@ -278,25 +278,25 @@ lit-element 2.xとの後方互換性のために、<code>performUpdate()</code>�
   super.scheduleUpdate();
 }
 </code></pre>
-<h4 id="shouldUpdate(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20boolean"><a href="#shouldUpdate(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20boolean">shouldUpdate(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): boolean</h4>
+<h4 id="shouldUpdate(_changedProperties__PropertyValues)__boolean"><a href="#shouldUpdate(_changedProperties__PropertyValues)__boolean">shouldUpdate(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): boolean</h4>
 <p>要素が更新をリクエストした時、<code>update()</code>の実行するか判断します。
 デフォルトでは、このメソッドは常にtrueを返します。
 このメソッドを変更することによって<code>update()</code>の実行を判断可能にします。</p>
-<h4 id="update(changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void"><a href="#update(changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void">update(changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
+<h4 id="update(changedProperties__PropertyValues)__void"><a href="#update(changedProperties__PropertyValues)__void">update(changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
 <p>要素を更新します。
 このメソッドはプロパティの値を属性に反映して<code>render()</code>を実行してlit-htmlを使ってDOMをレンダリングします。
 このメソッド内でプロパティをセットしても新たな更新を発動しません。</p>
-<h4 id="updateComplete()%3A%20Promise%3Cboolean%3E"><a href="#updateComplete()%3A%20Promise%3Cboolean%3E">updateComplete(): Promise</a></h4>
+<h4 id="updateComplete()__Promise"><a href="#updateComplete()__Promise">updateComplete(): Promise</a></h4>
 <p>更新が完了した時に解決するPromiseを返します。
 要素が新たな更新を発動せずに更新を完了した場合、Promiseの値はtrueになります。
 <code>update()</code>内でプロパティがセットされた場合、Promiseの値はfalseになります。
 更新中に例外が発生した場合、Promiseはrejectされます。
 更新が完了したときに実行する非同期処理を追加したい場合は、<code>getUpdateComplete</code>メソッドをオーバーライドします。
 その場合、最初に<code>await super.getUpdateComplete()</code>を実行して、その後に処理を追加する必要があります。</p>
-<h4 id="updated(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void"><a href="#updated(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void">updated(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
+<h4 id="updated(_changedProperties__PropertyValues)__void"><a href="#updated(_changedProperties__PropertyValues)__void">updated(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
 <p>要素が更新される毎に更新されます。
 更新後に実行する処理を実装します(例えば要素をfocusする処理)。</p>
-<h4 id="willUpdate(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void"><a href="#willUpdate(_changedProperties%3A%20%3Ca%20href%3D%22https%3A%2F%2Flit.dev%2Fdocs%2Fapi%2FReactiveElement%2F%23PropertyValues%22%20class%3D%22Link%22%3EPropertyValues%3C%2Fa%3E)%3A%20void">willUpdate(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
+<h4 id="willUpdate(_changedProperties__PropertyValues)__void"><a href="#willUpdate(_changedProperties__PropertyValues)__void">willUpdate(_changedProperties: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyValues">PropertyValues</a>): void</h4>
 <p>更新に必要な値を生成する処理を実行します。
 更新を実行する前に実行されます。
 以下は、他のプロパティに依存して、以降の更新処理に使われるプロパティの値を<code>willUpdate()</code>で生成します。</p>
@@ -311,26 +311,26 @@ render() {
   return html`SHA: ${this.sha}`;
 }
 </code></pre>
-<h2 id="type%20RenderOptions"><a href="#type%20RenderOptions">type RenderOptions</a></h2>
+<h2 id="type_RenderOptions"><a href="#type_RenderOptions">type RenderOptions</a></h2>
 <p>lit-htmlレンダリングをコントロールするオプションを格納するObjectです。</p>
 <h3 id="Import"><a href="#Import">Import</a></h3>
 <pre><code>import { RenderOptions } from 'lit';
 </code></pre>
-<h3 id="%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A8%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3"><a href="#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A8%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3">メソッドとプロパティ</a></h3>
-<h4 id="creationScope%3F%3A%20%7BimportNode%3A%20(node%3A%20Node%2C%20deep%3F%3A%20boolean)%20%3D%26gt%3B%20Node%7D"><a href="#creationScope%3F%3A%20%7BimportNode%3A%20(node%3A%20Node%2C%20deep%3F%3A%20boolean)%20%3D%26gt%3B%20Node%7D">creationScope?: {importNode: (node: Node, deep?: boolean) =&gt; Node}</a></h4>
+<h3 id="メソッドとプロパティ"><a href="#メソッドとプロパティ">メソッドとプロパティ</a></h3>
+<h4 id="creationScope___{importNode__(node__Node,_deep___boolean)_=>_Node}"><a href="#creationScope___{importNode__(node__Node,_deep___boolean)_=>_Node}">creationScope?: {importNode: (node: Node, deep?: boolean) =&gt; Node}</a></h4>
 <p>テンプレートの複製に使われるNodeです(このNodeの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode">importNode</a>が実行されます)。
 これは継承されたコンテキストとともにレンダリングされたDOMの<code>ownerDocument</code>をコントロールします。
 それはデフォルトではグローバルな<code>document</code>です。</p>
-<h4 id="host%3F%3A%20object"><a href="#host%3F%3A%20object">host?: object</a></h4>
+<h4 id="host___object"><a href="#host___object">host?: object</a></h4>
 <p>イベントリスナの<code>this</code>になるobjectです。
 テンプレートをレンダリングするホストコンポーネントをセットすると便利なことがよくあります。</p>
-<h4 id="isConnected%3F%3A%20boolean"><a href="#isConnected%3F%3A%20boolean">isConnected?: boolean</a></h4>
+<h4 id="isConnected___boolean"><a href="#isConnected___boolean">isConnected?: boolean</a></h4>
 <p>レンダリングされる最上位のNodeが初期状態で配置されるかどうか。</p>
-<h4 id="renderBefore%3F%3A%20ChildNode%20%7C%20null"><a href="#renderBefore%3F%3A%20ChildNode%20%7C%20null">renderBefore?: ChildNode | null</a></h4>
+<h4 id="renderBefore___ChildNode_|_null"><a href="#renderBefore___ChildNode_|_null">renderBefore?: ChildNode | null</a></h4>
 <p>レンダリングで生成されたDOM Nodeが挿入される位置の前にあるDOM Node</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese%20part"><a href="#Japanese%20part">Japanese part</a></h3>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
 <h3 id="Other"><a href="#Other">Other</a></h3>

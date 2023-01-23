@@ -42,10 +42,10 @@
       </details>
     </div></div>
     <main class="main markdown-body">
-      <h1 id="%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB"><a href="#%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB">ライフサイクル</a></h1>
+      <h1 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h1>
 <p>LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。
 更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。</p>
-<h2 id="custom%20elements%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB"><a href="#custom%20elements%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB">custom elementsのライフサイクル</a></h2>
+<h2 id="custom_elementsのライフサイクル"><a href="#custom_elementsのライフサイクル">custom elementsのライフサイクル</a></h2>
 <p>Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
 custom elementsのライフサイクルの詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a>を見てください。</p>
 <p>コンポーネントでcustom elementsのライフサイクルメソッドをオーバーライドする場合、
@@ -53,12 +53,12 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 <h3 id="constructor()"><a href="#constructor()">constructor()</a></h3>
 <p>custom elements(Litコンポーネント)が生成される時に実行されます。
 既にDOMにcustom elementsが存在していてcustom elements(Litコンポーネント)の定義がロードされた時(アップグレードされた時)も実行されます。</p>
-<h4 id="Lit%E3%81%AE%E5%8B%95%E4%BD%9C"><a href="#Lit%E3%81%AE%E5%8B%95%E4%BD%9C">Litの動作</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p><code>requestUpdate()</code>メソッドを実行して非同期更新をリクエストします。
 そうすることでLitコンポーネントにアップグレードされた時にすぐに更新されます。</p>
 <p>要素の既存のプロパティを保存します。
 これによって要素にセットされたプロパティの値が保持されます。そして、コンポーネントのデフォルトの値をそれで上書きすることができます。</p>
-<h4 id="%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9">ユースケース</a></h4>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p>最初の<a class="Link" href="#リアクティブアップデートサイクル">更新</a>の前に1回だけ実行する必要がある初期化処理を実行です。
 例えば、デコレータを使わない場合、<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#パブリックプロパティとインターナルステート"><code>static properties</code>クラスフィールドを使います</a>。
 その場合、constructor()内でデフォルトの値をセットします。</p>
@@ -70,11 +70,11 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 </code></pre>
 <h3 id="connectedCallback()"><a href="#connectedCallback()">connectedCallback()</a></h3>
 <p>コンポーネントがdocumentに接続された(追加された)時に実行されます。</p>
-<h4 id="Lit%E3%81%AE%E5%8B%95%E4%BD%9C"><a href="#Lit%E3%81%AE%E5%8B%95%E4%BD%9C">Litの動作</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p>要素がdocumentに接続された後、Litは更新サイクルの一番目の処理を開始します。
 レンダリングをする前にLitは<code>renderRoot</code>(通常は<code>shadowRoot</code>)が生成済みか確認します。</p>
 <p>1回でも要素がドキュメントに接続すると、コンポーネントの更新は接続状態に関係なく進みます。</p>
-<h4 id="%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9">ユースケース</a></h4>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p><code>connectedCallback()</code>には要素がdocumentに接続した時のみ実行したい処理を記述します。
 それの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
 通常、要素がdocumentから切断された時は<code>connectedCallback()</code>で加えた何かを元に戻す必要があります。例えば、メモリーリークを防止するためにwindowに登録したイベントリスナを削除することです。</p>
@@ -85,9 +85,9 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 </code></pre>
 <h3 id="disconnectedCallback()"><a href="#disconnectedCallback()">disconnectedCallback()</a></h3>
 <p>コンポーネントがdocumentのDOMツリーから削除されたら実行されます。</p>
-<h4 id="Lit%E3%81%AE%E5%8B%95%E4%BD%9C"><a href="#Lit%E3%81%AE%E5%8B%95%E4%BD%9C">Litの動作</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p><a class="Link" href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を一時停止します。 要素が接続されたら再開します。</p>
-<h4 id="%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9">ユースケース</a></h4>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p>このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
 ガベージコレクションで要素を解放するために、
 <code>disconnectedCallback()</code>では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
@@ -103,20 +103,20 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 外部のNodeに追加されたイベントリスナとは違って、それはコンポーネントのガベージコレクションを妨げません。</p>
 <h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
 <p>要素の<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array">observedAttributes</a>が1つでも変更された時に実行されます。</p>
-<h4 id="Lit%E3%81%AE%E5%8B%95%E4%BD%9C"><a href="#Lit%E3%81%AE%E5%8B%95%E4%BD%9C">Litの動作</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p>Litはこのコールバックを属性の変更をリアクティブプロパティに同期することに使います。
 それは属性に値がセットされるとそれに対応するプロパティに値がセットされます。
 Litは自動的に要素の<code>observedAttributes</code>とコンポーネントのリアクティブプロパティがそれぞれ対応するようにします。</p>
-<h4 id="%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9">ユースケース</a></h4>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p>このコールバックを実装する機会はほどんどありません。</p>
 <h3 id="adoptedCallback()"><a href="#adoptedCallback()">adoptedCallback()</a></h3>
 <p>コンポーネントが別のdocumentに移動したときに実行されます。</p>
 <p><code>adoptedCallback</code>はPolyfillにはないことに注意してください。</p>
-<h4 id="Lit%E3%81%AE%E5%8B%95%E4%BD%9C"><a href="#Lit%E3%81%AE%E5%8B%95%E4%BD%9C">Litの動作</a></h4>
+<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
 <p>デフォルトではLitはこのコールバックで何もしません。</p>
-<h4 id="%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9">ユースケース</a></h4>
+<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
 <p>このコールバックはdocumentを移動した時に要素の動作を変更するような高度なユースケースに使われます。</p>
-<h2 id="%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB"><a href="#%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB">リアクティブアップデートサイクル</a></h2>
+<h2 id="リアクティブアップデートサイクル"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></h2>
 <p>LitコンポーネントはWeb標準のcustom elementsのライフサイクルに加えてリアクティブアップデートサイクルを用意しています。</p>
 <p>リアクティブアップデートサイクルはリアクティブプロパティが変更された時もしくは<code>requestUpdate()</code>メソッドが明示的に実行された時に発動します。
 Litは更新を非同期で行います。そして、プロパティの変更の反映はまとめて行われます。
@@ -145,7 +145,7 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p>多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを<code>Map</code>に格納した引数(<code>changedProperties</code>)として受け取ります。
 <code>Map</code>のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
 現行のプロパティの値は<code>this.property</code>もしくは<code>this[property]</code>で取得することができます。</p>
-<h4 id="changedProperties%E3%81%AE%E5%9E%8B"><a href="#changedProperties%E3%81%AE%E5%9E%8B">changedPropertiesの型</a></h4>
+<h4 id="changedPropertiesの型"><a href="#changedPropertiesの型">changedPropertiesの型</a></h4>
 <p>TypeScriptで<code>changedProperties</code>に対して厳格な型チェックをしたい場合は<code>PropertyValues&lt;this&gt;</code>を使います。これは各プロパティ名に対して正確な型を推論します。</p>
 <pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
 ...
@@ -156,11 +156,11 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p>厳格な型が必要ないなら(プロパティ名だけチェックして1つ前の値はチェックしない)、<code>Map&lt;string, any&gt;</code>のような緩い型を使うこともできます。</p>
 <p><code>PropertyValues&lt;this&gt;</code>は<code>protected</code>と<code>private</code>なプロパティを認識しません。
 <code>protected</code>と<code>private</code>なプロパティをチェックしたい場合は<code>Map&lt;string, any&gt;</code>のような緩い型を使います。</p>
-<h4 id="%E6%9B%B4%E6%96%B0%E4%B8%AD%E3%81%AE%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E5%A4%89%E6%9B%B4"><a href="#%E6%9B%B4%E6%96%B0%E4%B8%AD%E3%81%AE%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E5%A4%89%E6%9B%B4">更新中のプロパティの変更</a></h4>
+<h4 id="更新中のプロパティの変更"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></h4>
 <p>更新中(<code>render()</code>メソッド完了まで)にプロパティを変更すると<code>changedProperties</code>は変更されますが、新たなアップデートサイクルを発動しません。
 <code>render()</code>メソッドの後(例: <code>updated()</code>内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
 そして、変更されたプロパティは新たな<code>changedProperties</code>に反映されて次のアップデートサイクルで使われます。</p>
-<h3 id="%E6%9B%B4%E6%96%B0%E3%81%AE%E7%99%BA%E5%8B%95"><a href="#%E6%9B%B4%E6%96%B0%E3%81%AE%E7%99%BA%E5%8B%95">更新の発動</a></h3>
+<h3 id="更新の発動"><a href="#更新の発動">更新の発動</a></h3>
 <p>リアクティブプロパティが変更される、もしくは<code>requestUpdate()</code>を実行すると更新が発動されます。
 更新は非同期で実行されるので、
 更新が実行される前に生じた変更はまとめて1回の更新で反映されます。</p>
@@ -189,7 +189,7 @@ disconnectedCallback() {
 カスタムゲッタやセッタに関する詳しい情報は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
 <pre><code class="language-js">  this.requestUpdate('state', this._previousState);
 </code></pre>
-<h3 id="%E6%9B%B4%E6%96%B0%E3%81%AE%E5%AE%9F%E8%A1%8C"><a href="#%E6%9B%B4%E6%96%B0%E3%81%AE%E5%AE%9F%E8%A1%8C">更新の実行</a></h3>
+<h3 id="更新の実行"><a href="#更新の実行">更新の実行</a></h3>
 <p><code>performUpdate()</code>が更新を実行します。このメソッド内で複数のライフサイクルが実行されます。</p>
 <p>これは更新処理中にプロパティの値の計算を可能にするために、
 通常はコンポーネントの更新中に更新を発動する変更は新しい更新をスケジュールしません。
@@ -323,7 +323,7 @@ render() {
 </tr>
 </tbody></table>
 <p><code>render()</code>は引数を取りません。
-通常は下記のようにコンポーネントのプロパティを使います。
+通常はコンポーネントのプロパティを使います。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a>を見てください。</p>
 <pre><code class="language-js">render() {
   const header = `&lt;header&gt;${this.header}&lt;/header&gt;`;
@@ -331,9 +331,9 @@ render() {
   return html`${header}${content}`;
 }
 </code></pre>
-<h3 id="Completing%20an%20update%20%7B%23reactive-update-cycle-completing%7D"><a href="#Completing%20an%20update%20%7B%23reactive-update-cycle-completing%7D">Completing an update {#reactive-update-cycle-completing}</a></h3>
+<h3 id="Completing_an_update_{#reactive-update-cycle-completing}"><a href="#Completing_an_update_{#reactive-update-cycle-completing}">Completing an update {#reactive-update-cycle-completing}</a></h3>
 <p>After <code>update()</code> is called to render changes to the component's DOM, you can perform actions on the component's DOM using these methods.</p>
-<h4 id="firstUpdated()%20%7B%23firstupdated%7D"><a href="#firstUpdated()%20%7B%23firstupdated%7D">firstUpdated() {#firstupdated}</a></h4>
+<h4 id="firstUpdated()_{#firstupdated}"><a href="#firstUpdated()_{#firstupdated}">firstUpdated() {#firstupdated}</a></h4>
 <p>Called after the component's DOM has been updated the first time, immediately before <a class="Link" href="#updated"><code>updated()</code></a> is called.</p>
 <table>
 <thead>
@@ -364,7 +364,7 @@ render() {
   this.renderRoot.getElementById('my-text-area').focus();
 }
 </code></pre>
-<h4 id="updated()%20%7B%23updated%7D"><a href="#updated()%20%7B%23updated%7D">updated() {#updated}</a></h4>
+<h4 id="updated()_{#updated}"><a href="#updated()_{#updated}">updated() {#updated}</a></h4>
 <p>Called whenever the component’s update finishes and the element's DOM has been updated and rendered.</p>
 <table>
 <thead>
@@ -425,7 +425,7 @@ render() {
 </li>
 </ol>
 <p>The <code>updateComplete</code> promise rejects if there's an unhandled error during the update cycle. For more information, see <a class="Link" href="#errors-in-the-update-cycle">Handling errors in the update cycle</a>.</p>
-<h3 id="Handling%20errors%20in%20the%20update%20cycle%20%7B%23errors-in-the-update-cycle%7D"><a href="#Handling%20errors%20in%20the%20update%20cycle%20%7B%23errors-in-the-update-cycle%7D">Handling errors in the update cycle {#errors-in-the-update-cycle}</a></h3>
+<h3 id="Handling_errors_in_the_update_cycle_{#errors-in-the-update-cycle}"><a href="#Handling_errors_in_the_update_cycle_{#errors-in-the-update-cycle}">Handling errors in the update cycle {#errors-in-the-update-cycle}</a></h3>
 <p>If you have an uncaught exception in a lifecycle method like <code>render()</code> or <code>update()</code>, it  causes the <code>updateComplete</code> promise to reject.
 If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a <code>try</code>/<code>catch</code> statement.</p>
 <p>You may also want to use a <code>try</code>/<code>catch</code> if you're awaiting the <code>updateComplete</code> promise:</p>
@@ -440,9 +440,9 @@ If you have code in a lifecycle method that can throw an exception, it's good pr
   /* handle error *
 }
 </code></pre>
-<h3 id="Implementing%20additional%20customization%20%7B%23reactive-update-cycle-customizing%7D"><a href="#Implementing%20additional%20customization%20%7B%23reactive-update-cycle-customizing%7D">Implementing additional customization {#reactive-update-cycle-customizing}</a></h3>
+<h3 id="Implementing_additional_customization_{#reactive-update-cycle-customizing}"><a href="#Implementing_additional_customization_{#reactive-update-cycle-customizing}">Implementing additional customization {#reactive-update-cycle-customizing}</a></h3>
 <p>This section covers some less-common methods for customizing the update cycle.</p>
-<h4 id="scheduleUpdate()%20%7B%23scheduleupdate%7D"><a href="#scheduleUpdate()%20%7B%23scheduleupdate%7D">scheduleUpdate() {#scheduleupdate}</a></h4>
+<h4 id="scheduleUpdate()_{#scheduleupdate}"><a href="#scheduleUpdate()_{#scheduleupdate}">scheduleUpdate() {#scheduleupdate}</a></h4>
 <p>Override <code>scheduleUpdate()</code> to customize the timing of the update. <code>scheduleUpdate()</code> is called when an update is about to be performed, and by default it calls <code>performUpdate()</code> immediately. Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
 <p>For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:</p>
 <p>{% switchable-sample %}</p>
@@ -462,16 +462,16 @@ If you have code in a lifecycle method that can throw an exception, it's good pr
 <p>Async function optional.</p>
 <p>This example shows an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async function</a> which <em>implicitly</em> returns a promise. You can also write <code>scheduleUpdate()</code> as a function that <em>explictly</em> returns a <code>Promise</code>. In either case, the <strong>next</strong> update doesn't start until the promise returned by <code>scheduleUpdate()</code> resolves. </p>
 <p>{% endaside %}</p>
-<h4 id="performUpdate()%20%20%7B%23performupdate%7D"><a href="#performUpdate()%20%20%7B%23performupdate%7D">performUpdate()  {#performupdate}</a></h4>
+<h4 id="performUpdate()__{#performupdate}"><a href="#performUpdate()__{#performupdate}">performUpdate()  {#performupdate}</a></h4>
 <p>Implements the reactive update cycle, calling the other methods, like <code>shouldUpdate()</code>, <code>update()</code>, and <code>updated()</code>.</p>
 <p>Call <code>performUpdate()</code> to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call <code>requestUpdate()</code> followed by `performUpdate() to force a synchronous update.)</p>
 <p>{% aside "info" %}</p>
 <p>Use <code>scheduleUpdate()</code> to customize scheduling.</p>
 <p>If you want to customize how updates are scheduled, override <code>scheduleUpdate()</code>. Previously, we recommended overriding <code>performUpdate()</code> for this purpose. That continues to work, but it makes it more difficult to call <code>performUpdate()</code> to process a pending update synchronously. </p>
 <p>{% endaside %}</p>
-<h4 id="hasUpdated%20%20%7B%23hasupdated%7D"><a href="#hasUpdated%20%20%7B%23hasupdated%7D">hasUpdated  {#hasupdated}</a></h4>
+<h4 id="hasUpdated__{#hasupdated}"><a href="#hasUpdated__{#hasupdated}">hasUpdated  {#hasupdated}</a></h4>
 <p>The <code>hasUpdated</code> property returns true if the component has updated at least once. You can use <code>hasUpdated</code> in any of the lifecycle methods to perform work only if the component has not yet updated.</p>
-<h4 id="getUpdateComplete()%20%7B%23getUpdateComplete%7D"><a href="#getUpdateComplete()%20%7B%23getUpdateComplete%7D">getUpdateComplete() {#getUpdateComplete}</a></h4>
+<h4 id="getUpdateComplete()_{#getUpdateComplete}"><a href="#getUpdateComplete()_{#getUpdateComplete}">getUpdateComplete() {#getUpdateComplete}</a></h4>
 <p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method. For example, it may be useful to await the update of a child element. First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
 <div class="alert alert-info">
 
@@ -485,10 +485,10 @@ If you have code in a lifecycle method that can throw an exception, it's good pr
   }
 }
 </code></pre>
-<h2 id="External%20lifecycle%20hooks%3A%20controllers%20and%20decorators"><a href="#External%20lifecycle%20hooks%3A%20controllers%20and%20decorators">External lifecycle hooks: controllers and decorators</a></h2>
+<h2 id="External_lifecycle_hooks__controllers_and_decorators"><a href="#External_lifecycle_hooks__controllers_and_decorators">External lifecycle hooks: controllers and decorators</a></h2>
 <p>In addition to component classes implementing lifecycle callbacks, external code, such as <a class="Link" href="https://lit.dev/docs/components/decorators/">decorators</a> may need to hook into a component's lifecycle.</p>
 <p>Lit offers two concepts for external code to integrate with the reactive update lifecycle: <code>static addInitializer()</code> and <code>addController()</code>:</p>
-<h4 id="static%20addInitializer()%20%7B%23addInitializer%7D"><a href="#static%20addInitializer()%20%7B%23addInitializer%7D">static addInitializer() {#addInitializer}</a></h4>
+<h4 id="static_addInitializer()_{#addInitializer}"><a href="#static_addInitializer()_{#addInitializer}">static addInitializer() {#addInitializer}</a></h4>
 <p><code>addInitializer()</code> allows code that has access to a Lit class definition to run code when instances of the class are constructed.</p>
 <p>This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call <code>addInitializer()</code>. It will be common to use this to add a <a class="Link" href="https://lit.dev/docs/composition/controllers/">reactive controller</a> so decorators can hook into the component lifecycle:</p>
 <p>{% switchable-sample %}</p>
@@ -524,11 +524,11 @@ that adds a controller:</p>
 subclass does not add it to a superclass. Since initializers are run in
 constructors, initializers will run in order of the class hierarchy,
 starting with superclasses and progressing to the instance's class.</p>
-<h4 id="addController()%20%7B%23addController%7D"><a href="#addController()%20%7B%23addController%7D">addController() {#addController}</a></h4>
+<h4 id="addController()_{#addController}"><a href="#addController()_{#addController}">addController() {#addController}</a></h4>
 <p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the <a class="Link" href="https://lit.dev/docs/composition/controllers/">Reactive Controller</a> docs for more information.</p>
-<h4 id="removeController()%20%7B%23removeController%7D"><a href="#removeController()%20%7B%23removeController%7D">removeController() {#removeController}</a></h4>
+<h4 id="removeController()_{#removeController}"><a href="#removeController()_{#removeController}">removeController() {#removeController}</a></h4>
 <p><code>removeController()</code> removes a reactive controller so it no longer receives lifecycle callbacks from this component.</p>
-<h2 id="Server-side%20reactive%20update%20cycle%20%7B%23server-reactive-update-cycle%7D"><a href="#Server-side%20reactive%20update%20cycle%20%7B%23server-reactive-update-cycle%7D">Server-side reactive update cycle {#server-reactive-update-cycle}</a></h2>
+<h2 id="Server-side_reactive_update_cycle_{#server-reactive-update-cycle}"><a href="#Server-side_reactive_update_cycle_{#server-reactive-update-cycle}">Server-side reactive update cycle {#server-reactive-update-cycle}</a></h2>
 <div class="alert alert-info">
 
 <p>Lit's <a class="Link" href="https://lit.dev/docs/ssr/overview/">server-side rendering package</a> is currently under active development so the following information is subject to change.</p>
@@ -538,7 +538,7 @@ starting with superclasses and progressing to the instance's class.</p>
 <p><img alt="update-server" src="/lit/images/components-update-server.jpg"></p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese%20part"><a href="#Japanese%20part">Japanese part</a></h3>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
 <h3 id="Other"><a href="#Other">Other</a></h3>
