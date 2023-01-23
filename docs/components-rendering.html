@@ -42,7 +42,7 @@
       </details>
     </div></div>
     <main class="main markdown-body">
-      <h1 id="レンダリング"><a href="#レンダリング">レンダリング</a></h1>
+      <h1 id="%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0"><a href="#%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0">レンダリング</a></h1>
 <p>レンダリングはコンポーネントにテンプレートを追加することで定義します。
 テンプレートにはエクスプレッション(expressions)を含めることができます。
 それは動的なコンテンツのプレースフォルダです。</p>
@@ -63,7 +63,7 @@ class MyElement extends LitElement {
 エクスプレッションを使って要素にテキストコンテンツ、属性、プロパティ、イベントリスナをセットすることができます。
 <code>render()</code>メソッドにJavaScriptの処理を記述することもできます。
 例えば、エクスプレッションで使うローカル変数を作成することができます。</p>
-<h2 id="レンダリング可能な値"><a href="#レンダリング可能な値">レンダリング可能な値</a></h2>
+<h2 id="%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E5%8F%AF%E8%83%BD%E3%81%AA%E5%80%A4"><a href="#%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E5%8F%AF%E8%83%BD%E3%81%AA%E5%80%A4">レンダリング可能な値</a></h2>
 <p>通常、Litコンポーネントの<code>render()</code>メソッドは<code>TemplateResult</code>オブジェクト(<code>html</code>タグ関数の戻り値と同じ型)を1つ返します。
 それ以外にも、<code>render()</code>メソッドはLitがレンダリング可能な下記の値を返すことができます。</p>
 <ul>
@@ -77,7 +77,7 @@ class MyElement extends LitElement {
 1点だけある違いはchild expressionsは<code>SVGTemplateResult</code>をレンダリングすることができます。
 これは<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><code>svg</code></a>で生成します。
 <code>SVGTemplateResult</code>は<code>&lt;svg&gt;</code>要素の子要素としてのみレンダリングすることができます。</p>
-<h2 id="render()メソッドの注意点"><a href="#render()メソッドの注意点">render()メソッドの注意点</a></h2>
+<h2 id="render()%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9"><a href="#render()%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9">render()メソッドの注意点</a></h2>
 <p>Litのレンダリング機構を活用するためには、
 <code>render()</code>メソッドは以下のガイドラインに従う必要があります。</p>
 <ul>
@@ -92,7 +92,7 @@ class MyElement extends LitElement {
 代わりにコンポーネントのステートをプロパティに保存して、テンプレートでそれらが反映されるようにします。</p>
 <p>例えば、コンポーネントがイベントを受け取ってUIにそれを反映したい場合、イベントリスナで直接DOMを操作するのではなくリアクティブプロパティに値をセットしてそれを<code>render()</code>で使います。</p>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
-<h2 id="テンプレートを組み合わせる"><a href="#テンプレートを組み合わせる">テンプレートを組み合わせる</a></h2>
+<h2 id="%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%82%8B"><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%82%8B">テンプレートを組み合わせる</a></h2>
 <p>テンプレートを組み合わせてテンプレートを作成できます。
 以下の例は<code>&lt;my-page&gt;</code>コンポーネントのテンプレートはヘッダー、フッター、メインコンテントのテンプレートを組み合わせて作られています。</p>
 <pre><code>import {LitElement, html} from 'lit';
@@ -173,7 +173,7 @@ class MyPage extends LitElement {
   }
 }
 </code></pre>
-<h2 id="テンプレートがレンダリングされるタイミング"><a href="#テンプレートがレンダリングされるタイミング">テンプレートがレンダリングされるタイミング</a></h2>
+<h2 id="%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%8C%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%95%E3%82%8C%E3%82%8B%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0"><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%8C%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%95%E3%82%8C%E3%82%8B%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0">テンプレートがレンダリングされるタイミング</a></h2>
 <p>初回のレンダリングの後、
 コンポーネントのリアクティブプロパティが変更されると更新サイクルが始動して、
 コンポーネントが再レンダリングされます。</p>
@@ -185,14 +185,14 @@ Litテンプレートは文字列に値を埋め込んでいるだけに見え�
 Litはそれを解析して静的なHTMLを1回生成します。
 それ以降は効率的に更新するためにエクスプレッション内の変更された値のみを更新します。</p>
 <p>更新サイクルの詳細は<a class="Link" href="https://lit.dev/docs/components/properties/#when-properties-change">What happens when properties change</a>を見てください。</p>
-<h2 id="DOMのカプセル化"><a href="#DOMのカプセル化">DOMのカプセル化</a></h2>
+<h2 id="DOM%E3%81%AE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E5%8C%96"><a href="#DOM%E3%81%AE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E5%8C%96">DOMのカプセル化</a></h2>
 <p>LitはコンポーネントがレンダリングしたDOMをShadow DOMを使ってカプセル化します。
 Shadow DOMはメインのdocumentツリーとは別の独立したDOMツリーを持ちます。
 Shadow DOMはweb componentsのコア機能の1つです。Shadow DOMは相互運用性(interoperability)やスタイルのカプセル化等の利益をもたらします。</p>
 <p>Shadow DOMの詳しい内容は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
 </a>にあります。</p>
 <p>コンポーネントでのShadow DOMの動作ついての詳細は<a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Working with shadow DOM</a>を見てください。</p>
-<h2 id="関連情報"><a href="#関連情報">関連情報</a></h2>
+<h2 id="%E9%96%A2%E9%80%A3%E6%83%85%E5%A0%B1"><a href="#%E9%96%A2%E9%80%A3%E6%83%85%E5%A0%B1">関連情報</a></h2>
 <ul>
 <li><a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Shadow DOM</a></li>
 <li><a class="Link" href="https://lit.dev/docs/templates/overview/">Templates overview</a></li>
@@ -200,7 +200,7 @@ Shadow DOMはweb componentsのコア機能の1つです。Shadow DOMは相互運
 </ul>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h3 id="Japanese%20part"><a href="#Japanese%20part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
 <h3 id="Other"><a href="#Other">Other</a></h3>
