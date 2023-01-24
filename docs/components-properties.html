@@ -25,20 +25,20 @@
     <div class="index-menu">
       <details open="">
         <summary>コンポーネント</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
       </details>
       <details open="">
         <summary>テンプレート</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
       </details>
       <details open="">
         <summary>API</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
       </details>
     </div></div>
     <main class="main markdown-body">
@@ -599,7 +599,38 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
-    <div class="right-side"></div>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#リアクティブプロパティ">リアクティブプロパティ</a></p>
+<p class="h2"><a href="#パブリックプロパティとインターナルステート">パブリックプロパティとインターナルステート</a></p>
+<p class="h2"><a href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></p>
+<p class="h3"><a href="#デコレータでプロパティを設定する">デコレータでプロパティを設定する</a></p>
+<p class="h3"><a href="#static_propertiesフィールドでプロパティを設定する">static propertiesフィールドでプロパティを設定する</a></p>
+<p class="h3"><a href="#プロパティオプション">プロパティオプション</a></p>
+<p class="h4"><a href="#attribute">attribute</a></p>
+<p class="h4"><a href="#converter">converter</a></p>
+<p class="h4"><a href="#hasChanged">hasChanged</a></p>
+<p class="h4"><a href="#noAccessor">noAccessor</a></p>
+<p class="h4"><a href="#reflect">reflect</a></p>
+<p class="h4"><a href="#state">state</a></p>
+<p class="h4"><a href="#type">type</a></p>
+<p class="h2"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></p>
+<p class="h2"><a href="#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a></p>
+<p class="h3"><a href="#プロパティでオブジェクトや配列を扱う際の注意点">プロパティでオブジェクトや配列を扱う際の注意点</a></p>
+<p class="h4"><a href="#値の置き換える">値の置き換える</a></p>
+<p class="h4"><a href="#手動で更新を発動する">手動で更新を発動する</a></p>
+<p class="h2"><a href="#属性">属性</a></p>
+<p class="h3"><a href="#attributeオプション">attributeオプション</a></p>
+<p class="h3"><a href="#デフォルトプロパティコンバータ">デフォルトプロパティコンバータ</a></p>
+<p class="h4"><a href="#要素の属性からコンポーネントのプロパティへ">要素の属性からコンポーネントのプロパティへ</a></p>
+<p class="h4"><a href="#コンポーネントのプロパティから要素の属性へ">コンポーネントのプロパティから要素の属性へ</a></p>
+<p class="h3"><a href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a></p>
+<p class="h3"><a href="#reflectオプション">reflectオプション</a></p>
+<p class="h2"><a href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></p>
+<p class="h3"><a href="#カスタムプロパティアクセサを作成する">カスタムプロパティアクセサを作成する</a></p>
+<p class="h3"><a href="#noAccessorオプション">noAccessorオプション</a></p>
+<p class="h2"><a href="#変更判定の変更">変更判定の変更</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
     <footer class="footer markdown-body">
       <a href="/lit">Top</a>
     </footer>

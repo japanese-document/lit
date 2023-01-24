@@ -25,20 +25,20 @@
     <div class="index-menu">
       <details open="">
         <summary>コンポーネント</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
       </details>
       <details open="">
         <summary>テンプレート</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
       </details>
       <details open="">
         <summary>API</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
       </details>
     </div></div>
     <main class="main markdown-body">
@@ -365,7 +365,66 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
-    <div class="right-side"></div>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#LitElement">LitElement</a></p>
+<p class="h2"><a href="#class_LitElement">class LitElement</a></p>
+<p class="h3"><a href="#Import">Import</a></p>
+<p class="h3"><a href="#Attributes">Attributes</a></p>
+<p class="h4"><a href="#attributeChangedCallback(name__string,__old__string_|_null,_value__string_|_null)__void">attributeChangedCallback(name: string, _old: string | null, value: string | null): void</a></p>
+<p class="h4"><a href="#static_observedAttributes__Array">static observedAttributes: Array</a></p>
+<p class="h3"><a href="#Controllers">Controllers</a></p>
+<p class="h4"><a href="#addController(controller__ReactiveController)__void">addController(controller: ReactiveController): void</a></p>
+<p class="h4"><a href="#removeController(controller__ReactiveController)__void">removeController(controller: ReactiveController): void</a></p>
+<p class="h3"><a href="#Dev_mode">Dev mode</a></p>
+<p class="h4"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
+<p class="h4"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array</a></p>
+<p class="h4"><a href="#static_enableWarning___(warningKind__WarningKind)___-_void">static enableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
+<p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
+<p class="h4"><a href="#connectedCallback()__void">connectedCallback(): void</a></p>
+<p class="h4"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></p>
+<p class="h3"><a href="#その他">その他</a></p>
+<p class="h4"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: Initializer): void</a></p>
+<p class="h4"><a href="#static_finalize()__boolean">static finalize(): boolean</a></p>
+<p class="h4"><a href="#static_finalized__boolean">static finalized: boolean</a></p>
+<p class="h3"><a href="#Properties">Properties</a></p>
+<p class="h4"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void">static createProperty(name: PropertyKey, options?: PropertyDeclaration): void</a></p>
+<p class="h4"><a href="#static_elementProperties__PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></p>
+<p class="h4"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: PropertyDeclaration): undefined | PropertyDescriptor</a></p>
+<p class="h4"><a href="#static_getPropertyOptions(name__PropertyKey)__PropertyDeclaration-_unknown,_unknown_-">static getPropertyOptions(name: PropertyKey): PropertyDeclaration</a></p>
+<p class="h4"><a href="#static_properties__PropertyDeclarations">static properties: PropertyDeclarations</a></p>
+<p class="h3"><a href="#Rendering">Rendering</a></p>
+<p class="h4"><a href="#createRenderRoot()__Element_|_ShadowRoot">createRenderRoot(): Element | ShadowRoot</a></p>
+<p class="h4"><a href="#render()__unknown">render(): unknown</a></p>
+<p class="h4"><a href="#readonly_renderOptions__RenderOptions">readonly renderOptions: RenderOptions</a></p>
+<p class="h4"><a href="#renderRoot()__Element_|_ShadowRoot">renderRoot(): Element | ShadowRoot</a></p>
+<p class="h4"><a href="#static_shadowRootOptions__ShadowRootInit">static shadowRootOptions: ShadowRootInit</a></p>
+<p class="h3"><a href="#Styles">Styles</a></p>
+<p class="h4"><a href="#static_elementStyles__Array-_CSSResultOrNative_-">static elementStyles: Array</a></p>
+<p class="h4"><a href="#static_finalizeStyles(styles___CSSResultGroup)__Array-_CSSResultOrNative_-">static finalizeStyles(styles?: CSSResultGroup): Array</a></p>
+<p class="h4"><a href="#static_styles___CSSResultGroup">static styles?: CSSResultGroup</a></p>
+<p class="h3"><a href="#Updates">Updates</a></p>
+<p class="h4"><a href="#enableUpdating(_requestedUpdate__boolean)__void">enableUpdating(_requestedUpdate: boolean): void</a></p>
+<p class="h4"><a href="#firstUpdated(_changedProperties__PropertyValues)__void">firstUpdated(_changedProperties: PropertyValues): void</a></p>
+<p class="h4"><a href="#getUpdateComplete()__Promise">getUpdateComplete(): Promise</a></p>
+<p class="h4"><a href="#hasUpdated__boolean">hasUpdated: boolean</a></p>
+<p class="h4"><a href="#isUpdatePending__boolean">isUpdatePending: boolean</a></p>
+<p class="h4"><a href="#performUpdate()__void_|_Promise">performUpdate(): void | Promise</a></p>
+<p class="h4"><a href="#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration-_unknown,_unknown_-)__void">requestUpdate(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration): void</a></p>
+<p class="h4"><a href="#scheduleUpdate()__void_|_Promise">scheduleUpdate(): void | Promise</a></p>
+<p class="h4"><a href="#shouldUpdate(_changedProperties__PropertyValues)__boolean">shouldUpdate(_changedProperties: PropertyValues): boolean</a></p>
+<p class="h4"><a href="#update(changedProperties__PropertyValues)__void">update(changedProperties: PropertyValues): void</a></p>
+<p class="h4"><a href="#updateComplete()__Promise">updateComplete(): Promise</a></p>
+<p class="h4"><a href="#updated(_changedProperties__PropertyValues)__void">updated(_changedProperties: PropertyValues): void</a></p>
+<p class="h4"><a href="#willUpdate(_changedProperties__PropertyValues)__void">willUpdate(_changedProperties: PropertyValues): void</a></p>
+<p class="h2"><a href="#type_RenderOptions">type RenderOptions</a></p>
+<p class="h3"><a href="#Import">Import</a></p>
+<p class="h3"><a href="#メソッドとプロパティ">メソッドとプロパティ</a></p>
+<p class="h4"><a href="#creationScope___{importNode__(node__Node,_deep___boolean)___-_Node}">creationScope?: {importNode: (node: Node, deep?: boolean) =&gt; Node}</a></p>
+<p class="h4"><a href="#host___object">host?: object</a></p>
+<p class="h4"><a href="#isConnected___boolean">isConnected?: boolean</a></p>
+<p class="h4"><a href="#renderBefore___ChildNode_|_null">renderBefore?: ChildNode | null</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
     <footer class="footer markdown-body">
       <a href="/lit">Top</a>
     </footer>
