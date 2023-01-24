@@ -25,20 +25,20 @@
     <div class="index-menu">
       <details open="">
         <summary>コンポーネント</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
       </details>
       <details open="">
         <summary>テンプレート</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
       </details>
       <details open="">
         <summary>API</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
       </details>
     </div></div>
     <main class="main markdown-body">
@@ -530,7 +530,29 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
-    <div class="right-side"></div>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#スタイル">スタイル</a></p>
+<p class="h2"><a href="#コンポーネントにスタイルを加える">コンポーネントにスタイルを加える</a></p>
+<p class="h3"><a href="#static_styles内でエクスプレッションを使う">static styles内でエクスプレッションを使う</a></p>
+<p class="h3"><a href="#スーパークラスのスタイルを継承する">スーパークラスのスタイルを継承する</a></p>
+<p class="h3"><a href="#スタイルを共有する">スタイルを共有する</a></p>
+<p class="h3"><a href="#スタイルでUnicodeエスケープを使う">スタイルでUnicodeエスケープを使う</a></p>
+<p class="h3"><a href="#CSS_module_scriptsを使う">CSS module scriptsを使う</a></p>
+<p class="h2"><a href="#Shadow_DOM">Shadow DOM</a></p>
+<p class="h3"><a href="#Shadow_treeのスタイルを設定する">Shadow treeのスタイルを設定する</a></p>
+<p class="h3"><a href="#コンポーネント自身のスタイルを設定する">コンポーネント自身のスタイルを設定する</a></p>
+<p class="h3"><a href="#子要素のスタイルを設定する">子要素のスタイルを設定する</a></p>
+<p class="h2"><a href="#テンプレート内で適用範囲が限定されているスタイルを定義する">テンプレート内で適用範囲が限定されているスタイルを定義する</a></p>
+<p class="h3"><a href="#style要素を使ってスタイルを定義する">style要素を使ってスタイルを定義する</a></p>
+<p class="h4"><a href="#エクスプレッションとstyle要素">エクスプレッションとstyle要素</a></p>
+<p class="h3"><a href="#外部のスタイルシートをインポートする(非推奨)">外部のスタイルシートをインポートする(非推奨)</a></p>
+<p class="h4"><a href="#外部のスタイルシートを使う際の注意事項">外部のスタイルシートを使う際の注意事項</a></p>
+<p class="h2"><a href="#動的なclass属性とstyle属性">動的なclass属性とstyle属性</a></p>
+<p class="h2"><a href="#テーマ">テーマ</a></p>
+<p class="h3"><a href="#CSSを継承する">CSSを継承する</a></p>
+<p class="h3"><a href="#CSSカスタムプロパティ">CSSカスタムプロパティ</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
     <footer class="footer markdown-body">
       <a href="/lit">Top</a>
     </footer>

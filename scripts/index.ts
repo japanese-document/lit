@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR } from './config.js'
-import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage, Page, createIndexItems, createIndexMenu } from './utils.js'
+import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage, Page, createIndexItems, createIndexMenu, createHeaderList } from './utils.js'
 
 const markDownFileNames = await getMarkDownFileNames()
 
@@ -29,7 +29,8 @@ for (const markDownFileName of markDownFileNames) {
   const title = createTitle(md)
   const { name, dir } = path.parse(markDownFileName)
   const url = createURL(dir, name)
-  const page = await createPage(pageLayout, md, title, url, indexMenu)
+  const headerList = createHeaderList(md)
+  const page = await createPage(pageLayout, md, title, url, indexMenu, headerList)
   const prefixDirCount = SOURCE_DIR.length + 1
   const dirPath = `${OUTPUT_DIR}/${dir.slice(prefixDirCount)}`
   if (!fs.existsSync(dirPath)) {

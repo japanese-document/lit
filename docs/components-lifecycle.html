@@ -25,20 +25,20 @@
     <div class="index-menu">
       <details open="">
         <summary>コンポーネント</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
       </details>
       <details open="">
         <summary>テンプレート</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
       </details>
       <details open="">
         <summary>API</summary>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
-        <p><a class="Link" href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
       </details>
     </div></div>
     <main class="main markdown-body">
@@ -573,7 +573,53 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
-    <div class="right-side"></div>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#ライフサイクル">ライフサイクル</a></p>
+<p class="h2"><a href="#custom_elementsのライフサイクル">custom elementsのライフサイクル</a></p>
+<p class="h3"><a href="#constructor()">constructor()</a></p>
+<p class="h4"><a href="#Litの動作">Litの動作</a></p>
+<p class="h4"><a href="#ユースケース">ユースケース</a></p>
+<p class="h3"><a href="#connectedCallback()">connectedCallback()</a></p>
+<p class="h4"><a href="#Litの動作">Litの動作</a></p>
+<p class="h4"><a href="#ユースケース">ユースケース</a></p>
+<p class="h3"><a href="#disconnectedCallback()">disconnectedCallback()</a></p>
+<p class="h4"><a href="#Litの動作">Litの動作</a></p>
+<p class="h4"><a href="#ユースケース">ユースケース</a></p>
+<p class="h3"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></p>
+<p class="h4"><a href="#Litの動作">Litの動作</a></p>
+<p class="h4"><a href="#ユースケース">ユースケース</a></p>
+<p class="h3"><a href="#adoptedCallback()">adoptedCallback()</a></p>
+<p class="h4"><a href="#Litの動作">Litの動作</a></p>
+<p class="h4"><a href="#ユースケース">ユースケース</a></p>
+<p class="h2"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></p>
+<p class="h3"><a href="#changedProperties">changedProperties</a></p>
+<p class="h4"><a href="#changedPropertiesの型">changedPropertiesの型</a></p>
+<p class="h4"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></p>
+<p class="h3"><a href="#更新の発動">更新の発動</a></p>
+<p class="h4"><a href="#hasChanged()">hasChanged()</a></p>
+<p class="h4"><a href="#requestUpdate()">requestUpdate()</a></p>
+<p class="h3"><a href="#更新の実行">更新の実行</a></p>
+<p class="h4"><a href="#shouldUpdate()">shouldUpdate()</a></p>
+<p class="h4"><a href="#willUpdate()">willUpdate()</a></p>
+<p class="h4"><a href="#update()">update()</a></p>
+<p class="h4"><a href="#render()">render()</a></p>
+<p class="h3"><a href="#Completing_an_update_{#reactive-update-cycle-completing}">Completing an update {#reactive-update-cycle-completing}</a></p>
+<p class="h4"><a href="#firstUpdated()_{#firstupdated}">firstUpdated() {#firstupdated}</a></p>
+<p class="h4"><a href="#updated()_{#updated}">updated() {#updated}</a></p>
+<p class="h4"><a href="#updateComplete">updateComplete</a></p>
+<p class="h3"><a href="#Handling_errors_in_the_update_cycle_{#errors-in-the-update-cycle}">Handling errors in the update cycle {#errors-in-the-update-cycle}</a></p>
+<p class="h3"><a href="#Implementing_additional_customization_{#reactive-update-cycle-customizing}">Implementing additional customization {#reactive-update-cycle-customizing}</a></p>
+<p class="h4"><a href="#scheduleUpdate()_{#scheduleupdate}">scheduleUpdate() {#scheduleupdate}</a></p>
+<p class="h4"><a href="#performUpdate()__{#performupdate}">performUpdate()  {#performupdate}</a></p>
+<p class="h4"><a href="#hasUpdated__{#hasupdated}">hasUpdated  {#hasupdated}</a></p>
+<p class="h4"><a href="#getUpdateComplete()_{#getUpdateComplete}">getUpdateComplete() {#getUpdateComplete}</a></p>
+<p class="h2"><a href="#External_lifecycle_hooks__controllers_and_decorators">External lifecycle hooks: controllers and decorators</a></p>
+<p class="h4"><a href="#static_addInitializer()_{#addInitializer}">static addInitializer() {#addInitializer}</a></p>
+<p class="h4"><a href="#addController()_{#addController}">addController() {#addController}</a></p>
+<p class="h4"><a href="#removeController()_{#removeController}">removeController() {#removeController}</a></p>
+<p class="h2"><a href="#Server-side_reactive_update_cycle_{#server-reactive-update-cycle}">Server-side reactive update cycle {#server-reactive-update-cycle}</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
     <footer class="footer markdown-body">
       <a href="/lit">Top</a>
     </footer>

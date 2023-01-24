@@ -1,4 +1,4 @@
-import { createTitle, createDescription, getMetaAndMd, createURL }  from './utils.js'
+import { createTitle, createDescription, getMetaAndMd, createURL, createHash }  from './utils.js'
 
 describe('createTitle', () => {
   test('output', () => {
@@ -28,5 +28,12 @@ describe('createURL', () => {
   test('output', () => {
     const url = createURL('0123456789', 'name')
     expect(url).toBe('https://japanese-document.github.io/lit/6789/name.html')
+  })
+})
+
+describe('createHash', () => {
+  test('output', () => {
+    const hash = createHash('<a>?:&foo=%"\'@><')
+    expect(hash).toBe('___foo______--_')
   })
 })
