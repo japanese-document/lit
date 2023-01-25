@@ -239,7 +239,7 @@ disconnectedCallback() {
 | | |
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
-| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| 更新は発動するか | いいえ、このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | いいえ |
 
@@ -263,7 +263,7 @@ shouldUpdate(changedProperties: Map<string, any>) {
 | | |
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
-| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| 更新は発動するか | いいえ、このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | はい |
 
@@ -289,8 +289,8 @@ render() {
 | | |
 |-|-|
 | 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
-| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
-| superを実行する必要があるか | はい。要素の属性とテンプレートは更新されません。 |
+| 更新は発動するか | いいえ、このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| superを実行する必要があるか | はい、実行しない場合、要素の属性とテンプレートは更新されません。 |
 | サーバで実行されるか | いいえ |
 
 プロパティの値を要素の属性に反映します。そして、`render()`でコンポーネント内のDOMを更新します。
@@ -305,7 +305,7 @@ render() {
 | | |
 |-|-|
 | 引数 | なし |
-| 更新は発動するか | いいえ。 このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
+| 更新は発動するか | いいえ、このメソッド内でのプロパティの変更は要素の更新を発動しません。 |
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | はい |
 
@@ -327,16 +327,17 @@ render() {
 
 #### firstUpdated()
 
-Called after the component's DOM has been updated the first time, immediately before [`updated()`](#updated) is called.
+初回のコンポーネントのDOMの更新後、[`updated()`](#updated)が実行される直前に実行されます。
 
 | | |
 |-|-|
-| Arguments | `changedProperties`: `Map` with keys that are the names of changed properties and  values that are the corresponding previous values. |
-| Updates? | Yes. Property changes inside this method schedule a new update cycle. |
-| Call super? | Not necessary. |
-| Called on server? | No. |
+| 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
+| 更新は発動するか | はい、このメソッド内でプロパティが変更されると新たに更新サイクルがスケジュールされます。 |
+| superを実行する必要があるか | いいえ |
+| サーバで実行されるか | いいえ |
 
-Implement `firstUpdated()` to perform one-time work after the component's DOM has been created. Some examples might include focusing a particular rendered element or adding a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) or [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to an element.
+Implement `firstUpdated()` to perform one-time work after the component's DOM has been created.
+Some examples might include focusing a particular rendered element or adding a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) or [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to an element.
 
 ```js
 firstUpdated() {
