@@ -321,11 +321,11 @@ render() {
 }
 ```
 
-### Completing an update {#reactive-update-cycle-completing}
+### 更新の完了 
 
-After `update()` is called to render changes to the component's DOM, you can perform actions on the component's DOM using these methods.
+変更をコンポーネントのDOMにレンダリングするために`update()`を実行した後、以下のメソッドを使ってコンポーネントのDOMを操作することができます。
 
-#### firstUpdated() {#firstupdated}
+#### firstUpdated()
 
 Called after the component's DOM has been updated the first time, immediately before [`updated()`](#updated) is called.
 
@@ -344,7 +344,7 @@ firstUpdated() {
 }
 ```
 
-#### updated() {#updated}
+#### updated()
 
 Called whenever the component’s update finishes and the element's DOM has been updated and rendered.
 
@@ -402,7 +402,7 @@ There are several use cases for needing to know when an element's update has com
 
 The `updateComplete` promise rejects if there's an unhandled error during the update cycle. For more information, see [Handling errors in the update cycle](#errors-in-the-update-cycle).
 
-### Handling errors in the update cycle {#errors-in-the-update-cycle}
+### Handling errors in the update cycle
 
 If you have an uncaught exception in a lifecycle method like `render()` or `update()`, it  causes the `updateComplete` promise to reject.
 If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a `try`/`catch` statement.
@@ -425,11 +425,11 @@ window.onunhandledrejection = function(e) {
 }
 ```
 
-### Implementing additional customization {#reactive-update-cycle-customizing}
+### Implementing additional customization
 
 This section covers some less-common methods for customizing the update cycle.
 
-#### scheduleUpdate() {#scheduleupdate}
+#### scheduleUpdate()
 
 Override `scheduleUpdate()` to customize the timing of the update. `scheduleUpdate()` is called when an update is about to be performed, and by default it calls `performUpdate()` immediately. Override it to defer the update—this technique can be used to unblock the main rendering/event thread. 
 
@@ -464,7 +464,7 @@ This example shows an [async function](https://developer.mozilla.org/en-US/docs/
 {% endaside %}
 
 
-#### performUpdate()  {#performupdate}
+#### performUpdate()
 
 Implements the reactive update cycle, calling the other methods, like `shouldUpdate()`, `update()`, and `updated()`.
 
@@ -478,12 +478,12 @@ If you want to customize how updates are scheduled, override `scheduleUpdate()`.
 
 {% endaside %}
 
-#### hasUpdated  {#hasupdated}
+#### hasUpdated
 
 The `hasUpdated` property returns true if the component has updated at least once. You can use `hasUpdated` in any of the lifecycle methods to perform work only if the component has not yet updated.
 
 
-#### getUpdateComplete() {#getUpdateComplete}
+#### getUpdateComplete()
 
 To await additional conditions before fulfilling the `updateComplete` promise, override the `getUpdateComplete()` method. For example, it may be useful to await the update of a child element. First await `super.getUpdateComplete()`, then any subsequent state.
 
@@ -508,7 +508,7 @@ In addition to component classes implementing lifecycle callbacks, external code
 
 Lit offers two concepts for external code to integrate with the reactive update lifecycle: `static addInitializer()` and `addController()`:
 
-#### static addInitializer() {#addInitializer}
+#### static addInitializer()
 
 `addInitializer()` allows code that has access to a Lit class definition to run code when instances of the class are constructed.
 
@@ -558,15 +558,15 @@ subclass does not add it to a superclass. Since initializers are run in
 constructors, initializers will run in order of the class hierarchy,
 starting with superclasses and progressing to the instance's class.
 
-#### addController() {#addController}
+#### addController()
 
 `addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the [Reactive Controller](https://lit.dev/docs/composition/controllers/) docs for more information.
 
-#### removeController() {#removeController}
+#### removeController()
 
 `removeController()` removes a reactive controller so it no longer receives lifecycle callbacks from this component.
 
-## Server-side reactive update cycle {#server-reactive-update-cycle}
+## Server-side reactive update cycle
 
 <div class="alert alert-info">
 
