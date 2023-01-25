@@ -336,8 +336,8 @@ render() {
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | いいえ |
 
-Implement `firstUpdated()` to perform one-time work after the component's DOM has been created.
-Some examples might include focusing a particular rendered element or adding a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) or [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to an element.
+`firstUpdated()`には初回にコンポーネントのDOMが生成された後に１回だけ実行したい処理を実装します。
+例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、[ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)もしくは[IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)を要素に加える処理です。
 
 ```js
 firstUpdated() {
@@ -358,8 +358,6 @@ Called whenever the component’s update finishes and the element's DOM has been
 
 Implement `updated()` to perform tasks that use element DOM after an update. For example, code that performs animation may need to measure the element DOM.
 
-{% switchable-sample %}
-
 ```ts
 updated(changedProperties: Map<string, any>) {
   if (changedProperties.has('collapsed')) {
@@ -367,16 +365,6 @@ updated(changedProperties: Map<string, any>) {
   }
 }
 ```
-
-```js
-updated(changedProperties) {
-  if (changedProperties.has('collapsed')) {
-    this._measureDOM();
-  }
-}
-```
-
-{% endswitchable-sample %}
 
 #### updateComplete
 

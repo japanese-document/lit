@@ -359,8 +359,8 @@ render() {
 <td>いいえ</td>
 </tr>
 </tbody></table>
-<p>Implement <code>firstUpdated()</code> to perform one-time work after the component's DOM has been created.
-Some examples might include focusing a particular rendered element or adding a <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">IntersectionObserver</a> to an element.</p>
+<p><code>firstUpdated()</code>には初回にコンポーネントのDOMが生成された後に１回だけ実行したい処理を実装します。
+例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a>もしくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">IntersectionObserver</a>を要素に加える処理です。</p>
 <pre><code class="language-js">firstUpdated() {
   this.renderRoot.getElementById('my-text-area').focus();
 }
@@ -392,20 +392,12 @@ Some examples might include focusing a particular rendered element or adding a <
 </tr>
 </tbody></table>
 <p>Implement <code>updated()</code> to perform tasks that use element DOM after an update. For example, code that performs animation may need to measure the element DOM.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">updated(changedProperties: Map&lt;string, any&gt;) {
   if (changedProperties.has('collapsed')) {
     this._measureDOM();
   }
 }
 </code></pre>
-<pre><code class="language-js">updated(changedProperties) {
-  if (changedProperties.has('collapsed')) {
-    this._measureDOM();
-  }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h4 id="updateComplete"><a href="#updateComplete">updateComplete</a></h4>
 <p>The <code>updateComplete</code> promise resolves when the element has finished updating. Use <code>updateComplete</code> to wait for an update. The resolved value is a boolean indicating if the element has finished updating. It will be <code>true</code> if there are no pending updates after the update cycle has finished.</p>
 <p>When an element updates, it may cause its children to update as well. By default, the <code>updateComplete</code> promise resolves when the element's update has completed, but does not wait for any children to have completed their updates. This behavior may be customized by overriding <a class="Link" href="#getUpdateComplete"><code>getUpdateComplete</code></a>.</p>
