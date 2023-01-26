@@ -337,7 +337,7 @@ render() {
 | サーバで実行されるか | いいえ |
 
 `firstUpdated()`には初回にコンポーネントのDOMが生成された後に１回だけ実行したい処理を実装します。
-例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、[ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)もしくは[IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)を要素に加える処理です。
+例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、要素に[ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)もしくは[IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)を加える処理です。
 
 ```js
 firstUpdated() {
@@ -347,16 +347,17 @@ firstUpdated() {
 
 #### updated()
 
-Called whenever the component’s update finishes and the element's DOM has been updated and rendered.
+コンポーネントの更新が終了して要素のDOMの更新とレンダリングがされる毎に実行されます。
 
 | | |
 |-|-|
-| Arguments | `changedProperties`: `Map` with keys that are the names of changed properties and  values that are the corresponding previous values. |
-| Updates? | Yes. Property changes inside this method trigger an element update. |
-| Call super? | Not necessary. |
-| Called on server? | No. |
+| 引数 | `changedProperties`: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ`Map` |
+| 更新は発動するか | はい、このメソッド内でプロパティが変更されると新たに更新サイクルがスケジュールされます。 |
+| superを実行する必要があるか | いいえ |
+| サーバで実行されるか | いいえ |
 
-Implement `updated()` to perform tasks that use element DOM after an update. For example, code that performs animation may need to measure the element DOM.
+Implement `updated()` to perform tasks that use element DOM after an update.
+For example, code that performs animation may need to measure the element DOM.
 
 ```ts
 updated(changedProperties: Map<string, any>) {

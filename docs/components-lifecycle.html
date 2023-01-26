@@ -360,13 +360,13 @@ render() {
 </tr>
 </tbody></table>
 <p><code>firstUpdated()</code>には初回にコンポーネントのDOMが生成された後に１回だけ実行したい処理を実装します。
-例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a>もしくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">IntersectionObserver</a>を要素に加える処理です。</p>
+例えば、下記のようにレンダリングされた要素にfocusを当てる処理や、要素に<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a>もしくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">IntersectionObserver</a>を加える処理です。</p>
 <pre><code class="language-js">firstUpdated() {
   this.renderRoot.getElementById('my-text-area').focus();
 }
 </code></pre>
 <h4 id="updated()"><a href="#updated()">updated()</a></h4>
-<p>Called whenever the component’s update finishes and the element's DOM has been updated and rendered.</p>
+<p>コンポーネントの更新が終了して要素のDOMの更新とレンダリングがされる毎に実行されます。</p>
 <table>
 <thead>
 <tr>
@@ -375,23 +375,24 @@ render() {
 </tr>
 </thead>
 <tbody><tr>
-<td>Arguments</td>
-<td><code>changedProperties</code>: <code>Map</code> with keys that are the names of changed properties and  values that are the corresponding previous values.</td>
+<td>引数</td>
+<td><code>changedProperties</code>: 変更されたプロパティ名をキーに持ち、その1つ前の値を値に持つ<code>Map</code></td>
 </tr>
 <tr>
-<td>Updates?</td>
-<td>Yes. Property changes inside this method trigger an element update.</td>
+<td>更新は発動するか</td>
+<td>はい、このメソッド内でプロパティが変更されると新たに更新サイクルがスケジュールされます。</td>
 </tr>
 <tr>
-<td>Call super?</td>
-<td>Not necessary.</td>
+<td>superを実行する必要があるか</td>
+<td>いいえ</td>
 </tr>
 <tr>
-<td>Called on server?</td>
-<td>No.</td>
+<td>サーバで実行されるか</td>
+<td>いいえ</td>
 </tr>
 </tbody></table>
-<p>Implement <code>updated()</code> to perform tasks that use element DOM after an update. For example, code that performs animation may need to measure the element DOM.</p>
+<p>Implement <code>updated()</code> to perform tasks that use element DOM after an update.
+For example, code that performs animation may need to measure the element DOM.</p>
 <pre><code class="language-ts">updated(changedProperties: Map&lt;string, any&gt;) {
   if (changedProperties.has('collapsed')) {
     this._measureDOM();
