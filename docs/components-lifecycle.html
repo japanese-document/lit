@@ -391,8 +391,8 @@ render() {
 <td>いいえ</td>
 </tr>
 </tbody></table>
-<p>Implement <code>updated()</code> to perform tasks that use element DOM after an update.
-For example, code that performs animation may need to measure the element DOM.</p>
+<p>更新の後に要素を使う処理は<code>updated()</code>に実装します。
+例えば、アニメーションを実行するコードでは要素の大きさを計測する必要があるかもしれません。</p>
 <pre><code class="language-ts">updated(changedProperties: Map&lt;string, any&gt;) {
   if (changedProperties.has('collapsed')) {
     this._measureDOM();
@@ -400,7 +400,10 @@ For example, code that performs animation may need to measure the element DOM.</
 }
 </code></pre>
 <h4 id="updateComplete"><a href="#updateComplete">updateComplete</a></h4>
-<p>The <code>updateComplete</code> promise resolves when the element has finished updating. Use <code>updateComplete</code> to wait for an update. The resolved value is a boolean indicating if the element has finished updating. It will be <code>true</code> if there are no pending updates after the update cycle has finished.</p>
+<p><code>updateComplete</code>はPromiseです。これは更新が終了した時に解決されます。
+<code>updateComplete</code>は更新の終了を待つために使います。
+解決した値は要素の更新が終了したかどうかを示すbooleanです。
+それが<code>true</code>なら更新サイクルが終了した後に待機している更新はありません。</p>
 <p>When an element updates, it may cause its children to update as well. By default, the <code>updateComplete</code> promise resolves when the element's update has completed, but does not wait for any children to have completed their updates. This behavior may be customized by overriding <a class="Link" href="#getUpdateComplete"><code>getUpdateComplete</code></a>.</p>
 <p>There are several use cases for needing to know when an element's update has completed:</p>
 <ol>
@@ -431,7 +434,7 @@ If you have code in a lifecycle method that can throw an exception, it's good pr
 </code></pre>
 <p>In some cases, code may throw in unexpected places. As a fallback, you can add a handler for <code>window.onunhandledrejection</code> to catch these issues. For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.</p>
 <pre><code class="language-js">window.onunhandledrejection = function(e) {
-  /* handle error *
+  /* handle error */
 }
 </code></pre>
 <h3 id="Implementing_additional_customization"><a href="#Implementing_additional_customization">Implementing additional customization</a></h3>
