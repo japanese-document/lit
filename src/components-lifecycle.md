@@ -356,8 +356,8 @@ firstUpdated() {
 | superを実行する必要があるか | いいえ |
 | サーバで実行されるか | いいえ |
 
-Implement `updated()` to perform tasks that use element DOM after an update.
-For example, code that performs animation may need to measure the element DOM.
+更新の後に要素を使う処理は`updated()`に実装します。
+例えば、アニメーションを実行するコードでは要素の大きさを計測する必要があるかもしれません。
 
 ```ts
 updated(changedProperties: Map<string, any>) {
@@ -369,7 +369,10 @@ updated(changedProperties: Map<string, any>) {
 
 #### updateComplete
 
-The `updateComplete` promise resolves when the element has finished updating. Use `updateComplete` to wait for an update. The resolved value is a boolean indicating if the element has finished updating. It will be `true` if there are no pending updates after the update cycle has finished.
+`updateComplete`はPromiseです。これは更新が終了した時に解決されます。
+`updateComplete`は更新の終了を待つために使います。
+解決した値は要素の更新が終了したかどうかを示すbooleanです。
+それが`true`なら更新サイクルが終了した後に待機している更新はありません。
 
 When an element updates, it may cause its children to update as well. By default, the `updateComplete` promise resolves when the element's update has completed, but does not wait for any children to have completed their updates. This behavior may be customized by overriding [`getUpdateComplete`](#getUpdateComplete).
 
@@ -411,7 +414,7 @@ In some cases, code may throw in unexpected places. As a fallback, you can add a
 
 ```js
 window.onunhandledrejection = function(e) {
-  /* handle error *
+  /* handle error */
 }
 ```
 
