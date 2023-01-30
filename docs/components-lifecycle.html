@@ -404,7 +404,9 @@ render() {
 <code>updateComplete</code>は更新の終了を待つために使います。
 解決した値は要素の更新が終了したかどうかを示すbooleanです。
 それが<code>true</code>なら更新サイクルが終了した後に待機している更新はありません。</p>
-<p>When an element updates, it may cause its children to update as well. By default, the <code>updateComplete</code> promise resolves when the element's update has completed, but does not wait for any children to have completed their updates. This behavior may be customized by overriding <a class="Link" href="#getUpdateComplete"><code>getUpdateComplete</code></a>.</p>
+<p>要素の更新は、その子要素の更新を引き起こす場合があります。
+デフォルトでは要素の更新が完了すると<code>updateComplete</code> Promiseは解決します。これは、その要素の子要素の更新が完了するまで待ちません。
+この動作は<a class="Link" href="#getUpdateComplete()"><code>getUpdateComplete()</code></a>をオーバーライドすることで変更することができます。</p>
 <p>There are several use cases for needing to know when an element's update has completed:</p>
 <ol>
 <li><p><strong>Tests</strong> When writing tests you can await the <code>updateComplete</code> promise before making assertions about a component’s DOM. If the assertions depend on updates completing for the component's entire descendant tree, awaiting <code>requestAnimationFrame</code> is often a better choice, since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames. This ensures all pending Lit updates on the page have completed before the <code>requestAnimationFrame</code> callback.</p>

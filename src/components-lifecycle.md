@@ -374,7 +374,9 @@ updated(changedProperties: Map<string, any>) {
 解決した値は要素の更新が終了したかどうかを示すbooleanです。
 それが`true`なら更新サイクルが終了した後に待機している更新はありません。
 
-When an element updates, it may cause its children to update as well. By default, the `updateComplete` promise resolves when the element's update has completed, but does not wait for any children to have completed their updates. This behavior may be customized by overriding [`getUpdateComplete`](#getUpdateComplete).
+要素の更新は、その子要素の更新を引き起こす場合があります。
+デフォルトでは要素の更新が完了すると`updateComplete` Promiseは解決します。これは、その要素の子要素の更新が完了するまで待ちません。
+この動作は[`getUpdateComplete()`](#getUpdateComplete())をオーバーライドすることで変更することができます。
 
 There are several use cases for needing to know when an element's update has completed:
 
