@@ -405,15 +405,20 @@ render() {
 解決した値は要素の更新が終了したかどうかを示すbooleanです。
 それが<code>true</code>なら更新サイクルが終了した後に待機している更新はありません。</p>
 <p>要素の更新は、その子要素の更新を引き起こす場合があります。
-デフォルトでは要素の更新が完了すると<code>updateComplete</code> Promiseは解決します。これは、その要素の子要素の更新が完了するまで待ちません。
+デフォルトではその要素の更新が完了すると<code>updateComplete</code> Promiseは解決しますが、その要素の子要素の更新が完了するまで待ちません。
 この動作は<a class="Link" href="#getUpdateComplete()"><code>getUpdateComplete()</code></a>をオーバーライドすることで変更することができます。</p>
-<p>There are several use cases for needing to know when an element's update has completed:</p>
+<p>下記は<code>updateComplete</code>のユースケースです。</p>
 <ol>
-<li><p><strong>Tests</strong> When writing tests you can await the <code>updateComplete</code> promise before making assertions about a component’s DOM. If the assertions depend on updates completing for the component's entire descendant tree, awaiting <code>requestAnimationFrame</code> is often a better choice, since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames. This ensures all pending Lit updates on the page have completed before the <code>requestAnimationFrame</code> callback.</p>
+<li><p><strong>テスト</strong>
+テストを書く時、コンポーネントのDOMをassertする前に<code>updateComplete</code> Promiseを<code>await</code>します。
+If the assertions depend on updates completing for the component's entire descendant tree,
+awaiting <code>requestAnimationFrame</code> is often a better choice,
+since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames.
+This ensures all pending Lit updates on the page have completed before the <code>requestAnimationFrame</code> callback.</p>
 </li>
-<li><p><strong>Measurement</strong> Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await <code>updateComplete</code> after state changes and before measuring. However, because <code>updateComplete</code> does not await the update of all descendants, we recommend using <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a> as a more robust way to trigger measurement code when layouts change.</p>
+<li><p><strong>計測</strong> Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await <code>updateComplete</code> after state changes and before measuring. However, because <code>updateComplete</code> does not await the update of all descendants, we recommend using <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a> as a more robust way to trigger measurement code when layouts change.</p>
 </li>
-<li><p><strong>Events</strong> It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> promise before firing the event.</p>
+<li><p><strong>イベント</strong> It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> promise before firing the event.</p>
 <pre><code class="language-js">async _loginClickHandler() {
   this.loggedIn = true;
   // Wait for `loggedIn` state to be rendered to the DOM

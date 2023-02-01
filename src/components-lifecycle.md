@@ -375,16 +375,21 @@ updated(changedProperties: Map<string, any>) {
 それが`true`なら更新サイクルが終了した後に待機している更新はありません。
 
 要素の更新は、その子要素の更新を引き起こす場合があります。
-デフォルトでは要素の更新が完了すると`updateComplete` Promiseは解決します。これは、その要素の子要素の更新が完了するまで待ちません。
+デフォルトではその要素の更新が完了すると`updateComplete` Promiseは解決しますが、その要素の子要素の更新が完了するまで待ちません。
 この動作は[`getUpdateComplete()`](#getUpdateComplete())をオーバーライドすることで変更することができます。
 
-There are several use cases for needing to know when an element's update has completed:
+下記は`updateComplete`のユースケースです。
 
-1. **Tests** When writing tests you can await the `updateComplete` promise before making assertions about a component’s DOM. If the assertions depend on updates completing for the component's entire descendant tree, awaiting `requestAnimationFrame` is often a better choice, since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames. This ensures all pending Lit updates on the page have completed before the `requestAnimationFrame` callback.
+1. **テスト**
+テストを書く時、コンポーネントのDOMをassertする前に`updateComplete` Promiseを`await`します。
+If the assertions depend on updates completing for the component's entire descendant tree,
+awaiting `requestAnimationFrame` is often a better choice,
+since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames.
+This ensures all pending Lit updates on the page have completed before the `requestAnimationFrame` callback.
 
-2. **Measurement** Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await `updateComplete` after state changes and before measuring. However, because `updateComplete` does not await the update of all descendants, we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
+2. **計測** Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await `updateComplete` after state changes and before measuring. However, because `updateComplete` does not await the update of all descendants, we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
 
-3. **Events** It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the `updateComplete` promise before firing the event.
+3. **イベント** It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the `updateComplete` promise before firing the event.
 
     ```js
     async _loginClickHandler() {
