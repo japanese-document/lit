@@ -378,14 +378,13 @@ updated(changedProperties: Map<string, any>) {
 デフォルトではその要素の更新が完了すると`updateComplete` Promiseは解決しますが、その要素の子要素の更新が完了するまで待ちません。
 この動作は[`getUpdateComplete()`](#getUpdateComplete())をオーバーライドすることで変更することができます。
 
-下記は`updateComplete`のユースケースです。
+下記はコンポーネントの更新が完了することが必要な処理の例です。
 
 1. **テスト**
 テストを書く時、コンポーネントのDOMをassertする前に`updateComplete` Promiseを`await`します。
-If the assertions depend on updates completing for the component's entire descendant tree,
-awaiting `requestAnimationFrame` is often a better choice,
-since Lit's default scheduling uses the browser's microtask queue, which is emptied prior to animation frames.
-This ensures all pending Lit updates on the page have completed before the `requestAnimationFrame` callback.
+しかし、assertする段階でコンポーネントの子孫要素全体の更新が完了している必要がある場合、通常は`requestAnimationFrame`コールバックを使うことを推奨します。
+理由はLitのデフォルトのスケジューリングがブラウザのmicrotaskキューを使っているからです。microtaskキューはanimation frameの前に空になります。
+これによって、ページ内で待機しているすべてのLitの更新が`requestAnimationFrame`コールバックより前で完了します。
 
 2. **計測** Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await `updateComplete` after state changes and before measuring. However, because `updateComplete` does not await the update of all descendants, we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
 
