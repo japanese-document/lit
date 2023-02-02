@@ -386,7 +386,14 @@ updated(changedProperties: Map<string, any>) {
 理由はLitのデフォルトのスケジューリングがブラウザのmicrotaskキューを使っているからです。microtaskキューはanimation frameの前に空になります。
 これによって、ページ内で待機しているすべてのLitの更新が`requestAnimationFrame`コールバックより前で完了します。
 
-2. **計測** Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await `updateComplete` after state changes and before measuring. However, because `updateComplete` does not await the update of all descendants, we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
+2. **測定** 
+目的のレイアウトにするためにDOMを測定する必要があるコンポーネントがあります。
+While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement,
+sometimes CSS limitations make this unavoidable.
+In very simple cases, and if you're measuring Lit or ReactiveElement components,
+it may be sufficient to await `updateComplete` after state changes and before measuring.
+However, because `updateComplete` does not await the update of all descendants,
+we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
 
 3. **イベント** It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the `updateComplete` promise before firing the event.
 
