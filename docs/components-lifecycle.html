@@ -416,13 +416,11 @@ render() {
 これによって、ページ内で待機しているすべてのLitの更新が<code>requestAnimationFrame</code>コールバックより前で完了します。</p>
 </li>
 <li><p><strong>測定</strong> 
-目的のレイアウトにするためにDOMを測定する必要があるコンポーネントがあります。
-While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement,
-sometimes CSS limitations make this unavoidable.
-In very simple cases, and if you're measuring Lit or ReactiveElement components,
-it may be sufficient to await <code>updateComplete</code> after state changes and before measuring.
-However, because <code>updateComplete</code> does not await the update of all descendants,
-we recommend using <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a> as a more robust way to trigger measurement code when layouts change.</p>
+目的のレイアウトにするためにコンポーネントのDOMサイズを測定する必要があるかもしれません。
+レイアウトはJavaScriptを使わずにCSSのみで実装する方が好ましいですが、CSSの制限のために使わざるを得ない場合があります。
+LitやReactiveElementのコンポーネントを測定する際は、ステートを変更した後かつ測定する前に<code>updateComplete</code>をawaitすることで解決できるかもしれません。
+この方法で充分かもしれませんが、<code>updateComplete</code>は子孫要素全体の更新が完了を待ちません。
+だから、レイアウトが変更された時により確実に測定する処理を実行する方法として<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a>を使う方法を推奨します。</p>
 </li>
 <li><p><strong>イベント</strong> It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> promise before firing the event.</p>
 <pre><code class="language-js">async _loginClickHandler() {
