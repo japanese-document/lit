@@ -415,7 +415,14 @@ render() {
 理由はLitのデフォルトのスケジューリングがブラウザのmicrotaskキューを使っているからです。microtaskキューはanimation frameの前に空になります。
 これによって、ページ内で待機しているすべてのLitの更新が<code>requestAnimationFrame</code>コールバックより前で完了します。</p>
 </li>
-<li><p><strong>計測</strong> Some components may need to measure DOM in order to implement certain layouts. While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement, sometimes CSS limitations make this unavoidable. In very simple cases, and if you're measuring Lit or ReactiveElement components, it may be sufficient to await <code>updateComplete</code> after state changes and before measuring. However, because <code>updateComplete</code> does not await the update of all descendants, we recommend using <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a> as a more robust way to trigger measurement code when layouts change.</p>
+<li><p><strong>測定</strong> 
+目的のレイアウトにするためにDOMを測定する必要があるコンポーネントがあります。
+While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement,
+sometimes CSS limitations make this unavoidable.
+In very simple cases, and if you're measuring Lit or ReactiveElement components,
+it may be sufficient to await <code>updateComplete</code> after state changes and before measuring.
+However, because <code>updateComplete</code> does not await the update of all descendants,
+we recommend using <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a> as a more robust way to trigger measurement code when layouts change.</p>
 </li>
 <li><p><strong>イベント</strong> It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> promise before firing the event.</p>
 <pre><code class="language-js">async _loginClickHandler() {
