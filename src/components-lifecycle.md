@@ -387,13 +387,11 @@ updated(changedProperties: Map<string, any>) {
 これによって、ページ内で待機しているすべてのLitの更新が`requestAnimationFrame`コールバックより前で完了します。
 
 2. **測定** 
-目的のレイアウトにするためにDOMを測定する必要があるコンポーネントがあります。
-While it is always better to implement layouts using pure CSS rather than JavaScript-based measurement,
-sometimes CSS limitations make this unavoidable.
-In very simple cases, and if you're measuring Lit or ReactiveElement components,
-it may be sufficient to await `updateComplete` after state changes and before measuring.
-However, because `updateComplete` does not await the update of all descendants,
-we recommend using [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as a more robust way to trigger measurement code when layouts change.
+目的のレイアウトにするためにコンポーネントのDOMサイズを測定する必要があるかもしれません。
+レイアウトはJavaScriptを使わずにCSSのみで実装する方が好ましいですが、CSSの制限のために使わざるを得ない場合があります。
+LitやReactiveElementのコンポーネントを測定する際は、ステートを変更した後かつ測定する前に`updateComplete`をawaitすることで解決できるかもしれません。
+この方法で充分かもしれませんが、`updateComplete`は子孫要素全体の更新が完了を待ちません。
+だから、レイアウトが変更された時により確実に測定する処理を実行する方法として[`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)を使う方法を推奨します。
 
 3. **イベント** It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the `updateComplete` promise before firing the event.
 
