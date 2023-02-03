@@ -422,18 +422,22 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 この方法で充分かもしれませんが、<code>updateComplete</code>は子孫要素全体の更新が完了を待ちません。
 だから、レイアウトが変更された時により確実に測定する処理を実行する方法として<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver"><code>ResizeObserver</code></a>を使う方法を推奨します。</p>
 </li>
-<li><p><strong>イベント</strong> It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the <code>updateComplete</code> promise before firing the event.</p>
+<li><p><strong>イベント</strong>
+レンダリングを完了した後、コンポーネントからイベントをdispatchすることを推奨します。
+そうするとイベントリスナはコンポーネントが完全にレンダリングされたかどうか知ることができます。
+下記のようにイベントをdispatchする前に<code>updateComplete</code> Promiseをawaitします。</p>
 <pre><code class="language-js">async _loginClickHandler() {
   this.loggedIn = true;
-  // Wait for `loggedIn` state to be rendered to the DOM
+  // loggedInステートがレンダリングされてDOMに反映されるまで待ちます。
   await this.updateComplete;
   this.dispatchEvent(new Event('login'));
 }
 </code></pre>
 </li>
 </ol>
-<p>The <code>updateComplete</code> promise rejects if there's an unhandled error during the update cycle. For more information, see <a class="Link" href="#errors-in-the-update-cycle">Handling errors in the update cycle</a>.</p>
-<h3 id="Handling_errors_in_the_update_cycle"><a href="#Handling_errors_in_the_update_cycle">Handling errors in the update cycle</a></h3>
+<p>アップデートサイクル中に未処理のエラーがある場合、<code>updateComplete</code> Promiseはrejectします。
+詳しくは<a class="Link" href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a>を見てください。</p>
+<h3 id="アップデートサイクル中のエラーを取り扱う"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></h3>
 <p>If you have an uncaught exception in a lifecycle method like <code>render()</code> or <code>update()</code>, it  causes the <code>updateComplete</code> promise to reject.
 If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a <code>try</code>/<code>catch</code> statement.</p>
 <p>You may also want to use a <code>try</code>/<code>catch</code> if you're awaiting the <code>updateComplete</code> promise:</p>
@@ -614,7 +618,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#firstUpdated()">firstUpdated()</a></p>
 <p class="h4"><a href="#updated()">updated()</a></p>
 <p class="h4"><a href="#updateComplete">updateComplete</a></p>
-<p class="h3"><a href="#Handling_errors_in_the_update_cycle">Handling errors in the update cycle</a></p>
+<p class="h3"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></p>
 <p class="h3"><a href="#Implementing_additional_customization">Implementing additional customization</a></p>
 <p class="h4"><a href="#scheduleUpdate()">scheduleUpdate()</a></p>
 <p class="h4"><a href="#performUpdate()">performUpdate()</a></p>

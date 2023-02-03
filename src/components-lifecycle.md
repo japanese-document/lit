@@ -393,20 +393,24 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 この方法で充分かもしれませんが、`updateComplete`は子孫要素全体の更新が完了を待ちません。
 だから、レイアウトが変更された時により確実に測定する処理を実行する方法として[`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)を使う方法を推奨します。
 
-3. **イベント** It is a good practice to dispatch events from components after rendering has completed, so that the event's listeners see the fully rendered state of the component. To do so, you can await the `updateComplete` promise before firing the event.
+3. **イベント**
+レンダリングを完了した後、コンポーネントからイベントをdispatchすることを推奨します。
+そうするとイベントリスナはコンポーネントが完全にレンダリングされたかどうか知ることができます。
+下記のようにイベントをdispatchする前に`updateComplete` Promiseをawaitします。
 
     ```js
     async _loginClickHandler() {
       this.loggedIn = true;
-      // Wait for `loggedIn` state to be rendered to the DOM
+      // loggedInステートがレンダリングされてDOMに反映されるまで待ちます。
       await this.updateComplete;
       this.dispatchEvent(new Event('login'));
     }
     ```
 
-The `updateComplete` promise rejects if there's an unhandled error during the update cycle. For more information, see [Handling errors in the update cycle](#errors-in-the-update-cycle).
+アップデートサイクル中に未処理のエラーがある場合、`updateComplete` Promiseはrejectします。
+詳しくは[アップデートサイクル中のエラーを取り扱う](#アップデートサイクル中のエラーを取り扱う)を見てください。
 
-### Handling errors in the update cycle
+### アップデートサイクル中のエラーを取り扱う
 
 If you have an uncaught exception in a lifecycle method like `render()` or `update()`, it  causes the `updateComplete` promise to reject.
 If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a `try`/`catch` statement.
