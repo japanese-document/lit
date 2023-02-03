@@ -175,7 +175,7 @@ class MyPage extends LitElement {
 </code></pre>
 <h2 id="テンプレートがレンダリングされるタイミング"><a href="#テンプレートがレンダリングされるタイミング">テンプレートがレンダリングされるタイミング</a></h2>
 <p>初回のレンダリングの後、
-コンポーネントのリアクティブプロパティが変更されると更新サイクルが始動して、
+コンポーネントのリアクティブプロパティが変更されるとアップデートサイクルが始動して、
 コンポーネントが再レンダリングされます。</p>
 <p>Litはパフォーマンスと効率を最大化するために更新を1回にまとめます。
 1度に複数のプロパティをセットしても、更新は1回のみ発動します。
@@ -184,7 +184,7 @@ class MyPage extends LitElement {
 Litテンプレートは文字列に値を埋め込んでいるだけに見えますが、
 Litはそれを解析して静的なHTMLを1回生成します。
 それ以降は効率的に更新するためにエクスプレッション内の変更された値のみを更新します。</p>
-<p>更新サイクルの詳細は<a class="Link" href="https://lit.dev/docs/components/properties/#when-properties-change">What happens when properties change</a>を見てください。</p>
+<p>アップデートサイクルの詳細は<a class="Link" href="https://lit.dev/docs/components/properties/#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a>を見てください。</p>
 <h2 id="DOMのカプセル化"><a href="#DOMのカプセル化">DOMのカプセル化</a></h2>
 <p>LitはコンポーネントがレンダリングしたDOMをShadow DOMを使ってカプセル化します。
 Shadow DOMはメインのdocumentツリーとは別の独立したDOMツリーを持ちます。

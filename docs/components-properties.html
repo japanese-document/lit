@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-properties.html" />
     <meta property="og:title" content="リアクティブプロパティ" />
-    <meta property="og:description" content="Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブな更新サイクルが発動され、コンポーネントが再レンダリングされます。そして、オプションの設定によって要素の属性を読み書きすることが可能です。class MyElement extends LitElement {  @property()  name: string;}class MyElement extends LitElement {  static properties" />
+    <meta property="og:description" content="Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブアップデートサイクルが発動され、コンポーネントが再レンダリングされます。そして、オプションの設定によって要素の属性を読み書きすることが可能です。class MyElement extends LitElement {  @property()  name: string;}class MyElement extends LitElement {  static propert" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブな更新サイクルが発動され、コンポーネントが再レンダリングされます。そして、オプションの設定によって要素の属性を読み書きすることが可能です。class MyElement extends LitElement {  @property()  name: string;}class MyElement extends LitElement {  static properties" />
+    <meta name="description" content="Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブアップデートサイクルが発動され、コンポーネントが再レンダリングされます。そして、オプションの設定によって要素の属性を読み書きすることが可能です。class MyElement extends LitElement {  @property()  name: string;}class MyElement extends LitElement {  static propert" />
     <title>リアクティブプロパティ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -44,7 +44,7 @@
     <main class="main markdown-body">
       <h1 id="リアクティブプロパティ"><a href="#リアクティブプロパティ">リアクティブプロパティ</a></h1>
 <p>Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。
-リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブな更新サイクルが発動され、コンポーネントが再レンダリングされます。
+リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブアップデートサイクルが発動され、コンポーネントが再レンダリングされます。
 そして、<a class="Link" href="#attribute">オプションの設定</a>によって要素の属性を読み書きすることが可能です。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   @property()
@@ -89,7 +89,7 @@ constructor()
 }
 </code></pre>
 <p>コンポーネントはインターナルリアクティブステートを扱います。
-パブリックプロパティと同様にインターナルリアクティブステートを更新すると更新サイクルが発動します。
+パブリックプロパティと同様にインターナルリアクティブステートを更新するとアップデートサイクルが発動します。
 詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
 <h2 id="パブリックリアクティブプロパティ"><a href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></h2>
 <p>要素のリアクティブプロパティはデコレータもしくは<code>static properties</code>を使って宣言します。</p>
@@ -500,7 +500,7 @@ get prop() { return this._prop; }
 <p>Litが生成したセッタは自動的に<code>requestUpdate()</code>を実行します。
 セッタを変更する場合、上記のようにプロパティ名とその変更前の値を<code>requestUpdate()</code>を渡して実行する必要があります。</p>
 <p>ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
-変更後のプロパティを使った処理を行う場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a>コールバックを使うことを推奨します。この方法では更新サイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
+変更後のプロパティを使った処理を行う場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a>コールバックを使うことを推奨します。この方法ではアップデートサイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
 要素が更新された後に実行される処理を変更したい場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a>コールバックを使うことを推奨します。</p>
 <p>クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
 クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。</p>
