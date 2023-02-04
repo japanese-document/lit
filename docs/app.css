@@ -20,6 +20,18 @@ body {
   font-family: Meiryo,Hiragino Fixed,sans-serif;
 }
 
+body::-webkit-scrollbar-thumb {
+  border: 4px solid transparent;
+  background-clip: content-box;
+  background-color: #808080;
+  border-radius: 8px;
+  height: 64px;
+}
+
+body::-webkit-scrollbar {
+  width: 16px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1000px 1fr;
