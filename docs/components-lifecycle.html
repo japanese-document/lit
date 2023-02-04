@@ -438,16 +438,18 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <p>アップデートサイクル中に未処理のエラーがある場合、<code>updateComplete</code> Promiseはrejectします。
 詳しくは<a class="Link" href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a>を見てください。</p>
 <h3 id="アップデートサイクル中のエラーを取り扱う"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></h3>
-<p><code>render()</code>や<code>update()</code>のようなライフサイクルメソッド内でcatchされない例外が発生は<code>updateComplete</code> Promiseはrejectを引き起します。
-If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a <code>try</code>/<code>catch</code> statement.</p>
-<p>You may also want to use a <code>try</code>/<code>catch</code> if you're awaiting the <code>updateComplete</code> promise:</p>
+<p><code>render()</code>や<code>update()</code>のようなライフサイクルメソッド内でcatchされない例外が発生は<code>updateComplete</code> Promiseのrejectを引き起します。
+ライフサイクルメソッド内のコードで例外がthrowされる可能性がある場合、それを<code>try</code>/<code>catch</code>ステートメントで囲むと良いでしょう。</p>
+<p><code>updateComplete</code> Promiseをawaitする時はそれを<code>try</code>/<code>catch</code>ステートメントで囲むと良いでしょう。</p>
 <pre><code class="language-js">try {
   await this.updateComplete;
 } catch (e) {
-  /* handle error */
+  /* エラーを取り扱う */
 }
 </code></pre>
-<p>In some cases, code may throw in unexpected places. As a fallback, you can add a handler for <code>window.onunhandledrejection</code> to catch these issues. For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.</p>
+<p>In some cases, code may throw in unexpected places.
+As a fallback, you can add a handler for <code>window.onunhandledrejection</code> to catch these issues.
+For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.</p>
 <pre><code class="language-js">window.onunhandledrejection = function(e) {
   /* handle error */
 }
