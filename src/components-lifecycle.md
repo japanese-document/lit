@@ -412,7 +412,7 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 
 ### アップデートサイクル中のエラーを取り扱う
 
-If you have an uncaught exception in a lifecycle method like `render()` or `update()`, it  causes the `updateComplete` promise to reject.
+`render()`や`update()`のようなライフサイクルメソッド内でcatchされない例外が発生は`updateComplete` Promiseはrejectを引き起します。
 If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a `try`/`catch` statement.
 
 You may also want to use a `try`/`catch` if you're awaiting the `updateComplete` promise:
