@@ -412,20 +412,23 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 
 ### アップデートサイクル中のエラーを取り扱う
 
-`render()`や`update()`のようなライフサイクルメソッド内でcatchされない例外が発生は`updateComplete` Promiseはrejectを引き起します。
-If you have code in a lifecycle method that can throw an exception, it's good practice to put it inside a `try`/`catch` statement.
+`render()`や`update()`のようなライフサイクルメソッド内でcatchされない例外が発生は`updateComplete` Promiseのrejectを引き起します。
+ライフサイクルメソッド内のコードで例外がthrowされる可能性がある場合、それを`try`/`catch`ステートメントで囲むと良いでしょう。
 
-You may also want to use a `try`/`catch` if you're awaiting the `updateComplete` promise:
+
+`updateComplete` Promiseをawaitする時はそれを`try`/`catch`ステートメントで囲むと良いでしょう。
 
 ```js
 try {
   await this.updateComplete;
 } catch (e) {
-  /* handle error */
+  /* エラーを取り扱う */
 }
 ```
 
-In some cases, code may throw in unexpected places. As a fallback, you can add a handler for `window.onunhandledrejection` to catch these issues. For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.
+In some cases, code may throw in unexpected places.
+As a fallback, you can add a handler for `window.onunhandledrejection` to catch these issues.
+For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.
 
 ```js
 window.onunhandledrejection = function(e) {
