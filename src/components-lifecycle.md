@@ -426,27 +426,27 @@ try {
 }
 ```
 
-In some cases, code may throw in unexpected places.
-As a fallback, you can add a handler for `window.onunhandledrejection` to catch these issues.
-For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.
+予期しない所でコードがthrowする場合があります。
+すべてのthrowに対応するために、`window.onunhandledrejection`にハンドラをセットします。
+例えば再現することが難しい問題を切り分けるためにバックエンドサービスにエラーレポートを送信するために使います。
 
 ```js
 window.onunhandledrejection = function(e) {
-  /* handle error */
+  /* エラーを取り扱う */
 }
 ```
 
-### Implementing additional customization
+### その他のライフサイクルメソッドの変更
 
-This section covers some less-common methods for customizing the update cycle.
+このセクションでは余り変更することがないライフサイクルメソッドを紹介します。
 
 #### scheduleUpdate()
 
-Override `scheduleUpdate()` to customize the timing of the update. `scheduleUpdate()` is called when an update is about to be performed, and by default it calls `performUpdate()` immediately. Override it to defer the update—this technique can be used to unblock the main rendering/event thread. 
+Override `scheduleUpdate()` to customize the timing of the update.
+`scheduleUpdate()` is called when an update is about to be performed, and by default it calls `performUpdate()` immediately.
+Override it to defer the update—this technique can be used to unblock the main rendering/event thread. 
 
 For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:
-
-{% switchable-sample %}
 
 ```ts
 protected override async scheduleUpdate(): Promise<void> {
@@ -454,15 +454,6 @@ protected override async scheduleUpdate(): Promise<void> {
   super.scheduleUpdate();
 }
 ```
-
-```js
-async scheduleUpdate() {
-  await new Promise((resolve) => setTimeout(resolve));
-  super.scheduleUpdate();
-}
-```
-
-{% endswitchable-sample %}
 
 If you override `scheduleUpdate()`, it's your responsibility to call `super.scheduleUpdate()` to perform the pending update.
 
@@ -525,8 +516,6 @@ Lit offers two concepts for external code to integrate with the reactive update 
 
 This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call `addInitializer()`. It will be common to use this to add a [reactive controller](https://lit.dev/docs/composition/controllers/) so decorators can hook into the component lifecycle:
 
-{% switchable-sample %}
-
 ```ts
 // A TypeScript decorator
 const myDecorator = (proto: ReactiveElement, key: string) => {
@@ -538,22 +527,6 @@ const myDecorator = (proto: ReactiveElement, key: string) => {
   });
 };
 ```
-
-```js
-// A Babel "Stage 2" decorator
-const myDecorator = (descriptor) => {
-  ...descriptor,
-  finisher(ctor) {
-    ctor.addInitializer((instance) => {
-      // This is run during construction of the element
-      new MyController(instance);
-    });
-  },
-};
-```
-
-{% endswitchable-sample %}
-
 
 Decorating a field will then cause each instance to run an initializer
 that adds a controller:
