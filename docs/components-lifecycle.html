@@ -447,30 +447,25 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
   /* エラーを取り扱う */
 }
 </code></pre>
-<p>In some cases, code may throw in unexpected places.
-As a fallback, you can add a handler for <code>window.onunhandledrejection</code> to catch these issues.
-For example, you could use this report errors back to a backend service to help diagnose issues that are hard to reproduce.</p>
+<p>予期しない所でコードがthrowする場合があります。
+すべてのthrowに対応するために、<code>window.onunhandledrejection</code>にハンドラをセットします。
+例えば再現することが難しい問題を切り分けるためにバックエンドサービスにエラーレポートを送信するために使います。</p>
 <pre><code class="language-js">window.onunhandledrejection = function(e) {
-  /* handle error */
+  /* エラーを取り扱う */
 }
 </code></pre>
-<h3 id="Implementing_additional_customization"><a href="#Implementing_additional_customization">Implementing additional customization</a></h3>
-<p>This section covers some less-common methods for customizing the update cycle.</p>
+<h3 id="その他のライフサイクルメソッドの変更"><a href="#その他のライフサイクルメソッドの変更">その他のライフサイクルメソッドの変更</a></h3>
+<p>このセクションでは余り変更することがないライフサイクルメソッドを紹介します。</p>
 <h4 id="scheduleUpdate()"><a href="#scheduleUpdate()">scheduleUpdate()</a></h4>
-<p>Override <code>scheduleUpdate()</code> to customize the timing of the update. <code>scheduleUpdate()</code> is called when an update is about to be performed, and by default it calls <code>performUpdate()</code> immediately. Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
+<p>Override <code>scheduleUpdate()</code> to customize the timing of the update.
+<code>scheduleUpdate()</code> is called when an update is about to be performed, and by default it calls <code>performUpdate()</code> immediately.
+Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
 <p>For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">protected override async scheduleUpdate(): Promise&lt;void&gt; {
   await new Promise((resolve) =&gt; setTimeout(resolve));
   super.scheduleUpdate();
 }
 </code></pre>
-<pre><code class="language-js">async scheduleUpdate() {
-  await new Promise((resolve) =&gt; setTimeout(resolve));
-  super.scheduleUpdate();
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>If you override <code>scheduleUpdate()</code>, it's your responsibility to call <code>super.scheduleUpdate()</code> to perform the pending update.</p>
 <p>{% aside "info" %}</p>
 <p>Async function optional.</p>
@@ -505,7 +500,6 @@ For example, you could use this report errors back to a backend service to help 
 <h4 id="static_addInitializer()"><a href="#static_addInitializer()">static addInitializer()</a></h4>
 <p><code>addInitializer()</code> allows code that has access to a Lit class definition to run code when instances of the class are constructed.</p>
 <p>This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call <code>addInitializer()</code>. It will be common to use this to add a <a class="Link" href="https://lit.dev/docs/composition/controllers/">reactive controller</a> so decorators can hook into the component lifecycle:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// A TypeScript decorator
 const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
   const ctor = proto.constructor as typeof ReactiveElement;
@@ -516,18 +510,6 @@ const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
   });
 };
 </code></pre>
-<pre><code class="language-js">// A Babel "Stage 2" decorator
-const myDecorator = (descriptor) =&gt; {
-  ...descriptor,
-  finisher(ctor) {
-    ctor.addInitializer((instance) =&gt; {
-      // This is run during construction of the element
-      new MyController(instance);
-    });
-  },
-};
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Decorating a field will then cause each instance to run an initializer
 that adds a controller:</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
@@ -621,7 +603,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#updated()">updated()</a></p>
 <p class="h4"><a href="#updateComplete">updateComplete</a></p>
 <p class="h3"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></p>
-<p class="h3"><a href="#Implementing_additional_customization">Implementing additional customization</a></p>
+<p class="h3"><a href="#その他のライフサイクルメソッドの変更">その他のライフサイクルメソッドの変更</a></p>
 <p class="h4"><a href="#scheduleUpdate()">scheduleUpdate()</a></p>
 <p class="h4"><a href="#performUpdate()">performUpdate()</a></p>
 <p class="h4"><a href="#hasUpdated">hasUpdated</a></p>
