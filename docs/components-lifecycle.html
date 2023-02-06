@@ -457,8 +457,8 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <h3 id="その他のライフサイクルメソッドの変更"><a href="#その他のライフサイクルメソッドの変更">その他のライフサイクルメソッドの変更</a></h3>
 <p>このセクションでは余り変更することがないライフサイクルメソッドを紹介します。</p>
 <h4 id="scheduleUpdate()"><a href="#scheduleUpdate()">scheduleUpdate()</a></h4>
-<p>Override <code>scheduleUpdate()</code> to customize the timing of the update.
-<code>scheduleUpdate()</code> is called when an update is about to be performed, and by default it calls <code>performUpdate()</code> immediately.
+<p><code>scheduleUpdate()</code>をオーバーライドすると更新するタイミングを変更することができます。
+<code>scheduleUpdate()</code>は更新が実行される直前に実行されます。デフォルトではすぐに<code>performUpdate()</code>を実行します。
 Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
 <p>For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:</p>
 <pre><code class="language-ts">protected override async scheduleUpdate(): Promise&lt;void&gt; {

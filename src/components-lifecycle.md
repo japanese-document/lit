@@ -442,8 +442,8 @@ window.onunhandledrejection = function(e) {
 
 #### scheduleUpdate()
 
-Override `scheduleUpdate()` to customize the timing of the update.
-`scheduleUpdate()` is called when an update is about to be performed, and by default it calls `performUpdate()` immediately.
+`scheduleUpdate()`をオーバーライドすると更新するタイミングを変更することができます。
+`scheduleUpdate()`は更新が実行される直前に実行されます。デフォルトではすぐに`performUpdate()`を実行します。
 Override it to defer the update—this technique can be used to unblock the main rendering/event thread. 
 
 For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:
