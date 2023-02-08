@@ -459,34 +459,22 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <h4 id="scheduleUpdate()"><a href="#scheduleUpdate()">scheduleUpdate()</a></h4>
 <p><code>scheduleUpdate()</code>をオーバーライドすると更新するタイミングを変更することができます。
 <code>scheduleUpdate()</code>は更新が実行される直前に実行されます。デフォルトではすぐに<code>performUpdate()</code>を実行します。
-Override it to defer the update—this technique can be used to unblock the main rendering/event thread. </p>
-<p>For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:</p>
+<code>scheduleUpdate()</code>をオーバーライドすることで更新の実行を延期することができます。
+これをすることによって更新がメインのレンダリング/イベントスレッドをブロックすることを防ぎます。
+下記のコードは次のフレームの描画の後に更新をスケジュールします。これで更新処理が高コストな場合、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Glossary/Jank">Jank</a>を削減することができます。</p>
 <pre><code class="language-ts">protected override async scheduleUpdate(): Promise&lt;void&gt; {
   await new Promise((resolve) =&gt; setTimeout(resolve));
   super.scheduleUpdate();
 }
 </code></pre>
-<p>If you override <code>scheduleUpdate()</code>, it's your responsibility to call <code>super.scheduleUpdate()</code> to perform the pending update.</p>
-<p>{% aside "info" %}</p>
-<p>Async function optional.</p>
-<p>This example shows an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async function</a> which <em>implicitly</em> returns a promise. You can also write <code>scheduleUpdate()</code> as a function that <em>explictly</em> returns a <code>Promise</code>. In either case, the <strong>next</strong> update doesn't start until the promise returned by <code>scheduleUpdate()</code> resolves. </p>
-<p>{% endaside %}</p>
+<p><code>scheduleUpdate()</code>をオーバーライドする場合、上記のように保留中の更新を実行するために<code>super.scheduleUpdate()</code>を実行する必要があります。</p>
 <h4 id="performUpdate()"><a href="#performUpdate()">performUpdate()</a></h4>
 <p>Implements the reactive update cycle, calling the other methods, like <code>shouldUpdate()</code>, <code>update()</code>, and <code>updated()</code>.</p>
 <p>Call <code>performUpdate()</code> to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call <code>requestUpdate()</code> followed by `performUpdate() to force a synchronous update.)</p>
-<p>{% aside "info" %}</p>
-<p>Use <code>scheduleUpdate()</code> to customize scheduling.</p>
-<p>If you want to customize how updates are scheduled, override <code>scheduleUpdate()</code>. Previously, we recommended overriding <code>performUpdate()</code> for this purpose. That continues to work, but it makes it more difficult to call <code>performUpdate()</code> to process a pending update synchronously. </p>
-<p>{% endaside %}</p>
 <h4 id="hasUpdated"><a href="#hasUpdated">hasUpdated</a></h4>
 <p>The <code>hasUpdated</code> property returns true if the component has updated at least once. You can use <code>hasUpdated</code> in any of the lifecycle methods to perform work only if the component has not yet updated.</p>
 <h4 id="getUpdateComplete()"><a href="#getUpdateComplete()">getUpdateComplete()</a></h4>
 <p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method. For example, it may be useful to await the update of a child element. First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
-<div class="alert alert-info">
-
-<p>It's recommended to override the <code>getUpdateComplete()</code> method instead of the <code>updateComplete</code> getter to ensure compatibility with users who are using TypeScript's ES5 output (see <a class="Link" href="https://github.com/microsoft/TypeScript/issues/338">TypeScript#338</a>).</p>
-</div>
-
 <pre><code class="language-js">class MyElement extends LitElement {
   async getUpdateComplete() {
     await super.getUpdateComplete();

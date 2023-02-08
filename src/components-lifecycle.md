@@ -444,9 +444,9 @@ window.onunhandledrejection = function(e) {
 
 `scheduleUpdate()`をオーバーライドすると更新するタイミングを変更することができます。
 `scheduleUpdate()`は更新が実行される直前に実行されます。デフォルトではすぐに`performUpdate()`を実行します。
-Override it to defer the update—this technique can be used to unblock the main rendering/event thread. 
-
-For example, the following code schedules the update to occur after the next frame paints, which can reduce jank if the update is expensive:
+`scheduleUpdate()`をオーバーライドすることで更新の実行を延期することができます。
+これをすることによって更新がメインのレンダリング/イベントスレッドをブロックすることを防ぎます。
+下記のコードは次のフレームの描画の後に更新をスケジュールします。これで更新処理が高コストな場合、[Jank](https://developer.mozilla.org/en-US/docs/Glossary/Jank)を削減することができます。
 
 ```ts
 protected override async scheduleUpdate(): Promise<void> {
@@ -455,30 +455,13 @@ protected override async scheduleUpdate(): Promise<void> {
 }
 ```
 
-If you override `scheduleUpdate()`, it's your responsibility to call `super.scheduleUpdate()` to perform the pending update.
-
-{% aside "info" %}
-
-Async function optional.
-
-This example shows an [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) which _implicitly_ returns a promise. You can also write `scheduleUpdate()` as a function that _explictly_ returns a `Promise`. In either case, the **next** update doesn't start until the promise returned by `scheduleUpdate()` resolves. 
-
-{% endaside %}
-
+`scheduleUpdate()`をオーバーライドする場合、上記のように保留中の更新を実行するために`super.scheduleUpdate()`を実行する必要があります。
 
 #### performUpdate()
 
 Implements the reactive update cycle, calling the other methods, like `shouldUpdate()`, `update()`, and `updated()`.
 
 Call `performUpdate()` to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call `requestUpdate()` followed by `performUpdate() to force a synchronous update.)
-
-{% aside "info" %}
-
-Use `scheduleUpdate()` to customize scheduling.
-
-If you want to customize how updates are scheduled, override `scheduleUpdate()`. Previously, we recommended overriding `performUpdate()` for this purpose. That continues to work, but it makes it more difficult to call `performUpdate()` to process a pending update synchronously. 
-
-{% endaside %}
 
 #### hasUpdated
 
@@ -488,12 +471,6 @@ The `hasUpdated` property returns true if the component has updated at least onc
 #### getUpdateComplete()
 
 To await additional conditions before fulfilling the `updateComplete` promise, override the `getUpdateComplete()` method. For example, it may be useful to await the update of a child element. First await `super.getUpdateComplete()`, then any subsequent state.
-
-<div class="alert alert-info">
-
-It's recommended to override the `getUpdateComplete()` method instead of the `updateComplete` getter to ensure compatibility with users who are using TypeScript's ES5 output (see [TypeScript#338](https://github.com/microsoft/TypeScript/issues/338)).
-
-</div>
 
 ```js
 class MyElement extends LitElement {
