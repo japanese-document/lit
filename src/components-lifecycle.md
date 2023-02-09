@@ -436,7 +436,7 @@ window.onunhandledrejection = function(e) {
 }
 ```
 
-### その他のライフサイクルメソッドの変更
+### その他のライフサイクルメソッドを変更する
 
 このセクションでは余り変更することがないライフサイクルメソッドを紹介します。
 
@@ -459,9 +459,11 @@ protected override async scheduleUpdate(): Promise<void> {
 
 #### performUpdate()
 
-Implements the reactive update cycle, calling the other methods, like `shouldUpdate()`, `update()`, and `updated()`.
+`performUpdate()`には`shouldUpdate()`、`update()`、`updated()`を実行してリアクティブアップデートサイクルを実行する処理を実装します。
 
-Call `performUpdate()` to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call `requestUpdate()` followed by `performUpdate() to force a synchronous update.)
+`performUpdate()`を実行すると保留中の更新をすぐに実行することができます。
+通常これを使うことはありませんが、同期的に更新を行いたい場合に使います。
+(If there is no update pending, you can call `requestUpdate()` followed by `performUpdate()` to force a synchronous update.)
 
 #### hasUpdated
 
