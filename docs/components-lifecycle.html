@@ -454,7 +454,7 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
   /* エラーを取り扱う */
 }
 </code></pre>
-<h3 id="その他のライフサイクルメソッドの変更"><a href="#その他のライフサイクルメソッドの変更">その他のライフサイクルメソッドの変更</a></h3>
+<h3 id="その他のライフサイクルメソッドを変更する"><a href="#その他のライフサイクルメソッドを変更する">その他のライフサイクルメソッドを変更する</a></h3>
 <p>このセクションでは余り変更することがないライフサイクルメソッドを紹介します。</p>
 <h4 id="scheduleUpdate()"><a href="#scheduleUpdate()">scheduleUpdate()</a></h4>
 <p><code>scheduleUpdate()</code>をオーバーライドすると更新するタイミングを変更することができます。
@@ -469,8 +469,10 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 </code></pre>
 <p><code>scheduleUpdate()</code>をオーバーライドする場合、上記のように保留中の更新を実行するために<code>super.scheduleUpdate()</code>を実行する必要があります。</p>
 <h4 id="performUpdate()"><a href="#performUpdate()">performUpdate()</a></h4>
-<p>Implements the reactive update cycle, calling the other methods, like <code>shouldUpdate()</code>, <code>update()</code>, and <code>updated()</code>.</p>
-<p>Call <code>performUpdate()</code> to immediately process a pending update. This should generally not be needed, but it can be done in rare cases when you need to update synchronously. (If there is no update pending, you can call <code>requestUpdate()</code> followed by `performUpdate() to force a synchronous update.)</p>
+<p><code>performUpdate()</code>には<code>shouldUpdate()</code>、<code>update()</code>、<code>updated()</code>を実行してリアクティブアップデートサイクルを実行する処理を実装します。</p>
+<p><code>performUpdate()</code>を実行すると保留中の更新をすぐに実行することができます。
+通常これを使うことはありませんが、同期的に更新を行いたい場合に使います。
+(If there is no update pending, you can call <code>requestUpdate()</code> followed by <code>performUpdate()</code> to force a synchronous update.)</p>
 <h4 id="hasUpdated"><a href="#hasUpdated">hasUpdated</a></h4>
 <p>The <code>hasUpdated</code> property returns true if the component has updated at least once. You can use <code>hasUpdated</code> in any of the lifecycle methods to perform work only if the component has not yet updated.</p>
 <h4 id="getUpdateComplete()"><a href="#getUpdateComplete()">getUpdateComplete()</a></h4>
@@ -591,7 +593,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#updated()">updated()</a></p>
 <p class="h4"><a href="#updateComplete">updateComplete</a></p>
 <p class="h3"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></p>
-<p class="h3"><a href="#その他のライフサイクルメソッドの変更">その他のライフサイクルメソッドの変更</a></p>
+<p class="h3"><a href="#その他のライフサイクルメソッドを変更する">その他のライフサイクルメソッドを変更する</a></p>
 <p class="h4"><a href="#scheduleUpdate()">scheduleUpdate()</a></p>
 <p class="h4"><a href="#performUpdate()">performUpdate()</a></p>
 <p class="h4"><a href="#hasUpdated">hasUpdated</a></p>
