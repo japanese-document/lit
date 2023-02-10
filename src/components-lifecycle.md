@@ -463,16 +463,19 @@ protected override async scheduleUpdate(): Promise<void> {
 
 `performUpdate()`を実行すると保留中の更新をすぐに実行することができます。
 通常これを使うことはありませんが、同期的に更新を行いたい場合に使います。
-(If there is no update pending, you can call `requestUpdate()` followed by `performUpdate()` to force a synchronous update.)
+(保留中の更新がない場合、`requestUpdate()`を実行して`performUpdate()`が実行されることで同期的な更新を強制することができます。)
 
 #### hasUpdated
 
-The `hasUpdated` property returns true if the component has updated at least once. You can use `hasUpdated` in any of the lifecycle methods to perform work only if the component has not yet updated.
+1回以上コンポーネントが更新されている場合、`hasUpdated`プロパティはtrueを返します。
+`hasUpdated`はライフサイクルメソッド内でコンポーネントが1回も更新されていない時に実行したい処理を実行したい場合に役立ちます。
 
 
 #### getUpdateComplete()
 
-To await additional conditions before fulfilling the `updateComplete` promise, override the `getUpdateComplete()` method. For example, it may be useful to await the update of a child element. First await `super.getUpdateComplete()`, then any subsequent state.
+To await additional conditions before fulfilling the `updateComplete` promise, override the `getUpdateComplete()` method.
+For example, it may be useful to await the update of a child element.
+First await `super.getUpdateComplete()`, then any subsequent state.
 
 ```js
 class MyElement extends LitElement {
