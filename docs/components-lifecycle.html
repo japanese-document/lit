@@ -472,11 +472,14 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <p><code>performUpdate()</code>には<code>shouldUpdate()</code>、<code>update()</code>、<code>updated()</code>を実行してリアクティブアップデートサイクルを実行する処理を実装します。</p>
 <p><code>performUpdate()</code>を実行すると保留中の更新をすぐに実行することができます。
 通常これを使うことはありませんが、同期的に更新を行いたい場合に使います。
-(If there is no update pending, you can call <code>requestUpdate()</code> followed by <code>performUpdate()</code> to force a synchronous update.)</p>
+(保留中の更新がない場合、<code>requestUpdate()</code>を実行して<code>performUpdate()</code>が実行されることで同期的な更新を強制することができます。)</p>
 <h4 id="hasUpdated"><a href="#hasUpdated">hasUpdated</a></h4>
-<p>The <code>hasUpdated</code> property returns true if the component has updated at least once. You can use <code>hasUpdated</code> in any of the lifecycle methods to perform work only if the component has not yet updated.</p>
+<p>1回以上コンポーネントが更新されている場合、<code>hasUpdated</code>プロパティはtrueを返します。
+<code>hasUpdated</code>はライフサイクルメソッド内でコンポーネントが1回も更新されていない時に実行したい処理を実行したい場合に役立ちます。</p>
 <h4 id="getUpdateComplete()"><a href="#getUpdateComplete()">getUpdateComplete()</a></h4>
-<p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method. For example, it may be useful to await the update of a child element. First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
+<p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method.
+For example, it may be useful to await the update of a child element.
+First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   async getUpdateComplete() {
     await super.getUpdateComplete();
