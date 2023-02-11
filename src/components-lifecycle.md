@@ -473,9 +473,9 @@ protected override async scheduleUpdate(): Promise<void> {
 
 #### getUpdateComplete()
 
-To await additional conditions before fulfilling the `updateComplete` promise, override the `getUpdateComplete()` method.
-For example, it may be useful to await the update of a child element.
-First await `super.getUpdateComplete()`, then any subsequent state.
+`updateComplete` Promiseの完了条件を変更するには`getUpdateComplete()`をオーバーライドします。
+例えば、下記のように子要素の更新をawaitすることに利用します。
+最初に`super.getUpdateComplete()`をawaitして、次に処理を追加します。
 
 ```js
 class MyElement extends LitElement {
@@ -486,9 +486,9 @@ class MyElement extends LitElement {
 }
 ```
 
-## External lifecycle hooks: controllers and decorators
+## 外部ライフサイクルフック(コントローラとデコレータ) 
 
-In addition to component classes implementing lifecycle callbacks, external code, such as [decorators](https://lit.dev/docs/components/decorators/) may need to hook into a component's lifecycle.
+コンポーネントクラスにライフサイクルメソッドを実装することに加えて、[デコレータ](https://lit.dev/docs/components/decorators/)のようにクラス外部のコードを使ってコンポーネントのライフサイクルを変更することができます。
 
 Lit offers two concepts for external code to integrate with the reactive update lifecycle: `static addInitializer()` and `addController()`:
 
