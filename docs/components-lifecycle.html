@@ -477,9 +477,9 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <p>1回以上コンポーネントが更新されている場合、<code>hasUpdated</code>プロパティはtrueを返します。
 <code>hasUpdated</code>はライフサイクルメソッド内でコンポーネントが1回も更新されていない時に実行したい処理を実行したい場合に役立ちます。</p>
 <h4 id="getUpdateComplete()"><a href="#getUpdateComplete()">getUpdateComplete()</a></h4>
-<p>To await additional conditions before fulfilling the <code>updateComplete</code> promise, override the <code>getUpdateComplete()</code> method.
-For example, it may be useful to await the update of a child element.
-First await <code>super.getUpdateComplete()</code>, then any subsequent state.</p>
+<p><code>updateComplete</code> Promiseの完了条件を変更するには<code>getUpdateComplete()</code>をオーバーライドします。
+例えば、下記のように子要素の更新をawaitすることに利用します。
+最初に<code>super.getUpdateComplete()</code>をawaitして、次に処理を追加します。</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   async getUpdateComplete() {
     await super.getUpdateComplete();
@@ -487,8 +487,8 @@ First await <code>super.getUpdateComplete()</code>, then any subsequent state.</
   }
 }
 </code></pre>
-<h2 id="External_lifecycle_hooks__controllers_and_decorators"><a href="#External_lifecycle_hooks__controllers_and_decorators">External lifecycle hooks: controllers and decorators</a></h2>
-<p>In addition to component classes implementing lifecycle callbacks, external code, such as <a class="Link" href="https://lit.dev/docs/components/decorators/">decorators</a> may need to hook into a component's lifecycle.</p>
+<h2 id="外部ライフサイクルフック(コントローラとデコレータ)"><a href="#外部ライフサイクルフック(コントローラとデコレータ)">外部ライフサイクルフック(コントローラとデコレータ)</a></h2>
+<p>コンポーネントクラスにライフサイクルメソッドを実装することに加えて、<a class="Link" href="https://lit.dev/docs/components/decorators/">デコレータ</a>のようにクラス外部のコードを使ってコンポーネントのライフサイクルを変更することができます。</p>
 <p>Lit offers two concepts for external code to integrate with the reactive update lifecycle: <code>static addInitializer()</code> and <code>addController()</code>:</p>
 <h4 id="static_addInitializer()"><a href="#static_addInitializer()">static addInitializer()</a></h4>
 <p><code>addInitializer()</code> allows code that has access to a Lit class definition to run code when instances of the class are constructed.</p>
@@ -601,7 +601,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#performUpdate()">performUpdate()</a></p>
 <p class="h4"><a href="#hasUpdated">hasUpdated</a></p>
 <p class="h4"><a href="#getUpdateComplete()">getUpdateComplete()</a></p>
-<p class="h2"><a href="#External_lifecycle_hooks__controllers_and_decorators">External lifecycle hooks: controllers and decorators</a></p>
+<p class="h2"><a href="#外部ライフサイクルフック(コントローラとデコレータ)">外部ライフサイクルフック(コントローラとデコレータ)</a></p>
 <p class="h4"><a href="#static_addInitializer()">static addInitializer()</a></p>
 <p class="h4"><a href="#addController()">addController()</a></p>
 <p class="h4"><a href="#removeController()">removeController()</a></p>
