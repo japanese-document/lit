@@ -490,28 +490,31 @@ class MyElement extends LitElement {
 
 コンポーネントクラスにライフサイクルメソッドを実装することに加えて、[デコレータ](https://lit.dev/docs/components/decorators/)のようにクラス外部のコードを使ってコンポーネントのライフサイクルを変更することができます。
 
-Lit offers two concepts for external code to integrate with the reactive update lifecycle: `static addInitializer()` and `addController()`:
+Litは外部コードをリアクティブアップデートサイクルに統合するために2つの仕組みを提供します。
+それは`static addInitializer()`と`addController()`です。
 
 #### static addInitializer()
 
-`addInitializer()` allows code that has access to a Lit class definition to run code when instances of the class are constructed.
+`addInitializer()`を使うとLitコンポーネントクラスの定義時に、そのクラスインスタンスが生成される時に実行されるコードを登録することができます。
 
-This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call `addInitializer()`. It will be common to use this to add a [reactive controller](https://lit.dev/docs/composition/controllers/) so decorators can hook into the component lifecycle:
+カスタムデコレータを実装する時によく使います。
+デコレータはクラスの定義される時に実行されます。そして、フィールドやメソッドの定義を置き換えることができます。
+インスタンスが生成される時にそれらをする必要がある場合は`addInitializer()`を実行する必要があります。
+通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために[リアクティブコントローラ](https://lit.dev/docs/composition/controllers/)を使います。
 
 ```ts
-// A TypeScript decorator
+// TypeScriptのデコレータ
 const myDecorator = (proto: ReactiveElement, key: string) => {
   const ctor = proto.constructor as typeof ReactiveElement;
 
   ctor.addInitializer((instance: ReactiveElement) => {
-    // This is run during construction of the element
+    // 要素の生成時に実行します。
     new MyController(instance);
   });
 };
 ```
 
-Decorating a field will then cause each instance to run an initializer
-that adds a controller:
+下記のように、フィールドにデコレータをセットすると各インスタンス毎にコントローラを追加するイニシャライザが実行されます。
 
 ```ts
 class MyElement extends LitElement {
@@ -519,20 +522,21 @@ class MyElement extends LitElement {
 }
 ```
 
-Initializers are stored per-constructor. Adding an initializer to a
-subclass does not add it to a superclass. Since initializers are run in
-constructors, initializers will run in order of the class hierarchy,
+Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass.
+Since initializers are run in constructors,
+initializers will run in order of the class hierarchy,
 starting with superclasses and progressing to the instance's class.
 
 #### addController()
 
-`addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the [Reactive Controller](https://lit.dev/docs/composition/controllers/) docs for more information.
+`addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks.
+詳しくは[リアクティブコントローラ](https://lit.dev/docs/composition/controllers/)を見てください。
 
 #### removeController()
 
 `removeController()` removes a reactive controller so it no longer receives lifecycle callbacks from this component.
 
-## Server-side reactive update cycle
+## サーバーサイドリアクティブアップデートサイクル
 
 <div class="alert alert-info">
 
