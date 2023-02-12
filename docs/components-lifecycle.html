@@ -489,35 +489,39 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 </code></pre>
 <h2 id="外部ライフサイクルフック(コントローラとデコレータ)"><a href="#外部ライフサイクルフック(コントローラとデコレータ)">外部ライフサイクルフック(コントローラとデコレータ)</a></h2>
 <p>コンポーネントクラスにライフサイクルメソッドを実装することに加えて、<a class="Link" href="https://lit.dev/docs/components/decorators/">デコレータ</a>のようにクラス外部のコードを使ってコンポーネントのライフサイクルを変更することができます。</p>
-<p>Lit offers two concepts for external code to integrate with the reactive update lifecycle: <code>static addInitializer()</code> and <code>addController()</code>:</p>
+<p>Litは外部コードをリアクティブアップデートサイクルに統合するために2つの仕組みを提供します。
+それは<code>static addInitializer()</code>と<code>addController()</code>です。</p>
 <h4 id="static_addInitializer()"><a href="#static_addInitializer()">static addInitializer()</a></h4>
-<p><code>addInitializer()</code> allows code that has access to a Lit class definition to run code when instances of the class are constructed.</p>
-<p>This is very useful when writing custom decorators. Decorators are run at class definition time, and can do things like replace field and method definitions. If they also need to do work when an instance is created, they must call <code>addInitializer()</code>. It will be common to use this to add a <a class="Link" href="https://lit.dev/docs/composition/controllers/">reactive controller</a> so decorators can hook into the component lifecycle:</p>
-<pre><code class="language-ts">// A TypeScript decorator
+<p><code>addInitializer()</code>を使うとLitコンポーネントクラスの定義時に、そのクラスインスタンスが生成される時に実行されるコードを登録することができます。</p>
+<p>カスタムデコレータを実装する時によく使います。
+デコレータはクラスの定義される時に実行されます。そして、フィールドやメソッドの定義を置き換えることができます。
+インスタンスが生成される時にそれらをする必要がある場合は<code>addInitializer()</code>を実行する必要があります。
+通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を使います。</p>
+<pre><code class="language-ts">// TypeScriptのデコレータ
 const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
   const ctor = proto.constructor as typeof ReactiveElement;
 
   ctor.addInitializer((instance: ReactiveElement) =&gt; {
-    // This is run during construction of the element
+    // 要素の生成時に実行します。
     new MyController(instance);
   });
 };
 </code></pre>
-<p>Decorating a field will then cause each instance to run an initializer
-that adds a controller:</p>
+<p>下記のように、フィールドにデコレータをセットすると各インスタンス毎にコントローラを追加するイニシャライザが実行されます。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   @myDecorator foo;
 }
 </code></pre>
-<p>Initializers are stored per-constructor. Adding an initializer to a
-subclass does not add it to a superclass. Since initializers are run in
-constructors, initializers will run in order of the class hierarchy,
+<p>Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass.
+Since initializers are run in constructors,
+initializers will run in order of the class hierarchy,
 starting with superclasses and progressing to the instance's class.</p>
 <h4 id="addController()"><a href="#addController()">addController()</a></h4>
-<p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks. See the <a class="Link" href="https://lit.dev/docs/composition/controllers/">Reactive Controller</a> docs for more information.</p>
+<p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks.
+詳しくは<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を見てください。</p>
 <h4 id="removeController()"><a href="#removeController()">removeController()</a></h4>
 <p><code>removeController()</code> removes a reactive controller so it no longer receives lifecycle callbacks from this component.</p>
-<h2 id="Server-side_reactive_update_cycle"><a href="#Server-side_reactive_update_cycle">Server-side reactive update cycle</a></h2>
+<h2 id="サーバーサイドリアクティブアップデートサイクル"><a href="#サーバーサイドリアクティブアップデートサイクル">サーバーサイドリアクティブアップデートサイクル</a></h2>
 <div class="alert alert-info">
 
 <p>Lit's <a class="Link" href="https://lit.dev/docs/ssr/overview/">server-side rendering package</a> is currently under active development so the following information is subject to change.</p>
@@ -605,7 +609,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_addInitializer()">static addInitializer()</a></p>
 <p class="h4"><a href="#addController()">addController()</a></p>
 <p class="h4"><a href="#removeController()">removeController()</a></p>
-<p class="h2"><a href="#Server-side_reactive_update_cycle">Server-side reactive update cycle</a></p>
+<p class="h2"><a href="#サーバーサイドリアクティブアップデートサイクル">サーバーサイドリアクティブアップデートサイクル</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>
