@@ -522,10 +522,10 @@ class MyElement extends LitElement {
 }
 ```
 
-Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass.
-Since initializers are run in constructors,
-initializers will run in order of the class hierarchy,
-starting with superclasses and progressing to the instance's class.
+イニシャライザはコンストラクタ毎に格納されます。
+イニシャライザをサブクラスに加えてもスーパークラスには加えられません。
+イニシャライザはコンストラクタで実行されるので、
+イニシャライザはクラスの階層順(スーパークラスからサブクラスの順番)で実行されます。
 
 #### addController()
 

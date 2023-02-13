@@ -512,10 +512,10 @@ const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
   @myDecorator foo;
 }
 </code></pre>
-<p>Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass.
-Since initializers are run in constructors,
-initializers will run in order of the class hierarchy,
-starting with superclasses and progressing to the instance's class.</p>
+<p>イニシャライザはコンストラクタ毎に格納されます。
+イニシャライザをサブクラスに加えてもスーパークラスには加えられません。
+イニシャライザはコンストラクタで実行されるので、
+イニシャライザはクラスの階層順(スーパークラスからサブクラスの順番)で実行されます。</p>
 <h4 id="addController()"><a href="#addController()">addController()</a></h4>
 <p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks.
 詳しくは<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を見てください。</p>
