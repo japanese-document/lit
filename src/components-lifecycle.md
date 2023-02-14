@@ -529,22 +529,19 @@ class MyElement extends LitElement {
 
 #### addController()
 
-`addController()` adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks.
+コンポーネントがコントローラのライフサイクルコールバックを実行するために`addController()`はリアクティブコントローラをLitコンポーネントに追加します。
 詳しくは[リアクティブコントローラ](https://lit.dev/docs/composition/controllers/)を見てください。
 
 #### removeController()
 
-`removeController()` removes a reactive controller so it no longer receives lifecycle callbacks from this component.
+`removeController()`はリアクティブコントローラを削除します。そして、コンポーネントからリアクティブライフサイクルコールバックを受け取らないようにします。
 
 ## サーバーサイドリアクティブアップデートサイクル
 
-<div class="alert alert-info">
+Litの[サーバーサイドレンダリングパッケージ](https://lit.dev/docs/ssr/overview/)は現在開発中なので下記の情報は変更される可能性があります。
 
-Lit's [server-side rendering package](https://lit.dev/docs/ssr/overview/) is currently under active development so the following information is subject to change.
-
-</div>
-
-Not all of the update cycle is called when rendering Lit on the server. The following methods are called on the server.
+Litをサーバでレンダリングする時はすべてのアップデートサイクルが実行されるわけではありません。
+次のメソッドはサーバで実行されます。
 
 ![update-server](/lit/images/components-update-server.jpg)
 
