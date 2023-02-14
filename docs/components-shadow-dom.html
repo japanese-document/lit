@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/components-shadow-dom.html" />
+    <meta property="og:title" content="Shadow DOM" />
+    <meta property="og:description" content="title: Working with Shadow DOMeleventyNavigation:  key: Shadow DOM  parent: Components  order: 6versionLinks:  v1: components/templates/#accessing-nodes-in-the-shadow-domLit components use shadow DOM to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM " />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="title: Working with Shadow DOMeleventyNavigation:  key: Shadow DOM  parent: Components  order: 6versionLinks:  v1: components/templates/#accessing-nodes-in-the-shadow-domLit components use shadow DOM to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM " />
+    <title>Shadow DOM</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <div class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </div></div>
+    <main class="main markdown-body">
+      <h1 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h1>
+<hr>
+<h2 id="title__Working_with_Shadow_DOM_eleventyNavigation____key__Shadow_DOM___parent__Components___order__6_versionLinks____v1__components_templates_#accessing-nodes-in-the-shadow-dom"><a href="#title__Working_with_Shadow_DOM_eleventyNavigation____key__Shadow_DOM___parent__Components___order__6_versionLinks____v1__components_templates_#accessing-nodes-in-the-shadow-dom">title: Working with Shadow DOM
+eleventyNavigation:
+  key: Shadow DOM
+  parent: Components
+  order: 6
+versionLinks:
+  v1: components/templates/#accessing-nodes-in-the-shadow-dom</a></h2>
+<p>Lit components use <a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">shadow DOM</a> to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM tree to an element. DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.</p>
+<p>Shadow DOM provides three benefits:</p>
+<ul>
+<li>DOM scoping. DOM APIs like <code>document.querySelector</code> won't find elements in the
+component's shadow DOM, so it's harder for global scripts to accidentally break your component.</li>
+<li>Style scoping. You can write encapsulated styles for your shadow DOM that don't
+affect the rest of the DOM tree.</li>
+<li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children. You can choose how children are rendered in your component's internal DOM.</li>
+</ul>
+<p>For more information on shadow DOM:</p>
+<ul>
+<li><a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a> on Web Fundamentals.</li>
+<li><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a> on MDN.</li>
+</ul>
+<div class="alert alert-info">
+
+<p><strong>Older browsers.</strong> On older browsers where native shadow DOM isn't available, the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs">web components polyfills</a> may be used. Please note that Lit's <code>polyfill-support</code> module must be loaded along with the web components polyfills. See <a class="Link" href="/docs/tools/requirements/#building-for-legacy-browsers">Requirements for legacy browsers</a> for details.</p>
+</div>
+
+<h2 id="Accessing_nodes_in_the_shadow_DOM"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></h2>
+<p>Lit renders components to its <code>renderRoot</code>, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as <code>this.renderRoot.querySelector()</code>.</p>
+<p>The <code>renderRoot</code> should always be either a shadow root or an element, which share APIs like <code>.querySelectorAll()</code> and <code>.children</code>.</p>
+<p>You can query internal DOM after component initial render (for example, in <code>firstUpdated</code>), or use a getter pattern:</p>
+<pre><code class="language-js">firstUpdated() {
+  this.staticNode = this.renderRoot.querySelector('#static-node');
+}
+
+get _closeButton() {
+  return this.renderRoot.querySelector('#close-button');
+}
+</code></pre>
+<p>LitElement supplies a set of decorators that provide a shorthand way of defining getters like this.</p>
+<h3 id="_query,__queryAll,_and__queryAsync_decorators"><a href="#_query,__queryAll,_and__queryAsync_decorators">@query, @queryAll, and @queryAsync decorators</a></h3>
+<p>The <code>@query</code>, <code>@queryAll</code>, and <code>@queryAsync</code> decorators all provide a convenient way to access nodes in the internal component DOM.</p>
+<div class="alert alert-info">
+
+<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See <a class="Link" href="/docs/components/decorators/">Using decorators</a> for details.</p>
+</div>
+
+<h4 id="_query_{_#query_}"><a href="#_query_{_#query_}">@query { #query }</a></h4>
+<p>Modifies a class property, turning it into a getter that returns a node from the render root. The optional second argument when true performs the DOM query only once and caches the result. This can be used as a performance optimization in cases when the node being queried will not change.</p>
+<pre><code class="language-js">import {LitElement, html} from 'lit';
+import {query} from 'lit/decorators/query.js';
+
+class MyElement extends LitElement {
+  @query('#first')
+  _first;
+
+  render() {
+    return html`
+      &lt;div id="first"&gt;&lt;/div&gt;
+      &lt;div id="second"&gt;&lt;/div&gt;
+    `;
+  }
+}
+</code></pre>
+<p>This decorator is equivalent to:</p>
+<pre><code class="language-js">get _first() {
+  return this.renderRoot?.querySelector('#first') ?? null;
+}
+</code></pre>
+<h4 id="_queryAll_{_#query-all_}"><a href="#_queryAll_{_#query-all_}">@queryAll { #query-all }</a></h4>
+<p>Identical to <code>query</code> except that it returns all matching nodes, instead of a single node. It's the equivalent of calling <code>querySelectorAll</code>.</p>
+<pre><code class="language-js">import {LitElement, html} from 'lit';
+import {queryAll} from 'lit/decorators/queryAll.js';
+
+class MyElement extends LitElement {
+  @queryAll('div')
+  _divs;
+
+  render() {
+    return html`
+      &lt;div id="first"&gt;&lt;/div&gt;
+      &lt;div id="second"&gt;&lt;/div&gt;
+    `;
+  }
+}
+</code></pre>
+<p>Here, <code>_divs</code> would return both <code>&lt;div&gt;</code> elements in the template. For TypeScript, the typing of a <code>@queryAll</code> property is <code>NodeListOf&lt;HTMLElement&gt;</code>. If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:</p>
+<pre><code class="language-js">@queryAll('button')
+_buttons!: NodeListOf&lt;HTMLButtonElement&gt;
+</code></pre>
+<p>The exclamation point (<code>!</code>) after <code>buttons</code> is TypeScript's <a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>. It tells the compiler to treat <code>buttons</code> as always being defined, never <code>null</code> or <code>undefined</code>.</p>
+<h4 id="_queryAsync_{_#query-async_}"><a href="#_queryAsync_{_#query-async_}">@queryAsync { #query-async }</a></h4>
+<p>Similar to <code>@query</code>, except that instead of returning a node directly, it returns a <code>Promise</code> that resolves to that node after any pending element render is completed. Code can use this instead of waiting for the <code>updateComplete</code> promise.</p>
+<p>This is useful, for example, if the node returned by <code>@queryAsync</code> can change as a result of another property change.</p>
+<h2 id="Rendering_children_with_slots_{#slots}"><a href="#Rendering_children_with_slots_{#slots}">Rendering children with slots {#slots}</a></h2>
+<p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children).</p>
+<pre><code class="language-html">&lt;my-element&gt;
+  &lt;p&gt;A child&lt;/p&gt;
+&lt;/my-element&gt;
+</code></pre>
+<p>By default, if an element has a shadow tree, its children don't render at all.</p>
+<p>To render children, your template needs to include one or more <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code> elements</a>, which act as placeholders for child nodes.</p>
+<h3 id="Using_the_slot_element"><a href="#Using_the_slot_element">Using the slot element</a></h3>
+<p>To render an element's children, create a <code>&lt;slot&gt;</code> for them in the element's template. The children aren't <em>moved</em> in the DOM tree, but they're rendered <em>as if</em> they were children of the <code>&lt;slot&gt;</code>. For example:</p>
+<p>{% playground-ide "docs/components/shadowdom/slots/" %}</p>
+<h3 id="Using_named_slots"><a href="#Using_named_slots">Using named slots</a></h3>
+<p>To assign a child to a specific slot, ensure that the child's <code>slot</code> attribute matches the slot's <code>name</code> attribute:</p>
+<ul>
+<li><p><strong>Named slots only accept children with a matching <code>slot</code> attribute.</strong></p>
+<p>For example, <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code> only accepts children with the attribute <code>slot="one"</code>.</p>
+</li>
+<li><p><strong>Children with a <code>slot</code> attribute will only be rendered in a slot with a matching <code>name</code> attribute.</strong></p>
+<p>For example, <code>&lt;p slot="one"&gt;...&lt;/p&gt;</code> will only be placed in <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code>.</p>
+</li>
+</ul>
+<p>{% playground-ide "docs/components/shadowdom/namedslots/" %}</p>
+<h3 id="Specifying_slot_fallback_content_{#fallback}"><a href="#Specifying_slot_fallback_content_{#fallback}">Specifying slot fallback content {#fallback}</a></h3>
+<p>You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.</p>
+<pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
+</code></pre>
+<div class="alert alert-info">
+
+<p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. See <a class="Link" href="/docs/templates/expressions/#non-rendering">non-rendering values</a> for more information.</p>
+</div>
+
+<h2 id="Accessing_slotted_children_{_#accessing-slotted-children_}"><a href="#Accessing_slotted_children_{_#accessing-slotted-children_}">Accessing slotted children { #accessing-slotted-children }</a></h2>
+<p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>
+<p>For example, you can create a getter to access assigned elements for a particular slot:</p>
+<pre><code class="language-js">get _slottedChildren() {
+  const slot = this.shadowRoot.querySelector('slot');
+  return slot.assignedElements({flatten: true});
+}
+</code></pre>
+<p>You can also use the <code>slotchange</code> event to take action when the assigned nodes change.
+The following example extracts the text content of all of the slotted children.</p>
+<pre><code class="language-js">handleSlotchange(e) {
+  const childNodes = e.target.assignedNodes({flatten: true});
+  // ... do something with childNodes ...
+  this.allText = childNodes.map((node) =&gt; {
+    return node.textContent ? node.textContent : ''
+  }).join('');
+}
+
+render() {
+  return html`&lt;slot @slotchange=${this.handleSlotchange}&gt;&lt;/slot&gt;`;
+}
+</code></pre>
+<p>For more information, see <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a> on MDN.</p>
+<h3 id="_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}">@queryAssignedElements and @queryAssignedNodes decorators { #query-assigned-nodes }</a></h3>
+<p><code>@queryAssignedElements</code> and <code>@queryAssignedNodes</code> convert a class property into a getter that returns the result of calling
+<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a> respectively on a given slot in the component's shadow tree.
+Use these to query the elements or nodes assigned to a given slot.</p>
+<p>Both accept an optional object with the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>flatten</code></td>
+<td>Boolean specifying whether to flatten the assigned nodes by replacing any child <code>&lt;slot&gt;</code> elements with their assigned nodes.</td>
+</tr>
+<tr>
+<td><code>slot</code></td>
+<td>Slot name specifying the slot to query. Leave undefined to select the default slot.</td>
+</tr>
+<tr>
+<td><code>selector</code> (<code>queryAssignedElements</code> only)</td>
+<td>If specified, only return assigned elements that match this CSS selector.</td>
+</tr>
+</tbody></table>
+<p>Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.</p>
+<div class="alert alert-info">
+
+<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See <a class="Link" href="/docs/components/decorators/">Using decorators</a> for details.</p>
+</div>
+
+<pre><code class="language-ts">@queryAssignedElements({slot: 'list', selector: '.item'})
+_listItems!: Array&lt;HTMLElement&gt;;
+
+@queryAssignedNodes({slot: 'header', flatten: true})
+_headerNodes!: Array&lt;Node&gt;;
+</code></pre>
+<p>The examples above are equivalent to the following code:</p>
+<pre><code class="language-js">get _listItems() {
+  const slot = this.shadowRoot.querySelector('slot[name=list]');
+  return slot.assignedElements().filter((node) =&gt; node.matches('.item'));
+}
+
+get _headerNodes() {
+  const slot = this.shadowRoot.querySelector('slot[name=header]');
+  return slot.assignedNodes({flatten: true});
+}
+</code></pre>
+<h2 id="Customizing_the_render_root_{#renderroot}"><a href="#Customizing_the_render_root_{#renderroot}">Customizing the render root {#renderroot}</a></h2>
+<p>Each Lit component has a <strong>render root</strong>—a DOM node that serves as a container for its internal DOM.</p>
+<p>By default, LitElement creates an open <code>shadowRoot</code> and renders inside it, producing the following DOM structure:</p>
+<pre><code class="language-html">&lt;my-element&gt;
+  #shadow-root
+    &lt;p&gt;child 1&lt;/p&gt;
+    &lt;p&gt;child 2&lt;/p&gt;
+</code></pre>
+<p>There are two ways to customize the render root used by LitElement:</p>
+<ul>
+<li>Setting <code>shadowRootOptions</code>.</li>
+<li>Implementing the <code>createRenderRoot</code> method.</li>
+</ul>
+<h3 id="Setting_shadowRootOptions"><a href="#Setting_shadowRootOptions">Setting <code>shadowRootOptions</code></a></h3>
+<p>The simplest way to customize the render root is to set the <code>shadowRootOptions</code> static property. The default implementation of <code>createRenderRoot</code> passes <code>shadowRootOptions</code> as the options argument to <code>attachShadow</code> when creating the component's shadow root. It can be set to customize any options allowed in the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a> dictionary, for example <code>mode</code> and <code>delegatesFocus</code>.</p>
+<pre><code class="language-js">class DelegatesFocus extends LitElement {
+  static shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
+}
+</code></pre>
+<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a> on MDN for more information.</p>
+<h3 id="Implementing_createRenderRoot"><a href="#Implementing_createRenderRoot">Implementing <code>createRenderRoot</code></a></h3>
+<p>The default implementation of <code>createRenderRoot</code> creates an open shadow root and adds to it any styles set in the <code>static styles</code> class field. For more information on styling see <a class="Link" href="/docs/components/styles/">Styles</a>.</p>
+<p>To customize a component's render root, implement <code>createRenderRoot</code> and return the node you want the template to render into.</p>
+<p>For example, to render the template into the main DOM tree as your element's children, implement <code>createRenderRoot</code> and return <code>this</code>.</p>
+<div class="alert alert-info">
+
+<p><strong>Rendering into children.</strong> Rendering into children and not shadow DOM is generally not recommended. Your element will not have access to DOM or style scoping, and it will not be able to compose elements into its internal DOM.</p>
+</div>
+
+<p>{% playground-ide "docs/components/shadowdom/renderroot/" %}</p>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#Shadow_DOM">Shadow DOM</a></p>
+<p class="h2"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></p>
+<p class="h3"><a href="#_query,__queryAll,_and__queryAsync_decorators">@query, @queryAll, and @queryAsync decorators</a></p>
+<p class="h4"><a href="#_query_{_#query_}">@query { #query }</a></p>
+<p class="h4"><a href="#_queryAll_{_#query-all_}">@queryAll { #query-all }</a></p>
+<p class="h4"><a href="#_queryAsync_{_#query-async_}">@queryAsync { #query-async }</a></p>
+<p class="h2"><a href="#Rendering_children_with_slots_{#slots}">Rendering children with slots {#slots}</a></p>
+<p class="h3"><a href="#Using_the_slot_element">Using the slot element</a></p>
+<p class="h3"><a href="#Using_named_slots">Using named slots</a></p>
+<p class="h3"><a href="#Specifying_slot_fallback_content_{#fallback}">Specifying slot fallback content {#fallback}</a></p>
+<p class="h2"><a href="#Accessing_slotted_children_{_#accessing-slotted-children_}">Accessing slotted children { #accessing-slotted-children }</a></p>
+<p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}">@queryAssignedElements and @queryAssignedNodes decorators { #query-assigned-nodes }</a></p>
+<p class="h2"><a href="#Customizing_the_render_root_{#renderroot}">Customizing the render root {#renderroot}</a></p>
+<p class="h3"><a href="#Setting_shadowRootOptions">Setting shadowRootOptions</a></p>
+<p class="h3"><a href="#Implementing_createRenderRoot">Implementing createRenderRoot</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
