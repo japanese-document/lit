@@ -517,17 +517,14 @@ const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
 イニシャライザはコンストラクタで実行されるので、
 イニシャライザはクラスの階層順(スーパークラスからサブクラスの順番)で実行されます。</p>
 <h4 id="addController()"><a href="#addController()">addController()</a></h4>
-<p><code>addController()</code> adds a reactive controller to a Lit component so that the component invokes the controller's lifecycle callbacks.
+<p>コンポーネントがコントローラのライフサイクルコールバックを実行するために<code>addController()</code>はリアクティブコントローラをLitコンポーネントに追加します。
 詳しくは<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を見てください。</p>
 <h4 id="removeController()"><a href="#removeController()">removeController()</a></h4>
-<p><code>removeController()</code> removes a reactive controller so it no longer receives lifecycle callbacks from this component.</p>
+<p><code>removeController()</code>はリアクティブコントローラを削除します。そして、コンポーネントからリアクティブライフサイクルコールバックを受け取らないようにします。</p>
 <h2 id="サーバーサイドリアクティブアップデートサイクル"><a href="#サーバーサイドリアクティブアップデートサイクル">サーバーサイドリアクティブアップデートサイクル</a></h2>
-<div class="alert alert-info">
-
-<p>Lit's <a class="Link" href="https://lit.dev/docs/ssr/overview/">server-side rendering package</a> is currently under active development so the following information is subject to change.</p>
-</div>
-
-<p>Not all of the update cycle is called when rendering Lit on the server. The following methods are called on the server.</p>
+<p>Litの<a class="Link" href="https://lit.dev/docs/ssr/overview/">サーバーサイドレンダリングパッケージ</a>は現在開発中なので下記の情報は変更される可能性があります。</p>
+<p>Litをサーバでレンダリングする時はすべてのアップデートサイクルが実行されるわけではありません。
+次のメソッドはサーバで実行されます。</p>
 <p><img alt="update-server" src="/lit/images/components-update-server.jpg"></p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
