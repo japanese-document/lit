@@ -140,6 +140,13 @@ a {
   margin-left: 42px;
 }
 
+/* .markdown-body */
+
+.markdown-body img {
+  display: block;
+  margin: auto;
+}
+
 /* MIT © GitHub */
 
 * {

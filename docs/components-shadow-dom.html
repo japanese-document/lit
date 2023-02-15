@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-shadow-dom.html" />
     <meta property="og:title" content="Shadow DOM" />
-    <meta property="og:description" content="Lit components use shadow DOM to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM tree to an element. DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the pag" />
+    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.Shadow DOMには下記の利点があります。DOM scoping. DOM APIs " />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Lit components use shadow DOM to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM tree to an element. DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the pag" />
+    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.Shadow DOMには下記の利点があります。DOM scoping. DOM APIs " />
     <title>Shadow DOM</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -44,25 +44,17 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h1>
-<p>Lit components use <a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">shadow DOM</a> to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM tree to an element. DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.</p>
-<p>Shadow DOM provides three benefits:</p>
+<p>LitコンポーネントはDOMをカプセル化するために<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM</a>を使います。
+Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
+DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.</p>
+<p>Shadow DOMには下記の利点があります。</p>
 <ul>
-<li>DOM scoping. DOM APIs like <code>document.querySelector</code> won't find elements in the
-component's shadow DOM, so it's harder for global scripts to accidentally break your component.</li>
-<li>Style scoping. You can write encapsulated styles for your shadow DOM that don't
-affect the rest of the DOM tree.</li>
-<li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children. You can choose how children are rendered in your component's internal DOM.</li>
+<li>DOM scoping. DOM APIs like <code>document.querySelector</code> won't find elements in the component's shadow DOM, so it's harder for global scripts to accidentally break your component.</li>
+<li>Style scoping. You can write encapsulated styles for your shadow DOM that don't affect the rest of the DOM tree.</li>
+<li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
+You can choose how children are rendered in your component's internal DOM.</li>
 </ul>
-<p>For more information on shadow DOM:</p>
-<ul>
-<li><a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a> on Web Fundamentals.</li>
-<li><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a> on MDN.</li>
-</ul>
-<div class="alert alert-info">
-
-<p><strong>Older browsers.</strong> On older browsers where native shadow DOM isn't available, the <a class="Link" href="https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs">web components polyfills</a> may be used. Please note that Lit's <code>polyfill-support</code> module must be loaded along with the web components polyfills. See <a class="Link" href="/docs/tools/requirements/#building-for-legacy-browsers">Requirements for legacy browsers</a> for details.</p>
-</div>
-
+<p>Shadow DOMに関する詳しい用法は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
 <h2 id="Accessing_nodes_in_the_shadow_DOM"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></h2>
 <p>Lit renders components to its <code>renderRoot</code>, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as <code>this.renderRoot.querySelector()</code>.</p>
 <p>The <code>renderRoot</code> should always be either a shadow root or an element, which share APIs like <code>.querySelectorAll()</code> and <code>.children</code>.</p>
