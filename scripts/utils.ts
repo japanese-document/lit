@@ -88,13 +88,13 @@ export function createHTML(
   layout: string, title: string, body: string, description: string, url: string,
   cssPath: string, indexMenu: string, headerList: string) {
   const html = layout
-    .replaceAll(TITLE, DOMPurify.sanitize(title))
-    .replace(BODY, DOMPurify.sanitize(body))
-    .replaceAll(DESCRIPTION, DOMPurify.sanitize(description))
-    .replace(URL, DOMPurify.sanitize(url))
-    .replace(CSS, DOMPurify.sanitize(cssPath))
-    .replace(INDEX, DOMPurify.sanitize(indexMenu))
-    .replace(HEADER, DOMPurify.sanitize(headerList))
+    .replaceAll(TITLE, () => DOMPurify.sanitize(title))
+    .replace(BODY, () => DOMPurify.sanitize(body))
+    .replaceAll(DESCRIPTION, () => DOMPurify.sanitize(description))
+    .replace(URL, () => DOMPurify.sanitize(url))
+    .replace(CSS, () => DOMPurify.sanitize(cssPath))
+    .replace(INDEX, () => DOMPurify.sanitize(indexMenu))
+    .replace(HEADER, () => DOMPurify.sanitize(headerList))
   return html
 }
 

@@ -2,27 +2,19 @@
 ---
 # Shadow DOM
 
-Lit components use [shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom) to encapsulate their DOM. Shadow DOM provides a way to add a separate isolated and encapsulated DOM tree to an element. DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.
+LitコンポーネントはDOMをカプセル化するために[Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)を使います。
+Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
+DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.
 
-Shadow DOM provides three benefits:
+Shadow DOMには下記の利点があります。
 
-* DOM scoping. DOM APIs like `document.querySelector` won't find elements in the
-  component's shadow DOM, so it's harder for global scripts to accidentally break your component.
-* Style scoping. You can write encapsulated styles for your shadow DOM that don't
-  affect the rest of the DOM tree.
-* Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children. You can choose how children are rendered in your component's internal DOM.
+* DOM scoping. DOM APIs like `document.querySelector` won't find elements in the component's shadow DOM, so it's harder for global scripts to accidentally break your component.
+* Style scoping. You can write encapsulated styles for your shadow DOM that don't affect the rest of the DOM tree.
+* Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
+You can choose how children are rendered in your component's internal DOM.
 
-For more information on shadow DOM:
+Shadow DOMに関する詳しい用法は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
 
-* [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom) on Web Fundamentals.
-* [Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on MDN.
-
-
-<div class="alert alert-info">
-
-**Older browsers.** On older browsers where native shadow DOM isn't available, the [web components polyfills](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs) may be used. Please note that Lit's `polyfill-support` module must be loaded along with the web components polyfills. See [Requirements for legacy browsers](/docs/tools/requirements/#building-for-legacy-browsers) for details.
-
-</div>
 
 ## Accessing nodes in the shadow DOM
 
