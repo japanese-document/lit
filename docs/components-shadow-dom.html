@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-shadow-dom.html" />
     <meta property="og:title" content="Shadow DOM" />
-    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOM scoping. DOM APIs like document.querySelector won't find elements in the component's shadow DOM, " />
+    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOM scoping. DOM APIs like document.querySelector won't find elements in the component's shadow DOM, " />
+    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを" />
     <title>Shadow DOM</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -49,8 +49,8 @@ Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセ�
 DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。</p>
 <p>Shadow DOMには下記の利点があります。</p>
 <ul>
-<li>DOM scoping. DOM APIs like <code>document.querySelector</code> won't find elements in the component's shadow DOM, so it's harder for global scripts to accidentally break your component.</li>
-<li>Style scoping. You can write encapsulated styles for your shadow DOM that don't affect the rest of the DOM tree.</li>
+<li>DOMの公開範囲を限定します。<code>document.querySelector</code>のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低くします。</li>
+<li>スタイルの適用範囲を限定します。Shadow DOMのカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。</li>
 <li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
 You can choose how children are rendered in your component's internal DOM.</li>
 </ul>
