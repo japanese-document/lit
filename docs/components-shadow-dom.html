@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-shadow-dom.html" />
     <meta property="og:title" content="Shadow DOM" />
-    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.Shadow DOMには下記の利点があります。DOM scoping. DOM APIs " />
+    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOM scoping. DOM APIs like document.querySelector won't find elements in the component's shadow DOM, " />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.Shadow DOMには下記の利点があります。DOM scoping. DOM APIs " />
+    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOM scoping. DOM APIs like document.querySelector won't find elements in the component's shadow DOM, " />
     <title>Shadow DOM</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -46,7 +46,7 @@
       <h1 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h1>
 <p>LitコンポーネントはDOMをカプセル化するために<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM</a>を使います。
 Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
-DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.</p>
+DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。</p>
 <p>Shadow DOMには下記の利点があります。</p>
 <ul>
 <li>DOM scoping. DOM APIs like <code>document.querySelector</code> won't find elements in the component's shadow DOM, so it's harder for global scripts to accidentally break your component.</li>
@@ -54,7 +54,7 @@ DOM encapsulation is the key to unlocking interoperability with any other code�
 <li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
 You can choose how children are rendered in your component's internal DOM.</li>
 </ul>
-<p>Shadow DOMに関する詳しい用法は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
+<p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
 <h2 id="Accessing_nodes_in_the_shadow_DOM"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></h2>
 <p>Lit renders components to its <code>renderRoot</code>, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as <code>this.renderRoot.querySelector()</code>.</p>
 <p>The <code>renderRoot</code> should always be either a shadow root or an element, which share APIs like <code>.querySelectorAll()</code> and <code>.children</code>.</p>
