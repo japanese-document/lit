@@ -4,7 +4,7 @@
 
 LitコンポーネントはDOMをカプセル化するために[Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)を使います。
 Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
-DOM encapsulation is the key to unlocking interoperability with any other code—including other web components or Lit components—functioning on the page.
+DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。
 
 Shadow DOMには下記の利点があります。
 
@@ -13,7 +13,7 @@ Shadow DOMには下記の利点があります。
 * Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
 You can choose how children are rendered in your component's internal DOM.
 
-Shadow DOMに関する詳しい用法は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
+Shadow DOMに関する詳しい情報は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
 
 
 ## Accessing nodes in the shadow DOM
