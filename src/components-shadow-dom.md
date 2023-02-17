@@ -10,13 +10,12 @@ Shadow DOMには下記の利点があります。
 
 * DOMの公開範囲を限定します。`document.querySelector`のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低くします。
 * スタイルの適用範囲を限定します。Shadow DOMのカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。
-* Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
-You can choose how children are rendered in your component's internal DOM.
+* 組み合わせることができます。コンポーネントのshadow rootはコンポーネントのDOMを保有しますが、そのコンポーネントの子コンポーネントからは分離されています。親コンポーネントと子コンポーネント間で相互に相手のDOMにアクセスすることはできません。
 
 Shadow DOMに関する詳しい情報は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
 
 
-## Accessing nodes in the shadow DOM
+## Shadow DOM内のNodeにアクセスする
 
 
 Lit renders components to its `renderRoot`, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as `this.renderRoot.querySelector()`.

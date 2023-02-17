@@ -51,11 +51,10 @@ DOMのカプセル化はページ内で動作する(Web componentsやLitコン�
 <ul>
 <li>DOMの公開範囲を限定します。<code>document.querySelector</code>のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低くします。</li>
 <li>スタイルの適用範囲を限定します。Shadow DOMのカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。</li>
-<li>Composition. The component's shadow root, which contains its internal DOM, is separate from the component's children.
-You can choose how children are rendered in your component's internal DOM.</li>
+<li>組み合わせることができます。コンポーネントのshadow rootはコンポーネントのDOMを保有しますが、そのコンポーネントの子コンポーネントからは分離されています。親コンポーネントと子コンポーネント間で相互に相手のDOMにアクセスすることはできません。</li>
 </ul>
 <p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
-<h2 id="Accessing_nodes_in_the_shadow_DOM"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></h2>
+<h2 id="Shadow_DOM内のNodeにアクセスする"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></h2>
 <p>Lit renders components to its <code>renderRoot</code>, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as <code>this.renderRoot.querySelector()</code>.</p>
 <p>The <code>renderRoot</code> should always be either a shadow root or an element, which share APIs like <code>.querySelectorAll()</code> and <code>.children</code>.</p>
 <p>You can query internal DOM after component initial render (for example, in <code>firstUpdated</code>), or use a getter pattern:</p>
@@ -292,7 +291,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#Shadow_DOM">Shadow DOM</a></p>
-<p class="h2"><a href="#Accessing_nodes_in_the_shadow_DOM">Accessing nodes in the shadow DOM</a></p>
+<p class="h2"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></p>
 <p class="h3"><a href="#_query,__queryAll,_and__queryAsync_decorators">@query, @queryAll, and @queryAsync decorators</a></p>
 <p class="h4"><a href="#_query_{_#query_}">@query { #query }</a></p>
 <p class="h4"><a href="#_queryAll_{_#query-all_}">@queryAll { #query-all }</a></p>
