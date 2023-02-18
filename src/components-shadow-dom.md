@@ -14,15 +14,15 @@ Shadow DOMには下記の利点があります。
 
 Shadow DOMに関する詳しい情報は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
 
-
 ## Shadow DOM内のNodeにアクセスする
 
+Litは`renderRoot`にコンポーネントをレンダリングします。`renderRoot`はデフォルトでshadow rootです。
+コンポーネント内の要素を取得するために`this.renderRoot.querySelector()`のようなDOMクエリーAPIを使います。
 
-Lit renders components to its `renderRoot`, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as `this.renderRoot.querySelector()`.
+`renderRoot`はshadow rootもしくは1つの要素です。それらは`.querySelectorAll()`や`.children`のようなAPIを持ちます。
 
-The `renderRoot` should always be either a shadow root or an element, which share APIs like `.querySelectorAll()` and `.children`.
-
-You can query internal DOM after component initial render (for example, in `firstUpdated`), or use a getter pattern:
+下記の例では、(`firstUpdated`で)コンポーネントの最初のレンダリングの後にコンポーネント内のDOMを取得しています。
+また、ゲッタでコンポーネント内のDOMを取得しています。
 
 ```js
 firstUpdated() {
@@ -34,21 +34,17 @@ get _closeButton() {
 }
 ```
 
-LitElement supplies a set of decorators that provide a shorthand way of defining getters like this.
+LitElementは上記のゲッタの処理を省略して書くためのデコレータのセットを用意しています。
 
-### @query, @queryAll, and @queryAsync decorators
+### @query、@queryAll、@queryAsyncデコレータ
 
-The `@query`, `@queryAll`, and `@queryAsync` decorators all provide a convenient way to access nodes in the internal component DOM.
+@query、@queryAll、@queryAsyncデコレータを使うとコンポーネント内にあるNodeに簡単にアクセスすることができます。
 
-<div class="alert alert-info">
+#### @query
 
-**Using decorators.** Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See [Using decorators](/docs/components/decorators/) for details.
-
-</div>
-
-#### @query { #query }
-
-Modifies a class property, turning it into a getter that returns a node from the render root. The optional second argument when true performs the DOM query only once and caches the result. This can be used as a performance optimization in cases when the node being queried will not change.
+Modifies a class property, turning it into a getter that returns a node from the render root.
+The optional second argument when true performs the DOM query only once and caches the result.
+This can be used as a performance optimization in cases when the node being queried will not change.
 
 ```js
 import {LitElement, html} from 'lit';
@@ -75,9 +71,10 @@ get _first() {
 }
 ```
 
-#### @queryAll { #query-all }
+#### @queryAll
 
-Identical to `query` except that it returns all matching nodes, instead of a single node. It's the equivalent of calling `querySelectorAll`.
+Identical to `query` except that it returns all matching nodes, instead of a single node.
+It's the equivalent of calling `querySelectorAll`.
 
 ```js
 import {LitElement, html} from 'lit';
@@ -105,13 +102,13 @@ _buttons!: NodeListOf<HTMLButtonElement>
 
 The exclamation point (`!`) after `buttons` is TypeScript's [non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator). It tells the compiler to treat `buttons` as always being defined, never `null` or `undefined`.
 
-#### @queryAsync { #query-async }
+#### @queryAsync
 
 Similar to `@query`, except that instead of returning a node directly, it returns a `Promise` that resolves to that node after any pending element render is completed. Code can use this instead of waiting for the `updateComplete` promise.
 
 This is useful, for example, if the node returned by `@queryAsync` can change as a result of another property change.
 
-## Rendering children with slots {#slots}
+## Rendering children with slots
 
 Your component may accept children (like a `<ul>` element can have `<li>` children).
 
@@ -144,7 +141,7 @@ To assign a child to a specific slot, ensure that the child's `slot` attribute m
 
 {% playground-ide "docs/components/shadowdom/namedslots/" %}
 
-### Specifying slot fallback content {#fallback}
+### Specifying slot fallback content
 
 You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.
 
@@ -158,7 +155,7 @@ You can specify fallback content for a slot. The fallback content is shown when 
 
 </div>
 
-## Accessing slotted children { #accessing-slotted-children }
+## Accessing slotted children
 
 To access children assigned to slots in your shadow root, you can use the standard `slot.assignedNodes` or `slot.assignedElements` methods with the `slotchange` event.
 
@@ -190,7 +187,7 @@ render() {
 
 For more information, see [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement) on MDN.
 
-### @queryAssignedElements and @queryAssignedNodes decorators { #query-assigned-nodes }
+### @queryAssignedElements and @queryAssignedNodes decorators
 
 `@queryAssignedElements` and `@queryAssignedNodes` convert a class property into a getter that returns the result of calling
 [`slot.assignedElements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements) or [`slot.assignedNodes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes) respectively on a given slot in the component's shadow tree.

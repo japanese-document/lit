@@ -89,12 +89,12 @@ export function createHTML(
   cssPath: string, indexMenu: string, headerList: string) {
   const html = layout
     .replaceAll(TITLE, () => DOMPurify.sanitize(title))
-    .replace(BODY, () => DOMPurify.sanitize(body))
     .replaceAll(DESCRIPTION, () => DOMPurify.sanitize(description))
     .replace(URL, () => DOMPurify.sanitize(url))
     .replace(CSS, () => DOMPurify.sanitize(cssPath))
     .replace(INDEX, () => DOMPurify.sanitize(indexMenu))
     .replace(HEADER, () => DOMPurify.sanitize(headerList))
+    .replace(BODY, () => DOMPurify.sanitize(body))
   return html
 }
 
