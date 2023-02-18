@@ -55,9 +55,11 @@ DOMのカプセル化はページ内で動作する(Web componentsやLitコン�
 </ul>
 <p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
 <h2 id="Shadow_DOM内のNodeにアクセスする"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></h2>
-<p>Lit renders components to its <code>renderRoot</code>, which is a shadow root by default. To find internal elements, you can use DOM query APIs, such as <code>this.renderRoot.querySelector()</code>.</p>
-<p>The <code>renderRoot</code> should always be either a shadow root or an element, which share APIs like <code>.querySelectorAll()</code> and <code>.children</code>.</p>
-<p>You can query internal DOM after component initial render (for example, in <code>firstUpdated</code>), or use a getter pattern:</p>
+<p>Litは<code>renderRoot</code>にコンポーネントをレンダリングします。<code>renderRoot</code>はデフォルトでshadow rootです。
+コンポーネント内の要素を取得するために<code>this.renderRoot.querySelector()</code>のようなDOMクエリーAPIを使います。</p>
+<p><code>renderRoot</code>はshadow rootもしくは1つの要素です。それらは<code>.querySelectorAll()</code>や<code>.children</code>のようなAPIを持ちます。</p>
+<p>下記の例では、(<code>firstUpdated</code>で)コンポーネントの最初のレンダリングの後にコンポーネント内のDOMを取得しています。
+また、ゲッタでコンポーネント内のDOMを取得しています。</p>
 <pre><code class="language-js">firstUpdated() {
   this.staticNode = this.renderRoot.querySelector('#static-node');
 }
@@ -66,16 +68,13 @@ get _closeButton() {
   return this.renderRoot.querySelector('#close-button');
 }
 </code></pre>
-<p>LitElement supplies a set of decorators that provide a shorthand way of defining getters like this.</p>
-<h3 id="_query,__queryAll,_and__queryAsync_decorators"><a href="#_query,__queryAll,_and__queryAsync_decorators">@query, @queryAll, and @queryAsync decorators</a></h3>
-<p>The <code>@query</code>, <code>@queryAll</code>, and <code>@queryAsync</code> decorators all provide a convenient way to access nodes in the internal component DOM.</p>
-<div class="alert alert-info">
-
-<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See <a class="Link" href="/docs/components/decorators/">Using decorators</a> for details.</p>
-</div>
-
-<h4 id="_query_{_#query_}"><a href="#_query_{_#query_}">@query { #query }</a></h4>
-<p>Modifies a class property, turning it into a getter that returns a node from the render root. The optional second argument when true performs the DOM query only once and caches the result. This can be used as a performance optimization in cases when the node being queried will not change.</p>
+<p>LitElementは上記のゲッタの処理を省略して書くためのデコレータのセットを用意しています。</p>
+<h3 id="_query、_queryAll、_queryAsyncデコレータ"><a href="#_query、_queryAll、_queryAsyncデコレータ">@query、@queryAll、@queryAsyncデコレータ</a></h3>
+<p>@query、@queryAll、@queryAsyncデコレータを使うとコンポーネント内にあるNodeに簡単にアクセスすることができます。</p>
+<h4 id="_query"><a href="#_query">@query</a></h4>
+<p>Modifies a class property, turning it into a getter that returns a node from the render root.
+The optional second argument when true performs the DOM query only once and caches the result.
+This can be used as a performance optimization in cases when the node being queried will not change.</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
 import {query} from 'lit/decorators/query.js';
 
@@ -96,8 +95,9 @@ class MyElement extends LitElement {
   return this.renderRoot?.querySelector('#first') ?? null;
 }
 </code></pre>
-<h4 id="_queryAll_{_#query-all_}"><a href="#_queryAll_{_#query-all_}">@queryAll { #query-all }</a></h4>
-<p>Identical to <code>query</code> except that it returns all matching nodes, instead of a single node. It's the equivalent of calling <code>querySelectorAll</code>.</p>
+<h4 id="_queryAll"><a href="#_queryAll">@queryAll</a></h4>
+<p>Identical to <code>query</code> except that it returns all matching nodes, instead of a single node.
+It's the equivalent of calling <code>querySelectorAll</code>.</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
 import {queryAll} from 'lit/decorators/queryAll.js';
 
@@ -118,10 +118,10 @@ class MyElement extends LitElement {
 _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </code></pre>
 <p>The exclamation point (<code>!</code>) after <code>buttons</code> is TypeScript's <a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>. It tells the compiler to treat <code>buttons</code> as always being defined, never <code>null</code> or <code>undefined</code>.</p>
-<h4 id="_queryAsync_{_#query-async_}"><a href="#_queryAsync_{_#query-async_}">@queryAsync { #query-async }</a></h4>
+<h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
 <p>Similar to <code>@query</code>, except that instead of returning a node directly, it returns a <code>Promise</code> that resolves to that node after any pending element render is completed. Code can use this instead of waiting for the <code>updateComplete</code> promise.</p>
 <p>This is useful, for example, if the node returned by <code>@queryAsync</code> can change as a result of another property change.</p>
-<h2 id="Rendering_children_with_slots_{#slots}"><a href="#Rendering_children_with_slots_{#slots}">Rendering children with slots {#slots}</a></h2>
+<h2 id="Rendering_children_with_slots"><a href="#Rendering_children_with_slots">Rendering children with slots</a></h2>
 <p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children).</p>
 <pre><code class="language-html">&lt;my-element&gt;
   &lt;p&gt;A child&lt;/p&gt;
@@ -143,7 +143,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </li>
 </ul>
 <p>{% playground-ide "docs/components/shadowdom/namedslots/" %}</p>
-<h3 id="Specifying_slot_fallback_content_{#fallback}"><a href="#Specifying_slot_fallback_content_{#fallback}">Specifying slot fallback content {#fallback}</a></h3>
+<h3 id="Specifying_slot_fallback_content"><a href="#Specifying_slot_fallback_content">Specifying slot fallback content</a></h3>
 <p>You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.</p>
 <pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
 </code></pre>
@@ -152,7 +152,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. See <a class="Link" href="/docs/templates/expressions/#non-rendering">non-rendering values</a> for more information.</p>
 </div>
 
-<h2 id="Accessing_slotted_children_{_#accessing-slotted-children_}"><a href="#Accessing_slotted_children_{_#accessing-slotted-children_}">Accessing slotted children { #accessing-slotted-children }</a></h2>
+<h2 id="Accessing_slotted_children"><a href="#Accessing_slotted_children">Accessing slotted children</a></h2>
 <p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>
 <p>For example, you can create a getter to access assigned elements for a particular slot:</p>
 <pre><code class="language-js">get _slottedChildren() {
@@ -175,7 +175,7 @@ render() {
 }
 </code></pre>
 <p>For more information, see <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a> on MDN.</p>
-<h3 id="_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}">@queryAssignedElements and @queryAssignedNodes decorators { #query-assigned-nodes }</a></h3>
+<h3 id="_queryAssignedElements_and__queryAssignedNodes_decorators"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></h3>
 <p><code>@queryAssignedElements</code> and <code>@queryAssignedNodes</code> convert a class property into a getter that returns the result of calling
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a> respectively on a given slot in the component's shadow tree.
 Use these to query the elements or nodes assigned to a given slot.</p>
@@ -292,16 +292,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#Shadow_DOM">Shadow DOM</a></p>
 <p class="h2"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></p>
-<p class="h3"><a href="#_query,__queryAll,_and__queryAsync_decorators">@query, @queryAll, and @queryAsync decorators</a></p>
-<p class="h4"><a href="#_query_{_#query_}">@query { #query }</a></p>
-<p class="h4"><a href="#_queryAll_{_#query-all_}">@queryAll { #query-all }</a></p>
-<p class="h4"><a href="#_queryAsync_{_#query-async_}">@queryAsync { #query-async }</a></p>
-<p class="h2"><a href="#Rendering_children_with_slots_{#slots}">Rendering children with slots {#slots}</a></p>
+<p class="h3"><a href="#_query、_queryAll、_queryAsyncデコレータ">@query、@queryAll、@queryAsyncデコレータ</a></p>
+<p class="h4"><a href="#_query">@query</a></p>
+<p class="h4"><a href="#_queryAll">@queryAll</a></p>
+<p class="h4"><a href="#_queryAsync">@queryAsync</a></p>
+<p class="h2"><a href="#Rendering_children_with_slots">Rendering children with slots</a></p>
 <p class="h3"><a href="#Using_the_slot_element">Using the slot element</a></p>
 <p class="h3"><a href="#Using_named_slots">Using named slots</a></p>
-<p class="h3"><a href="#Specifying_slot_fallback_content_{#fallback}">Specifying slot fallback content {#fallback}</a></p>
-<p class="h2"><a href="#Accessing_slotted_children_{_#accessing-slotted-children_}">Accessing slotted children { #accessing-slotted-children }</a></p>
-<p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators_{_#query-assigned-nodes_}">@queryAssignedElements and @queryAssignedNodes decorators { #query-assigned-nodes }</a></p>
+<p class="h3"><a href="#Specifying_slot_fallback_content">Specifying slot fallback content</a></p>
+<p class="h2"><a href="#Accessing_slotted_children">Accessing slotted children</a></p>
+<p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></p>
 <p class="h2"><a href="#Customizing_the_render_root_{#renderroot}">Customizing the render root {#renderroot}</a></p>
 <p class="h3"><a href="#Setting_shadowRootOptions">Setting shadowRootOptions</a></p>
 <p class="h3"><a href="#Implementing_createRenderRoot">Implementing createRenderRoot</a></p>
