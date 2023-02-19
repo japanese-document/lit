@@ -16,7 +16,7 @@ Shadow DOMに関する詳しい情報は[Shadow DOM v1: Self-Contained Web Compo
 
 ## Shadow DOM内のNodeにアクセスする
 
-Litは`renderRoot`にコンポーネントをレンダリングします。`renderRoot`はデフォルトでshadow rootです。
+Litは`renderRoot`にコンポーネントをレンダリングします。shadow rootはデフォルトで[renderRoot](https://japanese-document.github.io/lit/api-LitElement.html#renderRoot()__Element_|_ShadowRoot)です。
 コンポーネント内の要素を取得するために`this.renderRoot.querySelector()`のようなDOMクエリーAPIを使います。
 
 `renderRoot`はshadow rootもしくは1つの要素です。それらは`.querySelectorAll()`や`.children`のようなAPIを持ちます。
@@ -42,11 +42,11 @@ LitElementは上記のゲッタの処理を省略して書くためのデコレ�
 
 #### @query
 
-Modifies a class property, turning it into a getter that returns a node from the render root.
-The optional second argument when true performs the DOM query only once and caches the result.
-This can be used as a performance optimization in cases when the node being queried will not change.
+クラスプロパティを`renderRoot`からNodeを返すゲッタに変更します。
+オプションである第2引数にtrueを渡すとDOMクエリは1回のみ実行され、その結果がキャッシュされます。
+これは取得対象のNodeが代わらないケースではパフォーマンスが向上します。
 
-```js
+```ts
 import {LitElement, html} from 'lit';
 import {query} from 'lit/decorators/query.js';
 
@@ -63,7 +63,7 @@ class MyElement extends LitElement {
 }
 ```
 
-This decorator is equivalent to:
+上記のデコレータを使ったコードは下記と等価です。
 
 ```js
 get _first() {
@@ -231,7 +231,7 @@ get _headerNodes() {
 }
 ```
 
-## Customizing the render root {#renderroot}
+## Customizing the render root
 
 Each Lit component has a **render root**—a DOM node that serves as a container for its internal DOM.
 
