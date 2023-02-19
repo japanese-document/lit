@@ -55,7 +55,7 @@ DOMのカプセル化はページ内で動作する(Web componentsやLitコン�
 </ul>
 <p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
 <h2 id="Shadow_DOM内のNodeにアクセスする"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></h2>
-<p>Litは<code>renderRoot</code>にコンポーネントをレンダリングします。<code>renderRoot</code>はデフォルトでshadow rootです。
+<p>Litは<code>renderRoot</code>にコンポーネントをレンダリングします。shadow rootはデフォルトで<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#renderRoot()__Element_|_ShadowRoot">renderRoot</a>です。
 コンポーネント内の要素を取得するために<code>this.renderRoot.querySelector()</code>のようなDOMクエリーAPIを使います。</p>
 <p><code>renderRoot</code>はshadow rootもしくは1つの要素です。それらは<code>.querySelectorAll()</code>や<code>.children</code>のようなAPIを持ちます。</p>
 <p>下記の例では、(<code>firstUpdated</code>で)コンポーネントの最初のレンダリングの後にコンポーネント内のDOMを取得しています。
@@ -72,10 +72,10 @@ get _closeButton() {
 <h3 id="_query、_queryAll、_queryAsyncデコレータ"><a href="#_query、_queryAll、_queryAsyncデコレータ">@query、@queryAll、@queryAsyncデコレータ</a></h3>
 <p>@query、@queryAll、@queryAsyncデコレータを使うとコンポーネント内にあるNodeに簡単にアクセスすることができます。</p>
 <h4 id="_query"><a href="#_query">@query</a></h4>
-<p>Modifies a class property, turning it into a getter that returns a node from the render root.
-The optional second argument when true performs the DOM query only once and caches the result.
-This can be used as a performance optimization in cases when the node being queried will not change.</p>
-<pre><code class="language-js">import {LitElement, html} from 'lit';
+<p>クラスプロパティを<code>renderRoot</code>からNodeを返すゲッタに変更します。
+オプションである第2引数にtrueを渡すとDOMクエリは1回のみ実行され、その結果がキャッシュされます。
+これは取得対象のNodeが代わらないケースではパフォーマンスが向上します。</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {query} from 'lit/decorators/query.js';
 
 class MyElement extends LitElement {
@@ -90,7 +90,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>This decorator is equivalent to:</p>
+<p>上記のデコレータを使ったコードは下記と等価です。</p>
 <pre><code class="language-js">get _first() {
   return this.renderRoot?.querySelector('#first') ?? null;
 }
@@ -223,7 +223,7 @@ get _headerNodes() {
   return slot.assignedNodes({flatten: true});
 }
 </code></pre>
-<h2 id="Customizing_the_render_root_{#renderroot}"><a href="#Customizing_the_render_root_{#renderroot}">Customizing the render root {#renderroot}</a></h2>
+<h2 id="Customizing_the_render_root"><a href="#Customizing_the_render_root">Customizing the render root</a></h2>
 <p>Each Lit component has a <strong>render root</strong>—a DOM node that serves as a container for its internal DOM.</p>
 <p>By default, LitElement creates an open <code>shadowRoot</code> and renders inside it, producing the following DOM structure:</p>
 <pre><code class="language-html">&lt;my-element&gt;
@@ -302,7 +302,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#Specifying_slot_fallback_content">Specifying slot fallback content</a></p>
 <p class="h2"><a href="#Accessing_slotted_children">Accessing slotted children</a></p>
 <p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></p>
-<p class="h2"><a href="#Customizing_the_render_root_{#renderroot}">Customizing the render root {#renderroot}</a></p>
+<p class="h2"><a href="#Customizing_the_render_root">Customizing the render root</a></p>
 <p class="h3"><a href="#Setting_shadowRootOptions">Setting shadowRootOptions</a></p>
 <p class="h3"><a href="#Implementing_createRenderRoot">Implementing createRenderRoot</a></p>
 <p class="h2"><a href="#License">License</a></p>
