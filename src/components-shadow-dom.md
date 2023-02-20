@@ -73,8 +73,8 @@ get _first() {
 
 #### @queryAll
 
-Identical to `query` except that it returns all matching nodes, instead of a single node.
-It's the equivalent of calling `querySelectorAll`.
+`@query`と似ていますがマッチするNodeを1つだけ返すのではなくすべて返します。
+これは`querySelectorAll`を実行することと等価です。
 
 ```js
 import {LitElement, html} from 'lit';
@@ -93,7 +93,9 @@ class MyElement extends LitElement {
 }
 ```
 
-Here, `_divs` would return both `<div>` elements in the template. For TypeScript, the typing of a `@queryAll` property is `NodeListOf<HTMLElement>`. If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:
+Here, `_divs` would return both `<div>` elements in the template.
+For TypeScript, the typing of a `@queryAll` property is `NodeListOf<HTMLElement>`.
+If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:
 
 ```js
 @queryAll('button')

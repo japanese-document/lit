@@ -96,8 +96,8 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h4 id="_queryAll"><a href="#_queryAll">@queryAll</a></h4>
-<p>Identical to <code>query</code> except that it returns all matching nodes, instead of a single node.
-It's the equivalent of calling <code>querySelectorAll</code>.</p>
+<p><code>@query</code>と似ていますがマッチするNodeを1つだけ返すのではなくすべて返します。
+これは<code>querySelectorAll</code>を実行することと等価です。</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
 import {queryAll} from 'lit/decorators/queryAll.js';
 
@@ -113,7 +113,9 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Here, <code>_divs</code> would return both <code>&lt;div&gt;</code> elements in the template. For TypeScript, the typing of a <code>@queryAll</code> property is <code>NodeListOf&lt;HTMLElement&gt;</code>. If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:</p>
+<p>Here, <code>_divs</code> would return both <code>&lt;div&gt;</code> elements in the template.
+For TypeScript, the typing of a <code>@queryAll</code> property is <code>NodeListOf&lt;HTMLElement&gt;</code>.
+If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:</p>
 <pre><code class="language-js">@queryAll('button')
 _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </code></pre>
