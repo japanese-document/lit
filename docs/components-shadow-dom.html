@@ -75,7 +75,7 @@ get _closeButton() {
 <p>クラスプロパティを<code>renderRoot</code>からNodeを返すゲッタに変更します。
 オプションである第2引数にtrueを渡すとDOMクエリは1回のみ実行され、その結果がキャッシュされます。
 これは取得対象のNodeが代わらないケースではパフォーマンスが向上します。</p>
-<pre><code class="language-ts">import {LitElement, html} from 'lit';
+<pre><code class="language-js">import {LitElement, html} from 'lit';
 import {query} from 'lit/decorators/query.js';
 
 class MyElement extends LitElement {
@@ -113,15 +113,17 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Here, <code>_divs</code> would return both <code>&lt;div&gt;</code> elements in the template.
-For TypeScript, the typing of a <code>@queryAll</code> property is <code>NodeListOf&lt;HTMLElement&gt;</code>.
-If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:</p>
+<p>上記の<code>_divs</code>はテンプレート内の<code>&lt;div&gt;</code>要素を2つとも返します。
+TypeScriptでの<code>@queryAll</code>プロパティの型は<code>NodeListOf&lt;HTMLElement&gt;</code>です。
+取得するNodeが明確である場合、より詳細な型を指定することができます。</p>
 <pre><code class="language-js">@queryAll('button')
 _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </code></pre>
-<p>The exclamation point (<code>!</code>) after <code>buttons</code> is TypeScript's <a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>. It tells the compiler to treat <code>buttons</code> as always being defined, never <code>null</code> or <code>undefined</code>.</p>
+<p><code>buttons</code>の後の<code>!</code>はTypeScriptの<a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>です。
+これは<code>buttons</code>には常に<code>null</code>と<code>undefined</code>が入らないことを示します。</p>
 <h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
-<p>Similar to <code>@query</code>, except that instead of returning a node directly, it returns a <code>Promise</code> that resolves to that node after any pending element render is completed. Code can use this instead of waiting for the <code>updateComplete</code> promise.</p>
+<p>Similar to <code>@query</code>, except that instead of returning a node directly, it returns a <code>Promise</code> that resolves to that node after any pending element render is completed.
+Code can use this instead of waiting for the <code>updateComplete</code> promise.</p>
 <p>This is useful, for example, if the node returned by <code>@queryAsync</code> can change as a result of another property change.</p>
 <h2 id="Rendering_children_with_slots"><a href="#Rendering_children_with_slots">Rendering children with slots</a></h2>
 <p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children).</p>
