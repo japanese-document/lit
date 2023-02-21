@@ -46,7 +46,7 @@ LitElementは上記のゲッタの処理を省略して書くためのデコレ�
 オプションである第2引数にtrueを渡すとDOMクエリは1回のみ実行され、その結果がキャッシュされます。
 これは取得対象のNodeが代わらないケースではパフォーマンスが向上します。
 
-```ts
+```js
 import {LitElement, html} from 'lit';
 import {query} from 'lit/decorators/query.js';
 
@@ -93,20 +93,22 @@ class MyElement extends LitElement {
 }
 ```
 
-Here, `_divs` would return both `<div>` elements in the template.
-For TypeScript, the typing of a `@queryAll` property is `NodeListOf<HTMLElement>`.
-If you know exactly what kind of nodes you'll retrieve, the typing can be more specific:
+上記の`_divs`はテンプレート内の`<div>`要素を2つとも返します。
+TypeScriptでの`@queryAll`プロパティの型は`NodeListOf<HTMLElement>`です。
+取得するNodeが明確である場合、より詳細な型を指定することができます。
 
 ```js
 @queryAll('button')
 _buttons!: NodeListOf<HTMLButtonElement>
 ```
 
-The exclamation point (`!`) after `buttons` is TypeScript's [non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator). It tells the compiler to treat `buttons` as always being defined, never `null` or `undefined`.
+`buttons`の後の`!`はTypeScriptの[non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)です。
+これは`buttons`には常に`null`と`undefined`が入らないことを示します。
 
 #### @queryAsync
 
-Similar to `@query`, except that instead of returning a node directly, it returns a `Promise` that resolves to that node after any pending element render is completed. Code can use this instead of waiting for the `updateComplete` promise.
+Similar to `@query`, except that instead of returning a node directly, it returns a `Promise` that resolves to that node after any pending element render is completed.
+Code can use this instead of waiting for the `updateComplete` promise.
 
 This is useful, for example, if the node returned by `@queryAsync` can change as a result of another property change.
 
