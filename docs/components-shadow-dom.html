@@ -122,8 +122,8 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p><code>buttons</code>の後の<code>!</code>はTypeScriptの<a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>です。
 これは<code>buttons</code>には常に<code>null</code>と<code>undefined</code>が入らないことを示します。</p>
 <h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
-<p>Similar to <code>@query</code>, except that instead of returning a node directly, it returns a <code>Promise</code> that resolves to that node after any pending element render is completed.
-Code can use this instead of waiting for the <code>updateComplete</code> promise.</p>
+<p><code>@query</code>と似ています。<code>@queryAsync</code>はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
+<code>updateComplete</code> Promiseをawaitする代わりにこれを使うことができます。</p>
 <p>This is useful, for example, if the node returned by <code>@queryAsync</code> can change as a result of another property change.</p>
 <h2 id="Rendering_children_with_slots"><a href="#Rendering_children_with_slots">Rendering children with slots</a></h2>
 <p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children).</p>

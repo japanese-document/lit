@@ -107,8 +107,9 @@ _buttons!: NodeListOf<HTMLButtonElement>
 
 #### @queryAsync
 
-Similar to `@query`, except that instead of returning a node directly, it returns a `Promise` that resolves to that node after any pending element render is completed.
-Code can use this instead of waiting for the `updateComplete` promise.
+`@query`と似ています。`@queryAsync`はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
+`updateComplete` Promiseをawaitする代わりにこれを使うことができます。
+
 
 This is useful, for example, if the node returned by `@queryAsync` can change as a result of another property change.
 
