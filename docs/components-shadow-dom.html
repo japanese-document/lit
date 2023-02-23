@@ -123,20 +123,20 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 これは<code>buttons</code>には常に<code>null</code>と<code>undefined</code>が入らないことを示します。</p>
 <h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
 <p><code>@query</code>と似ています。<code>@queryAsync</code>はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
-<code>updateComplete</code> Promiseをawaitする代わりにこれを使うことができます。</p>
-<p>This is useful, for example, if the node returned by <code>@queryAsync</code> can change as a result of another property change.</p>
-<h2 id="Rendering_children_with_slots"><a href="#Rendering_children_with_slots">Rendering children with slots</a></h2>
-<p>Your component may accept children (like a <code>&lt;ul&gt;</code> element can have <code>&lt;li&gt;</code> children).</p>
+<code>updateComplete</code> Promiseをawaitする代わりにこれを使うことができます。
+これは<code>@queryAsync</code>によって返されるNodeが他のプロパティの変更に影響を受ける場合役立ちます。</p>
+<h2 id="slot要素を使って子要素をレンダリングする"><a href="#slot要素を使って子要素をレンダリングする">slot要素を使って子要素をレンダリングする</a></h2>
+<p>下記のようにコンポーネントに子要素を配置することができます。</p>
 <pre><code class="language-html">&lt;my-element&gt;
   &lt;p&gt;A child&lt;/p&gt;
 &lt;/my-element&gt;
 </code></pre>
-<p>By default, if an element has a shadow tree, its children don't render at all.</p>
+<p>デフォルトでは要素がshadow treeを持つ場合、その子要素はレンダリングされません。</p>
 <p>To render children, your template needs to include one or more <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code> elements</a>, which act as placeholders for child nodes.</p>
-<h3 id="Using_the_slot_element"><a href="#Using_the_slot_element">Using the slot element</a></h3>
+<h3 id="slot要素を使う"><a href="#slot要素を使う">slot要素を使う</a></h3>
 <p>To render an element's children, create a <code>&lt;slot&gt;</code> for them in the element's template. The children aren't <em>moved</em> in the DOM tree, but they're rendered <em>as if</em> they were children of the <code>&lt;slot&gt;</code>. For example:</p>
 <p>{% playground-ide "docs/components/shadowdom/slots/" %}</p>
-<h3 id="Using_named_slots"><a href="#Using_named_slots">Using named slots</a></h3>
+<h3 id="名前付きslotを使う"><a href="#名前付きslotを使う">名前付きslotを使う</a></h3>
 <p>To assign a child to a specific slot, ensure that the child's <code>slot</code> attribute matches the slot's <code>name</code> attribute:</p>
 <ul>
 <li><p><strong>Named slots only accept children with a matching <code>slot</code> attribute.</strong></p>
@@ -147,7 +147,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </li>
 </ul>
 <p>{% playground-ide "docs/components/shadowdom/namedslots/" %}</p>
-<h3 id="Specifying_slot_fallback_content"><a href="#Specifying_slot_fallback_content">Specifying slot fallback content</a></h3>
+<h3 id="デフォルトでslotに適用されるコンテンツを指定する"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></h3>
 <p>You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.</p>
 <pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
 </code></pre>
@@ -156,7 +156,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. See <a class="Link" href="/docs/templates/expressions/#non-rendering">non-rendering values</a> for more information.</p>
 </div>
 
-<h2 id="Accessing_slotted_children"><a href="#Accessing_slotted_children">Accessing slotted children</a></h2>
+<h2 id="slotに埋め込まれた子要素にアクセスする"><a href="#slotに埋め込まれた子要素にアクセスする">slotに埋め込まれた子要素にアクセスする</a></h2>
 <p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>
 <p>For example, you can create a getter to access assigned elements for a particular slot:</p>
 <pre><code class="language-js">get _slottedChildren() {
@@ -178,7 +178,7 @@ render() {
   return html`&lt;slot @slotchange=${this.handleSlotchange}&gt;&lt;/slot&gt;`;
 }
 </code></pre>
-<p>For more information, see <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a> on MDN.</p>
+<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a>を見てください。</p>
 <h3 id="_queryAssignedElements_and__queryAssignedNodes_decorators"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></h3>
 <p><code>@queryAssignedElements</code> and <code>@queryAssignedNodes</code> convert a class property into a getter that returns the result of calling
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a> respectively on a given slot in the component's shadow tree.
@@ -300,11 +300,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#_query">@query</a></p>
 <p class="h4"><a href="#_queryAll">@queryAll</a></p>
 <p class="h4"><a href="#_queryAsync">@queryAsync</a></p>
-<p class="h2"><a href="#Rendering_children_with_slots">Rendering children with slots</a></p>
-<p class="h3"><a href="#Using_the_slot_element">Using the slot element</a></p>
-<p class="h3"><a href="#Using_named_slots">Using named slots</a></p>
-<p class="h3"><a href="#Specifying_slot_fallback_content">Specifying slot fallback content</a></p>
-<p class="h2"><a href="#Accessing_slotted_children">Accessing slotted children</a></p>
+<p class="h2"><a href="#slot要素を使って子要素をレンダリングする">slot要素を使って子要素をレンダリングする</a></p>
+<p class="h3"><a href="#slot要素を使う">slot要素を使う</a></p>
+<p class="h3"><a href="#名前付きslotを使う">名前付きslotを使う</a></p>
+<p class="h3"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></p>
+<p class="h2"><a href="#slotに埋め込まれた子要素にアクセスする">slotに埋め込まれた子要素にアクセスする</a></p>
 <p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></p>
 <p class="h2"><a href="#Customizing_the_render_root">Customizing the render root</a></p>
 <p class="h3"><a href="#Setting_shadowRootOptions">Setting shadowRootOptions</a></p>

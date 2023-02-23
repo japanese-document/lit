@@ -109,30 +109,28 @@ _buttons!: NodeListOf<HTMLButtonElement>
 
 `@query`と似ています。`@queryAsync`はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
 `updateComplete` Promiseをawaitする代わりにこれを使うことができます。
+これは`@queryAsync`によって返されるNodeが他のプロパティの変更に影響を受ける場合役立ちます。
 
+## slot要素を使って子要素をレンダリングする
 
-This is useful, for example, if the node returned by `@queryAsync` can change as a result of another property change.
-
-## Rendering children with slots
-
-Your component may accept children (like a `<ul>` element can have `<li>` children).
+下記のようにコンポーネントに子要素を配置することができます。
 
 ```html
 <my-element>
   <p>A child</p>
 </my-element>
 ```
-By default, if an element has a shadow tree, its children don't render at all.
+デフォルトでは要素がshadow treeを持つ場合、その子要素はレンダリングされません。
 
 To render children, your template needs to include one or more [`<slot>` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot), which act as placeholders for child nodes.
 
-### Using the slot element
+### slot要素を使う
 
 To render an element's children, create a `<slot>` for them in the element's template. The children aren't _moved_ in the DOM tree, but they're rendered _as if_ they were children of the `<slot>`. For example:
 
 {% playground-ide "docs/components/shadowdom/slots/" %}
 
-### Using named slots
+### 名前付きslotを使う
 
 To assign a child to a specific slot, ensure that the child's `slot` attribute matches the slot's `name` attribute:
 
@@ -146,7 +144,7 @@ To assign a child to a specific slot, ensure that the child's `slot` attribute m
 
 {% playground-ide "docs/components/shadowdom/namedslots/" %}
 
-### Specifying slot fallback content
+### デフォルトでslotに適用されるコンテンツを指定する
 
 You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.
 
@@ -160,7 +158,7 @@ You can specify fallback content for a slot. The fallback content is shown when 
 
 </div>
 
-## Accessing slotted children
+## slotに埋め込まれた子要素にアクセスする
 
 To access children assigned to slots in your shadow root, you can use the standard `slot.assignedNodes` or `slot.assignedElements` methods with the `slotchange` event.
 
@@ -190,7 +188,7 @@ render() {
 }
 ```
 
-For more information, see [HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement) on MDN.
+詳しくは[HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement)を見てください。
 
 ### @queryAssignedElements and @queryAssignedNodes decorators
 
