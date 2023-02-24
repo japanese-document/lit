@@ -122,13 +122,14 @@ _buttons!: NodeListOf<HTMLButtonElement>
 ```
 デフォルトでは要素がshadow treeを持つ場合、その子要素はレンダリングされません。
 
-To render children, your template needs to include one or more [`<slot>` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot), which act as placeholders for child nodes.
+子要素をレンダリングするにはテンプレートに[`<slot>`要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot)を1つ以上配置する必要があります。
+`<slot>`要素を使って子要素を配置する位置を指定します。
 
 ### slot要素を使う
 
-To render an element's children, create a `<slot>` for them in the element's template. The children aren't _moved_ in the DOM tree, but they're rendered _as if_ they were children of the `<slot>`. For example:
-
-{% playground-ide "docs/components/shadowdom/slots/" %}
+To render an element's children, create a `<slot>` for them in the element's template.
+子要素をレンダリングするには、要素のテンプレートに`<slot>`を配置します。
+子要素は`<slot>`要素の子要素の様にレンダリングされます。
 
 ### 名前付きslotを使う
 
@@ -142,7 +143,36 @@ To assign a child to a specific slot, ensure that the child's `slot` attribute m
 
   For example, `<p slot="one">...</p>` will only be placed in `<slot name="one"></slot>`.
 
-{% playground-ide "docs/components/shadowdom/namedslots/" %}
+```html
+<my-element>
+  <p slot="two">Include me in slot "two".</p>
+</my-element>
+
+<hr>
+
+<my-element>
+  <p slot="one">Include me in slot "one".</p>
+  <p slot="nope">This one will not render at all.</p>
+  <p>No default slot, so this one won't render either.</p>
+</my-element>
+```
+
+```ts
+import {LitElement, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  protected render() {
+    return html`
+      <p>
+        <slot name="one"></slot>
+        <slot name="two"></slot>
+      </p>
+    `;
+  }
+}
+```
 
 ### デフォルトでslotに適用されるコンテンツを指定する
 

@@ -132,10 +132,12 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 &lt;/my-element&gt;
 </code></pre>
 <p>デフォルトでは要素がshadow treeを持つ場合、その子要素はレンダリングされません。</p>
-<p>To render children, your template needs to include one or more <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code> elements</a>, which act as placeholders for child nodes.</p>
+<p>子要素をレンダリングするにはテンプレートに<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code>要素</a>を1つ以上配置する必要があります。
+<code>&lt;slot&gt;</code>要素を使って子要素を配置する位置を指定します。</p>
 <h3 id="slot要素を使う"><a href="#slot要素を使う">slot要素を使う</a></h3>
-<p>To render an element's children, create a <code>&lt;slot&gt;</code> for them in the element's template. The children aren't <em>moved</em> in the DOM tree, but they're rendered <em>as if</em> they were children of the <code>&lt;slot&gt;</code>. For example:</p>
-<p>{% playground-ide "docs/components/shadowdom/slots/" %}</p>
+<p>To render an element's children, create a <code>&lt;slot&gt;</code> for them in the element's template.
+子要素をレンダリングするには、要素のテンプレートに<code>&lt;slot&gt;</code>を配置します。
+子要素は<code>&lt;slot&gt;</code>要素の子要素の様にレンダリングされます。</p>
 <h3 id="名前付きslotを使う"><a href="#名前付きslotを使う">名前付きslotを使う</a></h3>
 <p>To assign a child to a specific slot, ensure that the child's <code>slot</code> attribute matches the slot's <code>name</code> attribute:</p>
 <ul>
@@ -146,7 +148,33 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p>For example, <code>&lt;p slot="one"&gt;...&lt;/p&gt;</code> will only be placed in <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code>.</p>
 </li>
 </ul>
-<p>{% playground-ide "docs/components/shadowdom/namedslots/" %}</p>
+<pre><code class="language-html">&lt;my-element&gt;
+  &lt;p slot="two"&gt;Include me in slot "two".&lt;/p&gt;
+&lt;/my-element&gt;
+
+&lt;hr&gt;
+
+&lt;my-element&gt;
+  &lt;p slot="one"&gt;Include me in slot "one".&lt;/p&gt;
+  &lt;p slot="nope"&gt;This one will not render at all.&lt;/p&gt;
+  &lt;p&gt;No default slot, so this one won't render either.&lt;/p&gt;
+&lt;/my-element&gt;
+</code></pre>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  protected render() {
+    return html`
+      &lt;p&gt;
+        &lt;slot name="one"&gt;&lt;/slot&gt;
+        &lt;slot name="two"&gt;&lt;/slot&gt;
+      &lt;/p&gt;
+    `;
+  }
+}
+</code></pre>
 <h3 id="デフォルトでslotに適用されるコンテンツを指定する"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></h3>
 <p>You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.</p>
 <pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
