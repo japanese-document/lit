@@ -133,15 +133,15 @@ To render an element's children, create a `<slot>` for them in the element's tem
 
 ### 名前付きslotを使う
 
-To assign a child to a specific slot, ensure that the child's `slot` attribute matches the slot's `name` attribute:
+子要素を指定した`slot`要素に割り当てるには、子要素の`slot`属性をslot要素の`name`属性にマッチさせます。
 
-* **Named slots only accept children with a matching `slot` attribute.**
+* **名前付きslotは子要素の`slot`属性とマッチした場合のみ適用されます。**
 
-  For example, `<slot name="one"></slot>` only accepts children with the attribute `slot="one"`.
+  例: `<slot name="one"></slot>`は属性に`slot="one"`がある子要素のみ適用されます。
 
-* **Children with a `slot` attribute will only be rendered in a slot with a matching `name` attribute.**
+* **slot属性を持つ子要素はその値とマッチするname属性を持つslot要素にレンダリングされます。**
 
-  For example, `<p slot="one">...</p>` will only be placed in `<slot name="one"></slot>`.
+  例: `<p slot="one">...</p>`は`<slot name="one"></slot>`にのみ置き換えられます。
 
 ```html
 <my-element>
@@ -184,7 +184,7 @@ You can specify fallback content for a slot. The fallback content is shown when 
 
 <div class="alert alert-info">
 
-**Rendering fallback content.** If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example `<example-element> </example-element>`. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. See [non-rendering values](/docs/templates/expressions/#non-rendering) for more information.
+**Rendering fallback content.** If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example `<example-element> </example-element>`. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. 詳しくは[レンダリングしない値](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除)を見てください。
 
 </div>
 

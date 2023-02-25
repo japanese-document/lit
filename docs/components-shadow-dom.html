@@ -139,13 +139,13 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 子要素をレンダリングするには、要素のテンプレートに<code>&lt;slot&gt;</code>を配置します。
 子要素は<code>&lt;slot&gt;</code>要素の子要素の様にレンダリングされます。</p>
 <h3 id="名前付きslotを使う"><a href="#名前付きslotを使う">名前付きslotを使う</a></h3>
-<p>To assign a child to a specific slot, ensure that the child's <code>slot</code> attribute matches the slot's <code>name</code> attribute:</p>
+<p>子要素を指定した<code>slot</code>要素に割り当てるには、子要素の<code>slot</code>属性をslot要素の<code>name</code>属性にマッチさせます。</p>
 <ul>
-<li><p><strong>Named slots only accept children with a matching <code>slot</code> attribute.</strong></p>
-<p>For example, <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code> only accepts children with the attribute <code>slot="one"</code>.</p>
+<li><p><strong>名前付きslotは子要素の<code>slot</code>属性とマッチした場合のみ適用されます。</strong></p>
+<p>例: <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code>は属性に<code>slot="one"</code>がある子要素のみ適用されます。</p>
 </li>
-<li><p><strong>Children with a <code>slot</code> attribute will only be rendered in a slot with a matching <code>name</code> attribute.</strong></p>
-<p>For example, <code>&lt;p slot="one"&gt;...&lt;/p&gt;</code> will only be placed in <code>&lt;slot name="one"&gt;&lt;/slot&gt;</code>.</p>
+<li><p><strong>slot属性を持つ子要素はその値とマッチするname属性を持つslot要素にレンダリングされます。</strong></p>
+<p>例: <code>&lt;p slot="one"&gt;...&lt;/p&gt;</code>は<code>&lt;slot name="one"&gt;&lt;/slot&gt;</code>にのみ置き換えられます。</p>
 </li>
 </ul>
 <pre><code class="language-html">&lt;my-element&gt;
@@ -181,7 +181,7 @@ export class MyElement extends LitElement {
 </code></pre>
 <div class="alert alert-info">
 
-<p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. See <a class="Link" href="/docs/templates/expressions/#non-rendering">non-rendering values</a> for more information.</p>
+<p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
 </div>
 
 <h2 id="slotに埋め込まれた子要素にアクセスする"><a href="#slotに埋め込まれた子要素にアクセスする">slotに埋め込まれた子要素にアクセスする</a></h2>

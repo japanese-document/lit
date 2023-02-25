@@ -172,7 +172,7 @@ const page = html`
 詳しくは[Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)を見てください。
 
 フォールバックコンテンツを持つ`slot`に対応するコンテンツがない場合、フォールバックコンテンツがレンダリングされます。
-詳しくは[fallback content](https://lit.dev/docs/components/shadow-dom/#fallback)を見てください。
+詳しくは[fallback content](https://japanese-document.github.io/lit/components-shadow-dom.html#デフォルトでslotに適用されるコンテンツを指定する)を見てください。
 
 ## Attribute expressions
 
