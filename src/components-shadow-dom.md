@@ -176,19 +176,21 @@ export class MyElement extends LitElement {
 
 ### デフォルトでslotに適用されるコンテンツを指定する
 
-You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.
+slot要素に割り当てられるデフォルトのコンテンツを指定することができます。
+slot要素に対応するコンテンツが存在しない場合、デフォルトのコンテンツは表示されます。
 
 ```html
 <slot>I am fallback content</slot>
 ```
 
-<div class="alert alert-info">
+**デフォルトのコンテンツをレンダリングする**
+子Nodeがslotに適用された場合、デフォルトのコンテンツはレンダリングされません。
+name属性のないslot要素は任意の子Nodeを適用します。
+It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example `<example-element> </example-element>`.
+When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered.
+詳しくは[レンダリングしない値](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除)を見てください。
 
-**Rendering fallback content.** If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example `<example-element> </example-element>`. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. 詳しくは[レンダリングしない値](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除)を見てください。
-
-</div>
-
-## slotに埋め込まれた子要素にアクセスする
+## slotに適用された子要素にアクセスする
 
 To access children assigned to slots in your shadow root, you can use the standard `slot.assignedNodes` or `slot.assignedElements` methods with the `slotchange` event.
 
@@ -220,7 +222,7 @@ render() {
 
 詳しくは[HTMLSlotElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement)を見てください。
 
-### @queryAssignedElements and @queryAssignedNodes decorators
+### @queryAssignedElementsデコレータと@queryAssignedNodesデコレータ
 
 `@queryAssignedElements` and `@queryAssignedNodes` convert a class property into a getter that returns the result of calling
 [`slot.assignedElements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements) or [`slot.assignedNodes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes) respectively on a given slot in the component's shadow tree.
@@ -264,7 +266,7 @@ get _headerNodes() {
 }
 ```
 
-## Customizing the render root
+## render rootを変更する
 
 Each Lit component has a **render root**—a DOM node that serves as a container for its internal DOM.
 
@@ -282,7 +284,7 @@ There are two ways to customize the render root used by LitElement:
 * Setting `shadowRootOptions`.
 * Implementing the `createRenderRoot` method.
 
-### Setting `shadowRootOptions`
+### `shadowRootOptions`を変更する
 
 The simplest way to customize the render root is to set the `shadowRootOptions` static property. The default implementation of `createRenderRoot` passes `shadowRootOptions` as the options argument to `attachShadow` when creating the component's shadow root. It can be set to customize any options allowed in the [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters) dictionary, for example `mode` and `delegatesFocus`.
 
@@ -294,7 +296,7 @@ class DelegatesFocus extends LitElement {
 
 See [Element.attachShadow()](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) on MDN for more information.
 
-### Implementing `createRenderRoot`
+### `createRenderRoot`を実装する
 
 The default implementation of `createRenderRoot` creates an open shadow root and adds to it any styles set in the `static styles` class field. For more information on styling see [Styles](/docs/components/styles/).
 

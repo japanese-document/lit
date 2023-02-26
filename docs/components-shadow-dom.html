@@ -176,15 +176,17 @@ export class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="デフォルトでslotに適用されるコンテンツを指定する"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></h3>
-<p>You can specify fallback content for a slot. The fallback content is shown when no child is assigned to the slot.</p>
+<p>slot要素に割り当てられるデフォルトのコンテンツを指定することができます。
+slot要素に対応するコンテンツが存在しない場合、デフォルトのコンテンツは表示されます。</p>
 <pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>Rendering fallback content.</strong> If any child nodes are assigned to a slot, its fallback content doesn't render. A default slot with no name accepts any child nodes. It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>. When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered. 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
-</div>
-
-<h2 id="slotに埋め込まれた子要素にアクセスする"><a href="#slotに埋め込まれた子要素にアクセスする">slotに埋め込まれた子要素にアクセスする</a></h2>
+<p><strong>デフォルトのコンテンツをレンダリングする</strong>
+子Nodeがslotに適用された場合、デフォルトのコンテンツはレンダリングされません。
+name属性のないslot要素は任意の子Nodeを適用します。
+It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>.
+When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered.
+詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
+<h2 id="slotに適用された子要素にアクセスする"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></h2>
 <p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>
 <p>For example, you can create a getter to access assigned elements for a particular slot:</p>
 <pre><code class="language-js">get _slottedChildren() {
@@ -207,7 +209,7 @@ render() {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a>を見てください。</p>
-<h3 id="_queryAssignedElements_and__queryAssignedNodes_decorators"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></h3>
+<h3 id="_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ"><a href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</a></h3>
 <p><code>@queryAssignedElements</code> and <code>@queryAssignedNodes</code> convert a class property into a getter that returns the result of calling
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a> respectively on a given slot in the component's shadow tree.
 Use these to query the elements or nodes assigned to a given slot.</p>
@@ -255,7 +257,7 @@ get _headerNodes() {
   return slot.assignedNodes({flatten: true});
 }
 </code></pre>
-<h2 id="Customizing_the_render_root"><a href="#Customizing_the_render_root">Customizing the render root</a></h2>
+<h2 id="render_rootを変更する"><a href="#render_rootを変更する">render rootを変更する</a></h2>
 <p>Each Lit component has a <strong>render root</strong>—a DOM node that serves as a container for its internal DOM.</p>
 <p>By default, LitElement creates an open <code>shadowRoot</code> and renders inside it, producing the following DOM structure:</p>
 <pre><code class="language-html">&lt;my-element&gt;
@@ -268,14 +270,14 @@ get _headerNodes() {
 <li>Setting <code>shadowRootOptions</code>.</li>
 <li>Implementing the <code>createRenderRoot</code> method.</li>
 </ul>
-<h3 id="Setting_shadowRootOptions"><a href="#Setting_shadowRootOptions">Setting <code>shadowRootOptions</code></a></h3>
+<h3 id="shadowRootOptionsを変更する"><a href="#shadowRootOptionsを変更する"><code>shadowRootOptions</code>を変更する</a></h3>
 <p>The simplest way to customize the render root is to set the <code>shadowRootOptions</code> static property. The default implementation of <code>createRenderRoot</code> passes <code>shadowRootOptions</code> as the options argument to <code>attachShadow</code> when creating the component's shadow root. It can be set to customize any options allowed in the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a> dictionary, for example <code>mode</code> and <code>delegatesFocus</code>.</p>
 <pre><code class="language-js">class DelegatesFocus extends LitElement {
   static shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
 }
 </code></pre>
 <p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a> on MDN for more information.</p>
-<h3 id="Implementing_createRenderRoot"><a href="#Implementing_createRenderRoot">Implementing <code>createRenderRoot</code></a></h3>
+<h3 id="createRenderRootを実装する"><a href="#createRenderRootを実装する"><code>createRenderRoot</code>を実装する</a></h3>
 <p>The default implementation of <code>createRenderRoot</code> creates an open shadow root and adds to it any styles set in the <code>static styles</code> class field. For more information on styling see <a class="Link" href="/docs/components/styles/">Styles</a>.</p>
 <p>To customize a component's render root, implement <code>createRenderRoot</code> and return the node you want the template to render into.</p>
 <p>For example, to render the template into the main DOM tree as your element's children, implement <code>createRenderRoot</code> and return <code>this</code>.</p>
@@ -332,11 +334,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#slot要素を使う">slot要素を使う</a></p>
 <p class="h3"><a href="#名前付きslotを使う">名前付きslotを使う</a></p>
 <p class="h3"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></p>
-<p class="h2"><a href="#slotに埋め込まれた子要素にアクセスする">slotに埋め込まれた子要素にアクセスする</a></p>
-<p class="h3"><a href="#_queryAssignedElements_and__queryAssignedNodes_decorators">@queryAssignedElements and @queryAssignedNodes decorators</a></p>
-<p class="h2"><a href="#Customizing_the_render_root">Customizing the render root</a></p>
-<p class="h3"><a href="#Setting_shadowRootOptions">Setting shadowRootOptions</a></p>
-<p class="h3"><a href="#Implementing_createRenderRoot">Implementing createRenderRoot</a></p>
+<p class="h2"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></p>
+<p class="h3"><a href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</a></p>
+<p class="h2"><a href="#render_rootを変更する">render rootを変更する</a></p>
+<p class="h3"><a href="#shadowRootOptionsを変更する">shadowRootOptionsを変更する</a></p>
+<p class="h3"><a href="#createRenderRootを実装する">createRenderRootを実装する</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>
