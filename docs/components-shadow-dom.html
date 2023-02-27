@@ -135,8 +135,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p>子要素をレンダリングするにはテンプレートに<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code>要素</a>を1つ以上配置する必要があります。
 <code>&lt;slot&gt;</code>要素を使って子要素を配置する位置を指定します。</p>
 <h3 id="slot要素を使う"><a href="#slot要素を使う">slot要素を使う</a></h3>
-<p>To render an element's children, create a <code>&lt;slot&gt;</code> for them in the element's template.
-子要素をレンダリングするには、要素のテンプレートに<code>&lt;slot&gt;</code>を配置します。
+<p>子要素をレンダリングするには、要素のテンプレートに<code>&lt;slot&gt;</code>を配置します。
 子要素は<code>&lt;slot&gt;</code>要素の子要素の様にレンダリングされます。</p>
 <h3 id="名前付きslotを使う"><a href="#名前付きslotを使う">名前付きslotを使う</a></h3>
 <p>子要素を指定した<code>slot</code>要素に割り当てるには、子要素の<code>slot</code>属性をslot要素の<code>name</code>属性にマッチさせます。</p>
@@ -183,8 +182,9 @@ slot要素に対応するコンテンツが存在しない場合、デフォル�
 <p><strong>デフォルトのコンテンツをレンダリングする</strong>
 子Nodeがslotに適用された場合、デフォルトのコンテンツはレンダリングされません。
 name属性のないslot要素は任意の子Nodeを適用します。
-It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example <code>&lt;example-element&gt; &lt;/example-element&gt;</code>.
-When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered.
+<code>&lt;example-element&gt; &lt;/example-element&gt;</code>の様に子Nodeがスペースだけの場合でもデフォルトのコンテンツはレンダリングされません。
+custom elementの子要素にLitエクスプレッションを使う場合、
+意図した通りにデフォルトのコンテンツがレンダリングされるようにレンダリングしない値を使ってください。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
 <h2 id="slotに適用された子要素にアクセスする"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></h2>
 <p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>

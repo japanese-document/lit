@@ -127,7 +127,6 @@ _buttons!: NodeListOf<HTMLButtonElement>
 
 ### slot要素を使う
 
-To render an element's children, create a `<slot>` for them in the element's template.
 子要素をレンダリングするには、要素のテンプレートに`<slot>`を配置します。
 子要素は`<slot>`要素の子要素の様にレンダリングされます。
 
@@ -186,8 +185,9 @@ slot要素に対応するコンテンツが存在しない場合、デフォル�
 **デフォルトのコンテンツをレンダリングする**
 子Nodeがslotに適用された場合、デフォルトのコンテンツはレンダリングされません。
 name属性のないslot要素は任意の子Nodeを適用します。
-It won't render fallback content even if the only assigned nodes are text nodes containing whitespace, for example `<example-element> </example-element>`.
-When using a Lit expression as a child of a custom element, make sure to use a non-rendering value when appropriate so that any slot fallback content is rendered.
+`<example-element> </example-element>`の様に子Nodeがスペースだけの場合でもデフォルトのコンテンツはレンダリングされません。
+custom elementの子要素にLitエクスプレッションを使う場合、
+意図した通りにデフォルトのコンテンツがレンダリングされるようにレンダリングしない値を使ってください。
 詳しくは[レンダリングしない値](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除)を見てください。
 
 ## slotに適用された子要素にアクセスする
