@@ -192,7 +192,8 @@ custom elementの子要素にLitエクスプレッションを使う場合、
 
 ## slotに適用された子要素にアクセスする
 
-To access children assigned to slots in your shadow root, you can use the standard `slot.assignedNodes` or `slot.assignedElements` methods with the `slotchange` event.
+shadow root内のslotに割り当てられた子要素にアクセスするには、
+`slotchange`イベントでWeb標準の`slot.assignedNodes`メソッドもしくは`slot.assignedElements`メソッドを使います。
 
 For example, you can create a getter to access assigned elements for a particular slot:
 

@@ -187,7 +187,8 @@ custom elementの子要素にLitエクスプレッションを使う場合、
 意図した通りにデフォルトのコンテンツがレンダリングされるようにレンダリングしない値を使ってください。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
 <h2 id="slotに適用された子要素にアクセスする"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></h2>
-<p>To access children assigned to slots in your shadow root, you can use the standard <code>slot.assignedNodes</code> or <code>slot.assignedElements</code> methods with the <code>slotchange</code> event.</p>
+<p>shadow root内のslotに割り当てられた子要素にアクセスするには、
+<code>slotchange</code>イベントでWeb標準の<code>slot.assignedNodes</code>メソッドもしくは<code>slot.assignedElements</code>メソッドを使います。</p>
 <p>For example, you can create a getter to access assigned elements for a particular slot:</p>
 <pre><code class="language-js">get _slottedChildren() {
   const slot = this.shadowRoot.querySelector('slot');
