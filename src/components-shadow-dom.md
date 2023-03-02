@@ -193,9 +193,9 @@ custom elementの子要素にLitエクスプレッションを使う場合、
 ## slotに適用された子要素にアクセスする
 
 shadow root内のslotに割り当てられた子要素にアクセスするには、
-`slotchange`イベントでWeb標準の`slot.assignedNodes`メソッドもしくは`slot.assignedElements`メソッドを使います。
+[slotchange](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event)イベントでWeb標準の`slot.assignedNodes`メソッドもしくは`slot.assignedElements`メソッドを使います。
 
-For example, you can create a getter to access assigned elements for a particular slot:
+下記のように、特定のslotに割り当てられた要素を返すゲッタを作成することができます。
 
 ```js
 get _slottedChildren() {
@@ -204,13 +204,12 @@ get _slottedChildren() {
 }
 ```
 
-You can also use the `slotchange` event to take action when the assigned nodes change.
-The following example extracts the text content of all of the slotted children.
+`slotchange`イベントを使うとslotに割り当てられたNodeが変更された時に処理を実行することができます。
+下記の例では、すべてのslotに割り当てられた要素のテキストコンテンツを取得しています。
 
 ```js
 handleSlotchange(e) {
   const childNodes = e.target.assignedNodes({flatten: true});
-  // ... do something with childNodes ...
   this.allText = childNodes.map((node) => {
     return node.textContent ? node.textContent : ''
   }).join('');
@@ -238,12 +237,6 @@ Both accept an optional object with the following properties:
 | `selector` (`queryAssignedElements` only) | If specified, only return assigned elements that match this CSS selector. |
 
 Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.
-
-<div class="alert alert-info">
-
-**Using decorators.** Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See [Using decorators](/docs/components/decorators/) for details.
-
-</div>
 
 ```ts
 @queryAssignedElements({slot: 'list', selector: '.item'})

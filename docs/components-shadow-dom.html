@@ -188,18 +188,17 @@ custom elementの子要素にLitエクスプレッションを使う場合、
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
 <h2 id="slotに適用された子要素にアクセスする"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></h2>
 <p>shadow root内のslotに割り当てられた子要素にアクセスするには、
-<code>slotchange</code>イベントでWeb標準の<code>slot.assignedNodes</code>メソッドもしくは<code>slot.assignedElements</code>メソッドを使います。</p>
-<p>For example, you can create a getter to access assigned elements for a particular slot:</p>
+<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event">slotchange</a>イベントでWeb標準の<code>slot.assignedNodes</code>メソッドもしくは<code>slot.assignedElements</code>メソッドを使います。</p>
+<p>下記のように、特定のslotに割り当てられた要素を返すゲッタを作成することができます。</p>
 <pre><code class="language-js">get _slottedChildren() {
   const slot = this.shadowRoot.querySelector('slot');
   return slot.assignedElements({flatten: true});
 }
 </code></pre>
-<p>You can also use the <code>slotchange</code> event to take action when the assigned nodes change.
-The following example extracts the text content of all of the slotted children.</p>
+<p><code>slotchange</code>イベントを使うとslotに割り当てられたNodeが変更された時に処理を実行することができます。
+下記の例では、すべてのslotに割り当てられた要素のテキストコンテンツを取得しています。</p>
 <pre><code class="language-js">handleSlotchange(e) {
   const childNodes = e.target.assignedNodes({flatten: true});
-  // ... do something with childNodes ...
   this.allText = childNodes.map((node) =&gt; {
     return node.textContent ? node.textContent : ''
   }).join('');
@@ -236,11 +235,6 @@ Use these to query the elements or nodes assigned to a given slot.</p>
 </tr>
 </tbody></table>
 <p>Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.</p>
-<div class="alert alert-info">
-
-<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See <a class="Link" href="/docs/components/decorators/">Using decorators</a> for details.</p>
-</div>
-
 <pre><code class="language-ts">@queryAssignedElements({slot: 'list', selector: '.item'})
 _listItems!: Array&lt;HTMLElement&gt;;
 
