@@ -210,15 +210,15 @@ render() {
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a>を見てください。</p>
 <h3 id="_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ"><a href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</a></h3>
-<p><code>@queryAssignedElements</code> and <code>@queryAssignedNodes</code> convert a class property into a getter that returns the result of calling
-<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a> respectively on a given slot in the component's shadow tree.
-Use these to query the elements or nodes assigned to a given slot.</p>
-<p>Both accept an optional object with the following properties:</p>
+<p><code>@queryAssignedElements</code>はクラスのプロパティを指定したslotの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a>を返すgetterに変換します。
+<code>@queryAssignedNodes</code>はクラスのプロパティを指定したslotの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a>を返すgetterに変換します。
+これらのクエリを使ってslotに割り当てられた要素もしくはNodeを取得します。</p>
+<p>これら2つのデコレータにオプションで下記のプロパティを持つobjectを渡すことができます。</p>
 <table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Description</th>
+<th>プロパティ</th>
+<th>説明</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -230,7 +230,7 @@ Use these to query the elements or nodes assigned to a given slot.</p>
 <td>Slot name specifying the slot to query. Leave undefined to select the default slot.</td>
 </tr>
 <tr>
-<td><code>selector</code> (<code>queryAssignedElements</code> only)</td>
+<td><code>selector</code> (<code>queryAssignedElements</code>のみ)</td>
 <td>If specified, only return assigned elements that match this CSS selector.</td>
 </tr>
 </tbody></table>

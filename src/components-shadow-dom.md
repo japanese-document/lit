@@ -224,17 +224,17 @@ render() {
 
 ### @queryAssignedElementsデコレータと@queryAssignedNodesデコレータ
 
-`@queryAssignedElements` and `@queryAssignedNodes` convert a class property into a getter that returns the result of calling
-[`slot.assignedElements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements) or [`slot.assignedNodes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes) respectively on a given slot in the component's shadow tree.
-Use these to query the elements or nodes assigned to a given slot.
+`@queryAssignedElements`はクラスのプロパティを指定したslotの[`slot.assignedElements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements)を返すgetterに変換します。
+`@queryAssignedNodes`はクラスのプロパティを指定したslotの[`slot.assignedNodes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes)を返すgetterに変換します。
+これらのクエリを使ってslotに割り当てられた要素もしくはNodeを取得します。
 
-Both accept an optional object with the following properties:
+これら2つのデコレータにオプションで下記のプロパティを持つobjectを渡すことができます。
 
-| Property       | Description                                                             |
+| プロパティ       | 説明                                                             |
 | -------------- | ----------------------------------------------------------------------- |
 | `flatten` | Boolean specifying whether to flatten the assigned nodes by replacing any child `<slot>` elements with their assigned nodes. |
 | `slot` | Slot name specifying the slot to query. Leave undefined to select the default slot. |
-| `selector` (`queryAssignedElements` only) | If specified, only return assigned elements that match this CSS selector. |
+| `selector` (`queryAssignedElements`のみ) | If specified, only return assigned elements that match this CSS selector. |
 
 Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.
 
