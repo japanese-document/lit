@@ -254,25 +254,28 @@ get _headerNodes() {
 }
 </code></pre>
 <h2 id="render_rootを変更する"><a href="#render_rootを変更する">render rootを変更する</a></h2>
-<p>Each Lit component has a <strong>render root</strong>—a DOM node that serves as a container for its internal DOM.</p>
-<p>By default, LitElement creates an open <code>shadowRoot</code> and renders inside it, producing the following DOM structure:</p>
+<p>各Litコンポーネントはrender rootを保有しています。
+render rootはコンポーネント内のDOMを内包しています。</p>
+<p>デフォルトでは、LitElementは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode">open</a>モードの<code>shadowRoot</code>を生成します。そして、LitElementは<code>shadowRoot</code>の内側にレンダリングします。その結果、下記のようなDOM構造を生成します。</p>
 <pre><code class="language-html">&lt;my-element&gt;
   #shadow-root
     &lt;p&gt;child 1&lt;/p&gt;
     &lt;p&gt;child 2&lt;/p&gt;
 </code></pre>
-<p>There are two ways to customize the render root used by LitElement:</p>
+<p>LitElementでrender rootを変更する方法は下記の2つです。</p>
 <ul>
-<li>Setting <code>shadowRootOptions</code>.</li>
-<li>Implementing the <code>createRenderRoot</code> method.</li>
+<li><code>shadowRootOptions</code>を設定する方法</li>
+<li><code>createRenderRoot</code>メソッドを実装する方法</li>
 </ul>
-<h3 id="shadowRootOptionsを変更する"><a href="#shadowRootOptionsを変更する"><code>shadowRootOptions</code>を変更する</a></h3>
-<p>The simplest way to customize the render root is to set the <code>shadowRootOptions</code> static property. The default implementation of <code>createRenderRoot</code> passes <code>shadowRootOptions</code> as the options argument to <code>attachShadow</code> when creating the component's shadow root. It can be set to customize any options allowed in the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a> dictionary, for example <code>mode</code> and <code>delegatesFocus</code>.</p>
+<h3 id="shadowRootOptionsを設定する"><a href="#shadowRootOptionsを設定する"><code>shadowRootOptions</code>を設定する</a></h3>
+<p>The simplest way to customize the render root is to set the <code>shadowRootOptions</code> static property.
+The default implementation of <code>createRenderRoot</code> passes <code>shadowRootOptions</code> as the options argument to <code>attachShadow</code> when creating the component's shadow root.
+It can be set to customize any options allowed in the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a> dictionary, for example <code>mode</code> and <code>delegatesFocus</code>.</p>
 <pre><code class="language-js">class DelegatesFocus extends LitElement {
   static shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
 }
 </code></pre>
-<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a> on MDN for more information.</p>
+<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a>を見てください。</p>
 <h3 id="createRenderRootを実装する"><a href="#createRenderRootを実装する"><code>createRenderRoot</code>を実装する</a></h3>
 <p>The default implementation of <code>createRenderRoot</code> creates an open shadow root and adds to it any styles set in the <code>static styles</code> class field. For more information on styling see <a class="Link" href="/docs/components/styles/">Styles</a>.</p>
 <p>To customize a component's render root, implement <code>createRenderRoot</code> and return the node you want the template to render into.</p>
@@ -333,7 +336,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></p>
 <p class="h3"><a href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</a></p>
 <p class="h2"><a href="#render_rootを変更する">render rootを変更する</a></p>
-<p class="h3"><a href="#shadowRootOptionsを変更する">shadowRootOptionsを変更する</a></p>
+<p class="h3"><a href="#shadowRootOptionsを設定する">shadowRootOptionsを設定する</a></p>
 <p class="h3"><a href="#createRenderRootを実装する">createRenderRootを実装する</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
