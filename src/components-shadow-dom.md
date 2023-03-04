@@ -3,13 +3,13 @@
 # Shadow DOM
 
 LitコンポーネントはDOMをカプセル化するために[Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)を使います。
-Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
-DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。
+Shadow DOMを使うとコンポーネントにdocumentとは別箇でカプセル化されたDOMツリーを追加することができます。
+DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。
 
 Shadow DOMには下記の利点があります。
 
-* DOMの公開範囲を限定します。`document.querySelector`のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低くします。
-* スタイルの適用範囲を限定します。Shadow DOMのカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。
+* DOMの公開範囲を限定します。`document.querySelector`のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低減します。
+* スタイルの適用範囲を限定します。Shadow DOMによってカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。
 * 組み合わせることができます。コンポーネントのshadow rootはコンポーネントのDOMを保有しますが、そのコンポーネントの子コンポーネントからは分離されています。親コンポーネントと子コンポーネント間で相互に相手のDOMにアクセスすることはできません。
 
 Shadow DOMに関する詳しい情報は[Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)と[Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)を見てください。
@@ -109,7 +109,7 @@ _buttons!: NodeListOf<HTMLButtonElement>
 
 `@query`と似ています。`@queryAsync`はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
 `updateComplete` Promiseをawaitする代わりにこれを使うことができます。
-これは`@queryAsync`によって返されるNodeが他のプロパティの変更に影響を受ける場合役立ちます。
+これは`@queryAsync`によって返されるNodeが他のプロパティの変更に影響を受ける場合に便利です。
 
 ## slot要素を使って子要素をレンダリングする
 
@@ -232,11 +232,12 @@ render() {
 
 | プロパティ       | 説明                                                             |
 | -------------- | ----------------------------------------------------------------------- |
-| `flatten` | Boolean specifying whether to flatten the assigned nodes by replacing any child `<slot>` elements with their assigned nodes. |
-| `slot` | Slot name specifying the slot to query. Leave undefined to select the default slot. |
-| `selector` (`queryAssignedElements`のみ) | If specified, only return assigned elements that match this CSS selector. |
+| `flatten` | `slot.assignedElements`と`slot.assignedNodes`の引数の`flatten` |
+| `slot` | クエリの対象となるslot要素のname属性を指定します。何も指定しない場合はデフォルトのslotになります。 |
+| `selector` (`queryAssignedElements`のみ) | CSSセレクタを指定します。そのセレクタにマッチした要素のみ返します。 |
 
-Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.
+両者の違いは結果に要素のみが含まれるかそれに加えてテキストNodeが含まれるかです。
+どちらを使うかはユースケースによります。
 
 ```ts
 @queryAssignedElements({slot: 'list', selector: '.item'})
@@ -246,7 +247,7 @@ _listItems!: Array<HTMLElement>;
 _headerNodes!: Array<Node>;
 ```
 
-The examples above are equivalent to the following code:
+上記のコードは下記と等価です。
 
 ```js
 get _listItems() {
