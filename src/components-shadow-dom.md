@@ -263,9 +263,10 @@ get _headerNodes() {
 
 ## render rootを変更する
 
-Each Lit component has a **render root**—a DOM node that serves as a container for its internal DOM.
+各Litコンポーネントはrender rootを保有しています。
+render rootはコンポーネント内のDOMを内包しています。
 
-By default, LitElement creates an open `shadowRoot` and renders inside it, producing the following DOM structure:
+デフォルトでは、LitElementは[open](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode)モードの`shadowRoot`を生成します。そして、LitElementは`shadowRoot`の内側にレンダリングします。その結果、下記のようなDOM構造を生成します。
 
 ```html
 <my-element>
@@ -274,14 +275,16 @@ By default, LitElement creates an open `shadowRoot` and renders inside it, produ
     <p>child 2</p>
 ```
 
-There are two ways to customize the render root used by LitElement:
+LitElementでrender rootを変更する方法は下記の2つです。
 
-* Setting `shadowRootOptions`.
-* Implementing the `createRenderRoot` method.
+* `shadowRootOptions`を設定する方法
+* `createRenderRoot`メソッドを実装する方法
 
-### `shadowRootOptions`を変更する
+### `shadowRootOptions`を設定する
 
-The simplest way to customize the render root is to set the `shadowRootOptions` static property. The default implementation of `createRenderRoot` passes `shadowRootOptions` as the options argument to `attachShadow` when creating the component's shadow root. It can be set to customize any options allowed in the [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters) dictionary, for example `mode` and `delegatesFocus`.
+The simplest way to customize the render root is to set the `shadowRootOptions` static property.
+The default implementation of `createRenderRoot` passes `shadowRootOptions` as the options argument to `attachShadow` when creating the component's shadow root.
+It can be set to customize any options allowed in the [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters) dictionary, for example `mode` and `delegatesFocus`.
 
 ```js
 class DelegatesFocus extends LitElement {
@@ -289,7 +292,7 @@ class DelegatesFocus extends LitElement {
 }
 ```
 
-See [Element.attachShadow()](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow) on MDN for more information.
+詳しくは[Element.attachShadow()](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow)を見てください。
 
 ### `createRenderRoot`を実装する
 
