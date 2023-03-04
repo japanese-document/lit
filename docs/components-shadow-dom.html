@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-shadow-dom.html" />
     <meta property="og:title" content="Shadow DOM" />
-    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを" />
+    <meta property="og:description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentとは別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポー" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを" />
+    <meta name="description" content="LitコンポーネントはDOMをカプセル化するためにShadow DOMを使います。Shadow DOMを使うとコンポーネントにdocumentとは別箇でカプセル化されたDOMツリーを追加することができます。DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。Shadow DOMには下記の利点があります。DOMの公開範囲を限定します。document.querySelectorのようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポー" />
     <title>Shadow DOM</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -45,12 +45,12 @@
     <main class="main markdown-body">
       <h1 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h1>
 <p>LitコンポーネントはDOMをカプセル化するために<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM</a>を使います。
-Shadow DOMを使うとコンポーネントにdocumentから別箇でカプセル化されたDOMツリーを追加することができます。
-DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための鍵です。</p>
+Shadow DOMを使うとコンポーネントにdocumentとは別箇でカプセル化されたDOMツリーを追加することができます。
+DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。</p>
 <p>Shadow DOMには下記の利点があります。</p>
 <ul>
-<li>DOMの公開範囲を限定します。<code>document.querySelector</code>のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低くします。</li>
-<li>スタイルの適用範囲を限定します。Shadow DOMのカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。</li>
+<li>DOMの公開範囲を限定します。<code>document.querySelector</code>のようなDOM APIはコンポーネントのShadow DOMを見つけません。これはグローパルスクリプトが意図せずコンポーネントを破壊する可能性を低減します。</li>
+<li>スタイルの適用範囲を限定します。Shadow DOMによってカプセル化されたスタイルはDOMツリーの属する他のDOMに影響を与えません。</li>
 <li>組み合わせることができます。コンポーネントのshadow rootはコンポーネントのDOMを保有しますが、そのコンポーネントの子コンポーネントからは分離されています。親コンポーネントと子コンポーネント間で相互に相手のDOMにアクセスすることはできません。</li>
 </ul>
 <p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
@@ -124,7 +124,7 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
 <p><code>@query</code>と似ています。<code>@queryAsync</code>はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
 <code>updateComplete</code> Promiseをawaitする代わりにこれを使うことができます。
-これは<code>@queryAsync</code>によって返されるNodeが他のプロパティの変更に影響を受ける場合役立ちます。</p>
+これは<code>@queryAsync</code>によって返されるNodeが他のプロパティの変更に影響を受ける場合に便利です。</p>
 <h2 id="slot要素を使って子要素をレンダリングする"><a href="#slot要素を使って子要素をレンダリングする">slot要素を使って子要素をレンダリングする</a></h2>
 <p>下記のようにコンポーネントに子要素を配置することができます。</p>
 <pre><code class="language-html">&lt;my-element&gt;
@@ -223,25 +223,26 @@ render() {
 </thead>
 <tbody><tr>
 <td><code>flatten</code></td>
-<td>Boolean specifying whether to flatten the assigned nodes by replacing any child <code>&lt;slot&gt;</code> elements with their assigned nodes.</td>
+<td><code>slot.assignedElements</code>と<code>slot.assignedNodes</code>の引数の<code>flatten</code></td>
 </tr>
 <tr>
 <td><code>slot</code></td>
-<td>Slot name specifying the slot to query. Leave undefined to select the default slot.</td>
+<td>クエリの対象となるslot要素のname属性を指定します。何も指定しない場合はデフォルトのslotになります。</td>
 </tr>
 <tr>
 <td><code>selector</code> (<code>queryAssignedElements</code>のみ)</td>
-<td>If specified, only return assigned elements that match this CSS selector.</td>
+<td>CSSセレクタを指定します。そのセレクタにマッチした要素のみ返します。</td>
 </tr>
 </tbody></table>
-<p>Deciding which decorator to use depends on whether you want to query for text nodes assigned to the slot, or only element nodes. This decision is specific to your use case.</p>
+<p>両者の違いは結果に要素のみが含まれるかそれに加えてテキストNodeが含まれるかです。
+どちらを使うかはユースケースによります。</p>
 <pre><code class="language-ts">@queryAssignedElements({slot: 'list', selector: '.item'})
 _listItems!: Array&lt;HTMLElement&gt;;
 
 @queryAssignedNodes({slot: 'header', flatten: true})
 _headerNodes!: Array&lt;Node&gt;;
 </code></pre>
-<p>The examples above are equivalent to the following code:</p>
+<p>上記のコードは下記と等価です。</p>
 <pre><code class="language-js">get _listItems() {
   const slot = this.shadowRoot.querySelector('slot[name=list]');
   return slot.assignedElements().filter((node) =&gt; node.matches('.item'));
