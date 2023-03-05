@@ -268,24 +268,20 @@ render rootはコンポーネント内のDOMを内包しています。</p>
 <li><code>createRenderRoot</code>メソッドを実装する方法</li>
 </ul>
 <h3 id="shadowRootOptionsを設定する"><a href="#shadowRootOptionsを設定する"><code>shadowRootOptions</code>を設定する</a></h3>
-<p>The simplest way to customize the render root is to set the <code>shadowRootOptions</code> static property.
-The default implementation of <code>createRenderRoot</code> passes <code>shadowRootOptions</code> as the options argument to <code>attachShadow</code> when creating the component's shadow root.
-It can be set to customize any options allowed in the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters">ShadowRootInit</a> dictionary, for example <code>mode</code> and <code>delegatesFocus</code>.</p>
+<p>render rootを変更する一番シンプルな方法は<code>static shadowRootOptions</code>プロパティを変更することです。
+デフォルトの<code>createRenderRoot</code>の実装は、コンポーネントのshadow rootを作成する際に<code>attachShadow</code>に<code>static shadowRootOptions</code>プロパティを引数として渡します。
+だから、<code>static shadowRootOptions</code>プロパティを変更することで<code>mode</code>や<code>delegatesFocus</code>等の設定を変更することができます。</p>
 <pre><code class="language-js">class DelegatesFocus extends LitElement {
   static shadowRootOptions = {...LitElement.shadowRootOptions, delegatesFocus: true};
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a>を見てください。</p>
 <h3 id="createRenderRootを実装する"><a href="#createRenderRootを実装する"><code>createRenderRoot</code>を実装する</a></h3>
-<p>The default implementation of <code>createRenderRoot</code> creates an open shadow root and adds to it any styles set in the <code>static styles</code> class field. For more information on styling see <a class="Link" href="/docs/components/styles/">Styles</a>.</p>
-<p>To customize a component's render root, implement <code>createRenderRoot</code> and return the node you want the template to render into.</p>
-<p>For example, to render the template into the main DOM tree as your element's children, implement <code>createRenderRoot</code> and return <code>this</code>.</p>
-<div class="alert alert-info">
-
-<p><strong>Rendering into children.</strong> Rendering into children and not shadow DOM is generally not recommended. Your element will not have access to DOM or style scoping, and it will not be able to compose elements into its internal DOM.</p>
-</div>
-
-<p>{% playground-ide "docs/components/shadowdom/renderroot/" %}</p>
+<p>デフォルトの<code>createRenderRoot</code>の実装はopen modeのshadow rootを作成します。そして、<code>static style</code>クラスフィールドにセットされているスタイルをそれに加えます。
+詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a>を見てください。</p>
+<p>コンポーネントのrender rootを変更するには、<code>createRenderRoot</code>がテンプレートをレンダリングした結果を内包するNodeを返すように実装します。</p>
+<p>例えば、テンプレートを要素の子要素としてメインのDOMツリーにレンダリングする(shadow domではなく通常のDOMとしてレンダリングする)には、<code>createRenderRoot</code>が<code>this</code>を返すように実装します。</p>
+<p>shadow domではなく通常のDOMとしてレンダリングすることは非推奨です。</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>

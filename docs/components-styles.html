@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-styles.html" />
     <meta property="og:title" content="スタイル" />
-    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、Litはコンポー" />
+    <meta property="og:description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、コンポーネントに" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、Litはコンポー" />
+    <meta name="description" content="コンポーネントのテンプレートはshadow rootにレンダリングされます。コンポーネントに追加されたスタイルは自動的にshadow root内にスコープされます。つまり、そのスタイルはコンポーネントのshadow root内の要素にのみ影響を与えます。Shadow DOMによってスタイルのカプセル化がされます。LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。そのためにクラス名を長くて面倒な物にしないといけないかもしれません。Shadow DOMを使うことによって、コンポーネントに" />
     <title>スタイル</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -51,7 +51,7 @@
 LitがShadow DOMを使わなかった場合、コンポーネントの外側にある要素(親要素や子要素も含む)に誤ってスタイルを適用にしないように注意する必要があります。
 そのためにクラス名を長くて面倒な物にしないといけないかもしれません。
 Shadow DOMを使うことによって、
-Litはコンポーネントにセレクタ記述したセレクタをすべてコンポーネントのshadow root内の要素にのみ適用します。</p>
+コンポーネントに記述したセレクタは、コンポーネントのshadow root内の要素にのみ適用されます。</p>
 <h2 id="コンポーネントにスタイルを加える"><a href="#コンポーネントにスタイルを加える">コンポーネントにスタイルを加える</a></h2>
 <p><code>static styles</code>クラスフィールドに<code>css</code>タグ関数を付けでCSSを記述することで適用範囲が限定されているスタイルを定義します。
 この方法でスタイルを定義することでパフォーマンスが最適化されます。</p>

@@ -282,9 +282,9 @@ LitElementでrender rootを変更する方法は下記の2つです。
 
 ### `shadowRootOptions`を設定する
 
-The simplest way to customize the render root is to set the `shadowRootOptions` static property.
-The default implementation of `createRenderRoot` passes `shadowRootOptions` as the options argument to `attachShadow` when creating the component's shadow root.
-It can be set to customize any options allowed in the [ShadowRootInit](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#parameters) dictionary, for example `mode` and `delegatesFocus`.
+render rootを変更する一番シンプルな方法は`static shadowRootOptions`プロパティを変更することです。
+デフォルトの`createRenderRoot`の実装は、コンポーネントのshadow rootを作成する際に`attachShadow`に`static shadowRootOptions`プロパティを引数として渡します。
+だから、`static shadowRootOptions`プロパティを変更することで`mode`や`delegatesFocus`等の設定を変更することができます。
 
 ```js
 class DelegatesFocus extends LitElement {
@@ -296,19 +296,14 @@ class DelegatesFocus extends LitElement {
 
 ### `createRenderRoot`を実装する
 
-The default implementation of `createRenderRoot` creates an open shadow root and adds to it any styles set in the `static styles` class field. For more information on styling see [Styles](/docs/components/styles/).
+デフォルトの`createRenderRoot`の実装はopen modeのshadow rootを作成します。そして、`static style`クラスフィールドにセットされているスタイルをそれに加えます。
+詳しくは[スタイル](https://japanese-document.github.io/lit/components-styles.html)を見てください。
 
-To customize a component's render root, implement `createRenderRoot` and return the node you want the template to render into.
+コンポーネントのrender rootを変更するには、`createRenderRoot`がテンプレートをレンダリングした結果を内包するNodeを返すように実装します。
 
-For example, to render the template into the main DOM tree as your element's children, implement `createRenderRoot` and return `this`.
+例えば、テンプレートを要素の子要素としてメインのDOMツリーにレンダリングする(shadow domではなく通常のDOMとしてレンダリングする)には、`createRenderRoot`が`this`を返すように実装します。
 
-<div class="alert alert-info">
-
-**Rendering into children.** Rendering into children and not shadow DOM is generally not recommended. Your element will not have access to DOM or style scoping, and it will not be able to compose elements into its internal DOM.
-
-</div>
-
-{% playground-ide "docs/components/shadowdom/renderroot/" %}
+shadow domではなく通常のDOMとしてレンダリングすることは非推奨です。
 
 ---
 
