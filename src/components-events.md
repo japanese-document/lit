@@ -2,9 +2,14 @@
 ---
 # イベント
 
-Events are the standard way that elements communicate changes. These changes typically occur due to user interaction. For example, a button dispatches a click event when a user clicks on it; an input dispatches a change event when the user enters a value in it.
+イベントは要素が変化を伝える標準的な方法です。
+通常、それらの変化はユーザのインタラクションから発生します。
+例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。
+input要素はユーザが値を入力するとchangeイベントをdispatchします。
 
-In addition to these standard events that are automatically dispatched, Lit elements can dispatch custom events. For example, a menu element might dispatch an event to indicate the selected item changed; a popup element might dispatch an event when the popup opens or closes.
+Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。
+For example, a menu element might dispatch an event to indicate the selected item changed;
+a popup element might dispatch an event when the popup opens or closes.
 
 Any Javascript code, including Lit elements themselves, can listen for and take action based on events. For example, a toolbar element might filter a list when a menu item is selected; a login element might process a login when it handles a click on the login button.
 
