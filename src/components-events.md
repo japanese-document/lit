@@ -8,10 +8,12 @@
 input要素はユーザが値を入力するとchangeイベントをdispatchします。
 
 Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。
-For example, a menu element might dispatch an event to indicate the selected item changed;
-a popup element might dispatch an event when the popup opens or closes.
+例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。
+popup要素はポップアップが開いたり閉じたりするときにイベントをdispatchするでしょう。
 
-Any Javascript code, including Lit elements themselves, can listen for and take action based on events. For example, a toolbar element might filter a list when a menu item is selected; a login element might process a login when it handles a click on the login button.
+Any Javascript code, including Lit elements themselves, can listen for and take action based on events.
+For example, a toolbar element might filter a list when a menu item is selected;
+a login element might process a login when it handles a click on the login button.
 
 ## Listening to events
 
