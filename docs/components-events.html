@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-events.html" />
     <meta property="og:title" content="イベント" />
-    <meta property="og:description" content="イベントは要素が変化を伝える標準的な方法です。通常、それらの変化はユーザのインタラクションから発生します。例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。input要素はユーザが値を入力するとchangeイベントをdispatchします。Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。For example, a menu element might dispatch an event to indicate the sele" />
+    <meta property="og:description" content="イベントは要素が変化を伝える標準的な方法です。通常、それらの変化はユーザのインタラクションから発生します。例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。input要素はユーザが値を入力するとchangeイベントをdispatchします。Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。popup要素はポップアップが開いたり閉じたりするときに" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="イベントは要素が変化を伝える標準的な方法です。通常、それらの変化はユーザのインタラクションから発生します。例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。input要素はユーザが値を入力するとchangeイベントをdispatchします。Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。For example, a menu element might dispatch an event to indicate the sele" />
+    <meta name="description" content="イベントは要素が変化を伝える標準的な方法です。通常、それらの変化はユーザのインタラクションから発生します。例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。input要素はユーザが値を入力するとchangeイベントをdispatchします。Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。popup要素はポップアップが開いたり閉じたりするときに" />
     <title>イベント</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -50,9 +50,11 @@
 例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。
 input要素はユーザが値を入力するとchangeイベントをdispatchします。</p>
 <p>Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。
-For example, a menu element might dispatch an event to indicate the selected item changed;
-a popup element might dispatch an event when the popup opens or closes.</p>
-<p>Any Javascript code, including Lit elements themselves, can listen for and take action based on events. For example, a toolbar element might filter a list when a menu item is selected; a login element might process a login when it handles a click on the login button.</p>
+例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。
+popup要素はポップアップが開いたり閉じたりするときにイベントをdispatchするでしょう。</p>
+<p>Any Javascript code, including Lit elements themselves, can listen for and take action based on events.
+For example, a toolbar element might filter a list when a menu item is selected;
+a login element might process a login when it handles a click on the login button.</p>
 <h2 id="Listening_to_events"><a href="#Listening_to_events">Listening to events</a></h2>
 <p>In addition to the standard <code>addEventListener</code> API, Lit introduces a declarative way to add event listeners.</p>
 <h3 id="Adding_event_listeners_in_the_element_template"><a href="#Adding_event_listeners_in_the_element_template">Adding event listeners in the element template</a></h3>
