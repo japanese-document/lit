@@ -52,10 +52,10 @@ input要素はユーザが値を入力するとchangeイベントをdispatchし�
 <p>Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標準のイベントに加えて、カスタムイベントをdispatchすることができます。
 例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。
 popup要素はポップアップが開いたり閉じたりするときにイベントをdispatchするでしょう。</p>
-<p>Any Javascript code, including Lit elements themselves, can listen for and take action based on events.
-For example, a toolbar element might filter a list when a menu item is selected;
-a login element might process a login when it handles a click on the login button.</p>
-<h2 id="Listening_to_events"><a href="#Listening_to_events">Listening to events</a></h2>
+<p>JavaScriptのコードはイベントをリスニングしてイベントに紐づいた処理を実行することができます。
+例えばtoolbar要素はメニューの項目が選択された時、リストをフィルタリングするでしょう。
+login要素はログインボタンがクリックされるとログイン処理を実行するでしょう。</p>
+<h2 id="イベントリスニング"><a href="#イベントリスニング">イベントリスニング</a></h2>
 <p>In addition to the standard <code>addEventListener</code> API, Lit introduces a declarative way to add event listeners.</p>
 <h3 id="Adding_event_listeners_in_the_element_template"><a href="#Adding_event_listeners_in_the_element_template">Adding event listeners in the element template</a></h3>
 <p>You can use <code>@</code> expressions in your template to add event listeners to elements in your component's template. Declarative event listeners are added when the template is rendered.</p>
@@ -237,7 +237,7 @@ this.dispatchEvent(event);
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#イベント">イベント</a></p>
-<p class="h2"><a href="#Listening_to_events">Listening to events</a></p>
+<p class="h2"><a href="#イベントリスニング">イベントリスニング</a></p>
 <p class="h3"><a href="#Adding_event_listeners_in_the_element_template">Adding event listeners in the element template</a></p>
 <p class="h4"><a href="#Customizing_event_listener_options_{#event-options-decorator}">Customizing event listener options {#event-options-decorator}</a></p>
 <p class="h3"><a href="#Adding_event_listeners_to_the_component_or_its_shadow_root">Adding event listeners to the component or its shadow root</a></p>

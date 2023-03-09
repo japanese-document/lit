@@ -11,11 +11,11 @@ Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標
 例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。
 popup要素はポップアップが開いたり閉じたりするときにイベントをdispatchするでしょう。
 
-Any Javascript code, including Lit elements themselves, can listen for and take action based on events.
-For example, a toolbar element might filter a list when a menu item is selected;
-a login element might process a login when it handles a click on the login button.
+JavaScriptのコードはイベントをリスニングしてイベントに紐づいた処理を実行することができます。
+例えばtoolbar要素はメニューの項目が選択された時、リストをフィルタリングするでしょう。
+login要素はログインボタンがクリックされるとログイン処理を実行するでしょう。
 
-## Listening to events
+## イベントリスニング
 
 In addition to the standard `addEventListener` API, Lit introduces a declarative way to add event listeners.
 
