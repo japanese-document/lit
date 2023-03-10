@@ -11,15 +11,15 @@ Litで作ったcustom elementsはこれらの自動的にdispatchされるWeb標
 例えば、menu要素は項目が変更されたことを示すイベントをdispatchするでしょう。
 popup要素はポップアップが開いたり閉じたりするときにイベントをdispatchするでしょう。
 
-JavaScriptのコードはイベントをリスニングしてイベントに紐づいた処理を実行することができます。
+JavaScriptのコードはイベントをリッスンしてイベントに紐づいた処理を実行することができます。
 例えばtoolbar要素はメニューの項目が選択された時、リストをフィルタリングするでしょう。
 login要素はログインボタンがクリックされるとログイン処理を実行するでしょう。
 
 ## イベントリスニング
 
-In addition to the standard `addEventListener` API, Lit introduces a declarative way to add event listeners.
+LitはWeb標準の`addEventListener` APIだけでなく、宣言的な方法でもイベントリスナを加えることができます。
 
-### Adding event listeners in the element template
+### テンプレートでイベントリスナを加える
 
 You can use `@` expressions in your template to add event listeners to elements in your component's template. Declarative event listeners are added when the template is rendered.
 
