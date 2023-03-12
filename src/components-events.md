@@ -21,13 +21,13 @@ LitはWeb標準の`addEventListener` APIだけでなく、宣言的な方法で�
 
 ### テンプレートでイベントリスナを加える
 
-You can use `@` expressions in your template to add event listeners to elements in your component's template. Declarative event listeners are added when the template is rendered.
+[Event listener expressions](https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions)を使うとコンポーネントのテンプレートで要素にイベントリスナを加えることができます。
+この宣言的な方法で付与されるイベントリスナはテンプレートがレンダリングされる時に要素に加えられます。
 
-{% playground-example "docs/components/events/child/" "my-element.ts" %}
+#### イベントリスナのオプションを設定する
 
-#### Customizing event listener options {#event-options-decorator}
-
-If you need to customize the event options used for a declarative event listener (like `passive` or `capture`), you can specify these on the listener using the `@eventOptions` decorator. The object passed to `@eventOptions` is passed as the `options` parameter to `addEventListener`.
+宣言的な方法で付与されるイベントリスナに(`passive`や`capture`のような)オプションを設定するには`@eventOptions`を使います。
+`@eventOptions`に渡すobjectは`addEventListener`の`options`パラメータと同じ役割です。
 
 ```js
 import {LitElement, html} from 'lit';
@@ -37,16 +37,11 @@ import {eventOptions} from 'lit/decorators.js';
 private _handleTouchStart(e) { console.log(e.type) }
 ```
 
-<div class="alert alert-info">
-
-**Using decorators.** Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See [Enabling decorators](/docs/components/decorators/#enabling-decorators) for details.
-
-</div>
-
-If you're not using decorators, you can customize event listener options by passing an object to the event listener expression. The object must have a `handleEvent()` method and can include any the options that would normally appear in the `options` argument to `addEventListener()`.
-
-[comment]: <> (The `raw` macro is necessary to prevent the double handlebar in the code sample from messing with the liquid templating syntax)
-{% raw %}
+If you're not using decorators, you can customize event listener options by passing an object to the event listener expression.
+デコレータを使う以外にも、
+[Event listener expressions](https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions)にobjectを渡すことで
+イベントリスナのオプションを設定することができます。
+その渡されるobjectは`handleEvent()`メソッドと`addEventListener()`の`options`引数のキーと値を持ちます。
 
 ```js
 render() {
@@ -54,13 +49,12 @@ render() {
 }
 ```
 
-{% endraw %}
+### コンポーネントもしくはshadow rootにイベントリスナを追加する
 
-### Adding event listeners to the component or its shadow root
+コンポーネントにWeb標準の`addEventListener`メソッドを使ってコンポーネント自体にイベントリスナを追加します。
+詳しくは[EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を見てください。
 
-To be notified of an event dispatched from the component's slotted children as well as children rendered into shadow DOM via the component template, you can add a listener to the component itself using the standard `addEventListener` DOM method. See [EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) on MDN for full details.
-
-The component constructor is a good place to add event listeners on the component.
+コンポーネントのコンストラクタはコンポーネントにイベントリスナを追加することに適した場所です。
 
 ```js
 constructor() {
@@ -69,9 +63,11 @@ constructor() {
 }
 ```
 
-Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance. See [event delegation](#event-delegation) for details. Typically when this is done, the event's `target` property is used to take action based on which element fired the event.
+Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance.
+See [event delegation](#event-delegation) for details. Typically when this is done, the event's `target` property is used to take action based on which element fired the event.
 
-However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component. This means the event target is the component itself. See [Working with events in shadow DOM](#shadowdom) for more information.
+However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
+This means the event target is the component itself. See [Working with events in shadow DOM](#shadowdom) for more information.
 
 Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the `shadowRoot` is not available in the `constructor`, event listeners can be added in the `createRenderRoot` method as follows. Please note that it's important to make sure to return the shadow root from the `createRenderRoot` method.
 

@@ -58,38 +58,39 @@ login要素はログインボタンがクリックされるとログイン処理
 <h2 id="イベントリスニング"><a href="#イベントリスニング">イベントリスニング</a></h2>
 <p>LitはWeb標準の<code>addEventListener</code> APIだけでなく、宣言的な方法でもイベントリスナを加えることができます。</p>
 <h3 id="テンプレートでイベントリスナを加える"><a href="#テンプレートでイベントリスナを加える">テンプレートでイベントリスナを加える</a></h3>
-<p>You can use <code>@</code> expressions in your template to add event listeners to elements in your component's template. Declarative event listeners are added when the template is rendered.</p>
-<p>{% playground-example "docs/components/events/child/" "my-element.ts" %}</p>
-<h4 id="Customizing_event_listener_options_{#event-options-decorator}"><a href="#Customizing_event_listener_options_{#event-options-decorator}">Customizing event listener options {#event-options-decorator}</a></h4>
-<p>If you need to customize the event options used for a declarative event listener (like <code>passive</code> or <code>capture</code>), you can specify these on the listener using the <code>@eventOptions</code> decorator. The object passed to <code>@eventOptions</code> is passed as the <code>options</code> parameter to <code>addEventListener</code>.</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>を使うとコンポーネントのテンプレートで要素にイベントリスナを加えることができます。
+この宣言的な方法で付与されるイベントリスナはテンプレートがレンダリングされる時に要素に加えられます。</p>
+<h4 id="イベントリスナのオプションを設定する"><a href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></h4>
+<p>宣言的な方法で付与されるイベントリスナに(<code>passive</code>や<code>capture</code>のような)オプションを設定するには<code>@eventOptions</code>を使います。
+<code>@eventOptions</code>に渡すobjectは<code>addEventListener</code>の<code>options</code>パラメータと同じ役割です。</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
 import {eventOptions} from 'lit/decorators.js';
 //...
 @eventOptions({passive: true})
 private _handleTouchStart(e) { console.log(e.type) }
 </code></pre>
-<div class="alert alert-info">
-
-<p><strong>Using decorators.</strong> Decorators are a proposed JavaScript feature, so you’ll need to use a compiler like Babel or TypeScript to use decorators. See <a class="Link" href="/docs/components/decorators/#enabling-decorators">Enabling decorators</a> for details.</p>
-</div>
-
-<p>If you're not using decorators, you can customize event listener options by passing an object to the event listener expression. The object must have a <code>handleEvent()</code> method and can include any the options that would normally appear in the <code>options</code> argument to <code>addEventListener()</code>.</p>
-<p>{% raw %}</p>
+<p>If you're not using decorators, you can customize event listener options by passing an object to the event listener expression.
+デコレータを使う以外にも、
+<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>にobjectを渡すことで
+イベントリスナのオプションを設定することができます。
+その渡されるobjectは<code>handleEvent()</code>メソッドと<code>addEventListener()</code>の<code>options</code>引数のキーと値を持ちます。</p>
 <pre><code class="language-js">render() {
   return html`&lt;button @click=${{handleEvent: () =&gt; this.onClick(), once: true}}&gt;click&lt;/button&gt;`
 }
 </code></pre>
-<p>{% endraw %}</p>
-<h3 id="Adding_event_listeners_to_the_component_or_its_shadow_root"><a href="#Adding_event_listeners_to_the_component_or_its_shadow_root">Adding event listeners to the component or its shadow root</a></h3>
-<p>To be notified of an event dispatched from the component's slotted children as well as children rendered into shadow DOM via the component template, you can add a listener to the component itself using the standard <code>addEventListener</code> DOM method. See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener()</a> on MDN for full details.</p>
-<p>The component constructor is a good place to add event listeners on the component.</p>
+<h3 id="コンポーネントもしくはshadow_rootにイベントリスナを追加する"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></h3>
+<p>コンポーネントにWeb標準の<code>addEventListener</code>メソッドを使ってコンポーネント自体にイベントリスナを追加します。
+詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener()</a>を見てください。</p>
+<p>コンポーネントのコンストラクタはコンポーネントにイベントリスナを追加することに適した場所です。</p>
 <pre><code class="language-js">constructor() {
   super();
   this.addEventListener('click', (e) =&gt; console.log(e.type, e.target.localName));
 }
 </code></pre>
-<p>Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance. See <a class="Link" href="#event-delegation">event delegation</a> for details. Typically when this is done, the event's <code>target</code> property is used to take action based on which element fired the event.</p>
-<p>However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component. This means the event target is the component itself. See <a class="Link" href="#shadowdom">Working with events in shadow DOM</a> for more information.</p>
+<p>Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance.
+See <a class="Link" href="#event-delegation">event delegation</a> for details. Typically when this is done, the event's <code>target</code> property is used to take action based on which element fired the event.</p>
+<p>However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
+This means the event target is the component itself. See <a class="Link" href="#shadowdom">Working with events in shadow DOM</a> for more information.</p>
 <p>Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the <code>shadowRoot</code> is not available in the <code>constructor</code>, event listeners can be added in the <code>createRenderRoot</code> method as follows. Please note that it's important to make sure to return the shadow root from the <code>createRenderRoot</code> method.</p>
 <p>{% playground-example "docs/components/events/host/" "my-element.ts" %}</p>
 <h3 id="Adding_event_listeners_to_other_elements"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></h3>
@@ -239,8 +240,8 @@ this.dispatchEvent(event);
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#イベント">イベント</a></p>
 <p class="h2"><a href="#イベントリスニング">イベントリスニング</a></p>
 <p class="h3"><a href="#テンプレートでイベントリスナを加える">テンプレートでイベントリスナを加える</a></p>
-<p class="h4"><a href="#Customizing_event_listener_options_{#event-options-decorator}">Customizing event listener options {#event-options-decorator}</a></p>
-<p class="h3"><a href="#Adding_event_listeners_to_the_component_or_its_shadow_root">Adding event listeners to the component or its shadow root</a></p>
+<p class="h4"><a href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></p>
+<p class="h3"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></p>
 <p class="h3"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></p>
 <p class="h3"><a href="#Optimizing_for_performance">Optimizing for performance</a></p>
 <p class="h4"><a href="#Event_delegation_{_#event-delegation_}">Event delegation { #event-delegation }</a></p>
