@@ -17,7 +17,7 @@ login要素はログインボタンがクリックされるとログイン処理
 
 ## イベントリスニング
 
-LitはWeb標準の`addEventListener` APIだけでなく、宣言的な方法でもイベントリスナを加えることができます。
+LitはWeb標準の`addEventListener` APIだけでなく、宣言的な方法でも要素にイベントリスナを加えることができます。
 
 ### テンプレートでイベントリスナを加える
 
@@ -37,7 +37,6 @@ import {eventOptions} from 'lit/decorators.js';
 private _handleTouchStart(e) { console.log(e.type) }
 ```
 
-If you're not using decorators, you can customize event listener options by passing an object to the event listener expression.
 デコレータを使う以外にも、
 [Event listener expressions](https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions)にobjectを渡すことで
 イベントリスナのオプションを設定することができます。
@@ -51,7 +50,7 @@ render() {
 
 ### コンポーネントもしくはshadow rootにイベントリスナを追加する
 
-コンポーネントにWeb標準の`addEventListener`メソッドを使ってコンポーネント自体にイベントリスナを追加します。
+コンポーネントにWeb標準の`addEventListener`メソッドを使ってコンポーネント自身にイベントリスナを追加します。
 詳しくは[EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を見てください。
 
 コンポーネントのコンストラクタはコンポーネントにイベントリスナを追加することに適した場所です。
@@ -63,11 +62,12 @@ constructor() {
 }
 ```
 
-Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance.
-See [event delegation](#event-delegation) for details. Typically when this is done, the event's `target` property is used to take action based on which element fired the event.
+コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用することができます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
+詳しくは[event delegation](#Event_delegation)を見てください。
+Typically when this is done, the event's `target` property is used to take action based on which element fired the event.
 
 However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
-This means the event target is the component itself. See [Working with events in shadow DOM](#shadowdom) for more information.
+This means the event target is the component itself. See [Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う) for more information.
 
 Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the `shadowRoot` is not available in the `constructor`, event listeners can be added in the `createRenderRoot` method as follows. Please note that it's important to make sure to return the shadow root from the `createRenderRoot` method.
 
@@ -98,7 +98,7 @@ See the MDN documentation on using custom elements [lifecycle callbacks](https:/
 
 Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via [event delegation](#event-delegation) and adding listeners [asynchronously](#async-events) after rendering.
 
-#### Event delegation { #event-delegation }
+#### Event delegation
 
 Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that `bubble`. See [Dispatching events](#dispatching-events) for details on bubbling.
 
@@ -233,7 +233,7 @@ const event = new MyEvent('Something important happened');
 this.dispatchEvent(event);
 ```
 
-## Working with events in shadow DOM {#shadowdom}
+## Shadow DOMでイベントを扱う
 
 When using shadow DOM there are a few modifications to the standard event system that are important to understand. Shadow DOM exists primarily to provide a scoping mechanism in the DOM that encapsulates details about these "shadow" elements. As such, events in shadow DOM encapsulate certain details from outside DOM elements.
 

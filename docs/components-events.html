@@ -56,7 +56,7 @@ popup要素はポップアップが開いたり閉じたりするときにイベ
 例えばtoolbar要素はメニューの項目が選択された時、リストをフィルタリングするでしょう。
 login要素はログインボタンがクリックされるとログイン処理を実行するでしょう。</p>
 <h2 id="イベントリスニング"><a href="#イベントリスニング">イベントリスニング</a></h2>
-<p>LitはWeb標準の<code>addEventListener</code> APIだけでなく、宣言的な方法でもイベントリスナを加えることができます。</p>
+<p>LitはWeb標準の<code>addEventListener</code> APIだけでなく、宣言的な方法でも要素にイベントリスナを加えることができます。</p>
 <h3 id="テンプレートでイベントリスナを加える"><a href="#テンプレートでイベントリスナを加える">テンプレートでイベントリスナを加える</a></h3>
 <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>を使うとコンポーネントのテンプレートで要素にイベントリスナを加えることができます。
 この宣言的な方法で付与されるイベントリスナはテンプレートがレンダリングされる時に要素に加えられます。</p>
@@ -69,8 +69,7 @@ import {eventOptions} from 'lit/decorators.js';
 @eventOptions({passive: true})
 private _handleTouchStart(e) { console.log(e.type) }
 </code></pre>
-<p>If you're not using decorators, you can customize event listener options by passing an object to the event listener expression.
-デコレータを使う以外にも、
+<p>デコレータを使う以外にも、
 <a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>にobjectを渡すことで
 イベントリスナのオプションを設定することができます。
 その渡されるobjectは<code>handleEvent()</code>メソッドと<code>addEventListener()</code>の<code>options</code>引数のキーと値を持ちます。</p>
@@ -79,7 +78,7 @@ private _handleTouchStart(e) { console.log(e.type) }
 }
 </code></pre>
 <h3 id="コンポーネントもしくはshadow_rootにイベントリスナを追加する"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></h3>
-<p>コンポーネントにWeb標準の<code>addEventListener</code>メソッドを使ってコンポーネント自体にイベントリスナを追加します。
+<p>コンポーネントにWeb標準の<code>addEventListener</code>メソッドを使ってコンポーネント自身にイベントリスナを追加します。
 詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener()</a>を見てください。</p>
 <p>コンポーネントのコンストラクタはコンポーネントにイベントリスナを追加することに適した場所です。</p>
 <pre><code class="language-js">constructor() {
@@ -87,10 +86,11 @@ private _handleTouchStart(e) { console.log(e.type) }
   this.addEventListener('click', (e) =&gt; console.log(e.type, e.target.localName));
 }
 </code></pre>
-<p>Adding event listeners to the component itself is a form of event delegation and can be done to reduce code or improve performance.
-See <a class="Link" href="#event-delegation">event delegation</a> for details. Typically when this is done, the event's <code>target</code> property is used to take action based on which element fired the event.</p>
+<p>コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用することができます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
+詳しくは<a class="Link" href="#Event_delegation">event delegation</a>を見てください。
+Typically when this is done, the event's <code>target</code> property is used to take action based on which element fired the event.</p>
 <p>However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
-This means the event target is the component itself. See <a class="Link" href="#shadowdom">Working with events in shadow DOM</a> for more information.</p>
+This means the event target is the component itself. See [Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う) for more information.</p>
 <p>Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the <code>shadowRoot</code> is not available in the <code>constructor</code>, event listeners can be added in the <code>createRenderRoot</code> method as follows. Please note that it's important to make sure to return the shadow root from the <code>createRenderRoot</code> method.</p>
 <p>{% playground-example "docs/components/events/host/" "my-element.ts" %}</p>
 <h3 id="Adding_event_listeners_to_other_elements"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></h3>
@@ -113,7 +113,7 @@ disconnectedCallback() {
 <p>See the MDN documentation on using custom elements <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a> for more information on <code>connectedCallback</code> and <code>disconnectedCallback</code>.</p>
 <h3 id="Optimizing_for_performance"><a href="#Optimizing_for_performance">Optimizing for performance</a></h3>
 <p>Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via <a class="Link" href="#event-delegation">event delegation</a> and adding listeners <a class="Link" href="#async-events">asynchronously</a> after rendering.</p>
-<h4 id="Event_delegation_{_#event-delegation_}"><a href="#Event_delegation_{_#event-delegation_}">Event delegation { #event-delegation }</a></h4>
+<h4 id="Event_delegation"><a href="#Event_delegation">Event delegation</a></h4>
 <p>Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that <code>bubble</code>. See <a class="Link" href="#dispatching-events">Dispatching events</a> for details on bubbling.</p>
 <p>Bubbling events can be heard on any ancestor element in the DOM. You can take advantage of this by adding a single event listener on an ancestor component to be notified of a bubbling event dispatched by any of its descendants in the DOM. Use the event's <code>target</code> property to take specific action based on the element that dispatched the event.</p>
 <p>{% playground-example "docs/components/events/delegation/" "my-element.ts" %}</p>
@@ -198,7 +198,7 @@ this.dispatchEvent(event);
 const event = new MyEvent('Something important happened');
 this.dispatchEvent(event);
 </code></pre>
-<h2 id="Working_with_events_in_shadow_DOM_{#shadowdom}"><a href="#Working_with_events_in_shadow_DOM_{#shadowdom}">Working with events in shadow DOM {#shadowdom}</a></h2>
+<h2 id="Shadow_DOMでイベントを扱う"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></h2>
 <p>When using shadow DOM there are a few modifications to the standard event system that are important to understand. Shadow DOM exists primarily to provide a scoping mechanism in the DOM that encapsulates details about these "shadow" elements. As such, events in shadow DOM encapsulate certain details from outside DOM elements.</p>
 <h3 id="Understanding_composed_event_dispatching_{#shadowdom-composed}"><a href="#Understanding_composed_event_dispatching_{#shadowdom-composed}">Understanding composed event dispatching {#shadowdom-composed}</a></h3>
 <p>By default, an event dispatched inside a shadow root will not be visible outside that shadow root. To make an event pass through shadow DOM boundaries, you must set the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed"><code>composed</code> property</a> to <code>true</code>. It's common to pair <code>composed</code> with <code>bubbles</code> so that all nodes in the DOM tree can see the event:</p>
@@ -244,7 +244,7 @@ this.dispatchEvent(event);
 <p class="h3"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></p>
 <p class="h3"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></p>
 <p class="h3"><a href="#Optimizing_for_performance">Optimizing for performance</a></p>
-<p class="h4"><a href="#Event_delegation_{_#event-delegation_}">Event delegation { #event-delegation }</a></p>
+<p class="h4"><a href="#Event_delegation">Event delegation</a></p>
 <p class="h4"><a href="#Asynchronously_adding_event_listeners_{_#async-events_}">Asynchronously adding event listeners { #async-events }</a></p>
 <p class="h3"><a href="#Understanding_this_in_event_listeners">Understanding this in event listeners</a></p>
 <p class="h3"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></p>
@@ -254,7 +254,7 @@ this.dispatchEvent(event);
 <p class="h3"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></p>
 <p class="h4"><a href="#Firing_a_custom_event_">Firing a custom event:</a></p>
 <p class="h4"><a href="#Firing_a_standard_event_">Firing a standard event:</a></p>
-<p class="h2"><a href="#Working_with_events_in_shadow_DOM_{#shadowdom}">Working with events in shadow DOM {#shadowdom}</a></p>
+<p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
 <p class="h3"><a href="#Understanding_composed_event_dispatching_{#shadowdom-composed}">Understanding composed event dispatching {#shadowdom-composed}</a></p>
 <p class="h3"><a href="#Understanding_event_retargeting_{#shadowdom-retargeting}">Understanding event retargeting {#shadowdom-retargeting}</a></p>
 <p class="h2"><a href="#Communicating_between_the_event_dispatcher_and_listener">Communicating between the event dispatcher and listener</a></p></div></div>
