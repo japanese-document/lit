@@ -86,11 +86,12 @@ private _handleTouchStart(e) { console.log(e.type) }
   this.addEventListener('click', (e) =&gt; console.log(e.type, e.target.localName));
 }
 </code></pre>
-<p>コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用することができます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
+<p>コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用されます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
 詳しくは<a class="Link" href="#Event_delegation">event delegation</a>を見てください。
 Typically when this is done, the event's <code>target</code> property is used to take action based on which element fired the event.</p>
 <p>However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
-This means the event target is the component itself. See [Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う) for more information.</p>
+This means the event target is the component itself.
+詳しくは<a class="Link" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a>を見てください。</p>
 <p>Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the <code>shadowRoot</code> is not available in the <code>constructor</code>, event listeners can be added in the <code>createRenderRoot</code> method as follows. Please note that it's important to make sure to return the shadow root from the <code>createRenderRoot</code> method.</p>
 <p>{% playground-example "docs/components/events/host/" "my-element.ts" %}</p>
 <h3 id="Adding_event_listeners_to_other_elements"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></h3>
