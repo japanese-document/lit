@@ -64,15 +64,46 @@ constructor() {
 
 コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用されます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
 詳しくは[event delegation](#Event_delegation)を見てください。
-Typically when this is done, the event's `target` property is used to take action based on which element fired the event.
+通常、この用途ではどの要素でイベントが発生したかはeventの`target`プロパティで判別します。
 
-However, events fired from the component's shadow DOM are retargeted when heard by an event listener on the component.
-This means the event target is the component itself.
+しかし、コンポーネント自身にイベントリスナを追加した場合、そのイベントリスナではコンポーネントのShadow DOMで発生したイベントの`target`はコンポーネント自身になります。
 詳しくは[Shadow DOMでイベントを扱う](#Shadow_DOMでイベントを扱う)を見てください。
 
-Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself. Since the `shadowRoot` is not available in the `constructor`, event listeners can be added in the `createRenderRoot` method as follows. Please note that it's important to make sure to return the shadow root from the `createRenderRoot` method.
+Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself.
+Since the `shadowRoot` is not available in the `constructor`, event listeners can be added in the `createRenderRoot` method as follows.
+Please note that it's important to make sure to return the shadow root from the `createRenderRoot` method.
 
-{% playground-example "docs/components/events/host/" "my-element.ts" %}
+```
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property() hostName = '';
+  @property() shadowName = '';
+
+  constructor() {
+    super();
+    this.addEventListener('click',
+      (e: Event) => this.hostName = (e.target as Element).localName);
+  }
+
+  protected createRenderRoot() {
+    const root = super.createRenderRoot();
+    root.addEventListener('click',
+      (e: Event) => this.shadowName = (e.target as Element).localName);
+    return root;
+  }
+
+  protected render() {
+    return html`
+      <p><button>Click Me!</button></p>
+      <p>Component target: ${this.hostName}</p>
+      <p>Shadow target: ${this.shadowName}</p>
+    `;
+  }
+}
+```
 
 ### Adding event listeners to other elements
 
