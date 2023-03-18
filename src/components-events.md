@@ -66,12 +66,12 @@ constructor() {
 詳しくは[event delegation](#Event_delegation)を見てください。
 通常、この用途ではどの要素でイベントが発生したかはeventの`target`プロパティで判別します。
 
-しかし、コンポーネント自身にイベントリスナを追加した場合、そのイベントリスナではコンポーネントのShadow DOMで発生したイベントの`target`はコンポーネント自身になります。
+しかし、コンポーネント自身にイベントリスナを追加すると、そのイベントリスナではコンポーネントのShadow DOMで発生したイベントの`target`はコンポーネント自身になります。
 詳しくは[Shadow DOMでイベントを扱う](#Shadow_DOMでイベントを扱う)を見てください。
 
-Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself.
-Since the `shadowRoot` is not available in the `constructor`, event listeners can be added in the `createRenderRoot` method as follows.
-Please note that it's important to make sure to return the shadow root from the `createRenderRoot` method.
+これを回避するには、イベントリスナをコンポーネント自身ではなくコンポーネントのshadow root自身に追加します。
+`shadowRoot`(`renderRoot`プロパティ)は`constructor`で使うことができないので、イベントリスナは下記のように`createRenderRoot`メソッド内で追加します。
+この場合、`createRenderRoot`メソッドは必ずshadow rootを返さなければなりません。
 
 ```
 import {LitElement, html} from 'lit';
@@ -105,7 +105,7 @@ class MyElement extends LitElement {
 }
 ```
 
-### Adding event listeners to other elements
+### 他の要素にイベントリスナを追加する
 
 If your component adds an event listener to anything except itself or its templated DOM – for example, to `Window`, `Document`, or some element in the main DOM – you should add the listener in `connectedCallback` and remove it in `disconnectedCallback`.
 
