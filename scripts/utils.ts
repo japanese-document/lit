@@ -113,9 +113,13 @@ export function createIndexItems(pages: Page[]) {
       name,
       pages: []
     }
+    if (p[order].name !== name) {
+      console.log(p, _p)
+      throw Error('header already exists.')
+    }
     const page = p[order].pages[_p.meta.order]
     if (page) {
-      console.error(page, _p)
+      console.log(page, _p)
       throw Error('page already exists.')
     }
     p[order].pages[_p.meta.order] = {
