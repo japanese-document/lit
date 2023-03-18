@@ -68,11 +68,11 @@ describe('createIndexItems', () => {
 
   let spy: jest.SpyInstance
 
-  beforeEach(() => {
+  beforeAll(() => {
     spy = jest.spyOn(console, 'log')
   })
 
-  afterEach(() => {
+  afterAll(() => {
     jest.restoreAllMocks()
   })
 
