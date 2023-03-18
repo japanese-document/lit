@@ -72,6 +72,7 @@ module.exports = {
     'brace-style': [
       'error',
       'stroustrup'
-    ]
+    ],
+    'quote-props': ['error', 'as-needed']
   }
 };
