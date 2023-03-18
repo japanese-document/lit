@@ -89,11 +89,11 @@ private _handleTouchStart(e) { console.log(e.type) }
 <p>コンポーネント自身にイベントリスナを追加することはevent delegationの用途で利用されます。そうすることでコード量を削減したり、パフォーマンスを改善することができます。
 詳しくは<a class="Link" href="#Event_delegation">event delegation</a>を見てください。
 通常、この用途ではどの要素でイベントが発生したかはeventの<code>target</code>プロパティで判別します。</p>
-<p>しかし、コンポーネント自身にイベントリスナを追加した場合、そのイベントリスナではコンポーネントのShadow DOMで発生したイベントの<code>target</code>はコンポーネント自身になります。
+<p>しかし、コンポーネント自身にイベントリスナを追加すると、そのイベントリスナではコンポーネントのShadow DOMで発生したイベントの<code>target</code>はコンポーネント自身になります。
 詳しくは<a class="Link" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a>を見てください。</p>
-<p>Retargeting can interfere with event delegation, and to avoid it, event listeners can be added to the component's shadow root itself.
-Since the <code>shadowRoot</code> is not available in the <code>constructor</code>, event listeners can be added in the <code>createRenderRoot</code> method as follows.
-Please note that it's important to make sure to return the shadow root from the <code>createRenderRoot</code> method.</p>
+<p>これを回避するには、イベントリスナをコンポーネント自身ではなくコンポーネントのshadow root自身に追加します。
+<code>shadowRoot</code>(<code>renderRoot</code>プロパティ)は<code>constructor</code>で使うことができないので、イベントリスナは下記のように<code>createRenderRoot</code>メソッド内で追加します。
+この場合、<code>createRenderRoot</code>メソッドは必ずshadow rootを返さなければなりません。</p>
 <pre><code>import {LitElement, html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
@@ -124,7 +124,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="Adding_event_listeners_to_other_elements"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></h3>
+<h3 id="他の要素にイベントリスナを追加する"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></h3>
 <p>If your component adds an event listener to anything except itself or its templated DOM – for example, to <code>Window</code>, <code>Document</code>, or some element in the main DOM – you should add the listener in <code>connectedCallback</code> and remove it in <code>disconnectedCallback</code>.</p>
 <ul>
 <li><p>Removing the event listener in <code>disconnectedCallback</code> ensures that any memory allocated by your component will be cleaned up when your component is destroyed or disconnected from the page.</p>
@@ -273,7 +273,7 @@ this.dispatchEvent(event);
 <p class="h3"><a href="#テンプレートでイベントリスナを加える">テンプレートでイベントリスナを加える</a></p>
 <p class="h4"><a href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></p>
 <p class="h3"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></p>
-<p class="h3"><a href="#Adding_event_listeners_to_other_elements">Adding event listeners to other elements</a></p>
+<p class="h3"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></p>
 <p class="h3"><a href="#Optimizing_for_performance">Optimizing for performance</a></p>
 <p class="h4"><a href="#Event_delegation">Event delegation</a></p>
 <p class="h4"><a href="#Asynchronously_adding_event_listeners_{_#async-events_}">Asynchronously adding event listeners { #async-events }</a></p>
