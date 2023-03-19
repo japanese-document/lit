@@ -107,11 +107,12 @@ class MyElement extends LitElement {
 
 ### 他の要素にイベントリスナを追加する
 
-If your component adds an event listener to anything except itself or its templated DOM – for example, to `Window`, `Document`, or some element in the main DOM – you should add the listener in `connectedCallback` and remove it in `disconnectedCallback`.
+コンポーネント自身とテンプレートにあるDOM以外の要素(例: `window`、`document`、メインのDOMツリー上にある要素)にイベントリスナを追加したい場合、
+`connectedCallback`でイベントリスナを追加します。そして、`disconnectedCallback`でイベントリスナを削除します。
 
-*   Removing the event listener in `disconnectedCallback` ensures that any memory allocated by your component will be cleaned up when your component is destroyed or disconnected from the page.
+* `disconnectedCallback`でイベントリスナを削除する処理を記述することは、コンポーネントが破棄されたりページ上から削除された時にコンポーネントがクリーンアップされることを保証します。
 
-*   Adding the event listener in `connectedCallback` (instead of, for example, the constructor or `firstUpdated`) ensures that your component will re-create its event listener if it is disconnected and subsequently reconnected to DOM.
+* (コンストラクタや`firstUpdated`の代わりに)`connectedCallback`でイベントリスナを追加する処理を追加することは、コンポーネントがページ上から削除されて後に追加されたときに再びイベントリスナが追加されることを保証します。
 
 ```js
 connectedCallback() {
@@ -124,9 +125,9 @@ disconnectedCallback() {
 }
 ```
 
-See the MDN documentation on using custom elements [lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks) for more information on `connectedCallback` and `disconnectedCallback`.
+`connectedCallback` and `disconnectedCallback`の詳しい情報は[lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks)を見てください。
 
-### Optimizing for performance
+### パフォーマンスを改善する
 
 Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via [event delegation](#event-delegation) and adding listeners [asynchronously](#async-events) after rendering.
 
