@@ -125,11 +125,12 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="他の要素にイベントリスナを追加する"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></h3>
-<p>If your component adds an event listener to anything except itself or its templated DOM – for example, to <code>Window</code>, <code>Document</code>, or some element in the main DOM – you should add the listener in <code>connectedCallback</code> and remove it in <code>disconnectedCallback</code>.</p>
+<p>コンポーネント自身とテンプレートにあるDOM以外の要素(例: <code>window</code>、<code>document</code>、メインのDOMツリー上にある要素)にイベントリスナを追加したい場合、
+<code>connectedCallback</code>でイベントリスナを追加します。そして、<code>disconnectedCallback</code>でイベントリスナを削除します。</p>
 <ul>
-<li><p>Removing the event listener in <code>disconnectedCallback</code> ensures that any memory allocated by your component will be cleaned up when your component is destroyed or disconnected from the page.</p>
+<li><p><code>disconnectedCallback</code>でイベントリスナを削除する処理を記述することは、コンポーネントが破棄されたりページ上から削除された時にコンポーネントがクリーンアップされることを保証します。</p>
 </li>
-<li><p>Adding the event listener in <code>connectedCallback</code> (instead of, for example, the constructor or <code>firstUpdated</code>) ensures that your component will re-create its event listener if it is disconnected and subsequently reconnected to DOM.</p>
+<li><p>(コンストラクタや<code>firstUpdated</code>の代わりに)<code>connectedCallback</code>でイベントリスナを追加する処理を追加することは、コンポーネントがページ上から削除されて後に追加されたときに再びイベントリスナが追加されることを保証します。</p>
 </li>
 </ul>
 <pre><code class="language-js">connectedCallback() {
@@ -141,8 +142,8 @@ disconnectedCallback() {
   super.disconnectedCallback();
 }
 </code></pre>
-<p>See the MDN documentation on using custom elements <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a> for more information on <code>connectedCallback</code> and <code>disconnectedCallback</code>.</p>
-<h3 id="Optimizing_for_performance"><a href="#Optimizing_for_performance">Optimizing for performance</a></h3>
+<p><code>connectedCallback</code> and <code>disconnectedCallback</code>の詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a>を見てください。</p>
+<h3 id="パフォーマンスを改善する"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></h3>
 <p>Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via <a class="Link" href="#event-delegation">event delegation</a> and adding listeners <a class="Link" href="#async-events">asynchronously</a> after rendering.</p>
 <h4 id="Event_delegation"><a href="#Event_delegation">Event delegation</a></h4>
 <p>Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that <code>bubble</code>. See <a class="Link" href="#dispatching-events">Dispatching events</a> for details on bubbling.</p>
@@ -274,7 +275,7 @@ this.dispatchEvent(event);
 <p class="h4"><a href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></p>
 <p class="h3"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></p>
 <p class="h3"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></p>
-<p class="h3"><a href="#Optimizing_for_performance">Optimizing for performance</a></p>
+<p class="h3"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></p>
 <p class="h4"><a href="#Event_delegation">Event delegation</a></p>
 <p class="h4"><a href="#Asynchronously_adding_event_listeners_{_#async-events_}">Asynchronously adding event listeners { #async-events }</a></p>
 <p class="h3"><a href="#Understanding_this_in_event_listeners">Understanding this in event listeners</a></p>
