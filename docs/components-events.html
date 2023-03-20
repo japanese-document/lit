@@ -144,12 +144,14 @@ disconnectedCallback() {
 </code></pre>
 <p><code>connectedCallback</code> and <code>disconnectedCallback</code>の詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a>を見てください。</p>
 <h3 id="パフォーマンスを改善する"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></h3>
-<p>Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via <a class="Link" href="#event-delegation">event delegation</a> and adding listeners <a class="Link" href="#async-events">asynchronously</a> after rendering.</p>
+<p>イベントリスナを追加する処理はとても高速です。通常、これがパフォーマンス上の問題になりません。
+しかし、高頻度で使用されてかつ多くのイベントリスナを持つコンポーネントでは、
+<a class="Link" href="#Event_delegation">event delegation</a>を使ってイベントリスナを削減してレンダリング後に<a class="Link" href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a>ことで最初のレンダリングのパフォーマンスを改善することができます。</p>
 <h4 id="Event_delegation"><a href="#Event_delegation">Event delegation</a></h4>
 <p>Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that <code>bubble</code>. See <a class="Link" href="#dispatching-events">Dispatching events</a> for details on bubbling.</p>
 <p>Bubbling events can be heard on any ancestor element in the DOM. You can take advantage of this by adding a single event listener on an ancestor component to be notified of a bubbling event dispatched by any of its descendants in the DOM. Use the event's <code>target</code> property to take specific action based on the element that dispatched the event.</p>
 <p>{% playground-example "docs/components/events/delegation/" "my-element.ts" %}</p>
-<h4 id="Asynchronously_adding_event_listeners_{_#async-events_}"><a href="#Asynchronously_adding_event_listeners_{_#async-events_}">Asynchronously adding event listeners { #async-events }</a></h4>
+<h4 id="非同期でイベントリスナを追加する"><a href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></h4>
 <p>To add an event listener after rendering, use the <code>firstUpdated</code> method. This is a Lit lifecycle callback which runs after the component first updates and renders its templated DOM.</p>
 <p>The <code>firstUpdated</code> callback fires after the first time your component has been updated and called its <code>render</code> method, but <strong>before</strong> the browser has had a chance to paint.</p>
 <p>See <a class="Link" href="/docs/components/lifecycle/#firstupdated">firstUpdated</a> in the Lifecycle documentation for more information.</p>
@@ -312,7 +314,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></p>
 <p class="h3"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></p>
 <p class="h4"><a href="#Event_delegation">Event delegation</a></p>
-<p class="h4"><a href="#Asynchronously_adding_event_listeners_{_#async-events_}">Asynchronously adding event listeners { #async-events }</a></p>
+<p class="h4"><a href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></p>
 <p class="h3"><a href="#Understanding_this_in_event_listeners">Understanding this in event listeners</a></p>
 <p class="h3"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></p>
 <p class="h2"><a href="#Dispatching_events_{_#dispatching-events_}">Dispatching events { #dispatching-events }</a></p>
