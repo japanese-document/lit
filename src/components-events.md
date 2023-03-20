@@ -129,7 +129,9 @@ disconnectedCallback() {
 
 ### パフォーマンスを改善する
 
-Adding event listeners is extremely fast and typically not a performance concern. However, for components that are used in high frequency and need a lot of event listeners, you can optimize first render performance by reducing the number of listeners used via [event delegation](#event-delegation) and adding listeners [asynchronously](#async-events) after rendering.
+イベントリスナを追加する処理はとても高速です。通常、これがパフォーマンス上の問題になりません。
+しかし、高頻度で使用されてかつ多くのイベントリスナを持つコンポーネントでは、
+[event delegation](#Event_delegation)を使ってイベントリスナを削減してレンダリング後に[非同期でイベントリスナを追加する](#非同期でイベントリスナを追加する)ことで最初のレンダリングのパフォーマンスを改善することができます。
 
 #### Event delegation
 
@@ -139,7 +141,7 @@ Bubbling events can be heard on any ancestor element in the DOM. You can take ad
 
 {% playground-example "docs/components/events/delegation/" "my-element.ts" %}
 
-#### Asynchronously adding event listeners { #async-events }
+#### 非同期でイベントリスナを追加する
 
 To add an event listener after rendering, use the `firstUpdated` method. This is a Lit lifecycle callback which runs after the component first updates and renders its templated DOM.
 
