@@ -127,27 +127,32 @@ disconnectedCallback() {
 
 `connectedCallback` and `disconnectedCallback`の詳しい情報は[lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks)を見てください。
 
-### パフォーマンスを改善する
+### パフォーマンスの向上
 
-イベントリスナを追加する処理はとても高速です。通常、これがパフォーマンス上の問題になりません。
-しかし、高頻度で使用されてかつ多くのイベントリスナを持つコンポーネントでは、
-[event delegation](#Event_delegation)を使ってイベントリスナを削減してレンダリング後に[非同期でイベントリスナを追加する](#非同期でイベントリスナを追加する)ことで最初のレンダリングのパフォーマンスを改善することができます。
+通常、イベントリスナを追加する処理はとても高速なので、パフォーマンス上の問題になりません。
+しかし、高頻度で使用され、多くのイベントリスナを持つコンポーネントでは、
+[event delegation](#Event_delegation)を使ってイベントリスナを削減してレンダリング後に[非同期でイベントリスナを追加する](#非同期でイベントリスナを追加する)ことで初回レンダリングのパフォーマンスを向上させることができます。
 
 #### Event delegation
 
-Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that `bubble`. See [Dispatching events](#dispatching-events) for details on bubbling.
+event delegationを用いるとイベントリスナーを削減することができるのでパフォーマンスを向上させることができます。
+また、イベントの処理を集約することができるのでコードを削減することができます。
+Event delegationはイベントバブリング時のみを取り扱います。
+詳しくは[イベントをdispatchする](#イベントをdispatchする)を見てください。
 
-Bubbling events can be heard on any ancestor element in the DOM. You can take advantage of this by adding a single event listener on an ancestor component to be notified of a bubbling event dispatched by any of its descendants in the DOM. Use the event's `target` property to take specific action based on the element that dispatched the event.
-
-{% playground-example "docs/components/events/delegation/" "my-element.ts" %}
+イベントバブリング時はイベントが発生した要素の祖先の要素にイベントが伝播します。
+このことを利用するには祖先の要素にイベントリスナを追加して、どの子孫要素からバブリングによってイベントがdispatchされたか知る必要があります。
+`Event`インスタンスの`target`プロパティでどの子孫要素からイベントがdispatchされたか特定することができます。
 
 #### 非同期でイベントリスナを追加する
 
-To add an event listener after rendering, use the `firstUpdated` method. This is a Lit lifecycle callback which runs after the component first updates and renders its templated DOM.
+レンダリング後にイベントリスナを追加するには、`firstUpdated`メソッドを使います。
+これはコンポーネントの初回に更新でテンプレートが最初にレンダリングされた後に実行されるLitのライフサイクルコールバックです。
 
-The `firstUpdated` callback fires after the first time your component has been updated and called its `render` method, but **before** the browser has had a chance to paint.
+`firstUpdated`コールバックはコンポーネントの初回の更新で`render`メソッドを実行した後とブラウザが描画する前の間に実行されます。
 
-See [firstUpdated](/docs/components/lifecycle/#firstupdated) in the Lifecycle documentation for more information.
+
+詳しくは[firstUpdated](https://japanese-document.github.io/lit/components-lifecycle.html#firstUpdated())を見てください。
 
 To ensure the listener is added after the user can see the component, you can await a Promise that resolves after the browser paints.
 
@@ -199,7 +204,7 @@ When listening to events on repeated items, it's often convenient to use [event 
 
 {% playground-example "docs/components/events/list/" "my-element.ts" %}
 
-## Dispatching events { #dispatching-events }
+## イベントをdispatchする
 
 All DOM nodes can dispatch events using the `dispatchEvent` method. First, create an event instance, specifying the event type and options. Then pass it to `dispatchEvent` as follows:
 

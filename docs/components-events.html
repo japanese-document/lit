@@ -143,18 +143,23 @@ disconnectedCallback() {
 }
 </code></pre>
 <p><code>connectedCallback</code> and <code>disconnectedCallback</code>の詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a>を見てください。</p>
-<h3 id="パフォーマンスを改善する"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></h3>
-<p>イベントリスナを追加する処理はとても高速です。通常、これがパフォーマンス上の問題になりません。
-しかし、高頻度で使用されてかつ多くのイベントリスナを持つコンポーネントでは、
-<a class="Link" href="#Event_delegation">event delegation</a>を使ってイベントリスナを削減してレンダリング後に<a class="Link" href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a>ことで最初のレンダリングのパフォーマンスを改善することができます。</p>
+<h3 id="パフォーマンスの向上"><a href="#パフォーマンスの向上">パフォーマンスの向上</a></h3>
+<p>通常、イベントリスナを追加する処理はとても高速なので、パフォーマンス上の問題になりません。
+しかし、高頻度で使用され、多くのイベントリスナを持つコンポーネントでは、
+<a class="Link" href="#Event_delegation">event delegation</a>を使ってイベントリスナを削減してレンダリング後に<a class="Link" href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a>ことで初回レンダリングのパフォーマンスを向上させることができます。</p>
 <h4 id="Event_delegation"><a href="#Event_delegation">Event delegation</a></h4>
-<p>Using event delegation can reduce the number of event listeners used and therefore improve performance. It is also sometimes convenient to centralize event handling to reduce code. Event delegation can only be use to handle events that <code>bubble</code>. See <a class="Link" href="#dispatching-events">Dispatching events</a> for details on bubbling.</p>
-<p>Bubbling events can be heard on any ancestor element in the DOM. You can take advantage of this by adding a single event listener on an ancestor component to be notified of a bubbling event dispatched by any of its descendants in the DOM. Use the event's <code>target</code> property to take specific action based on the element that dispatched the event.</p>
-<p>{% playground-example "docs/components/events/delegation/" "my-element.ts" %}</p>
+<p>event delegationを用いるとイベントリスナーを削減することができるのでパフォーマンスを向上させることができます。
+また、イベントの処理を集約することができるのでコードを削減することができます。
+Event delegationはイベントバブリング時のみを取り扱います。
+詳しくは<a class="Link" href="#イベントをdispatchする">イベントをdispatchする</a>を見てください。</p>
+<p>イベントバブリング時はイベントが発生した要素の祖先の要素にイベントが伝播します。
+このことを利用するには祖先の要素にイベントリスナを追加して、どの子孫要素からバブリングによってイベントがdispatchされたか知る必要があります。
+<code>Event</code>インスタンスの<code>target</code>プロパティでどの子孫要素からイベントがdispatchされたか特定することができます。</p>
 <h4 id="非同期でイベントリスナを追加する"><a href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></h4>
-<p>To add an event listener after rendering, use the <code>firstUpdated</code> method. This is a Lit lifecycle callback which runs after the component first updates and renders its templated DOM.</p>
-<p>The <code>firstUpdated</code> callback fires after the first time your component has been updated and called its <code>render</code> method, but <strong>before</strong> the browser has had a chance to paint.</p>
-<p>See <a class="Link" href="/docs/components/lifecycle/#firstupdated">firstUpdated</a> in the Lifecycle documentation for more information.</p>
+<p>レンダリング後にイベントリスナを追加するには、<code>firstUpdated</code>メソッドを使います。
+これはコンポーネントの初回に更新でテンプレートが最初にレンダリングされた後に実行されるLitのライフサイクルコールバックです。</p>
+<p><code>firstUpdated</code>コールバックはコンポーネントの初回の更新で<code>render</code>メソッドを実行した後とブラウザが描画する前の間に実行されます。</p>
+<p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#firstUpdated()">firstUpdated</a>を見てください。</p>
 <p>To ensure the listener is added after the user can see the component, you can await a Promise that resolves after the browser paints.</p>
 <pre><code class="language-js">async firstUpdated() {
   // Give the browser a chance to paint
@@ -190,7 +195,7 @@ disconnectedCallback() {
 <h3 id="Listening_to_events_fired_from_repeated_templates"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></h3>
 <p>When listening to events on repeated items, it's often convenient to use <a class="Link" href="#event-delegation">event delegation</a> if the event bubbles. When an event does not bubble, a listener can be added on the repeated elements. Here's an example of both methods:</p>
 <p>{% playground-example "docs/components/events/list/" "my-element.ts" %}</p>
-<h2 id="Dispatching_events_{_#dispatching-events_}"><a href="#Dispatching_events_{_#dispatching-events_}">Dispatching events { #dispatching-events }</a></h2>
+<h2 id="イベントをdispatchする"><a href="#イベントをdispatchする">イベントをdispatchする</a></h2>
 <p>All DOM nodes can dispatch events using the <code>dispatchEvent</code> method. First, create an event instance, specifying the event type and options. Then pass it to <code>dispatchEvent</code> as follows:</p>
 <pre><code class="language-js">const event = new Event('my-event', {bubbles: true, composed: true});
 myElement.dispatchEvent(event);
@@ -312,12 +317,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></p>
 <p class="h3"><a href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></p>
 <p class="h3"><a href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></p>
-<p class="h3"><a href="#パフォーマンスを改善する">パフォーマンスを改善する</a></p>
+<p class="h3"><a href="#パフォーマンスの向上">パフォーマンスの向上</a></p>
 <p class="h4"><a href="#Event_delegation">Event delegation</a></p>
 <p class="h4"><a href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></p>
 <p class="h3"><a href="#Understanding_this_in_event_listeners">Understanding this in event listeners</a></p>
 <p class="h3"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></p>
-<p class="h2"><a href="#Dispatching_events_{_#dispatching-events_}">Dispatching events { #dispatching-events }</a></p>
+<p class="h2"><a href="#イベントをdispatchする">イベントをdispatchする</a></p>
 <p class="h3"><a href="#When_to_dispatch_an_event">When to dispatch an event</a></p>
 <p class="h3"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></p>
 <p class="h3"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></p>
