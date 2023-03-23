@@ -150,25 +150,23 @@ Event delegationはイベントバブリング時のみを取り扱います。
 これはコンポーネントの初回に更新でテンプレートが最初にレンダリングされた後に実行されるLitのライフサイクルコールバックです。
 
 `firstUpdated`コールバックはコンポーネントの初回の更新で`render`メソッドを実行した後とブラウザが描画する前の間に実行されます。
-
-
 詳しくは[firstUpdated](https://japanese-document.github.io/lit/components-lifecycle.html#firstUpdated())を見てください。
 
-To ensure the listener is added after the user can see the component, you can await a Promise that resolves after the browser paints.
+コンポーネントが表示された後にイベントリスナを追加するには、下記のようにブラウザが描画した後に解決するPromiseをawaitします。
 
 ```js
 async firstUpdated() {
-  // Give the browser a chance to paint
+  // ブラウザの描画処理に譲る
   await new Promise((r) => setTimeout(r, 0));
   this.addEventListener('click', this._handleClick);
 }
 ```
 
-### Understanding `this` in event listeners
+### イベントリスナの`this`
 
-Event listeners added using the declarative `@` syntax in the template are automatically _bound_ to the component.
+テンプレート内で[Event listener expressions](https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions)(`@`)を使って宣言的に追加されたイベントリスナは自動的にコンポーネントがbindされます。
 
-Therefore, you can use `this` to refer to your component instance inside any declarative event handler:
+だから、下記のように宣言的に追加されたイベントハンドラでは`this`でコンポーネントインスタンスを参照することができます。
 
 ```js
 class MyElement extends LitElement {
@@ -181,12 +179,12 @@ class MyElement extends LitElement {
 }
 ```
 
-When adding listeners imperatively with `addEventListener`, you'll want to use an arrow function so that `this` refers to the component:
+`addEventListener`を使ってイベントリスナを追加する場合、下記のように`this`でコンポーネントを参照するためにアロー関数を使う必要があります。
 
 ```ts
 export class MyElement extends LitElement {
   private _handleResize = () => {
-    // `this` refers to the component
+    // thisはコンポーネントを参照する
     console.log(this.isConnected);
   }
 
@@ -196,7 +194,7 @@ export class MyElement extends LitElement {
 }
 ```
 
-See the [documentation for `this` on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) for more information.
+詳しくは[thisのドキュメント](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)を見てください。
 
 ### Listening to events fired from repeated templates
 
