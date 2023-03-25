@@ -196,28 +196,60 @@ export class MyElement extends LitElement {
 
 詳しくは[thisのドキュメント](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)を見てください。
 
-### Listening to events fired from repeated templates
+### ループするテンプレートでイベントを取り扱う
 
-When listening to events on repeated items, it's often convenient to use [event delegation](#event-delegation) if the event bubbles. When an event does not bubble, a listener can be added on the repeated elements. Here's an example of both methods:
+下記のように、テンプレートでループを使って要素を生成する場合、イベントバブリングを利用して[event delegation](#Event_delegation)を使うと便利です。
+イベントバブリングしないイベント(focus)の場合、ループで生成される各要素にイベントリスナを加えます。
 
-{% playground-example "docs/components/events/list/" "my-element.ts" %}
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property() clicked = '';
+  @property() focused = '';
+  data = [1, 2, 3];
+
+  protected render() {
+    return html`
+      <div key="container" @click=${this._clickHandler}>
+        ${this.data.map(i => html`
+          <button key=${i} @focus=${this._focusHandler}>Item ${i}</button>
+        `)}
+      </div>
+      <p>Clicked: ${this.clicked}</p>
+      <p>Focused: ${this.focused}</p>
+    `;
+  }
+
+  private _clickHandler(e: Event) {
+    this.clicked = (e.target as Element).getAttribute('key')!;
+  }
+
+  private _focusHandler(e: Event) {
+    this.focused = (e.target as Element).textContent!;
+  }
+}
+```
 
 ## イベントをdispatchする
 
-All DOM nodes can dispatch events using the `dispatchEvent` method. First, create an event instance, specifying the event type and options. Then pass it to `dispatchEvent` as follows:
+すべてのDOM Nodeは`dispatchEvent`メソッドでイベントをdispatchすることができます。
+下記のように、第1引数にイベントタイプと第2引数にオプションを指定してEventインスタンスを生成します。
+それを`dispatchEvent`に渡します。
 
 ```js
 const event = new Event('my-event', {bubbles: true, composed: true});
 myElement.dispatchEvent(event);
 ```
 
-The `bubbles` option allows the event to flow up the DOM tree to ancestors of the dispatching element. It's important to set this flag if you want the event to be able to participate in [event delegation](#event-delegation).
+The `bubbles` option allows the event to flow up the DOM tree to ancestors of the dispatching element.
+It's important to set this flag if you want the event to be able to participate in [event delegation](#Event_delegation).
 
 The `composed` option is useful to set to allow the event to be dispatched above the shadow DOM tree in which the element exists.
 
-See [Working with events in shadow DOM](#shadowdom) for more information.
-
-See [EventTarget.dispatchEvent()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent) on MDN for a full description of dispatching events.
+詳しくは[Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う)と[EventTarget.dispatchEvent()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)を見てください。
 
 ### When to dispatch an event
 
