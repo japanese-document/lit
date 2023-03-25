@@ -192,18 +192,50 @@ Event delegationはイベントバブリング時のみを取り扱います。
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">thisのドキュメント</a>を見てください。</p>
-<h3 id="Listening_to_events_fired_from_repeated_templates"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></h3>
-<p>When listening to events on repeated items, it's often convenient to use <a class="Link" href="#event-delegation">event delegation</a> if the event bubbles. When an event does not bubble, a listener can be added on the repeated elements. Here's an example of both methods:</p>
-<p>{% playground-example "docs/components/events/list/" "my-element.ts" %}</p>
+<h3 id="ループするテンプレートでイベントを取り扱う"><a href="#ループするテンプレートでイベントを取り扱う">ループするテンプレートでイベントを取り扱う</a></h3>
+<p>下記のように、テンプレートでループを使って要素を生成する場合、イベントバブリングを利用して<a class="Link" href="#Event_delegation">event delegation</a>を使うと便利です。
+イベントバブリングしないイベント(focus)の場合、ループで生成される各要素にイベントリスナを加えます。</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  @property() clicked = '';
+  @property() focused = '';
+  data = [1, 2, 3];
+
+  protected render() {
+    return html`
+      &lt;div key="container" @click=${this._clickHandler}&gt;
+        ${this.data.map(i =&gt; html`
+          &lt;button key=${i} @focus=${this._focusHandler}&gt;Item ${i}&lt;/button&gt;
+        `)}
+      &lt;/div&gt;
+      &lt;p&gt;Clicked: ${this.clicked}&lt;/p&gt;
+      &lt;p&gt;Focused: ${this.focused}&lt;/p&gt;
+    `;
+  }
+
+  private _clickHandler(e: Event) {
+    this.clicked = (e.target as Element).getAttribute('key')!;
+  }
+
+  private _focusHandler(e: Event) {
+    this.focused = (e.target as Element).textContent!;
+  }
+}
+</code></pre>
 <h2 id="イベントをdispatchする"><a href="#イベントをdispatchする">イベントをdispatchする</a></h2>
-<p>All DOM nodes can dispatch events using the <code>dispatchEvent</code> method. First, create an event instance, specifying the event type and options. Then pass it to <code>dispatchEvent</code> as follows:</p>
+<p>すべてのDOM Nodeは<code>dispatchEvent</code>メソッドでイベントをdispatchすることができます。
+下記のように、第1引数にイベントタイプと第2引数にオプションを指定してEventインスタンスを生成します。
+それを<code>dispatchEvent</code>に渡します。</p>
 <pre><code class="language-js">const event = new Event('my-event', {bubbles: true, composed: true});
 myElement.dispatchEvent(event);
 </code></pre>
-<p>The <code>bubbles</code> option allows the event to flow up the DOM tree to ancestors of the dispatching element. It's important to set this flag if you want the event to be able to participate in <a class="Link" href="#event-delegation">event delegation</a>.</p>
+<p>The <code>bubbles</code> option allows the event to flow up the DOM tree to ancestors of the dispatching element.
+It's important to set this flag if you want the event to be able to participate in <a class="Link" href="#Event_delegation">event delegation</a>.</p>
 <p>The <code>composed</code> option is useful to set to allow the event to be dispatched above the shadow DOM tree in which the element exists.</p>
-<p>See <a class="Link" href="#shadowdom">Working with events in shadow DOM</a> for more information.</p>
-<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a> on MDN for a full description of dispatching events.</p>
+<p>詳しくは[Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う)と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a>を見てください。</p>
 <h3 id="When_to_dispatch_an_event"><a href="#When_to_dispatch_an_event">When to dispatch an event</a></h3>
 <p>Events should be dispatched in response to user interaction or asynchronous changes in the component's state. They should generally <strong>not</strong> be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. This is generally how native web platform elements work.</p>
 <p>For example, when a user types a value into an <code>input</code> element a <code>change</code> event is dispatched, but if code sets the <code>input</code>'s <code>value</code> property, a <code>change</code> event is <strong>not</strong> dispatched.</p>
@@ -321,7 +353,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#Event_delegation">Event delegation</a></p>
 <p class="h4"><a href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></p>
 <p class="h3"><a href="#イベントリスナのthis">イベントリスナのthis</a></p>
-<p class="h3"><a href="#Listening_to_events_fired_from_repeated_templates">Listening to events fired from repeated templates</a></p>
+<p class="h3"><a href="#ループするテンプレートでイベントを取り扱う">ループするテンプレートでイベントを取り扱う</a></p>
 <p class="h2"><a href="#イベントをdispatchする">イベントをdispatchする</a></p>
 <p class="h3"><a href="#When_to_dispatch_an_event">When to dispatch an event</a></p>
 <p class="h3"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></p>
