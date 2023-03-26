@@ -232,12 +232,14 @@ class MyElement extends LitElement {
 <pre><code class="language-js">const event = new Event('my-event', {bubbles: true, composed: true});
 myElement.dispatchEvent(event);
 </code></pre>
-<p>The <code>bubbles</code> option allows the event to flow up the DOM tree to ancestors of the dispatching element.
-It's important to set this flag if you want the event to be able to participate in <a class="Link" href="#Event_delegation">event delegation</a>.</p>
-<p>The <code>composed</code> option is useful to set to allow the event to be dispatched above the shadow DOM tree in which the element exists.</p>
-<p>詳しくは[Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う)と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a>を見てください。</p>
-<h3 id="When_to_dispatch_an_event"><a href="#When_to_dispatch_an_event">When to dispatch an event</a></h3>
-<p>Events should be dispatched in response to user interaction or asynchronous changes in the component's state. They should generally <strong>not</strong> be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. This is generally how native web platform elements work.</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event#values">bubbles</a>オプションに<code>true</code>をセットするとイベントをdispatchした要素の先祖方向にイベントが伝播します。
+この設定をしないと<a class="Link" href="#Event_delegation">event delegation</a>を行うことができません。</p>
+<p><code>composed</code>オプションを<code>true</code>にするとイベントをdispatchした要素が所属しているShadow DOMツリーの外にもイベントが伝播します。</p>
+<p>詳しくは<a class="Link" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a>を見てください。</p>
+<h3 id="どんなときイベントをdispatchするべきか"><a href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></h3>
+<p>Events should be dispatched in response to user interaction or asynchronous changes in the component's state.
+They should generally <strong>not</strong> be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. 
+This is generally how native web platform elements work.</p>
 <p>For example, when a user types a value into an <code>input</code> element a <code>change</code> event is dispatched, but if code sets the <code>input</code>'s <code>value</code> property, a <code>change</code> event is <strong>not</strong> dispatched.</p>
 <p>Similarly, a menu component should dispatch an event when the user selects a menu item, but it should not dispatch an event if, for example, the menu's <code>selectedItem</code> property is set.</p>
 <p>This typically means that a component should dispatch an event in response to another event to which it is listening.</p>
@@ -355,7 +357,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#イベントリスナのthis">イベントリスナのthis</a></p>
 <p class="h3"><a href="#ループするテンプレートでイベントを取り扱う">ループするテンプレートでイベントを取り扱う</a></p>
 <p class="h2"><a href="#イベントをdispatchする">イベントをdispatchする</a></p>
-<p class="h3"><a href="#When_to_dispatch_an_event">When to dispatch an event</a></p>
+<p class="h3"><a href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></p>
 <p class="h3"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></p>
 <p class="h3"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></p>
 <p class="h4"><a href="#Firing_a_custom_event_">Firing a custom event:</a></p>

@@ -244,16 +244,18 @@ const event = new Event('my-event', {bubbles: true, composed: true});
 myElement.dispatchEvent(event);
 ```
 
-The `bubbles` option allows the event to flow up the DOM tree to ancestors of the dispatching element.
-It's important to set this flag if you want the event to be able to participate in [event delegation](#Event_delegation).
+[bubbles](https://developer.mozilla.org/en-US/docs/Web/API/Event/Event#values)オプションに`true`をセットするとイベントをdispatchした要素の先祖方向にイベントが伝播します。
+この設定をしないと[event delegation](#Event_delegation)を行うことができません。
 
-The `composed` option is useful to set to allow the event to be dispatched above the shadow DOM tree in which the element exists.
+`composed`オプションを`true`にするとイベントをdispatchした要素が所属しているShadow DOMツリーの外にもイベントが伝播します。
 
-詳しくは[Shadow DOMでイベントを扱う](#Shadow DOMでイベントを扱う)と[EventTarget.dispatchEvent()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)を見てください。
+詳しくは[Shadow DOMでイベントを扱う](#Shadow_DOMでイベントを扱う)と[EventTarget.dispatchEvent()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)を見てください。
 
-### When to dispatch an event
+### どんなときイベントをdispatchするべきか
 
-Events should be dispatched in response to user interaction or asynchronous changes in the component's state. They should generally **not** be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. This is generally how native web platform elements work.
+Events should be dispatched in response to user interaction or asynchronous changes in the component's state.
+They should generally **not** be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. 
+This is generally how native web platform elements work.
 
 For example, when a user types a value into an `input` element a `change` event is dispatched, but if code sets the `input`'s `value` property, a `change` event is **not** dispatched.
 
