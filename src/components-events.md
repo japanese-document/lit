@@ -253,17 +253,73 @@ myElement.dispatchEvent(event);
 
 ### どんなときイベントをdispatchするべきか
 
-Events should be dispatched in response to user interaction or asynchronous changes in the component's state.
-They should generally **not** be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. 
-This is generally how native web platform elements work.
+イベントのdispatchはユーザの操作もしくはコンポーネントのステート(state)の非同期的な変更時に実行されるべきです。
+Webのネイティブ要素がそうであるように、コードでコンポーネントのプロパティもしくは属性を変更した時にイベントをdispatchするべきではありません。
 
-For example, when a user types a value into an `input` element a `change` event is dispatched, but if code sets the `input`'s `value` property, a `change` event is **not** dispatched.
+例えば、input要素にユーザが入力したら`change`イベントがdispatchされます。
+しかし、コードで`input`要素の`value`プロパティを変更した場合、`change`イベントはdispatchされません。
 
-Similarly, a menu component should dispatch an event when the user selects a menu item, but it should not dispatch an event if, for example, the menu's `selectedItem` property is set.
+同様にメニューコンポーネントはメニューの項目が選択されたときはイベントがdispatchされるべきです。メニューコンポーネントの`selectedItem`プロパティがセットされた場合はイベントをdispatchするべきではありません。
 
-This typically means that a component should dispatch an event in response to another event to which it is listening.
+通常、コンポーネントがリスニングしているイベントに応じてそれに適した別のイベントをdispatchするべきです。
 
-{% playground-ide "docs/components/events/dispatch/" "my-dispatcher.ts" %}
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, query} from 'lit/decorators.js';
+
+@customElement('my-dispatcher')
+class MyDispatcher extends LitElement {
+  @query('input', true) _input!: HTMLInputElement;
+
+  protected render() {
+    return html`
+      <p>Name: <input></p>
+      <p><button @click=${this._dispatchLogin}>Login</button></p>
+    `;
+  }
+
+  private _dispatchLogin() {
+    const name = this._input.value.trim();
+    if (name) {
+      const options = {
+        detail: {name},
+        bubbles: true,
+        composed: true
+      };
+      this.dispatchEvent(new CustomEvent('mylogin', options));
+    }
+  }
+}
+```
+
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-listener')
+class MyListener extends LitElement {
+  @property() name = '';
+
+  protected render() {
+    return html`
+      <p @mylogin=${this._loginListener}><slot></slot></p>
+      <p>Login: ${this.name}</p>`;
+  }
+
+  private _loginListener(e: CustomEvent) {
+    this.name = e.detail.name;
+  }
+}
+```
+
+```html
+<script type="module" src="./my-listener.js"></script>
+<script type="module" src="./my-dispatcher.js"></script>
+
+<my-listener>
+  <my-dispatcher></my-dispatcher>
+</my-listener>
+```
 
 ### Dispatching events after an element updates
 
