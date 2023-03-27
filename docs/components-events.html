@@ -237,13 +237,64 @@ myElement.dispatchEvent(event);
 <p><code>composed</code>オプションを<code>true</code>にするとイベントをdispatchした要素が所属しているShadow DOMツリーの外にもイベントが伝播します。</p>
 <p>詳しくは<a class="Link" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a>を見てください。</p>
 <h3 id="どんなときイベントをdispatchするべきか"><a href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></h3>
-<p>Events should be dispatched in response to user interaction or asynchronous changes in the component's state.
-They should generally <strong>not</strong> be dispatched in response to state changes made by the owner of the component via its property or attribute APIs. 
-This is generally how native web platform elements work.</p>
-<p>For example, when a user types a value into an <code>input</code> element a <code>change</code> event is dispatched, but if code sets the <code>input</code>'s <code>value</code> property, a <code>change</code> event is <strong>not</strong> dispatched.</p>
-<p>Similarly, a menu component should dispatch an event when the user selects a menu item, but it should not dispatch an event if, for example, the menu's <code>selectedItem</code> property is set.</p>
-<p>This typically means that a component should dispatch an event in response to another event to which it is listening.</p>
-<p>{% playground-ide "docs/components/events/dispatch/" "my-dispatcher.ts" %}</p>
+<p>イベントのdispatchはユーザの操作もしくはコンポーネントのステート(state)の非同期的な変更時に実行されるべきです。
+Webのネイティブ要素がそうであるように、コードでコンポーネントのプロパティもしくは属性を変更した時にイベントをdispatchするべきではありません。</p>
+<p>例えば、input要素にユーザが入力したら<code>change</code>イベントがdispatchされます。
+しかし、コードで<code>input</code>要素の<code>value</code>プロパティを変更した場合、<code>change</code>イベントはdispatchされません。</p>
+<p>同様にメニューコンポーネントはメニューの項目が選択されたときはイベントがdispatchされるべきです。メニューコンポーネントの<code>selectedItem</code>プロパティがセットされた場合はイベントをdispatchするべきではありません。</p>
+<p>通常、コンポーネントがリスニングしているイベントに応じてそれに適した別のイベントをdispatchするべきです。</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, query} from 'lit/decorators.js';
+
+@customElement('my-dispatcher')
+class MyDispatcher extends LitElement {
+  @query('input', true) _input!: HTMLInputElement;
+
+  protected render() {
+    return html`
+      &lt;p&gt;Name: &lt;input&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;button @click=${this._dispatchLogin}&gt;Login&lt;/button&gt;&lt;/p&gt;
+    `;
+  }
+
+  private _dispatchLogin() {
+    const name = this._input.value.trim();
+    if (name) {
+      const options = {
+        detail: {name},
+        bubbles: true,
+        composed: true
+      };
+      this.dispatchEvent(new CustomEvent('mylogin', options));
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-listener')
+class MyListener extends LitElement {
+  @property() name = '';
+
+  protected render() {
+    return html`
+      &lt;p @mylogin=${this._loginListener}&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/p&gt;
+      &lt;p&gt;Login: ${this.name}&lt;/p&gt;`;
+  }
+
+  private _loginListener(e: CustomEvent) {
+    this.name = e.detail.name;
+  }
+}
+</code></pre>
+<pre><code class="language-html">&lt;script type="module" src="./my-listener.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="./my-dispatcher.js"&gt;&lt;/script&gt;
+
+&lt;my-listener&gt;
+  &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
+&lt;/my-listener&gt;
+</code></pre>
 <h3 id="Dispatching_events_after_an_element_updates"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></h3>
 <p>Often, an event should be fired only after an element updates and renders. This might be necessary if an event is intended to communicate a change in rendered state based on user interaction. In this case, the component's <code>updateComplete</code> Promise can be awaited after changing state, but before dispatching the event.</p>
 <p>{% playground-ide "docs/components/events/update/" "my-dispatcher.ts" %}</p>
