@@ -295,9 +295,63 @@ class MyListener extends LitElement {
   &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
 &lt;/my-listener&gt;
 </code></pre>
-<h3 id="Dispatching_events_after_an_element_updates"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></h3>
-<p>Often, an event should be fired only after an element updates and renders. This might be necessary if an event is intended to communicate a change in rendered state based on user interaction. In this case, the component's <code>updateComplete</code> Promise can be awaited after changing state, but before dispatching the event.</p>
-<p>{% playground-ide "docs/components/events/update/" "my-dispatcher.ts" %}</p>
+<h3 id="要素の更新の後にイベントをdispatchする"><a href="#要素の更新の後にイベントをdispatchする">要素の更新の後にイベントをdispatchする</a></h3>
+<p>ほとんどの場合、イベントは要素の更新とレンダリングの後に発生するべきです。
+これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必要です。
+この場合、ステートの変更の後、イベントをdispatchする前にコンポーネントの<code>updateComplete</code> Promiseをawaitします。</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-dispatcher')
+class MyDispatcher extends LitElement {
+  @property({type: Boolean}) open = true;
+
+  protected render() {
+    return html`
+      &lt;p&gt;&lt;button @click=${this._notify}&gt;${this.open ? 'Close' : 'Open'}&lt;/button&gt;&lt;/p&gt;
+      &lt;p ?hidden=${!this.open}&gt;Content!&lt;/p&gt;
+    `;
+  }
+
+  private async _notify() {
+    this.open = !this.open;
+    await this.updateComplete;
+    const name = this.open ? 'opened' : 'closed';
+    this.dispatchEvent(new CustomEvent(name, {bubbles: true, composed: true}));
+  }
+}
+</code></pre>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-listener')
+class MyListener extends LitElement {
+  @property({type: Number}) height: number|null = null;
+
+  protected render() {
+    return html`
+      &lt;p @opened=${this._listener} @closed=${this._listener}&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/p&gt;
+      &lt;p&gt;Height: ${this.height}px&lt;/p&gt;`;
+  }
+
+  private _listener() {
+    this.height = null;
+  }
+
+  protected updated() {
+    if (this.height === null) {
+      requestAnimationFrame(() =&gt; this.height = this.getBoundingClientRect().height);
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-html">&lt;script type="module" src="./my-listener.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="./my-dispatcher.js"&gt;&lt;/script&gt;
+
+&lt;my-listener&gt;
+  &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
+&lt;/my-listener&gt;
+</code></pre>
 <h3 id="Using_standard_or_custom_events_{_#standard-custom-events_}"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></h3>
 <p>Events can be dispatched either by constructing an <code>Event</code> or a <code>CustomEvent</code>. Either is a reasonable approach. When using a <code>CustomEvent</code>, any event data is passed in the event's <code>detail</code> property. When using an <code>Event</code>, an event subclass can be made and custom API attached to it.</p>
 <p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event</a> on MDN for details about constructing events.</p>
@@ -409,7 +463,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#ループするテンプレートでイベントを取り扱う">ループするテンプレートでイベントを取り扱う</a></p>
 <p class="h2"><a href="#イベントをdispatchする">イベントをdispatchする</a></p>
 <p class="h3"><a href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></p>
-<p class="h3"><a href="#Dispatching_events_after_an_element_updates">Dispatching events after an element updates</a></p>
+<p class="h3"><a href="#要素の更新の後にイベントをdispatchする">要素の更新の後にイベントをdispatchする</a></p>
 <p class="h3"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></p>
 <p class="h4"><a href="#Firing_a_custom_event_">Firing a custom event:</a></p>
 <p class="h4"><a href="#Firing_a_standard_event_">Firing a standard event:</a></p>

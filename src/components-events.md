@@ -321,11 +321,70 @@ class MyListener extends LitElement {
 </my-listener>
 ```
 
-### Dispatching events after an element updates
+### 要素の更新の後にイベントをdispatchする
 
-Often, an event should be fired only after an element updates and renders. This might be necessary if an event is intended to communicate a change in rendered state based on user interaction. In this case, the component's `updateComplete` Promise can be awaited after changing state, but before dispatching the event.
+ほとんどの場合、イベントは要素の更新とレンダリングの後に発生するべきです。
+これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必要です。
+この場合、ステートの変更の後、イベントをdispatchする前にコンポーネントの`updateComplete` Promiseをawaitします。
 
-{% playground-ide "docs/components/events/update/" "my-dispatcher.ts" %}
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-dispatcher')
+class MyDispatcher extends LitElement {
+  @property({type: Boolean}) open = true;
+
+  protected render() {
+    return html`
+      <p><button @click=${this._notify}>${this.open ? 'Close' : 'Open'}</button></p>
+      <p ?hidden=${!this.open}>Content!</p>
+    `;
+  }
+
+  private async _notify() {
+    this.open = !this.open;
+    await this.updateComplete;
+    const name = this.open ? 'opened' : 'closed';
+    this.dispatchEvent(new CustomEvent(name, {bubbles: true, composed: true}));
+  }
+}
+```
+
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-listener')
+class MyListener extends LitElement {
+  @property({type: Number}) height: number|null = null;
+
+  protected render() {
+    return html`
+      <p @opened=${this._listener} @closed=${this._listener}><slot></slot></p>
+      <p>Height: ${this.height}px</p>`;
+  }
+
+  private _listener() {
+    this.height = null;
+  }
+
+  protected updated() {
+    if (this.height === null) {
+      requestAnimationFrame(() => this.height = this.getBoundingClientRect().height);
+    }
+  }
+}
+```
+
+```html
+<script type="module" src="./my-listener.js"></script>
+<script type="module" src="./my-dispatcher.js"></script>
+
+<my-listener>
+  <my-dispatcher></my-dispatcher>
+</my-listener>
+```
 
 ### Using standard or custom events { #standard-custom-events }
 
