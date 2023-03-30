@@ -352,19 +352,21 @@ class MyListener extends LitElement {
   &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
 &lt;/my-listener&gt;
 </code></pre>
-<h3 id="Using_standard_or_custom_events_{_#standard-custom-events_}"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></h3>
-<p>Events can be dispatched either by constructing an <code>Event</code> or a <code>CustomEvent</code>. Either is a reasonable approach. When using a <code>CustomEvent</code>, any event data is passed in the event's <code>detail</code> property. When using an <code>Event</code>, an event subclass can be made and custom API attached to it.</p>
-<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event</a> on MDN for details about constructing events.</p>
-<h4 id="Firing_a_custom_event_"><a href="#Firing_a_custom_event_">Firing a custom event:</a></h4>
+<h3 id="EventとCustomEventを扱う"><a href="#EventとCustomEventを扱う">EventとCustomEventを扱う</a></h3>
+<p>イベントは<code>Event</code>もしくは<code>CustomEvent</code>です。どちらを使っても良いです。
+<code>CustomEvent</code>を使う場合、イベントのデータは<code>detail</code>プロパティにセットします。
+<code>Event</code>を使う場合、<code>Event</code>クラスのサブクラスを作成します。そして、それにAPIを追加します。</p>
+<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">CustomEvent</a>を見てください。</p>
+<h4 id="CustomEventの使い方"><a href="#CustomEventの使い方">CustomEventの使い方</a></h4>
 <pre><code class="language-js">const event = new CustomEvent('my-event', {
   detail: {
     message: 'Something important happened'
   }
 });
+
 this.dispatchEvent(event);
 </code></pre>
-<p>See the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">MDN documentation on custom events</a> for more information.</p>
-<h4 id="Firing_a_standard_event_"><a href="#Firing_a_standard_event_">Firing a standard event:</a></h4>
+<h4 id="Eventの使い方"><a href="#Eventの使い方">Eventの使い方</a></h4>
 <pre><code class="language-js">class MyEvent extends Event {
   constructor(message) {
     super();
@@ -464,9 +466,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#イベントをdispatchする">イベントをdispatchする</a></p>
 <p class="h3"><a href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></p>
 <p class="h3"><a href="#要素の更新の後にイベントをdispatchする">要素の更新の後にイベントをdispatchする</a></p>
-<p class="h3"><a href="#Using_standard_or_custom_events_{_#standard-custom-events_}">Using standard or custom events { #standard-custom-events }</a></p>
-<p class="h4"><a href="#Firing_a_custom_event_">Firing a custom event:</a></p>
-<p class="h4"><a href="#Firing_a_standard_event_">Firing a standard event:</a></p>
+<p class="h3"><a href="#EventとCustomEventを扱う">EventとCustomEventを扱う</a></p>
+<p class="h4"><a href="#CustomEventの使い方">CustomEventの使い方</a></p>
+<p class="h4"><a href="#Eventの使い方">Eventの使い方</a></p>
 <p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
 <p class="h3"><a href="#Understanding_composed_event_dispatching_{#shadowdom-composed}">Understanding composed event dispatching {#shadowdom-composed}</a></p>
 <p class="h3"><a href="#Understanding_event_retargeting_{#shadowdom-retargeting}">Understanding event retargeting {#shadowdom-retargeting}</a></p>
