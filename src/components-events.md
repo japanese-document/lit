@@ -386,13 +386,15 @@ class MyListener extends LitElement {
 </my-listener>
 ```
 
-### Using standard or custom events { #standard-custom-events }
+### EventとCustomEventを扱う
 
-Events can be dispatched either by constructing an `Event` or a `CustomEvent`. Either is a reasonable approach. When using a `CustomEvent`, any event data is passed in the event's `detail` property. When using an `Event`, an event subclass can be made and custom API attached to it.
+イベントは`Event`もしくは`CustomEvent`です。どちらを使っても良いです。
+`CustomEvent`を使う場合、イベントのデータは`detail`プロパティにセットします。
+`Event`を使う場合、`Event`クラスのサブクラスを作成します。そして、それにAPIを追加します。
 
-See [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event/Event) on MDN for details about constructing events.
+詳しくは[Event](https://developer.mozilla.org/en-US/docs/Web/API/Event/Event)と[CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)を見てください。
 
-#### Firing a custom event:
+#### CustomEventの使い方
 
 ```js
 const event = new CustomEvent('my-event', {
@@ -400,12 +402,11 @@ const event = new CustomEvent('my-event', {
     message: 'Something important happened'
   }
 });
+
 this.dispatchEvent(event);
 ```
 
-See the [MDN documentation on custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) for more information.
-
-#### Firing a standard event:
+#### Eventの使い方
 
 ```js
 class MyEvent extends Event {
