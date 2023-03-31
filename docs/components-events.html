@@ -32,6 +32,7 @@
         <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
         <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
         <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
       </details>
       <details open="">
         <summary>テンプレート</summary>
@@ -394,7 +395,7 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
 </code></pre>
 <p>If an event is <code>composed</code> and does <code>bubble</code>, it can be received by all ancestors of the element that dispatches the event—including ancestors in outer shadow roots. If an event is <code>composed</code> but does not <code>bubble</code>, it can only be received on the element that dispatches the event and on the host element containing the shadow root.</p>
 <p>Note that most standard user interface events, including all mouse, touch, and keyboard events, are both bubbling and composed. See the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">MDN documentation on composed events</a> for more information.</p>
-<h3 id="Understanding_event_retargeting_{#shadowdom-retargeting}"><a href="#Understanding_event_retargeting_{#shadowdom-retargeting}">Understanding event retargeting {#shadowdom-retargeting}</a></h3>
+<h3 id="Understanding_event_retargeting"><a href="#Understanding_event_retargeting">Understanding event retargeting</a></h3>
 <p><a class="Link" href="#shadowdom-composed">Composed</a> events dispatched from within a shadow root are retargeted, meaning that to any listener on an element hosting a shadow root or any of its ancestors, they appear to come from the hosting element. Since Lit components render into shadow roots, all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself. The event's <code>target</code> property is the Lit component.</p>
 <pre><code class="language-html">&lt;my-element onClick="(e) =&gt; console.log(e.target)"&gt;&lt;/my-element&gt;
 </code></pre>
@@ -411,7 +412,7 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
 }
 </code></pre>
 <p>See the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">MDN documentation on composedPath</a> for more information.</p>
-<h2 id="Communicating_between_the_event_dispatcher_and_listener"><a href="#Communicating_between_the_event_dispatcher_and_listener">Communicating between the event dispatcher and listener</a></h2>
+<h2 id="イベントディスパッチャーとイベントリスナ間でデータをやり取りする"><a href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">イベントディスパッチャーとイベントリスナ間でデータをやり取りする</a></h2>
 <p>Events exist primarily to communicate changes from the event dispatcher to the event listener, but events can also be used to communicate information from the listener back to the dispatcher.</p>
 <p>One way you can do this is to expose API on events which listeners can use to customize component behavior. For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.</p>
 <p>Another way to communicate between the dispatcher and listener is via the <code>preventDefault()</code> method. It can be called to indicate the event's standard action should not occur. When the listener calls <code>preventDefault()</code>, the event's <code>defaultPrevented</code> property becomes true. This flag can then be used by the listener to customize behavior.</p>
@@ -473,8 +474,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#Eventの使い方">Eventの使い方</a></p>
 <p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
 <p class="h3"><a href="#Understanding_composed_event_dispatching">Understanding composed event dispatching</a></p>
-<p class="h3"><a href="#Understanding_event_retargeting_{#shadowdom-retargeting}">Understanding event retargeting {#shadowdom-retargeting}</a></p>
-<p class="h2"><a href="#Communicating_between_the_event_dispatcher_and_listener">Communicating between the event dispatcher and listener</a></p>
+<p class="h3"><a href="#Understanding_event_retargeting">Understanding event retargeting</a></p>
+<p class="h2"><a href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">イベントディスパッチャーとイベントリスナ間でデータをやり取りする</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>
