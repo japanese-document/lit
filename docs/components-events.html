@@ -379,8 +379,10 @@ const event = new MyEvent('Something important happened');
 this.dispatchEvent(event);
 </code></pre>
 <h2 id="Shadow_DOMでイベントを扱う"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></h2>
-<p>When using shadow DOM there are a few modifications to the standard event system that are important to understand. Shadow DOM exists primarily to provide a scoping mechanism in the DOM that encapsulates details about these "shadow" elements. As such, events in shadow DOM encapsulate certain details from outside DOM elements.</p>
-<h3 id="Understanding_composed_event_dispatching_{#shadowdom-composed}"><a href="#Understanding_composed_event_dispatching_{#shadowdom-composed}">Understanding composed event dispatching {#shadowdom-composed}</a></h3>
+<p>Shadow DOMでイベントを取り扱う場合の注意点があります。
+Shadow DOMはshadow要素に関する詳細を外部に公開せずカプセル化します。
+Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要素に渡しません。</p>
+<h3 id="Understanding_composed_event_dispatching"><a href="#Understanding_composed_event_dispatching">Understanding composed event dispatching</a></h3>
 <p>By default, an event dispatched inside a shadow root will not be visible outside that shadow root. To make an event pass through shadow DOM boundaries, you must set the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed"><code>composed</code> property</a> to <code>true</code>. It's common to pair <code>composed</code> with <code>bubbles</code> so that all nodes in the DOM tree can see the event:</p>
 <pre><code class="language-js">_dispatchMyEvent() {
   let myEvent = new CustomEvent('my-event', {
@@ -470,7 +472,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#CustomEventの使い方">CustomEventの使い方</a></p>
 <p class="h4"><a href="#Eventの使い方">Eventの使い方</a></p>
 <p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
-<p class="h3"><a href="#Understanding_composed_event_dispatching_{#shadowdom-composed}">Understanding composed event dispatching {#shadowdom-composed}</a></p>
+<p class="h3"><a href="#Understanding_composed_event_dispatching">Understanding composed event dispatching</a></p>
 <p class="h3"><a href="#Understanding_event_retargeting_{#shadowdom-retargeting}">Understanding event retargeting {#shadowdom-retargeting}</a></p>
 <p class="h2"><a href="#Communicating_between_the_event_dispatcher_and_listener">Communicating between the event dispatcher and listener</a></p>
 <p class="h2"><a href="#License">License</a></p>

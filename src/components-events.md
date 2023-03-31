@@ -423,9 +423,11 @@ this.dispatchEvent(event);
 
 ## Shadow DOMでイベントを扱う
 
-When using shadow DOM there are a few modifications to the standard event system that are important to understand. Shadow DOM exists primarily to provide a scoping mechanism in the DOM that encapsulates details about these "shadow" elements. As such, events in shadow DOM encapsulate certain details from outside DOM elements.
+Shadow DOMでイベントを取り扱う場合の注意点があります。
+Shadow DOMはshadow要素に関する詳細を外部に公開せずカプセル化します。
+Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要素に渡しません。
 
-### Understanding composed event dispatching {#shadowdom-composed}
+### Understanding composed event dispatching
 
 By default, an event dispatched inside a shadow root will not be visible outside that shadow root. To make an event pass through shadow DOM boundaries, you must set the [`composed` property](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed) to `true`. It's common to pair `composed` with `bubbles` so that all nodes in the DOM tree can see the event:
 
