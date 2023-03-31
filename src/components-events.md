@@ -445,7 +445,7 @@ If an event is `composed` and does `bubble`, it can be received by all ancestors
 
 Note that most standard user interface events, including all mouse, touch, and keyboard events, are both bubbling and composed. See the [MDN documentation on composed events](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed) for more information.
 
-### Understanding event retargeting {#shadowdom-retargeting}
+### Understanding event retargeting
 
 [Composed](#shadowdom-composed) events dispatched from within a shadow root are retargeted, meaning that to any listener on an element hosting a shadow root or any of its ancestors, they appear to come from the hosting element. Since Lit components render into shadow roots, all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself. The event's `target` property is the Lit component.
 
@@ -471,7 +471,7 @@ handleMyEvent(event) {
 ```
 See the [MDN documentation on composedPath](https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath) for more information.
 
-## Communicating between the event dispatcher and listener
+## イベントディスパッチャーとイベントリスナ間でデータをやり取りする
 
 Events exist primarily to communicate changes from the event dispatcher to the event listener, but events can also be used to communicate information from the listener back to the dispatcher.
 

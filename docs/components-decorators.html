@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/components-decorators.html" />
+    <meta property="og:title" content="デコレータ" />
+    <meta property="og:description" content="Decorators are special functions that can modify the behavior of classes, class methods, and class fields. Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.Decorators are a stage 3 proposal for addition to the ECMAScript standard." />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Decorators are special functions that can modify the behavior of classes, class methods, and class fields. Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.Decorators are a stage 3 proposal for addition to the ECMAScript standard." />
+    <title>デコレータ</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <div class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </div></div>
+    <main class="main markdown-body">
+      <h1 id="デコレータ"><a href="#デコレータ">デコレータ</a></h1>
+<p>Decorators are special functions that can modify the behavior of classes, class methods, and class fields. Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.</p>
+<p>Decorators are a <a class="Link" href="https://github.com/tc39/proposal-decorators">stage 3 proposal</a> for addition to the ECMAScript standard. Currently no browsers implement decorators, but compilers like <a class="Link" href="https://babeljs.io/">Babel</a> and <a class="Link" href="https://www.typescriptlang.org/">TypeScript</a> provide support for an earlier version of the decorators proposal. Lit decorators work with Babel and TypeScript, and will be updated to work with the final specification when it's implemented in browsers.</p>
+<p>See the <a class="Link" href="#enabling-decorators">Enabling decorators</a> section for more information.</p>
+<p>Lit supplies a set of decorators that reduce the amount of boilerplate code you need to write when defining a component. For example, the <code>@customElement</code> and <code>@property</code> decorators make a basic element definition more compact:</p>
+<pre><code class="language-ts">@customElement('my-element')
+export class MyElement extends LitElement {
+  @property() greeting = "Welcome";
+  @property() name = "Sally";
+  @property({type: Boolean}) emphatic = true;
+  //...
+}
+</code></pre>
+<p>{#custom-element}</p>
+<p>The <code>@customElement</code> decorator defines a custom element, equivalent to calling:</p>
+<pre><code class="language-js">customElements.define('my-element', MyElement);
+</code></pre>
+<p>The <code>@property</code> decorator declares a reactive property.</p>
+<p>See <a class="Link" href="/docs/components/properties/">Reactive properties</a> for more information about configuring properties.</p>
+<h2 id="Built-in_decorators"><a href="#Built-in_decorators">Built-in decorators</a></h2>
+<table>
+<thead>
+<tr>
+<th>Decorator</th>
+<th>Summary</th>
+<th>More Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{% api "@customElement" "customElement" %}</td>
+<td>Defines a custom element</td>
+<td><a class="Link" href="#custom-element">Above</a></td>
+</tr>
+<tr>
+<td>{% api "@eventOptions" "eventOptions" %}</td>
+<td>Adds event listener options.</td>
+<td><a class="Link" href="/docs/components/events/#event-options-decorator">Events</a></td>
+</tr>
+<tr>
+<td>{% api "@property" "property" %}</td>
+<td>Defines a public property.</td>
+<td><a class="Link" href="/docs/components/properties/#declare-with-decorators">Properties</a></td>
+</tr>
+<tr>
+<td>{% api "@state" "state" %}</td>
+<td>Defines a private state property</td>
+<td><a class="Link" href="/docs/components/properties/#declare-with-decorators">Properties</a></td>
+</tr>
+<tr>
+<td>{% api "@query" "query" %}</td>
+<td>Defines a property that returns an element in the component template.</td>
+<td><a class="Link" href="/docs/components/shadow-dom/#query">Shadow DOM</a></td>
+</tr>
+<tr>
+<td>{% api "@queryAll" "queryAll" %}</td>
+<td>Defines a property that returns a list of elements in the component template.</td>
+<td><a class="Link" href="/docs/components/shadow-dom/#query-all">Shadow DOM</a></td>
+</tr>
+<tr>
+<td>{% api "@queryAsync" "queryAsync" %}</td>
+<td>Defines a property that returns a promise that resolves to an element in the component template.</td>
+<td><a class="Link" href="/docs/components/shadow-dom/#query-async">Shadow DOM</a></td>
+</tr>
+<tr>
+<td>{% api "@queryAssignedElements" "queryAssignedElements" %}</td>
+<td>Defines a property that returns the child elements assigned to a specific slot.</td>
+<td><a class="Link" href="/docs/components/shadow-dom/#query-assigned-nodes">Shadow DOM</a></td>
+</tr>
+<tr>
+<td>{% api "@queryAssignedNodes" "queryAssignedNodes" %}</td>
+<td>Defines a property that returns the child nodes assigned to a specific slot.</td>
+<td><a class="Link" href="/docs/components/shadow-dom/#query-assigned-nodes">Shadow DOM</a></td>
+</tr>
+</tbody></table>
+<h2 id="Importing_decorators"><a href="#Importing_decorators">Importing decorators</a></h2>
+<p>You can import all the lit decorators via the <code>lit/decorators.js</code> module:</p>
+<pre><code class="language-js">import {customElement, property, eventOptions, query} from 'lit/decorators.js';
+</code></pre>
+<p>To reduce the amount of code needed to run the component, decorators can be imported individually into component code. All decorators are available at <code>lit/decorators/&lt;decorator-name&gt;.js</code>. For example,</p>
+<pre><code class="language-js">import {customElement} from 'lit/decorators/custom-element.js';
+import {eventOptions} from 'lit/decorators/event-options.js';
+</code></pre>
+<h2 id="Enabling_decorators_{_#enabling-decorators_}"><a href="#Enabling_decorators_{_#enabling-decorators_}">Enabling decorators { #enabling-decorators }</a></h2>
+<p>To use decorators, you need to build your code with a compiler such as <a class="Link" href="#decorators-typescript">TypeScript</a> or <a class="Link" href="#decorators-babel">Babel</a>.</p>
+<p>In the future when decorators become a native web platform feature, this may no longer be necessary.</p>
+<h3 id="Using_decorators_with_TypeScript_{_#decorators-typescript_}"><a href="#Using_decorators_with_TypeScript_{_#decorators-typescript_}">Using decorators with TypeScript { #decorators-typescript }</a></h3>
+<p>To use decorators with <a class="Link" href="https://www.typescriptlang.org/docs/handbook/decorators.html">TypeScript</a>, enable the <code>experimentalDecorators</code> compiler option.</p>
+<p>You should also ensure that the <code>useDefineForClassFields</code> setting is <code>false</code>. Note, this should only be required when the <code>target</code> is set to <code>esnext</code> or greater, but it's recommended to explicitly ensure this setting is <code>false</code>.</p>
+<pre><code class="language-json">"experimentalDecorators": true,
+"useDefineForClassFields": false,
+</code></pre>
+<p>Enabling <code>emitDecoratorMetadata</code> is not required and not recommended.</p>
+<h3 id="Using_decorators_with_Babel__{_#decorators-babel_}"><a href="#Using_decorators_with_Babel__{_#decorators-babel_}">Using decorators with Babel  { #decorators-babel }</a></h3>
+<p>If you're compiling JavaScript with <a class="Link" href="https://babeljs.io/docs/en/">Babel</a>, you can enable decorators by adding the following plugins and settings:</p>
+<ul>
+<li><a class="Link" href="https://babeljs.io/docs/en/babel-plugin-proposal-decorators"><code>@babel/plugin-proposal-decorators</code></a></li>
+<li><a class="Link" href="https://babeljs.io/docs/en/babel-plugin-proposal-class-properties"><code>@babel/plugin-proposal-class-properties</code></a></li>
+</ul>
+<p>Note, the <code>@babel/plugin-proposal-class-properties</code> may not be required with the latest versions of Babel.</p>
+<p>To set up the plugins, add code like this to your Babel configuration:</p>
+<pre><code class="language-json">"assumptions": {
+  "setPublicClassFields": true
+},
+"plugins": [
+  ["@babel/plugin-proposal-decorators", {
+    "version": "2018-09",
+    "decoratorsBeforeExport": true
+  }],
+  ["@babel/plugin-proposal-class-properties"]
+]
+</code></pre>
+<div class="alert alert-info">
+
+<p>Babel decorator support has been tested with <code>version: '2018-09'</code>. This is currently the default, but we recommend setting the version explicitly in case the default changes. Other versions ('2021-12' or 'legacy') are not supported, but this may change as Babel evolves. See the <a class="Link" href="https://babeljs.io/docs/en/babel-plugin-proposal-decorators#options">Babel documentation</a> if you want to experiment.</p>
+</div>
+
+<h3 id="Using_decorators_with_TypeScript_and_Babel"><a href="#Using_decorators_with_TypeScript_and_Babel">Using decorators with TypeScript and Babel</a></h3>
+<p>When using TypeScript with Babel, it's important to order the TypeScript transform before the decorators transform in your Babel config as follows:</p>
+<pre><code class="language-json">{
+  "assumptions": {
+    "setPublicClassFields": true
+  },
+  "plugins": [
+    ["@babel/plugin-transform-typescript", {
+      "allowDeclareFields": true
+    }],
+    ["@babel/plugin-proposal-decorators", {
+      "version": "2018-09",
+      "decoratorsBeforeExport": true
+    }],
+    ["@babel/plugin-proposal-class-properties"]
+  ]
+}
+</code></pre>
+<p>The <code>allowDeclareFields</code> setting is generally not needed, but it can be useful if you want to define a reactive property without using a decorator. For example,</p>
+<pre><code class="language-ts">static properties = { foo: {} };
+
+declare foo: string;
+
+constructor() {
+  super();
+  this.foo = 'bar';
+}
+</code></pre>
+<h3 id="Avoiding_issues_with_class_fields_and_decorators_{#avoiding-issues-with-class-fields}"><a href="#Avoiding_issues_with_class_fields_and_decorators_{#avoiding-issues-with-class-fields}">Avoiding issues with class fields and decorators {#avoiding-issues-with-class-fields}</a></h3>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields">Class fields</a> have a problematic interaction with declaring reactive properties. See <a class="Link" href="/docs/components/properties/#avoiding-issues-with-class-fields">Avoiding issues with class fields when declaring properties</a> for more information.</p>
+<p>The current decorators <a class="Link" href="https://github.com/tc39/proposal-decorators">stage 3 proposal</a> does not directly address this issue, but it should be solved as the proposal evolves and matures.</p>
+<p>When using decorators, transpiler settings for Babel and TypeScript must be configured correctly as shown in the sections above for <a class="Link" href="#decorators-typescript">TypeScript</a> and <a class="Link" href="#decorators-babel">Babel</a>.</p>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#デコレータ">デコレータ</a></p>
+<p class="h2"><a href="#Built-in_decorators">Built-in decorators</a></p>
+<p class="h2"><a href="#Importing_decorators">Importing decorators</a></p>
+<p class="h2"><a href="#Enabling_decorators_{_#enabling-decorators_}">Enabling decorators { #enabling-decorators }</a></p>
+<p class="h3"><a href="#Using_decorators_with_TypeScript_{_#decorators-typescript_}">Using decorators with TypeScript { #decorators-typescript }</a></p>
+<p class="h3"><a href="#Using_decorators_with_Babel__{_#decorators-babel_}">Using decorators with Babel  { #decorators-babel }</a></p>
+<p class="h3"><a href="#Using_decorators_with_TypeScript_and_Babel">Using decorators with TypeScript and Babel</a></p>
+<p class="h3"><a href="#Avoiding_issues_with_class_fields_and_decorators_{#avoiding-issues-with-class-fields}">Avoiding issues with class fields and decorators {#avoiding-issues-with-class-fields}</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
