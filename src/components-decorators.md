@@ -31,10 +31,10 @@ See [リアクティブプロパティ](https://japanese-document.github.io/lit/
 
 | デコレータ | サマリー | 詳細 |
 |-----------|---------|--------------|
-| [@customElement](https://lit.dev/docs/api/decorators/#customElement) | Defines a custom element | [定義](https://japanese-document.github.io/lit/components-defining.html) |
-| [@eventOptions](https://lit.dev/docs/api/decorators/#eventOptions) | Adds event listener options. | [イベント](https://japanese-document.github.io/lit/components-events.html#イベントリスナのオプションを設定する) |
-| [@property](https://lit.dev/docs/api/decorators/#property) | Defines a public property. | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#デコレータでプロパティを設定する) |
-| [@state](https://lit.dev/docs/api/decorators/#state) | Defines a private state property | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#インターナルリアクティブステート) |
+| [@customElement](https://lit.dev/docs/api/decorators/#customElement) | custom elementsを定義する | [定義](https://japanese-document.github.io/lit/components-defining.html) |
+| [@eventOptions](https://lit.dev/docs/api/decorators/#eventOptions) | イベントリスナのoptionsを加える | [イベント](https://japanese-document.github.io/lit/components-events.html#イベントリスナのオプションを設定する) |
+| [@property](https://lit.dev/docs/api/decorators/#property) | パブリックプロパティを定義する | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#デコレータでプロパティを設定する) |
+| [@state](https://lit.dev/docs/api/decorators/#state) | プライベートステートプロパティを定義する | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#インターナルリアクティブステート) |
 | [@query](https://lit.dev/docs/api/decorators/#query) | Defines a property that returns an element in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_query) |
 | [@queryAll](https://lit.dev/docs/api/decorators/#queryAll) | Defines a property that returns a list of elements in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAll) |
 | [@queryAsync](https://lit.dev/docs/api/decorators/#queryAsync) | Defines a property that returns a promise that resolves to an element in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAsync) |
