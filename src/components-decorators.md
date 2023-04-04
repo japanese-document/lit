@@ -35,9 +35,9 @@ See [リアクティブプロパティ](https://japanese-document.github.io/lit/
 | [@eventOptions](https://lit.dev/docs/api/decorators/#eventOptions) | イベントリスナのoptionsを加える | [イベント](https://japanese-document.github.io/lit/components-events.html#イベントリスナのオプションを設定する) |
 | [@property](https://lit.dev/docs/api/decorators/#property) | パブリックプロパティを定義する | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#デコレータでプロパティを設定する) |
 | [@state](https://lit.dev/docs/api/decorators/#state) | プライベートステートプロパティを定義する | [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html#インターナルリアクティブステート) |
-| [@query](https://lit.dev/docs/api/decorators/#query) | Defines a property that returns an element in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_query) |
-| [@queryAll](https://lit.dev/docs/api/decorators/#queryAll) | Defines a property that returns a list of elements in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAll) |
-| [@queryAsync](https://lit.dev/docs/api/decorators/#queryAsync) | Defines a property that returns a promise that resolves to an element in the component template. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAsync) |
+| [@query](https://lit.dev/docs/api/decorators/#query) | コンポーネントのテンプレート内にある要素を返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_query) |
+| [@queryAll](https://lit.dev/docs/api/decorators/#queryAll) | コンポーネントのテンプレート内にある要素のリストを返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAll) |
+| [@queryAsync](https://lit.dev/docs/api/decorators/#queryAsync) | コンポーネントのテンプレート内にある要素をresolveするPromiseを返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAsync) |
 | [@queryAssignedElements](https://lit.dev/docs/api/decorators/#queryAssignedElements) | Defines a property that returns the child elements assigned to a specific slot. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElements) |
 | [@queryAssignedNodes](https://lit.dev/docs/api/decorators/#queryAssignedNodes) | Defines a property that returns the child nodes assigned to a specific slot. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedNodes) |
 
