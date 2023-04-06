@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/templates-directives.html" />
+    <meta property="og:title" content="ビルトインディレクティブ" />
+    <meta property="og:description" content="Directives are functions that can extend Lit by customizing the way an expression renders.Lit includes a number of built-in directives to help with a variety of rendering needs:  DirectiveSummary    Styling        classMap      Assigns a list of classes to an element based on an object.        style" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Directives are functions that can extend Lit by customizing the way an expression renders.Lit includes a number of built-in directives to help with a variety of rendering needs:  DirectiveSummary    Styling        classMap      Assigns a list of classes to an element based on an object.        style" />
+    <title>ビルトインディレクティブ</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <div class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </div></div>
+    <main class="main markdown-body">
+      <h1 id="ビルトインディレクティブ"><a href="#ビルトインディレクティブ">ビルトインディレクティブ</a></h1>
+<p>Directives are functions that can extend Lit by customizing the way an expression renders.
+Lit includes a number of built-in directives to help with a variety of rendering needs:</p>
+<p></p><p></p><table class="directory">
+  <tbody><tr><th>Directive</th><th>Summary</th></tr>
+  <tr class="subheading"><td colspan="2">
+
+<p>  Styling</p>
+  </td></tr>
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#classmap"><code>classMap</code></a></p>
+  </td>
+  <td>
+
+<p>  Assigns a list of classes to an element based on an object.</p></td>
+  </tr>
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#stylemap"><code>styleMap</code></a></p>
+  </td>
+  <td>
+
+<p>  Sets a list of style properties to an element based on an object.</p></td>
+  </tr>
+  <tr class="subheading"><td colspan="2">
+
+<p>  Loops and Conditionals</p>
+  </td></tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#when"><code>when</code></a></p>
+  </td>
+  <td>Renders one of two templates based on a condition.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#choose"><code>choose</code></a></p>
+  </td>
+  <td>Renders one of many templates based on a key value.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#map"><code>map</code></a></p>
+  </td>
+  <td>Transforms an iterable with a function.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#repeat"><code>repeat</code></a></p>
+  </td>
+  <td>Renders values from an iterable into the DOM, with optional keying to enable data diffing and DOM stability.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#join"><code>join</code></a></p>
+  </td>
+  <td>Interleave values from an iterable with a joiner value.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#range"><code>range</code></a></p>
+  </td>
+  <td>Creates an iterable of numbers in a sequence, useful for iterating a specific number of times.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#ifdefined"><code>ifDefined</code></a></p>
+  </td>
+  <td>Sets an attribute if the value is defined and removes the attribute if undefined.</td>
+  </tr>
+
+  <tr class="subheading"><td colspan="2">
+
+<p>  Caching and change detection</p>
+  </td></tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#cache"><code>cache</code></a></p>
+  </td>
+  <td>Caches rendered DOM when changing templates rather than discarding the DOM.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#keyed"><code>keyed</code></a></p>
+  </td>
+  <td>Associates a renderable value with a unique key, forcing the DOM to re-render if the key changes.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#guard"><code>guard</code></a></p>
+  </td>
+  <td>Only re-evaluates the template when one of its dependencies changes.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#live"><code>live</code></a></p>
+  </td>
+  <td>Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.</td>
+  </tr>
+
+  <tr class="subheading"><td colspan="2">
+
+<p>  Referencing rendered DOM</p>
+  </td></tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#ref"><code>ref</code></a></p>
+  </td>
+  <td>Gets a reference to an element rendered in the template.</td>
+  </tr>
+
+  <tr class="subheading"><td colspan="2">
+
+<p>  Rendering special values</p>
+  </td></tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#templatecontent"><code>templateContent</code></a></p>
+  </td>
+  <td>
+
+<p>  Renders the content of a <code>&lt;template&gt;</code> element.</p>
+  </td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#unsafehtml"><code>unsafeHTML</code></a></p>
+  </td>
+  <td>Renders a string as HTML rather than text.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#unsafesvg"><code>unsafeSVG</code></a></p>
+  </td>
+  <td>Renders a string as SVG rather than text.</td>
+  </tr>
+
+  <tr class="subheading"><td colspan="2">
+
+<p>  Asynchronous rendering</p>
+  </td></tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#until"><code>until</code></a></p>
+  </td>
+  <td>Renders placeholder content until one or more promises resolve.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#asyncappend"><code>asyncAppend</code></a></p>
+  </td>
+  <td>Appends values from an `AsyncIterable` into the DOM as they are yielded.</td>
+  </tr>
+
+  <tr>
+  <td>
+
+<p>  <a class="Link" href="#asyncreplace"><code>asyncReplace</code></a></p>
+  </td>
+  <td>Renders the latest value from an `AsyncIterable` into the DOM as it is yielded.</td>
+  </tr>
+</tbody></table>
+
+<div class="alert alert-info">
+
+<p><strong>Only bundle what you use.</strong> These are called "built-in" directives because they're part of the Lit package. But each directive is a separate module, so your app only bundles the directives you import.</p>
+</div>
+
+<p>You can also build your own directives. For more information, see <a class="Link" href="/docs/templates/custom-directives/">Custom directives</a>.</p>
+<h2 id="Styling"><a href="#Styling">Styling</a></h2>
+<h3 id="classMap"><a href="#classMap">classMap</a></h3>
+<p>Sets a list of classes to an element based on an object.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {classMap} from 'lit/directives/class-map.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">classMap(classInfo: {[name: string]: string | boolean | number})
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p><code>class</code> attribute expression (must be the only expression in the <code>class</code> attribute)</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>The <code>classMap</code> directive uses the <code>element.classList</code> API to efficiently add and
+remove classes to an element based on an object passed by the user. Each key in
+the object is treated as a class name, and if the value associated with the key
+is truthy, that class is added to the element. On subsequent renders, any
+previously set classes that are falsy or no longer in the object are removed.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property({type: Boolean})
+  enabled = false;
+
+  render() {
+    const classes = { enabled: this.enabled, hidden: false };
+    return html`&lt;div class=${classMap(classes)}&gt;Classy text&lt;/div&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    enabled: {type: Boolean},
+  };
+
+  constructor() {
+    super();
+    this.enabled = false;
+  }
+
+  render() {
+    const classes = { enabled: this.enabled, hidden: false };
+    return html`&lt;div class=${classMap(classes)}&gt;Classy text&lt;/div&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>The <code>classMap</code> must be the only expression in the <code>class</code> attribute, but it can
+be combined with static values:</p>
+<pre><code class="language-ts">html`&lt;div class="my-widget ${classMap(dynamicClasses)}"&gt;Static and dynamic&lt;/div&gt;`;
+</code></pre>
+<p>Explore <code>classMap</code> more in the <a class="Link" href="/playground/#sample=examples/directive-class-map">playground</a>.</p>
+<h3 id="styleMap"><a href="#styleMap">styleMap</a></h3>
+<p>Sets a list of style properties to an element based on an object.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {styleMap} from 'lit/directives/style-map.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">styleMap(styleInfo: {[name: string]: string | undefined | null})
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p><code>style</code> attribute expression (must be the only expression in the <code>style</code> attribute)</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>The <code>styleMap</code> directive uses the <code>element.style</code> API to efficiently add and
+remove inline styles to an element based on an object passed by the user. Each
+key in the object is treated as a style property name, the value is treated as
+the value for that property. On subsequent renders, any previously set style
+properties that are undefined or <code>null</code> are removed (set to <code>null</code>).</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property({type: Boolean})
+  enabled = false;
+
+  render() {
+    const styles = { backgroundColor: this.enabled ? 'blue' : 'gray', color: 'white' };
+    return html`&lt;p style=${styleMap(styles)}&gt;Hello style!&lt;/p&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    enabled: {type: Boolean},
+  };
+
+  constructor() {
+    super();
+    this.enabled = false;
+  }
+
+  render() {
+    const styles = { backgroundColor: this.enabled ? 'blue' : 'gray', color: 'white' };
+    return html`&lt;p style=${styleMap(styles)}&gt;Hello style!&lt;/p&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes. For example, you can write the CSS property <code>font-family</code> as either <code>fontFamily</code> or <code>'font-family'</code>:</p>
+<pre><code class="language-js">{ fontFamily: 'roboto' }
+{ 'font-family': 'roboto' }
+</code></pre>
+<p>Refer to CSS custom properties such as <code>--custom-color</code>, by placing the whole property name in quotes:</p>
+<pre><code class="language-js">{ '--custom-color': 'steelblue' }
+</code></pre>
+<p>The <code>styleMap</code> must be the only expression in the <code>style</code> attribute, but it can
+be combined with static values:</p>
+<pre><code class="language-js">html`&lt;p style="color: white; ${styleMap(moreStyles)}"&gt;More styles!&lt;/p&gt;`;
+</code></pre>
+<p>Explore <code>styleMap</code> more in the <a class="Link" href="/playground/#sample=examples/directive-style-map">playground</a>.</p>
+<h2 id="Loops_and_conditionals"><a href="#Loops_and_conditionals">Loops and conditionals</a></h2>
+<h3 id="when"><a href="#when">when</a></h3>
+<p>Renders one of two templates based on a condition.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {when} from 'lit/directives/when.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">when&lt;T, F&gt;(
+  condition: boolean,
+  trueCase: () =&gt; T,
+  falseCase?: () =&gt; F
+)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>When <code>condition</code> is true, returns the result of calling <code>trueCase()</code>, else returns the result of calling <code>falseCase()</code> if <code>falseCase</code> is defined.</p>
+<p>This is a convenience wrapper around a ternary expression that makes it a
+little nicer to write an inline conditional without an else.</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  render() {
+    return html`
+      ${when(this.user, () =&gt; html`User: ${this.user.username}`, () =&gt; html`Sign In...`)}
+    `;
+  }
+}
+</code></pre>
+<h3 id="choose"><a href="#choose">choose</a></h3>
+<p>Chooses and evaluates a template function from a list of cases based on matching
+the given <code>value</code> to a case.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {choose} from 'lit/directives/choose.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">choose&lt;T, V&gt;(
+  value: T,
+  cases: Array&lt;[T, () =&gt; V]&gt;,
+  defaultCase?: () =&gt; V
+)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Cases are structured as <code>[caseValue, func]</code>. <code>value</code> is matched to
+<code>caseValue</code> by strict equality. The first match is selected. Case values
+can be of any type including primitives, objects, and symbols.</p>
+<p>This is similar to a switch statement, but as an expression and without
+fallthrough.</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  render() {
+    return html`
+      ${choose(this.section, [
+        ['home', () =&gt; html`&lt;h1&gt;Home&lt;/h1&gt;`],
+        ['about', () =&gt; html`&lt;h1&gt;About&lt;/h1&gt;`]
+      ],
+      () =&gt; html`&lt;h1&gt;Error&lt;/h1&gt;`)}
+    `;
+  }
+}
+</code></pre>
+<h3 id="map"><a href="#map">map</a></h3>
+<p>Returns an iterable containing the result of calling <code>f(value)</code> on each value in <code>items</code>.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {map} from 'lit/directives/map.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">map&lt;T&gt;(
+  items: Iterable&lt;T&gt; | undefined,
+  f: (value: T, index: number) =&gt; unknown
+)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>map()</code> is a simple wrapper around a <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for/of loop</a> that makes working with iterables in expressions a bit easier. <code>map()</code> always updates any DOM created in place - it does not do any diffing or DOM movement. If you need that see <a class="Link" href="#repeat">repeat</a>. <code>map()</code> is smaller and faster than <code>repeat()</code>, so if you don't need diffing and DOM stability, prefer <code>map()</code>.</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  render() {
+    return html`
+      &lt;ul&gt;
+        ${map(items, (i) =&gt; html`&lt;li&gt;${i}&lt;/li&gt;`)}
+      &lt;/ul&gt;
+    `;
+  }
+}
+</code></pre>
+<h3 id="repeat"><a href="#repeat">repeat</a></h3>
+<p>Renders values from an iterable into the DOM, with optional keying to enable data diffing and DOM stability.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {repeat} from 'lit/directives/repeat.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">repeat(items: Iterable&lt;T&gt;, keyfn: KeyFn&lt;T&gt;, template: ItemTemplate&lt;T&gt;)
+repeat(items: Iterable&lt;T&gt;, template: ItemTemplate&lt;T&gt;)
+type KeyFn&lt;T&gt; = (item: T, index: number) =&gt; unknown;
+type ItemTemplate&lt;T&gt; = (item: T, index: number) =&gt; unknown;
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Repeats a series of values (usually <code>TemplateResults</code>) generated from an
+iterable, and updates those items efficiently when the iterable changes. When
+the <code>keyFn</code> is provided, key-to-DOM association is maintained between updates by
+moving generated DOM when required, and is generally the most efficient way to use <code>repeat</code> since it performs minimum unnecessary work for insertions and removals.</p>
+<p>If you're not using a key function, you should consider using <a class="Link" href="#map"><code>map()</code></a>.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  items: Array&lt;{id: number, name: string}&gt; = [];
+
+  render() {
+    return html`
+      &lt;ul&gt;
+        ${repeat(this.items, (item) =&gt; item.id, (item, index) =&gt; html`
+          &lt;li&gt;${index}: ${item.name}&lt;/li&gt;`)}
+      &lt;/ul&gt;
+    `;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    items: {},
+  };
+
+  constructor() {
+    super();
+    this.items = [];
+  }
+
+  render() {
+    return html`
+      &lt;ul&gt;
+        ${repeat(this.items, (item) =&gt; item.id, (item, index) =&gt; html`
+          &lt;li&gt;${index}: ${item.name}&lt;/li&gt;`)}
+      &lt;/ul&gt;
+    `;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>If no <code>keyFn</code> is provided, <code>repeat</code> will perform similar to a simple map of
+items to values, and DOM will be reused against potentially different items.</p>
+<p>See <a class="Link" href="/docs/templates/lists/#when-to-use-map-or-repeat">When to use map or repeat</a> for a discussion
+of when to use <code>repeat</code> and when to use standard JavaScript flow control.</p>
+<p>Explore <code>repeat</code> more in the <a class="Link" href="/playground/#sample=examples/directive-repeat">playground</a>.</p>
+<h3 id="join"><a href="#join">join</a></h3>
+<p>Returns an iterable containing the values in <code>items</code> interleaved with the <code>joiner</code> value.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {join} from 'lit/directives/join.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">join&lt;I, J&gt;(
+  items: Iterable&lt;I&gt; | undefined,
+  joiner: J
+): Iterable&lt;I | J&gt;;
+
+join&lt;I, J&gt;(
+  items: Iterable&lt;I&gt; | undefined,
+  joiner: (index: number) =&gt; J
+): Iterable&lt;I | J&gt;;
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-ts">
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      ${join(
+        map(menuItems, (i) =&gt; html`&lt;a href=${i.href}&gt;${i.label}&lt;/a&gt;`),
+        html`&lt;span class="separator"&gt;|&lt;/span&gt;`
+      )}
+    `;
+  }
+}
+</code></pre>
+<h3 id="range"><a href="#range">range</a></h3>
+<p>Returns an iterable of integers from <code>start</code> to <code>end</code> (exclusive) incrementing by <code>step</code>.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {range} from 'lit/directives/range.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">range(end: number): Iterable&lt;number&gt;;
+
+range(
+  start: number,
+  end: number,
+  step?: number
+): Iterable&lt;number&gt;;
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-ts">
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      ${map(range(8), (i) =&gt; html`${i + 1}`)}
+    `;
+  }
+}
+</code></pre>
+<h3 id="ifDefined"><a href="#ifDefined">ifDefined</a></h3>
+<p>Sets an attribute if the value is defined and removes the attribute if undefined.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {ifDefined} from 'lit/directives/if-defined.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">ifDefined(value: unknown)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Attribute expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For AttributeParts, sets the attribute if the value is defined and removes the attribute if the value is undefined (<code>undefined</code> or <code>null</code>). For other part types, this directive is a no-op.</p>
+<p>When more than one expression exists in a single attribute value, the attribute will be removed if <em>any</em> expression uses <code>ifDefined</code> and evaluates to <code>undefined</code>/<code>null</code>. This is especially useful for setting URL attributes, when the attribute should not be set if required parts of the URL are not defined, to prevent 404's.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  filename: string | undefined = undefined;
+
+  @property()
+  size: string | undefined = undefined;
+
+  render() {
+    // src attribute not rendered if either size or filename are undefined
+    return html`&lt;img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}"&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    filename: {},
+    size: {},
+  };
+
+  constructor() {
+    super();
+    this.filename = undefined;
+    this.size = undefined;
+  }
+
+  render() {
+    // src attribute not rendered if either size or filename are undefined
+    return html`&lt;img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}"&gt;`;
+  }
+}
+customElements.define('my-element', MyEleent);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>ifDefined</code> more in the <a class="Link" href="/playground/#sample=examples/directive-if-defined">playground</a>.</p>
+<h2 id="Caching_and_change_detection"><a href="#Caching_and_change_detection">Caching and change detection</a></h2>
+<h3 id="cache"><a href="#cache">cache</a></h3>
+<p>Caches rendered DOM when changing templates rather than discarding the DOM. You
+can use this directive to optimize rendering performance when frequently
+switching between large templates.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {cache} from 'lit/directives/cache.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">cache(value: TemplateResult|unknown)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>When the value passed to <code>cache</code> changes between one or more <code>TemplateResult</code>s,
+the rendered DOM nodes for a given template are cached when they're not in use.
+When the template changes, the directive caches the <em>current</em> DOM nodes before
+switching to the new value, and restores them from the cache when switching back
+to a previously-rendered value, rather than creating the DOM nodes anew.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">const detailView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
+const summaryView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  data = {showDetails: true, /*...*/ };
+
+  render() {
+    return html`${cache(this.data.showDetails
+      ? detailView(this.data)
+      : summaryView(this.data)
+    )}`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">const detailView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
+const summaryView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
+
+class MyElement extends LitElement {
+  static properties = {
+    data: {},
+  };
+
+  constructor() {
+    super();
+    this.data = {showDetails: true, /*...*/ };
+  }
+
+  render() {
+    return html`${cache(this.data.showDetails
+      ? detailView(this.data)
+      : summaryView(this.data)
+    )}`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>When Lit re-renders a template, it only updates the modified portions: it doesn't create or remove any more DOM than needed. But when you switch from one template to another, Lit removes the old DOM and renders a new DOM tree.</p>
+<p>The <code>cache</code> directive caches the generated DOM for a given expression and input template. In the example above, it caches the DOM for both the <code>summaryView</code> and <code>detailView</code> templates. When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data. This can improve rendering performance when these views are frequently switched.</p>
+<p>Explore <code>cache</code> more in the <a class="Link" href="/playground/#sample=examples/directive-cache">playground</a>.</p>
+<h3 id="keyed"><a href="#keyed">keyed</a></h3>
+<p>Associates a renderable value with a unique key. When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {keyed} from 'lit/directives/keyed.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">keyed(key: unknown, value: unknown)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>keyed</code> is useful when you're rendering stateful elements and you need to ensure that all state of the element is cleared when some critical data changes. It essentially opts-out of Lit's default DOM reuse strategy.</p>
+<p><code>keyed</code> is also useful in some animation scenarios if you need to force a new element for "enter" or "exit" animations.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  userId: string = '';
+
+  render() {
+    return html`
+      &lt;div&gt;
+        ${keyed(this.userId, html`&lt;user-card .userId=${this.userId}&gt;&lt;/user-card&gt;`)}
+      &lt;/div&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    userId: {},
+  };
+
+  constructor() {
+    super();
+    this.userId = '';
+  }
+
+  render() {
+    return html`
+      &lt;div&gt;
+        ${keyed(this.userId, html`&lt;user-card .userId=${this.userId}&gt;&lt;/user-card&gt;`)}
+      &lt;/div&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="guard"><a href="#guard">guard</a></h3>
+<p>Only re-evaluates the template when one of its dependencies changes, to optimize
+rendering performance by preventing unnecessary work.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {guard} from 'lit/directives/guard.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">guard(dependencies: unknown[], valueFn: () =&gt; unknown)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Renders the value returned by <code>valueFn</code>, and only re-evaluates <code>valueFn</code> when one of the
+dependencies changes identity.</p>
+<p>Where:</p>
+<ul>
+<li><code>dependencies</code> is an array of values to monitor for changes.</li>
+<li><code>valueFn</code> is a function that returns a renderable value.</li>
+</ul>
+<p><code>guard</code> is useful with immutable data patterns, by preventing expensive work
+until data updates.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  value: string = '';
+
+  render() {
+    return html`
+      &lt;div&gt;
+        ${guard([this.value], () =&gt; calculateSHA(this.value))}
+      &lt;/div&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    value: {},
+  };
+
+  constructor() {
+    super();
+    this.value = '';
+  }
+
+  render() {
+    return html`
+      &lt;div&gt;
+        ${guard([this.value], () =&gt; calculateSHA(this.value))}
+      &lt;/div&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>In this case, the expensive <code>calculateSHA</code> function is only run when the <code>value</code> property changes.</p>
+<p>Explore <code>guard</code> more in the <a class="Link" href="/playground/#sample=examples/directive-guard">playground</a>.</p>
+<h3 id="live"><a href="#live">live</a></h3>
+<p>Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {live} from 'lit/directives/live.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">live(value: unknown)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Attribute or property expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>When determining whether to update the value, checks the expression value
+against the <em>live</em> DOM value, instead of Lit's default behavior of checking
+against the last set value.</p>
+<p>This is useful for cases where the DOM value may change from outside of Lit. For
+example, when using an expression to set an <code>&lt;input&gt;</code> element's <code>value</code>
+property, a content editable element's text, or to a custom element that changes
+its own properties or attributes.</p>
+<p>In these cases if the DOM value changes, but the value set through Lit
+expression hasn't, Lit won't know to update the DOM value and will leave it
+alone. If this is not what you want—if you want to overwrite the DOM value with
+the bound value no matter what—use the <code>live()</code> directive.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @property()
+  data = {value: 'test'};
+
+  render() {
+    return html`&lt;input .value=${live(this.data.value)}&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    data: {},
+  };
+
+  constructor() {
+    super();
+    this.data = {value: 'test'};
+  }
+
+  render() {
+    return html`&lt;input .value=${live(this.data.value)}&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p><code>live()</code> performs a strict equality check against the live DOM value, and if
+the new value is equal to the live value, does nothing. This means that
+<code>live()</code> should not be used when the expression will cause a type conversion. If
+you use <code>live()</code> with an attribute expression, make sure that only strings are
+passed in, or the expression will update every render.</p>
+<p>Explore <code>live</code> more in the <a class="Link" href="/playground/#sample=examples/directive-live">playground</a>.</p>
+<h2 id="Rendering_special_values"><a href="#Rendering_special_values">Rendering special values</a></h2>
+<h3 id="templateContent"><a href="#templateContent">templateContent</a></h3>
+<p>Renders the content of a <code>&lt;template&gt;</code> element.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {templateContent} from 'lit/directives/template-content.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">templateContent(templateElement: HTMLTemplateElement)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Lit templates are encoded in Javascript, so that they can embed Javascript
+expressions that make them dynamic. If you have a static HTML <code>&lt;template&gt;</code> that
+you need to include in your Lit template, you can use the <code>templateContent</code>
+directive to clone the template content and include it in your Lit template. As
+long as the template element reference does not change between renders,
+subsequent renders will no-op.</p>
+<div class="alert alert-warning">
+
+<p>Note, the template content should be developer-controlled and must not be
+created using an untrusted string. Examples of untrusted content include query
+string parameters and values from user inputs. Untrusted templates rendered with
+this directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
+</div>
+
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  render() {
+    return  html`
+      Here's some content from a template element:
+      ${templateContent(templateEl)}`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">const templateEl = document.querySelector('template#myContent');
+
+class MyElement extends LitElement {
+
+  render() {
+    return  html`
+      Here's some content from a template element:
+      ${templateContent(templateEl)}`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>templateContent</code> more in the <a class="Link" href="/playground/#sample=examples/directive-template-content">playground</a>.</p>
+<h3 id="unsafeHTML"><a href="#unsafeHTML">unsafeHTML</a></h3>
+<p>Renders a string as HTML rather than text.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {unsafeHTML} from 'lit/directives/unsafe-html.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">unsafeHTML(value: string | typeof nothing | typeof noChange)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>A key feature of Lit's templating syntax is that only strings originating in
+template literals are parsed as HTML. Because template literals can only be
+authored in trusted script files, this acts as a natural safeguard against XSS
+attacks injecting untrusted HTML. However, there may be cases when HTML not
+originating in script files needs to be rendered in a Lit template, for example
+trusted HTML content fetched from a database. The <code>unsafeHTML</code> directive will
+parse such a string as HTML and render it in a Lit template.</p>
+<div class="alert alert-warning">
+
+<p>Note, the string passed to <code>unsafeHTML</code> must be developer-controlled and not
+include untrusted content. Examples of untrusted content include query string
+parameters and values from user inputs. Untrusted content rendered with this
+directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
+</div>
+
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">const markup = '&lt;h3&gt;Some HTML to render.&lt;/h3&gt;';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      Look out, potentially unsafe HTML ahead:
+      ${unsafeHTML(markup)}
+    `;
+  }
+}
+</code></pre>
+<pre><code class="language-js">const markup = '&lt;h3&gt;Some HTML to render.&lt;/h3&gt;';
+
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      Look out, potentially unsafe HTML ahead:
+      ${unsafeHTML(markup)}
+    `;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>unsafeHTML</code> more in the <a class="Link" href="/playground/#sample=examples/directive-unsafe-html">playground</a>.</p>
+<h3 id="unsafeSVG"><a href="#unsafeSVG">unsafeSVG</a></h3>
+<p>Renders a string as SVG rather than text.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">unsafeSVG(value: string | typeof nothing | typeof noChange)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Similar to with <a class="Link" href="#unsafeHTML"><code>unsafeHTML</code></a>, there may be cases when SVG content
+not originating in script files needs to be rendered in a Lit template, for
+example trusted SVG content fetched from a database. The <code>unsafeSVG</code> directive
+will parse such a string as SVG and render it in a Lit template.</p>
+<div class="alert alert-warning">
+
+<p>Note, the string passed to <code>unsafeSVG</code> must be developer-controlled and not
+include untrusted content. Examples of untrusted content include query string
+parameters and values from user inputs. Untrusted content rendered with this
+directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
+</div>
+
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">const svg = '&lt;circle cx="50" cy="50" r="40" fill="red" /&gt;';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      Look out, potentially unsafe SVG ahead:
+      &lt;svg width="40" height="40" viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
+        ${unsafeSVG(svg)}
+      &lt;/svg&gt; `;
+  }
+}
+</code></pre>
+<pre><code class="language-js">const svg = '&lt;circle cx="50" cy="50" r="40" fill="red" /&gt;';
+
+class MyElement extends LitElement {
+
+  render() {
+    return html`
+      Look out, potentially unsafe SVG ahead:
+      &lt;svg width="40" height="40" viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
+        ${unsafeSVG(svg)}
+      &lt;/svg&gt; `;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>unsafeSVG</code> more in the <a class="Link" href="/playground/#sample=examples/directive-unsafe-svg">playground</a>.</p>
+<h2 id="Referencing_rendered_DOM"><a href="#Referencing_rendered_DOM">Referencing rendered DOM</a></h2>
+<h3 id="ref"><a href="#ref">ref</a></h3>
+<p>Retrieves a reference to an element rendered into the DOM.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {ref} from 'lit/directives/ref.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">ref(refOrCallback: RefOrCallback)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Element expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Although most DOM manipulation in Lit can be achieved declaratively using
+templates, advanced situations may required getting a reference to an element
+rendered in the template and manipulating it imperatively. Common examples of
+when this may be useful include focusing a form control or calling an imperative
+DOM manipulation library on a container element.</p>
+<p>When placed on an element in the template, the <code>ref</code> directive will retrieve a
+reference to that element once rendered. The element reference may be retrieved
+in one of two ways: either by passing a <code>Ref</code> object or by passing a callback.</p>
+<p>A <code>Ref</code> object acts as a container for a reference to the element, and can be
+created using the <code>createRef</code> helper method found in the <code>ref</code> module. After
+rendering, the <code>Ref</code>'s <code>value</code> property will be set to the element, where it
+can be accessed in post-render lifecycle like <code>updated</code>.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  inputRef: Ref&lt;HTMLInputElement&gt; = createRef();
+
+  render() {
+    // Passing ref directive a Ref object that will hold the element in .value
+    return html`&lt;input ${ref(this.inputRef)}&gt;`;
+  }
+
+  firstUpdated() {
+    const input = this.inputRef.value!;
+    input.focus();
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+
+  inputRef = createRef();
+
+  render() {
+    // Passing ref directive a Ref object that will hold the element in .value
+    return html`&lt;input ${ref(this.inputRef)}&gt;`;
+  }
+
+  firstUpdated() {
+    const input = this.inputRef.value!;
+    input.focus();
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>A ref callback can also be passed to the <code>ref</code> directive. The callback will be
+called each time the referenced element changes.  If a ref callback is
+rendered to a different element position or is removed in a subsequent render,
+it will first be called with <code>undefined</code>, followed by another call with the new
+element it was rendered to (if any). Note that in a <code>LitElement</code>, the callback
+will be called bound to the host element automatically.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  render() {
+    // Passing ref directive a change callback
+    return html`&lt;input ${ref(this.inputChanged)}&gt;`;
+  }
+
+  inputChanged(input?: HTMLInputElement) {
+    input?.focus();
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+
+  render() {
+    // Passing ref directive a change callback
+    return html`&lt;input ${ref(this.inputChanged)}&gt;`;
+  }
+
+  inputChanged(input) {
+    input?.focus();
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>ref</code> more in the <a class="Link" href="/playground/#sample=examples/directive-ref">playground</a>.</p>
+<h2 id="Asynchronous_rendering"><a href="#Asynchronous_rendering">Asynchronous rendering</a></h2>
+<h3 id="until"><a href="#until">until</a></h3>
+<p>Renders placeholder content until one or more promises resolve.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {until} from 'lit/directives/until.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">until(...values: unknown[])
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Any expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Takes a series of values, including Promises. Values are rendered in priority order,
+ with the first argument having the highest priority and the last argument having the
+ lowest priority. If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
+<p>The priority of values can be used to create placeholder content for async
+data. For example, a Promise with pending content can be the first
+(highest-priority) argument, and a non-promise loading indicator template can
+be used as the second (lower-priority) argument. The loading indicator
+renders immediately, and the primary content will render when the Promise
+resolves.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">@customElement('my-element')
+class MyElement extends LitElement {
+
+  @state()
+  private content = fetch('./content.txt').then(r =&gt; r.text());
+
+  render() {
+    return html`${until(this.content, html`&lt;span&gt;Loading...&lt;/span&gt;`)}`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static properties = {
+    content: {state: true},
+  };
+
+  constructor() {
+    super();
+    this.content = fetch('./content.txt').then(r =&gt; r.text());
+  }
+
+  render() {
+    return html`${until(this.content, html`&lt;span&gt;Loading...&lt;/span&gt;`)}`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>until</code> more in the <a class="Link" href="/playground/#sample=examples/directive-until">playground</a>.</p>
+<h3 id="asyncAppend"><a href="#asyncAppend">asyncAppend</a></h3>
+<p>Appends values from an <code>AsyncIterable</code> into the DOM as they are yielded.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {asyncAppend} from 'lit/directives/async-append.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">asyncAppend(iterable: AsyncIterable)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>asyncAppend</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, appending each new value after the previous. Note that async generators also implement the async iterable protocol, and thus can be consumed by <code>asyncAppend</code>.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">async function *tossCoins(count: number) {
+  for (let i=0; i&lt;count; i++) {
+    yield Math.random() &gt; 0.5 ? 'Heads' : 'Tails';
+    await new Promise((r) =&gt; setTimeout(r, 1000));
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  @state()
+  private tosses = tossCoins(10);
+
+  render() {
+    return html`
+      &lt;ul&gt;${asyncAppend(this.tosses, (v: string) =&gt; html`&lt;li&gt;${v}&lt;/li&gt;`)}&lt;/ul&gt;`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">async function *tossCoins(count) {
+  for (let i=0; i&lt;count; i++) {
+    yield Math.random() &gt; 0.5 ? 'Heads' : 'Tails';
+    await new Promise((r) =&gt; setTimeout(r, 1000));
+  }
+}
+
+class MyElement extends LitElement {
+  static properties = {
+    tosses: {state: true},
+  };
+
+  constructor() {
+    super();
+    this.tosses = tossCoins(10);
+  }
+
+  render() {
+    return html`
+      &lt;ul&gt;${asyncAppend(this.tosses, (v) =&gt; html`&lt;li&gt;${v}&lt;/li&gt;`)}&lt;/ul&gt;`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>asyncAppend</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-append">playground</a>.</p>
+<h3 id="asyncReplace"><a href="#asyncReplace">asyncReplace</a></h3>
+<p>Renders the latest value from an <code>AsyncIterable</code> into the DOM as it is yielded.</p>
+<table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Import</td>
+<td class="wide-cell">
+
+<pre><code class="language-js">import {asyncReplace} from 'lit/directives/async-replace.js';
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="wide-cell">
+
+<pre><code class="language-ts">asyncReplace(iterable: AsyncIterable)
+</code></pre>
+</td>
+</tr>
+<tr>
+<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="wide-cell">
+
+<p>Child expression</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Similar to <a class="Link" href="#asyncappend"><code>asyncAppend</code></a>, <code>asyncReplace</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, replacing the previous value with each new value.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">async function *countDown(count: number) {
+  while (count &gt; 0) {
+    yield count--;
+    await new Promise((r) =&gt; setTimeout(r, 1000));
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  @state()
+  private timer = countDown(10);
+
+  render() {
+    return html`Timer: &lt;span&gt;${asyncReplace(this.timer)}&lt;/span&gt;.`;
+  }
+}
+</code></pre>
+<pre><code class="language-js">async function *countDown(count) {
+  while (count &gt; 0) {
+    yield count--;
+    await new Promise((r) =&gt; setTimeout(r, 1000));
+  }
+}
+
+class MyElement extends LitElement {
+  static properties = {
+    timer: {state: true},
+  };
+
+  constructor() {
+    super();
+    this.timer = countDown(10);
+  }
+
+  render() {
+    return html`Timer: &lt;span&gt;${asyncReplace(this.timer)}&lt;/span&gt;.`;
+  }
+}
+customElements.define('my-element', MyElement);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Explore <code>asyncReplace</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-replace">playground</a>.</p>
+
+    </main>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#ビルトインディレクティブ">ビルトインディレクティブ</a></p>
+<p class="h2"><a href="#Styling">Styling</a></p>
+<p class="h3"><a href="#classMap">classMap</a></p>
+<p class="h3"><a href="#styleMap">styleMap</a></p>
+<p class="h2"><a href="#Loops_and_conditionals">Loops and conditionals</a></p>
+<p class="h3"><a href="#when">when</a></p>
+<p class="h3"><a href="#choose">choose</a></p>
+<p class="h3"><a href="#map">map</a></p>
+<p class="h3"><a href="#repeat">repeat</a></p>
+<p class="h3"><a href="#join">join</a></p>
+<p class="h3"><a href="#range">range</a></p>
+<p class="h3"><a href="#ifDefined">ifDefined</a></p>
+<p class="h2"><a href="#Caching_and_change_detection">Caching and change detection</a></p>
+<p class="h3"><a href="#cache">cache</a></p>
+<p class="h3"><a href="#keyed">keyed</a></p>
+<p class="h3"><a href="#guard">guard</a></p>
+<p class="h3"><a href="#live">live</a></p>
+<p class="h2"><a href="#Rendering_special_values">Rendering special values</a></p>
+<p class="h3"><a href="#templateContent">templateContent</a></p>
+<p class="h3"><a href="#unsafeHTML">unsafeHTML</a></p>
+<p class="h3"><a href="#unsafeSVG">unsafeSVG</a></p>
+<p class="h2"><a href="#Referencing_rendered_DOM">Referencing rendered DOM</a></p>
+<p class="h3"><a href="#ref">ref</a></p>
+<p class="h2"><a href="#Asynchronous_rendering">Asynchronous rendering</a></p>
+<p class="h3"><a href="#until">until</a></p>
+<p class="h3"><a href="#asyncAppend">asyncAppend</a></p>
+<p class="h3"><a href="#asyncReplace">asyncReplace</a></p></div></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
