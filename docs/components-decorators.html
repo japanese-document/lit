@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-decorators.html" />
     <meta property="og:title" content="デコレータ" />
-    <meta property="og:description" content="Decorators are special functions that can modify the behavior of classes, class methods, and class fields.Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.Lit supplies a set of decorators that reduce the amount of boilerplate code" />
+    <meta property="og:description" content="デコレータはクラス、クラスメソッド、そしてクラスフィールドの動作を変更することができる特別な関数です。Litはデコレータを使ってcustom elementsの登録、リアクティブプロパティ、クエリ等の宣言的なAPIを提供します。Litをコンポーネントの定義を定型文を省いて簡潔にするためのデコレータのセットを用意しています。例えば、デコレータの@customElementと@propertyは基本的なコンポーネントの定義をコンパクトにします。@customElement('my-element')export class MyElement extends LitElement {  @prop" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Decorators are special functions that can modify the behavior of classes, class methods, and class fields.Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.Lit supplies a set of decorators that reduce the amount of boilerplate code" />
+    <meta name="description" content="デコレータはクラス、クラスメソッド、そしてクラスフィールドの動作を変更することができる特別な関数です。Litはデコレータを使ってcustom elementsの登録、リアクティブプロパティ、クエリ等の宣言的なAPIを提供します。Litをコンポーネントの定義を定型文を省いて簡潔にするためのデコレータのセットを用意しています。例えば、デコレータの@customElementと@propertyは基本的なコンポーネントの定義をコンパクトにします。@customElement('my-element')export class MyElement extends LitElement {  @prop" />
     <title>デコレータ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -46,9 +46,10 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="デコレータ"><a href="#デコレータ">デコレータ</a></h1>
-<p>Decorators are special functions that can modify the behavior of classes, class methods, and class fields.
-Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.</p>
-<p>Lit supplies a set of decorators that reduce the amount of boilerplate code you need to write when defining a component. For example, the <code>@customElement</code> and <code>@property</code> decorators make a basic element definition more compact:</p>
+<p>デコレータはクラス、クラスメソッド、そしてクラスフィールドの動作を変更することができる特別な関数です。
+Litはデコレータを使ってcustom elementsの登録、リアクティブプロパティ、クエリ等の宣言的なAPIを提供します。</p>
+<p>Litをコンポーネントの定義を定型文を省いて簡潔にするためのデコレータのセットを用意しています。
+例えば、デコレータの<code>@customElement</code>と<code>@property</code>は基本的なコンポーネントの定義をコンパクトにします。</p>
 <pre><code class="language-ts">@customElement('my-element')
 export class MyElement extends LitElement {
   @property() greeting = "Welcome";
@@ -57,11 +58,10 @@ export class MyElement extends LitElement {
   //...
 }
 </code></pre>
-<p>The <code>@customElement</code> decorator defines a custom element, equivalent to calling:</p>
+<p><code>@customElement</code>デコレータはcustom elementsを定義します。これは下記と等価です。</p>
 <pre><code class="language-js">customElements.define('my-element', MyElement);
 </code></pre>
-<p>The <code>@property</code> decorator declares a reactive property.</p>
-<p>See <a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a> for more information about configuring properties.</p>
+<p><code>@property</code>デコレータはリアクティブプロパティをセットします。詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
 <h2 id="ビルトインデコレータ"><a href="#ビルトインデコレータ">ビルトインデコレータ</a></h2>
 <table>
 <thead>
@@ -108,13 +108,13 @@ export class MyElement extends LitElement {
 </tr>
 <tr>
 <td><a class="Link" href="https://lit.dev/docs/api/decorators/#queryAssignedElements">@queryAssignedElements</a></td>
-<td>Defines a property that returns the child elements assigned to a specific slot.</td>
-<td><a class="Link" href="https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElements">Shadow DOM</a></td>
+<td>指定したslotに置き換えられた要素を返すプロパティを定義する</td>
+<td><a class="Link" href="https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">Shadow DOM</a></td>
 </tr>
 <tr>
 <td><a class="Link" href="https://lit.dev/docs/api/decorators/#queryAssignedNodes">@queryAssignedNodes</a></td>
-<td>Defines a property that returns the child nodes assigned to a specific slot.</td>
-<td><a class="Link" href="https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedNodes">Shadow DOM</a></td>
+<td>指定したslotに置き換えられたNodeを返すプロパティを定義する</td>
+<td><a class="Link" href="https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">Shadow DOM</a></td>
 </tr>
 </tbody></table>
 <h2 id="デコレータをimportする"><a href="#デコレータをimportする">デコレータをimportする</a></h2>

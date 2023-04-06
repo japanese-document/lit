@@ -2,10 +2,11 @@
 ---
 # デコレータ
 
-Decorators are special functions that can modify the behavior of classes, class methods, and class fields.
-Lit uses decorators to provide declarative APIs for things like registering elements, reactive properties, and queries.
+デコレータはクラス、クラスメソッド、そしてクラスフィールドの動作を変更することができる特別な関数です。
+Litはデコレータを使ってcustom elementsの登録、リアクティブプロパティ、クエリ等の宣言的なAPIを提供します。
 
-Lit supplies a set of decorators that reduce the amount of boilerplate code you need to write when defining a component. For example, the `@customElement` and `@property` decorators make a basic element definition more compact:
+Litをコンポーネントの定義を定型文を省いて簡潔にするためのデコレータのセットを用意しています。
+例えば、デコレータの`@customElement`と`@property`は基本的なコンポーネントの定義をコンパクトにします。
 
 ```ts
 @customElement('my-element')
@@ -17,15 +18,13 @@ export class MyElement extends LitElement {
 }
 ```
 
-The `@customElement` decorator defines a custom element, equivalent to calling:
+`@customElement`デコレータはcustom elementsを定義します。これは下記と等価です。
 
 ```js
 customElements.define('my-element', MyElement);
 ```
 
-The `@property` decorator declares a reactive property.
-
-See [リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html) for more information about configuring properties.
+`@property`デコレータはリアクティブプロパティをセットします。詳しくは[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を見てください。
 
 ## ビルトインデコレータ
 
@@ -38,8 +37,8 @@ See [リアクティブプロパティ](https://japanese-document.github.io/lit/
 | [@query](https://lit.dev/docs/api/decorators/#query) | コンポーネントのテンプレート内にある要素を返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_query) |
 | [@queryAll](https://lit.dev/docs/api/decorators/#queryAll) | コンポーネントのテンプレート内にある要素のリストを返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAll) |
 | [@queryAsync](https://lit.dev/docs/api/decorators/#queryAsync) | コンポーネントのテンプレート内にある要素をresolveするPromiseを返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAsync) |
-| [@queryAssignedElements](https://lit.dev/docs/api/decorators/#queryAssignedElements) | Defines a property that returns the child elements assigned to a specific slot. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElements) |
-| [@queryAssignedNodes](https://lit.dev/docs/api/decorators/#queryAssignedNodes) | Defines a property that returns the child nodes assigned to a specific slot. | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedNodes) |
+| [@queryAssignedElements](https://lit.dev/docs/api/decorators/#queryAssignedElements) | 指定したslotに置き換えられた要素を返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ) |
+| [@queryAssignedNodes](https://lit.dev/docs/api/decorators/#queryAssignedNodes) | 指定したslotに置き換えられたNodeを返すプロパティを定義する | [Shadow DOM](https://japanese-document.github.io/lit/components-shadow-dom.html#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ) |
 
 ## デコレータをimportする
 
