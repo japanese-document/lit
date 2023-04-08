@@ -2,41 +2,40 @@
 ---
 # ビルトインディレクティブ
 
-Directives are functions that can extend Lit by customizing the way an expression renders.
-Lit includes a number of built-in directives to help with a variety of rendering needs:
+ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。
+Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。
 
 <table class="directory">
-  <tr><th>Directive</th><th>Summary</th></tr>
+  <tr><th>ディレクティブ</th><th>サマリー</th></tr>
   <tr class="subheading"><td colspan="2">
 
-  Styling
+  スタイル
 
   </td></tr>
   <tr>
   <td>
 
-  [`classMap`](#classmap)
+  [`classMap`](#classMap)
 
   </td>
   <td>
-
-  Assigns a list of classes to an element based on an object.</td>
+  　　渡されたobjectに応じて要素のclass属性を割り当てます。
+  </td>
   </tr>
 
   <tr>
   <td>
 
-  [`styleMap`](#stylemap)
+  [`styleMap`](#styleMap)
 
   </td>
   <td>
-
-  Sets a list of style properties to an element based on an object.</td>
+  渡されたobjectに応じて要素のstyle属性を割り当てます。
   </tr>
 
   <tr class="subheading"><td colspan="2">
 
-  Loops and Conditionals
+  繰り返しと条件
 
   </td></tr>
 
@@ -46,7 +45,7 @@ Lit includes a number of built-in directives to help with a variety of rendering
   [`when`](#when)
 
   </td>
-  <td>Renders one of two templates based on a condition.</td>
+  <td>条件に応じて2つのテンプレートの内1つをレンダリングします。</td>
   </tr>
 
   <tr>
@@ -55,7 +54,7 @@ Lit includes a number of built-in directives to help with a variety of rendering
   [`choose`](#choose)
 
   </td>
-  <td>Renders one of many templates based on a key value.</td>
+  <td>オブジェクトのキーの値に応じて指定した多数のテンプレートの内1つをレンダリングします。</td>
   </tr>
 
   <tr>
@@ -64,7 +63,7 @@ Lit includes a number of built-in directives to help with a variety of rendering
   [`map`](#map)
 
   </td>
-  <td>Transforms an iterable with a function.</td>
+  <td>iterableの各値を指定した関数で変換します。</td>
   </tr>
 
   <tr>
