@@ -47,8 +47,13 @@ async function createHTMLFile(
 
 const createHTMLFilePromises = markDownFileNames.map(
   (markDownFileName) => createHTMLFile(markDownFileName, indexMenu, pageLayout, SOURCE_DIR, OUTPUT_DIR))
-await Promise.all(createHTMLFilePromises)
 
-const indexPageLayout = fs.readFileSync(INDEX_PAGE_LAYOUT, 'utf8')
-const indexPage = createIndexPage(indexPageLayout, indexItems)
-await fs.promises.writeFile(`${OUTPUT_DIR}/index.html`, indexPage)
+async function createIndexHtmlFile(layout: string, indexItems: ReturnType<typeof createIndexItems>) {
+  const indexPageLayout = await fs.promises.readFile(layout, 'utf8')
+  const indexPage = createIndexPage(indexPageLayout, indexItems)
+  await fs.promises.writeFile(`${OUTPUT_DIR}/index.html`, indexPage)
+}
+
+const createIndexHtmlFilePromise = createIndexHtmlFile(INDEX_PAGE_LAYOUT, indexItems)
+
+await Promise.all([createIndexHtmlFilePromise, ...createHTMLFilePromises])
