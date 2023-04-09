@@ -72,7 +72,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`repeat`](#repeat)
 
   </td>
-  <td>Renders values from an iterable into the DOM, with optional keying to enable data diffing and DOM stability.</td>
+  <td>iterableの各値をDOMにレンダリングします。オプションでそれらにkeyを付与する処理を追加することができます。</td>
   </tr>
 
   <tr>
@@ -81,7 +81,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`join`](#join)
 
   </td>
-  <td>Interleave values from an iterable with a joiner value.</td>
+  <td>iterableの各値を指定した値で連結します。</td>
   </tr>
 
   <tr>
