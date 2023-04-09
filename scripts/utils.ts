@@ -1,6 +1,4 @@
-import { promisify } from 'node:util'
-// eslint-disable-next-line import/no-named-as-default
-import glob from 'glob'
+import { glob } from 'glob'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import { marked } from 'marked'
@@ -59,7 +57,7 @@ export function createTitle(md: string) {
 }
 
 export function getMarkDownFileNames(): Promise<string[]> {
-  return promisify(glob)(`${SOURCE_DIR}/**/*.md`).catch((err) => {
+  return glob(`${SOURCE_DIR}/**/*.md`).catch((err) => {
     console.error(err)
     process.exit(1)
   })
