@@ -5,25 +5,30 @@ import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage,
 
 const markDownFileNames = await getMarkDownFileNames()
 
-const pages: Page[] = []
-for (const markDownfileName of markDownFileNames) {
-  const content = await fs.promises.readFile(markDownfileName, 'utf8')
+async function createPageData(markDownFileName: string): Promise<Page> {
+  const content = await fs.promises.readFile(markDownFileName, 'utf8')
   const [meta, md] = getMetaAndMd(content)
   const title = createTitle(md)
-  const { name, dir } = path.parse(markDownfileName)
+  const { name, dir } = path.parse(markDownFileName)
   const url = createURL(dir, name)
-  pages.push({
+  const page = {
     meta,
     title,
     url
-  })
+  }
+  return page
 }
+
+const createPageDataPromises = markDownFileNames.map(
+  (markDownFileName) => createPageData(markDownFileName))
+const pages = await Promise.all(createPageDataPromises)
 
 const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
-
 const pageLayout = fs.readFileSync(PAGE_LAYOUT, 'utf8')
-for (const markDownFileName of markDownFileNames) {
+
+async function createHTMLFile(
+  markDownFileName: string, indexMenu: string, pageLayout: string, sourceDir: string, outputDir: string) {
   const content = await fs.promises.readFile(markDownFileName, 'utf8')
   const [, md] = getMetaAndMd(content)
   const title = createTitle(md)
@@ -31,14 +36,18 @@ for (const markDownFileName of markDownFileNames) {
   const url = createURL(dir, name)
   const headerList = createHeaderList(md)
   const page = await createPage(pageLayout, md, title, url, indexMenu, headerList)
-  const prefixDirCount = SOURCE_DIR.length + 1
-  const dirPath = `${OUTPUT_DIR}/${dir.slice(prefixDirCount)}`
+  const prefixDirCount = sourceDir.length + 1
+  const dirPath = `${outputDir}/${dir.slice(prefixDirCount)}`
   if (!fs.existsSync(dirPath)) {
     await fs.promises.mkdir(dirPath)
   }
   const htmlFileName = `${dirPath}/${name}.html`
   await fs.promises.writeFile(htmlFileName, page)
 }
+
+const createHTMLFilePromises = markDownFileNames.map(
+  (markDownFileName) => createHTMLFile(markDownFileName, indexMenu, pageLayout, SOURCE_DIR, OUTPUT_DIR))
+await Promise.all(createHTMLFilePromises)
 
 const indexPageLayout = fs.readFileSync(INDEX_PAGE_LAYOUT, 'utf8')
 const indexPage = createIndexPage(indexPageLayout, indexItems)
