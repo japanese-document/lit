@@ -19,7 +19,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
   </td>
   <td>
-  　　渡されたobjectに応じて要素のclass属性を割り当てます。
+  渡されたobjectに応じて要素のclass属性を割り当てます。
   </td>
   </tr>
 
@@ -123,7 +123,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`keyed`](#keyed)
 
   </td>
-  <td>Associates a renderable value with a unique key, forcing the DOM to re-render if the key changes.</td>
+  <td>レンダリング可能な値とユニークなキーを関連付けます。そして、キーが変化すると強制的に関連付けられた値が強制的に再レンダリングされます。</td>
   </tr>
 
   <tr>
