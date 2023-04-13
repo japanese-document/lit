@@ -19,7 +19,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
   </td>
   <td>
-  渡されたobjectに応じて要素のclass属性を割り当てます。
+  渡されたobjectに応じて要素にclass属性を割り当てます。
   </td>
   </tr>
 
@@ -30,7 +30,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
   </td>
   <td>
-  渡されたobjectに応じて要素のstyle属性を割り当てます。
+  渡されたobjectに応じて要素にstyle属性を割り当てます。
   </tr>
 
   <tr class="subheading"><td colspan="2">
