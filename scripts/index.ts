@@ -1,7 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR } from './config.js'
-import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage, Page, createIndexItems, createIndexMenu, createHeaderList } from './utils.js'
+import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
+  Page, createIndexItems, createIndexMenu, createHeaderList } from './utils.js'
 
 const markDownFileNames = await getMarkDownFileNames()
 
@@ -27,7 +28,7 @@ const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
 const pageLayout = fs.readFileSync(PAGE_LAYOUT, 'utf8')
 
-async function createHTMLFile(
+async function createPageHtmlFile(
   markDownFileName: string, indexMenu: string, pageLayout: string, sourceDir: string, outputDir: string) {
   const content = await fs.promises.readFile(markDownFileName, 'utf8')
   const [, md] = getMetaAndMd(content)
@@ -45,15 +46,15 @@ async function createHTMLFile(
   await fs.promises.writeFile(htmlFileName, page)
 }
 
-const createHTMLFilePromises = markDownFileNames.map(
-  (markDownFileName) => createHTMLFile(markDownFileName, indexMenu, pageLayout, SOURCE_DIR, OUTPUT_DIR))
+const createPageHtmlFilePromises = markDownFileNames.map(
+  (markDownFileName) => createPageHtmlFile(markDownFileName, indexMenu, pageLayout, SOURCE_DIR, OUTPUT_DIR))
 
-async function createIndexHtmlFile(layout: string, indexItems: ReturnType<typeof createIndexItems>) {
+async function createIndexHtmlFile(layout: string, outputDir: string, indexItems: ReturnType<typeof createIndexItems>) {
   const indexPageLayout = await fs.promises.readFile(layout, 'utf8')
   const indexPage = createIndexPage(indexPageLayout, indexItems)
-  await fs.promises.writeFile(`${OUTPUT_DIR}/index.html`, indexPage)
+  await fs.promises.writeFile(`${outputDir}/index.html`, indexPage)
 }
 
-const createIndexHtmlFilePromise = createIndexHtmlFile(INDEX_PAGE_LAYOUT, indexItems)
+const createIndexHtmlFilePromise = createIndexHtmlFile(INDEX_PAGE_LAYOUT, OUTPUT_DIR, indexItems)
 
-await Promise.all([createIndexHtmlFilePromise, ...createHTMLFilePromises])
+await Promise.all([createIndexHtmlFilePromise, ...createPageHtmlFilePromises])
