@@ -132,7 +132,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`guard`](#guard)
 
   </td>
-  <td>Only re-evaluates the template when one of its dependencies changes.</td>
+  <td>指定した変更を検知するための値の内1つが変更された場合のみテンプレートを再評価します。</td>
   </tr>
 
   <tr>
@@ -141,12 +141,12 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`live`](#live)
 
   </td>
-  <td>Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.</td>
+  <td>最後にレンダリングされた時の値が現行のDOMの属性もしくはプロパティと異なっていた場合、それに値をセットします。</td>
   </tr>
 
   <tr class="subheading"><td colspan="2">
 
-  Referencing rendered DOM
+  レンダリングされたDOMの参照
 
   </td></tr>
 
@@ -156,24 +156,24 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`ref`](#ref)
 
   </td>
-  <td>Gets a reference to an element rendered in the template.</td>
+  <td>テンプレートでレンダリングされた要素の参照を取得します。</td>
   </tr>
 
   <tr class="subheading"><td colspan="2">
 
-  Rendering special values
+  特殊な値のレンダリング
 
   </td></tr>
 
   <tr>
   <td>
 
-  [`templateContent`](#templatecontent)
+  [`templateContent`](#templateContent)
 
   </td>
   <td>
 
-  Renders the content of a `<template>` element.
+  `<template>`要素のコンテンツをレンダリングします。
 
   </td>
   </tr>
