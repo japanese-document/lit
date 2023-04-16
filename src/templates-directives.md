@@ -181,24 +181,24 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   <tr>
   <td>
 
-  [`unsafeHTML`](#unsafehtml)
+  [`unsafeHTML`](#unsafeHTML)
 
   </td>
-  <td>Renders a string as HTML rather than text.</td>
+  <td>文字列をテキストではなくHTMLとしてレンダリングします。</td>
   </tr>
 
   <tr>
   <td>
 
-  [`unsafeSVG`](#unsafesvg)
+  [`unsafeSVG`](#unsafeSVG)
 
   </td>
-  <td>Renders a string as SVG rather than text.</td>
+  <td>文字列をテキストではなくSVGとしてレンダリングします。</td>
   </tr>
 
   <tr class="subheading"><td colspan="2">
 
-  Asynchronous rendering
+  非同期レンダリング
 
   </td></tr>
 
@@ -208,13 +208,13 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`until`](#until)
 
   </td>
-  <td>Renders placeholder content until one or more promises resolve.</td>
+  <td>1つ以上のPromiseが解決するまでプレイスフォルダのコンテンツをレンダリングします。</td>
   </tr>
 
   <tr>
   <td>
 
-  [`asyncAppend`](#asyncappend)
+  [`asyncAppend`](#asyncAppend)
 
   </td>
   <td>Appends values from an `AsyncIterable` into the DOM as they are yielded.</td>
@@ -223,7 +223,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   <tr>
   <td>
 
-  [`asyncReplace`](#asyncreplace)
+  [`asyncReplace`](#asyncReplace)
 
   </td>
   <td>Renders the latest value from an `AsyncIterable` into the DOM as it is yielded.</td>
@@ -236,7 +236,8 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 </div>
 
-You can also build your own directives. For more information, see [Custom directives](/docs/templates/custom-directives/).
+独自のディレクティブを作成することができます。
+詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
 ## Styling
 
