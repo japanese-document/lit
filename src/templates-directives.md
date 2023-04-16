@@ -217,7 +217,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`asyncAppend`](#asyncAppend)
 
   </td>
-  <td>Appends values from an `AsyncIterable` into the DOM as they are yielded.</td>
+  <td><code>AsyncIterable</code>の各値を解決される毎にDOMに追記していきます。</td>
   </tr>
 
   <tr>
@@ -226,7 +226,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`asyncReplace`](#asyncReplace)
 
   </td>
-  <td>Renders the latest value from an `AsyncIterable` into the DOM as it is yielded.</td>
+  <td><code>AsyncIterable</code>の各値を解決される毎にDOMを置き換えます。</td>
   </tr>
 </table>
 
