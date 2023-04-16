@@ -235,7 +235,9 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 <p>  <a class="Link" href="#asyncAppend"><code>asyncAppend</code></a></p>
   </td>
-  <td><code>AsyncIterable</code>の各値を解決される毎にDOMに追記していきます。</td>
+  <td>
+  `AsyncIterable`の各値を解決される毎にDOMに追記していきます。
+  </td>
   </tr>
 
   <tr>
@@ -243,18 +245,15 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 <p>  <a class="Link" href="#asyncReplace"><code>asyncReplace</code></a></p>
   </td>
-  <td><code>AsyncIterable</code>の各値を解決される毎にDOMを置き換えます。</td>
+  <td>
+  `AsyncIterable`の各値を解決される毎にDOMを置き換えます。
+  </td>
   </tr>
 </tbody></table>
 
-<div class="alert alert-info">
-
-<p><strong>Only bundle what you use.</strong> These are called "built-in" directives because they're part of the Lit package. But each directive is a separate module, so your app only bundles the directives you import.</p>
-</div>
-
 <p>独自のディレクティブを作成することができます。
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
-<h2 id="Styling"><a href="#Styling">Styling</a></h2>
+<h2 id="スタイル"><a href="#スタイル">スタイル</a></h2>
 <h3 id="classMap"><a href="#classMap">classMap</a></h3>
 <p>Sets a list of classes to an element based on an object.</p>
 <table>
@@ -406,7 +405,7 @@ be combined with static values:</p>
 <pre><code class="language-js">html`&lt;p style="color: white; ${styleMap(moreStyles)}"&gt;More styles!&lt;/p&gt;`;
 </code></pre>
 <p>Explore <code>styleMap</code> more in the <a class="Link" href="/playground/#sample=examples/directive-style-map">playground</a>.</p>
-<h2 id="Loops_and_conditionals"><a href="#Loops_and_conditionals">Loops and conditionals</a></h2>
+<h2 id="繰り返しと条件"><a href="#繰り返しと条件">繰り返しと条件</a></h2>
 <h3 id="when"><a href="#when">when</a></h3>
 <p>Renders one of two templates based on a condition.</p>
 <table>
@@ -804,7 +803,7 @@ customElements.define('my-element', MyEleent);
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <p>Explore <code>ifDefined</code> more in the <a class="Link" href="/playground/#sample=examples/directive-if-defined">playground</a>.</p>
-<h2 id="Caching_and_change_detection"><a href="#Caching_and_change_detection">Caching and change detection</a></h2>
+<h2 id="キャッシュと変更の検出"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></h2>
 <h3 id="cache"><a href="#cache">cache</a></h3>
 <p>Caches rendered DOM when changing templates rather than discarding the DOM. You
 can use this directive to optimize rendering performance when frequently
@@ -1110,7 +1109,7 @@ the new value is equal to the live value, does nothing. This means that
 you use <code>live()</code> with an attribute expression, make sure that only strings are
 passed in, or the expression will update every render.</p>
 <p>Explore <code>live</code> more in the <a class="Link" href="/playground/#sample=examples/directive-live">playground</a>.</p>
-<h2 id="Rendering_special_values"><a href="#Rendering_special_values">Rendering special values</a></h2>
+<h2 id="特殊な値のレンダリング"><a href="#特殊な値のレンダリング">特殊な値のレンダリング</a></h2>
 <h3 id="templateContent"><a href="#templateContent">templateContent</a></h3>
 <p>Renders the content of a <code>&lt;template&gt;</code> element.</p>
 <table>
@@ -1334,7 +1333,7 @@ customElements.define('my-element', MyElement);
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <p>Explore <code>unsafeSVG</code> more in the <a class="Link" href="/playground/#sample=examples/directive-unsafe-svg">playground</a>.</p>
-<h2 id="Referencing_rendered_DOM"><a href="#Referencing_rendered_DOM">Referencing rendered DOM</a></h2>
+<h2 id="レンダリングされたDOMの参照"><a href="#レンダリングされたDOMの参照">レンダリングされたDOMの参照</a></h2>
 <h3 id="ref"><a href="#ref">ref</a></h3>
 <p>Retrieves a reference to an element rendered into the DOM.</p>
 <table>
@@ -1447,7 +1446,7 @@ customElements.define('my-element', MyElement);
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <p>Explore <code>ref</code> more in the <a class="Link" href="/playground/#sample=examples/directive-ref">playground</a>.</p>
-<h2 id="Asynchronous_rendering"><a href="#Asynchronous_rendering">Asynchronous rendering</a></h2>
+<h2 id="非同期レンダリング"><a href="#非同期レンダリング">非同期レンダリング</a></h2>
 <h3 id="until"><a href="#until">until</a></h3>
 <p>Renders placeholder content until one or more promises resolve.</p>
 <table>
@@ -1675,10 +1674,10 @@ customElements.define('my-element', MyElement);
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#ビルトインディレクティブ">ビルトインディレクティブ</a></p>
-<p class="h2"><a href="#Styling">Styling</a></p>
+<p class="h2"><a href="#スタイル">スタイル</a></p>
 <p class="h3"><a href="#classMap">classMap</a></p>
 <p class="h3"><a href="#styleMap">styleMap</a></p>
-<p class="h2"><a href="#Loops_and_conditionals">Loops and conditionals</a></p>
+<p class="h2"><a href="#繰り返しと条件">繰り返しと条件</a></p>
 <p class="h3"><a href="#when">when</a></p>
 <p class="h3"><a href="#choose">choose</a></p>
 <p class="h3"><a href="#map">map</a></p>
@@ -1686,18 +1685,18 @@ customElements.define('my-element', MyElement);
 <p class="h3"><a href="#join">join</a></p>
 <p class="h3"><a href="#range">range</a></p>
 <p class="h3"><a href="#ifDefined">ifDefined</a></p>
-<p class="h2"><a href="#Caching_and_change_detection">Caching and change detection</a></p>
+<p class="h2"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></p>
 <p class="h3"><a href="#cache">cache</a></p>
 <p class="h3"><a href="#keyed">keyed</a></p>
 <p class="h3"><a href="#guard">guard</a></p>
 <p class="h3"><a href="#live">live</a></p>
-<p class="h2"><a href="#Rendering_special_values">Rendering special values</a></p>
+<p class="h2"><a href="#特殊な値のレンダリング">特殊な値のレンダリング</a></p>
 <p class="h3"><a href="#templateContent">templateContent</a></p>
 <p class="h3"><a href="#unsafeHTML">unsafeHTML</a></p>
 <p class="h3"><a href="#unsafeSVG">unsafeSVG</a></p>
-<p class="h2"><a href="#Referencing_rendered_DOM">Referencing rendered DOM</a></p>
+<p class="h2"><a href="#レンダリングされたDOMの参照">レンダリングされたDOMの参照</a></p>
 <p class="h3"><a href="#ref">ref</a></p>
-<p class="h2"><a href="#Asynchronous_rendering">Asynchronous rendering</a></p>
+<p class="h2"><a href="#非同期レンダリング">非同期レンダリング</a></p>
 <p class="h3"><a href="#until">until</a></p>
 <p class="h3"><a href="#asyncAppend">asyncAppend</a></p>
 <p class="h3"><a href="#asyncReplace">asyncReplace</a></p></div></div>

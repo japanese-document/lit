@@ -217,7 +217,9 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`asyncAppend`](#asyncAppend)
 
   </td>
-  <td><code>AsyncIterable</code>の各値を解決される毎にDOMに追記していきます。</td>
+  <td>
+  `AsyncIterable`の各値を解決される毎にDOMに追記していきます。
+  </td>
   </tr>
 
   <tr>
@@ -226,20 +228,16 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`asyncReplace`](#asyncReplace)
 
   </td>
-  <td><code>AsyncIterable</code>の各値を解決される毎にDOMを置き換えます。</td>
+  <td>
+  `AsyncIterable`の各値を解決される毎にDOMを置き換えます。
+  </td>
   </tr>
 </table>
-
-<div class="alert alert-info">
-
-**Only bundle what you use.** These are called "built-in" directives because they're part of the Lit package. But each directive is a separate module, so your app only bundles the directives you import.
-
-</div>
 
 独自のディレクティブを作成することができます。
 詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
-## Styling
+## スタイル
 
 ### classMap
 
@@ -435,7 +433,7 @@ html`<p style="color: white; ${styleMap(moreStyles)}">More styles!</p>`;
 
 Explore `styleMap` more in the [playground](/playground/#sample=examples/directive-style-map).
 
-## Loops and conditionals
+## 繰り返しと条件
 
 ### when
 
@@ -917,7 +915,7 @@ customElements.define('my-element', MyEleent);
 
 Explore `ifDefined` more in the [playground](/playground/#sample=examples/directive-if-defined).
 
-## Caching and change detection
+## キャッシュと変更の検出
 
 ### cache
 
@@ -1293,7 +1291,7 @@ passed in, or the expression will update every render.
 Explore `live` more in the [playground](/playground/#sample=examples/directive-live).
 
 
-## Rendering special values
+## 特殊な値のレンダリング
 
 ### templateContent
 
@@ -1568,7 +1566,7 @@ customElements.define('my-element', MyElement);
 Explore `unsafeSVG` more in the [playground](/playground/#sample=examples/directive-unsafe-svg).
 
 
-## Referencing rendered DOM
+## レンダリングされたDOMの参照
 
 ### ref
 
@@ -1706,7 +1704,7 @@ customElements.define('my-element', MyElement);
 
 Explore `ref` more in the [playground](/playground/#sample=examples/directive-ref).
 
-## Asynchronous rendering
+## 非同期レンダリング
 
 ### until
 
