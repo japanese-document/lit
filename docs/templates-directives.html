@@ -257,7 +257,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
 <h2 id="スタイル"><a href="#スタイル">スタイル</a></h2>
 <h3 id="classMap"><a href="#classMap">classMap</a></h3>
-<p>Sets a list of classes to an element based on an object.</p>
+<p>渡されたobjectに応じて要素にclass属性のリストを割り当てます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -292,7 +292,6 @@ remove classes to an element based on an object passed by the user. Each key in
 the object is treated as a class name, and if the value associated with the key
 is truthy, that class is added to the element. On subsequent renders, any
 previously set classes that are falsy or no longer in the object are removed.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -305,24 +304,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    enabled: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.enabled = false;
-  }
-
-  render() {
-    const classes = { enabled: this.enabled, hidden: false };
-    return html`&lt;div class=${classMap(classes)}&gt;Classy text&lt;/div&gt;`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>The <code>classMap</code> must be the only expression in the <code>class</code> attribute, but it can
 be combined with static values:</p>
 <pre><code class="language-ts">html`&lt;div class="my-widget ${classMap(dynamicClasses)}"&gt;Static and dynamic&lt;/div&gt;`;

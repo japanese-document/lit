@@ -245,7 +245,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 ### classMap
 
-Sets a list of classes to an element based on an object.
+渡されたobjectに応じて要素にclass属性のリストを割り当てます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -287,8 +287,6 @@ the object is treated as a class name, and if the value associated with the key
 is truthy, that class is added to the element. On subsequent renders, any
 previously set classes that are falsy or no longer in the object are removed.
 
-{% switchable-sample %}
-
 ```ts
 @customElement('my-element')
 class MyElement extends LitElement {
@@ -302,27 +300,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  static properties = {
-    enabled: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.enabled = false;
-  }
-
-  render() {
-    const classes = { enabled: this.enabled, hidden: false };
-    return html`<div class=${classMap(classes)}>Classy text</div>`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 The `classMap` must be the only expression in the `class` attribute, but it can
 be combined with static values:
