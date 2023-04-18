@@ -270,7 +270,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">classMap(classInfo: {[name: string]: string | boolean | number})
@@ -323,7 +323,7 @@ be combined with static values:</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">styleMap(styleInfo: {[name: string]: string | undefined | null})
@@ -403,7 +403,7 @@ be combined with static values:</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">when&lt;T, F&gt;(
@@ -450,7 +450,7 @@ the given <code>value</code> to a case.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">choose&lt;T, V&gt;(
@@ -503,7 +503,7 @@ fallthrough.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">map&lt;T&gt;(
@@ -548,7 +548,7 @@ fallthrough.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">repeat(items: Iterable&lt;T&gt;, keyfn: KeyFn&lt;T&gt;, template: ItemTemplate&lt;T&gt;)
@@ -631,7 +631,7 @@ of when to use <code>repeat</code> and when to use standard JavaScript flow cont
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">join&lt;I, J&gt;(
@@ -683,7 +683,7 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">range(end: number): Iterable&lt;number&gt;;
@@ -730,7 +730,7 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">ifDefined(value: unknown)
@@ -803,7 +803,7 @@ switching between large templates.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">cache(value: TemplateResult|unknown)
@@ -883,7 +883,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">keyed(key: unknown, value: unknown)
@@ -952,7 +952,7 @@ rendering performance by preventing unnecessary work.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">guard(dependencies: unknown[], valueFn: () =&gt; unknown)
@@ -1029,7 +1029,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">live(value: unknown)
@@ -1107,7 +1107,7 @@ passed in, or the expression will update every render.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">templateContent(templateElement: HTMLTemplateElement)
@@ -1179,7 +1179,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">unsafeHTML(value: string | typeof nothing | typeof noChange)
@@ -1254,7 +1254,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">unsafeSVG(value: string | typeof nothing | typeof noChange)
@@ -1331,7 +1331,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">ref(refOrCallback: RefOrCallback)
@@ -1444,7 +1444,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">until(...values: unknown[])
@@ -1514,7 +1514,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">asyncAppend(iterable: AsyncIterable)
@@ -1592,7 +1592,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 <pre><code class="language-ts">asyncReplace(iterable: AsyncIterable)
