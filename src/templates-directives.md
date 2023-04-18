@@ -261,7 +261,7 @@ import {classMap} from 'lit/directives/class-map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -328,7 +328,7 @@ import {styleMap} from 'lit/directives/style-map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -434,7 +434,7 @@ import {when} from 'lit/directives/when.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -491,7 +491,7 @@ import {choose} from 'lit/directives/choose.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -554,7 +554,7 @@ import {map} from 'lit/directives/map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -609,7 +609,7 @@ import {repeat} from 'lit/directives/repeat.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -710,7 +710,7 @@ import {join} from 'lit/directives/join.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -771,7 +771,7 @@ import {range} from 'lit/directives/range.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -828,7 +828,7 @@ import {ifDefined} from 'lit/directives/if-defined.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -918,7 +918,7 @@ import {cache} from 'lit/directives/cache.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1016,7 +1016,7 @@ import {keyed} from 'lit/directives/keyed.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1100,7 +1100,7 @@ import {guard} from 'lit/directives/guard.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1194,7 +1194,7 @@ import {live} from 'lit/directives/live.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1292,7 +1292,7 @@ import {templateContent} from 'lit/directives/template-content.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1380,7 +1380,7 @@ import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1472,7 +1472,7 @@ import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1567,7 +1567,7 @@ import {ref} from 'lit/directives/ref.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1705,7 +1705,7 @@ import {until} from 'lit/directives/until.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1791,7 +1791,7 @@ import {asyncAppend} from 'lit/directives/async-append.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
@@ -1884,7 +1884,7 @@ import {asyncReplace} from 'lit/directives/async-replace.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Signature</td>
+<td class="no-wrap-cell vcenter-cell">API</td>
 <td class="wide-cell">
 
 ```ts
