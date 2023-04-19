@@ -278,20 +278,18 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-<p><code>class</code> attribute expression (must be the only expression in the <code>class</code> attribute)</p>
+<p><code>class</code>属性に対応する<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>The <code>classMap</code> directive uses the <code>element.classList</code> API to efficiently add and
-remove classes to an element based on an object passed by the user. Each key in
-the object is treated as a class name, and if the value associated with the key
-is truthy, that class is added to the element. On subsequent renders, any
-previously set classes that are falsy or no longer in the object are removed.</p>
+<p><code>classMap</code>ディレクディブは渡されたオブジェクトに応じて<code>element.classList</code>を使って効率的にclass属性に値を追加および削除します。
+オブジェクトの各キーはclass名です。その値がtrueと評価できる場合、要素のclass属性にそのclass名を加えます。
+その後のレンダリングでは、1つ前のレンダリングでclass属性にセットされていたclass名のうち値がfalseと評価できるものやオブジェクトにキーが存在しないものはclass属性から削除されます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -304,13 +302,12 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>The <code>classMap</code> must be the only expression in the <code>class</code> attribute, but it can
-be combined with static values:</p>
+<p><code>classMap</code>は下記のようにclass属性の静的な値と組み合わせることができます。</p>
 <pre><code class="language-ts">html`&lt;div class="my-widget ${classMap(dynamicClasses)}"&gt;Static and dynamic&lt;/div&gt;`;
 </code></pre>
-<p>Explore <code>classMap</code> more in the <a class="Link" href="/playground/#sample=examples/directive-class-map">playground</a>.</p>
+<p><code>classMap</code>を使用した例は<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-class-map">こちら</a>です。</p>
 <h3 id="styleMap"><a href="#styleMap">styleMap</a></h3>
-<p>Sets a list of style properties to an element based on an object.</p>
+<p>渡されたobjectに応じて要素にstyleプロパティのリストを割り当てます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -331,7 +328,7 @@ be combined with static values:</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p><code>style</code> attribute expression (must be the only expression in the <code>style</code> attribute)</p>
@@ -415,7 +412,7 @@ be combined with static values:</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any</p>
@@ -462,7 +459,7 @@ the given <code>value</code> to a case.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any</p>
@@ -514,7 +511,7 @@ fallthrough.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any</p>
@@ -559,7 +556,7 @@ type ItemTemplate&lt;T&gt; = (item: T, index: number) =&gt; unknown;
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -647,7 +644,7 @@ join&lt;I, J&gt;(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any</p>
@@ -697,7 +694,7 @@ range(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any</p>
@@ -738,7 +735,7 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Attribute expression</p>
@@ -811,7 +808,7 @@ switching between large templates.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -891,7 +888,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any expression</p>
@@ -960,7 +957,7 @@ rendering performance by preventing unnecessary work.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any expression</p>
@@ -1037,7 +1034,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Attribute or property expression</p>
@@ -1115,7 +1112,7 @@ passed in, or the expression will update every render.</p>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -1187,7 +1184,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -1262,7 +1259,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -1339,7 +1336,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Element expression</p>
@@ -1452,7 +1449,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Any expression</p>
@@ -1522,7 +1519,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>
@@ -1600,7 +1597,7 @@ customElements.define('my-element', MyElement);
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 <p>Child expression</p>

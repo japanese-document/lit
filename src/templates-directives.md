@@ -271,21 +271,19 @@ classMap(classInfo: {[name: string]: string | boolean | number})
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-`class` attribute expression (must be the only expression in the `class` attribute)
+`class`属性に対応する[エクスプレッション](https://japanese-document.github.io/lit/templates-expressions.html)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-The `classMap` directive uses the `element.classList` API to efficiently add and
-remove classes to an element based on an object passed by the user. Each key in
-the object is treated as a class name, and if the value associated with the key
-is truthy, that class is added to the element. On subsequent renders, any
-previously set classes that are falsy or no longer in the object are removed.
+`classMap`ディレクディブは渡されたオブジェクトに応じて`element.classList`を使って効率的にclass属性に値を追加および削除します。
+オブジェクトの各キーはclass名です。その値がtrueと評価できる場合、要素のclass属性にそのclass名を加えます。
+その後のレンダリングでは、1つ前のレンダリングでclass属性にセットされていたclass名のうち値がfalseと評価できるものやオブジェクトにキーが存在しないものはclass属性から削除されます。
 
 ```ts
 @customElement('my-element')
@@ -301,18 +299,17 @@ class MyElement extends LitElement {
 }
 ```
 
-The `classMap` must be the only expression in the `class` attribute, but it can
-be combined with static values:
+`classMap`は下記のようにclass属性の静的な値と組み合わせることができます。
 
 ```ts
 html`<div class="my-widget ${classMap(dynamicClasses)}">Static and dynamic</div>`;
 ```
 
-Explore `classMap` more in the [playground](/playground/#sample=examples/directive-class-map).
+`classMap`を使用した例は[こちら](https://lit.dev/playground/#sample=examples/directive-class-map)です。
 
 ### styleMap
 
-Sets a list of style properties to an element based on an object.
+渡されたobjectに応じて要素にstyleプロパティのリストを割り当てます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -338,7 +335,7 @@ styleMap(styleInfo: {[name: string]: string | undefined | null})
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 `style` attribute expression (must be the only expression in the `style` attribute)
@@ -447,7 +444,7 @@ when<T, F>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any
@@ -504,7 +501,7 @@ choose<T, V>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any
@@ -566,7 +563,7 @@ map<T>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any
@@ -622,7 +619,7 @@ type ItemTemplate<T> = (item: T, index: number) => unknown;
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -728,7 +725,7 @@ join<I, J>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any
@@ -788,7 +785,7 @@ range(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any
@@ -838,7 +835,7 @@ ifDefined(value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Attribute expression
@@ -928,7 +925,7 @@ cache(value: TemplateResult|unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -1026,7 +1023,7 @@ keyed(key: unknown, value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any expression
@@ -1110,7 +1107,7 @@ guard(dependencies: unknown[], valueFn: () => unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any expression
@@ -1204,7 +1201,7 @@ live(value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Attribute or property expression
@@ -1302,7 +1299,7 @@ templateContent(templateElement: HTMLTemplateElement)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -1390,7 +1387,7 @@ unsafeHTML(value: string | typeof nothing | typeof noChange)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -1482,7 +1479,7 @@ unsafeSVG(value: string | typeof nothing | typeof noChange)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -1577,7 +1574,7 @@ ref(refOrCallback: RefOrCallback)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Element expression
@@ -1715,7 +1712,7 @@ until(...values: unknown[])
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Any expression
@@ -1801,7 +1798,7 @@ asyncAppend(iterable: AsyncIterable)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
@@ -1894,7 +1891,7 @@ asyncReplace(iterable: AsyncIterable)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Usable location</td>
+<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
 Child expression
