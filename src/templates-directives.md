@@ -338,20 +338,16 @@ styleMap(styleInfo: {[name: string]: string | undefined | null})
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-`style` attribute expression (must be the only expression in the `style` attribute)
+`style`属性に対応する[エクスプレッション](https://japanese-document.github.io/lit/templates-expressions.html)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-The `styleMap` directive uses the `element.style` API to efficiently add and
-remove inline styles to an element based on an object passed by the user. Each
-key in the object is treated as a style property name, the value is treated as
-the value for that property. On subsequent renders, any previously set style
-properties that are undefined or `null` are removed (set to `null`).
-
-{% switchable-sample %}
+The `styleMap` directive uses the `element.style` API to efficiently add and remove inline styles to an element based on an object passed by the user.
+Each key in the object is treated as a style property name, the value is treated as the value for that property.
+On subsequent renders, any previously set style properties that are undefined or `null` are removed (set to `null`).
 
 ```ts
 @customElement('my-element')
@@ -367,27 +363,6 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-class MyElement extends LitElement {
-  static properties = {
-    enabled: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.enabled = false;
-  }
-
-  render() {
-    const styles = { backgroundColor: this.enabled ? 'blue' : 'gray', color: 'white' };
-    return html`<p style=${styleMap(styles)}>Hello style!</p>`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
 For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes. For example, you can write the CSS property `font-family` as either `fontFamily` or `'font-family'`:
 
 ```js
@@ -402,14 +377,13 @@ Refer to CSS custom properties such as `--custom-color`, by placing the whole pr
 ```
 
 
-The `styleMap` must be the only expression in the `style` attribute, but it can
-be combined with static values:
+The `styleMap` must be the only expression in the `style` attribute, but it can be combined with static values:
 
 ```js
 html`<p style="color: white; ${styleMap(moreStyles)}">More styles!</p>`;
 ```
 
-Explore `styleMap` more in the [playground](/playground/#sample=examples/directive-style-map).
+Explore `styleMap` more in the [playground](https://lit.dev/playground/#sample=examples/directive-style-map).
 
 ## 繰り返しと条件
 
