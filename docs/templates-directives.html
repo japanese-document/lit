@@ -331,18 +331,15 @@ class MyElement extends LitElement {
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-<p><code>style</code> attribute expression (must be the only expression in the <code>style</code> attribute)</p>
+<p><code>style</code>属性に対応する<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>The <code>styleMap</code> directive uses the <code>element.style</code> API to efficiently add and
-remove inline styles to an element based on an object passed by the user. Each
-key in the object is treated as a style property name, the value is treated as
-the value for that property. On subsequent renders, any previously set style
-properties that are undefined or <code>null</code> are removed (set to <code>null</code>).</p>
-<p>{% switchable-sample %}</p>
+<p>The <code>styleMap</code> directive uses the <code>element.style</code> API to efficiently add and remove inline styles to an element based on an object passed by the user.
+Each key in the object is treated as a style property name, the value is treated as the value for that property.
+On subsequent renders, any previously set style properties that are undefined or <code>null</code> are removed (set to <code>null</code>).</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -355,24 +352,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    enabled: {type: Boolean},
-  };
-
-  constructor() {
-    super();
-    this.enabled = false;
-  }
-
-  render() {
-    const styles = { backgroundColor: this.enabled ? 'blue' : 'gray', color: 'white' };
-    return html`&lt;p style=${styleMap(styles)}&gt;Hello style!&lt;/p&gt;`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes. For example, you can write the CSS property <code>font-family</code> as either <code>fontFamily</code> or <code>'font-family'</code>:</p>
 <pre><code class="language-js">{ fontFamily: 'roboto' }
 { 'font-family': 'roboto' }
@@ -380,11 +359,10 @@ customElements.define('my-element', MyElement);
 <p>Refer to CSS custom properties such as <code>--custom-color</code>, by placing the whole property name in quotes:</p>
 <pre><code class="language-js">{ '--custom-color': 'steelblue' }
 </code></pre>
-<p>The <code>styleMap</code> must be the only expression in the <code>style</code> attribute, but it can
-be combined with static values:</p>
+<p>The <code>styleMap</code> must be the only expression in the <code>style</code> attribute, but it can be combined with static values:</p>
 <pre><code class="language-js">html`&lt;p style="color: white; ${styleMap(moreStyles)}"&gt;More styles!&lt;/p&gt;`;
 </code></pre>
-<p>Explore <code>styleMap</code> more in the <a class="Link" href="/playground/#sample=examples/directive-style-map">playground</a>.</p>
+<p>Explore <code>styleMap</code> more in the <a class="Link" href="https://lit.dev/playground/#sample=examples/directive-style-map">playground</a>.</p>
 <h2 id="繰り返しと条件"><a href="#繰り返しと条件">繰り返しと条件</a></h2>
 <h3 id="when"><a href="#when">when</a></h3>
 <p>Renders one of two templates based on a condition.</p>
