@@ -337,9 +337,9 @@ class MyElement extends LitElement {
 </tbody>
 </table>
 
-<p>The <code>styleMap</code> directive uses the <code>element.style</code> API to efficiently add and remove inline styles to an element based on an object passed by the user.
-Each key in the object is treated as a style property name, the value is treated as the value for that property.
-On subsequent renders, any previously set style properties that are undefined or <code>null</code> are removed (set to <code>null</code>).</p>
+<p><code>styleMap</code>ディレクティブは渡されたオブジェクトに応じて<code>element.style</code> APIを使って効率的に要素のstyle属性にスタイルを追加したり削除したりします。
+渡されたオブジェクトの各キーはスタイルのプロパティ名になります。その値はスタイルのプロパティの値になります。
+その後のレンダリングでは、値がセットされていなかったり<code>null</code>の場合は1つ前のレンダリングでセットされていたスタイルプロパティは削除されます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -352,7 +352,8 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes. For example, you can write the CSS property <code>font-family</code> as either <code>fontFamily</code> or <code>'font-family'</code>:</p>
+<p>For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes.
+For example, you can write the CSS property <code>font-family</code> as either <code>fontFamily</code> or <code>'font-family'</code>:</p>
 <pre><code class="language-js">{ fontFamily: 'roboto' }
 { 'font-family': 'roboto' }
 </code></pre>

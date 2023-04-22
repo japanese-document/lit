@@ -345,9 +345,9 @@ styleMap(styleInfo: {[name: string]: string | undefined | null})
 </tbody>
 </table>
 
-The `styleMap` directive uses the `element.style` API to efficiently add and remove inline styles to an element based on an object passed by the user.
-Each key in the object is treated as a style property name, the value is treated as the value for that property.
-On subsequent renders, any previously set style properties that are undefined or `null` are removed (set to `null`).
+`styleMap`ディレクティブは渡されたオブジェクトに応じて`element.style` APIを使って効率的に要素のstyle属性にスタイルを追加したり削除したりします。
+渡されたオブジェクトの各キーはスタイルのプロパティ名になります。その値はスタイルのプロパティの値になります。
+その後のレンダリングでは、値がセットされていなかったり`null`の場合は1つ前のレンダリングでセットされていたスタイルプロパティは削除されます。
 
 ```ts
 @customElement('my-element')
@@ -363,7 +363,8 @@ class MyElement extends LitElement {
 }
 ```
 
-For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes. For example, you can write the CSS property `font-family` as either `fontFamily` or `'font-family'`:
+For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes.
+For example, you can write the CSS property `font-family` as either `fontFamily` or `'font-family'`:
 
 ```js
 { fontFamily: 'roboto' }
