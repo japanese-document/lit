@@ -363,34 +363,33 @@ class MyElement extends LitElement {
 }
 ```
 
-For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes.
-For example, you can write the CSS property `font-family` as either `fontFamily` or `'font-family'`:
+下記のようにCSSプロパティ名に`-`が含まれている場合、camel-caseにするか、プロパティ名を`'`内に置きます。
+例えば、`font-family`は`fontFamily`もしくは`'font-family'`にすることができます。
 
 ```js
 { fontFamily: 'roboto' }
 { 'font-family': 'roboto' }
 ```
 
-Refer to CSS custom properties such as `--custom-color`, by placing the whole property name in quotes:
+CSSカスタムプロパティを参照する場合、下記のようにプロパティ名全体を`'`内に置きます。
 
 ```js
 { '--custom-color': 'steelblue' }
 ```
 
-
-The `styleMap` must be the only expression in the `style` attribute, but it can be combined with static values:
+`styleMap`はstyle属性内の唯一のエクスプレッションでなければなりませんが、下記のように静的な値と組み合わせることができます。
 
 ```js
 html`<p style="color: white; ${styleMap(moreStyles)}">More styles!</p>`;
 ```
 
-Explore `styleMap` more in the [playground](https://lit.dev/playground/#sample=examples/directive-style-map).
+詳しくは[playground](https://lit.dev/playground/#sample=examples/directive-style-map)を見てください。
 
 ## 繰り返しと条件
 
 ### when
 
-Renders one of two templates based on a condition.
+条件に応じて2つのテンプレートの内1つをレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -422,17 +421,15 @@ when<T, F>(
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-Any
+どこでも
 
 </td>
 </tr>
 </tbody>
 </table>
 
-When `condition` is true, returns the result of calling `trueCase()`, else returns the result of calling `falseCase()` if `falseCase` is defined.
-
-This is a convenience wrapper around a ternary expression that makes it a
-little nicer to write an inline conditional without an else.
+`condition`がtrueの場合、`trueCase()`を実行した結果を返します。そうでない場合、`falseCase`が渡されているなら`falseCase()`を実行した結果を返します。
+これは三項演算子のラッパーです。これを使うとelseを使わないでインラインで書くことができるので少しだけキレイに書くことができます。
 
 ```ts
 class MyElement extends LitElement {
@@ -446,8 +443,7 @@ class MyElement extends LitElement {
 
 ### choose
 
-Chooses and evaluates a template function from a list of cases based on matching
-the given `value` to a case.
+Chooses and evaluates a template function from a list of cases based on matching the given `value` to a case.
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -479,7 +475,7 @@ choose<T, V>(
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-Any
+どこでも
 
 </td>
 </tr>
