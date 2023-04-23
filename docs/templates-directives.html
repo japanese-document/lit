@@ -352,21 +352,21 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>For CSS properties that contain dashes, you can either use the camel-case equivalent, or put the property name in quotes.
-For example, you can write the CSS property <code>font-family</code> as either <code>fontFamily</code> or <code>'font-family'</code>:</p>
+<p>下記のようにCSSプロパティ名に<code>-</code>が含まれている場合、camel-caseにするか、プロパティ名を<code>'</code>内に置きます。
+例えば、<code>font-family</code>は<code>fontFamily</code>もしくは<code>'font-family'</code>にすることができます。</p>
 <pre><code class="language-js">{ fontFamily: 'roboto' }
 { 'font-family': 'roboto' }
 </code></pre>
-<p>Refer to CSS custom properties such as <code>--custom-color</code>, by placing the whole property name in quotes:</p>
+<p>CSSカスタムプロパティを参照する場合、下記のようにプロパティ名全体を<code>'</code>内に置きます。</p>
 <pre><code class="language-js">{ '--custom-color': 'steelblue' }
 </code></pre>
-<p>The <code>styleMap</code> must be the only expression in the <code>style</code> attribute, but it can be combined with static values:</p>
+<p><code>styleMap</code>はstyle属性内の唯一のエクスプレッションでなければなりませんが、下記のように静的な値と組み合わせることができます。</p>
 <pre><code class="language-js">html`&lt;p style="color: white; ${styleMap(moreStyles)}"&gt;More styles!&lt;/p&gt;`;
 </code></pre>
-<p>Explore <code>styleMap</code> more in the <a class="Link" href="https://lit.dev/playground/#sample=examples/directive-style-map">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-style-map">playground</a>を見てください。</p>
 <h2 id="繰り返しと条件"><a href="#繰り返しと条件">繰り返しと条件</a></h2>
 <h3 id="when"><a href="#when">when</a></h3>
-<p>Renders one of two templates based on a condition.</p>
+<p>条件に応じて2つのテンプレートの内1つをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -394,15 +394,14 @@ For example, you can write the CSS property <code>font-family</code> as either <
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-<p>Any</p>
+<p>どこでも</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>When <code>condition</code> is true, returns the result of calling <code>trueCase()</code>, else returns the result of calling <code>falseCase()</code> if <code>falseCase</code> is defined.</p>
-<p>This is a convenience wrapper around a ternary expression that makes it a
-little nicer to write an inline conditional without an else.</p>
+<p><code>condition</code>がtrueの場合、<code>trueCase()</code>を実行した結果を返します。そうでない場合、<code>falseCase</code>が渡されているなら<code>falseCase()</code>を実行した結果を返します。
+これは三項演算子のラッパーです。これを使うとelseを使わないでインラインで書くことができるので少しだけキレイに書くことができます。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   render() {
     return html`
@@ -412,8 +411,7 @@ little nicer to write an inline conditional without an else.</p>
 }
 </code></pre>
 <h3 id="choose"><a href="#choose">choose</a></h3>
-<p>Chooses and evaluates a template function from a list of cases based on matching
-the given <code>value</code> to a case.</p>
+<p>Chooses and evaluates a template function from a list of cases based on matching the given <code>value</code> to a case.</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -441,7 +439,7 @@ the given <code>value</code> to a case.</p>
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-<p>Any</p>
+<p>どこでも</p>
 </td>
 </tr>
 </tbody>
