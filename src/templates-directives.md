@@ -45,7 +45,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
   [`when`](#when)
 
   </td>
-  <td>条件に応じて2つのテンプレートの内1つをレンダリングします。</td>
+  <td>条件に応じて渡された2つのテンプレートの内1つをレンダリングします。</td>
   </tr>
 
   <tr>
@@ -389,7 +389,7 @@ html`<p style="color: white; ${styleMap(moreStyles)}">More styles!</p>`;
 
 ### when
 
-条件に応じて2つのテンプレートの内1つをレンダリングします。
+条件に応じて渡された2つのテンプレートの内1つをレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -443,7 +443,8 @@ class MyElement extends LitElement {
 
 ### choose
 
-Chooses and evaluates a template function from a list of cases based on matching the given `value` to a case.
+渡された`value`にマッチする関数を実行してテンプレートを返します。
+`case`にはキーとテンプレートを返す関数の配列を渡します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -483,9 +484,9 @@ choose<T, V>(
 </table>
 
 
-Cases are structured as `[caseValue, func]`. `value` is matched to
-`caseValue` by strict equality. The first match is selected. Case values
-can be of any type including primitives, objects, and symbols.
+Cases are structured as `[caseValue, func]`.
+`value` is matched to `caseValue` by strict equality.
+The first match is selected. Case values can be of any type including primitives, objects, and symbols.
 
 This is similar to a switch statement, but as an expression and without
 fallthrough.

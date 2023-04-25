@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-directives.html" />
     <meta property="og:title" content="ビルトインディレクティブ" />
-    <meta property="og:description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて2つのテンプレートの内1つをレンダリングします。        choose " />
+    <meta property="og:description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        cho" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて2つのテンプレートの内1つをレンダリングします。        choose " />
+    <meta name="description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        cho" />
     <title>ビルトインディレクティブ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -84,7 +84,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 <p>  <a class="Link" href="#when"><code>when</code></a></p>
   </td>
-  <td>条件に応じて2つのテンプレートの内1つをレンダリングします。</td>
+  <td>条件に応じて渡された2つのテンプレートの内1つをレンダリングします。</td>
   </tr>
 
   <tr>
@@ -366,7 +366,7 @@ class MyElement extends LitElement {
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-style-map">playground</a>を見てください。</p>
 <h2 id="繰り返しと条件"><a href="#繰り返しと条件">繰り返しと条件</a></h2>
 <h3 id="when"><a href="#when">when</a></h3>
-<p>条件に応じて2つのテンプレートの内1つをレンダリングします。</p>
+<p>条件に応じて渡された2つのテンプレートの内1つをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -411,7 +411,8 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="choose"><a href="#choose">choose</a></h3>
-<p>Chooses and evaluates a template function from a list of cases based on matching the given <code>value</code> to a case.</p>
+<p>渡された<code>value</code>にマッチする関数を実行してテンプレートを返します。
+<code>case</code>にはキーとテンプレートを返す関数の配列を渡します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -446,9 +447,9 @@ class MyElement extends LitElement {
 </table>
 
 
-<p>Cases are structured as <code>[caseValue, func]</code>. <code>value</code> is matched to
-<code>caseValue</code> by strict equality. The first match is selected. Case values
-can be of any type including primitives, objects, and symbols.</p>
+<p>Cases are structured as <code>[caseValue, func]</code>.
+<code>value</code> is matched to <code>caseValue</code> by strict equality.
+The first match is selected. Case values can be of any type including primitives, objects, and symbols.</p>
 <p>This is similar to a switch statement, but as an expression and without
 fallthrough.</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
