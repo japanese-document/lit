@@ -484,12 +484,10 @@ choose<T, V>(
 </table>
 
 
-Cases are structured as `[caseValue, func]`.
-`value` is matched to `caseValue` by strict equality.
-The first match is selected. Case values can be of any type including primitives, objects, and symbols.
-
-This is similar to a switch statement, but as an expression and without
-fallthrough.
+`cases`の構造は`[caseValue, func]`です。
+`value`は`caseValue`と`===`で比較されます。
+最初にマッチしたものを採用します。
+`caseValue`には任意の型の値を指定することができます。
 
 ```ts
 class MyElement extends LitElement {
