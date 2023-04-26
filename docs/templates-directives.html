@@ -447,11 +447,10 @@ class MyElement extends LitElement {
 </table>
 
 
-<p>Cases are structured as <code>[caseValue, func]</code>.
-<code>value</code> is matched to <code>caseValue</code> by strict equality.
-The first match is selected. Case values can be of any type including primitives, objects, and symbols.</p>
-<p>This is similar to a switch statement, but as an expression and without
-fallthrough.</p>
+<p><code>cases</code>の構造は<code>[caseValue, func]</code>です。
+<code>value</code>は<code>caseValue</code>と<code>===</code>で比較されます。
+最初にマッチしたものを採用します。
+<code>caseValue</code>には任意の型の値を指定することができます。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   render() {
     return html`
