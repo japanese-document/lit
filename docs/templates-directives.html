@@ -491,15 +491,17 @@ class MyElement extends LitElement {
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-<p>Any</p>
+<p>どこでも</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p><code>map()</code> is a simple wrapper around a <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for/of loop</a> that makes working with iterables in expressions a bit easier.
-<code>map()</code> always updates any DOM created in place - it does not do any diffing or DOM movement.
-If you need that see <a class="Link" href="#repeat">repeat</a>. <code>map()</code> is smaller and faster than <code>repeat()</code>, so if you don't need diffing and DOM stability, prefer <code>map()</code>.</p>
+<p><code>map()</code>は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for/of loop</a>の簡単なラッパです。
+これはエクスプレッション内でのiterableに対する処理を少しだけ簡単にします。
+<code>map()</code>で生成されたすべてのDOMは更新されます。(差分やDOMの移動は発生しません。)
+それが必要な場合は<a class="Link" href="#repeat">repeat</a>を見てください。
+<code>map()</code>は<code>repeat()</code>より小さくて速いです。だから、差分やDOMの安定性が必要ない場合は<code>map()</code>を使うことが好ましいです。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   render() {
     return html`
