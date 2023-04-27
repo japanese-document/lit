@@ -505,7 +505,7 @@ class MyElement extends LitElement {
 
 ### map
 
-Returns an iterable containing the result of calling `f(value)` on each value in `items`.
+`items`の各値に対して`f(value)`を実行した結果を格納しているiterableを返します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -543,7 +543,9 @@ Any
 </tbody>
 </table>
 
-`map()` is a simple wrapper around a [for/of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) that makes working with iterables in expressions a bit easier. `map()` always updates any DOM created in place - it does not do any diffing or DOM movement. If you need that see [repeat](#repeat). `map()` is smaller and faster than `repeat()`, so if you don't need diffing and DOM stability, prefer `map()`.
+`map()` is a simple wrapper around a [for/of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) that makes working with iterables in expressions a bit easier.
+`map()` always updates any DOM created in place - it does not do any diffing or DOM movement.
+If you need that see [repeat](#repeat). `map()` is smaller and faster than `repeat()`, so if you don't need diffing and DOM stability, prefer `map()`.
 
 
 ```ts
