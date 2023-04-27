@@ -536,16 +536,18 @@ map<T>(
 <td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
 <td class="wide-cell">
 
-Any
+どこでも
 
 </td>
 </tr>
 </tbody>
 </table>
 
-`map()` is a simple wrapper around a [for/of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) that makes working with iterables in expressions a bit easier.
-`map()` always updates any DOM created in place - it does not do any diffing or DOM movement.
-If you need that see [repeat](#repeat). `map()` is smaller and faster than `repeat()`, so if you don't need diffing and DOM stability, prefer `map()`.
+`map()`は[for/of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)の簡単なラッパです。
+これはエクスプレッション内でのiterableに対する処理を少しだけ簡単にします。
+`map()`で生成されたすべてのDOMは更新されます。(差分やDOMの移動は発生しません。)
+それが必要な場合は[repeat](#repeat)を見てください。
+`map()`は`repeat()`より小さくて速いです。だから、差分やDOMの安定性が必要ない場合は`map()`を使うことが好ましいです。
 
 
 ```ts
