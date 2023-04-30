@@ -262,24 +262,24 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {classMap} from 'lit/directives/class-map.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">classMap(classInfo: {[name: string]: string | boolean | number})
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p><code>class</code>属性に対応する<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
 </td>
@@ -312,24 +312,24 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {styleMap} from 'lit/directives/style-map.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">styleMap(styleInfo: {[name: string]: string | undefined | null})
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p><code>style</code>属性に対応する<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
 </td>
@@ -371,16 +371,16 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {when} from 'lit/directives/when.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">when&lt;T, F&gt;(
   condition: boolean,
@@ -391,8 +391,8 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>どこでも</p>
 </td>
@@ -417,16 +417,16 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {choose} from 'lit/directives/choose.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">choose&lt;T, V&gt;(
   value: T,
@@ -437,8 +437,8 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>どこでも</p>
 </td>
@@ -469,16 +469,16 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {map} from 'lit/directives/map.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">map&lt;T&gt;(
   items: Iterable&lt;T&gt; | undefined,
@@ -488,8 +488,8 @@ class MyElement extends LitElement {
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>どこでも</p>
 </td>
@@ -501,7 +501,7 @@ class MyElement extends LitElement {
 これはエクスプレッション内でのiterableに対する処理を少しだけ簡単にします。
 <code>map()</code>で生成されたすべてのDOMは更新されます。(差分やDOMの移動は発生しません。)
 それが必要な場合は<a class="Link" href="#repeat">repeat</a>を見てください。
-<code>map()</code>は<code>repeat()</code>より小さくて速いです。だから、差分やDOMの安定性が必要ない場合は<code>map()</code>を使うことが好ましいです。</p>
+<code>map()</code>は<code>repeat()</code>より低コストで高速です。だから、差分やDOMの安定性が必要ない場合は<code>map()</code>を使うことが好ましいです。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   render() {
     return html`
@@ -513,21 +513,21 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="repeat"><a href="#repeat">repeat</a></h3>
-<p>Renders values from an iterable into the DOM, with optional keying to enable data diffing and DOM stability.</p>
+<p>iterableの値をDOMにレンダリングします。その際にDOMの安定性を付与するためにキーをDOMに付与します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {repeat} from 'lit/directives/repeat.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">repeat(items: Iterable&lt;T&gt;, keyfn: KeyFn&lt;T&gt;, template: ItemTemplate&lt;T&gt;)
 repeat(items: Iterable&lt;T&gt;, template: ItemTemplate&lt;T&gt;)
@@ -537,21 +537,21 @@ type ItemTemplate&lt;T&gt; = (item: T, index: number) =&gt; unknown;
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>Repeats a series of values (usually <code>TemplateResults</code>) generated from an
-iterable, and updates those items efficiently when the iterable changes. When
-the <code>keyFn</code> is provided, key-to-DOM association is maintained between updates by
-moving generated DOM when required, and is generally the most efficient way to use <code>repeat</code> since it performs minimum unnecessary work for insertions and removals.</p>
-<p>If you're not using a key function, you should consider using <a class="Link" href="#map"><code>map()</code></a>.</p>
-<p>{% switchable-sample %}</p>
+<p><code>repeat</code>はiterableからレンダリング対象の値(通常は<code>TemplateResults</code>の配列)を生成します。
+そして、iterableが変更された時、それらを効率的に更新します。
+<code>keyFn</code>が渡された場合、キーがDOMに付与されます。
+キーとDOMの関係はDOMが移動する更新で維持されます。
+これは不要な要素の挿入と削除を最小にすることができるので、一般的に<code>repeat</code>を使うことは最も効率的な方法です。</p>
+<p><code>keyFn</code>が必要ない場合、<a class="Link" href="#map"><code>map()</code></a>を使うことを検討した方が良いかもしれません。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -568,49 +568,25 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    items: {},
-  };
-
-  constructor() {
-    super();
-    this.items = [];
-  }
-
-  render() {
-    return html`
-      &lt;ul&gt;
-        ${repeat(this.items, (item) =&gt; item.id, (item, index) =&gt; html`
-          &lt;li&gt;${index}: ${item.name}&lt;/li&gt;`)}
-      &lt;/ul&gt;
-    `;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>If no <code>keyFn</code> is provided, <code>repeat</code> will perform similar to a simple map of
-items to values, and DOM will be reused against potentially different items.</p>
-<p>See <a class="Link" href="/docs/templates/lists/#when-to-use-map-or-repeat">When to use map or repeat</a> for a discussion
-of when to use <code>repeat</code> and when to use standard JavaScript flow control.</p>
-<p>Explore <code>repeat</code> more in the <a class="Link" href="/playground/#sample=examples/directive-repeat">playground</a>.</p>
+<p><code>keyFn</code>が渡されなかった場合、<code>repeat</code>は単純な<code>map</code>と似た動きをします。
+その場合、DOMは違う値と関連付けられる可能性があります。</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/docs/docs/templates/lists/#when-to-use-map-or-repeat">mapとrepeatの使い分け</a>を見てください。</p>
 <h3 id="join"><a href="#join">join</a></h3>
 <p>Returns an iterable containing the values in <code>items</code> interleaved with the <code>joiner</code> value.</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {join} from 'lit/directives/join.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">join&lt;I, J&gt;(
   items: Iterable&lt;I&gt; | undefined,
@@ -625,10 +601,10 @@ join&lt;I, J&gt;(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
-<p>Any</p>
+<p>どこでも</p>
 </td>
 </tr>
 </tbody>
@@ -653,16 +629,16 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {range} from 'lit/directives/range.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">range(end: number): Iterable&lt;number&gt;;
 
@@ -675,8 +651,8 @@ range(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Any</p>
 </td>
@@ -700,24 +676,24 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {ifDefined} from 'lit/directives/if-defined.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">ifDefined(value: unknown)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Attribute expression</p>
 </td>
@@ -773,24 +749,24 @@ switching between large templates.</p>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {cache} from 'lit/directives/cache.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">cache(value: TemplateResult|unknown)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
@@ -853,24 +829,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {keyed} from 'lit/directives/keyed.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">keyed(key: unknown, value: unknown)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Any expression</p>
 </td>
@@ -922,24 +898,24 @@ rendering performance by preventing unnecessary work.</p>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {guard} from 'lit/directives/guard.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">guard(dependencies: unknown[], valueFn: () =&gt; unknown)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Any expression</p>
 </td>
@@ -999,24 +975,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {live} from 'lit/directives/live.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">live(value: unknown)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Attribute or property expression</p>
 </td>
@@ -1077,24 +1053,24 @@ passed in, or the expression will update every render.</p>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {templateContent} from 'lit/directives/template-content.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">templateContent(templateElement: HTMLTemplateElement)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
@@ -1149,24 +1125,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">unsafeHTML(value: string | typeof nothing | typeof noChange)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
@@ -1224,24 +1200,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">unsafeSVG(value: string | typeof nothing | typeof noChange)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
@@ -1301,24 +1277,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {ref} from 'lit/directives/ref.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">ref(refOrCallback: RefOrCallback)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Element expression</p>
 </td>
@@ -1414,24 +1390,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {until} from 'lit/directives/until.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">until(...values: unknown[])
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Any expression</p>
 </td>
@@ -1484,24 +1460,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {asyncAppend} from 'lit/directives/async-append.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">asyncAppend(iterable: AsyncIterable)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
@@ -1562,24 +1538,24 @@ customElements.define('my-element', MyElement);
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 <pre><code class="language-js">import {asyncReplace} from 'lit/directives/async-replace.js';
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 <pre><code class="language-ts">asyncReplace(iterable: AsyncIterable)
 </code></pre>
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 <p>Child expression</p>
 </td>
