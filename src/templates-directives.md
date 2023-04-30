@@ -251,8 +251,8 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {classMap} from 'lit/directives/class-map.js';
@@ -261,8 +261,8 @@ import {classMap} from 'lit/directives/class-map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 classMap(classInfo: {[name: string]: string | boolean | number})
@@ -271,8 +271,8 @@ classMap(classInfo: {[name: string]: string | boolean | number})
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 `class`属性に対応する[エクスプレッション](https://japanese-document.github.io/lit/templates-expressions.html)
 
@@ -315,8 +315,8 @@ html`<div class="my-widget ${classMap(dynamicClasses)}">Static and dynamic</div>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {styleMap} from 'lit/directives/style-map.js';
@@ -325,8 +325,8 @@ import {styleMap} from 'lit/directives/style-map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 styleMap(styleInfo: {[name: string]: string | undefined | null})
@@ -335,8 +335,8 @@ styleMap(styleInfo: {[name: string]: string | undefined | null})
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 `style`属性に対応する[エクスプレッション](https://japanese-document.github.io/lit/templates-expressions.html)
 
@@ -395,8 +395,8 @@ html`<p style="color: white; ${styleMap(moreStyles)}">More styles!</p>`;
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {when} from 'lit/directives/when.js';
@@ -405,8 +405,8 @@ import {when} from 'lit/directives/when.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 when<T, F>(
@@ -418,8 +418,8 @@ when<T, F>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 どこでも
 
@@ -450,8 +450,8 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {choose} from 'lit/directives/choose.js';
@@ -460,8 +460,8 @@ import {choose} from 'lit/directives/choose.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 choose<T, V>(
@@ -473,8 +473,8 @@ choose<T, V>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 どこでも
 
@@ -511,8 +511,8 @@ class MyElement extends LitElement {
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {map} from 'lit/directives/map.js';
@@ -521,8 +521,8 @@ import {map} from 'lit/directives/map.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 map<T>(
@@ -533,8 +533,8 @@ map<T>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 どこでも
 
@@ -547,7 +547,7 @@ map<T>(
 これはエクスプレッション内でのiterableに対する処理を少しだけ簡単にします。
 `map()`で生成されたすべてのDOMは更新されます。(差分やDOMの移動は発生しません。)
 それが必要な場合は[repeat](#repeat)を見てください。
-`map()`は`repeat()`より小さくて速いです。だから、差分やDOMの安定性が必要ない場合は`map()`を使うことが好ましいです。
+`map()`は`repeat()`より低コストで高速です。だから、差分やDOMの安定性が必要ない場合は`map()`を使うことが好ましいです。
 
 
 ```ts
@@ -564,14 +564,14 @@ class MyElement extends LitElement {
 
 ### repeat
 
-Renders values from an iterable into the DOM, with optional keying to enable data diffing and DOM stability.
+iterableの値をDOMにレンダリングします。その際にDOMの安定性を付与するためにキーをDOMに付与します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {repeat} from 'lit/directives/repeat.js';
@@ -580,8 +580,8 @@ import {repeat} from 'lit/directives/repeat.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 repeat(items: Iterable<T>, keyfn: KeyFn<T>, template: ItemTemplate<T>)
@@ -593,24 +593,23 @@ type ItemTemplate<T> = (item: T, index: number) => unknown;
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-Repeats a series of values (usually `TemplateResults`) generated from an
-iterable, and updates those items efficiently when the iterable changes. When
-the `keyFn` is provided, key-to-DOM association is maintained between updates by
-moving generated DOM when required, and is generally the most efficient way to use `repeat` since it performs minimum unnecessary work for insertions and removals.
+`repeat`はiterableからレンダリング対象の値(通常は`TemplateResults`の配列)を生成します。
+そして、iterableが変更された時、それらを効率的に更新します。
+`keyFn`が渡された場合、キーがDOMに付与されます。
+キーとDOMの関係はDOMが移動する更新で維持されます。
+これは不要な要素の挿入と削除を最小にすることができるので、一般的に`repeat`を使うことは最も効率的な方法です。
 
-If you're not using a key function, you should consider using [`map()`](#map).
-
-{% switchable-sample %}
+`keyFn`が必要ない場合、[`map()`](#map)を使うことを検討した方が良いかもしれません。
 
 ```ts
 @customElement('my-element')
@@ -630,38 +629,10 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-class MyElement extends LitElement {
-  static properties = {
-    items: {},
-  };
+`keyFn`が渡されなかった場合、`repeat`は単純な`map`と似た動きをします。
+その場合、DOMは違う値と関連付けられる可能性があります。
 
-  constructor() {
-    super();
-    this.items = [];
-  }
-
-  render() {
-    return html`
-      <ul>
-        ${repeat(this.items, (item) => item.id, (item, index) => html`
-          <li>${index}: ${item.name}</li>`)}
-      </ul>
-    `;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
-If no `keyFn` is provided, `repeat` will perform similar to a simple map of
-items to values, and DOM will be reused against potentially different items.
-
-See [When to use map or repeat](/docs/templates/lists/#when-to-use-map-or-repeat) for a discussion
-of when to use `repeat` and when to use standard JavaScript flow control.
-
-Explore `repeat` more in the [playground](/playground/#sample=examples/directive-repeat).
+詳しくは[mapとrepeatの使い分け](https://lit.dev/docs/docs/templates/lists/#when-to-use-map-or-repeat)を見てください。
 
 ### join
 
@@ -671,8 +642,8 @@ Returns an iterable containing the values in `items` interleaved with the `joine
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {join} from 'lit/directives/join.js';
@@ -681,8 +652,8 @@ import {join} from 'lit/directives/join.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 join<I, J>(
@@ -699,10 +670,10 @@ join<I, J>(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
-Any
+どこでも
 
 </td>
 </tr>
@@ -732,8 +703,8 @@ Returns an iterable of integers from `start` to `end` (exclusive) incrementing b
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {range} from 'lit/directives/range.js';
@@ -742,8 +713,8 @@ import {range} from 'lit/directives/range.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 range(end: number): Iterable<number>;
@@ -759,8 +730,8 @@ range(
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Any
 
@@ -789,8 +760,8 @@ Sets an attribute if the value is defined and removes the attribute if undefined
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {ifDefined} from 'lit/directives/if-defined.js';
@@ -799,8 +770,8 @@ import {ifDefined} from 'lit/directives/if-defined.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 ifDefined(value: unknown)
@@ -809,8 +780,8 @@ ifDefined(value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Attribute expression
 
@@ -879,8 +850,8 @@ switching between large templates.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {cache} from 'lit/directives/cache.js';
@@ -889,8 +860,8 @@ import {cache} from 'lit/directives/cache.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 cache(value: TemplateResult|unknown)
@@ -899,8 +870,8 @@ cache(value: TemplateResult|unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
@@ -977,8 +948,8 @@ Associates a renderable value with a unique key. When the key changes, the previ
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {keyed} from 'lit/directives/keyed.js';
@@ -987,8 +958,8 @@ import {keyed} from 'lit/directives/keyed.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 keyed(key: unknown, value: unknown)
@@ -997,8 +968,8 @@ keyed(key: unknown, value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Any expression
 
@@ -1061,8 +1032,8 @@ rendering performance by preventing unnecessary work.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {guard} from 'lit/directives/guard.js';
@@ -1071,8 +1042,8 @@ import {guard} from 'lit/directives/guard.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 guard(dependencies: unknown[], valueFn: () => unknown)
@@ -1081,8 +1052,8 @@ guard(dependencies: unknown[], valueFn: () => unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Any expression
 
@@ -1155,8 +1126,8 @@ Sets an attribute or property if it differs from the live DOM value rather than 
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {live} from 'lit/directives/live.js';
@@ -1165,8 +1136,8 @@ import {live} from 'lit/directives/live.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 live(value: unknown)
@@ -1175,8 +1146,8 @@ live(value: unknown)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Attribute or property expression
 
@@ -1253,8 +1224,8 @@ Renders the content of a `<template>` element.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {templateContent} from 'lit/directives/template-content.js';
@@ -1263,8 +1234,8 @@ import {templateContent} from 'lit/directives/template-content.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 templateContent(templateElement: HTMLTemplateElement)
@@ -1273,8 +1244,8 @@ templateContent(templateElement: HTMLTemplateElement)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
@@ -1341,8 +1312,8 @@ Renders a string as HTML rather than text.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
@@ -1351,8 +1322,8 @@ import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 unsafeHTML(value: string | typeof nothing | typeof noChange)
@@ -1361,8 +1332,8 @@ unsafeHTML(value: string | typeof nothing | typeof noChange)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
@@ -1433,8 +1404,8 @@ Renders a string as SVG rather than text.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
@@ -1443,8 +1414,8 @@ import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 unsafeSVG(value: string | typeof nothing | typeof noChange)
@@ -1453,8 +1424,8 @@ unsafeSVG(value: string | typeof nothing | typeof noChange)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
@@ -1528,8 +1499,8 @@ Retrieves a reference to an element rendered into the DOM.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {ref} from 'lit/directives/ref.js';
@@ -1538,8 +1509,8 @@ import {ref} from 'lit/directives/ref.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 ref(refOrCallback: RefOrCallback)
@@ -1548,8 +1519,8 @@ ref(refOrCallback: RefOrCallback)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Element expression
 
@@ -1666,8 +1637,8 @@ Renders placeholder content until one or more promises resolve.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {until} from 'lit/directives/until.js';
@@ -1676,8 +1647,8 @@ import {until} from 'lit/directives/until.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 until(...values: unknown[])
@@ -1686,8 +1657,8 @@ until(...values: unknown[])
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Any expression
 
@@ -1752,8 +1723,8 @@ Appends values from an `AsyncIterable` into the DOM as they are yielded.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {asyncAppend} from 'lit/directives/async-append.js';
@@ -1762,8 +1733,8 @@ import {asyncAppend} from 'lit/directives/async-append.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 asyncAppend(iterable: AsyncIterable)
@@ -1772,8 +1743,8 @@ asyncAppend(iterable: AsyncIterable)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
@@ -1845,8 +1816,8 @@ Renders the latest value from an `AsyncIterable` into the DOM as it is yielded.
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
 <tr>
-<td class="no-wrap-cell vcenter-cell">Import</td>
-<td class="wide-cell">
+<td>Import</td>
+<td>
 
 ```js
 import {asyncReplace} from 'lit/directives/async-replace.js';
@@ -1855,8 +1826,8 @@ import {asyncReplace} from 'lit/directives/async-replace.js';
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">API</td>
-<td class="wide-cell">
+<td>API</td>
+<td>
 
 ```ts
 asyncReplace(iterable: AsyncIterable)
@@ -1865,8 +1836,8 @@ asyncReplace(iterable: AsyncIterable)
 </td>
 </tr>
 <tr>
-<td class="no-wrap-cell vcenter-cell">使用可能な場所</td>
-<td class="wide-cell">
+<td>使用可能な場所</td>
+<td>
 
 Child expression
 
