@@ -572,7 +572,7 @@ class MyElement extends LitElement {
 その場合、DOMは違う値と関連付けられる可能性があります。</p>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/docs/templates/lists/#when-to-use-map-or-repeat">mapとrepeatの使い分け</a>を見てください。</p>
 <h3 id="join"><a href="#join">join</a></h3>
-<p>Returns an iterable containing the values in <code>items</code> interleaved with the <code>joiner</code> value.</p>
+<p><code>items</code>の各値の間に<code>joiner</code>の値を挿入したiterableを返します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -624,7 +624,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="range"><a href="#range">range</a></h3>
-<p>Returns an iterable of integers from <code>start</code> to <code>end</code> (exclusive) incrementing by <code>step</code>.</p>
+<p><code>start</code>から<code>end</code>まで<code>step</code>分だけ増加した一連の整数のiterableを返します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -671,7 +671,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="ifDefined"><a href="#ifDefined">ifDefined</a></h3>
-<p>Sets an attribute if the value is defined and removes the attribute if undefined.</p>
+<p>渡された値が定義されているなら属性をセットします。未定義なら属性を削除します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -695,15 +695,15 @@ class MyElement extends LitElement {
 <td>使用可能な場所</td>
 <td>
 
-<p>Attribute expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions">Attribute expression</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>For AttributeParts, sets the attribute if the value is defined and removes the attribute if the value is undefined (<code>undefined</code> or <code>null</code>). For other part types, this directive is a no-op.</p>
+<p>このディレクティブは属性部分に配置された場合、値が定義されていると属性をセットします。値が未定義(<code>undefined</code>もしくは<code>null</code>)だと属性を削除します。
+他の部分に配置された場合、何もしません。</p>
 <p>When more than one expression exists in a single attribute value, the attribute will be removed if <em>any</em> expression uses <code>ifDefined</code> and evaluates to <code>undefined</code>/<code>null</code>. This is especially useful for setting URL attributes, when the attribute should not be set if required parts of the URL are not defined, to prevent 404's.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -719,27 +719,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    filename: {},
-    size: {},
-  };
-
-  constructor() {
-    super();
-    this.filename = undefined;
-    this.size = undefined;
-  }
-
-  render() {
-    // src attribute not rendered if either size or filename are undefined
-    return html`&lt;img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}"&gt;`;
-  }
-}
-customElements.define('my-element', MyEleent);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>Explore <code>ifDefined</code> more in the <a class="Link" href="/playground/#sample=examples/directive-if-defined">playground</a>.</p>
 <h2 id="キャッシュと変更の検出"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></h2>
 <h3 id="cache"><a href="#cache">cache</a></h3>
 <p>Caches rendered DOM when changing templates rather than discarding the DOM. You
