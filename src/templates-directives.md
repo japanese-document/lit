@@ -636,7 +636,7 @@ class MyElement extends LitElement {
 
 ### join
 
-Returns an iterable containing the values in `items` interleaved with the `joiner` value.
+`items`の各値の間に`joiner`の値を挿入したiterableを返します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -697,7 +697,7 @@ class MyElement extends LitElement {
 
 ### range
 
-Returns an iterable of integers from `start` to `end` (exclusive) incrementing by `step`.
+`start`から`end`まで`step`分だけ増加した一連の整数のiterableを返します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -754,7 +754,7 @@ class MyElement extends LitElement {
 
 ### ifDefined
 
-Sets an attribute if the value is defined and removes the attribute if undefined.
+渡された値が定義されているなら属性をセットします。未定義なら属性を削除します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -783,18 +783,17 @@ ifDefined(value: unknown)
 <td>使用可能な場所</td>
 <td>
 
-Attribute expression
+[Attribute expression](https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-For AttributeParts, sets the attribute if the value is defined and removes the attribute if the value is undefined (`undefined` or `null`). For other part types, this directive is a no-op.
+このディレクティブは属性部分に配置された場合、値が定義されていると属性をセットします。値が未定義(`undefined`もしくは`null`)だと属性を削除します。
+他の部分に配置された場合、何もしません。
 
 When more than one expression exists in a single attribute value, the attribute will be removed if _any_ expression uses `ifDefined` and evaluates to `undefined`/`null`. This is especially useful for setting URL attributes, when the attribute should not be set if required parts of the URL are not defined, to prevent 404's.
-
-{% switchable-sample %}
 
 ```ts
 @customElement('my-element')
@@ -812,31 +811,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  static properties = {
-    filename: {},
-    size: {},
-  };
-
-  constructor() {
-    super();
-    this.filename = undefined;
-    this.size = undefined;
-  }
-
-  render() {
-    // src attribute not rendered if either size or filename are undefined
-    return html`<img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}">`;
-  }
-}
-customElements.define('my-element', MyEleent);
-```
-
-{% endswitchable-sample %}
-
-Explore `ifDefined` more in the [playground](/playground/#sample=examples/directive-if-defined).
 
 ## キャッシュと変更の検出
 
