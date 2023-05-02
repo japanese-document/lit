@@ -793,7 +793,10 @@ ifDefined(value: unknown)
 このディレクティブは属性部分に配置された場合、値が定義されていると属性をセットします。値が未定義(`undefined`もしくは`null`)だと属性を削除します。
 他の部分に配置された場合、何もしません。
 
-When more than one expression exists in a single attribute value, the attribute will be removed if _any_ expression uses `ifDefined` and evaluates to `undefined`/`null`. This is especially useful for setting URL attributes, when the attribute should not be set if required parts of the URL are not defined, to prevent 404's.
+1つの属性に1つ以上のエクスプレッションが存在する場合、
+1つでも`ifDefined`に`undefined`/`null`渡されたものがある場合、その属性は削除されます。
+これはurlの属性をセットする際に特に便利です。
+urlに必要な部分が定義されていない場合、404を防ぐために属性をセットしません。
 
 ```ts
 @customElement('my-element')
@@ -806,7 +809,7 @@ class MyElement extends LitElement {
   size: string | undefined = undefined;
 
   render() {
-    // src attribute not rendered if either size or filename are undefined
+    // sizeもしくはfilenameが未定義の場合、src属性はレンダリングさません。
     return html`<img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}">`;
   }
 }
@@ -816,9 +819,8 @@ class MyElement extends LitElement {
 
 ### cache
 
-Caches rendered DOM when changing templates rather than discarding the DOM. You
-can use this directive to optimize rendering performance when frequently
-switching between large templates.
+Caches rendered DOM when changing templates rather than discarding the DOM.
+You can use this directive to optimize rendering performance when frequently switching between large templates.
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -847,7 +849,7 @@ cache(value: TemplateResult|unknown)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
@@ -859,8 +861,6 @@ the rendered DOM nodes for a given template are cached when they're not in use.
 When the template changes, the directive caches the _current_ DOM nodes before
 switching to the new value, and restores them from the cache when switching back
 to a previously-rendered value, rather than creating the DOM nodes anew.
-
-{% switchable-sample %}
 
 ```ts
 const detailView = (data) => html`<div>...</div>`;
@@ -880,32 +880,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-const detailView = (data) => html`<div>...</div>`;
-const summaryView = (data) => html`<div>...</div>`;
-
-class MyElement extends LitElement {
-  static properties = {
-    data: {},
-  };
-
-  constructor() {
-    super();
-    this.data = {showDetails: true, /*...*/ };
-  }
-
-  render() {
-    return html`${cache(this.data.showDetails
-      ? detailView(this.data)
-      : summaryView(this.data)
-    )}`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 When Lit re-renders a template, it only updates the modified portions: it doesn't create or remove any more DOM than needed. But when you switch from one template to another, Lit removes the old DOM and renders a new DOM tree.
 
