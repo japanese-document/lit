@@ -703,7 +703,10 @@ class MyElement extends LitElement {
 
 <p>このディレクティブは属性部分に配置された場合、値が定義されていると属性をセットします。値が未定義(<code>undefined</code>もしくは<code>null</code>)だと属性を削除します。
 他の部分に配置された場合、何もしません。</p>
-<p>When more than one expression exists in a single attribute value, the attribute will be removed if <em>any</em> expression uses <code>ifDefined</code> and evaluates to <code>undefined</code>/<code>null</code>. This is especially useful for setting URL attributes, when the attribute should not be set if required parts of the URL are not defined, to prevent 404's.</p>
+<p>1つの属性に1つ以上のエクスプレッションが存在する場合、
+1つでも<code>ifDefined</code>に<code>undefined</code>/<code>null</code>渡されたものがある場合、その属性は削除されます。
+これはurlの属性をセットする際に特に便利です。
+urlに必要な部分が定義されていない場合、404を防ぐために属性をセットしません。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -714,16 +717,15 @@ class MyElement extends LitElement {
   size: string | undefined = undefined;
 
   render() {
-    // src attribute not rendered if either size or filename are undefined
+    // sizeもしくはfilenameが未定義の場合、src属性はレンダリングさません。
     return html`&lt;img src="/images/${ifDefined(this.size)}/${ifDefined(this.filename)}"&gt;`;
   }
 }
 </code></pre>
 <h2 id="キャッシュと変更の検出"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></h2>
 <h3 id="cache"><a href="#cache">cache</a></h3>
-<p>Caches rendered DOM when changing templates rather than discarding the DOM. You
-can use this directive to optimize rendering performance when frequently
-switching between large templates.</p>
+<p>Caches rendered DOM when changing templates rather than discarding the DOM.
+You can use this directive to optimize rendering performance when frequently switching between large templates.</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -747,7 +749,7 @@ switching between large templates.</p>
 <td>使用可能な場所</td>
 <td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
@@ -758,7 +760,6 @@ the rendered DOM nodes for a given template are cached when they're not in use.
 When the template changes, the directive caches the <em>current</em> DOM nodes before
 switching to the new value, and restores them from the cache when switching back
 to a previously-rendered value, rather than creating the DOM nodes anew.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">const detailView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
 const summaryView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
 
@@ -776,29 +777,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">const detailView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
-const summaryView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
-
-class MyElement extends LitElement {
-  static properties = {
-    data: {},
-  };
-
-  constructor() {
-    super();
-    this.data = {showDetails: true, /*...*/ };
-  }
-
-  render() {
-    return html`${cache(this.data.showDetails
-      ? detailView(this.data)
-      : summaryView(this.data)
-    )}`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>When Lit re-renders a template, it only updates the modified portions: it doesn't create or remove any more DOM than needed. But when you switch from one template to another, Lit removes the old DOM and renders a new DOM tree.</p>
 <p>The <code>cache</code> directive caches the generated DOM for a given expression and input template. In the example above, it caches the DOM for both the <code>summaryView</code> and <code>detailView</code> templates. When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data. This can improve rendering performance when these views are frequently switched.</p>
 <p>Explore <code>cache</code> more in the <a class="Link" href="/playground/#sample=examples/directive-cache">playground</a>.</p>
