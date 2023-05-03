@@ -724,8 +724,8 @@ class MyElement extends LitElement {
 </code></pre>
 <h2 id="キャッシュと変更の検出"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></h2>
 <h3 id="cache"><a href="#cache">cache</a></h3>
-<p>Caches rendered DOM when changing templates rather than discarding the DOM.
-You can use this directive to optimize rendering performance when frequently switching between large templates.</p>
+<p>渡されたテンプレートが変更した時、レンダリングされたDOMを廃棄するのではなくキャッシュします。
+大きなテンプレートを頻繁に切り替える場合、このディレクティブを使うことでパフォーマンスが改善されます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -755,11 +755,10 @@ You can use this directive to optimize rendering performance when frequently swi
 </tbody>
 </table>
 
-<p>When the value passed to <code>cache</code> changes between one or more <code>TemplateResult</code>s,
-the rendered DOM nodes for a given template are cached when they're not in use.
-When the template changes, the directive caches the <em>current</em> DOM nodes before
-switching to the new value, and restores them from the cache when switching back
-to a previously-rendered value, rather than creating the DOM nodes anew.</p>
+<p><code>cache</code>に渡された<code>TemplateResult</code>が変更されると、
+渡されたテンプレートがレンダリングされたDOMはそれらが使われない時にキャッシュされます。
+テンプレートが変更されると、このディレクティブは新しい値に切り替える前に現行のDOM Nodeをキャッシュします。
+このディレクティブは過去にレンダリングされた値に戻す時、新しいDOM Nodeを生成するのではなくキャッシュから復元します。</p>
 <pre><code class="language-ts">const detailView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
 const summaryView = (data) =&gt; html`&lt;div&gt;...&lt;/div&gt;`;
 

@@ -819,8 +819,8 @@ class MyElement extends LitElement {
 
 ### cache
 
-Caches rendered DOM when changing templates rather than discarding the DOM.
-You can use this directive to optimize rendering performance when frequently switching between large templates.
+渡されたテンプレートが変更した時、レンダリングされたDOMを廃棄するのではなくキャッシュします。
+大きなテンプレートを頻繁に切り替える場合、このディレクティブを使うことでパフォーマンスが改善されます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -856,11 +856,10 @@ cache(value: TemplateResult|unknown)
 </tbody>
 </table>
 
-When the value passed to `cache` changes between one or more `TemplateResult`s,
-the rendered DOM nodes for a given template are cached when they're not in use.
-When the template changes, the directive caches the _current_ DOM nodes before
-switching to the new value, and restores them from the cache when switching back
-to a previously-rendered value, rather than creating the DOM nodes anew.
+`cache`に渡された`TemplateResult`が変更されると、
+渡されたテンプレートがレンダリングされたDOMはそれらが使われない時にキャッシュされます。
+テンプレートが変更されると、このディレクティブは新しい値に切り替える前に現行のDOM Nodeをキャッシュします。
+このディレクティブは過去にレンダリングされた値に戻す時、新しいDOM Nodeを生成するのではなくキャッシュから復元します。
 
 ```ts
 const detailView = (data) => html`<div>...</div>`;
