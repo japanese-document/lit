@@ -885,8 +885,8 @@ Litのデフォルトの動作は、テンプレートを再レンダリング�
 しかし、レンダリングするテンプレートが別のテンプレートに切り替わると、
 Litは現行のDOM treeを削除して新しいDOMツリーをレンダリングします。
 
-The `cache` directive caches the generated DOM for a given expression and input template.
-In the example above, it caches the DOM for both the `summaryView` and `detailView` templates.
+`cache`ディレクティブは生成されたDOMをキャッシュします。
+上記の例は`summaryView`および`detailView`の両方に対するDOMをキャッシュします。
 When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data.
 This can improve rendering performance when these views are frequently switched.
 

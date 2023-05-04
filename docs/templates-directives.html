@@ -781,8 +781,8 @@ class MyElement extends LitElement {
 必要なDOMのみが作成または削除されます。
 しかし、レンダリングするテンプレートが別のテンプレートに切り替わると、
 Litは現行のDOM treeを削除して新しいDOMツリーをレンダリングします。</p>
-<p>The <code>cache</code> directive caches the generated DOM for a given expression and input template.
-In the example above, it caches the DOM for both the <code>summaryView</code> and <code>detailView</code> templates.
+<p><code>cache</code>ディレクティブは生成されたDOMをキャッシュします。
+上記の例は<code>summaryView</code>および<code>detailView</code>の両方に対するDOMをキャッシュします。
 When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data.
 This can improve rendering performance when these views are frequently switched.</p>
 <h3 id="keyed"><a href="#keyed">keyed</a></h3>
