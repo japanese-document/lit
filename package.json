@@ -12,7 +12,7 @@
     "css": "npm run css:links && npm run css:md && npm run css:cat",
     "docs": "rm -rf docs && mkdir docs",
     "prebuild": "npm run docs",
-    "build": "ts-node scripts/index.ts && npm run css && npm run image",
+    "build": "concurrently \"ts-node scripts/index.ts\"  \"npm run css\" \"npm run image\"",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
     "test": "jest"
@@ -37,6 +37,7 @@
     "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
+    "concurrently": "^8.0.1",
     "eslint": "^8.36.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
