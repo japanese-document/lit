@@ -880,12 +880,15 @@ class MyElement extends LitElement {
 }
 ```
 
-When Lit re-renders a template, it only updates the modified portions: it doesn't create or remove any more DOM than needed. But when you switch from one template to another, Lit removes the old DOM and renders a new DOM tree.
+Litのデフォルトの動作は、テンプレートを再レンダリングすると、変更された部分のみが更新されます。
+必要なDOMのみが作成または削除されます。
+しかし、レンダリングするテンプレートが別のテンプレートに切り替わると、
+Litは現行のDOM treeを削除して新しいDOMツリーをレンダリングします。
 
-The `cache` directive caches the generated DOM for a given expression and input template. In the example above, it caches the DOM for both the `summaryView` and `detailView` templates. When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data. This can improve rendering performance when these views are frequently switched.
-
-Explore `cache` more in the [playground](/playground/#sample=examples/directive-cache).
-
+The `cache` directive caches the generated DOM for a given expression and input template.
+In the example above, it caches the DOM for both the `summaryView` and `detailView` templates.
+When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data.
+This can improve rendering performance when these views are frequently switched.
 
 ### keyed
 
