@@ -786,7 +786,8 @@ Litは現行のDOM treeを削除して新しいDOMツリーをレンダリング
 When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data.
 This can improve rendering performance when these views are frequently switched.</p>
 <h3 id="keyed"><a href="#keyed">keyed</a></h3>
-<p>Associates a renderable value with a unique key. When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.</p>
+<p>ユニークなキーとレンダリング可能な値を関連付けます。
+When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -810,7 +811,7 @@ This can improve rendering performance when these views are frequently switched.
 <td>使用可能な場所</td>
 <td>
 
-<p>Any expression</p>
+<p>すべてのエクスプレッション</p>
 </td>
 </tr>
 </tbody>
@@ -818,7 +819,6 @@ This can improve rendering performance when these views are frequently switched.
 
 <p><code>keyed</code> is useful when you're rendering stateful elements and you need to ensure that all state of the element is cleared when some critical data changes. It essentially opts-out of Lit's default DOM reuse strategy.</p>
 <p><code>keyed</code> is also useful in some animation scenarios if you need to force a new element for "enter" or "exit" animations.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -833,26 +833,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    userId: {},
-  };
-
-  constructor() {
-    super();
-    this.userId = '';
-  }
-
-  render() {
-    return html`
-      &lt;div&gt;
-        ${keyed(this.userId, html`&lt;user-card .userId=${this.userId}&gt;&lt;/user-card&gt;`)}
-      &lt;/div&gt;`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h3 id="guard"><a href="#guard">guard</a></h3>
 <p>Only re-evaluates the template when one of its dependencies changes, to optimize
 rendering performance by preventing unnecessary work.</p>
