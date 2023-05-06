@@ -892,7 +892,8 @@ This can improve rendering performance when these views are frequently switched.
 
 ### keyed
 
-Associates a renderable value with a unique key. When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.
+ユニークなキーとレンダリング可能な値を関連付けます。
+When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -921,7 +922,7 @@ keyed(key: unknown, value: unknown)
 <td>使用可能な場所</td>
 <td>
 
-Any expression
+すべてのエクスプレッション
 
 </td>
 </tr>
@@ -931,8 +932,6 @@ Any expression
 `keyed` is useful when you're rendering stateful elements and you need to ensure that all state of the element is cleared when some critical data changes. It essentially opts-out of Lit's default DOM reuse strategy.
 
 `keyed` is also useful in some animation scenarios if you need to force a new element for "enter" or "exit" animations.
-
-{% switchable-sample %}
 
 ```ts
 @customElement('my-element')
@@ -949,29 +948,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  static properties = {
-    userId: {},
-  };
-
-  constructor() {
-    super();
-    this.userId = '';
-  }
-
-  render() {
-    return html`
-      <div>
-        ${keyed(this.userId, html`<user-card .userId=${this.userId}></user-card>`)}
-      </div>`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 ### guard
 
