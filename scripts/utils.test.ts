@@ -27,7 +27,7 @@ describe('getMetaAndMd', () => {
 describe('createURL', () => {
   test('output', () => {
     const url = createURL('0123456789', 'name')
-    expect(url).toBe('https://japanese-document.github.io/lit/6789/name.html')
+    expect(url).toBe('https://japanese-document.github.io/lit/456789/name.html')
   })
 })
 

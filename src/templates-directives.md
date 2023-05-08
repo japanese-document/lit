@@ -2,7 +2,7 @@
 ---
 # ビルトインディレクティブ
 
-ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。
+ディレクティブを使うとエクスプレッションのレンダリング方法を変更することによってLitを拡張することができます。
 Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。
 
 <table class="directory">
@@ -632,7 +632,7 @@ class MyElement extends LitElement {
 `keyFn`が渡されなかった場合、`repeat`は単純な`map`と似た動きをします。
 その場合、DOMは違う値と関連付けられる可能性があります。
 
-詳しくは[mapとrepeatの使い分け](https://lit.dev/docs/docs/templates/lists/#when-to-use-map-or-repeat)を見てください。
+詳しくは[mapとrepeatの使い分け](https://lit.dev/docs/templates/lists/#when-to-use-map-or-repeat)を見てください。
 
 ### join
 
@@ -893,7 +893,9 @@ This can improve rendering performance when these views are frequently switched.
 ### keyed
 
 ユニークなキーとレンダリング可能な値を関連付けます。
-When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.
+キーが変更されると、
+テンプレートの内容が同じでも、
+次の値がレンダリングされる前に現行のDOMは削除されて破棄されます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -929,9 +931,10 @@ keyed(key: unknown, value: unknown)
 </tbody>
 </table>
 
-`keyed` is useful when you're rendering stateful elements and you need to ensure that all state of the element is cleared when some critical data changes. It essentially opts-out of Lit's default DOM reuse strategy.
+`keyed`はステートを持つ要素をレンダリングしていて重要なデータが変更されて要素のすべてのステートを確実にクリアする必要がある時に役立ちます。
+これは基本的にLitのデフォルトのDOMを再利用する方針とは異なります。
 
-`keyed` is also useful in some animation scenarios if you need to force a new element for "enter" or "exit" animations.
+`keyed`は新しい要素にenterやexitのアニメーションを適用にするようなCSSアニメーションを制作する際にも役立ちます。
 
 ```ts
 @customElement('my-element')
@@ -951,8 +954,8 @@ class MyElement extends LitElement {
 
 ### guard
 
-Only re-evaluates the template when one of its dependencies changes, to optimize
-rendering performance by preventing unnecessary work.
+`dependencies`が1つでも変更された場合のみテンプレートが再評価されます。
+これによってレンダリングの不要な作業を削減することでパフォーマンスが改善されます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -981,15 +984,15 @@ guard(dependencies: unknown[], valueFn: () => unknown)
 <td>使用可能な場所</td>
 <td>
 
-Any expression
+すべてのエクスプレッション
 
 </td>
 </tr>
 </tbody>
 </table>
 
-Renders the value returned by `valueFn`, and only re-evaluates `valueFn` when one of the
-dependencies changes identity.
+`valueFn`の戻り値をレンダリングします。
+そして`dependencies`が1つでも`===`で比較して変更された時だけ`valueFn`を再評価します。
 
 Where:
 
@@ -998,8 +1001,6 @@ Where:
 
 `guard` is useful with immutable data patterns, by preventing expensive work
 until data updates.
-
-{% switchable-sample %}
 
 ```ts
 @customElement('my-element')
@@ -1016,29 +1017,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  static properties = {
-    value: {},
-  };
-
-  constructor() {
-    super();
-    this.value = '';
-  }
-
-  render() {
-    return html`
-      <div>
-        ${guard([this.value], () => calculateSHA(this.value))}
-      </div>`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 In this case, the expensive `calculateSHA` function is only run when the `value` property changes.
 
