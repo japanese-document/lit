@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-directives.html" />
     <meta property="og:title" content="ビルトインディレクティブ" />
-    <meta property="og:description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        cho" />
+    <meta property="og:description" content="ディレクティブを使うとエクスプレッションのレンダリング方法を変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        c" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        cho" />
+    <meta name="description" content="ディレクティブを使うとエクスプレッションのレンダリング方法を変更することによってLitを拡張することができます。Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。  ディレクティブサマリー    スタイル        classMap      渡されたobjectに応じて要素にclass属性を割り当てます。          styleMap      渡されたobjectに応じて要素にstyle属性を割り当てます。      繰り返しと条件        when    条件に応じて渡された2つのテンプレートの内1つをレンダリングします。        c" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>ビルトインディレクティブ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -48,7 +48,7 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="ビルトインディレクティブ"><a href="#ビルトインディレクティブ">ビルトインディレクティブ</a></h1>
-<p>ディレクティブを使うとエクスプレッションのレンダリングを変更することによってLitを拡張することができます。
+<p>ディレクティブを使うとエクスプレッションのレンダリング方法を変更することによってLitを拡張することができます。
 Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。</p>
 <table class="directory">
   <tbody><tr><th>ディレクティブ</th><th>サマリー</th></tr>
@@ -571,7 +571,7 @@ class MyElement extends LitElement {
 </code></pre>
 <p><code>keyFn</code>が渡されなかった場合、<code>repeat</code>は単純な<code>map</code>と似た動きをします。
 その場合、DOMは違う値と関連付けられる可能性があります。</p>
-<p>詳しくは<a class="Link" href="https://lit.dev/docs/docs/templates/lists/#when-to-use-map-or-repeat">mapとrepeatの使い分け</a>を見てください。</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/#when-to-use-map-or-repeat">mapとrepeatの使い分け</a>を見てください。</p>
 <h3 id="join"><a href="#join">join</a></h3>
 <p><code>items</code>の各値の間に<code>joiner</code>の値を挿入したiterableを返します。</p>
 <table>
@@ -787,7 +787,9 @@ When you switch from one view to another, Lit swaps in the cached version of the
 This can improve rendering performance when these views are frequently switched.</p>
 <h3 id="keyed"><a href="#keyed">keyed</a></h3>
 <p>ユニークなキーとレンダリング可能な値を関連付けます。
-When the key changes, the previous DOM is removed and disposed before rendering the next value, even if the value—such as a template—is the same.</p>
+キーが変更されると、
+テンプレートの内容が同じでも、
+次の値がレンダリングされる前に現行のDOMは削除されて破棄されます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -817,8 +819,9 @@ When the key changes, the previous DOM is removed and disposed before rendering 
 </tbody>
 </table>
 
-<p><code>keyed</code> is useful when you're rendering stateful elements and you need to ensure that all state of the element is cleared when some critical data changes. It essentially opts-out of Lit's default DOM reuse strategy.</p>
-<p><code>keyed</code> is also useful in some animation scenarios if you need to force a new element for "enter" or "exit" animations.</p>
+<p><code>keyed</code>はステートを持つ要素をレンダリングしていて重要なデータが変更されて要素のすべてのステートを確実にクリアする必要がある時に役立ちます。
+これは基本的にLitのデフォルトのDOMを再利用する方針とは異なります。</p>
+<p><code>keyed</code>は新しい要素にenterやexitのアニメーションを適用にするようなCSSアニメーションを制作する際にも役立ちます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -834,8 +837,8 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="guard"><a href="#guard">guard</a></h3>
-<p>Only re-evaluates the template when one of its dependencies changes, to optimize
-rendering performance by preventing unnecessary work.</p>
+<p><code>dependencies</code>が1つでも変更された場合のみテンプレートが再評価されます。
+これによってレンダリングの不要な作業を削減することでパフォーマンスが改善されます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -859,14 +862,14 @@ rendering performance by preventing unnecessary work.</p>
 <td>使用可能な場所</td>
 <td>
 
-<p>Any expression</p>
+<p>すべてのエクスプレッション</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>Renders the value returned by <code>valueFn</code>, and only re-evaluates <code>valueFn</code> when one of the
-dependencies changes identity.</p>
+<p><code>valueFn</code>の戻り値をレンダリングします。
+そして<code>dependencies</code>が1つでも<code>===</code>で比較して変更された時だけ<code>valueFn</code>を再評価します。</p>
 <p>Where:</p>
 <ul>
 <li><code>dependencies</code> is an array of values to monitor for changes.</li>
@@ -874,7 +877,6 @@ dependencies changes identity.</p>
 </ul>
 <p><code>guard</code> is useful with immutable data patterns, by preventing expensive work
 until data updates.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -889,26 +891,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    value: {},
-  };
-
-  constructor() {
-    super();
-    this.value = '';
-  }
-
-  render() {
-    return html`
-      &lt;div&gt;
-        ${guard([this.value], () =&gt; calculateSHA(this.value))}
-      &lt;/div&gt;`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>In this case, the expensive <code>calculateSHA</code> function is only run when the <code>value</code> property changes.</p>
 <p>Explore <code>guard</code> more in the <a class="Link" href="/playground/#sample=examples/directive-guard">playground</a>.</p>
 <h3 id="live"><a href="#live">live</a></h3>
