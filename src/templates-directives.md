@@ -994,13 +994,12 @@ guard(dependencies: unknown[], valueFn: () => unknown)
 `valueFn`の戻り値をレンダリングします。
 そして`dependencies`が1つでも`===`で比較して変更された時だけ`valueFn`を再評価します。
 
-Where:
+引数:
 
--   `dependencies` is an array of values to monitor for changes.
--   `valueFn` is a function that returns a renderable value.
+- `dependencies`は変更を検知する対象を格納している配列です。
+- `valueFn`はレンダリング可能な値を返す関数です。
 
-`guard` is useful with immutable data patterns, by preventing expensive work
-until data updates.
+`guard` is useful with immutable data patterns, by preventing expensive work until data updates.
 
 ```ts
 @customElement('my-element')
@@ -1019,8 +1018,6 @@ class MyElement extends LitElement {
 ```
 
 In this case, the expensive `calculateSHA` function is only run when the `value` property changes.
-
-Explore `guard` more in the [playground](/playground/#sample=examples/directive-guard).
 
 ### live
 
