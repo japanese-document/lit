@@ -870,13 +870,12 @@ class MyElement extends LitElement {
 
 <p><code>valueFn</code>の戻り値をレンダリングします。
 そして<code>dependencies</code>が1つでも<code>===</code>で比較して変更された時だけ<code>valueFn</code>を再評価します。</p>
-<p>Where:</p>
+<p>引数:</p>
 <ul>
-<li><code>dependencies</code> is an array of values to monitor for changes.</li>
-<li><code>valueFn</code> is a function that returns a renderable value.</li>
+<li><code>dependencies</code>は変更を検知する対象を格納している配列です。</li>
+<li><code>valueFn</code>はレンダリング可能な値を返す関数です。</li>
 </ul>
-<p><code>guard</code> is useful with immutable data patterns, by preventing expensive work
-until data updates.</p>
+<p><code>guard</code> is useful with immutable data patterns, by preventing expensive work until data updates.</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -892,7 +891,6 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>In this case, the expensive <code>calculateSHA</code> function is only run when the <code>value</code> property changes.</p>
-<p>Explore <code>guard</code> more in the <a class="Link" href="/playground/#sample=examples/directive-guard">playground</a>.</p>
 <h3 id="live"><a href="#live">live</a></h3>
 <p>Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.</p>
 <table>
