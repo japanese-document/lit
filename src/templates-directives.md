@@ -1068,10 +1068,10 @@ Litのデフォルトの動作ではエクスプレッションに最後にセ�
 この`value`プロパティはユーザの入力によって編集可能であり、
 custom elementの側でもそのプロパティもしくは属性を変更する場合です。
 
-In these cases if the DOM value changes, but the value set through Lit
-expression hasn't, Lit won't know to update the DOM value and will leave it
-alone. If this is not what you want—if you want to overwrite the DOM value with
-the bound value no matter what—use the `live()` directive.
+In these cases if the DOM value changes,
+but the value set through Lit expression hasn't,
+Lit won't know to update the DOM value and will leave it alone.
+If this is not what you want—if you want to overwrite the DOM value with the bound value no matter what—use the `live()` directive.
 
 ```ts
 @customElement('my-element')
