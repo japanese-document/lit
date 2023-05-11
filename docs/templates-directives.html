@@ -931,10 +931,10 @@ Litのデフォルトの動作ではエクスプレッションに最後にセ�
 <code>&lt;input&gt;</code>要素の<code>value</code>プロパティの値をセットするエクスプレッションが配置され、
 この<code>value</code>プロパティはユーザの入力によって編集可能であり、
 custom elementの側でもそのプロパティもしくは属性を変更する場合です。</p>
-<p>In these cases if the DOM value changes, but the value set through Lit
-expression hasn't, Lit won't know to update the DOM value and will leave it
-alone. If this is not what you want—if you want to overwrite the DOM value with
-the bound value no matter what—use the <code>live()</code> directive.</p>
+<p>In these cases if the DOM value changes,
+but the value set through Lit expression hasn't,
+Lit won't know to update the DOM value and will leave it alone.
+If this is not what you want—if you want to overwrite the DOM value with the bound value no matter what—use the <code>live()</code> directive.</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 

@@ -81,6 +81,10 @@ a {
   color: initial;
 }
 
+table {
+  border-collapse: collapse;
+}
+
 /* index-menu */
 
 .index-menu {
