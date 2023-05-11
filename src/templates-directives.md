@@ -1021,7 +1021,7 @@ class MyElement extends LitElement {
 
 ### live
 
-Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.
+属性やプロパティの値が(最後のレンダリング時の値ではなく)現行のDOMの値と異なる場合、属性やプロパティに値をセットします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1050,28 +1050,28 @@ live(value: unknown)
 <td>使用可能な場所</td>
 <td>
 
-Attribute or property expression
+[Attribute expression](https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions)もしくは[Property expression](https://japanese-document.github.io/lit/templates-expressions.html#Property_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-When determining whether to update the value, checks the expression value
-against the _live_ DOM value, instead of Lit's default behavior of checking
-against the last set value.
+属性やプロパティの値を更新するかの判断は、
+Litのデフォルトの動作ではエクスプレッションに最後にセットされた値と比較します。
+`live`を使うと現行のDOMの属性やプロパティの値と比較します。
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-live)を見てください。
 
-This is useful for cases where the DOM value may change from outside of Lit. For
-example, when using an expression to set an `<input>` element's `value`
-property, a content editable element's text, or to a custom element that changes
-its own properties or attributes.
+これはDOMの値がLitの外部から変更される可能性がある場合に役立ちます。
+例えば、
+`<input>`要素の`value`プロパティの値をセットするエクスプレッションが配置され、
+この`value`プロパティはユーザの入力によって編集可能であり、
+custom elementの側でもそのプロパティもしくは属性を変更する場合です。
 
 In these cases if the DOM value changes, but the value set through Lit
 expression hasn't, Lit won't know to update the DOM value and will leave it
 alone. If this is not what you want—if you want to overwrite the DOM value with
 the bound value no matter what—use the `live()` directive.
-
-{% switchable-sample %}
 
 ```ts
 @customElement('my-element')
@@ -1085,26 +1085,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  static properties = {
-    data: {},
-  };
-
-  constructor() {
-    super();
-    this.data = {value: 'test'};
-  }
-
-  render() {
-    return html`<input .value=${live(this.data.value)}>`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 `live()` performs a strict equality check against the live DOM value, and if
 the new value is equal to the live value, does nothing. This means that
