@@ -875,7 +875,7 @@ class MyElement extends LitElement {
 <li><code>dependencies</code>は変更を検知する対象を格納している配列です。</li>
 <li><code>valueFn</code>はレンダリング可能な値を返す関数です。</li>
 </ul>
-<p><code>guard</code> is useful with immutable data patterns, by preventing expensive work until data updates.</p>
+<p><code>guard</code>はデータが変更されるまで高コストの処理を行わないイミュータブルデータパターンに利用することができます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -890,7 +890,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>In this case, the expensive <code>calculateSHA</code> function is only run when the <code>value</code> property changes.</p>
+<p>上記のケースでは、<code>value</code>プロパティが変更された時のみ高コストの<code>calculateSHA</code>関数を実行します。</p>
 <h3 id="live"><a href="#live">live</a></h3>
 <p>Sets an attribute or property if it differs from the live DOM value rather than the last-rendered value.</p>
 <table>

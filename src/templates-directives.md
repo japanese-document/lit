@@ -999,7 +999,7 @@ guard(dependencies: unknown[], valueFn: () => unknown)
 - `dependencies`は変更を検知する対象を格納している配列です。
 - `valueFn`はレンダリング可能な値を返す関数です。
 
-`guard` is useful with immutable data patterns, by preventing expensive work until data updates.
+`guard`はデータが変更されるまで高コストの処理を行わないイミュータブルデータパターンに利用することができます。
 
 ```ts
 @customElement('my-element')
@@ -1017,7 +1017,7 @@ class MyElement extends LitElement {
 }
 ```
 
-In this case, the expensive `calculateSHA` function is only run when the `value` property changes.
+上記のケースでは、`value`プロパティが変更された時のみ高コストの`calculateSHA`関数を実行します。
 
 ### live
 
