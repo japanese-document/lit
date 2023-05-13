@@ -931,10 +931,9 @@ Litのデフォルトの動作ではエクスプレッションに最後にセ�
 <code>&lt;input&gt;</code>要素の<code>value</code>プロパティの値をセットするエクスプレッションが配置され、
 この<code>value</code>プロパティはユーザの入力によって編集可能であり、
 custom elementの側でもそのプロパティもしくは属性を変更する場合です。</p>
-<p>In these cases if the DOM value changes,
-but the value set through Lit expression hasn't,
-Lit won't know to update the DOM value and will leave it alone.
-If this is not what you want—if you want to overwrite the DOM value with the bound value no matter what—use the <code>live()</code> directive.</p>
+<p>DOM上の値が変化したがエクスプレッションでセットされた値が変化していない場合、
+LitはそのDOM上の値が変化したことを検知することができません。DOM上の値はエクスプレッションでセットされている値で上書きされません。
+この挙動を変えたい場合(常にエクスプレッションにセットされた値で上書きしたい場合)は<code>live()</code>ディレクティブを使います。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -946,12 +945,9 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p><code>live()</code> performs a strict equality check against the live DOM value, and if
-the new value is equal to the live value, does nothing. This means that
-<code>live()</code> should not be used when the expression will cause a type conversion. If
-you use <code>live()</code> with an attribute expression, make sure that only strings are
-passed in, or the expression will update every render.</p>
-<p>Explore <code>live</code> more in the <a class="Link" href="/playground/#sample=examples/directive-live">playground</a>.</p>
+<p><code>live()</code> performs a strict equality check against the live DOM value, and if the new value is equal to the live value, does nothing.
+This means that <code>live()</code> should not be used when the expression will cause a type conversion.
+If you use <code>live()</code> with an attribute expression, make sure that only strings are passed in, or the expression will update every render.</p>
 <h2 id="特殊な値のレンダリング"><a href="#特殊な値のレンダリング">特殊な値のレンダリング</a></h2>
 <h3 id="templateContent"><a href="#templateContent">templateContent</a></h3>
 <p>Renders the content of a <code>&lt;template&gt;</code> element.</p>
