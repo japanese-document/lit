@@ -1068,10 +1068,9 @@ Litのデフォルトの動作ではエクスプレッションに最後にセ�
 この`value`プロパティはユーザの入力によって編集可能であり、
 custom elementの側でもそのプロパティもしくは属性を変更する場合です。
 
-In these cases if the DOM value changes,
-but the value set through Lit expression hasn't,
-Lit won't know to update the DOM value and will leave it alone.
-If this is not what you want—if you want to overwrite the DOM value with the bound value no matter what—use the `live()` directive.
+DOM上の値が変化したがエクスプレッションでセットされた値が変化していない場合、
+LitはそのDOM上の値が変化したことを検知することができません。DOM上の値はエクスプレッションでセットされている値で上書きされません。
+この挙動を変えたい場合(常にエクスプレッションにセットされた値で上書きしたい場合)は`live()`ディレクティブを使います。
 
 ```ts
 @customElement('my-element')
@@ -1086,14 +1085,9 @@ class MyElement extends LitElement {
 }
 ```
 
-`live()` performs a strict equality check against the live DOM value, and if
-the new value is equal to the live value, does nothing. This means that
-`live()` should not be used when the expression will cause a type conversion. If
-you use `live()` with an attribute expression, make sure that only strings are
-passed in, or the expression will update every render.
-
-Explore `live` more in the [playground](/playground/#sample=examples/directive-live).
-
+`live()` performs a strict equality check against the live DOM value, and if the new value is equal to the live value, does nothing.
+This means that `live()` should not be used when the expression will cause a type conversion.
+If you use `live()` with an attribute expression, make sure that only strings are passed in, or the expression will update every render.
 
 ## 特殊な値のレンダリング
 
