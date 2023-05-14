@@ -945,9 +945,9 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p><code>live()</code> performs a strict equality check against the live DOM value, and if the new value is equal to the live value, does nothing.
-This means that <code>live()</code> should not be used when the expression will cause a type conversion.
-If you use <code>live()</code> with an attribute expression, make sure that only strings are passed in, or the expression will update every render.</p>
+<p><code>live()</code>は現行のDOMの値と渡された値を<code>===</code>で比較します。そして、それらが等しい場合は何もしません。
+つまり、エクスプレッションが型を変換するような場合は<code>live()</code>を使うべきではありません。
+<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions">Attribute expression</a>に対する<code>live()</code>には文字列のみを渡してください。そうしないとエクスプレッションは常にレンダリング毎に更新を発生させます。</p>
 <h2 id="特殊な値のレンダリング"><a href="#特殊な値のレンダリング">特殊な値のレンダリング</a></h2>
 <h3 id="templateContent"><a href="#templateContent">templateContent</a></h3>
 <p>Renders the content of a <code>&lt;template&gt;</code> element.</p>
@@ -974,7 +974,7 @@ If you use <code>live()</code> with an attribute expression, make sure that only
 <td>使用可能な場所</td>
 <td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
@@ -994,7 +994,6 @@ string parameters and values from user inputs. Untrusted templates rendered with
 this directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
 </div>
 
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
 
 @customElement('my-element')
@@ -1007,20 +1006,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">const templateEl = document.querySelector('template#myContent');
-
-class MyElement extends LitElement {
-
-  render() {
-    return  html`
-      Here's some content from a template element:
-      ${templateContent(templateEl)}`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>Explore <code>templateContent</code> more in the <a class="Link" href="/playground/#sample=examples/directive-template-content">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-template-content">こちら</a>を見てください。</p>
 <h3 id="unsafeHTML"><a href="#unsafeHTML">unsafeHTML</a></h3>
 <p>Renders a string as HTML rather than text.</p>
 <table>
