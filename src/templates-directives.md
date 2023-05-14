@@ -1085,9 +1085,9 @@ class MyElement extends LitElement {
 }
 ```
 
-`live()` performs a strict equality check against the live DOM value, and if the new value is equal to the live value, does nothing.
-This means that `live()` should not be used when the expression will cause a type conversion.
-If you use `live()` with an attribute expression, make sure that only strings are passed in, or the expression will update every render.
+`live()`は現行のDOMの値と渡された値を`===`で比較します。そして、それらが等しい場合は何もしません。
+つまり、エクスプレッションが型を変換するような場合は`live()`を使うべきではありません。
+[Attribute expression](https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions)に対する`live()`には文字列のみを渡してください。そうしないとエクスプレッションは常にレンダリング毎に更新を発生させます。
 
 ## 特殊な値のレンダリング
 
@@ -1122,7 +1122,7 @@ templateContent(templateElement: HTMLTemplateElement)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
@@ -1145,8 +1145,6 @@ this directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.o
 
 </div>
 
-{% switchable-sample %}
-
 ```ts
 const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
 
@@ -1161,23 +1159,7 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-const templateEl = document.querySelector('template#myContent');
-
-class MyElement extends LitElement {
-
-  render() {
-    return  html`
-      Here's some content from a template element:
-      ${templateContent(templateEl)}`;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
-Explore `templateContent` more in the [playground](/playground/#sample=examples/directive-template-content).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-template-content)を見てください。
 
 ### unsafeHTML
 
