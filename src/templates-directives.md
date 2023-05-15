@@ -1093,7 +1093,7 @@ class MyElement extends LitElement {
 
 ### templateContent
 
-Renders the content of a `<template>` element.
+`<template>`要素のコンテンツをレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1129,21 +1129,15 @@ templateContent(templateElement: HTMLTemplateElement)
 </tbody>
 </table>
 
-Lit templates are encoded in Javascript, so that they can embed Javascript
-expressions that make them dynamic. If you have a static HTML `<template>` that
-you need to include in your Lit template, you can use the `templateContent`
-directive to clone the template content and include it in your Lit template. As
-long as the template element reference does not change between renders,
-subsequent renders will no-op.
+LitテンプレートはJavaScript内でエンコードされます。
+だから、それにJavaScriptのエクスプレッションを埋め込むことでそれを動的にすることができます。
+Liテンプレートに静的な`<template>`要素を組み込みたい場合、`templateContent`ディレクティブを使います。
+`templateContent`ディレクティブはテンプレートのコンテンツを複製します。そして、それをLitテンプレートに組み込みます。
+template要素の参照が1つ前のレンダリング時と変わらない限り、その後のレンダリングでは何もしません。
 
-<div class="alert alert-warning">
-
-Note, the template content should be developer-controlled and must not be
-created using an untrusted string. Examples of untrusted content include query
-string parameters and values from user inputs. Untrusted templates rendered with
-this directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
-
-</div>
+template要素のコンテンツは見ず知らずの人が作成した信頼できない文字列が含まれないように注意してください。
+信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
+信頼できないtemplate要素のコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
@@ -1163,7 +1157,7 @@ class MyElement extends LitElement {
 
 ### unsafeHTML
 
-Renders a string as HTML rather than text.
+文字列をテキストではなくHTMLとしてレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1192,31 +1186,22 @@ unsafeHTML(value: string | typeof nothing | typeof noChange)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-A key feature of Lit's templating syntax is that only strings originating in
-template literals are parsed as HTML. Because template literals can only be
-authored in trusted script files, this acts as a natural safeguard against XSS
-attacks injecting untrusted HTML. However, there may be cases when HTML not
-originating in script files needs to be rendered in a Lit template, for example
-trusted HTML content fetched from a database. The `unsafeHTML` directive will
-parse such a string as HTML and render it in a Lit template.
+A key feature of Lit's templating syntax is that only strings originating in template literals are parsed as HTML.
+Because template literals can only be authored in trusted script files, this acts as a natural safeguard against XSS attacks injecting untrusted HTML.
+However, there may be cases when HTML not originating in script files needs to be rendered in a Lit template, for example
+trusted HTML content fetched from a database.
+The `unsafeHTML` directive will parse such a string as HTML and render it in a Lit template.
 
-<div class="alert alert-warning">
-
-Note, the string passed to `unsafeHTML` must be developer-controlled and not
-include untrusted content. Examples of untrusted content include query string
-parameters and values from user inputs. Untrusted content rendered with this
-directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
-
-</div>
-
-{% switchable-sample %}
+Note, the string passed to `unsafeHTML` must be developer-controlled and not include untrusted content.
+Examples of untrusted content include query string parameters and values from user inputs.
+信頼できないコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const markup = '<h3>Some HTML to render.</h3>';
@@ -1233,25 +1218,7 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-const markup = '<h3>Some HTML to render.</h3>';
-
-class MyElement extends LitElement {
-
-  render() {
-    return html`
-      Look out, potentially unsafe HTML ahead:
-      ${unsafeHTML(markup)}
-    `;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
-
-Explore `unsafeHTML` more in the [playground](/playground/#sample=examples/directive-unsafe-html).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-unsafe-html)を見てください。
 
 ### unsafeSVG
 
