@@ -1193,11 +1193,12 @@ unsafeHTML(value: string | typeof nothing | typeof noChange)
 </tbody>
 </table>
 
-A key feature of Lit's templating syntax is that only strings originating in template literals are parsed as HTML.
-Because template literals can only be authored in trusted script files, this acts as a natural safeguard against XSS attacks injecting untrusted HTML.
-However, there may be cases when HTML not originating in script files needs to be rendered in a Lit template, for example
-trusted HTML content fetched from a database.
-The `unsafeHTML` directive will parse such a string as HTML and render it in a Lit template.
+Litのテンプレートシンタックスの重要な特徴はテンプレートリテラル内の文字列のみがHTMLとしてパースされます。
+テンプレートリテラルは信頼することができるスクリプトファイル内でのみ記述することができるので、
+これは信頼できないHTMLが混入することから生じるXSSに対する根本的な対策です。
+しかし、スクリプトファイル以外から得たHTMLをLitテンプレート内でレンダリングする必要がある場合もあるかもしれません。
+例えば、データベースからfetchした信頼できるHTMLをレンダリングする場合です。
+`unsafeHTML`ディレクティブはそのような文字列をHTMLとしてパースします。そして、それをLitテンプレートでレンダリングします。
 
 Note, the string passed to `unsafeHTML` must be developer-controlled and not include untrusted content.
 Examples of untrusted content include query string parameters and values from user inputs.
