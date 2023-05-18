@@ -655,7 +655,7 @@ range(
 <td>使用可能な場所</td>
 <td>
 
-<p>Any</p>
+<p>どこでも</p>
 </td>
 </tr>
 </tbody>
@@ -1032,14 +1032,14 @@ class MyElement extends LitElement {
 </tbody>
 </table>
 
-<p>Litのテンプレートシンタックスの重要な特徴はテンプレートリテラル内の文字列のみがHTMLとしてパースされます。
+<p>Litのテンプレートシンタックスの重要な特徴はテンプレートリテラル内の文字列のみがHTMLとしてパースされることです。
 テンプレートリテラルは信頼することができるスクリプトファイル内でのみ記述することができるので、
-これは信頼できないHTMLが混入することから生じるXSSに対する根本的な対策です。
+これは信頼することができないHTMLが混入することから生じるXSSに対する根本的な対策です。
 しかし、スクリプトファイル以外から得たHTMLをLitテンプレート内でレンダリングする必要がある場合もあるかもしれません。
 例えば、データベースからfetchした信頼できるHTMLをレンダリングする場合です。
 <code>unsafeHTML</code>ディレクティブはそのような文字列をHTMLとしてパースします。そして、それをLitテンプレートでレンダリングします。</p>
-<p>Note, the string passed to <code>unsafeHTML</code> must be developer-controlled and not include untrusted content.
-Examples of untrusted content include query string parameters and values from user inputs.
+<p><code>unsafeHTML</code>渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
+信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
 信頼できないコンテンツをこのディレクディブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
 <pre><code class="language-ts">const markup = '&lt;h3&gt;Some HTML to render.&lt;/h3&gt;';
 
@@ -1056,7 +1056,7 @@ class MyElement extends LitElement {
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-unsafe-html">こちら</a>を見てください。</p>
 <h3 id="unsafeSVG"><a href="#unsafeSVG">unsafeSVG</a></h3>
-<p>Renders a string as SVG rather than text.</p>
+<p>文字列をテキストではなくSVGとしてレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1080,25 +1080,19 @@ class MyElement extends LitElement {
 <td>使用可能な場所</td>
 <td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>Similar to with <a class="Link" href="#unsafeHTML"><code>unsafeHTML</code></a>, there may be cases when SVG content
-not originating in script files needs to be rendered in a Lit template, for
-example trusted SVG content fetched from a database. The <code>unsafeSVG</code> directive
-will parse such a string as SVG and render it in a Lit template.</p>
-<div class="alert alert-warning">
-
-<p>Note, the string passed to <code>unsafeSVG</code> must be developer-controlled and not
-include untrusted content. Examples of untrusted content include query string
-parameters and values from user inputs. Untrusted content rendered with this
-directive could lead to <a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerabilities.</p>
-</div>
-
-<p>{% switchable-sample %}</p>
+<p><a class="Link" href="#unsafeHTML"><code>unsafeHTML</code></a>に似ています。
+しかし、スクリプトファイル以外から得たSVGをLitテンプレート内でレンダリングする必要がある場合もあるかもしれません。
+例えば、データベースからfetchした信頼できるSVGをレンダリングする場合です。
+<code>unsafeSVG</code>ディレクティブはそのような文字列をSVGとしてパースします。そして、それをLitテンプレートでレンダリングします。</p>
+<p><code>unsafeSVG</code>渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
+信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
+信頼できないコンテンツをこのディレクディブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
 <pre><code class="language-ts">const svg = '&lt;circle cx="50" cy="50" r="40" fill="red" /&gt;';
 
 @customElement('my-element')
@@ -1114,26 +1108,10 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">const svg = '&lt;circle cx="50" cy="50" r="40" fill="red" /&gt;';
-
-class MyElement extends LitElement {
-
-  render() {
-    return html`
-      Look out, potentially unsafe SVG ahead:
-      &lt;svg width="40" height="40" viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
-        ${unsafeSVG(svg)}
-      &lt;/svg&gt; `;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
-<p>Explore <code>unsafeSVG</code> more in the <a class="Link" href="/playground/#sample=examples/directive-unsafe-svg">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-unsafe-svg">こちら</a>を見てください。</p>
 <h2 id="レンダリングされたDOMの参照"><a href="#レンダリングされたDOMの参照">レンダリングされたDOMの参照</a></h2>
 <h3 id="ref"><a href="#ref">ref</a></h3>
-<p>Retrieves a reference to an element rendered into the DOM.</p>
+<p>DOMにレンダリングされた１つの要素への参照を取得します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1157,25 +1135,24 @@ customElements.define('my-element', MyElement);
 <td>使用可能な場所</td>
 <td>
 
-<p>Element expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Element_expressions">Element expression</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>Although most DOM manipulation in Lit can be achieved declaratively using
-templates, advanced situations may required getting a reference to an element
-rendered in the template and manipulating it imperatively. Common examples of
-when this may be useful include focusing a form control or calling an imperative
-DOM manipulation library on a container element.</p>
-<p>When placed on an element in the template, the <code>ref</code> directive will retrieve a
-reference to that element once rendered. The element reference may be retrieved
-in one of two ways: either by passing a <code>Ref</code> object or by passing a callback.</p>
-<p>A <code>Ref</code> object acts as a container for a reference to the element, and can be
-created using the <code>createRef</code> helper method found in the <code>ref</code> module. After
-rendering, the <code>Ref</code>'s <code>value</code> property will be set to the element, where it
-can be accessed in post-render lifecycle like <code>updated</code>.</p>
-<p>{% switchable-sample %}</p>
+<p>LitでのほとんどのDOMの操作はテンプレートを使って宣言的に行うことができます。
+しかし、テンプレート内のレンダリングされた要素の参照を取得して、それを命令的に操作したい場合があるかもしれません。
+これの一般的な例は、フォーム内のコントロールにフォーカスを当てることやコンテナ要素上で命令的なDOM操作をするライブラリを実行することです。</p>
+<p>テンプレートの要素上に配置すると、
+<code>ref</code>ディレクティブはレンダリング直後にその要素の参照を取得します。
+要素の参照をする方法は2つあります。
+それは<code>Ref</code>オブジェクトを渡す方法とコールバック関数を渡す方法です。</p>
+<p>A <code>Ref</code> object acts as a container for a reference to the element,
+and can be created using the <code>createRef</code> helper method found in the <code>ref</code> module.
+After rendering,
+the <code>Ref</code>'s <code>value</code> property will be set to the element,
+where it can be accessed in post-render lifecycle like <code>updated</code>.</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1192,30 +1169,12 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-
-  inputRef = createRef();
-
-  render() {
-    // Passing ref directive a Ref object that will hold the element in .value
-    return html`&lt;input ${ref(this.inputRef)}&gt;`;
-  }
-
-  firstUpdated() {
-    const input = this.inputRef.value!;
-    input.focus();
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>A ref callback can also be passed to the <code>ref</code> directive. The callback will be
 called each time the referenced element changes.  If a ref callback is
 rendered to a different element position or is removed in a subsequent render,
 it will first be called with <code>undefined</code>, followed by another call with the new
 element it was rendered to (if any). Note that in a <code>LitElement</code>, the callback
 will be called bound to the host element automatically.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1229,20 +1188,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-
-  render() {
-    // Passing ref directive a change callback
-    return html`&lt;input ${ref(this.inputChanged)}&gt;`;
-  }
-
-  inputChanged(input) {
-    input?.focus();
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Explore <code>ref</code> more in the <a class="Link" href="/playground/#sample=examples/directive-ref">playground</a>.</p>
 <h2 id="非同期レンダリング"><a href="#非同期レンダリング">非同期レンダリング</a></h2>
 <h3 id="until"><a href="#until">until</a></h3>
