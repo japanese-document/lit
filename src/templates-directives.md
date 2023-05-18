@@ -733,7 +733,7 @@ range(
 <td>使用可能な場所</td>
 <td>
 
-Any
+どこでも
 
 </td>
 </tr>
@@ -1193,15 +1193,15 @@ unsafeHTML(value: string | typeof nothing | typeof noChange)
 </tbody>
 </table>
 
-Litのテンプレートシンタックスの重要な特徴はテンプレートリテラル内の文字列のみがHTMLとしてパースされます。
+Litのテンプレートシンタックスの重要な特徴はテンプレートリテラル内の文字列のみがHTMLとしてパースされることです。
 テンプレートリテラルは信頼することができるスクリプトファイル内でのみ記述することができるので、
-これは信頼できないHTMLが混入することから生じるXSSに対する根本的な対策です。
+これは信頼することができないHTMLが混入することから生じるXSSに対する根本的な対策です。
 しかし、スクリプトファイル以外から得たHTMLをLitテンプレート内でレンダリングする必要がある場合もあるかもしれません。
 例えば、データベースからfetchした信頼できるHTMLをレンダリングする場合です。
 `unsafeHTML`ディレクティブはそのような文字列をHTMLとしてパースします。そして、それをLitテンプレートでレンダリングします。
 
-Note, the string passed to `unsafeHTML` must be developer-controlled and not include untrusted content.
-Examples of untrusted content include query string parameters and values from user inputs.
+`unsafeHTML`渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
+信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
 信頼できないコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
@@ -1223,7 +1223,7 @@ class MyElement extends LitElement {
 
 ### unsafeSVG
 
-Renders a string as SVG rather than text.
+文字列をテキストではなくSVGとしてレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1252,28 +1252,21 @@ unsafeSVG(value: string | typeof nothing | typeof noChange)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-Similar to with [`unsafeHTML`](#unsafeHTML), there may be cases when SVG content
-not originating in script files needs to be rendered in a Lit template, for
-example trusted SVG content fetched from a database. The `unsafeSVG` directive
-will parse such a string as SVG and render it in a Lit template.
+[`unsafeHTML`](#unsafeHTML)に似ています。
+しかし、スクリプトファイル以外から得たSVGをLitテンプレート内でレンダリングする必要がある場合もあるかもしれません。
+例えば、データベースからfetchした信頼できるSVGをレンダリングする場合です。
+`unsafeSVG`ディレクティブはそのような文字列をSVGとしてパースします。そして、それをLitテンプレートでレンダリングします。
 
-<div class="alert alert-warning">
-
-Note, the string passed to `unsafeSVG` must be developer-controlled and not
-include untrusted content. Examples of untrusted content include query string
-parameters and values from user inputs. Untrusted content rendered with this
-directive could lead to [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerabilities.
-
-</div>
-
-{% switchable-sample %}
+`unsafeSVG`渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
+信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
+信頼できないコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const svg = '<circle cx="50" cy="50" r="40" fill="red" />';
@@ -1292,33 +1285,14 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-const svg = '<circle cx="50" cy="50" r="40" fill="red" />';
-
-class MyElement extends LitElement {
-
-  render() {
-    return html`
-      Look out, potentially unsafe SVG ahead:
-      <svg width="40" height="40" viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg" version="1.1">
-        ${unsafeSVG(svg)}
-      </svg> `;
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
-Explore `unsafeSVG` more in the [playground](/playground/#sample=examples/directive-unsafe-svg).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-unsafe-svg)を見てください。
 
 
 ## レンダリングされたDOMの参照
 
 ### ref
 
-Retrieves a reference to an element rendered into the DOM.
+DOMにレンダリングされた１つの要素への参照を取得します。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1347,29 +1321,27 @@ ref(refOrCallback: RefOrCallback)
 <td>使用可能な場所</td>
 <td>
 
-Element expression
+[Element expression](https://japanese-document.github.io/lit/templates-expressions.html#Element_expressions)
 
 </td>
 </tr>
 </tbody>
 </table>
 
-Although most DOM manipulation in Lit can be achieved declaratively using
-templates, advanced situations may required getting a reference to an element
-rendered in the template and manipulating it imperatively. Common examples of
-when this may be useful include focusing a form control or calling an imperative
-DOM manipulation library on a container element.
+LitでのほとんどのDOMの操作はテンプレートを使って宣言的に行うことができます。
+しかし、テンプレート内のレンダリングされた要素の参照を取得して、それを命令的に操作したい場合があるかもしれません。
+これの一般的な例は、フォーム内のコントロールにフォーカスを当てることやコンテナ要素上で命令的なDOM操作をするライブラリを実行することです。
 
-When placed on an element in the template, the `ref` directive will retrieve a
-reference to that element once rendered. The element reference may be retrieved
-in one of two ways: either by passing a `Ref` object or by passing a callback.
+テンプレートの要素上に配置すると、
+`ref`ディレクティブはレンダリング直後にその要素の参照を取得します。
+要素の参照をする方法は2つあります。
+それは`Ref`オブジェクトを渡す方法とコールバック関数を渡す方法です。
 
-A `Ref` object acts as a container for a reference to the element, and can be
-created using the `createRef` helper method found in the `ref` module. After
-rendering, the `Ref`'s `value` property will be set to the element, where it
-can be accessed in post-render lifecycle like `updated`.
-
-{% switchable-sample %}
+A `Ref` object acts as a container for a reference to the element,
+and can be created using the `createRef` helper method found in the `ref` module.
+After rendering,
+the `Ref`'s `value` property will be set to the element,
+where it can be accessed in post-render lifecycle like `updated`.
 
 ```ts
 @customElement('my-element')
@@ -1389,34 +1361,12 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-class MyElement extends LitElement {
-
-  inputRef = createRef();
-
-  render() {
-    // Passing ref directive a Ref object that will hold the element in .value
-    return html`<input ${ref(this.inputRef)}>`;
-  }
-
-  firstUpdated() {
-    const input = this.inputRef.value!;
-    input.focus();
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
-
 A ref callback can also be passed to the `ref` directive. The callback will be
 called each time the referenced element changes.  If a ref callback is
 rendered to a different element position or is removed in a subsequent render,
 it will first be called with `undefined`, followed by another call with the new
 element it was rendered to (if any). Note that in a `LitElement`, the callback
 will be called bound to the host element automatically.
-
-{% switchable-sample %}
 
 ```ts
 @customElement('my-element')
@@ -1432,23 +1382,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-
-  render() {
-    // Passing ref directive a change callback
-    return html`<input ${ref(this.inputChanged)}>`;
-  }
-
-  inputChanged(input) {
-    input?.focus();
-  }
-}
-customElements.define('my-element', MyElement);
-```
-
-{% endswitchable-sample %}
 
 Explore `ref` more in the [playground](/playground/#sample=examples/directive-ref).
 
