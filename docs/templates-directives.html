@@ -1152,9 +1152,7 @@ class MyElement extends LitElement {
 <code>Ref</code>オブジェクトは<code>ref</code>モジュールの<a class="Link" href="https://lit.dev/docs/api/directives/#createRef">createRef</a>関数を使って生成します。
 <code>updated</code>のようなレンダリング後のライフサイクルで、
 <code>Ref</code>オブジェクトの<code>value</code>プロパティに要素がセットされていて使用することができます。</p>
-<pre><code class="language-ts">import { createRef, ref } from 'lit/directives/ref.js';
-
-@customElement('my-element')
+<pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
   inputRef: Ref&lt;HTMLInputElement&gt; = createRef();
@@ -1170,16 +1168,17 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>A <code>ref</code> callback can also be passed to the <code>ref</code> directive.
-The callback will be called each time the referenced element changes.
-If a <code>ref</code> callback is rendered to a different element position or is removed in a subsequent render,
-it will first be called with <code>undefined</code>, followed by another call with the new element it was rendered to (if any).
-Note that in a <code>LitElement</code>, the callback will be called bound to the host element automatically.</p>
+<p>コールバック関数を<code>ref</code>ディレクティブに渡すことができます。
+参照される要素が変更される度、コールバック関数が実行されます。
+コールバックが別の要素上でレンダリングされたり、その後のレンダリングで削除された場合、
+その後の最初の1回は<code>undefined</code>が渡されて実行されます。
+その後に新しい要素に付与した場合はその要素を渡したコールバック関数が実行されます。
+<code>LitElement</code>では、refディレクティブに渡されたコールバック関数は自動的にhost要素がbindされることに注意してください。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
   render() {
-    // Passing ref directive a change callback
+    // refディレクティブにchangeコールバックを渡します。
     return html`&lt;input ${ref(this.inputChanged)}&gt;`;
   }
 
@@ -1215,15 +1214,16 @@ class MyElement extends LitElement {
 <td>使用可能な場所</td>
 <td>
 
-<p>Any expression</p>
+<p>すべてのエクスプレッション</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p>Takes a series of values, including Promises. Values are rendered in priority order,
-with the first argument having the highest priority and the last argument having the
-lowest priority. If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
+<p>Takes a series of values, including Promises.
+Values are rendered in priority order,
+with the first argument having the highest priority and the last argument having the lowest priority.
+If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
 <p>The priority of values can be used to create placeholder content for async
 data. For example, a Promise with pending content can be the first
 (highest-priority) argument, and a non-promise loading indicator template can
@@ -1267,7 +1267,7 @@ class MyElement extends LitElement {
 <td>使用可能な場所</td>
 <td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
@@ -1319,7 +1319,7 @@ class MyElement extends LitElement {
 <td>使用可能な場所</td>
 <td>
 
-<p>Child expression</p>
+<p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions">Child expression</a></p>
 </td>
 </tr>
 </tbody>
