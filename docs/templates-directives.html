@@ -1148,18 +1148,19 @@ class MyElement extends LitElement {
 <code>ref</code>ディレクティブはレンダリング直後にその要素の参照を取得します。
 要素の参照をする方法は2つあります。
 それは<code>Ref</code>オブジェクトを渡す方法とコールバック関数を渡す方法です。</p>
-<p>A <code>Ref</code> object acts as a container for a reference to the element,
-and can be created using the <code>createRef</code> helper method found in the <code>ref</code> module.
-After rendering,
-the <code>Ref</code>'s <code>value</code> property will be set to the element,
-where it can be accessed in post-render lifecycle like <code>updated</code>.</p>
-<pre><code class="language-ts">@customElement('my-element')
+<p><code>Ref</code>オブジェクトは要素の参照のコンテナの役割を果たします。
+<code>Ref</code>オブジェクトは<code>ref</code>モジュールの<a class="Link" href="https://lit.dev/docs/api/directives/#createRef">createRef</a>関数を使って生成します。
+<code>updated</code>のようなレンダリング後のライフサイクルで、
+<code>Ref</code>オブジェクトの<code>value</code>プロパティに要素がセットされていて使用することができます。</p>
+<pre><code class="language-ts">import { createRef, ref } from 'lit/directives/ref.js';
+
+@customElement('my-element')
 class MyElement extends LitElement {
 
   inputRef: Ref&lt;HTMLInputElement&gt; = createRef();
 
   render() {
-    // Passing ref directive a Ref object that will hold the element in .value
+    // refディレクティブにRefオブジェクトを渡します。Refオブジェクトのvalueプロパティに要素が格納されます。
     return html`&lt;input ${ref(this.inputRef)}&gt;`;
   }
 
@@ -1169,12 +1170,11 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>A ref callback can also be passed to the <code>ref</code> directive. The callback will be
-called each time the referenced element changes.  If a ref callback is
-rendered to a different element position or is removed in a subsequent render,
-it will first be called with <code>undefined</code>, followed by another call with the new
-element it was rendered to (if any). Note that in a <code>LitElement</code>, the callback
-will be called bound to the host element automatically.</p>
+<p>A <code>ref</code> callback can also be passed to the <code>ref</code> directive.
+The callback will be called each time the referenced element changes.
+If a <code>ref</code> callback is rendered to a different element position or is removed in a subsequent render,
+it will first be called with <code>undefined</code>, followed by another call with the new element it was rendered to (if any).
+Note that in a <code>LitElement</code>, the callback will be called bound to the host element automatically.</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1188,7 +1188,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Explore <code>ref</code> more in the <a class="Link" href="/playground/#sample=examples/directive-ref">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-ref">こちら</a>を見てください。</p>
 <h2 id="非同期レンダリング"><a href="#非同期レンダリング">非同期レンダリング</a></h2>
 <h3 id="until"><a href="#until">until</a></h3>
 <p>Renders placeholder content until one or more promises resolve.</p>
@@ -1222,15 +1222,14 @@ class MyElement extends LitElement {
 </table>
 
 <p>Takes a series of values, including Promises. Values are rendered in priority order,
- with the first argument having the highest priority and the last argument having the
- lowest priority. If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
+with the first argument having the highest priority and the last argument having the
+lowest priority. If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
 <p>The priority of values can be used to create placeholder content for async
 data. For example, a Promise with pending content can be the first
 (highest-priority) argument, and a non-promise loading indicator template can
 be used as the second (lower-priority) argument. The loading indicator
 renders immediately, and the primary content will render when the Promise
 resolves.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1242,23 +1241,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  static properties = {
-    content: {state: true},
-  };
-
-  constructor() {
-    super();
-    this.content = fetch('./content.txt').then(r =&gt; r.text());
-  }
-
-  render() {
-    return html`${until(this.content, html`&lt;span&gt;Loading...&lt;/span&gt;`)}`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Explore <code>until</code> more in the <a class="Link" href="/playground/#sample=examples/directive-until">playground</a>.</p>
 <h3 id="asyncAppend"><a href="#asyncAppend">asyncAppend</a></h3>
 <p>Appends values from an <code>AsyncIterable</code> into the DOM as they are yielded.</p>
@@ -1292,7 +1274,6 @@ customElements.define('my-element', MyElement);
 </table>
 
 <p><code>asyncAppend</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, appending each new value after the previous. Note that async generators also implement the async iterable protocol, and thus can be consumed by <code>asyncAppend</code>.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">async function *tossCoins(count: number) {
   for (let i=0; i&lt;count; i++) {
     yield Math.random() &gt; 0.5 ? 'Heads' : 'Tails';
@@ -1312,31 +1293,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">async function *tossCoins(count) {
-  for (let i=0; i&lt;count; i++) {
-    yield Math.random() &gt; 0.5 ? 'Heads' : 'Tails';
-    await new Promise((r) =&gt; setTimeout(r, 1000));
-  }
-}
-
-class MyElement extends LitElement {
-  static properties = {
-    tosses: {state: true},
-  };
-
-  constructor() {
-    super();
-    this.tosses = tossCoins(10);
-  }
-
-  render() {
-    return html`
-      &lt;ul&gt;${asyncAppend(this.tosses, (v) =&gt; html`&lt;li&gt;${v}&lt;/li&gt;`)}&lt;/ul&gt;`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Explore <code>asyncAppend</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-append">playground</a>.</p>
 <h3 id="asyncReplace"><a href="#asyncReplace">asyncReplace</a></h3>
 <p>Renders the latest value from an <code>AsyncIterable</code> into the DOM as it is yielded.</p>
@@ -1370,7 +1326,6 @@ customElements.define('my-element', MyElement);
 </table>
 
 <p>Similar to <a class="Link" href="#asyncappend"><code>asyncAppend</code></a>, <code>asyncReplace</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, replacing the previous value with each new value.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">async function *countDown(count: number) {
   while (count &gt; 0) {
     yield count--;
@@ -1389,30 +1344,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">async function *countDown(count) {
-  while (count &gt; 0) {
-    yield count--;
-    await new Promise((r) =&gt; setTimeout(r, 1000));
-  }
-}
-
-class MyElement extends LitElement {
-  static properties = {
-    timer: {state: true},
-  };
-
-  constructor() {
-    super();
-    this.timer = countDown(10);
-  }
-
-  render() {
-    return html`Timer: &lt;span&gt;${asyncReplace(this.timer)}&lt;/span&gt;.`;
-  }
-}
-customElements.define('my-element', MyElement);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Explore <code>asyncReplace</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-replace">playground</a>.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
