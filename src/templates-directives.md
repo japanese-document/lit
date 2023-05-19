@@ -1343,8 +1343,6 @@ LitでのほとんどのDOMの操作はテンプレートを使って宣言的�
 `Ref`オブジェクトの`value`プロパティに要素がセットされていて使用することができます。
 
 ```ts
-import { createRef, ref } from 'lit/directives/ref.js';
-
 @customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1362,18 +1360,19 @@ class MyElement extends LitElement {
 }
 ```
 
-A `ref` callback can also be passed to the `ref` directive.
-The callback will be called each time the referenced element changes.
-If a `ref` callback is rendered to a different element position or is removed in a subsequent render,
-it will first be called with `undefined`, followed by another call with the new element it was rendered to (if any).
-Note that in a `LitElement`, the callback will be called bound to the host element automatically.
+コールバック関数を`ref`ディレクティブに渡すことができます。
+参照される要素が変更される度、コールバック関数が実行されます。
+コールバックが別の要素上でレンダリングされたり、その後のレンダリングで削除された場合、
+その後の最初の1回は`undefined`が渡されて実行されます。
+その後に新しい要素に付与した場合はその要素を渡したコールバック関数が実行されます。
+`LitElement`では、refディレクティブに渡されたコールバック関数は自動的にhost要素がbindされることに注意してください。
 
 ```ts
 @customElement('my-element')
 class MyElement extends LitElement {
 
   render() {
-    // Passing ref directive a change callback
+    // refディレクティブにchangeコールバックを渡します。
     return html`<input ${ref(this.inputChanged)}>`;
   }
 
@@ -1418,16 +1417,17 @@ until(...values: unknown[])
 <td>使用可能な場所</td>
 <td>
 
-Any expression
+すべてのエクスプレッション
 
 </td>
 </tr>
 </tbody>
 </table>
 
-Takes a series of values, including Promises. Values are rendered in priority order,
-with the first argument having the highest priority and the last argument having the
-lowest priority. If a value is a Promise, a lower-priority value will be rendered until it resolves.
+Takes a series of values, including Promises.
+Values are rendered in priority order,
+with the first argument having the highest priority and the last argument having the lowest priority.
+If a value is a Promise, a lower-priority value will be rendered until it resolves.
 
 The priority of values can be used to create placeholder content for async
 data. For example, a Promise with pending content can be the first
@@ -1482,7 +1482,7 @@ asyncAppend(iterable: AsyncIterable)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
@@ -1545,7 +1545,7 @@ asyncReplace(iterable: AsyncIterable)
 <td>使用可能な場所</td>
 <td>
 
-Child expression
+[Child expression](https://japanese-document.github.io/lit/templates-expressions.html#Child_expressions)
 
 </td>
 </tr>
