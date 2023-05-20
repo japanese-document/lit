@@ -1388,7 +1388,7 @@ class MyElement extends LitElement {
 
 ### until
 
-Renders placeholder content until one or more promises resolve.
+1つ以上のPromiseが解決するまでプレースホルダのコンテンツをレンダリングします。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1429,12 +1429,11 @@ Values are rendered in priority order,
 with the first argument having the highest priority and the last argument having the lowest priority.
 If a value is a Promise, a lower-priority value will be rendered until it resolves.
 
-The priority of values can be used to create placeholder content for async
-data. For example, a Promise with pending content can be the first
-(highest-priority) argument, and a non-promise loading indicator template can
-be used as the second (lower-priority) argument. The loading indicator
-renders immediately, and the primary content will render when the Promise
-resolves.
+The priority of values can be used to create placeholder content for async data.
+For example, a Promise with pending content can be the first (highest-priority) argument,
+and a non-promise loading indicator template can be used as the second (lower-priority) argument.
+The loading indicator renders immediately,
+and the primary content will render when the Promise resolves.
 
 ```ts
 @customElement('my-element')
@@ -1449,7 +1448,7 @@ class MyElement extends LitElement {
 }
 ```
 
-Explore `until` more in the [playground](/playground/#sample=examples/directive-until).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-until)を見てください。
 
 ### asyncAppend
 
@@ -1512,7 +1511,7 @@ class MyElement extends LitElement {
 }
 ```
 
-Explore `asyncAppend` more in the [playground](/playground/#sample=examples/directive-async-append).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-async-append)を見てください。
 
 ### asyncReplace
 
@@ -1574,7 +1573,7 @@ class MyElement extends LitElement {
 }
 ```
 
-Explore `asyncReplace` more in the [playground](/playground/#sample=examples/directive-async-replace).
+詳しくは[こちら](https://lit.dev/playground/#sample=examples/directive-async-replace)を見てください。
 
 ---
 

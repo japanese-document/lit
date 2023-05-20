@@ -3,7 +3,7 @@
 # Shadow DOM
 
 LitコンポーネントはDOMをカプセル化するために[Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)を使います。
-Shadow DOMを使うとコンポーネントにdocumentとは別箇でカプセル化されたDOMツリーを追加することができます。
+Shadow DOMを使うとコンポーネントのDOMツリーをdocumentと分離されているカプセル化されたDOMツリーにすることができます。
 DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。
 
 Shadow DOMには下記の利点があります。
