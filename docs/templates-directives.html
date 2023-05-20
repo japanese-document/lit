@@ -1190,7 +1190,7 @@ class MyElement extends LitElement {
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-ref">こちら</a>を見てください。</p>
 <h2 id="非同期レンダリング"><a href="#非同期レンダリング">非同期レンダリング</a></h2>
 <h3 id="until"><a href="#until">until</a></h3>
-<p>Renders placeholder content until one or more promises resolve.</p>
+<p>1つ以上のPromiseが解決するまでプレースホルダのコンテンツをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1224,12 +1224,11 @@ class MyElement extends LitElement {
 Values are rendered in priority order,
 with the first argument having the highest priority and the last argument having the lowest priority.
 If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
-<p>The priority of values can be used to create placeholder content for async
-data. For example, a Promise with pending content can be the first
-(highest-priority) argument, and a non-promise loading indicator template can
-be used as the second (lower-priority) argument. The loading indicator
-renders immediately, and the primary content will render when the Promise
-resolves.</p>
+<p>The priority of values can be used to create placeholder content for async data.
+For example, a Promise with pending content can be the first (highest-priority) argument,
+and a non-promise loading indicator template can be used as the second (lower-priority) argument.
+The loading indicator renders immediately,
+and the primary content will render when the Promise resolves.</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1241,7 +1240,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Explore <code>until</code> more in the <a class="Link" href="/playground/#sample=examples/directive-until">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-until">こちら</a>を見てください。</p>
 <h3 id="asyncAppend"><a href="#asyncAppend">asyncAppend</a></h3>
 <p>Appends values from an <code>AsyncIterable</code> into the DOM as they are yielded.</p>
 <table>
@@ -1293,7 +1292,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Explore <code>asyncAppend</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-append">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-async-append">こちら</a>を見てください。</p>
 <h3 id="asyncReplace"><a href="#asyncReplace">asyncReplace</a></h3>
 <p>Renders the latest value from an <code>AsyncIterable</code> into the DOM as it is yielded.</p>
 <table>
@@ -1344,7 +1343,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<p>Explore <code>asyncReplace</code> more in the <a class="Link" href="/playground/#sample=examples/directive-async-replace">playground</a>.</p>
+<p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-async-replace">こちら</a>を見てください。</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
