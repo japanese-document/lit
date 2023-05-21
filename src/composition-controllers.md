@@ -1,10 +1,13 @@
 { "header": {"name": "組み合わせ", "order": 2}, "order": 0 }
 ---
-# コントローラ
+# リアクティブコントローラ
 
-Lit 2 introduces a new concept for code reuse and composition called _reactive controllers_.
+Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。
 
-A reactive controller is an object that can hook into a component's [reactive update cycle](/docs/v2/components/lifecycle/#reactive-update-cycle). Controllers can bundle state and behavior related to a feature, making it reusable across multiple component definitions.
+リアクティブコントローラを使うとコンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
+Controllers can bundle state and behavior related to a feature,
+making it reusable across multiple component definitions.
+
 
 You can use controllers to implement features that require their own state and access to the component's lifecycle, such as:
 
