@@ -258,7 +258,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
 <h2 id="スタイル"><a href="#スタイル">スタイル</a></h2>
 <h3 id="classMap"><a href="#classMap">classMap</a></h3>
-<p>渡されたobjectに応じて要素にclass属性のリストを割り当てます。</p>
+<p>渡されたobjectに応じて要素のclass属性にclass名のリストを割り当てます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1220,15 +1220,15 @@ class MyElement extends LitElement {
 </tbody>
 </table>
 
-<p>Takes a series of values, including Promises.
-Values are rendered in priority order,
-with the first argument having the highest priority and the last argument having the lowest priority.
-If a value is a Promise, a lower-priority value will be rendered until it resolves.</p>
-<p>The priority of values can be used to create placeholder content for async data.
-For example, a Promise with pending content can be the first (highest-priority) argument,
-and a non-promise loading indicator template can be used as the second (lower-priority) argument.
-The loading indicator renders immediately,
-and the primary content will render when the Promise resolves.</p>
+<p><code>until</code>はPromiseを含む複数の値を引数に取ります。
+引数は優先順位が高い値から低い値の順に指定します。
+優先順位が高いものに未解決のPtomiseがあった場合、優先順位が低い引数の値でPromiseでない値や解決済みの値がレンダリングされます。</p>
+<p>この引数の値の優先順位は非同期でデータを取得する間のプレイスホルダのコンテンツを生成することに利用することができます。
+例えば、
+解決に時間がかかるPromiseを第1引数(優先順位が1番高い)として渡します。
+非Promiseのローディングインディケータテンプレートを第2引数(優先順位が低い)として渡します。
+すると、ローディングインディケータはすぐにレンダリングされます。
+そして、Promiseが解決されると優先順位が1番高いコンテンツがレンダリングされます。</p>
 <pre><code class="language-ts">@customElement('my-element')
 class MyElement extends LitElement {
 
@@ -1242,7 +1242,7 @@ class MyElement extends LitElement {
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-until">こちら</a>を見てください。</p>
 <h3 id="asyncAppend"><a href="#asyncAppend">asyncAppend</a></h3>
-<p>Appends values from an <code>AsyncIterable</code> into the DOM as they are yielded.</p>
+<p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator">AsyncIterable</a>から値を得る毎にそれをDOMに追記していきます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1272,7 +1272,10 @@ class MyElement extends LitElement {
 </tbody>
 </table>
 
-<p><code>asyncAppend</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, appending each new value after the previous. Note that async generators also implement the async iterable protocol, and thus can be consumed by <code>asyncAppend</code>.</p>
+<p><code>asyncAppend</code>は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>の各値をレンダリングします。
+各値は1つ前の値の後に追記されていきます。
+<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator">AsyncGenerator</a>は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols">async iterable protocols</a>を実装しています。
+だから、下記のように<code>asyncAppend</code>に渡すことができます。</p>
 <pre><code class="language-ts">async function *tossCoins(count: number) {
   for (let i=0; i&lt;count; i++) {
     yield Math.random() &gt; 0.5 ? 'Heads' : 'Tails';
@@ -1294,7 +1297,7 @@ class MyElement extends LitElement {
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-async-append">こちら</a>を見てください。</p>
 <h3 id="asyncReplace"><a href="#asyncReplace">asyncReplace</a></h3>
-<p>Renders the latest value from an <code>AsyncIterable</code> into the DOM as it is yielded.</p>
+<p><code>AsyncIterable</code>から得た最新の値をDOMにレンダリングします。値を得る度、１つ前の値のレンダリング結果と置き換えます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
 <tbody>
@@ -1324,7 +1327,8 @@ class MyElement extends LitElement {
 </tbody>
 </table>
 
-<p>Similar to <a class="Link" href="#asyncappend"><code>asyncAppend</code></a>, <code>asyncReplace</code> renders the values of an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>, replacing the previous value with each new value.</p>
+<p><code>asyncReplace</code>は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">async iterable</a>の各値をレンダリングする点が<a class="Link" href="#asyncAppend"><code>asyncAppend</code></a>と似ています。
+<code>asyncReplace</code>は<code>AsyncIterable</code>から得た1つ前の値を最新の値に置き換えます。</p>
 <pre><code class="language-ts">async function *countDown(count: number) {
   while (count &gt; 0) {
     yield count--;
