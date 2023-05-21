@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/composition-controllers.html" />
+    <meta property="og:title" content="コントローラ" />
+    <meta property="og:description" content="Lit 2 introduces a new concept for code reuse and composition called reactive controllers.A reactive controller is an object that can hook into a component's reactive update cycle. Controllers can bundle state and behavior related to a feature, making it reusable across multiple component definition" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Lit 2 introduces a new concept for code reuse and composition called reactive controllers.A reactive controller is an object that can hook into a component's reactive update cycle. Controllers can bundle state and behavior related to a feature, making it reusable across multiple component definition" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>コントローラ</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <div class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">コントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </div></div>
+    <main class="main markdown-body">
+      <h1 id="コントローラ"><a href="#コントローラ">コントローラ</a></h1>
+<p>Lit 2 introduces a new concept for code reuse and composition called <em>reactive controllers</em>.</p>
+<p>A reactive controller is an object that can hook into a component's <a class="Link" href="/docs/v2/components/lifecycle/#reactive-update-cycle">reactive update cycle</a>. Controllers can bundle state and behavior related to a feature, making it reusable across multiple component definitions.</p>
+<p>You can use controllers to implement features that require their own state and access to the component's lifecycle, such as:</p>
+<ul>
+<li>Handling global events like mouse events</li>
+<li>Managing asynchronous tasks like fetching data over the network</li>
+<li>Running animations</li>
+</ul>
+<p>Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be thought of as reusable, partial component definitions, with their own identity and state.</p>
+<p>{% playground-ide "docs/controllers/overview" "clock-controller.ts" %}</p>
+<p>Reactive controllers are similar in many ways to class mixins. The main difference is that they have their own identity and don't add to the component's prototype, which helps contain their APIs and lets you use multiple controller instances per host component. See <a class="Link" href="/docs/v2/composition/overview/#controllers-and-mixins">Controllers and mixins</a> for more details.</p>
+<h2 id="Using_a_controller"><a href="#Using_a_controller">Using a controller</a></h2>
+<p>Each controller has its own creation API, but typically you will create an instance and store it with the component:</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  private clock = new ClockController(this, 1000);
+}
+</code></pre>
+<p>The component associated with a controller instance is called the host component.</p>
+<p>The controller instance registers itself to receive lifecycle callbacks from the host component, and triggers a host update when the controller has new data to render. This is how the <code>ClockController</code> example periodically renders the current time.</p>
+<p>A controller will typically expose some functionality to be used in the host's <code>render()</code> method. For example, many controllers will have some state, like a current value:</p>
+<pre><code class="language-ts">  render() {
+    return html`
+      &lt;div&gt;Current time: ${this.clock.value}&lt;/div&gt;
+    `;
+  }
+</code></pre>
+<p>Since each controller has it's own API, refer to specific controller documentation on how to use them.</p>
+<h2 id="Writing_a_controller"><a href="#Writing_a_controller">Writing a controller</a></h2>
+<p>A reactive controller is an object associated with a host component, which implements one or more host lifecycle callbacks or interacts with its host. It can be implemented in a number of ways, but we'll focus on using JavaScript classes, with constructors for initialization and methods for lifecycles.</p>
+<h3 id="Controller_initialization"><a href="#Controller_initialization">Controller initialization</a></h3>
+<p>A controller registers itself with its host component by calling <code>host.addController(this)</code>. Usually a controller stores a reference to its host component so that it can interact with it later.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class ClockController implements ReactiveController {
+  private host: ReactiveControllerHost;
+
+  constructor(host: ReactiveControllerHost) {
+    // Store a reference to the host
+    this.host = host;
+    // Register for lifecycle updates
+    host.addController(this);
+  }
+}
+</code></pre>
+<pre><code class="language-js">class ClockController {
+  constructor(host) {
+    // Store a reference to the host
+    this.host = host;
+    // Register for lifecycle updates
+    host.addController(this);
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>You can add other constructor parameters for one-time configuration.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class ClockController implements ReactiveController {
+  private host: ReactiveControllerHost;
+  timeout: number
+
+  constructor(host: ReactiveControllerHost, timeout: number) {
+    this.host = host;
+    this.timeout = timeout;
+    host.addController(this);
+  }
+</code></pre>
+<pre><code class="language-js">class ClockController {
+  constructor(host, timeout) {
+    this.host = host;
+    this.timeout = timeout;
+    host.addController(this);
+  }
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Once your controller is registered with the host component, you can add lifecycle callbacks and other class fields and methods to the controller to implement the desired state and behavior.</p>
+<h3 id="Lifecycle"><a href="#Lifecycle">Lifecycle</a></h3>
+<p>The reactive controller lifecycle, defined in the {% api "ReactiveController" %} interface, is a subset of the reactive update cycle. LitElement calls into any installed controllers during its lifecycle callbacks. These callbacks are optional.</p>
+<ul>
+<li><code>hostConnected()</code>:<ul>
+<li>Called when the host is connected.</li>
+<li>Called after creating the <code>renderRoot</code>, so a shadow root will exist at this point.</li>
+<li>Useful for setting up event listeners, observers, etc.</li>
+</ul>
+</li>
+<li><code>hostUpdate()</code>:<ul>
+<li>Called before the host's <code>update()</code> and <code>render()</code> methods.</li>
+<li>Useful for reading DOM before it's updated (for example, for animations).</li>
+</ul>
+</li>
+<li><code>hostUpdated()</code>:<ul>
+<li>Called after updates, before the host's <code>updated()</code> method.</li>
+<li>Useful for reading DOM after it's modified (for example, for animations).</li>
+</ul>
+</li>
+<li><code>hostDisconnected()</code>:<ul>
+<li>Called when the host is disconnected.</li>
+<li>Useful for cleaning up things added in <code>hostConnected()</code>, such as event listeners and observers.</li>
+</ul>
+</li>
+</ul>
+<p>For more information, see <a class="Link" href="/docs/v2/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a>.</p>
+<h3 id="Controller_host_API"><a href="#Controller_host_API">Controller host API</a></h3>
+<p>A reactive controller host implements a small API for adding controllers and requesting updates, and is responsible for calling its controller's lifecycle methods.</p>
+<p>This is the minimum API exposed on a controller host:</p>
+<ul>
+<li><code>addController(controller: ReactiveController)</code></li>
+<li><code>removeController(controller: ReactiveController)</code></li>
+<li><code>requestUpdate()</code></li>
+<li><code>updateComplete: Promise&lt;boolean&gt;</code></li>
+</ul>
+<p>You can also create controllers that are specific to <code>HTMLElement</code>, <code>ReactiveElement</code>, <code>LitElement</code> and require more of those APIs; or even controllers that are tied to a specific element class or other interface.</p>
+<p><code>LitElement</code> and <code>ReactiveElement</code> are controller hosts, but hosts can also be other objects like base classes from other web components libraries, components from frameworks, or other controllers.</p>
+<h3 id="Building_controllers_from_other_controllers"><a href="#Building_controllers_from_other_controllers">Building controllers from other controllers</a></h3>
+<p>Controllers can be composed of other controllers as well. To do this create a child controller and forward the host to it.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class DualClockController implements ReactiveController {
+  private clock1: ClockController;
+  private clock2: ClockController;
+
+  constructor(host: ReactiveControllerHost, delay1: number, delay2: number) {
+    this.clock1 = new ClockController(host, delay1);
+    this.clock2 = new ClockController(host, delay2);
+  }
+
+  get time1() { return this.clock1.value; }
+  get time2() { return this.clock2.value; }
+}
+</code></pre>
+<pre><code class="language-js">class DualClockController {
+  constructor(host, delay1, delay2) {
+    this.clock1 = new ClockController(host, delay1);
+    this.clock2 = new ClockController(host, delay2);
+  }
+
+  get time1() { return this.clock1.value; }
+  get time2() { return this.clock2.value; }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="Controllers_and_directives"><a href="#Controllers_and_directives">Controllers and directives</a></h3>
+<p>Combining controllers with directives can be a very powerful technique, especially for directives that need to do work before or after rendering, like animation directives; or controllers that need references to specific elements in a template.</p>
+<p>There are two main patterns of using controllers with directives:</p>
+<ul>
+<li>Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.</li>
+<li>Controllers that own directives. These are controllers that create one or more directives for use in the host's template.</li>
+</ul>
+<p>For more information about writing directives, see <a class="Link" href="/docs/v2/templates/custom-directives/">Custom directives</a>.</p>
+<h4 id="Controller_directives"><a href="#Controller_directives">Controller directives</a></h4>
+<p>Reactive controllers do not need to be stored as instance fields on the host. Anything added to a host using <code>addController()</code> is a controller. In particular, a directive can also be a controller. This enables a directive to hook into the host lifecycle.</p>
+<h4 id="Controllers_that_own_directives"><a href="#Controllers_that_own_directives">Controllers that own directives</a></h4>
+<p>Directives do not need to be standalone functions, they can be methods on other objects as well, such as controllers. This can be useful in cases where a controller needs a specific reference to an element in a template.</p>
+<p>For example, imagine a ResizeController that lets you observe an element's size with a ResizeObserver. To work we need both a ResizeController instance, and a directive that is placed on the element we want to observe:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  private _textSize = new ResizeController(this);
+
+  render() {
+    return html`
+      &lt;textarea ${this._textSize.observe()}&gt;&lt;/textarea&gt;
+      &lt;p&gt;The width is ${this._textSize.contentRect?.width}&lt;/p&gt;
+    `;
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  _textSize = new ResizeController(this);
+
+  render() {
+    return html`
+      &lt;textarea ${this._textSize.observe()}&gt;&lt;/textarea&gt;
+      &lt;p&gt;The width is ${this._textSize.contentRect?.width}&lt;/p&gt;
+    `;
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>To implement this, you create a directive and call it from a method:</p>
+<pre><code class="language-ts">class ResizeDirective {
+  /* ... */
+}
+const resizeDirective = directive(ResizeDirective);
+
+export class ResizeController {
+  /* ... */
+  observe() {
+    // Pass a reference to the controller so the directive can
+    // notify the controller on size changes.
+    return resizeDirective(this);
+  }
+}
+</code></pre>
+<p>{% todo %}</p>
+<ul>
+<li>Review and cleanup this example</li>
+</ul>
+<p>{% endtodo %}</p>
+<h2 id="Use_cases"><a href="#Use_cases">Use cases</a></h2>
+<p>Reactive controllers are very general and have a very broad set of possible use cases. They are particularly good for connecting a component to an external resource, like user input, state management, or remote APIs. Here are a few common use cases.</p>
+<h3 id="External_inputs"><a href="#External_inputs">External inputs</a></h3>
+<p>Reactive controllers can be used to connect to external inputs. For example, keyboard and mouse events, resize observers, or mutation observers. The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.</p>
+<h4 id="Example__MouseMoveController"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></h4>
+<p>This example shows how a controller can perform setup and cleanup work when its host is connected and disconnected, and request an update when an input changes:</p>
+<p>{% playground-ide "docs/controllers/mouse" "my-element.ts" %}</p>
+<h3 id="Asynchronous_tasks"><a href="#Asynchronous_tasks">Asynchronous tasks</a></h3>
+<p>Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).</p>
+<p>Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.</p>
+<p><code>@lit-labs/task</code> contains a generic <code>Task</code> controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.</p>
+<p>You can use <code>Task</code> to create a custom controller with an API tailored for your specific task. Here we wrap <code>Task</code> in a <code>NamesController</code> that can fetch one of a specified list of names from a demo REST API. <code>NameController</code> exposes a <code>kind</code> property as an input, and a <code>render()</code> method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.</p>
+<p>{% playground-ide "docs/controllers/names" %}</p>
+<p>{% todo %}</p>
+<ul>
+<li>Animations</li>
+</ul>
+<p>{% endtodo %}</p>
+<h2 id="See_also"><a href="#See_also">See also</a></h2>
+<ul>
+<li><a class="Link" href="/docs/v2/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a></li>
+<li><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a></li>
+</ul>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#コントローラ">コントローラ</a></p>
+<p class="h2"><a href="#Using_a_controller">Using a controller</a></p>
+<p class="h2"><a href="#Writing_a_controller">Writing a controller</a></p>
+<p class="h3"><a href="#Controller_initialization">Controller initialization</a></p>
+<p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
+<p class="h3"><a href="#Controller_host_API">Controller host API</a></p>
+<p class="h3"><a href="#Building_controllers_from_other_controllers">Building controllers from other controllers</a></p>
+<p class="h3"><a href="#Controllers_and_directives">Controllers and directives</a></p>
+<p class="h4"><a href="#Controller_directives">Controller directives</a></p>
+<p class="h4"><a href="#Controllers_that_own_directives">Controllers that own directives</a></p>
+<p class="h2"><a href="#Use_cases">Use cases</a></p>
+<p class="h3"><a href="#External_inputs">External inputs</a></p>
+<p class="h4"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></p>
+<p class="h3"><a href="#Asynchronous_tasks">Asynchronous tasks</a></p>
+<p class="h2"><a href="#See_also">See also</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
