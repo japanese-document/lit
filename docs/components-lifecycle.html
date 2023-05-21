@@ -505,7 +505,7 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 <p>カスタムデコレータを実装する時によく使います。
 デコレータはクラスの定義される時に実行されます。そして、フィールドやメソッドの定義を置き換えることができます。
 インスタンスが生成される時にそれらをする必要がある場合は<code>addInitializer()</code>を実行する必要があります。
-通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を使います。</p>
+通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために<a class="Link" href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a>を使います。</p>
 <pre><code class="language-ts">// TypeScriptのデコレータ
 const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
   const ctor = proto.constructor as typeof ReactiveElement;
@@ -527,7 +527,7 @@ const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
 イニシャライザはクラスの階層順(スーパークラスからサブクラスの順番)で実行されます。</p>
 <h4 id="addController()"><a href="#addController()">addController()</a></h4>
 <p>コンポーネントがコントローラのライフサイクルコールバックを実行するために<code>addController()</code>はリアクティブコントローラをLitコンポーネントに追加します。
-詳しくは<a class="Link" href="https://lit.dev/docs/composition/controllers/">リアクティブコントローラ</a>を見てください。</p>
+詳しくは<a class="Link" href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a>を見てください。</p>
 <h4 id="removeController()"><a href="#removeController()">removeController()</a></h4>
 <p><code>removeController()</code>はリアクティブコントローラを削除します。そして、コンポーネントからリアクティブライフサイクルコールバックを受け取らないようにします。</p>
 <h2 id="サーバーサイドリアクティブアップデートサイクル"><a href="#サーバーサイドリアクティブアップデートサイクル">サーバーサイドリアクティブアップデートサイクル</a></h2>

@@ -500,7 +500,7 @@ Litは外部コードをリアクティブアップデートサイクルに統�
 カスタムデコレータを実装する時によく使います。
 デコレータはクラスの定義される時に実行されます。そして、フィールドやメソッドの定義を置き換えることができます。
 インスタンスが生成される時にそれらをする必要がある場合は`addInitializer()`を実行する必要があります。
-通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために[リアクティブコントローラ](https://lit.dev/docs/composition/controllers/)を使います。
+通常はこれを利用してデコレータでコンポーネントのライフサイクルをフックするために[リアクティブコントローラ](https://japanese-document.github.io/lit/composition-controllers.html)を使います。
 
 ```ts
 // TypeScriptのデコレータ
@@ -530,7 +530,7 @@ class MyElement extends LitElement {
 #### addController()
 
 コンポーネントがコントローラのライフサイクルコールバックを実行するために`addController()`はリアクティブコントローラをLitコンポーネントに追加します。
-詳しくは[リアクティブコントローラ](https://lit.dev/docs/composition/controllers/)を見てください。
+詳しくは[リアクティブコントローラ](https://japanese-document.github.io/lit/composition-controllers.html)を見てください。
 
 #### removeController()
 
