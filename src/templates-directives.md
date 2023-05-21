@@ -245,7 +245,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 ### classMap
 
-渡されたobjectに応じて要素にclass属性のリストを割り当てます。
+渡されたobjectに応じて要素のclass属性にclass名のリストを割り当てます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1424,16 +1424,16 @@ until(...values: unknown[])
 </tbody>
 </table>
 
-Takes a series of values, including Promises.
-Values are rendered in priority order,
-with the first argument having the highest priority and the last argument having the lowest priority.
-If a value is a Promise, a lower-priority value will be rendered until it resolves.
+`until`はPromiseを含む複数の値を引数に取ります。
+引数は優先順位が高い値から低い値の順に指定します。
+優先順位が高いものに未解決のPtomiseがあった場合、優先順位が低い引数の値でPromiseでない値や解決済みの値がレンダリングされます。
 
-The priority of values can be used to create placeholder content for async data.
-For example, a Promise with pending content can be the first (highest-priority) argument,
-and a non-promise loading indicator template can be used as the second (lower-priority) argument.
-The loading indicator renders immediately,
-and the primary content will render when the Promise resolves.
+この引数の値の優先順位は非同期でデータを取得する間のプレイスホルダのコンテンツを生成することに利用することができます。
+例えば、
+解決に時間がかかるPromiseを第1引数(優先順位が1番高い)として渡します。
+非Promiseのローディングインディケータテンプレートを第2引数(優先順位が低い)として渡します。
+すると、ローディングインディケータはすぐにレンダリングされます。
+そして、Promiseが解決されると優先順位が1番高いコンテンツがレンダリングされます。
 
 ```ts
 @customElement('my-element')
@@ -1452,7 +1452,7 @@ class MyElement extends LitElement {
 
 ### asyncAppend
 
-Appends values from an `AsyncIterable` into the DOM as they are yielded.
+[AsyncIterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator)から値を得る毎にそれをDOMに追記していきます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1488,7 +1488,10 @@ asyncAppend(iterable: AsyncIterable)
 </tbody>
 </table>
 
-`asyncAppend` renders the values of an [async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of), appending each new value after the previous. Note that async generators also implement the async iterable protocol, and thus can be consumed by `asyncAppend`.
+`asyncAppend`は[async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)の各値をレンダリングします。
+各値は1つ前の値の後に追記されていきます。
+[AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator)は[async iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols)を実装しています。
+だから、下記のように`asyncAppend`に渡すことができます。
 
 ```ts
 async function *tossCoins(count: number) {
@@ -1515,7 +1518,7 @@ class MyElement extends LitElement {
 
 ### asyncReplace
 
-Renders the latest value from an `AsyncIterable` into the DOM as it is yielded.
+`AsyncIterable`から得た最新の値をDOMにレンダリングします。値を得る度、１つ前の値のレンダリング結果と置き換えます。
 
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1551,7 +1554,8 @@ asyncReplace(iterable: AsyncIterable)
 </tbody>
 </table>
 
-Similar to [`asyncAppend`](#asyncappend), `asyncReplace` renders the values of an [async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of), replacing the previous value with each new value.
+`asyncReplace`は[async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)の各値をレンダリングする点が[`asyncAppend`](#asyncAppend)と似ています。
+`asyncReplace`は`AsyncIterable`から得た1つ前の値を最新の値に置き換えます。
 
 ```ts
 async function *countDown(count: number) {
