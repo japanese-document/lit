@@ -4,17 +4,8 @@
 
 Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。
 
-リアクティブコントローラを使うとコンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
-Controllers can bundle state and behavior related to a feature,
-making it reusable across multiple component definitions.
-
-
-You can use controllers to implement features that require their own state and access to the component's lifecycle, such as:
-
-* Handling global events like mouse events
-* Managing asynchronous tasks like fetching data over the network
-* Running animations
-
+リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
+そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントで共用することができます。
 
 Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be thought of as reusable, partial component definitions, with their own identity and state.
 
