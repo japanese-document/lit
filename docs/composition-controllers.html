@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/composition-controllers.html" />
     <meta property="og:title" content="リアクティブコントローラ" />
-    <meta property="og:description" content="Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントで共用することができます。Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be" />
+    <meta property="og:description" content="Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';import {customElement} from 'lit/decorato" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントで共用することができます。Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be" />
+    <meta name="description" content="Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';import {customElement} from 'lit/decorato" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>リアクティブコントローラ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -54,11 +54,55 @@
       <h1 id="リアクティブコントローラ"><a href="#リアクティブコントローラ">リアクティブコントローラ</a></h1>
 <p>Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。</p>
 <p>リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
-そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントで共用することができます。</p>
-<p>Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be thought of as reusable, partial component definitions, with their own identity and state.</p>
-<p>{% playground-ide "docs/controllers/overview" "clock-controller.ts" %}</p>
+そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。</p>
+<pre><code class="language-ts">import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {ClockController} from './clock-controller.js';
+
+export class ClockController implements ReactiveController {
+  host: ReactiveControllerHost;
+
+  value = new Date();
+  timeout: number;
+  private _timerID?: number;
+
+  constructor(host: ReactiveControllerHost, timeout = 1000) {
+    (this.host = host).addController(this);
+    this.timeout = timeout;
+  }
+  hostConnected() {
+    // Start a timer when the host is connected
+    this._timerID = setInterval(() =&gt; {
+      this.value = new Date();
+      // Update the host with new value
+      this.host.requestUpdate();
+    }, this.timeout);
+  }
+  hostDisconnected() {
+    // Clear the timer when the host is disconnected
+    clearInterval(this._timerID);
+    this._timerID = undefined;
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  // Create the controller and store it
+  private clock = new ClockController(this, 100);
+
+  // Use the controller in render()
+  render() {
+    const formattedTime = timeFormat.format(this.clock.value);
+    return html`Current time: ${formattedTime}`;
+  }
+}
+
+const timeFormat = new Intl.DateTimeFormat('en-US', {
+  hour: 'numeric', minute: 'numeric', second: 'numeric',
+});
+</code></pre>
 <p>Reactive controllers are similar in many ways to class mixins. The main difference is that they have their own identity and don't add to the component's prototype, which helps contain their APIs and lets you use multiple controller instances per host component. See <a class="Link" href="/docs/v2/composition/overview/#controllers-and-mixins">Controllers and mixins</a> for more details.</p>
-<h2 id="Using_a_controller"><a href="#Using_a_controller">Using a controller</a></h2>
+<h2 id="リアクティブコントローラを使う"><a href="#リアクティブコントローラを使う">リアクティブコントローラを使う</a></h2>
 <p>Each controller has its own creation API, but typically you will create an instance and store it with the component:</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   private clock = new ClockController(this, 1000);
@@ -303,7 +347,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#リアクティブコントローラ">リアクティブコントローラ</a></p>
-<p class="h2"><a href="#Using_a_controller">Using a controller</a></p>
+<p class="h2"><a href="#リアクティブコントローラを使う">リアクティブコントローラを使う</a></p>
 <p class="h2"><a href="#Writing_a_controller">Writing a controller</a></p>
 <p class="h3"><a href="#Controller_initialization">Controller initialization</a></p>
 <p class="h3"><a href="#Lifecycle">Lifecycle</a></p>

@@ -5,15 +5,59 @@
 Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。
 
 リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
-そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントで共用することができます。
+そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。
 
-Reactive controllers allow you to build components by composing smaller pieces that aren't themselves components. They can be thought of as reusable, partial component definitions, with their own identity and state.
+```ts
+import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {ClockController} from './clock-controller.js';
 
-{% playground-ide "docs/controllers/overview" "clock-controller.ts" %}
+export class ClockController implements ReactiveController {
+  host: ReactiveControllerHost;
+
+  value = new Date();
+  timeout: number;
+  private _timerID?: number;
+
+  constructor(host: ReactiveControllerHost, timeout = 1000) {
+    (this.host = host).addController(this);
+    this.timeout = timeout;
+  }
+  hostConnected() {
+    // Start a timer when the host is connected
+    this._timerID = setInterval(() => {
+      this.value = new Date();
+      // Update the host with new value
+      this.host.requestUpdate();
+    }, this.timeout);
+  }
+  hostDisconnected() {
+    // Clear the timer when the host is disconnected
+    clearInterval(this._timerID);
+    this._timerID = undefined;
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  // Create the controller and store it
+  private clock = new ClockController(this, 100);
+
+  // Use the controller in render()
+  render() {
+    const formattedTime = timeFormat.format(this.clock.value);
+    return html`Current time: ${formattedTime}`;
+  }
+}
+
+const timeFormat = new Intl.DateTimeFormat('en-US', {
+  hour: 'numeric', minute: 'numeric', second: 'numeric',
+});
+```
 
 Reactive controllers are similar in many ways to class mixins. The main difference is that they have their own identity and don't add to the component's prototype, which helps contain their APIs and lets you use multiple controller instances per host component. See [Controllers and mixins](/docs/v2/composition/overview/#controllers-and-mixins) for more details.
 
-## Using a controller
+## リアクティブコントローラを使う
 
 Each controller has its own creation API, but typically you will create an instance and store it with the component:
 
