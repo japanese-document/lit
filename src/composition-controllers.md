@@ -24,15 +24,15 @@ export class ClockController implements ReactiveController {
     this.timeout = timeout;
   }
   hostConnected() {
-    // Start a timer when the host is connected
+    // コンポーネントがDOMツリーに接続された時、タイマーがスタートする。
     this._timerID = setInterval(() => {
       this.value = new Date();
-      // Update the host with new value
+      // 新しい値をコンポーネントに反映する。
       this.host.requestUpdate();
     }, this.timeout);
   }
   hostDisconnected() {
-    // Clear the timer when the host is disconnected
+    // コンポーネントがDOMツリーから切断された時、タイマーをクリアする。
     clearInterval(this._timerID);
     this._timerID = undefined;
   }
@@ -40,10 +40,10 @@ export class ClockController implements ReactiveController {
 
 @customElement('my-element')
 class MyElement extends LitElement {
-  // Create the controller and store it
+  // コントローラを生成してそれを格納する。
   private clock = new ClockController(this, 100);
 
-  // Use the controller in render()
+  // render()内でコントローラを使う。
   render() {
     const formattedTime = timeFormat.format(this.clock.value);
     return html`Current time: ${formattedTime}`;
@@ -55,7 +55,10 @@ const timeFormat = new Intl.DateTimeFormat('en-US', {
 });
 ```
 
-Reactive controllers are similar in many ways to class mixins. The main difference is that they have their own identity and don't add to the component's prototype, which helps contain their APIs and lets you use multiple controller instances per host component. See [Controllers and mixins](/docs/v2/composition/overview/#controllers-and-mixins) for more details.
+Reactive controllers are similar in many ways to class mixins.
+The main difference is that they have their own identity and don't add to the component's prototype,
+which helps contain their APIs and lets you use multiple controller instances per host component.
+詳しくは[コントローラとミックスイン](https://lit.dev/docs/composition/overview/#controllers-and-mixins)を見てください。
 
 ## リアクティブコントローラを使う
 
