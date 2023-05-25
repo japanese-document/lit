@@ -101,26 +101,28 @@ const timeFormat = new Intl.DateTimeFormat('en-US', {
   hour: 'numeric', minute: 'numeric', second: 'numeric',
 });
 </code></pre>
-<p>Reactive controllers are similar in many ways to class mixins.
+<p>コントローラはクラスのミックスインとよく似ています。
 The main difference is that they have their own identity and don't add to the component's prototype,
 which helps contain their APIs and lets you use multiple controller instances per host component.
 詳しくは<a class="Link" href="https://lit.dev/docs/composition/overview/#controllers-and-mixins">コントローラとミックスイン</a>を見てください。</p>
-<h2 id="リアクティブコントローラを使う"><a href="#リアクティブコントローラを使う">リアクティブコントローラを使う</a></h2>
-<p>Each controller has its own creation API, but typically you will create an instance and store it with the component:</p>
+<h2 id="コントローラを使う"><a href="#コントローラを使う">コントローラを使う</a></h2>
+<p>以下のようにコントローラを生成します。通常、コントローラのインスタンスはコンポーネント内で生成され格納されます。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   private clock = new ClockController(this, 1000);
 }
 </code></pre>
-<p>The component associated with a controller instance is called the host component.</p>
-<p>The controller instance registers itself to receive lifecycle callbacks from the host component, and triggers a host update when the controller has new data to render. This is how the <code>ClockController</code> example periodically renders the current time.</p>
-<p>A controller will typically expose some functionality to be used in the host's <code>render()</code> method. For example, many controllers will have some state, like a current value:</p>
+<p>コントローラに関連付けられたコンポーネントのことをホストコンポーネントと呼びます。</p>
+<p>コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録します。
+<code>ClockController</code>の例では、これを行うことで現在の時刻を更新しています。</p>
+<p>通常、コントローラはホストコンポーネントの<code>render()</code>メソッド内で使われる値を提供します。
+例えば以下のような現在の日時を表す値です。</p>
 <pre><code class="language-ts">  render() {
     return html`
       &lt;div&gt;Current time: ${this.clock.value}&lt;/div&gt;
     `;
   }
 </code></pre>
-<p>Since each controller has it's own API, refer to specific controller documentation on how to use them.</p>
+<p>コントローラのAPIの仕様に関しては<a class="Link" href="https://lit.dev/docs/api/controllers/">こちら</a>を見てください。</p>
 <h2 id="Writing_a_controller"><a href="#Writing_a_controller">Writing a controller</a></h2>
 <p>A reactive controller is an object associated with a host component, which implements one or more host lifecycle callbacks or interacts with its host. It can be implemented in a number of ways, but we'll focus on using JavaScript classes, with constructors for initialization and methods for lifecycles.</p>
 <h3 id="Controller_initialization"><a href="#Controller_initialization">Controller initialization</a></h3>
@@ -350,7 +352,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#リアクティブコントローラ">リアクティブコントローラ</a></p>
-<p class="h2"><a href="#リアクティブコントローラを使う">リアクティブコントローラを使う</a></p>
+<p class="h2"><a href="#コントローラを使う">コントローラを使う</a></p>
 <p class="h2"><a href="#Writing_a_controller">Writing a controller</a></p>
 <p class="h3"><a href="#Controller_initialization">Controller initialization</a></p>
 <p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
