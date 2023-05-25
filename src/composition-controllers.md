@@ -55,14 +55,14 @@ const timeFormat = new Intl.DateTimeFormat('en-US', {
 });
 ```
 
-Reactive controllers are similar in many ways to class mixins.
+コントローラはクラスのミックスインとよく似ています。
 The main difference is that they have their own identity and don't add to the component's prototype,
 which helps contain their APIs and lets you use multiple controller instances per host component.
 詳しくは[コントローラとミックスイン](https://lit.dev/docs/composition/overview/#controllers-and-mixins)を見てください。
 
-## リアクティブコントローラを使う
+## コントローラを使う
 
-Each controller has its own creation API, but typically you will create an instance and store it with the component:
+以下のようにコントローラを生成します。通常、コントローラのインスタンスはコンポーネント内で生成され格納されます。
 
 ```ts
 class MyElement extends LitElement {
@@ -70,11 +70,13 @@ class MyElement extends LitElement {
 }
 ```
 
-The component associated with a controller instance is called the host component.
+コントローラに関連付けられたコンポーネントのことをホストコンポーネントと呼びます。
 
-The controller instance registers itself to receive lifecycle callbacks from the host component, and triggers a host update when the controller has new data to render. This is how the `ClockController` example periodically renders the current time.
+コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録します。
+`ClockController`の例では、これを行うことで現在の時刻を更新しています。
 
-A controller will typically expose some functionality to be used in the host's `render()` method. For example, many controllers will have some state, like a current value:
+通常、コントローラはホストコンポーネントの`render()`メソッド内で使われる値を提供します。
+例えば以下のような現在の日時を表す値です。
 
 ```ts
   render() {
@@ -84,7 +86,7 @@ A controller will typically expose some functionality to be used in the host's `
   }
 ```
 
-Since each controller has it's own API, refer to specific controller documentation on how to use them.
+コントローラのAPIの仕様に関しては[こちら](https://lit.dev/docs/api/controllers/)を見てください。
 
 ## Writing a controller
 
