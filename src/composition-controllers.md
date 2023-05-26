@@ -10,7 +10,6 @@ Lit2はリアクティブコントローラというコードの再利用と構�
 ```ts
 import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {ClockController} from './clock-controller.js';
 
 export class ClockController implements ReactiveController {
   host: ReactiveControllerHost;
@@ -70,9 +69,9 @@ class MyElement extends LitElement {
 }
 ```
 
-コントローラに関連付けられたコンポーネントのことをホストコンポーネントと呼びます。
+コントローラに結びつけられたコンポーネントのことをホストコンポーネントと呼びます。
 
-コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録します。
+コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録されます。
 `ClockController`の例では、これを行うことで現在の時刻を更新しています。
 
 通常、コントローラはホストコンポーネントの`render()`メソッド内で使われる値を提供します。
@@ -88,45 +87,32 @@ class MyElement extends LitElement {
 
 コントローラのAPIの仕様に関しては[こちら](https://lit.dev/docs/api/controllers/)を見てください。
 
-## Writing a controller
+## コントローラを実装する
 
-A reactive controller is an object associated with a host component, which implements one or more host lifecycle callbacks or interacts with its host. It can be implemented in a number of ways, but we'll focus on using JavaScript classes, with constructors for initialization and methods for lifecycles.
+リアクティブコントローラはホストコンポーネントに結びつけられるオブジェクトです。
+リアクティブコントローラには1つ以上のホストライフサイクルコールバックもしくはホストコンポーネントを操作する処理を実装します。
+リアクティブコントローラを実装する方法はいろいろありますが、
+ここではクラスを使ってコンストラクタで初期化処理を行ってメソッドでライフサイクルを実装します。
 
-### Controller initialization
+### コントローラの初期化
 
-A controller registers itself with its host component by calling `host.addController(this)`. Usually a controller stores a reference to its host component so that it can interact with it later.
-
-{% switchable-sample %}
+`host.addController(this)`でコントローラをホストコンポーネントに登録します。
+通常、コントローラはホストコンポーネントを操作するためにホストコンポーネントの参照を保持します。
 
 ```ts
 class ClockController implements ReactiveController {
   private host: ReactiveControllerHost;
 
   constructor(host: ReactiveControllerHost) {
-    // Store a reference to the host
+    // ホストコンポーネントを保持する。
     this.host = host;
-    // Register for lifecycle updates
+    // コントローラをライフサイクルに登録する。
     host.addController(this);
   }
 }
 ```
-
-```js
-class ClockController {
-  constructor(host) {
-    // Store a reference to the host
-    this.host = host;
-    // Register for lifecycle updates
-    host.addController(this);
-  }
-}
-```
-
-{% endswitchable-sample %}
 
 You can add other constructor parameters for one-time configuration.
-
-{% switchable-sample %}
 
 ```ts
 class ClockController implements ReactiveController {
@@ -139,18 +125,6 @@ class ClockController implements ReactiveController {
     host.addController(this);
   }
 ```
-
-```js
-class ClockController {
-  constructor(host, timeout) {
-    this.host = host;
-    this.timeout = timeout;
-    host.addController(this);
-  }
-```
-
-{% endswitchable-sample %}
-
 
 Once your controller is registered with the host component, you can add lifecycle callbacks and other class fields and methods to the controller to implement the desired state and behavior.
 
