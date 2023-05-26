@@ -57,7 +57,6 @@
 そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。</p>
 <pre><code class="language-ts">import {LitElement, html, ReactiveController, ReactiveControllerHost} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {ClockController} from './clock-controller.js';
 
 export class ClockController implements ReactiveController {
   host: ReactiveControllerHost;
@@ -111,8 +110,8 @@ which helps contain their APIs and lets you use multiple controller instances pe
   private clock = new ClockController(this, 1000);
 }
 </code></pre>
-<p>コントローラに関連付けられたコンポーネントのことをホストコンポーネントと呼びます。</p>
-<p>コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録します。
+<p>コントローラに結びつけられたコンポーネントのことをホストコンポーネントと呼びます。</p>
+<p>コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録されます。
 <code>ClockController</code>の例では、これを行うことで現在の時刻を更新しています。</p>
 <p>通常、コントローラはホストコンポーネントの<code>render()</code>メソッド内で使われる値を提供します。
 例えば以下のような現在の日時を表す値です。</p>
@@ -123,34 +122,26 @@ which helps contain their APIs and lets you use multiple controller instances pe
   }
 </code></pre>
 <p>コントローラのAPIの仕様に関しては<a class="Link" href="https://lit.dev/docs/api/controllers/">こちら</a>を見てください。</p>
-<h2 id="Writing_a_controller"><a href="#Writing_a_controller">Writing a controller</a></h2>
-<p>A reactive controller is an object associated with a host component, which implements one or more host lifecycle callbacks or interacts with its host. It can be implemented in a number of ways, but we'll focus on using JavaScript classes, with constructors for initialization and methods for lifecycles.</p>
-<h3 id="Controller_initialization"><a href="#Controller_initialization">Controller initialization</a></h3>
-<p>A controller registers itself with its host component by calling <code>host.addController(this)</code>. Usually a controller stores a reference to its host component so that it can interact with it later.</p>
-<p>{% switchable-sample %}</p>
+<h2 id="コントローラを実装する"><a href="#コントローラを実装する">コントローラを実装する</a></h2>
+<p>リアクティブコントローラはホストコンポーネントに結びつけられるオブジェクトです。
+リアクティブコントローラには1つ以上のホストライフサイクルコールバックもしくはホストコンポーネントを操作する処理を実装します。
+リアクティブコントローラを実装する方法はいろいろありますが、
+ここではクラスを使ってコンストラクタで初期化処理を行ってメソッドでライフサイクルを実装します。</p>
+<h3 id="コントローラの初期化"><a href="#コントローラの初期化">コントローラの初期化</a></h3>
+<p><code>host.addController(this)</code>でコントローラをホストコンポーネントに登録します。
+通常、コントローラはホストコンポーネントを操作するためにホストコンポーネントの参照を保持します。</p>
 <pre><code class="language-ts">class ClockController implements ReactiveController {
   private host: ReactiveControllerHost;
 
   constructor(host: ReactiveControllerHost) {
-    // Store a reference to the host
+    // ホストコンポーネントを保持する。
     this.host = host;
-    // Register for lifecycle updates
+    // コントローラをライフサイクルに登録する。
     host.addController(this);
   }
 }
 </code></pre>
-<pre><code class="language-js">class ClockController {
-  constructor(host) {
-    // Store a reference to the host
-    this.host = host;
-    // Register for lifecycle updates
-    host.addController(this);
-  }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>You can add other constructor parameters for one-time configuration.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class ClockController implements ReactiveController {
   private host: ReactiveControllerHost;
   timeout: number
@@ -161,14 +152,6 @@ which helps contain their APIs and lets you use multiple controller instances pe
     host.addController(this);
   }
 </code></pre>
-<pre><code class="language-js">class ClockController {
-  constructor(host, timeout) {
-    this.host = host;
-    this.timeout = timeout;
-    host.addController(this);
-  }
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Once your controller is registered with the host component, you can add lifecycle callbacks and other class fields and methods to the controller to implement the desired state and behavior.</p>
 <h3 id="Lifecycle"><a href="#Lifecycle">Lifecycle</a></h3>
 <p>The reactive controller lifecycle, defined in the {% api "ReactiveController" %} interface, is a subset of the reactive update cycle. LitElement calls into any installed controllers during its lifecycle callbacks. These callbacks are optional.</p>
@@ -353,8 +336,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#リアクティブコントローラ">リアクティブコントローラ</a></p>
 <p class="h2"><a href="#コントローラを使う">コントローラを使う</a></p>
-<p class="h2"><a href="#Writing_a_controller">Writing a controller</a></p>
-<p class="h3"><a href="#Controller_initialization">Controller initialization</a></p>
+<p class="h2"><a href="#コントローラを実装する">コントローラを実装する</a></p>
+<p class="h3"><a href="#コントローラの初期化">コントローラの初期化</a></p>
 <p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
 <p class="h3"><a href="#Controller_host_API">Controller host API</a></p>
 <p class="h3"><a href="#Building_controllers_from_other_controllers">Building controllers from other controllers</a></p>
