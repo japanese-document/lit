@@ -69,7 +69,7 @@ class MyElement extends LitElement {
 }
 ```
 
-コントローラに結びつけられたコンポーネントのことをホストコンポーネントと呼びます。
+コントローラに結びつけられたコンポーネントのことを **ホストコンポーネント** と呼びます。
 
 コントローラインスタンスはホストコンポーネントのライフサイクルを受信したり、ホストコンポーネントを更新してデータを反映するためにホストコンポーネントに登録されます。
 `ClockController`の例では、これを行うことで現在の時刻を更新しています。
@@ -106,13 +106,13 @@ class ClockController implements ReactiveController {
   constructor(host: ReactiveControllerHost) {
     // ホストコンポーネントを保持する。
     this.host = host;
-    // コントローラをライフサイクルに登録する。
+    // コントローラをホストコンポーネントに登録する。
     host.addController(this);
   }
 }
 ```
 
-You can add other constructor parameters for one-time configuration.
+下記のように、ホストコンポーネント以外のコンストラクタの引数を使って設定を追加することができます。
 
 ```ts
 class ClockController implements ReactiveController {
@@ -126,11 +126,14 @@ class ClockController implements ReactiveController {
   }
 ```
 
-Once your controller is registered with the host component, you can add lifecycle callbacks and other class fields and methods to the controller to implement the desired state and behavior.
+コントローラをホストコンポーネントに登録すると、
+コントローラに実装したホストコンポーネントに対するライフサイクルコールバックが有効になります。
 
-### Lifecycle
+### ライフサイクル
 
-The reactive controller lifecycle, defined in the {% api "ReactiveController" %} interface, is a subset of the reactive update cycle. LitElement calls into any installed controllers during its lifecycle callbacks. These callbacks are optional.
+[ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)インターフェイスで定義されているリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
+LitElementはそのライフサイクルイベントの際、結びつけられているコントローラのリアクティブコントローラライフサイクルメソッドを実行します。
+リアクティブコントローラライフサイクルメソッドの実装はオプションです。
 
 * `hostConnected()`:
   * Called when the host is connected.
@@ -146,8 +149,9 @@ The reactive controller lifecycle, defined in the {% api "ReactiveController" %}
   * Called when the host is disconnected.
   * Useful for cleaning up things added in `hostConnected()`, such as event listeners and observers.
 
-For more information, see [Reactive update cycle](/docs/v2/components/lifecycle/#reactive-update-cycle).
-### Controller host API
+[リアクティブアップデートサイクル](https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル)を見てください。
+
+### ReactiveControllerHost API
 
 A reactive controller host implements a small API for adding controllers and requesting updates, and is responsible for calling its controller's lifecycle methods.
 
