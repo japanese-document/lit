@@ -136,7 +136,7 @@ which helps contain their APIs and lets you use multiple controller instances pe
   constructor(host: ReactiveControllerHost) {
     // ホストコンポーネントを保持する。
     this.host = host;
-    // コントローラをホストコンポーネントに登録する。
+    // コントローラをホストコンポーネントに結びつける。
     host.addController(this);
   }
 }
@@ -183,8 +183,9 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 </ul>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を見てください。</p>
 <h3 id="ReactiveControllerHost_API"><a href="#ReactiveControllerHost_API">ReactiveControllerHost API</a></h3>
-<p>A reactive controller host implements a small API for adding controllers and requesting updates, and is responsible for calling its controller's lifecycle methods.</p>
-<p>This is the minimum API exposed on a controller host:</p>
+<p>リアクティブコントローラホストはコントローラを追加して更新をリクエストする小さいAPIを持ちます。
+そして、結びついたコントローラのライフサイクルメソッドを実行します。</p>
+<p>以下にリアクティブコントローラホストのAPIを簡潔に示します。</p>
 <ul>
 <li><code>addController(controller: ReactiveController)</code></li>
 <li><code>removeController(controller: ReactiveController)</code></li>
@@ -194,8 +195,8 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 <p>You can also create controllers that are specific to <code>HTMLElement</code>, <code>ReactiveElement</code>, <code>LitElement</code> and require more of those APIs; or even controllers that are tied to a specific element class or other interface.</p>
 <p><code>LitElement</code> and <code>ReactiveElement</code> are controller hosts, but hosts can also be other objects like base classes from other web components libraries, components from frameworks, or other controllers.</p>
 <h3 id="Building_controllers_from_other_controllers"><a href="#Building_controllers_from_other_controllers">Building controllers from other controllers</a></h3>
-<p>Controllers can be composed of other controllers as well. To do this create a child controller and forward the host to it.</p>
-<p>{% switchable-sample %}</p>
+<p>Controllers can be composed of other controllers as well.
+To do this create a child controller and forward the host to it.</p>
 <pre><code class="language-ts">class DualClockController implements ReactiveController {
   private clock1: ClockController;
   private clock2: ClockController;
@@ -209,17 +210,6 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
   get time2() { return this.clock2.value; }
 }
 </code></pre>
-<pre><code class="language-js">class DualClockController {
-  constructor(host, delay1, delay2) {
-    this.clock1 = new ClockController(host, delay1);
-    this.clock2 = new ClockController(host, delay2);
-  }
-
-  get time1() { return this.clock1.value; }
-  get time2() { return this.clock2.value; }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h3 id="Controllers_and_directives"><a href="#Controllers_and_directives">Controllers and directives</a></h3>
 <p>Combining controllers with directives can be a very powerful technique, especially for directives that need to do work before or after rendering, like animation directives; or controllers that need references to specific elements in a template.</p>
 <p>There are two main patterns of using controllers with directives:</p>

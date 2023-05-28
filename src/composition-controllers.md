@@ -106,7 +106,7 @@ class ClockController implements ReactiveController {
   constructor(host: ReactiveControllerHost) {
     // ホストコンポーネントを保持する。
     this.host = host;
-    // コントローラをホストコンポーネントに登録する。
+    // コントローラをホストコンポーネントに結びつける。
     host.addController(this);
   }
 }
@@ -153,9 +153,10 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 
 ### ReactiveControllerHost API
 
-A reactive controller host implements a small API for adding controllers and requesting updates, and is responsible for calling its controller's lifecycle methods.
+リアクティブコントローラホストはコントローラを追加して更新をリクエストする小さいAPIを持ちます。
+そして、結びついたコントローラのライフサイクルメソッドを実行します。
 
-This is the minimum API exposed on a controller host:
+以下にリアクティブコントローラホストのAPIを簡潔に示します。
 
 * `addController(controller: ReactiveController)`
 * `removeController(controller: ReactiveController)`
@@ -168,9 +169,8 @@ You can also create controllers that are specific to `HTMLElement`, `ReactiveEle
 
 ### Building controllers from other controllers
 
-Controllers can be composed of other controllers as well. To do this create a child controller and forward the host to it.
-
-{% switchable-sample %}
+Controllers can be composed of other controllers as well.
+To do this create a child controller and forward the host to it.
 
 ```ts
 class DualClockController implements ReactiveController {
@@ -186,20 +186,6 @@ class DualClockController implements ReactiveController {
   get time2() { return this.clock2.value; }
 }
 ```
-
-```js
-class DualClockController {
-  constructor(host, delay1, delay2) {
-    this.clock1 = new ClockController(host, delay1);
-    this.clock2 = new ClockController(host, delay2);
-  }
-
-  get time1() { return this.clock1.value; }
-  get time2() { return this.clock2.value; }
-}
-```
-
-{% endswitchable-sample %}
 
 ### Controllers and directives
 
