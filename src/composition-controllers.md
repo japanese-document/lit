@@ -136,20 +136,20 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 リアクティブコントローラライフサイクルメソッドの実装はオプションです。
 
 * `hostConnected()`:
-  * Called when the host is connected.
-  * Called after creating the `renderRoot`, so a shadow root will exist at this point.
-  * Useful for setting up event listeners, observers, etc.
+  * ホストコンポーネントがDOMツリーに接続した時に実行されます。
+  * `renderRoot`が生成された後に実行されるので、この時点でshadow rootは存在しています。
+  * イベントリスナやオブザーバをセットすることに使用します。
 * `hostUpdate()`:
-  * Called before the host's `update()` and `render()` methods.
-  * Useful for reading DOM before it's updated (for example, for animations).
+  * ホストコンポーネントの`update()`メソッドと`render()`メソッドを実行する前に実行されます。
+  * 更新前にDOMを読む処理に使用します。
 * `hostUpdated()`:
-  * Called after updates, before the host's `updated()` method.
-  * Useful for reading DOM after it's modified (for example, for animations).
+  * ホストコンポーネントが更新した後で`updated()`メソッドが実行する前に実行されます。
+  * 更新後にDOMを読む処理に使用します。
 * `hostDisconnected()`:
-  * Called when the host is disconnected.
-  * Useful for cleaning up things added in `hostConnected()`, such as event listeners and observers.
+  * ホストコンポーネントがDOMツリーから離れた時に実行されます。
+  * イベントリスナやオブザーバのような`hostConnected()`で追加した処理を削除することに使用します。
 
-[リアクティブアップデートサイクル](https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル)を見てください。
+詳しくは[リアクティブアップデートサイクル](https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル)を見てください。
 
 ### ReactiveControllerHost API
 

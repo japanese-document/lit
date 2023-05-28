@@ -160,28 +160,28 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 リアクティブコントローラライフサイクルメソッドの実装はオプションです。</p>
 <ul>
 <li><code>hostConnected()</code>:<ul>
-<li>Called when the host is connected.</li>
-<li>Called after creating the <code>renderRoot</code>, so a shadow root will exist at this point.</li>
-<li>Useful for setting up event listeners, observers, etc.</li>
+<li>ホストコンポーネントがDOMツリーに接続した時に実行されます。</li>
+<li><code>renderRoot</code>が生成された後に実行されるので、この時点でshadow rootは存在しています。</li>
+<li>イベントリスナやオブザーバをセットすることに使用します。</li>
 </ul>
 </li>
 <li><code>hostUpdate()</code>:<ul>
-<li>Called before the host's <code>update()</code> and <code>render()</code> methods.</li>
-<li>Useful for reading DOM before it's updated (for example, for animations).</li>
+<li>ホストコンポーネントの<code>update()</code>メソッドと<code>render()</code>メソッドを実行する前に実行されます。</li>
+<li>更新前にDOMを読む処理に使用します。</li>
 </ul>
 </li>
 <li><code>hostUpdated()</code>:<ul>
-<li>Called after updates, before the host's <code>updated()</code> method.</li>
-<li>Useful for reading DOM after it's modified (for example, for animations).</li>
+<li>ホストコンポーネントが更新した後で<code>updated()</code>メソッドが実行する前に実行されます。</li>
+<li>更新後にDOMを読む処理に使用します。</li>
 </ul>
 </li>
 <li><code>hostDisconnected()</code>:<ul>
-<li>Called when the host is disconnected.</li>
-<li>Useful for cleaning up things added in <code>hostConnected()</code>, such as event listeners and observers.</li>
+<li>ホストコンポーネントがDOMツリーから離れた時に実行されます。</li>
+<li>イベントリスナやオブザーバのような<code>hostConnected()</code>で追加した処理を削除することに使用します。</li>
 </ul>
 </li>
 </ul>
-<p><a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を見てください。</p>
+<p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を見てください。</p>
 <h3 id="ReactiveControllerHost_API"><a href="#ReactiveControllerHost_API">ReactiveControllerHost API</a></h3>
 <p>A reactive controller host implements a small API for adding controllers and requesting updates, and is responsible for calling its controller's lifecycle methods.</p>
 <p>This is the minimum API exposed on a controller host:</p>
