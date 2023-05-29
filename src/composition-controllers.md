@@ -131,7 +131,7 @@ class ClockController implements ReactiveController {
 
 ### ライフサイクル
 
-[ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)インターフェイスで定義されているリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
+[ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)型のリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
 LitElementはそのライフサイクルイベントの際、結びつけられているコントローラのリアクティブコントローラライフサイクルメソッドを実行します。
 リアクティブコントローラライフサイクルメソッドの実装はオプションです。
 
@@ -187,9 +187,11 @@ class DualClockController implements ReactiveController {
 
 ### コントローラとディレクティブ
 
-Combining controllers with directives can be a very powerful technique, especially for directives that need to do work before or after rendering, like animation directives; or controllers that need references to specific elements in a template.
+コントローラとディレクティブを組み合わせることはとても応用範囲が広いテクニックです。
+特にアニメーションディレクティブようなレンダリングの前後で動作が必要なディレクティブや
+テンプレート内の特定の要素を参照する必要があるコントローラです。
 
-There are two main patterns of using controllers with directives:
+コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。
 
 * Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.
 * Controllers that own directives. These are controllers that create one or more directives for use in the host's template.
@@ -257,16 +259,11 @@ Asynchronous tasks, such as long running computations or network I/O, typically 
 
 Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.
 
-`@lit-labs/task` contains a generic `Task` controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.
+[@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task) contains a generic `Task` controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.
 
 You can use `Task` to create a custom controller with an API tailored for your specific task. Here we wrap `Task` in a `NamesController` that can fetch one of a specified list of names from a demo REST API. `NameController` exposes a `kind` property as an input, and a `render()` method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.
 
 {% playground-ide "docs/controllers/names" %}
-
-## See also
-
-* [Reactive update cycle](/docs/v2/components/lifecycle/#reactive-update-cycle)
-* [@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task)
 
 ---
 
