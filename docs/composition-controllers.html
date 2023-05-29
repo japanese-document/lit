@@ -155,7 +155,7 @@ which helps contain their APIs and lets you use multiple controller instances pe
 <p>コントローラをホストコンポーネントに登録すると、
 コントローラに実装したホストコンポーネントに対するライフサイクルコールバックが有効になります。</p>
 <h3 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h3>
-<p><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>インターフェイスで定義されているリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
+<p><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>型のリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
 LitElementはそのライフサイクルイベントの際、結びつけられているコントローラのリアクティブコントローラライフサイクルメソッドを実行します。
 リアクティブコントローラライフサイクルメソッドの実装はオプションです。</p>
 <ul>
@@ -210,8 +210,10 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 }
 </code></pre>
 <h3 id="コントローラとディレクティブ"><a href="#コントローラとディレクティブ">コントローラとディレクティブ</a></h3>
-<p>Combining controllers with directives can be a very powerful technique, especially for directives that need to do work before or after rendering, like animation directives; or controllers that need references to specific elements in a template.</p>
-<p>There are two main patterns of using controllers with directives:</p>
+<p>コントローラとディレクティブを組み合わせることはとても応用範囲が広いテクニックです。
+特にアニメーションディレクティブようなレンダリングの前後で動作が必要なディレクティブや
+テンプレート内の特定の要素を参照する必要があるコントローラです。</p>
+<p>コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。</p>
 <ul>
 <li>Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.</li>
 <li>Controllers that own directives. These are controllers that create one or more directives for use in the host's template.</li>
@@ -258,14 +260,9 @@ export class ResizeController {
 <h3 id="Asynchronous_tasks"><a href="#Asynchronous_tasks">Asynchronous tasks</a></h3>
 <p>Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).</p>
 <p>Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.</p>
-<p><code>@lit-labs/task</code> contains a generic <code>Task</code> controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.</p>
+<p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a> contains a generic <code>Task</code> controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.</p>
 <p>You can use <code>Task</code> to create a custom controller with an API tailored for your specific task. Here we wrap <code>Task</code> in a <code>NamesController</code> that can fetch one of a specified list of names from a demo REST API. <code>NameController</code> exposes a <code>kind</code> property as an input, and a <code>render()</code> method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.</p>
 <p>{% playground-ide "docs/controllers/names" %}</p>
-<h2 id="See_also"><a href="#See_also">See also</a></h2>
-<ul>
-<li><a class="Link" href="/docs/v2/components/lifecycle/#reactive-update-cycle">Reactive update cycle</a></li>
-<li><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a></li>
-</ul>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -317,7 +314,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#External_inputs">External inputs</a></p>
 <p class="h4"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></p>
 <p class="h3"><a href="#Asynchronous_tasks">Asynchronous tasks</a></p>
-<p class="h2"><a href="#See_also">See also</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>
