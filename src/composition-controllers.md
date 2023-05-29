@@ -163,14 +163,12 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 * `requestUpdate()`
 * `updateComplete: Promise<boolean>`
 
-You can also create controllers that are specific to `HTMLElement`, `ReactiveElement`, `LitElement` and require more of those APIs; or even controllers that are tied to a specific element class or other interface.
+[ReactiveControllerHost](https://lit.dev/docs/api/controllers/#ReactiveControllerHost)型だけではなく`HTMLElement`、`ReactiveElement`、`LitElement`をコントローラと結びつけることもできます。それだけてはなく、コントローラをcustom elementsや他のインターフェイスと結びつけることもできます。
 
-`LitElement` and `ReactiveElement` are controller hosts, but hosts can also be other objects like base classes from other web components libraries, components from frameworks, or other controllers.
+### コントローラを組み合わせてコントローラを生成する
 
-### Building controllers from other controllers
-
-Controllers can be composed of other controllers as well.
-To do this create a child controller and forward the host to it.
+コントローラを組み合わせてコントローラを定義することができます。
+下記のように子コントローラにホストコンポーネントを渡します。
 
 ```ts
 class DualClockController implements ReactiveController {
@@ -187,15 +185,16 @@ class DualClockController implements ReactiveController {
 }
 ```
 
-### Controllers and directives
+### コントローラとディレクティブ
 
 Combining controllers with directives can be a very powerful technique, especially for directives that need to do work before or after rendering, like animation directives; or controllers that need references to specific elements in a template.
 
 There are two main patterns of using controllers with directives:
+
 * Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.
 * Controllers that own directives. These are controllers that create one or more directives for use in the host's template.
 
-For more information about writing directives, see [Custom directives](/docs/v2/templates/custom-directives/).
+詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
 #### Controller directives
 
@@ -206,8 +205,6 @@ Reactive controllers do not need to be stored as instance fields on the host. An
 Directives do not need to be standalone functions, they can be methods on other objects as well, such as controllers. This can be useful in cases where a controller needs a specific reference to an element in a template.
 
 For example, imagine a ResizeController that lets you observe an element's size with a ResizeObserver. To work we need both a ResizeController instance, and a directive that is placed on the element we want to observe:
-
-{% switchable-sample %}
 
 ```ts
 class MyElement extends LitElement {
@@ -221,21 +218,6 @@ class MyElement extends LitElement {
   }
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  _textSize = new ResizeController(this);
-
-  render() {
-    return html`
-      <textarea ${this._textSize.observe()}></textarea>
-      <p>The width is ${this._textSize.contentRect?.width}</p>
-    `;
-  }
-}
-```
-
-{% endswitchable-sample %}
 
 To implement this, you create a directive and call it from a method:
 
@@ -254,12 +236,6 @@ export class ResizeController {
   }
 }
 ```
-
-{% todo %}
-
-- Review and cleanup this example
-
-{% endtodo %}
 
 ## Use cases
 
@@ -286,12 +262,6 @@ Controllers are a great way to bundle task execution and state to make it easy t
 You can use `Task` to create a custom controller with an API tailored for your specific task. Here we wrap `Task` in a `NamesController` that can fetch one of a specified list of names from a demo REST API. `NameController` exposes a `kind` property as an input, and a `render()` method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.
 
 {% playground-ide "docs/controllers/names" %}
-
-{% todo %}
-
-- Animations
-
-{% endtodo %}
 
 ## See also
 
