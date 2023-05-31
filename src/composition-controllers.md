@@ -193,20 +193,27 @@ class DualClockController implements ReactiveController {
 
 コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。
 
-* Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.
+* コントローラディレクティブ。これはディレクティブ自身がホストコンポーネントのライフサイクルをフックするコントローラであるディレクティブです。
 * Controllers that own directives. These are controllers that create one or more directives for use in the host's template.
 
 詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
-#### Controller directives
+#### コントローラディレクティブ
 
-Reactive controllers do not need to be stored as instance fields on the host. Anything added to a host using `addController()` is a controller. In particular, a directive can also be a controller. This enables a directive to hook into the host lifecycle.
+リアクティブコントローラはホストコンポーネントのフィールドに格納する必要はありません。
+ホストコンポーネントの`addController()`で結びつけられるものがコントローラです。
+ディレクティブはコントローラにすることができます。
+ディレクティブをコントローラにするとディレクティブはホストコンポーネントのライフサイクルにフックすることが可能になります。
 
-#### Controllers that own directives
+#### ディレクティブを持つコントローラ
 
-Directives do not need to be standalone functions, they can be methods on other objects as well, such as controllers. This can be useful in cases where a controller needs a specific reference to an element in a template.
+ディレクティブは単独の関数である必要はありません。
+コントローラのようなオブジェクトのメソッドでも可能です。
+これはコントローラがテンプレート内の特定の要素を産量する必要がある場合で使います。
 
-For example, imagine a ResizeController that lets you observe an element's size with a ResizeObserver. To work we need both a ResizeController instance, and a directive that is placed on the element we want to observe:
+例えば、[ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)を使って要素の大きさを監視する(observe)`ResizeController`を想像してください。
+それには下記のような`ResizeController`インスタンスと監視したい要素上に配置されるディレクティブが必要です。
+
 
 ```ts
 class MyElement extends LitElement {
@@ -221,7 +228,7 @@ class MyElement extends LitElement {
 }
 ```
 
-To implement this, you create a directive and call it from a method:
+これを実現するために下記のようにディレクティブを作成してそれをメソッドから実行します。
 
 ```ts
 class ResizeDirective {
@@ -232,16 +239,17 @@ const resizeDirective = directive(ResizeDirective);
 export class ResizeController {
   /* ... */
   observe() {
-    // Pass a reference to the controller so the directive can
-    // notify the controller on size changes.
+    // サイズの変更をディレクティブがコントローラに通知するためにコントローラの参照をディレクティブに渡します。
     return resizeDirective(this);
   }
 }
 ```
 
-## Use cases
+## ユースケース
 
-Reactive controllers are very general and have a very broad set of possible use cases. They are particularly good for connecting a component to an external resource, like user input, state management, or remote APIs. Here are a few common use cases.
+リアクティブコントローラの用途は多岐にわたります。
+リアクティブコントローラはユーザインプットやステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
+次に一般的なユースケースを示します。
 
 ### External inputs
 

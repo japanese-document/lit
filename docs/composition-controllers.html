@@ -215,15 +215,21 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 テンプレート内の特定の要素を参照する必要があるコントローラです。</p>
 <p>コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。</p>
 <ul>
-<li>Controller directives. These are directives that themselves are controllers in order to hook into the host lifecycle.</li>
+<li>コントローラディレクティブ。これはディレクティブ自身がホストコンポーネントのライフサイクルをフックするコントローラであるディレクティブです。</li>
 <li>Controllers that own directives. These are controllers that create one or more directives for use in the host's template.</li>
 </ul>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
-<h4 id="Controller_directives"><a href="#Controller_directives">Controller directives</a></h4>
-<p>Reactive controllers do not need to be stored as instance fields on the host. Anything added to a host using <code>addController()</code> is a controller. In particular, a directive can also be a controller. This enables a directive to hook into the host lifecycle.</p>
-<h4 id="Controllers_that_own_directives"><a href="#Controllers_that_own_directives">Controllers that own directives</a></h4>
-<p>Directives do not need to be standalone functions, they can be methods on other objects as well, such as controllers. This can be useful in cases where a controller needs a specific reference to an element in a template.</p>
-<p>For example, imagine a ResizeController that lets you observe an element's size with a ResizeObserver. To work we need both a ResizeController instance, and a directive that is placed on the element we want to observe:</p>
+<h4 id="コントローラディレクティブ"><a href="#コントローラディレクティブ">コントローラディレクティブ</a></h4>
+<p>リアクティブコントローラはホストコンポーネントのフィールドに格納する必要はありません。
+ホストコンポーネントの<code>addController()</code>で結びつけられるものがコントローラです。
+ディレクティブはコントローラにすることができます。
+ディレクティブをコントローラにするとディレクティブはホストコンポーネントのライフサイクルにフックすることが可能になります。</p>
+<h4 id="ディレクティブを持つコントローラ"><a href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></h4>
+<p>ディレクティブは単独の関数である必要はありません。
+コントローラのようなオブジェクトのメソッドでも可能です。
+これはコントローラがテンプレート内の特定の要素を産量する必要がある場合で使います。</p>
+<p>例えば、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">ResizeObserver</a>を使って要素の大きさを監視する(observe)<code>ResizeController</code>を想像してください。
+それには下記のような<code>ResizeController</code>インスタンスと監視したい要素上に配置されるディレクティブが必要です。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   private _textSize = new ResizeController(this);
 
@@ -235,7 +241,7 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
   }
 }
 </code></pre>
-<p>To implement this, you create a directive and call it from a method:</p>
+<p>これを実現するために下記のようにディレクティブを作成してそれをメソッドから実行します。</p>
 <pre><code class="language-ts">class ResizeDirective {
   /* ... */
 }
@@ -244,14 +250,15 @@ const resizeDirective = directive(ResizeDirective);
 export class ResizeController {
   /* ... */
   observe() {
-    // Pass a reference to the controller so the directive can
-    // notify the controller on size changes.
+    // サイズの変更をディレクティブがコントローラに通知するためにコントローラの参照をディレクティブに渡します。
     return resizeDirective(this);
   }
 }
 </code></pre>
-<h2 id="Use_cases"><a href="#Use_cases">Use cases</a></h2>
-<p>Reactive controllers are very general and have a very broad set of possible use cases. They are particularly good for connecting a component to an external resource, like user input, state management, or remote APIs. Here are a few common use cases.</p>
+<h2 id="ユースケース"><a href="#ユースケース">ユースケース</a></h2>
+<p>リアクティブコントローラの用途は多岐にわたります。
+リアクティブコントローラはユーザインプットやステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
+次に一般的なユースケースを示します。</p>
 <h3 id="External_inputs"><a href="#External_inputs">External inputs</a></h3>
 <p>Reactive controllers can be used to connect to external inputs. For example, keyboard and mouse events, resize observers, or mutation observers. The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.</p>
 <h4 id="Example__MouseMoveController"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></h4>
@@ -308,9 +315,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#ReactiveControllerHost_API">ReactiveControllerHost API</a></p>
 <p class="h3"><a href="#コントローラを組み合わせてコントローラを生成する">コントローラを組み合わせてコントローラを生成する</a></p>
 <p class="h3"><a href="#コントローラとディレクティブ">コントローラとディレクティブ</a></p>
-<p class="h4"><a href="#Controller_directives">Controller directives</a></p>
-<p class="h4"><a href="#Controllers_that_own_directives">Controllers that own directives</a></p>
-<p class="h2"><a href="#Use_cases">Use cases</a></p>
+<p class="h4"><a href="#コントローラディレクティブ">コントローラディレクティブ</a></p>
+<p class="h4"><a href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></p>
+<p class="h2"><a href="#ユースケース">ユースケース</a></p>
 <p class="h3"><a href="#External_inputs">External inputs</a></p>
 <p class="h4"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></p>
 <p class="h3"><a href="#Asynchronous_tasks">Asynchronous tasks</a></p>
