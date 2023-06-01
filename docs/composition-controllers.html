@@ -257,10 +257,12 @@ export class ResizeController {
 </code></pre>
 <h2 id="ユースケース"><a href="#ユースケース">ユースケース</a></h2>
 <p>リアクティブコントローラの用途は多岐にわたります。
-リアクティブコントローラはユーザインプットやステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
+リアクティブコントローラはユーザ入力やステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
 次に一般的なユースケースを示します。</p>
-<h3 id="External_inputs"><a href="#External_inputs">External inputs</a></h3>
-<p>Reactive controllers can be used to connect to external inputs. For example, keyboard and mouse events, resize observers, or mutation observers. The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.</p>
+<h3 id="外部入力"><a href="#外部入力">外部入力</a></h3>
+<p>Reactive controllers can be used to connect to external inputs.
+For example, keyboard and mouse events, resize observers, or mutation observers.
+The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.</p>
 <h4 id="Example__MouseMoveController"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></h4>
 <p>This example shows how a controller can perform setup and cleanup work when its host is connected and disconnected, and request an update when an input changes:</p>
 <p>{% playground-ide "docs/controllers/mouse" "my-element.ts" %}</p>
@@ -318,7 +320,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#コントローラディレクティブ">コントローラディレクティブ</a></p>
 <p class="h4"><a href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></p>
 <p class="h2"><a href="#ユースケース">ユースケース</a></p>
-<p class="h3"><a href="#External_inputs">External inputs</a></p>
+<p class="h3"><a href="#外部入力">外部入力</a></p>
 <p class="h4"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></p>
 <p class="h3"><a href="#Asynchronous_tasks">Asynchronous tasks</a></p>
 <p class="h2"><a href="#License">License</a></p>

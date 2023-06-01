@@ -248,12 +248,14 @@ export class ResizeController {
 ## ユースケース
 
 リアクティブコントローラの用途は多岐にわたります。
-リアクティブコントローラはユーザインプットやステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
+リアクティブコントローラはユーザ入力やステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
 次に一般的なユースケースを示します。
 
-### External inputs
+### 外部入力
 
-Reactive controllers can be used to connect to external inputs. For example, keyboard and mouse events, resize observers, or mutation observers. The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.
+Reactive controllers can be used to connect to external inputs.
+For example, keyboard and mouse events, resize observers, or mutation observers.
+The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.
 
 #### Example: MouseMoveController
 
