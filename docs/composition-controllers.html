@@ -260,13 +260,54 @@ export class ResizeController {
 リアクティブコントローラはユーザ入力やステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
 次に一般的なユースケースを示します。</p>
 <h3 id="外部入力"><a href="#外部入力">外部入力</a></h3>
-<p>Reactive controllers can be used to connect to external inputs.
-For example, keyboard and mouse events, resize observers, or mutation observers.
-The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.</p>
-<h4 id="Example__MouseMoveController"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></h4>
-<p>This example shows how a controller can perform setup and cleanup work when its host is connected and disconnected, and request an update when an input changes:</p>
-<p>{% playground-ide "docs/controllers/mouse" "my-element.ts" %}</p>
-<h3 id="Asynchronous_tasks"><a href="#Asynchronous_tasks">Asynchronous tasks</a></h3>
+<p>リアクティブコントローラは外部入力に接続することに使うことができます。
+外部入力の例はキーボードイベントやマウスイベント、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">リサイズオブザーバ</a>、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">ミューテーションオブザーバ</a>があります。
+コントローラはレンダリング時に現在の入力値を用意して、入力値が変わるとホストコンポーネントを更新することができます。</p>
+<h4 id="例__MouseMoveController"><a href="#例__MouseMoveController">例: MouseMoveController</a></h4>
+<p>下記の例はホストコンポーネントがDOMツリーに接続したり切断した時にコントローラがセットアップしたりクリーンアップする方法と入力値が変更した時に更新する方法を説明しています。</p>
+<pre><code class="language-ts">import {LitElement, html, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {MouseController} from './mouse-controller.js';
+
+export class MouseController {
+  private host: ReactiveControllerHost;
+  pos = {x: 0, y: 0};
+
+  _onMouseMove = ({clientX, clientY}: MouseEvent) =&gt; {
+    this.pos = {x: clientX, y: clientY};
+    this.host.requestUpdate();
+  };
+
+  constructor(host: ReactiveControllerHost) {
+    this.host = host;
+    host.addController(this);
+  }
+
+  hostConnected() {
+    window.addEventListener('mousemove', this._onMouseMove);
+  }
+
+  hostDisconnected() {
+    window.removeEventListener('mousemove', this._onMouseMove);
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  private mouse = new MouseController(this);
+
+  render() {
+    return html`
+      &lt;h3&gt;The mouse is at:&lt;/h3&gt;
+      &lt;pre&gt;
+        x: ${this.mouse.pos.x as number}
+        y: ${this.mouse.pos.y as number}
+      &lt;/pre&gt;
+    `;
+  }
+}
+</code></pre>
+<h3 id="非同期タスク"><a href="#非同期タスク">非同期タスク</a></h3>
 <p>Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).</p>
 <p>Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.</p>
 <p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a> contains a generic <code>Task</code> controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.</p>
@@ -321,8 +362,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></p>
 <p class="h2"><a href="#ユースケース">ユースケース</a></p>
 <p class="h3"><a href="#外部入力">外部入力</a></p>
-<p class="h4"><a href="#Example__MouseMoveController">Example: MouseMoveController</a></p>
-<p class="h3"><a href="#Asynchronous_tasks">Asynchronous tasks</a></p>
+<p class="h4"><a href="#例__MouseMoveController">例: MouseMoveController</a></p>
+<p class="h3"><a href="#非同期タスク">非同期タスク</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>

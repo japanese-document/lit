@@ -253,17 +253,59 @@ export class ResizeController {
 
 ### 外部入力
 
-Reactive controllers can be used to connect to external inputs.
-For example, keyboard and mouse events, resize observers, or mutation observers.
-The controller can provide the current value of the input to use in rendering, and request a host update when the value changes.
+リアクティブコントローラは外部入力に接続することに使うことができます。
+外部入力の例はキーボードイベントやマウスイベント、[リサイズオブザーバ](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)、[ミューテーションオブザーバ](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)があります。
+コントローラはレンダリング時に現在の入力値を用意して、入力値が変わるとホストコンポーネントを更新することができます。
 
-#### Example: MouseMoveController
+#### 例: MouseMoveController
 
-This example shows how a controller can perform setup and cleanup work when its host is connected and disconnected, and request an update when an input changes:
+下記の例はホストコンポーネントがDOMツリーに接続したり切断した時にコントローラがセットアップしたりクリーンアップする方法と入力値が変更した時に更新する方法を説明しています。
 
-{% playground-ide "docs/controllers/mouse" "my-element.ts" %}
+```ts
+import {LitElement, html, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {MouseController} from './mouse-controller.js';
 
-### Asynchronous tasks
+export class MouseController {
+  private host: ReactiveControllerHost;
+  pos = {x: 0, y: 0};
+
+  _onMouseMove = ({clientX, clientY}: MouseEvent) => {
+    this.pos = {x: clientX, y: clientY};
+    this.host.requestUpdate();
+  };
+
+  constructor(host: ReactiveControllerHost) {
+    this.host = host;
+    host.addController(this);
+  }
+
+  hostConnected() {
+    window.addEventListener('mousemove', this._onMouseMove);
+  }
+
+  hostDisconnected() {
+    window.removeEventListener('mousemove', this._onMouseMove);
+  }
+}
+
+@customElement('my-element')
+class MyElement extends LitElement {
+  private mouse = new MouseController(this);
+
+  render() {
+    return html`
+      <h3>The mouse is at:</h3>
+      <pre>
+        x: ${this.mouse.pos.x as number}
+        y: ${this.mouse.pos.y as number}
+      </pre>
+    `;
+  }
+}
+```
+
+### 非同期タスク
 
 Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).
 
