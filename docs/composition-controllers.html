@@ -308,10 +308,16 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="非同期タスク"><a href="#非同期タスク">非同期タスク</a></h3>
-<p>Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).</p>
-<p>Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.</p>
-<p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a> contains a generic <code>Task</code> controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.</p>
-<p>You can use <code>Task</code> to create a custom controller with an API tailored for your specific task. Here we wrap <code>Task</code> in a <code>NamesController</code> that can fetch one of a specified list of names from a demo REST API. <code>NameController</code> exposes a <code>kind</code> property as an input, and a <code>render()</code> method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.</p>
+<p>長い時間がかかる計算やネットワークI/Oのような非同期タスクは通常、時間の経過とともにステートが変化します。
+非同期タスクのステートが変化した時、それをホストコンポーネントに通知する必要があります。</p>
+<p>コントローラはコンポーネント内でタスクの実行とステートの管理を簡単にする優れた方法です。
+通常、コントローラの形式で実装されたタスクはホストコンポーネントがセットする入力とホストコンポーネントがレンダリングすることができる出力を持っています。</p>
+<p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a> contains a generic <code>Task</code> controller that can pull inputs from the host,
+execute a task function, and render different templates depending on the task state.</p>
+<p>You can use <code>Task</code> to create a custom controller with an API tailored for your specific task.
+Here we wrap <code>Task</code> in a <code>NamesController</code> that can fetch one of a specified list of names from a demo REST API.
+<code>NameController</code> exposes a <code>kind</code> property as an input, and a <code>render()</code> method that can render one of four templates depending on the task state. 
+The task logic, and how it updates the host, are abstracted from the host component.</p>
 <p>{% playground-ide "docs/controllers/names" %}</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>

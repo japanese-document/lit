@@ -307,13 +307,19 @@ class MyElement extends LitElement {
 
 ### 非同期タスク
 
-Asynchronous tasks, such as long running computations or network I/O, typically have state that changes over time, and will need to notify the host when the task state changes (completes, errors, etc.).
+長い時間がかかる計算やネットワークI/Oのような非同期タスクは通常、時間の経過とともにステートが変化します。
+非同期タスクのステートが変化した時、それをホストコンポーネントに通知する必要があります。
 
-Controllers are a great way to bundle task execution and state to make it easy to use inside a component. A task written as a controller usually has inputs that a host can set, and outputs that a host can render.
+コントローラはコンポーネント内でタスクの実行とステートの管理を簡単にする優れた方法です。
+通常、コントローラの形式で実装されたタスクはホストコンポーネントがセットする入力とホストコンポーネントがレンダリングすることができる出力を持っています。
 
-[@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task) contains a generic `Task` controller that can pull inputs from the host, execute a task function, and render different templates depending on the task state.
+[@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task) contains a generic `Task` controller that can pull inputs from the host,
+execute a task function, and render different templates depending on the task state.
 
-You can use `Task` to create a custom controller with an API tailored for your specific task. Here we wrap `Task` in a `NamesController` that can fetch one of a specified list of names from a demo REST API. `NameController` exposes a `kind` property as an input, and a `render()` method that can render one of four templates depending on the task state. The task logic, and how it updates the host, are abstracted from the host component.
+You can use `Task` to create a custom controller with an API tailored for your specific task.
+Here we wrap `Task` in a `NamesController` that can fetch one of a specified list of names from a demo REST API.
+`NameController` exposes a `kind` property as an input, and a `render()` method that can render one of four templates depending on the task state. 
+The task logic, and how it updates the host, are abstracted from the host component.
 
 {% playground-ide "docs/controllers/names" %}
 
