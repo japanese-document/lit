@@ -313,15 +313,101 @@ class MyElement extends LitElement {
 コントローラはコンポーネント内でタスクの実行とステートの管理を簡単にする優れた方法です。
 通常、コントローラの形式で実装されたタスクはホストコンポーネントがセットする入力とホストコンポーネントがレンダリングすることができる出力を持っています。
 
-[@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task) contains a generic `Task` controller that can pull inputs from the host,
-execute a task function, and render different templates depending on the task state.
+[@lit-labs/task](https://www.npmjs.com/package/@lit-labs/task)は汎用的な`Task`コントローラを提供します。
+そのコントローラはホストコンポーネントからの入力を受け取り、タスクを実行して、タスクのステートに応じて異なるテンプレートをレンダリングします。
 
-You can use `Task` to create a custom controller with an API tailored for your specific task.
-Here we wrap `Task` in a `NamesController` that can fetch one of a specified list of names from a demo REST API.
-`NameController` exposes a `kind` property as an input, and a `render()` method that can render one of four templates depending on the task state. 
-The task logic, and how it updates the host, are abstracted from the host component.
+`Task`コントローラを使って特定のAPIに対応したカスタムコントローラを作成することができます。
+下記の例では、`NamesController`内の`Task`をラップします。
+`NameController`はデモのREST APIから名前のリストを取得しています。
+`NameController`は入力用に`kind`プロパティを提供します。
+`NameController`の`render()`メソッドはタスクのステートに応じて4つのテンプレートの内1つをレンダリングします。
+タスクのロジックとホストコンポーネントの更新はホストコンポーネントから抽象化されています。
 
-{% playground-ide "docs/controllers/names" %}
+```ts
+import {LitElement, html, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {initialState, StatusRenderer, Task} from '@lit-labs/task';
+
+type Result = Array<{name: string}>;
+type Kind = typeof kinds[number];
+
+const baseUrl = 'https://swapi.dev/api/';
+
+const kinds = [
+  '',
+  'people',
+  'starships',
+  'species',
+  'planets',
+  // Inserted to demo an error state.
+  'error'
+] as const;
+
+class NamesController {
+  host: ReactiveControllerHost;
+  value?: string[];
+  readonly kinds = Names.kinds;
+  private task!: Task;
+  private _kind: Names.Kind = '';
+
+  constructor(host: ReactiveControllerHost) {
+    this.host = host;
+    this.task = new Task<[Names.Kind], Names.Result>(host,
+      async ([kind]: [Names.Kind]) => {
+        if (!kind?.trim()) {
+          return initialState;
+        }
+        try {
+          const response = await fetch(`${Names.baseUrl}${kind}`);
+          const data = await response.json();
+          return data.results as Names.Result;
+        } catch {
+          throw new Error(`Failed to fetch "${kind}"`);
+        }
+      }, () => [this.kind]
+    );
+  }
+
+  set kind(value: Names.Kind) {
+    this._kind = value;
+    this.host.requestUpdate();
+  }
+  get kind() { return this._kind; }
+
+  render(renderFunctions: StatusRenderer<Names.Result>) {
+    return this.task.render(renderFunctions);
+  }
+}
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  private names = new NamesController(this);
+
+  render() {
+    return html`
+      <h3>Names List</h3>
+      Kind: <select @change=${this._kindChange}>
+      ${this.names.kinds.map(
+        (k) => html`<option value=${k}>${k}</option>`)
+      }
+    </select>
+    ${this.names.render({
+      complete: (result: Names.Result) => html`
+        <p>List of ${this.names.kind}</p>
+        <ul>${result.map(i => html`<li>${i.name}</li>`)}
+        </ul>
+      `,
+      initial: () => html`<p>Select a kind...</p>`,
+      pending: () => html`<p>Loading ${this.names.kind}...</p>`,
+      error: (e: any) => html`<p>${e}</p>`
+    })}`;
+  }
+
+  private _kindChange(e: Event) {
+    this.names.kind = (e.target as HTMLSelectElement).value as Names.Kind;
+  }
+}
+```
 
 ---
 

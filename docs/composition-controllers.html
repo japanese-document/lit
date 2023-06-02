@@ -312,13 +312,98 @@ class MyElement extends LitElement {
 非同期タスクのステートが変化した時、それをホストコンポーネントに通知する必要があります。</p>
 <p>コントローラはコンポーネント内でタスクの実行とステートの管理を簡単にする優れた方法です。
 通常、コントローラの形式で実装されたタスクはホストコンポーネントがセットする入力とホストコンポーネントがレンダリングすることができる出力を持っています。</p>
-<p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a> contains a generic <code>Task</code> controller that can pull inputs from the host,
-execute a task function, and render different templates depending on the task state.</p>
-<p>You can use <code>Task</code> to create a custom controller with an API tailored for your specific task.
-Here we wrap <code>Task</code> in a <code>NamesController</code> that can fetch one of a specified list of names from a demo REST API.
-<code>NameController</code> exposes a <code>kind</code> property as an input, and a <code>render()</code> method that can render one of four templates depending on the task state. 
-The task logic, and how it updates the host, are abstracted from the host component.</p>
-<p>{% playground-ide "docs/controllers/names" %}</p>
+<p><a class="Link" href="https://www.npmjs.com/package/@lit-labs/task">@lit-labs/task</a>は汎用的な<code>Task</code>コントローラを提供します。
+そのコントローラはホストコンポーネントからの入力を受け取り、タスクを実行して、タスクのステートに応じて異なるテンプレートをレンダリングします。</p>
+<p><code>Task</code>コントローラを使って特定のAPIに対応したカスタムコントローラを作成することができます。
+下記の例では、<code>NamesController</code>内の<code>Task</code>をラップします。
+<code>NameController</code>はデモのREST APIから名前のリストを取得しています。
+<code>NameController</code>は入力用に<code>kind</code>プロパティを提供します。
+<code>NameController</code>の<code>render()</code>メソッドはタスクのステートに応じて4つのテンプレートの内1つをレンダリングします。
+タスクのロジックとホストコンポーネントの更新はホストコンポーネントから抽象化されています。</p>
+<pre><code class="language-ts">import {LitElement, html, ReactiveControllerHost} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {initialState, StatusRenderer, Task} from '@lit-labs/task';
+
+type Result = Array&lt;{name: string}&gt;;
+type Kind = typeof kinds[number];
+
+const baseUrl = 'https://swapi.dev/api/';
+
+const kinds = [
+  '',
+  'people',
+  'starships',
+  'species',
+  'planets',
+  // Inserted to demo an error state.
+  'error'
+] as const;
+
+class NamesController {
+  host: ReactiveControllerHost;
+  value?: string[];
+  readonly kinds = Names.kinds;
+  private task!: Task;
+  private _kind: Names.Kind = '';
+
+  constructor(host: ReactiveControllerHost) {
+    this.host = host;
+    this.task = new Task&lt;[Names.Kind], Names.Result&gt;(host,
+      async ([kind]: [Names.Kind]) =&gt; {
+        if (!kind?.trim()) {
+          return initialState;
+        }
+        try {
+          const response = await fetch(`${Names.baseUrl}${kind}`);
+          const data = await response.json();
+          return data.results as Names.Result;
+        } catch {
+          throw new Error(`Failed to fetch "${kind}"`);
+        }
+      }, () =&gt; [this.kind]
+    );
+  }
+
+  set kind(value: Names.Kind) {
+    this._kind = value;
+    this.host.requestUpdate();
+  }
+  get kind() { return this._kind; }
+
+  render(renderFunctions: StatusRenderer&lt;Names.Result&gt;) {
+    return this.task.render(renderFunctions);
+  }
+}
+
+@customElement('my-element')
+export class MyElement extends LitElement {
+  private names = new NamesController(this);
+
+  render() {
+    return html`
+      &lt;h3&gt;Names List&lt;/h3&gt;
+      Kind: &lt;select @change=${this._kindChange}&gt;
+      ${this.names.kinds.map(
+        (k) =&gt; html`&lt;option value=${k}&gt;${k}&lt;/option&gt;`)
+      }
+    &lt;/select&gt;
+    ${this.names.render({
+      complete: (result: Names.Result) =&gt; html`
+        &lt;p&gt;List of ${this.names.kind}&lt;/p&gt;
+        &lt;ul&gt;${result.map(i =&gt; html`&lt;li&gt;${i.name}&lt;/li&gt;`)}
+        &lt;/ul&gt;
+      `,
+      initial: () =&gt; html`&lt;p&gt;Select a kind...&lt;/p&gt;`,
+      pending: () =&gt; html`&lt;p&gt;Loading ${this.names.kind}...&lt;/p&gt;`,
+      error: (e: any) =&gt; html`&lt;p&gt;${e}&lt;/p&gt;`
+    })}`;
+  }
+
+  private _kindChange(e: Event) {
+    this.names.kind = (e.target as HTMLSelectElement).value as Names.Kind;
+  }
+}
+</code></pre>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
