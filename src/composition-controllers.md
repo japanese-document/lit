@@ -194,7 +194,7 @@ class DualClockController implements ReactiveController {
 コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。
 
 * コントローラディレクティブ。これはディレクティブ自身がホストコンポーネントのライフサイクルをフックするコントローラであるディレクティブです。
-* Controllers that own directives. These are controllers that create one or more directives for use in the host's template.
+* ディレクティブを持つコントローラ。これはホストコンポーネントのテンプレート内で使用する1つ以上のディレクティブを生成します。
 
 詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
 
@@ -339,7 +339,6 @@ const kinds = [
   'starships',
   'species',
   'planets',
-  // Inserted to demo an error state.
   'error'
 ] as const;
 

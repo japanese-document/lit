@@ -216,7 +216,7 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 <p>コントローラとディレクティブを組み合わせて使うパターンは主に下記の2つです。</p>
 <ul>
 <li>コントローラディレクティブ。これはディレクティブ自身がホストコンポーネントのライフサイクルをフックするコントローラであるディレクティブです。</li>
-<li>Controllers that own directives. These are controllers that create one or more directives for use in the host's template.</li>
+<li>ディレクティブを持つコントローラ。これはホストコンポーネントのテンプレート内で使用する1つ以上のディレクティブを生成します。</li>
 </ul>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/custom-directives/">カスタムディレクティブ</a>を見てください。</p>
 <h4 id="コントローラディレクティブ"><a href="#コントローラディレクティブ">コントローラディレクティブ</a></h4>
@@ -335,7 +335,6 @@ const kinds = [
   'starships',
   'species',
   'planets',
-  // Inserted to demo an error state.
   'error'
 ] as const;
 
