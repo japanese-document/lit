@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/templates-custom-directives.html" />
+    <meta property="og:title" content="カスタムディレクティブ" />
+    <meta property="og:description" content="Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.U" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.U" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>カスタムディレクティブ</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <div class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">Expressions</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </div></div>
+    <main class="main markdown-body">
+      <h1 id="カスタムディレクティブ"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></h1>
+<p>Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.</p>
+<p>Using a directive in your template is as simple as calling a function in a template expression:</p>
+<pre><code class="language-js">html`&lt;div&gt;
+       ${fancyDirective('some text')}
+     &lt;/div&gt;`
+</code></pre>
+<p>Lit ships with a number of <a class="Link" href="/docs/v2/templates/directives/">built-in directives</a> like <a class="Link" href="/docs/v2/templates/directives/#repeat"><code>repeat()</code></a> and <a class="Link" href="/docs/v2/templates/directives/#cache"><code>cache()</code></a>. Users can also write their own custom directives.</p>
+<p>There are two kinds of directives:</p>
+<ul>
+<li>Simple functions</li>
+<li>Class-based directives</li>
+</ul>
+<p>A simple function returns a value to render. It can take any number of arguments, or no arguments at all.</p>
+<pre><code class="language-js">export noVowels = (str) =&gt; str.replaceAll(/[aeiou]/ig,'x');
+</code></pre>
+<p>A class-based directive lets you do things that a simple function can't. Use a class based directive to:</p>
+<ul>
+<li>Access the rendered DOM directly (for example, add, remove, or reorder rendered DOM nodes).</li>
+<li>Persist state between renders.</li>
+<li>Update the DOM asynchronously, outside of a render call.</li>
+<li>Clean up resources when the directive is disconnected from the DOM</li>
+</ul>
+<p>The rest of this page describes class-based directives.</p>
+<h2 id="Creating_class-based_directives"><a href="#Creating_class-based_directives">Creating class-based directives</a></h2>
+<p>To create a class-based directive:</p>
+<ul>
+<li>Implement the directive as a class that extends the {% api "Directive" %} class.</li>
+<li>Pass your class to the {% api "directive()" "directive" %} factory to create a directive function that can be used in Lit template expressions.</li>
+</ul>
+<pre><code class="language-js">import {Directive, directive} from 'lit/directive.js';
+
+// Define directive
+class HelloDirective extends Directive {
+  render() {
+    return `Hello!`;
+  }
+}
+// Create the directive function
+const hello = directive(HelloDirective);
+
+// Use directive
+const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
+</code></pre>
+<p>When this template is evaluated, the directive <em>function</em>  (<code>hello()</code>) returns a <code>DirectiveResult</code> object, which instructs Lit to create or update an instance of the directive <em>class</em> (<code>HelloDirective</code>). Lit then calls methods on the directive instance to run its update logic.</p>
+<p>Some directives need to update the DOM asynchronously, outside of the normal update cycle. To create an <em>async directive</em>, extend the <code>AsyncDirective</code> base class instead of <code>Directive</code>. See <a class="Link" href="#async-directives">Async directives</a> for details.</p>
+<h2 id="Lifecycle_of_a_class-based_directive"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></h2>
+<p>The directive class has a few built-in lifecycle methods:</p>
+<ul>
+<li>The class constructor, for one-time initialization.</li>
+<li><code>render()</code>, for declarative rendering.</li>
+<li><code>update()</code>, for imperative DOM access.</li>
+</ul>
+<p>You must implement the <code>render()</code> callback for all directives. Implementing <code>update()</code> is optional. The default implementation of <code>update()</code> calls and returns the value from <code>render()</code>.</p>
+<p>Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks. See <a class="Link" href="#async-directives">Async directives</a> for details.</p>
+<h3 id="One-time_setup__constructor()"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></h3>
+<p>When Lit encounters a <code>DirectiveResult</code> in an expression for the first time, it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyDirective extends Directive {
+  // Class fields will be initialized once and can be used to persist
+  // state between renders
+  value = 0;
+  // Constructor is only run the first time a given directive is used
+  // in an expression
+  constructor(partInfo: PartInfo) {
+    super(partInfo);
+    console.log('MyDirective created');
+  }
+  ...
+}
+</code></pre>
+<pre><code class="language-js">class MyDirective extends Directive {
+  // Class fields will be initialized once and can be used to persist
+  // state between renders
+  value = 0;
+  // Constructor is only run the first time a given directive is used
+  // in an expression
+  constructor(partInfo) {
+    super(partInfo);
+    console.log('MyDirective created');
+  }
+  ...
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>As long as the same directive function is used in the same expression each render, the previous instance is reused, thus the state of the instance persists between renders.</p>
+<p>The constructor receives a single <code>PartInfo</code> object, which provides metadata about the expression the directive was used in. This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions (see <a class="Link" href="#limiting-a-directive-to-one-expression-type">Limiting a directive to one expression type</a>).</p>
+<h3 id="Declarative_rendering__render()"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></h3>
+<p>The <code>render()</code> method should return the value to render into the DOM. It can return any renderable value, including another <code>DirectiveResult</code>.</p>
+<p>In addition to referring to state on the directive instance, the <code>render()</code> method can also accept arbitrary arguments passed in to the directive function:</p>
+<pre><code class="language-js">const template = html`&lt;div&gt;${myDirective(name, rank)}&lt;/div&gt;`
+</code></pre>
+<p>The parameters defined for the <code>render()</code> method determine the signature of the directive function:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MaxDirective extends Directive {
+  maxValue = Number.MIN_VALUE;
+  // Define a render method, which may accept arguments:
+  render(value: number, minValue = Number.MIN_VALUE) {
+    this.maxValue = Math.max(value, this.maxValue, minValue);
+    return this.maxValue;
+  }
+}
+const max = directive(MaxDirective);
+
+// Call the directive with `value` and `minValue` arguments defined for `render()`:
+const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
+</code></pre>
+<pre><code class="language-js">class MaxDirective extends Directive {
+  maxValue = Number.MIN_VALUE;
+  // Define a render method, which may accept arguments:
+  render(value, minValue = Number.MIN_VALUE) {
+    this.maxValue = Math.max(value, this.maxValue, minValue);
+    return this.maxValue;
+  }
+}
+const max = directive(MaxDirective);
+
+// Call the directive with `value` and `minValue` arguments defined for `render()`:
+const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="Imperative_DOM_access__update()"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></h3>
+<p>In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the <code>update()</code> callback.</p>
+<p>The <code>update()</code> callback receives two arguments:</p>
+<ul>
+<li>A <code>Part</code> object with an API for directly managing the DOM associated with the expression.</li>
+<li>An array containing the <code>render()</code> arguments.</li>
+</ul>
+<p>Your <code>update()</code> method should return something Lit can render, or the special value <code>noChange</code> if no re-rendering is required. The <code>update()</code> callback is quite flexible, but typical uses include:</p>
+<ul>
+<li>Reading data from the DOM, and using it to generate a value to render.</li>
+<li>Imperatively updating the DOM using the <code>element</code> or <code>parentNode</code> reference on the <code>Part</code> object. In this case, <code>update()</code> usually returns <code>noChange</code>, indicating that Lit doesn't need to take any further action to render the directive.</li>
+</ul>
+<h4 id="Parts"><a href="#Parts">Parts</a></h4>
+<p>Each expression position has its own specific <code>Part</code> object:</p>
+<ul>
+<li>{% api "ChildPart" %} for expressions in HTML child position.</li>
+<li>{% api "AttributePart" %} for expressions in HTML attribute value position.</li>
+<li>{% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with <code>?</code>).</li>
+<li>{% api "EventPart" %} for expressions in an event listener position (name prefixed with <code>@</code>).</li>
+<li>{% api "PropertyPart" %} for expressions in property value position (name prefixed with <code>.</code>).</li>
+<li>{% api "ElementPart" %} for expressions on the element tag.</li>
+</ul>
+<p>In addition to the part-specific metadata contained in <code>PartInfo</code>, all <code>Part</code> types provide access to the DOM <code>element</code> associated with the expression (or <code>parentNode</code>, in the case of <code>ChildPart</code>), which may be directly accessed in <code>update()</code>. For example:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">// Renders attribute names of parent element to textContent
+class AttributeLogger extends Directive {
+  attributeNames = '';
+  update(part: ChildPart) {
+    this.attributeNames = (part.parentNode as Element).getAttributeNames?.().join(' ');
+    return this.render();
+  }
+  render() {
+    return this.attributeNames;
+  }
+}
+const attributeLogger = directive(AttributeLogger);
+
+const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
+// Renders: `&lt;div a b&gt;a b&lt;/div&gt;`
+</code></pre>
+<pre><code class="language-js">// Renders attribute names of parent element to textContent
+class AttributeLogger extends Directive {
+  attributeNames = '';
+  update(part) {
+    this.attributeNames = part.parentNode.getAttributeNames?.().join(' ');
+    return this.render();
+  }
+  render() {
+    return this.attributeNames;
+  }
+}
+const attributeLogger = directive(AttributeLogger);
+
+const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
+// Renders: `&lt;div a b&gt;a b&lt;/div&gt;`
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
+<h4 id="Calling_render()_from_update()"><a href="#Calling_render()_from_update()">Calling render() from update()</a></h4>
+<p>The default implementation of <code>update()</code> simply calls and returns the value from <code>render()</code>. If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
+<p>The <code>render()</code> arguments are passed into <code>update()</code> as an array. You can pass the arguments to <code>render()</code> like this:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyDirective extends Directive {
+  update(part: Part, [fish, bananas]: DirectiveParameters&lt;this&gt;) {
+    // ...
+    return this.render(fish, bananas);
+  }
+  render(fish: number, bananas: number) { ... }
+}
+</code></pre>
+<pre><code class="language-js">class MyDirective extends Directive {
+  update(part, [fish, bananas]) {
+    // ...
+    return this.render(fish, bananas);
+  }
+  render(fish, bananas) { ... }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="Differences_between_update()_and_render()"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></h3>
+<p>While the <code>update()</code> callback is more powerful than the <code>render()</code> callback, there is an important distinction: When using the <code>@lit-labs/ssr</code> package for server-side rendering (SSR), <em>only</em> the <code>render()</code> method is called on the server. To be compatible with SSR, directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
+<h2 id="Signaling_no_change"><a href="#Signaling_no_change">Signaling no change</a></h2>
+<p>Sometimes a directive may have nothing new for Lit to render. You signal this by returning <code>noChange</code> from the <code>update()</code> or <code>render()</code> method. This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive. Returning <code>noChange</code> leaves the previously rendered value in place.</p>
+<p>There are several common reasons for returning <code>noChange</code>:</p>
+<ul>
+<li>Based on the input values, there's nothing new to render.</li>
+<li>The <code>update()</code> method updated the DOM imperatively.</li>
+<li>In an async directive, a call to <code>update()</code> or <code>render()</code> may return <code>noChange</code> because there's nothing to render <em>yet</em>.</li>
+</ul>
+<p>For example, a directive can keep track of the previous values passed in to it, and perform its own dirty checking to determine whether the directive's output needs to be updated. The <code>update()</code> or <code>render()</code> method can return <code>noChange</code>  to signal that the directive's output doesn't need to be re-rendered.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">import {Directive} from 'lit/directive.js';
+import {noChange} from 'lit';
+class CalculateDiff extends Directive {
+  a?: string;
+  b?: string;
+  render(a: string, b: string) {
+    if (this.a !== a || this.b !== b) {
+      this.a = a;
+      this.b = b;
+      // Expensive &amp; fancy text diffing algorithm
+      return calculateDiff(a, b);
+    }
+    return noChange;
+  }
+}
+</code></pre>
+<pre><code class="language-js">import {Directive} from 'lit/directive.js';
+import {noChange} from 'lit';
+class CalculateDiff extends Directive {
+  render(a, b) {
+    if (this.a !== a || this.b !== b) {
+      this.a = a;
+      this.b = b;
+      // Expensive &amp; fancy text diffing algorithm
+      return calculateDiff(a, b);
+    }
+    return noChange;
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h2 id="Limiting_a_directive_to_one_expression_type"><a href="#Limiting_a_directive_to_one_expression_type">Limiting a directive to one expression type</a></h2>
+<p>Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.</p>
+<p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class ClassMap extends Directive {
+  constructor(partInfo: PartInfo) {
+    super(partInfo);
+    if (
+      partInfo.type !== PartType.ATTRIBUTE ||
+      partInfo.name !== 'class'
+    ) {
+      throw new Error('The `classMap` directive must be used in the `class` attribute');
+    }
+  }
+  ...
+}
+</code></pre>
+<pre><code class="language-js">class ClassMap extends Directive {
+  constructor(partInfo) {
+    super(partInfo);
+    if (
+      partInfo.type !== PartType.ATTRIBUTE ||
+      partInfo.name !== 'class'
+    ) {
+      throw new Error('The `classMap` directive must be used in the `class` attribute');
+    }
+  }
+  ...
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h2 id="Async_directives"><a href="#Async_directives">Async directives</a></h2>
+<p>The previous example directives are synchronous: they return values synchronously from their <code>render()</code>/<code>update()</code> lifecycle callbacks, so their results are written to the DOM during the component's <code>update()</code> callback.</p>
+<p>Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
+<p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
+<p>Here's an example of a simple async directive that renders a Promise value:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class ResolvePromise extends AsyncDirective {
+  render(promise: Promise&lt;unknown&gt;) {
+    Promise.resolve(promise).then((resolvedValue) =&gt; {
+      // Rendered asynchronously:
+      this.setValue(resolvedValue);
+    });
+    // Rendered synchronously:
+    return `Waiting for promise to resolve`;
+  }
+}
+export const resolvePromise = directive(ResolvePromise);
+</code></pre>
+<pre><code class="language-js">class ResolvePromise extends AsyncDirective {
+  render(promise) {
+    Promise.resolve(promise).then((resolvedValue) =&gt; {
+      // Rendered asynchronously:
+      this.setValue(resolvedValue);
+    });
+    // Rendered synchronously:
+    return `Waiting for promise to resolve`;
+  }
+}
+export const resolvePromise = directive(ResolvePromise);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Here, the rendered template shows "Waiting for promise to resolve," followed by the resolved value of the promise, whenever it resolves.</p>
+<p>Async directives often need to subscribe to external resources. To prevent memory leaks async directives should unsubscribe or dispose of resources when the directive instance is no longer in use.  For this purpose, <code>AsyncDirective</code> provides the following extra lifecycle callbacks and API:</p>
+<ul>
+<li><p><code>disconnected()</code>: Called when a directive is no longer in use.  Directive instances are disconnected in three cases:</p>
+<ul>
+<li>When the DOM tree the directive is contained in is removed from the DOM</li>
+<li>When the directive's host element is disconnected</li>
+<li>When the expression that produced the directive no longer resolves to the same directive.</li>
+</ul>
+<p>After a directive receives a <code>disconnected</code> callback, it should release all resources it may have subscribed to during <code>update</code> or <code>render</code> to prevent memory leaks.</p>
+</li>
+<li><p><code>reconnected()</code>: Called when a previously disconnected directive is being returned to use. Because DOM subtrees can be temporarily disconnected and then reconnected again later, a disconnected directive may need to react to being reconnected. Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. The <code>reconnected()</code> callback should always be implemented alongside <code>disconnected()</code>, in order to restore a disconnected directive back to its working state.</p>
+</li>
+<li><p><code>isConnected</code>: Reflects the current connection state of the directive.</p>
+</li>
+</ul>
+<div class="alert alert-info">
+
+<p>Note that it is possible for an <code>AsyncDirective</code> to continue receiving updates while it is disconnected if its containing tree is re-rendered. Because of this, <code>update</code> and/or <code>render</code> should always check the <code>this.isConnected</code> flag before subscribing to any long-held resources to prevent memory leaks.</p>
+</div>
+
+<p>Below is an example of a directive that subscribes to an <code>Observable</code> and handles disconnection and reconnection appropriately:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class ObserveDirective extends AsyncDirective {
+  observable: Observable&lt;unknown&gt; | undefined;
+  unsubscribe: (() =&gt; void) | undefined;
+  // When the observable changes, unsubscribe to the old one and
+  // subscribe to the new one
+  render(observable: Observable&lt;unknown&gt;) {
+    if (this.observable !== observable) {
+      this.unsubscribe?.();
+      this.observable = observable
+      if (this.isConnected)  {
+        this.subscribe(observable);
+      }
+    }
+    return noChange;
+  }
+  // Subscribes to the observable, calling the directive's asynchronous
+  // setValue API each time the value changes
+  subscribe(observable: Observable&lt;unknown&gt;) {
+    this.unsubscribe = observable.subscribe((v: unknown) =&gt; {
+      this.setValue(v);
+    });
+  }
+  // When the directive is disconnected from the DOM, unsubscribe to ensure
+  // the directive instance can be garbage collected
+  disconnected() {
+    this.unsubscribe!();
+  }
+  // If the subtree the directive is in was disconnected and subsequently
+  // re-connected, re-subscribe to make the directive operable again
+  reconnected() {
+    this.subscribe(this.observable!);
+  }
+}
+export const observe = directive(ObserveDirective);
+</code></pre>
+<pre><code class="language-js">class ObserveDirective extends AsyncDirective {
+  // When the observable changes, unsubscribe to the old one and
+  // subscribe to the new one
+  render(observable) {
+    if (this.observable !== observable) {
+      this.unsubscribe?.();
+      this.observable = observable
+      if (this.isConnected)  {
+        this.subscribe(observable);
+      }
+    }
+    return noChange;
+  }
+  // Subscribes to the observable, calling the directive's asynchronous
+  // setValue API each time the value changes
+  subscribe(observable) {
+    this.unsubscribe = observable.subscribe((v) =&gt; {
+      this.setValue(v);
+    });
+  }
+  // When the directive is disconnected from the DOM, unsubscribe to ensure
+  // the directive instance can be garbage collected
+  disconnected() {
+    this.unsubscribe();
+  }
+  // If the subtree the directive is in was disconneted and subsequently
+  // re-connected, re-subscribe to make the directive operable again
+  reconnected() {
+    this.subscribe(this.observable);
+  }
+}
+export const observe = directive(ObserveDirective);
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<hr>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><div class="header-list"><p class="h1"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></p>
+<p class="h2"><a href="#Creating_class-based_directives">Creating class-based directives</a></p>
+<p class="h2"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></p>
+<p class="h3"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></p>
+<p class="h3"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></p>
+<p class="h3"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></p>
+<p class="h4"><a href="#Parts">Parts</a></p>
+<p class="h4"><a href="#Calling_render()_from_update()">Calling render() from update()</a></p>
+<p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
+<p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
+<p class="h2"><a href="#Limiting_a_directive_to_one_expression_type">Limiting a directive to one expression type</a></p>
+<p class="h2"><a href="#Async_directives">Async directives</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></div></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
