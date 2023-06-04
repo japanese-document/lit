@@ -2,9 +2,10 @@
 ---
 # カスタムディレクティブ
 
-Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.
+ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。
+ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。
 
-Using a directive in your template is as simple as calling a function in a template expression:
+下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらい簡単です。
 
 ```js
 html`<div>
@@ -12,9 +13,10 @@ html`<div>
      </div>`
 ```
 
-Lit ships with a number of [built-in directives](/docs/v2/templates/directives/) like [`repeat()`](/docs/v2/templates/directives/#repeat) and [`cache()`](/docs/v2/templates/directives/#cache). Users can also write their own custom directives.
+Lit ships with a number of [built-in directives](https://japanese-document.github.io/lit/templates-directives.html) like [`repeat()`](https://japanese-document.github.io/lit/templates-directives.html#repeat) and [`cache()`](https://japanese-document.github.io/lit/templates-directives.html#cache).
+Users can also write their own custom directives.
 
-There are two kinds of directives:
+ディレクディブは下記の2種類あります。
 
 -   Simple functions
 -   Class-based directives
