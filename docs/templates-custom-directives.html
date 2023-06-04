@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-custom-directives.html" />
     <meta property="og:title" content="カスタムディレクティブ" />
-    <meta property="og:description" content="Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.U" />
+    <meta property="og:description" content="ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらい簡単です。html`<div>       ${fancyDirective('some text')}     </div>`L" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.U" />
+    <meta name="description" content="ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらい簡単です。html`<div>       ${fancyDirective('some text')}     </div>`L" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>カスタムディレクティブ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -53,14 +53,16 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="カスタムディレクティブ"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></h1>
-<p>Directives are functions that can extend Lit by customizing how a template expression renders. Directives are useful and powerful because they can be stateful, access the DOM, be notified when templates are disconnected and reconnected, and independently update expressions outside of a render call.</p>
-<p>Using a directive in your template is as simple as calling a function in a template expression:</p>
+<p>ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。
+ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。</p>
+<p>下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらい簡単です。</p>
 <pre><code class="language-js">html`&lt;div&gt;
        ${fancyDirective('some text')}
      &lt;/div&gt;`
 </code></pre>
-<p>Lit ships with a number of <a class="Link" href="/docs/v2/templates/directives/">built-in directives</a> like <a class="Link" href="/docs/v2/templates/directives/#repeat"><code>repeat()</code></a> and <a class="Link" href="/docs/v2/templates/directives/#cache"><code>cache()</code></a>. Users can also write their own custom directives.</p>
-<p>There are two kinds of directives:</p>
+<p>Lit ships with a number of <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">built-in directives</a> like <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a> and <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>.
+Users can also write their own custom directives.</p>
+<p>ディレクディブは下記の2種類あります。</p>
 <ul>
 <li>Simple functions</li>
 <li>Class-based directives</li>
