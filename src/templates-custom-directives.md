@@ -43,25 +43,28 @@ export noVowels = (str) => str.replaceAll(/[aeiou]/ig,'x');
 下記の手順でクラスディレクティブを実装します。
 
 * [Directive](https://lit.dev/docs/api/custom-directives/#Directive)クラスを継承したクラスを実装します。
-* そのクラスを`directive()`に渡してテンプレートのエクスプレッションで使うことができるディレクティブを生成します。
+* そのクラスを`directive()`に渡してテンプレートのエクスプレッションで使うことができるディレクティブ関数を生成します。
 
 ```js
 import {Directive, directive} from 'lit/directive.js';
 
-// Define directive
+// ディレクティブを定義します。
 class HelloDirective extends Directive {
   render() {
     return `Hello!`;
   }
 }
-// Create the directive function
+// ディレクティブ関数を生成します。
 const hello = directive(HelloDirective);
 
-// Use directive
+// ディレクティブを使いします。
 const template = html`<div>${hello()}</div>`;
 ```
 
-When this template is evaluated, the directive _function_  (`hello()`) returns a `DirectiveResult` object, which instructs Lit to create or update an instance of the directive _class_ (`HelloDirective`). Lit then calls methods on the directive instance to run its update logic.
+When this template is evaluated,
+the directive function (`hello()`) returns a `DirectiveResult` object,
+which instructs Lit to create or update an instance of the directive class (`HelloDirective`).
+Lit then calls methods on the directive instance to run its update logic.
 
 Some directives need to update the DOM asynchronously, outside of the normal update cycle. To create an _async directive_, extend the `AsyncDirective` base class instead of `Directive`. See [Async directives](#async-directives) for details.
 
