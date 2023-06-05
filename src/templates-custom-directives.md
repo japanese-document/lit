@@ -13,21 +13,23 @@ html`<div>
      </div>`
 ```
 
-Lit ships with a number of [built-in directives](https://japanese-document.github.io/lit/templates-directives.html) like [`repeat()`](https://japanese-document.github.io/lit/templates-directives.html#repeat) and [`cache()`](https://japanese-document.github.io/lit/templates-directives.html#cache).
-Users can also write their own custom directives.
+Litは[`repeat()`](https://japanese-document.github.io/lit/templates-directives.html#repeat) and [`cache()`](https://japanese-document.github.io/lit/templates-directives.html#cache)のような[ビルトインディレクティブ](https://japanese-document.github.io/lit/templates-directives.html)を用意しています。
+カスタムディレクティブを作成することもできます。
 
 ディレクディブは下記の2種類あります。
 
--   Simple functions
--   Class-based directives
+-   関数ディレクティブ
+-   クラスディレクディブ
 
-A simple function returns a value to render. It can take any number of arguments, or no arguments at all.
+関数ディレクティブはレンダリングする値を返します。
+関数ディレクディブは任意の引数を受け取ることができます。
 
 ```js
 export noVowels = (str) => str.replaceAll(/[aeiou]/ig,'x');
 ```
 
-A class-based directive lets you do things that a simple function can't. Use a class based directive to:
+クラスディレクティブを使うと関数ディレクティブではできないことができるようになります。
+クラスディレクティブは下記の場合に使用します。
 
 -   Access the rendered DOM directly (for example, add, remove, or reorder rendered DOM nodes).
 -   Persist state between renders.
@@ -36,7 +38,7 @@ A class-based directive lets you do things that a simple function can't. Use a c
 
 The rest of this page describes class-based directives.
 
-## Creating class-based directives
+## クラスディレクティブを生成する
 
 To create a class-based directive:
 

@@ -60,17 +60,19 @@
        ${fancyDirective('some text')}
      &lt;/div&gt;`
 </code></pre>
-<p>Lit ships with a number of <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">built-in directives</a> like <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a> and <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>.
-Users can also write their own custom directives.</p>
+<p>Litは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a> and <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>のような<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a>を用意しています。
+カスタムディレクティブを作成することもできます。</p>
 <p>ディレクディブは下記の2種類あります。</p>
 <ul>
-<li>Simple functions</li>
-<li>Class-based directives</li>
+<li>関数ディレクティブ</li>
+<li>クラスディレクディブ</li>
 </ul>
-<p>A simple function returns a value to render. It can take any number of arguments, or no arguments at all.</p>
+<p>関数ディレクティブはレンダリングする値を返します。
+関数ディレクディブは任意の引数を受け取ることができます。</p>
 <pre><code class="language-js">export noVowels = (str) =&gt; str.replaceAll(/[aeiou]/ig,'x');
 </code></pre>
-<p>A class-based directive lets you do things that a simple function can't. Use a class based directive to:</p>
+<p>クラスディレクティブを使うと関数ディレクティブではできないことができるようになります。
+クラスディレクティブは下記の場合に使用します。</p>
 <ul>
 <li>Access the rendered DOM directly (for example, add, remove, or reorder rendered DOM nodes).</li>
 <li>Persist state between renders.</li>
@@ -78,7 +80,7 @@ Users can also write their own custom directives.</p>
 <li>Clean up resources when the directive is disconnected from the DOM</li>
 </ul>
 <p>The rest of this page describes class-based directives.</p>
-<h2 id="Creating_class-based_directives"><a href="#Creating_class-based_directives">Creating class-based directives</a></h2>
+<h2 id="クラスディレクティブを生成する"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></h2>
 <p>To create a class-based directive:</p>
 <ul>
 <li>Implement the directive as a class that extends the {% api "Directive" %} class.</li>
@@ -489,7 +491,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></p>
-<p class="h2"><a href="#Creating_class-based_directives">Creating class-based directives</a></p>
+<p class="h2"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></p>
 <p class="h2"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></p>
 <p class="h3"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></p>
 <p class="h3"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></p>
