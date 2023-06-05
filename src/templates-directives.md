@@ -239,7 +239,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 </table>
 
 独自のディレクティブを作成することができます。
-詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
+詳しくは[カスタムディレクティブ](https://japanese-document.github.io/lit/templates-custom-directives.html)を見てください。
 
 ## スタイル
 
