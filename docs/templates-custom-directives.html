@@ -60,31 +60,31 @@
        ${fancyDirective('some text')}
      &lt;/div&gt;`
 </code></pre>
-<p>Litは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a> and <a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>のような<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a>を用意しています。
+<p>Litは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a>と<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>のような<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a>を用意しています。
 カスタムディレクティブを作成することもできます。</p>
 <p>ディレクディブは下記の2種類あります。</p>
 <ul>
 <li>関数ディレクティブ</li>
 <li>クラスディレクディブ</li>
 </ul>
-<p>関数ディレクティブはレンダリングする値を返します。
+<p>関数ディレクティブは下記のようにレンダリングする値を返します。
 関数ディレクディブは任意の引数を受け取ることができます。</p>
 <pre><code class="language-js">export noVowels = (str) =&gt; str.replaceAll(/[aeiou]/ig,'x');
 </code></pre>
 <p>クラスディレクティブを使うと関数ディレクティブではできないことができるようになります。
-クラスディレクティブは下記の場合に使用します。</p>
+クラスディレクティブは下記の用途で使用します。</p>
 <ul>
-<li>Access the rendered DOM directly (for example, add, remove, or reorder rendered DOM nodes).</li>
-<li>Persist state between renders.</li>
-<li>Update the DOM asynchronously, outside of a render call.</li>
-<li>Clean up resources when the directive is disconnected from the DOM</li>
+<li>直接レンダリングされたDOMにアクセスします。(例: レンダリングされたDOMを追加、削除、並べ替える)</li>
+<li>レンダリング間でステートを保持します。</li>
+<li>レンダリングの実行外でDOMを非同期で更新します。</li>
+<li>ディレクティブがDOMから切断される時にリソースをクリーンアップします。</li>
 </ul>
-<p>The rest of this page describes class-based directives.</p>
+<p>ここからはクラスディレクティブについて解説します。</p>
 <h2 id="クラスディレクティブを生成する"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></h2>
-<p>To create a class-based directive:</p>
+<p>下記の手順でクラスディレクティブを実装します。</p>
 <ul>
-<li>Implement the directive as a class that extends the {% api "Directive" %} class.</li>
-<li>Pass your class to the {% api "directive()" "directive" %} factory to create a directive function that can be used in Lit template expressions.</li>
+<li><a class="Link" href="https://lit.dev/docs/api/custom-directives/#Directive">Directive</a>クラスを継承したクラスを実装します。</li>
+<li>そのクラスを<code>directive()</code>に渡してテンプレートのエクスプレッションで使うことができるディレクティブを生成します。</li>
 </ul>
 <pre><code class="language-js">import {Directive, directive} from 'lit/directive.js';
 
