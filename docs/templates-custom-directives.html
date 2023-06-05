@@ -84,23 +84,26 @@
 <p>下記の手順でクラスディレクティブを実装します。</p>
 <ul>
 <li><a class="Link" href="https://lit.dev/docs/api/custom-directives/#Directive">Directive</a>クラスを継承したクラスを実装します。</li>
-<li>そのクラスを<code>directive()</code>に渡してテンプレートのエクスプレッションで使うことができるディレクティブを生成します。</li>
+<li>そのクラスを<code>directive()</code>に渡してテンプレートのエクスプレッションで使うことができるディレクティブ関数を生成します。</li>
 </ul>
 <pre><code class="language-js">import {Directive, directive} from 'lit/directive.js';
 
-// Define directive
+// ディレクティブを定義します。
 class HelloDirective extends Directive {
   render() {
     return `Hello!`;
   }
 }
-// Create the directive function
+// ディレクティブ関数を生成します。
 const hello = directive(HelloDirective);
 
-// Use directive
+// ディレクティブを使いします。
 const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 </code></pre>
-<p>When this template is evaluated, the directive <em>function</em>  (<code>hello()</code>) returns a <code>DirectiveResult</code> object, which instructs Lit to create or update an instance of the directive <em>class</em> (<code>HelloDirective</code>). Lit then calls methods on the directive instance to run its update logic.</p>
+<p>When this template is evaluated,
+the directive function (<code>hello()</code>) returns a <code>DirectiveResult</code> object,
+which instructs Lit to create or update an instance of the directive class (<code>HelloDirective</code>).
+Lit then calls methods on the directive instance to run its update logic.</p>
 <p>Some directives need to update the DOM asynchronously, outside of the normal update cycle. To create an <em>async directive</em>, extend the <code>AsyncDirective</code> base class instead of <code>Directive</code>. See <a class="Link" href="#async-directives">Async directives</a> for details.</p>
 <h2 id="Lifecycle_of_a_class-based_directive"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></h2>
 <p>The directive class has a few built-in lifecycle methods:</p>
