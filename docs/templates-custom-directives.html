@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-custom-directives.html" />
     <meta property="og:title" content="カスタムディレクティブ" />
-    <meta property="og:description" content="ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
+    <meta property="og:description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
+    <meta name="description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>カスタムディレクティブ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -53,7 +53,7 @@
     </div></div>
     <main class="main markdown-body">
       <h1 id="カスタムディレクティブ"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></h1>
-<p>ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。
+<p>ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。
 ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。</p>
 <p>下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。</p>
 <pre><code class="language-js">html`&lt;div&gt;
@@ -104,17 +104,18 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 ディレクティブ関数(<code>hello()</code>)は<code>DirectiveResult</code>オブジェクトを返します。
 <code>DirectiveResult</code>オブジェクトはLitにクラスディレクティブ(<code>HelloDirective</code>)を生成もしくは更新するように命令します。
 それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。</p>
-<p>Some directives need to update the DOM asynchronously, outside of the normal update cycle.
-To create an <em>async directive</em>, extend the <code>AsyncDirective</code> base class instead of <code>Directive</code>.
+<p>ディレクティブで通常のアップデートサイクル外でDOMを非同期に更新したい時があります。
+非同期ディレクティブを生成するには、ベースクラスを<code>Directive</code>の代わりに<code>AsyncDirective</code>にします。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
-<h2 id="Lifecycle_of_a_class-based_directive"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></h2>
-<p>The directive class has a few built-in lifecycle methods:</p>
+<h2 id="クラスディレクティブのライフサイクル"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></h2>
+<p>クラスディレクティブは下記のビルトインライフサイクルメソッドを持ちます。</p>
 <ul>
-<li>The class constructor, for one-time initialization.</li>
-<li><code>render()</code>, for declarative rendering.</li>
-<li><code>update()</code>, for imperative DOM access.</li>
+<li>コンストラクタで1回だけの初期化をします。</li>
+<li><code>render()</code>で宣言的レンダリングをします。</li>
+<li><code>update()</code>で命令的DOMアクセスをします。</li>
 </ul>
-<p>You must implement the <code>render()</code> callback for all directives. Implementing <code>update()</code> is optional. The default implementation of <code>update()</code> calls and returns the value from <code>render()</code>.</p>
+<p>You must implement the <code>render()</code> callback for all directives.
+Implementing <code>update()</code> is optional. The default implementation of <code>update()</code> calls and returns the value from <code>render()</code>.</p>
 <p>Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h3 id="One-time_setup__constructor()"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></h3>
@@ -498,7 +499,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></p>
 <p class="h2"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></p>
-<p class="h2"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></p>
+<p class="h2"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></p>
 <p class="h3"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></p>
 <p class="h3"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></p>
 <p class="h3"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></p>

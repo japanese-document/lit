@@ -2,7 +2,7 @@
 ---
 # カスタムディレクティブ
 
-ディレクティブはテンプレートエクスプレッションを蓮台リングする方法を変更することによってLitを拡張する関数です。
+ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。
 ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。
 
 下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。
@@ -66,19 +66,20 @@ const template = html`<div>${hello()}</div>`;
 `DirectiveResult`オブジェクトはLitにクラスディレクティブ(`HelloDirective`)を生成もしくは更新するように命令します。
 それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。
 
-Some directives need to update the DOM asynchronously, outside of the normal update cycle.
-To create an _async directive_, extend the `AsyncDirective` base class instead of `Directive`.
+ディレクティブで通常のアップデートサイクル外でDOMを非同期に更新したい時があります。
+非同期ディレクティブを生成するには、ベースクラスを`Directive`の代わりに`AsyncDirective`にします。
 詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
-## Lifecycle of a class-based directive
+## クラスディレクティブのライフサイクル
 
-The directive class has a few built-in lifecycle methods:
+クラスディレクティブは下記のビルトインライフサイクルメソッドを持ちます。
 
-*  The class constructor, for one-time initialization.
-*  `render()`, for declarative rendering.
-*  `update()`, for imperative DOM access.
+* コンストラクタで1回だけの初期化をします。
+* `render()`で宣言的レンダリングをします。
+* `update()`で命令的DOMアクセスをします。
 
-You must implement the `render()` callback for all directives. Implementing `update()` is optional. The default implementation of `update()` calls and returns the value from `render()`.
+You must implement the `render()` callback for all directives.
+Implementing `update()` is optional. The default implementation of `update()` calls and returns the value from `render()`.
 
 Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
 詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
