@@ -61,12 +61,14 @@ const hello = directive(HelloDirective);
 const template = html`<div>${hello()}</div>`;
 ```
 
-When this template is evaluated,
-the directive function (`hello()`) returns a `DirectiveResult` object,
-which instructs Lit to create or update an instance of the directive class (`HelloDirective`).
-Lit then calls methods on the directive instance to run its update logic.
+上記のテンプレートが評価される時、
+ディレクティブ関数(`hello()`)は`DirectiveResult`オブジェクトを返します。
+`DirectiveResult`オブジェクトはLitにクラスディレクティブ(`HelloDirective`)を生成もしくは更新するように命令します。
+それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。
 
-Some directives need to update the DOM asynchronously, outside of the normal update cycle. To create an _async directive_, extend the `AsyncDirective` base class instead of `Directive`. See [Async directives](#async-directives) for details.
+Some directives need to update the DOM asynchronously, outside of the normal update cycle.
+To create an _async directive_, extend the `AsyncDirective` base class instead of `Directive`.
+詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
 ## Lifecycle of a class-based directive
 
@@ -78,7 +80,8 @@ The directive class has a few built-in lifecycle methods:
 
 You must implement the `render()` callback for all directives. Implementing `update()` is optional. The default implementation of `update()` calls and returns the value from `render()`.
 
-Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks. See [Async directives](#async-directives) for details.
+Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
+詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
 ### One-time setup: constructor()
 
@@ -361,7 +364,7 @@ class ClassMap extends Directive {
 
 {% endswitchable-sample %}
 
-## Async directives
+## 非同期ディレクティブ
 
 The previous example directives are synchronous: they return values synchronously from their `render()`/`update()` lifecycle callbacks, so their results are written to the DOM during the component's `update()` callback.
 

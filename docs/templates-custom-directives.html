@@ -100,11 +100,13 @@ const hello = directive(HelloDirective);
 // ディレクティブを使いします。
 const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 </code></pre>
-<p>When this template is evaluated,
-the directive function (<code>hello()</code>) returns a <code>DirectiveResult</code> object,
-which instructs Lit to create or update an instance of the directive class (<code>HelloDirective</code>).
-Lit then calls methods on the directive instance to run its update logic.</p>
-<p>Some directives need to update the DOM asynchronously, outside of the normal update cycle. To create an <em>async directive</em>, extend the <code>AsyncDirective</code> base class instead of <code>Directive</code>. See <a class="Link" href="#async-directives">Async directives</a> for details.</p>
+<p>上記のテンプレートが評価される時、
+ディレクティブ関数(<code>hello()</code>)は<code>DirectiveResult</code>オブジェクトを返します。
+<code>DirectiveResult</code>オブジェクトはLitにクラスディレクティブ(<code>HelloDirective</code>)を生成もしくは更新するように命令します。
+それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。</p>
+<p>Some directives need to update the DOM asynchronously, outside of the normal update cycle.
+To create an <em>async directive</em>, extend the <code>AsyncDirective</code> base class instead of <code>Directive</code>.
+詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h2 id="Lifecycle_of_a_class-based_directive"><a href="#Lifecycle_of_a_class-based_directive">Lifecycle of a class-based directive</a></h2>
 <p>The directive class has a few built-in lifecycle methods:</p>
 <ul>
@@ -113,7 +115,8 @@ Lit then calls methods on the directive instance to run its update logic.</p>
 <li><code>update()</code>, for imperative DOM access.</li>
 </ul>
 <p>You must implement the <code>render()</code> callback for all directives. Implementing <code>update()</code> is optional. The default implementation of <code>update()</code> calls and returns the value from <code>render()</code>.</p>
-<p>Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks. See <a class="Link" href="#async-directives">Async directives</a> for details.</p>
+<p>Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
+詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h3 id="One-time_setup__constructor()"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></h3>
 <p>When Lit encounters a <code>DirectiveResult</code> in an expression for the first time, it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):</p>
 <p>{% switchable-sample %}</p>
@@ -333,7 +336,7 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h2 id="Async_directives"><a href="#Async_directives">Async directives</a></h2>
+<h2 id="非同期ディレクティブ"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></h2>
 <p>The previous example directives are synchronous: they return values synchronously from their <code>render()</code>/<code>update()</code> lifecycle callbacks, so their results are written to the DOM during the component's <code>update()</code> callback.</p>
 <p>Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
 <p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
@@ -504,7 +507,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
 <p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
 <p class="h2"><a href="#Limiting_a_directive_to_one_expression_type">Limiting a directive to one expression type</a></p>
-<p class="h2"><a href="#Async_directives">Async directives</a></p>
+<p class="h2"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></div></div>
