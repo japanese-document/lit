@@ -196,7 +196,7 @@ class DualClockController implements ReactiveController {
 * コントローラディレクティブ。これはディレクティブ自身がホストコンポーネントのライフサイクルをフックするコントローラであるディレクティブです。
 * ディレクティブを持つコントローラ。これはホストコンポーネントのテンプレート内で使用する1つ以上のディレクティブを生成します。
 
-詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
+詳しくは[カスタムディレクティブ](https://japanese-document.github.io/lit/templates-custom-directives.html)を見てください。
 
 #### コントローラディレクティブ
 
