@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { glob } from 'glob'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
@@ -18,6 +20,26 @@ export function createHash(text: string) {
     .replaceAll(/>/g, '_-')
 }
 
+async function createPageData(markDownFileName: string): Promise<Page> {
+  const content = await fs.promises.readFile(markDownFileName, 'utf8')
+  const [meta, md] = getMetaAndMd(content)
+  const title = createTitle(md)
+  const { name, dir } = path.parse(markDownFileName)
+  const url = createURL(dir, name)
+  const page = {
+    meta,
+    title,
+    url
+  }
+  return page
+}
+
+export async function createPages(markDownFileNames: string[]) {
+  const createPageDataPromises = markDownFileNames.map(
+    (markDownFileName) => createPageData(markDownFileName))
+  return await Promise.all(createPageDataPromises)
+}
+
 const renderer = {
   link(href: string, _title: string, text: string) {
     return `<a href="${href}" class="Link">${text}</a>`
@@ -36,6 +58,7 @@ interface Meta {
     order: number
   }
   order: number
+  date?: string
 }
 
 export interface Page {

@@ -2,30 +2,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR } from './config.js'
 import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
-  Page, createIndexItems, createIndexMenu, createHeaderList } from './utils.js'
+  createIndexItems, createIndexMenu, createHeaderList, createPages } from './utils.js'
 
 const markDownFileNames = await getMarkDownFileNames()
 
-async function createPageData(markDownFileName: string): Promise<Page> {
-  const content = await fs.promises.readFile(markDownFileName, 'utf8')
-  const [meta, md] = getMetaAndMd(content)
-  const title = createTitle(md)
-  const { name, dir } = path.parse(markDownFileName)
-  const url = createURL(dir, name)
-  const page = {
-    meta,
-    title,
-    url
-  }
-  return page
-}
-
-const createPageDataPromises = markDownFileNames.map(
-  (markDownFileName) => createPageData(markDownFileName))
-const pages = await Promise.all(createPageDataPromises)
-
+const pages = await createPages(markDownFileNames)
 const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
+
 const pageLayout = fs.readFileSync(PAGE_LAYOUT, 'utf8')
 
 async function createPageHtmlFile(
