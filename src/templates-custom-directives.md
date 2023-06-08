@@ -66,7 +66,7 @@ const template = html`<div>${hello()}</div>`;
 `DirectiveResult`オブジェクトはLitにクラスディレクティブ(`HelloDirective`)を生成もしくは更新するように命令します。
 それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。
 
-ディレクティブで通常のアップデートサイクル外でDOMを非同期に更新したい時があります。
+ディレクティブで通常の更新サイクル外でDOMを非同期に更新したい時があります。
 非同期ディレクティブを生成するには、ベースクラスを`Directive`の代わりに`AsyncDirective`にします。
 詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
@@ -78,17 +78,18 @@ const template = html`<div>${hello()}</div>`;
 * `render()`で宣言的レンダリングをします。
 * `update()`で命令的DOMアクセスをします。
 
-You must implement the `render()` callback for all directives.
-Implementing `update()` is optional. The default implementation of `update()` calls and returns the value from `render()`.
+クラスディレクティブでは`render()`を実装することは必須です。
+`update()`はオプションです。
+デフォルトの`update()`の実装は`render()`を実行してその値を返します。
 
-Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
+非同期ディレクディブを使うと、通常の更新サイクル外でDOMを更新することができます。
+非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
 詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
-### One-time setup: constructor()
+### 1回だけ設定する: constructor()
 
-When Lit encounters a `DirectiveResult` in an expression for the first time, it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):
-
-{% switchable-sample %}
+When Lit encounters a `DirectiveResult` in an expression for the first time,
+it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):
 
 ```ts
 class MyDirective extends Directive {
@@ -104,23 +105,6 @@ class MyDirective extends Directive {
   ...
 }
 ```
-
-```js
-class MyDirective extends Directive {
-  // Class fields will be initialized once and can be used to persist
-  // state between renders
-  value = 0;
-  // Constructor is only run the first time a given directive is used
-  // in an expression
-  constructor(partInfo) {
-    super(partInfo);
-    console.log('MyDirective created');
-  }
-  ...
-}
-```
-
-{% endswitchable-sample %}
 
 As long as the same directive function is used in the same expression each render, the previous instance is reused, thus the state of the instance persists between renders.
 

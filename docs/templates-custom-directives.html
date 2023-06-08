@@ -104,7 +104,7 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 ディレクティブ関数(<code>hello()</code>)は<code>DirectiveResult</code>オブジェクトを返します。
 <code>DirectiveResult</code>オブジェクトはLitにクラスディレクティブ(<code>HelloDirective</code>)を生成もしくは更新するように命令します。
 それから、Litはクラスディレクティブインスタンスのメソッドでその更新ロジックを実行します。</p>
-<p>ディレクティブで通常のアップデートサイクル外でDOMを非同期に更新したい時があります。
+<p>ディレクティブで通常の更新サイクル外でDOMを非同期に更新したい時があります。
 非同期ディレクティブを生成するには、ベースクラスを<code>Directive</code>の代わりに<code>AsyncDirective</code>にします。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h2 id="クラスディレクティブのライフサイクル"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></h2>
@@ -114,13 +114,15 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <li><code>render()</code>で宣言的レンダリングをします。</li>
 <li><code>update()</code>で命令的DOMアクセスをします。</li>
 </ul>
-<p>You must implement the <code>render()</code> callback for all directives.
-Implementing <code>update()</code> is optional. The default implementation of <code>update()</code> calls and returns the value from <code>render()</code>.</p>
-<p>Async directives, which can update the DOM outside of the normal update cycle, use some additional lifecycle callbacks.
+<p>クラスディレクティブでは<code>render()</code>を実装することは必須です。
+<code>update()</code>はオプションです。
+デフォルトの<code>update()</code>の実装は<code>render()</code>を実行してその値を返します。</p>
+<p>非同期ディレクディブを使うと、通常の更新サイクル外でDOMを更新することができます。
+非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
-<h3 id="One-time_setup__constructor()"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></h3>
-<p>When Lit encounters a <code>DirectiveResult</code> in an expression for the first time, it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):</p>
-<p>{% switchable-sample %}</p>
+<h3 id="1回だけ設定する__constructor()"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></h3>
+<p>When Lit encounters a <code>DirectiveResult</code> in an expression for the first time,
+it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):</p>
 <pre><code class="language-ts">class MyDirective extends Directive {
   // Class fields will be initialized once and can be used to persist
   // state between renders
@@ -134,20 +136,6 @@ Implementing <code>update()</code> is optional. The default implementation of <c
   ...
 }
 </code></pre>
-<pre><code class="language-js">class MyDirective extends Directive {
-  // Class fields will be initialized once and can be used to persist
-  // state between renders
-  value = 0;
-  // Constructor is only run the first time a given directive is used
-  // in an expression
-  constructor(partInfo) {
-    super(partInfo);
-    console.log('MyDirective created');
-  }
-  ...
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>As long as the same directive function is used in the same expression each render, the previous instance is reused, thus the state of the instance persists between renders.</p>
 <p>The constructor receives a single <code>PartInfo</code> object, which provides metadata about the expression the directive was used in. This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions (see <a class="Link" href="#limiting-a-directive-to-one-expression-type">Limiting a directive to one expression type</a>).</p>
 <h3 id="Declarative_rendering__render()"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></h3>
@@ -500,7 +488,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     <div class="right-side"><div class="header-list"><p class="h1"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></p>
 <p class="h2"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></p>
 <p class="h2"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></p>
-<p class="h3"><a href="#One-time_setup__constructor()">One-time setup: constructor()</a></p>
+<p class="h3"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></p>
 <p class="h3"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></p>
 <p class="h3"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></p>
 <p class="h4"><a href="#Parts">Parts</a></p>
