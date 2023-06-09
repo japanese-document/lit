@@ -245,7 +245,7 @@ MyElement.enableWarning?.('migration');
 <h4 id="getUpdateComplete()__Promise"><a href="#getUpdateComplete()__Promise">getUpdateComplete(): Promise</a></h4>
 <p><code>updateComplete</code>ゲッターが返すPromiseを返すメソッドです。
 TypeScriptのtargetがES5の場合、スーパークラスのゲッターを取得することができないので、
-<code>updateComplete</code>ゲッターをオーバーライドすることは安全でありません。
+<code>updateComplete</code>ゲッターをオーバーライドすることは安全ではありません。
 代わりにこのメソッドを使います。</p>
 <pre><code>class MyElement extends LitElement {
   override async getUpdateComplete() {

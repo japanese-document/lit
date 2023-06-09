@@ -284,7 +284,7 @@ firstUpdated() {
 
 `updateComplete`ゲッターが返すPromiseを返すメソッドです。
 TypeScriptのtargetがES5の場合、スーパークラスのゲッターを取得することができないので、
-`updateComplete`ゲッターをオーバーライドすることは安全でありません。
+`updateComplete`ゲッターをオーバーライドすることは安全ではありません。
 代わりにこのメソッドを使います。
 
 ```

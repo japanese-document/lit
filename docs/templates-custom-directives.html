@@ -121,14 +121,13 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h3 id="1回だけ設定する__constructor()"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></h3>
-<p>When Lit encounters a <code>DirectiveResult</code> in an expression for the first time,
-it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):</p>
+<p>Litが最初にエクスプレッション内の<code>DirectiveResult</code>を評価する時、
+対応するクラスディレクティブのインスタンスを生成します。
+(クラスディレクティブのコンストラクタを実行して、クラスフィールドを初期化します。)</p>
 <pre><code class="language-ts">class MyDirective extends Directive {
-  // Class fields will be initialized once and can be used to persist
-  // state between renders
+  // クラスフィールドは1回だけ初期化されます。これはレンダリング間で保持されます。
   value = 0;
-  // Constructor is only run the first time a given directive is used
-  // in an expression
+  // コンストラクタはエクスプレッション内で使われるディレクティブで初回のみ実行されます。
   constructor(partInfo: PartInfo) {
     super(partInfo);
     console.log('MyDirective created');
@@ -136,8 +135,12 @@ it will construct an instance of the corresponding directive class (causing the 
   ...
 }
 </code></pre>
-<p>As long as the same directive function is used in the same expression each render, the previous instance is reused, thus the state of the instance persists between renders.</p>
-<p>The constructor receives a single <code>PartInfo</code> object, which provides metadata about the expression the directive was used in. This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions (see <a class="Link" href="#limiting-a-directive-to-one-expression-type">Limiting a directive to one expression type</a>).</p>
+<p>レンダー毎に同じエクスプレッションに同じディレクティブ関数を配置する限り、
+1つ前のクラスディレクティブのインスタンスを再び使います。
+そして、レンダリング間でクラスディレクティブのインスタンスのステートは保持されます。</p>
+<p>The constructor receives a single <code>PartInfo</code> object, which provides metadata about the expression the directive was used in.
+This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions
+詳しくは<a class="Link" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a>を見てください。</p>
 <h3 id="Declarative_rendering__render()"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></h3>
 <p>The <code>render()</code> method should return the value to render into the DOM. It can return any renderable value, including another <code>DirectiveResult</code>.</p>
 <p>In addition to referring to state on the directive instance, the <code>render()</code> method can also accept arbitrary arguments passed in to the directive function:</p>
@@ -294,7 +297,7 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h2 id="Limiting_a_directive_to_one_expression_type"><a href="#Limiting_a_directive_to_one_expression_type">Limiting a directive to one expression type</a></h2>
+<h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></h2>
 <p>Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.</p>
 <p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
 <p>{% switchable-sample %}</p>
@@ -495,7 +498,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#Calling_render()_from_update()">Calling render() from update()</a></p>
 <p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
 <p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
-<p class="h2"><a href="#Limiting_a_directive_to_one_expression_type">Limiting a directive to one expression type</a></p>
+<p class="h2"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></p>
 <p class="h2"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>

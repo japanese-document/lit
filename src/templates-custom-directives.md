@@ -88,16 +88,15 @@ const template = html`<div>${hello()}</div>`;
 
 ### 1回だけ設定する: constructor()
 
-When Lit encounters a `DirectiveResult` in an expression for the first time,
-it will construct an instance of the corresponding directive class (causing the directive's constructor and any class field initializers to run):
+Litが最初にエクスプレッション内の`DirectiveResult`を評価する時、
+対応するクラスディレクティブのインスタンスを生成します。
+(クラスディレクティブのコンストラクタを実行して、クラスフィールドを初期化します。)
 
 ```ts
 class MyDirective extends Directive {
-  // Class fields will be initialized once and can be used to persist
-  // state between renders
+  // クラスフィールドは1回だけ初期化されます。これはレンダリング間で保持されます。
   value = 0;
-  // Constructor is only run the first time a given directive is used
-  // in an expression
+  // コンストラクタはエクスプレッション内で使われるディレクティブで初回のみ実行されます。
   constructor(partInfo: PartInfo) {
     super(partInfo);
     console.log('MyDirective created');
@@ -106,9 +105,13 @@ class MyDirective extends Directive {
 }
 ```
 
-As long as the same directive function is used in the same expression each render, the previous instance is reused, thus the state of the instance persists between renders.
+レンダー毎に同じエクスプレッションに同じディレクティブ関数を配置する限り、
+1つ前のクラスディレクティブのインスタンスを再び使います。
+そして、レンダリング間でクラスディレクティブのインスタンスのステートは保持されます。
 
-The constructor receives a single `PartInfo` object, which provides metadata about the expression the directive was used in. This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions (see [Limiting a directive to one expression type](#limiting-a-directive-to-one-expression-type)).
+The constructor receives a single `PartInfo` object, which provides metadata about the expression the directive was used in.
+This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions
+詳しくは[ディレクティブを使用することができるエクスプレッションの種類を1つに制限する](#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する)を見てください。
 
 ### Declarative rendering: render()
 
@@ -309,7 +312,7 @@ class CalculateDiff extends Directive {
 
 {% endswitchable-sample %}
 
-## Limiting a directive to one expression type
+## ディレクティブを使用することができるエクスプレッションの種類を1つに制限する
 
 Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.
 
