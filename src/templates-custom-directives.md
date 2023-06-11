@@ -3,7 +3,7 @@
 # カスタムディレクティブ
 
 ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。
-ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。
+ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができます。だから、便利で応用範囲が広いです。
 
 下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。
 
@@ -109,23 +109,24 @@ class MyDirective extends Directive {
 1つ前のクラスディレクティブのインスタンスを再び使います。
 そして、レンダリング間でクラスディレクティブのインスタンスのステートは保持されます。
 
-The constructor receives a single `PartInfo` object, which provides metadata about the expression the directive was used in.
-This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions
+コンストラクタは`PartInfo`オブジェクトを引数に取ります。
+その`PartInfo`オブジェクトはディレクティブが使われているエクスプレッションに関するメタデータを含んでいます。
+これは使用されるエクスプレッションの種類を限定しているディレクティブがそれをチェックする際に利用することができます。
 詳しくは[ディレクティブを使用することができるエクスプレッションの種類を1つに制限する](#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する)を見てください。
 
-### Declarative rendering: render()
+### ディレクティブのレンダリング: render()
 
-The `render()` method should return the value to render into the DOM. It can return any renderable value, including another `DirectiveResult`.
+The `render()` method should return the value to render into the DOM.
+It can return any renderable value, including another `DirectiveResult`.
 
-In addition to referring to state on the directive instance, the `render()` method can also accept arbitrary arguments passed in to the directive function:
+In addition to referring to state on the directive instance,
+the `render()` method can also accept arbitrary arguments passed in to the directive function:
 
 ```js
 const template = html`<div>${myDirective(name, rank)}</div>`
 ```
 
 The parameters defined for the `render()` method determine the signature of the directive function:
-
-{% switchable-sample %}
 
 ```ts
 class MaxDirective extends Directive {
@@ -141,23 +142,6 @@ const max = directive(MaxDirective);
 // Call the directive with `value` and `minValue` arguments defined for `render()`:
 const template = html`<div>${max(someNumber, 0)}</div>`;
 ```
-
-```js
-class MaxDirective extends Directive {
-  maxValue = Number.MIN_VALUE;
-  // Define a render method, which may accept arguments:
-  render(value, minValue = Number.MIN_VALUE) {
-    this.maxValue = Math.max(value, this.maxValue, minValue);
-    return this.maxValue;
-  }
-}
-const max = directive(MaxDirective);
-
-// Call the directive with `value` and `minValue` arguments defined for `render()`:
-const template = html`<div>${max(someNumber, 0)}</div>`;
-```
-
-{% endswitchable-sample %}
 
 ### Imperative DOM access: update()
 

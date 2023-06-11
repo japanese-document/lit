@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-custom-directives.html" />
     <meta property="og:title" content="カスタムディレクティブ" />
-    <meta property="og:description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
+    <meta property="og:description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができます。だから、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     &lt;/</div>" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     </div>" />
+    <meta name="description" content="ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができます。だから、便利で応用範囲が広いです。下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。html`<div>       ${fancyDirective('some text')}     &lt;/</div>" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>カスタムディレクティブ</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -54,7 +54,7 @@
     <main class="main markdown-body">
       <h1 id="カスタムディレクティブ"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></h1>
 <p>ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。
-ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができるので、便利で応用範囲が広いです。</p>
+ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができます。だから、便利で応用範囲が広いです。</p>
 <p>下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。</p>
 <pre><code class="language-js">html`&lt;div&gt;
        ${fancyDirective('some text')}
@@ -138,16 +138,18 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <p>レンダー毎に同じエクスプレッションに同じディレクティブ関数を配置する限り、
 1つ前のクラスディレクティブのインスタンスを再び使います。
 そして、レンダリング間でクラスディレクティブのインスタンスのステートは保持されます。</p>
-<p>The constructor receives a single <code>PartInfo</code> object, which provides metadata about the expression the directive was used in.
-This can be useful for providing error checking in the cases where a directive is designed to be used only in specific types of expressions
+<p>コンストラクタは<code>PartInfo</code>オブジェクトを引数に取ります。
+その<code>PartInfo</code>オブジェクトはディレクティブが使われているエクスプレッションに関するメタデータを含んでいます。
+これは使用されるエクスプレッションの種類を限定しているディレクティブがそれをチェックする際に利用することができます。
 詳しくは<a class="Link" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a>を見てください。</p>
-<h3 id="Declarative_rendering__render()"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></h3>
-<p>The <code>render()</code> method should return the value to render into the DOM. It can return any renderable value, including another <code>DirectiveResult</code>.</p>
-<p>In addition to referring to state on the directive instance, the <code>render()</code> method can also accept arbitrary arguments passed in to the directive function:</p>
+<h3 id="ディレクティブのレンダリング__render()"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></h3>
+<p>The <code>render()</code> method should return the value to render into the DOM.
+It can return any renderable value, including another <code>DirectiveResult</code>.</p>
+<p>In addition to referring to state on the directive instance,
+the <code>render()</code> method can also accept arbitrary arguments passed in to the directive function:</p>
 <pre><code class="language-js">const template = html`&lt;div&gt;${myDirective(name, rank)}&lt;/div&gt;`
 </code></pre>
 <p>The parameters defined for the <code>render()</code> method determine the signature of the directive function:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class MaxDirective extends Directive {
   maxValue = Number.MIN_VALUE;
   // Define a render method, which may accept arguments:
@@ -161,20 +163,6 @@ const max = directive(MaxDirective);
 // Call the directive with `value` and `minValue` arguments defined for `render()`:
 const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 </code></pre>
-<pre><code class="language-js">class MaxDirective extends Directive {
-  maxValue = Number.MIN_VALUE;
-  // Define a render method, which may accept arguments:
-  render(value, minValue = Number.MIN_VALUE) {
-    this.maxValue = Math.max(value, this.maxValue, minValue);
-    return this.maxValue;
-  }
-}
-const max = directive(MaxDirective);
-
-// Call the directive with `value` and `minValue` arguments defined for `render()`:
-const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h3 id="Imperative_DOM_access__update()"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></h3>
 <p>In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the <code>update()</code> callback.</p>
 <p>The <code>update()</code> callback receives two arguments:</p>
@@ -492,7 +480,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></p>
 <p class="h2"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></p>
 <p class="h3"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></p>
-<p class="h3"><a href="#Declarative_rendering__render()">Declarative rendering: render()</a></p>
+<p class="h3"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></p>
 <p class="h3"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></p>
 <p class="h4"><a href="#Parts">Parts</a></p>
 <p class="h4"><a href="#Calling_render()_from_update()">Calling render() from update()</a></p>
