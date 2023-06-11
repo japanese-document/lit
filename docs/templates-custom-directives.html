@@ -143,10 +143,10 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 これは使用されるエクスプレッションの種類を限定しているディレクティブがそれをチェックする際に利用することができます。
 詳しくは<a class="Link" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a>を見てください。</p>
 <h3 id="ディレクティブのレンダリング__render()"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></h3>
-<p>The <code>render()</code> method should return the value to render into the DOM.
-It can return any renderable value, including another <code>DirectiveResult</code>.</p>
-<p>In addition to referring to state on the directive instance,
-the <code>render()</code> method can also accept arbitrary arguments passed in to the directive function:</p>
+<p><code>render()</code>メソッドはDOMにレンダリングする値を返す必要があります。
+<code>render()</code>メソッドは<code>DirectiveResult</code>のようなレンダリング可能な値を返すこともできます。</p>
+<p>下記のように<code>render()</code>はディレクティブインスタンスのステートを参照できるだけではなく、
+<code>render()</code>メソッドはディレクティブ関数に渡された引数を引数として受け取ります。</p>
 <pre><code class="language-js">const template = html`&lt;div&gt;${myDirective(name, rank)}&lt;/div&gt;`
 </code></pre>
 <p>The parameters defined for the <code>render()</code> method determine the signature of the directive function:</p>

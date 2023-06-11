@@ -116,11 +116,11 @@ class MyDirective extends Directive {
 
 ### ディレクティブのレンダリング: render()
 
-The `render()` method should return the value to render into the DOM.
-It can return any renderable value, including another `DirectiveResult`.
+`render()`メソッドはDOMにレンダリングする値を返す必要があります。
+`render()`メソッドは`DirectiveResult`のようなレンダリング可能な値を返すこともできます。
 
-In addition to referring to state on the directive instance,
-the `render()` method can also accept arbitrary arguments passed in to the directive function:
+下記のように`render()`はディレクティブインスタンスのステートを参照できるだけではなく、
+`render()`メソッドはディレクティブ関数に渡された引数を引数として受け取ります。
 
 ```js
 const template = html`<div>${myDirective(name, rank)}</div>`
