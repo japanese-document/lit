@@ -153,12 +153,12 @@ export function createIndexItems(pages: Page[]) {
 
 export function createIndexMenu(items: IndexItem[]) {
   return `
-    <div class="index-menu">${items.reduce((p, item) => `${p}
+    <nav class="index-menu">${items.reduce((p, item) => `${p}
       <details open>
         <summary>${item.name}</summary>${item.pages.reduce((p, page) => `${p}
         <p><a href="${page.url}">${page.title}</a></p>`, '')}
       </details>`, '')}
-    </div>`
+    </nav>`
 }
 
 export function createHeaderList(md: string) {
@@ -177,7 +177,7 @@ export function createHeaderList(md: string) {
       }
     })
     .join('\n')
-  return `<div class="header-list">${list}</div>`
+  return `<nav class="header-list">${list}</nav>`
 }
 
 export function createIndexPage(layout: string, indexItems: IndexItem[]) {
