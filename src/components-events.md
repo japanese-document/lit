@@ -324,7 +324,7 @@ class MyListener extends LitElement {
 ### 要素の更新の後にイベントをdispatchする
 
 ほとんどの場合、イベントは要素の更新とレンダリングの後に発生するべきです。
-これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必要です。
+これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必須です。
 この場合、ステートの変更の後、イベントをdispatchする前にコンポーネントの`updateComplete` Promiseをawaitします。
 
 ```ts
@@ -427,9 +427,11 @@ Shadow DOMでイベントを取り扱う場合の注意点があります。
 Shadow DOMはshadow要素に関する詳細を外部に公開せずカプセル化します。
 Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要素に渡しません。
 
-### Understanding composed event dispatching
+### Composedイベント
 
-By default, an event dispatched inside a shadow root will not be visible outside that shadow root. To make an event pass through shadow DOM boundaries, you must set the [`composed` property](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed) to `true`. It's common to pair `composed` with `bubbles` so that all nodes in the DOM tree can see the event:
+デフォルトでshadow root内でdispatchされた上記で作成したイベントはshadow rootの外には伝播しません。
+イベントがshadow domの外にも伝播するには[`composed`プロパティ](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed)を`true`にします。
+通常、DOMツリーのすべてのNodeにイベントを伝播するために`composed`と一緒に`bubbles`も`true`にします。
 
 ```js
 _dispatchMyEvent() {
@@ -441,9 +443,13 @@ _dispatchMyEvent() {
 }
 ```
 
-If an event is `composed` and does `bubble`, it can be received by all ancestors of the element that dispatches the event—including ancestors in outer shadow roots. If an event is `composed` but does not `bubble`, it can only be received on the element that dispatches the event and on the host element containing the shadow root.
+イベントの`composed`と`bubbles`が有効である場合、
+イベントは(shadow rootの外側にある要素を含む)イベントをdispatchした要素のすべての祖先要素に伝播します。
+イベントの`composed`が有効で`bubbles`が無効である場合、
+イベントはイベントをdispatchした要素からDOM上のshadow rootを含む要素まで伝播します。
 
-Note that most standard user interface events, including all mouse, touch, and keyboard events, are both bubbling and composed. See the [MDN documentation on composed events](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed) for more information.
+すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは`bubbles`と`composed`が両方有効です。
+詳しくは[こちら](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed)を見てください。
 
 ### Understanding event retargeting
 
