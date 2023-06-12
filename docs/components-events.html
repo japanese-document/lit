@@ -305,7 +305,7 @@ class MyListener extends LitElement {
 </code></pre>
 <h3 id="要素の更新の後にイベントをdispatchする"><a href="#要素の更新の後にイベントをdispatchする">要素の更新の後にイベントをdispatchする</a></h3>
 <p>ほとんどの場合、イベントは要素の更新とレンダリングの後に発生するべきです。
-これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必要です。
+これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必須です。
 この場合、ステートの変更の後、イベントをdispatchする前にコンポーネントの<code>updateComplete</code> Promiseをawaitします。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
@@ -390,8 +390,10 @@ this.dispatchEvent(event);
 <p>Shadow DOMでイベントを取り扱う場合の注意点があります。
 Shadow DOMはshadow要素に関する詳細を外部に公開せずカプセル化します。
 Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要素に渡しません。</p>
-<h3 id="Understanding_composed_event_dispatching"><a href="#Understanding_composed_event_dispatching">Understanding composed event dispatching</a></h3>
-<p>By default, an event dispatched inside a shadow root will not be visible outside that shadow root. To make an event pass through shadow DOM boundaries, you must set the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed"><code>composed</code> property</a> to <code>true</code>. It's common to pair <code>composed</code> with <code>bubbles</code> so that all nodes in the DOM tree can see the event:</p>
+<h3 id="Composedイベント"><a href="#Composedイベント">Composedイベント</a></h3>
+<p>デフォルトでshadow root内でdispatchされた上記で作成したイベントはshadow rootの外には伝播しません。
+イベントがshadow domの外にも伝播するには<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed"><code>composed</code>プロパティ</a>を<code>true</code>にします。
+通常、DOMツリーのすべてのNodeにイベントを伝播するために<code>composed</code>と一緒に<code>bubbles</code>も<code>true</code>にします。</p>
 <pre><code class="language-js">_dispatchMyEvent() {
   let myEvent = new CustomEvent('my-event', {
     detail: { message: 'my-event happened.' },
@@ -400,8 +402,12 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
   this.dispatchEvent(myEvent);
 }
 </code></pre>
-<p>If an event is <code>composed</code> and does <code>bubble</code>, it can be received by all ancestors of the element that dispatches the event—including ancestors in outer shadow roots. If an event is <code>composed</code> but does not <code>bubble</code>, it can only be received on the element that dispatches the event and on the host element containing the shadow root.</p>
-<p>Note that most standard user interface events, including all mouse, touch, and keyboard events, are both bubbling and composed. See the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">MDN documentation on composed events</a> for more information.</p>
+<p>イベントの<code>composed</code>と<code>bubbles</code>が有効である場合、
+イベントは(shadow rootの外側にある要素を含む)イベントをdispatchした要素のすべての祖先要素に伝播します。
+イベントの<code>composed</code>が有効で<code>bubbles</code>が無効である場合、
+イベントはイベントをdispatchした要素からDOM上のshadow rootを含む要素まで伝播します。</p>
+<p>すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは<code>bubbles</code>と<code>composed</code>が両方有効です。
+詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">こちら</a>を見てください。</p>
 <h3 id="Understanding_event_retargeting"><a href="#Understanding_event_retargeting">Understanding event retargeting</a></h3>
 <p><a class="Link" href="#shadowdom-composed">Composed</a> events dispatched from within a shadow root are retargeted, meaning that to any listener on an element hosting a shadow root or any of its ancestors, they appear to come from the hosting element. Since Lit components render into shadow roots, all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself. The event's <code>target</code> property is the Lit component.</p>
 <pre><code class="language-html">&lt;my-element onClick="(e) =&gt; console.log(e.target)"&gt;&lt;/my-element&gt;
@@ -480,7 +486,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#CustomEventの使い方">CustomEventの使い方</a></p>
 <p class="h4"><a href="#Eventの使い方">Eventの使い方</a></p>
 <p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
-<p class="h3"><a href="#Understanding_composed_event_dispatching">Understanding composed event dispatching</a></p>
+<p class="h3"><a href="#Composedイベント">Composedイベント</a></p>
 <p class="h3"><a href="#Understanding_event_retargeting">Understanding event retargeting</a></p>
 <p class="h2"><a href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">イベントディスパッチャーとイベントリスナ間でデータをやり取りする</a></p>
 <p class="h2"><a href="#License">License</a></p>
