@@ -52,7 +52,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="Shadow_DOM"><a href="#Shadow_DOM">Shadow DOM</a></h1>
+      <h1 id="Shadow_DOM"><a class="anchor" href="#Shadow_DOM">#</a>Shadow DOM</h1>
 <p>LitコンポーネントはDOMをカプセル化するために<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM</a>を使います。
 Shadow DOMを使うとコンポーネントのDOMツリーをdocumentと分離されているカプセル化されたDOMツリーにすることができます。
 DOMのカプセル化はページ内で動作する(Web componentsやLitコンポーネントを含む)他のコードとの相互運用性を実現するための重要な要素です。</p>
@@ -63,7 +63,7 @@ DOMのカプセル化はページ内で動作する(Web componentsやLitコン�
 <li>組み合わせることができます。コンポーネントのshadow rootはコンポーネントのDOMを保有しますが、そのコンポーネントの子コンポーネントからは分離されています。親コンポーネントと子コンポーネント間で相互に相手のDOMにアクセスすることはできません。</li>
 </ul>
 <p>Shadow DOMに関する詳しい情報は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using shadow DOM</a>を見てください。</p>
-<h2 id="Shadow_DOM内のNodeにアクセスする"><a href="#Shadow_DOM内のNodeにアクセスする">Shadow DOM内のNodeにアクセスする</a></h2>
+<h2 id="Shadow_DOM内のNodeにアクセスする"><a class="anchor" href="#Shadow_DOM内のNodeにアクセスする">#</a>Shadow DOM内のNodeにアクセスする</h2>
 <p>Litは<code>renderRoot</code>にコンポーネントをレンダリングします。shadow rootはデフォルトで<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#renderRoot()__Element_|_ShadowRoot">renderRoot</a>です。
 コンポーネント内の要素を取得するために<code>this.renderRoot.querySelector()</code>のようなDOMクエリーAPIを使います。</p>
 <p><code>renderRoot</code>はshadow rootもしくは1つの要素です。それらは<code>.querySelectorAll()</code>や<code>.children</code>のようなAPIを持ちます。</p>
@@ -78,9 +78,9 @@ get _closeButton() {
 }
 </code></pre>
 <p>LitElementは上記のゲッタの処理を省略して書くためのデコレータのセットを用意しています。</p>
-<h3 id="_query、_queryAll、_queryAsyncデコレータ"><a href="#_query、_queryAll、_queryAsyncデコレータ">@query、@queryAll、@queryAsyncデコレータ</a></h3>
+<h3 id="_query、_queryAll、_queryAsyncデコレータ"><a class="anchor" href="#_query、_queryAll、_queryAsyncデコレータ">#</a>@query、@queryAll、@queryAsyncデコレータ</h3>
 <p>@query、@queryAll、@queryAsyncデコレータを使うとコンポーネント内にあるNodeに簡単にアクセスすることができます。</p>
-<h4 id="_query"><a href="#_query">@query</a></h4>
+<h4 id="_query"><a class="anchor" href="#_query">#</a>@query</h4>
 <p>クラスプロパティを<code>renderRoot</code>からNodeを返すゲッタに変更します。
 オプションである第2引数にtrueを渡すとDOMクエリは1回のみ実行され、その結果がキャッシュされます。
 これは取得対象のNodeが代わらないケースではパフォーマンスが向上します。</p>
@@ -104,7 +104,7 @@ class MyElement extends LitElement {
   return this.renderRoot?.querySelector('#first') ?? null;
 }
 </code></pre>
-<h4 id="_queryAll"><a href="#_queryAll">@queryAll</a></h4>
+<h4 id="_queryAll"><a class="anchor" href="#_queryAll">#</a>@queryAll</h4>
 <p><code>@query</code>と似ていますがマッチするNodeを1つだけ返すのではなくすべて返します。
 これは<code>querySelectorAll</code>を実行することと等価です。</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
@@ -130,11 +130,11 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 </code></pre>
 <p><code>buttons</code>の後の<code>!</code>はTypeScriptの<a class="Link" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">non-null assertion operator</a>です。
 これは<code>buttons</code>には常に<code>null</code>と<code>undefined</code>が入らないことを示します。</p>
-<h4 id="_queryAsync"><a href="#_queryAsync">@queryAsync</a></h4>
+<h4 id="_queryAsync"><a class="anchor" href="#_queryAsync">#</a>@queryAsync</h4>
 <p><code>@query</code>と似ています。<code>@queryAsync</code>はNodeを返すのではなく、保留中のレンダリングが完了した後にNodeを解決するPromiseを返します。
 <code>updateComplete</code> Promiseをawaitする代わりにこれを使うことができます。
 これは<code>@queryAsync</code>によって返されるNodeが他のプロパティの変更に影響を受ける場合に便利です。</p>
-<h2 id="slot要素を使って子要素をレンダリングする"><a href="#slot要素を使って子要素をレンダリングする">slot要素を使って子要素をレンダリングする</a></h2>
+<h2 id="slot要素を使って子要素をレンダリングする"><a class="anchor" href="#slot要素を使って子要素をレンダリングする">#</a>slot要素を使って子要素をレンダリングする</h2>
 <p>下記のようにコンポーネントに子要素を配置することができます。</p>
 <pre><code class="language-html">&lt;my-element&gt;
   &lt;p&gt;A child&lt;/p&gt;
@@ -143,10 +143,10 @@ _buttons!: NodeListOf&lt;HTMLButtonElement&gt;
 <p>デフォルトでは要素がshadow treeを持つ場合、その子要素はレンダリングされません。</p>
 <p>子要素をレンダリングするにはテンプレートに<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"><code>&lt;slot&gt;</code>要素</a>を1つ以上配置する必要があります。
 <code>&lt;slot&gt;</code>要素を使って子要素を配置する位置を指定します。</p>
-<h3 id="slot要素を使う"><a href="#slot要素を使う">slot要素を使う</a></h3>
+<h3 id="slot要素を使う"><a class="anchor" href="#slot要素を使う">#</a>slot要素を使う</h3>
 <p>子要素をレンダリングするには、要素のテンプレートに<code>&lt;slot&gt;</code>を配置します。
 子要素は<code>&lt;slot&gt;</code>要素の子要素の様にレンダリングされます。</p>
-<h3 id="名前付きslotを使う"><a href="#名前付きslotを使う">名前付きslotを使う</a></h3>
+<h3 id="名前付きslotを使う"><a class="anchor" href="#名前付きslotを使う">#</a>名前付きslotを使う</h3>
 <p>子要素を指定した<code>slot</code>要素に割り当てるには、子要素の<code>slot</code>属性をslot要素の<code>name</code>属性にマッチさせます。</p>
 <ul>
 <li><p><strong>名前付きslotは子要素の<code>slot</code>属性とマッチした場合のみ適用されます。</strong></p>
@@ -183,7 +183,7 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="デフォルトでslotに適用されるコンテンツを指定する"><a href="#デフォルトでslotに適用されるコンテンツを指定する">デフォルトでslotに適用されるコンテンツを指定する</a></h3>
+<h3 id="デフォルトでslotに適用されるコンテンツを指定する"><a class="anchor" href="#デフォルトでslotに適用されるコンテンツを指定する">#</a>デフォルトでslotに適用されるコンテンツを指定する</h3>
 <p>slot要素に割り当てられるデフォルトのコンテンツを指定することができます。
 slot要素に対応するコンテンツが存在しない場合、デフォルトのコンテンツは表示されます。</p>
 <pre><code class="language-html">&lt;slot&gt;I am fallback content&lt;/slot&gt;
@@ -195,7 +195,7 @@ name属性のないslot要素は任意の子Nodeを適用します。
 custom elementの子要素にLitエクスプレッションを使う場合、
 意図した通りにデフォルトのコンテンツがレンダリングされるようにレンダリングしない値を使ってください。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">レンダリングしない値</a>を見てください。</p>
-<h2 id="slotに適用された子要素にアクセスする"><a href="#slotに適用された子要素にアクセスする">slotに適用された子要素にアクセスする</a></h2>
+<h2 id="slotに適用された子要素にアクセスする"><a class="anchor" href="#slotに適用された子要素にアクセスする">#</a>slotに適用された子要素にアクセスする</h2>
 <p>shadow root内のslotに割り当てられた子要素にアクセスするには、
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event">slotchange</a>イベントでWeb標準の<code>slot.assignedNodes</code>メソッドもしくは<code>slot.assignedElements</code>メソッドを使います。</p>
 <p>下記のように、特定のslotに割り当てられた要素を返すゲッタを作成することができます。</p>
@@ -218,7 +218,7 @@ render() {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">HTMLSlotElement</a>を見てください。</p>
-<h3 id="_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ"><a href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</a></h3>
+<h3 id="_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ"><a class="anchor" href="#_queryAssignedElementsデコレータと_queryAssignedNodesデコレータ">#</a>@queryAssignedElementsデコレータと@queryAssignedNodesデコレータ</h3>
 <p><code>@queryAssignedElements</code>はクラスのプロパティを指定したslotの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedElements"><code>slot.assignedElements</code></a>を返すgetterに変換します。
 <code>@queryAssignedNodes</code>はクラスのプロパティを指定したslotの<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/assignedNodes"><code>slot.assignedNodes</code></a>を返すgetterに変換します。
 これらのクエリを使ってslotに割り当てられた要素もしくはNodeを取得します。</p>
@@ -262,7 +262,7 @@ get _headerNodes() {
   return slot.assignedNodes({flatten: true});
 }
 </code></pre>
-<h2 id="render_rootを変更する"><a href="#render_rootを変更する">render rootを変更する</a></h2>
+<h2 id="render_rootを変更する"><a class="anchor" href="#render_rootを変更する">#</a>render rootを変更する</h2>
 <p>各Litコンポーネントはrender rootを保有しています。
 render rootはコンポーネント内のDOMを内包しています。</p>
 <p>デフォルトでは、LitElementは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/mode">open</a>モードの<code>shadowRoot</code>を生成します。そして、LitElementは<code>shadowRoot</code>の内側にレンダリングします。その結果、下記のようなDOM構造を生成します。</p>
@@ -276,7 +276,7 @@ render rootはコンポーネント内のDOMを内包しています。</p>
 <li><code>shadowRootOptions</code>を設定する方法</li>
 <li><code>createRenderRoot</code>メソッドを実装する方法</li>
 </ul>
-<h3 id="shadowRootOptionsを設定する"><a href="#shadowRootOptionsを設定する"><code>shadowRootOptions</code>を設定する</a></h3>
+<h3 id="shadowRootOptionsを設定する"><a class="anchor" href="#shadowRootOptionsを設定する">#</a><code>shadowRootOptions</code>を設定する</h3>
 <p>render rootを変更する一番シンプルな方法は<code>static shadowRootOptions</code>プロパティを変更することです。
 デフォルトの<code>createRenderRoot</code>の実装は、コンポーネントのshadow rootを作成する際に<code>attachShadow</code>に<code>static shadowRootOptions</code>プロパティを引数として渡します。
 だから、<code>static shadowRootOptions</code>プロパティを変更することで<code>mode</code>や<code>delegatesFocus</code>等の設定を変更することができます。</p>
@@ -285,18 +285,18 @@ render rootはコンポーネント内のDOMを内包しています。</p>
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow">Element.attachShadow()</a>を見てください。</p>
-<h3 id="createRenderRootを実装する"><a href="#createRenderRootを実装する"><code>createRenderRoot</code>を実装する</a></h3>
+<h3 id="createRenderRootを実装する"><a class="anchor" href="#createRenderRootを実装する">#</a><code>createRenderRoot</code>を実装する</h3>
 <p>デフォルトの<code>createRenderRoot</code>の実装はopen modeのshadow rootを作成します。そして、<code>static style</code>クラスフィールドにセットされているスタイルをそれに加えます。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a>を見てください。</p>
 <p>コンポーネントのrender rootを変更するには、<code>createRenderRoot</code>がテンプレートをレンダリングした結果を内包するNodeを返すように実装します。</p>
 <p>例えば、テンプレートを要素の子要素としてメインのDOMツリーにレンダリングする(shadow domではなく通常のDOMとしてレンダリングする)には、<code>createRenderRoot</code>が<code>this</code>を返すように実装します。</p>
 <p>shadow domではなく通常のDOMとしてレンダリングすることは非推奨です。</p>
 <hr>
-<h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a href="#Other">Other</a></h3>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/components-lifecycle.html" />
     <meta property="og:title" content="ライフサイクル" />
-    <meta property="og:description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのライ" />
+    <meta property="og:description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。#custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのラ" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのライ" />
+    <meta name="description" content="LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。#custom elementsのライフサイクルLitコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。custom elementsのライフサイクルの詳しい情報はUsing the lifecycle callbacksを見てください。コンポーネントでcustom elementsのラ" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>ライフサイクル</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -52,23 +52,23 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h1>
+      <h1 id="ライフサイクル"><a class="anchor" href="#ライフサイクル">#</a>ライフサイクル</h1>
 <p>LitコンポーネントはWeb標準であるcustom elementsのライフサイクルメソッドを使っています。
 更にLitはリアクティブプロパティが変更された時にDOMにそれを反映するリアクティブアップデートサイクルを追加しています。</p>
-<h2 id="custom_elementsのライフサイクル"><a href="#custom_elementsのライフサイクル">custom elementsのライフサイクル</a></h2>
+<h2 id="custom_elementsのライフサイクル"><a class="anchor" href="#custom_elementsのライフサイクル">#</a>custom elementsのライフサイクル</h2>
 <p>Litコンポーネントはcustom elementsです。そして、custom elementsのライフサイクルメソッドを継承しています。
 custom elementsのライフサイクルの詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">Using the lifecycle callbacks</a>を見てください。</p>
 <p>コンポーネントでcustom elementsのライフサイクルメソッドをオーバーライドする場合、
 Litが正常に動作するために、そのメソッド内でそれに該当する<code>super</code>のメソッド(例: <code>super.connectedCallback()</code>)を実行しなければなりません。</p>
-<h3 id="constructor()"><a href="#constructor()">constructor()</a></h3>
+<h3 id="constructor()"><a class="anchor" href="#constructor()">#</a>constructor()</h3>
 <p>custom elements(Litコンポーネント)が生成される時に実行されます。
 既にDOMにcustom elementsが存在していてcustom elements(Litコンポーネント)の定義がロードされた時(アップグレードされた時)も実行されます。</p>
-<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<h4 id="Litの動作"><a class="anchor" href="#Litの動作">#</a>Litの動作</h4>
 <p><code>requestUpdate()</code>メソッドを実行して非同期更新をリクエストします。
 そうすることでLitコンポーネントにアップグレードされた時にすぐに更新されます。</p>
 <p>要素の既存のプロパティを保存します。
 これによって要素にセットされたプロパティの値が保持されます。そして、コンポーネントのデフォルトの値をそれで上書きすることができます。</p>
-<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<h4 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h4>
 <p>最初の<a class="Link" href="#リアクティブアップデートサイクル">更新</a>の前に1回だけ実行する必要がある初期化処理を実行です。
 例えば、デコレータを使わない場合、<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#パブリックプロパティとインターナルステート"><code>static properties</code>クラスフィールドを使います</a>。
 その場合、constructor()内でデフォルトの値をセットします。</p>
@@ -78,13 +78,13 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
   this.bar = 'bar';
 }
 </code></pre>
-<h3 id="connectedCallback()"><a href="#connectedCallback()">connectedCallback()</a></h3>
+<h3 id="connectedCallback()"><a class="anchor" href="#connectedCallback()">#</a>connectedCallback()</h3>
 <p>コンポーネントがdocumentに接続された(追加された)時に実行されます。</p>
-<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<h4 id="Litの動作"><a class="anchor" href="#Litの動作">#</a>Litの動作</h4>
 <p>要素がdocumentに接続された後、Litはアップデートサイクルの一番目の処理を開始します。
 レンダリングをする前にLitは<code>renderRoot</code>(通常は<code>shadowRoot</code>)が生成済みか確認します。</p>
 <p>1回でも要素がドキュメントに接続すると、コンポーネントの更新は接続状態に関係なく進みます。</p>
-<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<h4 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h4>
 <p><code>connectedCallback()</code>には要素がdocumentに接続した時のみ実行したい処理を記述します。
 それの最も一般的なケースは要素の外部のNodeにイベントリスナを追加することです。例えばkeydownイベントハンドラをwindowに追加することです。
 通常、要素がdocumentから切断された時は<code>connectedCallback()</code>で加えた何かを元に戻す必要があります。例えば、メモリーリークを防止するためにwindowに登録したイベントリスナを削除することです。</p>
@@ -93,11 +93,11 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
   addEventListener('keydown', this._handleKeydown);
 }
 </code></pre>
-<h3 id="disconnectedCallback()"><a href="#disconnectedCallback()">disconnectedCallback()</a></h3>
+<h3 id="disconnectedCallback()"><a class="anchor" href="#disconnectedCallback()">#</a>disconnectedCallback()</h3>
 <p>コンポーネントがdocumentのDOMツリーから削除されたら実行されます。</p>
-<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<h4 id="Litの動作"><a class="anchor" href="#Litの動作">#</a>Litの動作</h4>
 <p><a class="Link" href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を一時停止します。 要素が接続されたら再開します。</p>
-<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<h4 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h4>
 <p>このコールバックが実行されることは要素が今後使われないかもしれないことを示しています。
 ガベージコレクションで要素を解放するために、
 <code>disconnectedCallback()</code>では要素への参照を保持している物(例えば要素を参照している外部のNodeに加えられたイベントリスナ)がないか確認する必要があります。
@@ -111,22 +111,22 @@ Litが正常に動作するために、そのメソッド内でそれに該当�
 </code></pre>
 <p>コンポーネント内のDOMに加えられた(テンプレート内で宣言的に加えられた物も含む)イベントリスナを削除する必要はありません。
 外部のNodeに追加されたイベントリスナとは違って、それはコンポーネントのガベージコレクションを妨げません。</p>
-<h3 id="attributeChangedCallback()"><a href="#attributeChangedCallback()">attributeChangedCallback()</a></h3>
+<h3 id="attributeChangedCallback()"><a class="anchor" href="#attributeChangedCallback()">#</a>attributeChangedCallback()</h3>
 <p>要素の<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#static_observedAttributes__Array">observedAttributes</a>が1つでも変更された時に実行されます。</p>
-<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<h4 id="Litの動作"><a class="anchor" href="#Litの動作">#</a>Litの動作</h4>
 <p>Litはこのコールバックを属性の変更をリアクティブプロパティに同期することに使います。
 それは属性に値がセットされるとそれに対応するプロパティに値がセットされます。
 Litは自動的に要素の<code>observedAttributes</code>とコンポーネントのリアクティブプロパティがそれぞれ対応するようにします。</p>
-<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<h4 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h4>
 <p>このコールバックを実装する機会はほどんどありません。</p>
-<h3 id="adoptedCallback()"><a href="#adoptedCallback()">adoptedCallback()</a></h3>
+<h3 id="adoptedCallback()"><a class="anchor" href="#adoptedCallback()">#</a>adoptedCallback()</h3>
 <p>コンポーネントが別のdocumentに移動したときに実行されます。</p>
 <p><code>adoptedCallback</code>はPolyfillにはないことに注意してください。</p>
-<h4 id="Litの動作"><a href="#Litの動作">Litの動作</a></h4>
+<h4 id="Litの動作"><a class="anchor" href="#Litの動作">#</a>Litの動作</h4>
 <p>デフォルトではLitはこのコールバックで何もしません。</p>
-<h4 id="ユースケース"><a href="#ユースケース">ユースケース</a></h4>
+<h4 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h4>
 <p>このコールバックはdocumentを移動した時に要素の動作を変更するような高度なユースケースに使われます。</p>
-<h2 id="リアクティブアップデートサイクル"><a href="#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a></h2>
+<h2 id="リアクティブアップデートサイクル"><a class="anchor" href="#リアクティブアップデートサイクル">#</a>リアクティブアップデートサイクル</h2>
 <p>LitコンポーネントはWeb標準のcustom elementsのライフサイクルに加えてリアクティブアップデートサイクルを用意しています。</p>
 <p>リアクティブアップデートサイクルはリアクティブプロパティが変更された時もしくは<code>requestUpdate()</code>メソッドが明示的に実行された時に発動します。
 Litは更新を非同期で行います。そして、プロパティの変更の反映はまとめて行われます。
@@ -151,11 +151,11 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p><img alt="update-3" src="/lit/images/components-update-3.jpg"></p>
 <p><strong>更新後</strong></p>
 <p><img alt="update-4" src="/lit/images/components-update-4.jpg"></p>
-<h3 id="changedProperties"><a href="#changedProperties">changedProperties</a></h3>
+<h3 id="changedProperties"><a class="anchor" href="#changedProperties">#</a>changedProperties</h3>
 <p>多くのリアクティブアップデートサイクルのメソッドは変更済みのプロパティを<code>Map</code>に格納した引数(<code>changedProperties</code>)として受け取ります。
 <code>Map</code>のキーはプロパティ名です。そして、その値は1つ前のプロパティの値です。
 現行のプロパティの値は<code>this.property</code>もしくは<code>this[property]</code>で取得することができます。</p>
-<h4 id="changedPropertiesの型"><a href="#changedPropertiesの型">changedPropertiesの型</a></h4>
+<h4 id="changedPropertiesの型"><a class="anchor" href="#changedPropertiesの型">#</a>changedPropertiesの型</h4>
 <p>TypeScriptで<code>changedProperties</code>に対して厳格な型チェックをしたい場合は<code>PropertyValues&lt;this&gt;</code>を使います。これは各プロパティ名に対して正確な型を推論します。</p>
 <pre><code class="language-ts">import {LitElement, html, PropertyValues} from 'lit';
 ...
@@ -166,19 +166,19 @@ microtaskの説明は<a class="Link" href="https://jakearchibald.com/2015/tasks-
 <p>厳格な型が必要ないなら(プロパティ名だけチェックして1つ前の値はチェックしない)、<code>Map&lt;string, any&gt;</code>のような緩い型を使うこともできます。</p>
 <p><code>PropertyValues&lt;this&gt;</code>は<code>protected</code>と<code>private</code>なプロパティを認識しません。
 <code>protected</code>と<code>private</code>なプロパティをチェックしたい場合は<code>Map&lt;string, any&gt;</code>のような緩い型を使います。</p>
-<h4 id="更新中のプロパティの変更"><a href="#更新中のプロパティの変更">更新中のプロパティの変更</a></h4>
+<h4 id="更新中のプロパティの変更"><a class="anchor" href="#更新中のプロパティの変更">#</a>更新中のプロパティの変更</h4>
 <p>更新中(<code>render()</code>メソッド完了まで)にプロパティを変更すると<code>changedProperties</code>は変更されますが、新たなアップデートサイクルを発動しません。
 <code>render()</code>メソッドの後(例: <code>updated()</code>内)でプロパティを変更した場合は新たなアップデートサイクルを発動します。
 そして、変更されたプロパティは新たな<code>changedProperties</code>に反映されて次のアップデートサイクルで使われます。</p>
-<h3 id="更新の発動"><a href="#更新の発動">更新の発動</a></h3>
+<h3 id="更新の発動"><a class="anchor" href="#更新の発動">#</a>更新の発動</h3>
 <p>リアクティブプロパティが変更される、もしくは<code>requestUpdate()</code>を実行すると更新が発動されます。
 更新は非同期で実行されるので、
 更新が実行される前に生じた変更はまとめて1回の更新で反映されます。</p>
-<h4 id="hasChanged()"><a href="#hasChanged()">hasChanged()</a></h4>
+<h4 id="hasChanged()"><a class="anchor" href="#hasChanged()">#</a>hasChanged()</h4>
 <p>リアクティブプロパティに値がセットされた時に実行されます。
 デフォルトでは<code>hasChanged()</code>は<code>!==</code>で比較します。そして、<code>true</code>を返した場合、更新がスケジュールされます。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#hasChanged"><code>hasChanged()</code></a>を見てください。</p>
-<h4 id="requestUpdate()"><a href="#requestUpdate()">requestUpdate()</a></h4>
+<h4 id="requestUpdate()"><a class="anchor" href="#requestUpdate()">#</a>requestUpdate()</h4>
 <p><code>requestUpdate()</code>を実行すると明示的に更新をスケジュールすることができます。
 これはプロパティの変更によらずに要素を更新してレンダリングしたい場合に使います。
 例えば、タイマーコンポーネントは1秒ごとに<code>requestUpdate()</code>を実行します。</p>
@@ -199,12 +199,12 @@ disconnectedCallback() {
 カスタムゲッタやセッタに関する詳しい情報は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
 <pre><code class="language-js">  this.requestUpdate('state', this._previousState);
 </code></pre>
-<h3 id="更新の実行"><a href="#更新の実行">更新の実行</a></h3>
+<h3 id="更新の実行"><a class="anchor" href="#更新の実行">#</a>更新の実行</h3>
 <p><code>performUpdate()</code>が更新を実行します。このメソッド内で複数のライフサイクルが実行されます。</p>
 <p>これは更新処理中にプロパティの値の計算を可能にするために、
 通常はコンポーネントの更新中に更新を発動する変更は新しい更新をスケジュールしません。
 更新中に変更されたプロパティは<code>changedProperties</code> Mapに反映されます。だから、その後のライフサイクルメソッドは変更を反映した処理を行うことができます。</p>
-<h4 id="shouldUpdate()"><a href="#shouldUpdate()">shouldUpdate()</a></h4>
+<h4 id="shouldUpdate()"><a class="anchor" href="#shouldUpdate()">#</a>shouldUpdate()</h4>
 <p>更新を実行するかどうか判断するために実行されます。</p>
 <table>
 <thead>
@@ -239,7 +239,7 @@ disconnectedCallback() {
   return changedProperties.has('prop1'); 
 }
 </code></pre>
-<h4 id="willUpdate()"><a href="#willUpdate()">willUpdate()</a></h4>
+<h4 id="willUpdate()"><a class="anchor" href="#willUpdate()">#</a>willUpdate()</h4>
 <p><code>update()</code>を実行する前に実行されます。更新で使用する値を生成する用途に使います。</p>
 <table>
 <thead>
@@ -277,7 +277,7 @@ render() {
   return html`SHA: ${this.sha}`;
 }
 </code></pre>
-<h4 id="update()"><a href="#update()">update()</a></h4>
+<h4 id="update()"><a class="anchor" href="#update()">#</a>update()</h4>
 <p>コンポーネントのDOMを更新するために実行されます。</p>
 <table>
 <thead>
@@ -305,7 +305,7 @@ render() {
 </tbody></table>
 <p>プロパティの値を要素の属性に反映します。そして、<code>render()</code>でコンポーネント内のDOMを更新します。</p>
 <p>通常、このメソッドを実装することはありません。</p>
-<h4 id="render()"><a href="#render()">render()</a></h4>
+<h4 id="render()"><a class="anchor" href="#render()">#</a>render()</h4>
 <p><code>render()</code>は<code>update()</code>内で実行されます。
 <code>render()</code>はコンポーネントのDOMとしてレンダリングできる値(例: <code>TemplateResult</code>)を返すように実装する必要があります。</p>
 <table>
@@ -341,9 +341,9 @@ render() {
   return html`${header}${content}`;
 }
 </code></pre>
-<h3 id="更新の完了"><a href="#更新の完了">更新の完了</a></h3>
+<h3 id="更新の完了"><a class="anchor" href="#更新の完了">#</a>更新の完了</h3>
 <p>変更をコンポーネントのDOMにレンダリングするために<code>update()</code>を実行した後、以下のメソッドを使ってコンポーネントのDOMを操作することができます。</p>
-<h4 id="firstUpdated()"><a href="#firstUpdated()">firstUpdated()</a></h4>
+<h4 id="firstUpdated()"><a class="anchor" href="#firstUpdated()">#</a>firstUpdated()</h4>
 <p>初回のコンポーネントのDOMの更新後、<a class="Link" href="#updated"><code>updated()</code></a>が実行される直前に実行されます。</p>
 <table>
 <thead>
@@ -375,7 +375,7 @@ render() {
   this.renderRoot.getElementById('my-text-area').focus();
 }
 </code></pre>
-<h4 id="updated()"><a href="#updated()">updated()</a></h4>
+<h4 id="updated()"><a class="anchor" href="#updated()">#</a>updated()</h4>
 <p>コンポーネントの更新が終了して要素のDOMの更新とレンダリングがされる毎に実行されます。</p>
 <table>
 <thead>
@@ -409,7 +409,7 @@ render() {
   }
 }
 </code></pre>
-<h4 id="updateComplete"><a href="#updateComplete">updateComplete</a></h4>
+<h4 id="updateComplete"><a class="anchor" href="#updateComplete">#</a>updateComplete</h4>
 <p><code>updateComplete</code>はPromiseです。これは更新が終了した時に解決されます。
 <code>updateComplete</code>は更新の終了を待つために使います。
 解決した値は要素の更新が終了したかどうかを示すbooleanです。
@@ -447,7 +447,7 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 </ol>
 <p>アップデートサイクル中に未処理のエラーがある場合、<code>updateComplete</code> Promiseはrejectします。
 詳しくは<a class="Link" href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a>を見てください。</p>
-<h3 id="アップデートサイクル中のエラーを取り扱う"><a href="#アップデートサイクル中のエラーを取り扱う">アップデートサイクル中のエラーを取り扱う</a></h3>
+<h3 id="アップデートサイクル中のエラーを取り扱う"><a class="anchor" href="#アップデートサイクル中のエラーを取り扱う">#</a>アップデートサイクル中のエラーを取り扱う</h3>
 <p><code>render()</code>や<code>update()</code>のようなライフサイクルメソッド内でcatchされない例外が発生は<code>updateComplete</code> Promiseのrejectを引き起します。
 ライフサイクルメソッド内のコードで例外がthrowされる可能性がある場合、それを<code>try</code>/<code>catch</code>ステートメントで囲むと良いでしょう。</p>
 <p><code>updateComplete</code> Promiseをawaitする時はそれを<code>try</code>/<code>catch</code>ステートメントで囲むと良いでしょう。</p>
@@ -464,9 +464,9 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
   /* エラーを取り扱う */
 }
 </code></pre>
-<h3 id="その他のライフサイクルメソッドを変更する"><a href="#その他のライフサイクルメソッドを変更する">その他のライフサイクルメソッドを変更する</a></h3>
+<h3 id="その他のライフサイクルメソッドを変更する"><a class="anchor" href="#その他のライフサイクルメソッドを変更する">#</a>その他のライフサイクルメソッドを変更する</h3>
 <p>このセクションでは余り変更することがないライフサイクルメソッドを紹介します。</p>
-<h4 id="scheduleUpdate()"><a href="#scheduleUpdate()">scheduleUpdate()</a></h4>
+<h4 id="scheduleUpdate()"><a class="anchor" href="#scheduleUpdate()">#</a>scheduleUpdate()</h4>
 <p><code>scheduleUpdate()</code>をオーバーライドすると更新するタイミングを変更することができます。
 <code>scheduleUpdate()</code>は更新が実行される直前に実行されます。デフォルトではすぐに<code>performUpdate()</code>を実行します。
 <code>scheduleUpdate()</code>をオーバーライドすることで更新の実行を延期することができます。
@@ -478,15 +478,15 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
 }
 </code></pre>
 <p><code>scheduleUpdate()</code>をオーバーライドする場合、上記のように保留中の更新を実行するために<code>super.scheduleUpdate()</code>を実行する必要があります。</p>
-<h4 id="performUpdate()"><a href="#performUpdate()">performUpdate()</a></h4>
+<h4 id="performUpdate()"><a class="anchor" href="#performUpdate()">#</a>performUpdate()</h4>
 <p><code>performUpdate()</code>には<code>shouldUpdate()</code>、<code>update()</code>、<code>updated()</code>を実行してリアクティブアップデートサイクルを実行する処理を実装します。</p>
 <p><code>performUpdate()</code>を実行すると保留中の更新をすぐに実行することができます。
 通常これを使うことはありませんが、同期的に更新を行いたい場合に使います。
 (保留中の更新がない場合、<code>requestUpdate()</code>を実行して<code>performUpdate()</code>が実行されることで同期的な更新を強制することができます。)</p>
-<h4 id="hasUpdated"><a href="#hasUpdated">hasUpdated</a></h4>
+<h4 id="hasUpdated"><a class="anchor" href="#hasUpdated">#</a>hasUpdated</h4>
 <p>1回以上コンポーネントが更新されている場合、<code>hasUpdated</code>プロパティはtrueを返します。
 <code>hasUpdated</code>はライフサイクルメソッド内でコンポーネントが1回も更新されていない時に実行したい処理を実行したい場合に役立ちます。</p>
-<h4 id="getUpdateComplete()"><a href="#getUpdateComplete()">getUpdateComplete()</a></h4>
+<h4 id="getUpdateComplete()"><a class="anchor" href="#getUpdateComplete()">#</a>getUpdateComplete()</h4>
 <p><code>updateComplete</code> Promiseの完了条件を変更するには<code>getUpdateComplete()</code>をオーバーライドします。
 例えば、下記のように子要素の更新をawaitすることに利用します。
 最初に<code>super.getUpdateComplete()</code>をawaitして、次に処理を追加します。</p>
@@ -497,11 +497,11 @@ LitやReactiveElementのコンポーネントを測定する際は、ステー�
   }
 }
 </code></pre>
-<h2 id="外部ライフサイクルフック(コントローラとデコレータ)"><a href="#外部ライフサイクルフック(コントローラとデコレータ)">外部ライフサイクルフック(コントローラとデコレータ)</a></h2>
+<h2 id="外部ライフサイクルフック(コントローラとデコレータ)"><a class="anchor" href="#外部ライフサイクルフック(コントローラとデコレータ)">#</a>外部ライフサイクルフック(コントローラとデコレータ)</h2>
 <p>コンポーネントクラスにライフサイクルメソッドを実装することに加えて、<a class="Link" href="https://lit.dev/docs/components/decorators/">デコレータ</a>のようにクラス外部のコードを使ってコンポーネントのライフサイクルを変更することができます。</p>
 <p>Litは外部コードをリアクティブアップデートサイクルに統合するために2つの仕組みを提供します。
 それは<code>static addInitializer()</code>と<code>addController()</code>です。</p>
-<h4 id="static_addInitializer()"><a href="#static_addInitializer()">static addInitializer()</a></h4>
+<h4 id="static_addInitializer()"><a class="anchor" href="#static_addInitializer()">#</a>static addInitializer()</h4>
 <p><code>addInitializer()</code>を使うとLitコンポーネントクラスの定義時に、そのクラスインスタンスが生成される時に実行されるコードを登録することができます。</p>
 <p>カスタムデコレータを実装する時によく使います。
 デコレータはクラスの定義される時に実行されます。そして、フィールドやメソッドの定義を置き換えることができます。
@@ -526,22 +526,22 @@ const myDecorator = (proto: ReactiveElement, key: string) =&gt; {
 イニシャライザをサブクラスに加えてもスーパークラスには加えられません。
 イニシャライザはコンストラクタで実行されるので、
 イニシャライザはクラスの階層順(スーパークラスからサブクラスの順番)で実行されます。</p>
-<h4 id="addController()"><a href="#addController()">addController()</a></h4>
+<h4 id="addController()"><a class="anchor" href="#addController()">#</a>addController()</h4>
 <p>コンポーネントがコントローラのライフサイクルコールバックを実行するために<code>addController()</code>はリアクティブコントローラをLitコンポーネントに追加します。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a>を見てください。</p>
-<h4 id="removeController()"><a href="#removeController()">removeController()</a></h4>
+<h4 id="removeController()"><a class="anchor" href="#removeController()">#</a>removeController()</h4>
 <p><code>removeController()</code>はリアクティブコントローラを削除します。そして、コンポーネントからリアクティブライフサイクルコールバックを受け取らないようにします。</p>
-<h2 id="サーバーサイドリアクティブアップデートサイクル"><a href="#サーバーサイドリアクティブアップデートサイクル">サーバーサイドリアクティブアップデートサイクル</a></h2>
+<h2 id="サーバーサイドリアクティブアップデートサイクル"><a class="anchor" href="#サーバーサイドリアクティブアップデートサイクル">#</a>サーバーサイドリアクティブアップデートサイクル</h2>
 <p>Litの<a class="Link" href="https://lit.dev/docs/ssr/overview/">サーバーサイドレンダリングパッケージ</a>は現在開発中なので下記の情報は変更される可能性があります。</p>
 <p>Litをサーバでレンダリングする時はすべてのアップデートサイクルが実行されるわけではありません。
 次のメソッドはサーバで実行されます。</p>
 <p><img alt="update-server" src="/lit/images/components-update-server.jpg"></p>
 <hr>
-<h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a href="#Other">Other</a></h3>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

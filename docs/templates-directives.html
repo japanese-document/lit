@@ -52,7 +52,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="ビルトインディレクティブ"><a href="#ビルトインディレクティブ">ビルトインディレクティブ</a></h1>
+      <h1 id="ビルトインディレクティブ"><a class="anchor" href="#ビルトインディレクティブ">#</a>ビルトインディレクティブ</h1>
 <p>ディレクティブを使うとエクスプレッションのレンダリング方法を変更することによってLitを拡張することができます。
 Litは下記のような多様な用途に対応したビルドインディレクティブを用意しています。</p>
 <table class="directory">
@@ -261,8 +261,8 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 
 <p>独自のディレクティブを作成することができます。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a>を見てください。</p>
-<h2 id="スタイル"><a href="#スタイル">スタイル</a></h2>
-<h3 id="classMap"><a href="#classMap">classMap</a></h3>
+<h2 id="スタイル"><a class="anchor" href="#スタイル">#</a>スタイル</h2>
+<h3 id="classMap"><a class="anchor" href="#classMap">#</a>classMap</h3>
 <p>渡されたobjectに応じて要素のclass属性にclass名のリストを割り当てます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -312,7 +312,7 @@ class MyElement extends LitElement {
 <pre><code class="language-ts">html`&lt;div class="my-widget ${classMap(dynamicClasses)}"&gt;Static and dynamic&lt;/div&gt;`;
 </code></pre>
 <p><code>classMap</code>を使用した例は<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-class-map">こちら</a>です。</p>
-<h3 id="styleMap"><a href="#styleMap">styleMap</a></h3>
+<h3 id="styleMap"><a class="anchor" href="#styleMap">#</a>styleMap</h3>
 <p>渡されたobjectに応じて要素にstyleプロパティのリストを割り当てます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -370,8 +370,8 @@ class MyElement extends LitElement {
 <pre><code class="language-js">html`&lt;p style="color: white; ${styleMap(moreStyles)}"&gt;More styles!&lt;/p&gt;`;
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-style-map">playground</a>を見てください。</p>
-<h2 id="繰り返しと条件"><a href="#繰り返しと条件">繰り返しと条件</a></h2>
-<h3 id="when"><a href="#when">when</a></h3>
+<h2 id="繰り返しと条件"><a class="anchor" href="#繰り返しと条件">#</a>繰り返しと条件</h2>
+<h3 id="when"><a class="anchor" href="#when">#</a>when</h3>
 <p>条件に応じて渡された2つのテンプレートの内1つをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -416,7 +416,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="choose"><a href="#choose">choose</a></h3>
+<h3 id="choose"><a class="anchor" href="#choose">#</a>choose</h3>
 <p>渡された<code>value</code>にマッチする関数を実行してテンプレートを返します。
 <code>case</code>にはキーとテンプレートを返す関数の配列を渡します。</p>
 <table>
@@ -469,7 +469,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="map"><a href="#map">map</a></h3>
+<h3 id="map"><a class="anchor" href="#map">#</a>map</h3>
 <p><code>items</code>の各値に対して<code>f(value)</code>を実行した結果を格納しているiterableを返します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -518,7 +518,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="repeat"><a href="#repeat">repeat</a></h3>
+<h3 id="repeat"><a class="anchor" href="#repeat">#</a>repeat</h3>
 <p>iterableの値をDOMにレンダリングします。その際にDOMの安定性を付与するためにキーをDOMに付与します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -577,7 +577,7 @@ class MyElement extends LitElement {
 <p><code>keyFn</code>が渡されなかった場合、<code>repeat</code>は単純な<code>map</code>と似た動きをします。
 その場合、DOMは違う値と関連付けられる可能性があります。</p>
 <p>詳しくは<a class="Link" href="https://lit.dev/docs/templates/lists/#when-to-use-map-or-repeat">mapとrepeatの使い分け</a>を見てください。</p>
-<h3 id="join"><a href="#join">join</a></h3>
+<h3 id="join"><a class="anchor" href="#join">#</a>join</h3>
 <p><code>items</code>の各値の間に<code>joiner</code>の値を挿入したiterableを返します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -629,7 +629,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="range"><a href="#range">range</a></h3>
+<h3 id="range"><a class="anchor" href="#range">#</a>range</h3>
 <p><code>start</code>から<code>end</code>まで<code>step</code>分だけ増加した一連の整数のiterableを返します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -676,7 +676,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="ifDefined"><a href="#ifDefined">ifDefined</a></h3>
+<h3 id="ifDefined"><a class="anchor" href="#ifDefined">#</a>ifDefined</h3>
 <p>渡された値が定義されているなら属性をセットします。未定義なら属性を削除します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -728,8 +728,8 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h2 id="キャッシュと変更の検出"><a href="#キャッシュと変更の検出">キャッシュと変更の検出</a></h2>
-<h3 id="cache"><a href="#cache">cache</a></h3>
+<h2 id="キャッシュと変更の検出"><a class="anchor" href="#キャッシュと変更の検出">#</a>キャッシュと変更の検出</h2>
+<h3 id="cache"><a class="anchor" href="#cache">#</a>cache</h3>
 <p>渡されたテンプレートが変更した時、レンダリングされたDOMを廃棄するのではなくキャッシュします。
 大きなテンプレートを頻繁に切り替える場合、このディレクティブを使うことでパフォーマンスが改善されます。</p>
 <table>
@@ -790,7 +790,7 @@ Litは現行のDOM treeを削除して新しいDOMツリーをレンダリング
 上記の例は<code>summaryView</code>および<code>detailView</code>の両方に対するDOMをキャッシュします。
 When you switch from one view to another, Lit swaps in the cached version of the new view and updates it with the latest data.
 This can improve rendering performance when these views are frequently switched.</p>
-<h3 id="keyed"><a href="#keyed">keyed</a></h3>
+<h3 id="keyed"><a class="anchor" href="#keyed">#</a>keyed</h3>
 <p>ユニークなキーとレンダリング可能な値を関連付けます。
 キーが変更されると、
 テンプレートの内容が同じでも、
@@ -841,7 +841,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="guard"><a href="#guard">guard</a></h3>
+<h3 id="guard"><a class="anchor" href="#guard">#</a>guard</h3>
 <p><code>dependencies</code>が1つでも変更された場合のみテンプレートが再評価されます。
 これによってレンダリングの不要な作業を削減することでパフォーマンスが改善されます。</p>
 <table>
@@ -896,7 +896,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>上記のケースでは、<code>value</code>プロパティが変更された時のみ高コストの<code>calculateSHA</code>関数を実行します。</p>
-<h3 id="live"><a href="#live">live</a></h3>
+<h3 id="live"><a class="anchor" href="#live">#</a>live</h3>
 <p>属性やプロパティの値が(最後のレンダリング時の値ではなく)現行のDOMの値と異なる場合、属性やプロパティに値をセットします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -953,8 +953,8 @@ class MyElement extends LitElement {
 <p><code>live()</code>は現行のDOMの値と渡された値を<code>===</code>で比較します。そして、それらが等しい場合は何もしません。
 つまり、エクスプレッションが型を変換するような場合は<code>live()</code>を使うべきではありません。
 <a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Attribute_expressions">Attribute expression</a>に対する<code>live()</code>には文字列のみを渡してください。そうしないとエクスプレッションは常にレンダリング毎に更新を発生させます。</p>
-<h2 id="特殊な値のレンダリング"><a href="#特殊な値のレンダリング">特殊な値のレンダリング</a></h2>
-<h3 id="templateContent"><a href="#templateContent">templateContent</a></h3>
+<h2 id="特殊な値のレンダリング"><a class="anchor" href="#特殊な値のレンダリング">#</a>特殊な値のレンダリング</h2>
+<h3 id="templateContent"><a class="anchor" href="#templateContent">#</a>templateContent</h3>
 <p><code>&lt;template&gt;</code>要素のコンテンツをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1006,7 +1006,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-template-content">こちら</a>を見てください。</p>
-<h3 id="unsafeHTML"><a href="#unsafeHTML">unsafeHTML</a></h3>
+<h3 id="unsafeHTML"><a class="anchor" href="#unsafeHTML">#</a>unsafeHTML</h3>
 <p>文字列をテキストではなくHTMLとしてレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1060,7 +1060,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-unsafe-html">こちら</a>を見てください。</p>
-<h3 id="unsafeSVG"><a href="#unsafeSVG">unsafeSVG</a></h3>
+<h3 id="unsafeSVG"><a class="anchor" href="#unsafeSVG">#</a>unsafeSVG</h3>
 <p>文字列をテキストではなくSVGとしてレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1114,8 +1114,8 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-unsafe-svg">こちら</a>を見てください。</p>
-<h2 id="レンダリングされたDOMの参照"><a href="#レンダリングされたDOMの参照">レンダリングされたDOMの参照</a></h2>
-<h3 id="ref"><a href="#ref">ref</a></h3>
+<h2 id="レンダリングされたDOMの参照"><a class="anchor" href="#レンダリングされたDOMの参照">#</a>レンダリングされたDOMの参照</h2>
+<h3 id="ref"><a class="anchor" href="#ref">#</a>ref</h3>
 <p>DOMにレンダリングされた１つの要素への参照を取得します。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1193,8 +1193,8 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-ref">こちら</a>を見てください。</p>
-<h2 id="非同期レンダリング"><a href="#非同期レンダリング">非同期レンダリング</a></h2>
-<h3 id="until"><a href="#until">until</a></h3>
+<h2 id="非同期レンダリング"><a class="anchor" href="#非同期レンダリング">#</a>非同期レンダリング</h2>
+<h3 id="until"><a class="anchor" href="#until">#</a>until</h3>
 <p>1つ以上のPromiseが解決するまでプレースホルダのコンテンツをレンダリングします。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1246,7 +1246,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-until">こちら</a>を見てください。</p>
-<h3 id="asyncAppend"><a href="#asyncAppend">asyncAppend</a></h3>
+<h3 id="asyncAppend"><a class="anchor" href="#asyncAppend">#</a>asyncAppend</h3>
 <p><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator">AsyncIterable</a>から値を得る毎にそれをDOMに追記していきます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1301,7 +1301,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-async-append">こちら</a>を見てください。</p>
-<h3 id="asyncReplace"><a href="#asyncReplace">asyncReplace</a></h3>
+<h3 id="asyncReplace"><a class="anchor" href="#asyncReplace">#</a>asyncReplace</h3>
 <p><code>AsyncIterable</code>から得た最新の値をDOMにレンダリングします。値を得る度、１つ前の値のレンダリング結果と置き換えます。</p>
 <table>
 <thead><tr><th></th><th></th></tr></thead>
@@ -1354,11 +1354,11 @@ class MyElement extends LitElement {
 </code></pre>
 <p>詳しくは<a class="Link" href="https://lit.dev/playground/#sample=examples/directive-async-replace">こちら</a>を見てください。</p>
 <hr>
-<h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a href="#Other">Other</a></h3>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

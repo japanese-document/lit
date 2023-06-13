@@ -46,7 +46,7 @@ const renderer = {
   },
   heading(text: string, level: number) {
     const hash = createHash(text)
-    return `<h${level} id="${hash}"><a href="#${hash}">${text}</a></h${level}>\n`
+    return `<h${level} id="${hash}"><a href="#${hash}" class="anchor">#</a>${text}</h${level}>\n`
   }
 }
 

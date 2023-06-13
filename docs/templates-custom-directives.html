@@ -52,7 +52,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="カスタムディレクティブ"><a href="#カスタムディレクティブ">カスタムディレクティブ</a></h1>
+      <h1 id="カスタムディレクティブ"><a class="anchor" href="#カスタムディレクティブ">#</a>カスタムディレクティブ</h1>
 <p>ディレクティブはテンプレートエクスプレッションをレンダリングする方法を変更することによってLitを拡張する関数です。
 ディレクティブはステートを持つことができて、DOMにアクセスすることができて、テンプレートがDOMツリーに接続/切断されたことを検知することができて、レンダリング関数外から独立してエクスプレッションを更新することができます。だから、便利で応用範囲が広いです。</p>
 <p>下記のように、テンプレートのエクスプレッションでディレクティブを使うことは関数を実行することと同じくらいシンプルです。</p>
@@ -80,7 +80,7 @@
 <li>ディレクティブがDOMから切断される時にリソースをクリーンアップします。</li>
 </ul>
 <p>ここからはクラスディレクティブについて解説します。</p>
-<h2 id="クラスディレクティブを生成する"><a href="#クラスディレクティブを生成する">クラスディレクティブを生成する</a></h2>
+<h2 id="クラスディレクティブを生成する"><a class="anchor" href="#クラスディレクティブを生成する">#</a>クラスディレクティブを生成する</h2>
 <p>下記の手順でクラスディレクティブを実装します。</p>
 <ul>
 <li><a class="Link" href="https://lit.dev/docs/api/custom-directives/#Directive">Directive</a>クラスを継承したクラスを実装します。</li>
@@ -107,7 +107,7 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <p>ディレクティブで通常の更新サイクル外でDOMを非同期に更新したい時があります。
 非同期ディレクティブを生成するには、ベースクラスを<code>Directive</code>の代わりに<code>AsyncDirective</code>にします。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
-<h2 id="クラスディレクティブのライフサイクル"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></h2>
+<h2 id="クラスディレクティブのライフサイクル"><a class="anchor" href="#クラスディレクティブのライフサイクル">#</a>クラスディレクティブのライフサイクル</h2>
 <p>クラスディレクティブは下記のビルトインライフサイクルメソッドを持ちます。</p>
 <ul>
 <li>コンストラクタで1回だけの初期化をします。</li>
@@ -120,7 +120,7 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <p>非同期ディレクディブを使うと、通常の更新サイクル外でDOMを更新することができます。
 非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
-<h3 id="1回だけ設定する__constructor()"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></h3>
+<h3 id="1回だけ設定する__constructor()"><a class="anchor" href="#1回だけ設定する__constructor()">#</a>1回だけ設定する: constructor()</h3>
 <p>Litが最初にエクスプレッション内の<code>DirectiveResult</code>を評価する時、
 対応するクラスディレクティブのインスタンスを生成します。
 (クラスディレクティブのコンストラクタを実行して、クラスフィールドを初期化します。)</p>
@@ -142,7 +142,7 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 その<code>PartInfo</code>オブジェクトはディレクティブが使われているエクスプレッションに関するメタデータを含んでいます。
 これは使用されるエクスプレッションの種類を限定しているディレクティブがそれをチェックする際に利用することができます。
 詳しくは<a class="Link" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a>を見てください。</p>
-<h3 id="ディレクティブのレンダリング__render()"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></h3>
+<h3 id="ディレクティブのレンダリング__render()"><a class="anchor" href="#ディレクティブのレンダリング__render()">#</a>ディレクティブのレンダリング: render()</h3>
 <p><code>render()</code>メソッドはDOMにレンダリングする値を返す必要があります。
 <code>render()</code>メソッドは<code>DirectiveResult</code>のようなレンダリング可能な値を返すこともできます。</p>
 <p>下記のように<code>render()</code>はディレクティブインスタンスのステートを参照できるだけではなく、
@@ -163,7 +163,7 @@ const max = directive(MaxDirective);
 // Call the directive with `value` and `minValue` arguments defined for `render()`:
 const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 </code></pre>
-<h3 id="Imperative_DOM_access__update()"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></h3>
+<h3 id="Imperative_DOM_access__update()"><a class="anchor" href="#Imperative_DOM_access__update()">#</a>Imperative DOM access: update()</h3>
 <p>In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the <code>update()</code> callback.</p>
 <p>The <code>update()</code> callback receives two arguments:</p>
 <ul>
@@ -175,7 +175,7 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 <li>Reading data from the DOM, and using it to generate a value to render.</li>
 <li>Imperatively updating the DOM using the <code>element</code> or <code>parentNode</code> reference on the <code>Part</code> object. In this case, <code>update()</code> usually returns <code>noChange</code>, indicating that Lit doesn't need to take any further action to render the directive.</li>
 </ul>
-<h4 id="Parts"><a href="#Parts">Parts</a></h4>
+<h4 id="Parts"><a class="anchor" href="#Parts">#</a>Parts</h4>
 <p>Each expression position has its own specific <code>Part</code> object:</p>
 <ul>
 <li>{% api "ChildPart" %} for expressions in HTML child position.</li>
@@ -221,7 +221,7 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
-<h4 id="Calling_render()_from_update()"><a href="#Calling_render()_from_update()">Calling render() from update()</a></h4>
+<h4 id="Calling_render()_from_update()"><a class="anchor" href="#Calling_render()_from_update()">#</a>Calling render() from update()</h4>
 <p>The default implementation of <code>update()</code> simply calls and returns the value from <code>render()</code>. If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
 <p>The <code>render()</code> arguments are passed into <code>update()</code> as an array. You can pass the arguments to <code>render()</code> like this:</p>
 <p>{% switchable-sample %}</p>
@@ -242,9 +242,9 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 }
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h3 id="Differences_between_update()_and_render()"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></h3>
+<h3 id="Differences_between_update()_and_render()"><a class="anchor" href="#Differences_between_update()_and_render()">#</a>Differences between update() and render()</h3>
 <p>While the <code>update()</code> callback is more powerful than the <code>render()</code> callback, there is an important distinction: When using the <code>@lit-labs/ssr</code> package for server-side rendering (SSR), <em>only</em> the <code>render()</code> method is called on the server. To be compatible with SSR, directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
-<h2 id="Signaling_no_change"><a href="#Signaling_no_change">Signaling no change</a></h2>
+<h2 id="Signaling_no_change"><a class="anchor" href="#Signaling_no_change">#</a>Signaling no change</h2>
 <p>Sometimes a directive may have nothing new for Lit to render. You signal this by returning <code>noChange</code> from the <code>update()</code> or <code>render()</code> method. This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive. Returning <code>noChange</code> leaves the previously rendered value in place.</p>
 <p>There are several common reasons for returning <code>noChange</code>:</p>
 <ul>
@@ -285,7 +285,7 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></h2>
+<h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a class="anchor" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">#</a>ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</h2>
 <p>Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.</p>
 <p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
 <p>{% switchable-sample %}</p>
@@ -316,7 +316,7 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h2 id="非同期ディレクティブ"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></h2>
+<h2 id="非同期ディレクティブ"><a class="anchor" href="#非同期ディレクティブ">#</a>非同期ディレクティブ</h2>
 <p>The previous example directives are synchronous: they return values synchronously from their <code>render()</code>/<code>update()</code> lifecycle callbacks, so their results are written to the DOM during the component's <code>update()</code> callback.</p>
 <p>Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
 <p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
@@ -440,11 +440,11 @@ export const observe = directive(ObserveDirective);
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <hr>
-<h2 id="License"><a href="#License">License</a></h2>
-<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a href="#Other">Other</a></h3>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>
