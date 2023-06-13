@@ -148,6 +148,7 @@ table {
 }
 
 .markdown-body :is(h1, h2, h3, h4, h5, h6) .anchor {
+  float: initial;
   color: initial;
   line-height: unset;
   visibility: hidden;
