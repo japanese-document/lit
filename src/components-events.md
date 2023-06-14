@@ -451,9 +451,14 @@ _dispatchMyEvent() {
 すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは`bubbles`と`composed`が両方有効です。
 詳しくは[こちら](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed)を見てください。
 
-### Understanding event retargeting
+### イベントのリターゲティング
 
-[Composed](#shadowdom-composed) events dispatched from within a shadow root are retargeted, meaning that to any listener on an element hosting a shadow root or any of its ancestors, they appear to come from the hosting element. Since Lit components render into shadow roots, all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself. The event's `target` property is the Lit component.
+[Composed](#shadowdom-composed) events dispatched from within a shadow root are retargeted,
+meaning that to any listener on an element hosting a shadow root or any of its ancestors,
+they appear to come from the hosting element.
+Since Lit components render into shadow roots,
+all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself.
+The event's `target` property is the Lit component.
 
 ```html
 <my-element onClick="(e) => console.log(e.target)"></my-element>
