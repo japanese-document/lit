@@ -405,16 +405,15 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
 <p>イベントの<code>composed</code>と<code>bubbles</code>が有効である場合、
 イベントは(shadow rootの外側にある要素を含む)イベントをdispatchした要素のすべての祖先要素に伝播します。
 イベントの<code>composed</code>が有効で<code>bubbles</code>が無効である場合、
-イベントはイベントをdispatchした要素からDOM上のshadow rootを含む要素まで伝播します。</p>
+イベントはイベントをdispatchした要素からDOMツリー上のshadow rootを含む要素まで伝播します。</p>
 <p>すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは<code>bubbles</code>と<code>composed</code>が両方有効です。
 詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">こちら</a>を見てください。</p>
-<h3 id="イベントのリターゲティング"><a class="anchor" href="#イベントのリターゲティング">#</a>イベントのリターゲティング</h3>
-<p><a class="Link" href="#shadowdom-composed">Composed</a> events dispatched from within a shadow root are retargeted,
-meaning that to any listener on an element hosting a shadow root or any of its ancestors,
-they appear to come from the hosting element.
-Since Lit components render into shadow roots,
-all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself.
-The event's <code>target</code> property is the Lit component.</p>
+<h3 id="Eventのtargetプロパティ"><a class="anchor" href="#Eventのtargetプロパティ">#</a>Eventのtargetプロパティ</h3>
+<p>shadow rootもしくはその祖先要素のイベントリスナで、
+shadow root内でdispatchされた<a class="Link" href="#Composedイベント">Composedイベント</a>はのtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
+Litコンポーネントはshadow root内にレンダリングされるので、
+Litコンポーネント内からdispatchされたComposedイベントはLitコンポーネントでdispatchされたように見えます。
+その<code>Event</code>の<code>target</code>プロパティはLitコンポーネントです。</p>
 <pre><code class="language-html">&lt;my-element onClick="(e) =&gt; console.log(e.target)"&gt;&lt;/my-element&gt;
 </code></pre>
 <pre><code class="language-js">render() {
@@ -424,12 +423,15 @@ The event's <code>target</code> property is the Lit component.</p>
     &lt;/button&gt;`;
 }
 </code></pre>
-<p>In advanced cases where it is required to determine the origin of an event, use the <code>event.composedPath()</code> API. This method returns an array of all the nodes traversed by the event dispatch, including those within shadow roots. Because this breaks encapsulation, care should be taken to avoid relying on implementation details that may be exposed.  Common use cases include determining if the element clicked was an anchor tag, for purposes of client-side routing.</p>
+<p>In advanced cases where it is required to determine the origin of an event, use the <code>event.composedPath()</code> API.
+This method returns an array of all the nodes traversed by the event dispatch, including those within shadow roots.
+Because this breaks encapsulation, care should be taken to avoid relying on implementation details that may be exposed.
+Common use cases include determining if the element clicked was an anchor tag, for purposes of client-side routing.</p>
 <pre><code class="language-js">handleMyEvent(event) {
   console.log('Origin: ', event.composedPath()[0]);
 }
 </code></pre>
-<p>See the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">MDN documentation on composedPath</a> for more information.</p>
+<p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">composedPath</a>を見てください。</p>
 <h2 id="イベントディスパッチャーとイベントリスナ間でデータをやり取りする"><a class="anchor" href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">#</a>イベントディスパッチャーとイベントリスナ間でデータをやり取りする</h2>
 <p>Events exist primarily to communicate changes from the event dispatcher to the event listener, but events can also be used to communicate information from the listener back to the dispatcher.</p>
 <p>One way you can do this is to expose API on events which listeners can use to customize component behavior. For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.</p>
@@ -492,7 +494,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#Eventの使い方">Eventの使い方</a></p>
 <p class="h2"><a href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></p>
 <p class="h3"><a href="#Composedイベント">Composedイベント</a></p>
-<p class="h3"><a href="#イベントのリターゲティング">イベントのリターゲティング</a></p>
+<p class="h3"><a href="#Eventのtargetプロパティ">Eventのtargetプロパティ</a></p>
 <p class="h2"><a href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">イベントディスパッチャーとイベントリスナ間でデータをやり取りする</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>

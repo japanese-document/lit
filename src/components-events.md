@@ -446,19 +446,18 @@ _dispatchMyEvent() {
 イベントの`composed`と`bubbles`が有効である場合、
 イベントは(shadow rootの外側にある要素を含む)イベントをdispatchした要素のすべての祖先要素に伝播します。
 イベントの`composed`が有効で`bubbles`が無効である場合、
-イベントはイベントをdispatchした要素からDOM上のshadow rootを含む要素まで伝播します。
+イベントはイベントをdispatchした要素からDOMツリー上のshadow rootを含む要素まで伝播します。
 
 すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは`bubbles`と`composed`が両方有効です。
 詳しくは[こちら](https://developer.mozilla.org/en-US/docs/Web/API/Event/composed)を見てください。
 
-### イベントのリターゲティング
+### Eventのtargetプロパティ
 
-[Composed](#shadowdom-composed) events dispatched from within a shadow root are retargeted,
-meaning that to any listener on an element hosting a shadow root or any of its ancestors,
-they appear to come from the hosting element.
-Since Lit components render into shadow roots,
-all composed events dispatched from inside a Lit component appear to be dispatched by the Lit component itself.
-The event's `target` property is the Lit component.
+shadow rootもしくはその祖先要素のイベントリスナで、
+shadow root内でdispatchされた[Composedイベント](#Composedイベント)はのtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
+Litコンポーネントはshadow root内にレンダリングされるので、
+Litコンポーネント内からdispatchされたComposedイベントはLitコンポーネントでdispatchされたように見えます。
+その`Event`の`target`プロパティはLitコンポーネントです。
 
 ```html
 <my-element onClick="(e) => console.log(e.target)"></my-element>
@@ -473,14 +472,18 @@ render() {
 }
 ```
 
-In advanced cases where it is required to determine the origin of an event, use the `event.composedPath()` API. This method returns an array of all the nodes traversed by the event dispatch, including those within shadow roots. Because this breaks encapsulation, care should be taken to avoid relying on implementation details that may be exposed.  Common use cases include determining if the element clicked was an anchor tag, for purposes of client-side routing.
+In advanced cases where it is required to determine the origin of an event, use the `event.composedPath()` API.
+This method returns an array of all the nodes traversed by the event dispatch, including those within shadow roots.
+Because this breaks encapsulation, care should be taken to avoid relying on implementation details that may be exposed.
+Common use cases include determining if the element clicked was an anchor tag, for purposes of client-side routing.
 
 ```js
 handleMyEvent(event) {
   console.log('Origin: ', event.composedPath()[0]);
 }
 ```
-See the [MDN documentation on composedPath](https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath) for more information.
+
+詳しくは[composedPath](https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath)を見てください。
 
 ## イベントディスパッチャーとイベントリスナ間でデータをやり取りする
 
