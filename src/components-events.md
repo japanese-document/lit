@@ -472,10 +472,11 @@ render() {
 }
 ```
 
-In advanced cases where it is required to determine the origin of an event, use the `event.composedPath()` API.
-This method returns an array of all the nodes traversed by the event dispatch, including those within shadow roots.
-Because this breaks encapsulation, care should be taken to avoid relying on implementation details that may be exposed.
-Common use cases include determining if the element clicked was an anchor tag, for purposes of client-side routing.
+イベントが発生した要素を割り出したい場合、`event.composedPath()` APIを使います。
+このメソッドはshadow root内の要素を含むすべてのイベントが通過したNodeの配列を返します。
+これはカプセル化されている前提の実装を閲覧するので、それらライブラリの場合はその実装の変更に気づかないかもしれません。
+だから、shadow root内の実装に依存するような処理を実装する際は注意してください。
+これの一般的なユースケースはクライアントサイドのルーティングでクリックされた要素がアンカータグかどうかを判別することです。
 
 ```js
 handleMyEvent(event) {
