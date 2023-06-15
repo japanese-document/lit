@@ -410,7 +410,7 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
 詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">こちら</a>を見てください。</p>
 <h3 id="Eventのtargetプロパティ"><a class="anchor" href="#Eventのtargetプロパティ">#</a>Eventのtargetプロパティ</h3>
 <p>shadow rootもしくはその祖先要素のイベントリスナで、
-shadow root内でdispatchされた<a class="Link" href="#Composedイベント">Composedイベント</a>はのtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
+shadow root内でdispatchされた<a class="Link" href="#Composedイベント">Composedイベント</a>のtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
 Litコンポーネントはshadow root内にレンダリングされるので、
 Litコンポーネント内からdispatchされたComposedイベントはLitコンポーネントでdispatchされたように見えます。
 その<code>Event</code>の<code>target</code>プロパティはLitコンポーネントです。</p>
@@ -434,9 +434,14 @@ Litコンポーネント内からdispatchされたComposedイベントはLitコ�
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">composedPath</a>を見てください。</p>
 <h2 id="イベントディスパッチャーとイベントリスナ間でデータをやり取りする"><a class="anchor" href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">#</a>イベントディスパッチャーとイベントリスナ間でデータをやり取りする</h2>
-<p>Events exist primarily to communicate changes from the event dispatcher to the event listener, but events can also be used to communicate information from the listener back to the dispatcher.</p>
-<p>One way you can do this is to expose API on events which listeners can use to customize component behavior. For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.</p>
-<p>Another way to communicate between the dispatcher and listener is via the <code>preventDefault()</code> method. It can be called to indicate the event's standard action should not occur. When the listener calls <code>preventDefault()</code>, the event's <code>defaultPrevented</code> property becomes true. This flag can then be used by the listener to customize behavior.</p>
+<p>Events exist primarily to communicate changes from the event dispatcher to the event listener,
+but events can also be used to communicate information from the listener back to the dispatcher.</p>
+<p>One way you can do this is to expose API on events which listeners can use to customize component behavior.
+For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.</p>
+<p>Another way to communicate between the dispatcher and listener is via the <code>preventDefault()</code> method.
+It can be called to indicate the event's standard action should not occur.
+When the listener calls <code>preventDefault()</code>, the event's <code>defaultPrevented</code> property becomes true.
+This flag can then be used by the listener to customize behavior.</p>
 <p>Both of these techniques are used in the following example:</p>
 <p>{% playground-ide "docs/components/events/comm/" "my-listener.ts" %}</p>
 <hr>

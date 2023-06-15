@@ -454,7 +454,7 @@ _dispatchMyEvent() {
 ### Eventのtargetプロパティ
 
 shadow rootもしくはその祖先要素のイベントリスナで、
-shadow root内でdispatchされた[Composedイベント](#Composedイベント)はのtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
+shadow root内でdispatchされた[Composedイベント](#Composedイベント)のtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
 Litコンポーネントはshadow root内にレンダリングされるので、
 Litコンポーネント内からdispatchされたComposedイベントはLitコンポーネントでdispatchされたように見えます。
 その`Event`の`target`プロパティはLitコンポーネントです。
@@ -488,11 +488,16 @@ handleMyEvent(event) {
 
 ## イベントディスパッチャーとイベントリスナ間でデータをやり取りする
 
-Events exist primarily to communicate changes from the event dispatcher to the event listener, but events can also be used to communicate information from the listener back to the dispatcher.
+Events exist primarily to communicate changes from the event dispatcher to the event listener,
+but events can also be used to communicate information from the listener back to the dispatcher.
 
-One way you can do this is to expose API on events which listeners can use to customize component behavior. For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.
+One way you can do this is to expose API on events which listeners can use to customize component behavior.
+For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.
 
-Another way to communicate between the dispatcher and listener is via the `preventDefault()` method. It can be called to indicate the event's standard action should not occur. When the listener calls `preventDefault()`, the event's `defaultPrevented` property becomes true. This flag can then be used by the listener to customize behavior.
+Another way to communicate between the dispatcher and listener is via the `preventDefault()` method.
+It can be called to indicate the event's standard action should not occur.
+When the listener calls `preventDefault()`, the event's `defaultPrevented` property becomes true.
+This flag can then be used by the listener to customize behavior.
 
 Both of these techniques are used in the following example:
 
