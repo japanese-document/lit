@@ -488,20 +488,77 @@ handleMyEvent(event) {
 
 ## イベントディスパッチャーとイベントリスナ間でデータをやり取りする
 
-Events exist primarily to communicate changes from the event dispatcher to the event listener,
-but events can also be used to communicate information from the listener back to the dispatcher.
+イベントはイベントの発信元からイベントリスナに変化を通知するために使われます。
+そして、イベントリスナから発信元へそのイベントの返信することにも使うことができます。
 
-One way you can do this is to expose API on events which listeners can use to customize component behavior.
-For example, a listener can set a property on a custom event's detail property which the dispatching component then uses to customize behavior.
+これをする1つの方法はEventインスタンスに発信元のコンポーネントを操作するためのAPIを用意することです。
+例えば、イベントリスナでCustomEventの`detail`プロパティにイベントの発信元のコンポーネントのプロパティをセットして、それを使ってコンポーネントの動作を変更します。
 
-Another way to communicate between the dispatcher and listener is via the `preventDefault()` method.
-It can be called to indicate the event's standard action should not occur.
-When the listener calls `preventDefault()`, the event's `defaultPrevented` property becomes true.
-This flag can then be used by the listener to customize behavior.
+イベントの発信元とイベントリスナがやりとりをするもう1つ方法は`preventDefault()`を使う方法です。
+`preventDefault()`はイベントが標準のアクションを実行しないことを示すために使われます。
+イベントリスナが`preventDefault()`を実行するとイベントインスタンスの`defaultPrevented`プロパティの値を`true`にします。
+このフラグはイベントリスナがイベントの発信元の動作を変更することに使うことができます。
 
-Both of these techniques are used in the following example:
+この2つのテクニックは下記の例で使われています。
 
-{% playground-ide "docs/components/events/comm/" "my-listener.ts" %}
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('my-listener')
+class MyListener extends LitElement {
+  @property() canCheck = false;
+  protected render() {
+    return html`
+      <p @checked=${this._checkedHandler}><slot></slot></p>
+      <hr>
+      <p>${this.canCheck ? 'Allowing' : 'Preventing'} check</p>
+      <p><button @click=${this._clickHandler}>Toggle</button></p>`;
+  }
+  private _checkedHandler(e: CustomEvent) {
+    if (!this.canCheck) {
+      e.preventDefault();
+      e.detail.message = '✅ Prevented!!';
+    }
+  }
+  private _clickHandler() {
+    this.canCheck = !this.canCheck;
+  }
+}
+
+
+@customElement('my-dispatcher')
+class MyDispatcher extends LitElement {
+  @property() label = 'Check me!';
+  defaultMessage = '🙂';
+  @property() message = this.defaultMessage;
+  private _resetMessage?: ReturnType<typeof setTimeout>;
+  protected render() {
+    return html`
+      <label><input type="checkbox" @click=${this._tryChange}>${this.label}</label>
+      <div>${this.message}</div>
+    `;
+  }
+  private _tryChange(e: Event) {
+    const detail = {message: this.message};
+    const event = new CustomEvent('checked', {detail, bubbles: true, composed: true, cancelable: true});
+    this.dispatchEvent(event);
+    if (event.defaultPrevented) {
+      e.preventDefault();
+    }
+    this.message = detail.message;
+  }
+  protected updated() {
+    clearTimeout(this._resetMessage);
+    this._resetMessage =
+      setTimeout(() => this.message = this.defaultMessage, 1000);
+  }
+}
+
+// <my-listener>
+//   <my-dispatcher></my-dispatcher>
+// </my-listener>
+```
 
 ---
 
