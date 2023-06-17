@@ -293,7 +293,7 @@ Litは下記のような多様な用途に対応したビルドインディレ�
 </tbody>
 </table>
 
-<p><code>classMap</code>ディレクディブは渡されたオブジェクトに応じて<code>element.classList</code>を使って効率的にclass属性に値を追加および削除します。
+<p><code>classMap</code>ディレクティブは渡されたオブジェクトに応じて<code>element.classList</code>を使って効率的にclass属性に値を追加および削除します。
 オブジェクトの各キーはclass名です。その値がtrueと評価できる場合、要素のclass属性にそのclass名を加えます。
 その後のレンダリングでは、1つ前のレンダリングでclass属性にセットされていたclass名のうち値がfalseと評価できるものやオブジェクトにキーが存在しないものはclass属性から削除されます。</p>
 <pre><code class="language-ts">@customElement('my-element')
@@ -992,7 +992,7 @@ Liテンプレートに静的な<code>&lt;template&gt;</code>要素を組み込�
 template要素の参照が1つ前のレンダリング時と変わらない限り、その後のレンダリングでは何もしません。</p>
 <p>template要素のコンテンツは見ず知らずの人が作成した信頼できない文字列が含まれないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないtemplate要素のコンテンツをこのディレクディブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
+信頼できないtemplate要素のコンテンツをこのディレクティブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
 <pre><code class="language-ts">const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
 
 @customElement('my-element')
@@ -1045,7 +1045,7 @@ class MyElement extends LitElement {
 <code>unsafeHTML</code>ディレクティブはそのような文字列をHTMLとしてパースします。そして、それをLitテンプレートでレンダリングします。</p>
 <p><code>unsafeHTML</code>渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないコンテンツをこのディレクディブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
+信頼できないコンテンツをこのディレクティブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
 <pre><code class="language-ts">const markup = '&lt;h3&gt;Some HTML to render.&lt;/h3&gt;';
 
 @customElement('my-element')
@@ -1097,7 +1097,7 @@ class MyElement extends LitElement {
 <code>unsafeSVG</code>ディレクティブはそのような文字列をSVGとしてパースします。そして、それをLitテンプレートでレンダリングします。</p>
 <p><code>unsafeSVG</code>渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないコンテンツをこのディレクディブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
+信頼できないコンテンツをこのディレクティブでレンダリングすることは<a class="Link" href="https://en.wikipedia.org/wiki/Cross-site_scripting">クロスサイトスクリプティング(XSS)</a>の原因になります。</p>
 <pre><code class="language-ts">const svg = '&lt;circle cx="50" cy="50" r="40" fill="red" /&gt;';
 
 @customElement('my-element')

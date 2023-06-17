@@ -62,13 +62,13 @@
 </code></pre>
 <p>Litは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#repeat"><code>repeat()</code></a>と<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache"><code>cache()</code></a>のような<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a>を用意しています。
 カスタムディレクティブを作成することもできます。</p>
-<p>ディレクディブは下記の2種類あります。</p>
+<p>ディレクティブは下記の2種類あります。</p>
 <ul>
 <li>関数ディレクティブ</li>
-<li>クラスディレクディブ</li>
+<li>クラスディレクティブ</li>
 </ul>
 <p>関数ディレクティブは下記のようにレンダリングする値を返します。
-関数ディレクディブは任意の引数を受け取ることができます。</p>
+関数ディレクティブは任意の引数を受け取ることができます。</p>
 <pre><code class="language-js">export noVowels = (str) =&gt; str.replaceAll(/[aeiou]/ig,'x');
 </code></pre>
 <p>クラスディレクティブを使うと関数ディレクティブではできないことができるようになります。
@@ -117,8 +117,8 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <p>クラスディレクティブでは<code>render()</code>を実装することは必須です。
 <code>update()</code>はオプションです。
 デフォルトの<code>update()</code>の実装は<code>render()</code>を実行してその値を返します。</p>
-<p>非同期ディレクディブを使うと、通常の更新サイクル外でDOMを更新することができます。
-非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
+<p>非同期ディレクティブを使うと、通常の更新サイクル外でDOMを更新することができます。
+非同期ディレクティブには上記以外のライフサイクルメソッドが存在します。
 詳しくは<a class="Link" href="#非同期ディレクティブ">非同期ディレクティブ</a>を見てください。</p>
 <h3 id="1回だけ設定する__constructor()"><a class="anchor" href="#1回だけ設定する__constructor()">#</a>1回だけ設定する: constructor()</h3>
 <p>Litが最初にエクスプレッション内の<code>DirectiveResult</code>を評価する時、
@@ -149,10 +149,10 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 <code>render()</code>メソッドはディレクティブ関数に渡された引数を引数として受け取ります。</p>
 <pre><code class="language-js">const template = html`&lt;div&gt;${myDirective(name, rank)}&lt;/div&gt;`
 </code></pre>
-<p>The parameters defined for the <code>render()</code> method determine the signature of the directive function:</p>
+<p><code>render()</code>メソッドのパラメータの定義はディレクティブ関数のパラメータの定義になります。</p>
 <pre><code class="language-ts">class MaxDirective extends Directive {
   maxValue = Number.MIN_VALUE;
-  // Define a render method, which may accept arguments:
+  // 下記のような引数を持つrender関数を定義します。
   render(value: number, minValue = Number.MIN_VALUE) {
     this.maxValue = Math.max(value, this.maxValue, minValue);
     return this.maxValue;
@@ -160,10 +160,10 @@ const template = html`&lt;div&gt;${hello()}&lt;/div&gt;`;
 }
 const max = directive(MaxDirective);
 
-// Call the directive with `value` and `minValue` arguments defined for `render()`:
+// `render()`で定義されている`value`および`minValue`引数をディレクティブ関数に渡して実行します。
 const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 </code></pre>
-<h3 id="Imperative_DOM_access__update()"><a class="anchor" href="#Imperative_DOM_access__update()">#</a>Imperative DOM access: update()</h3>
+<h3 id="命令的DOMアクセス__update()"><a class="anchor" href="#命令的DOMアクセス__update()">#</a>命令的DOMアクセス: update()</h3>
 <p>In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the <code>update()</code> callback.</p>
 <p>The <code>update()</code> callback receives two arguments:</p>
 <ul>
@@ -175,7 +175,7 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 <li>Reading data from the DOM, and using it to generate a value to render.</li>
 <li>Imperatively updating the DOM using the <code>element</code> or <code>parentNode</code> reference on the <code>Part</code> object. In this case, <code>update()</code> usually returns <code>noChange</code>, indicating that Lit doesn't need to take any further action to render the directive.</li>
 </ul>
-<h4 id="Parts"><a class="anchor" href="#Parts">#</a>Parts</h4>
+<h4 id="Part"><a class="anchor" href="#Part">#</a>Part</h4>
 <p>Each expression position has its own specific <code>Part</code> object:</p>
 <ul>
 <li>{% api "ChildPart" %} for expressions in HTML child position.</li>
@@ -481,8 +481,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#クラスディレクティブのライフサイクル">クラスディレクティブのライフサイクル</a></p>
 <p class="h3"><a href="#1回だけ設定する__constructor()">1回だけ設定する: constructor()</a></p>
 <p class="h3"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></p>
-<p class="h3"><a href="#Imperative_DOM_access__update()">Imperative DOM access: update()</a></p>
-<p class="h4"><a href="#Parts">Parts</a></p>
+<p class="h3"><a href="#命令的DOMアクセス__update()">命令的DOMアクセス: update()</a></p>
+<p class="h4"><a href="#Part">Part</a></p>
 <p class="h4"><a href="#Calling_render()_from_update()">Calling render() from update()</a></p>
 <p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
 <p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
