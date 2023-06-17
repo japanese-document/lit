@@ -16,13 +16,13 @@ html`<div>
 Litは[`repeat()`](https://japanese-document.github.io/lit/templates-directives.html#repeat)と[`cache()`](https://japanese-document.github.io/lit/templates-directives.html#cache)のような[ビルトインディレクティブ](https://japanese-document.github.io/lit/templates-directives.html)を用意しています。
 カスタムディレクティブを作成することもできます。
 
-ディレクディブは下記の2種類あります。
+ディレクティブは下記の2種類あります。
 
 -   関数ディレクティブ
--   クラスディレクディブ
+-   クラスディレクティブ
 
 関数ディレクティブは下記のようにレンダリングする値を返します。
-関数ディレクディブは任意の引数を受け取ることができます。
+関数ディレクティブは任意の引数を受け取ることができます。
 
 ```js
 export noVowels = (str) => str.replaceAll(/[aeiou]/ig,'x');
@@ -82,8 +82,8 @@ const template = html`<div>${hello()}</div>`;
 `update()`はオプションです。
 デフォルトの`update()`の実装は`render()`を実行してその値を返します。
 
-非同期ディレクディブを使うと、通常の更新サイクル外でDOMを更新することができます。
-非同期ディレクディブには上記以外のライフサイクルメソッドが存在します。
+非同期ディレクティブを使うと、通常の更新サイクル外でDOMを更新することができます。
+非同期ディレクティブには上記以外のライフサイクルメソッドが存在します。
 詳しくは[非同期ディレクティブ](#非同期ディレクティブ)を見てください。
 
 ### 1回だけ設定する: constructor()
@@ -126,12 +126,12 @@ class MyDirective extends Directive {
 const template = html`<div>${myDirective(name, rank)}</div>`
 ```
 
-The parameters defined for the `render()` method determine the signature of the directive function:
+`render()`メソッドのパラメータの定義はディレクティブ関数のパラメータの定義になります。
 
 ```ts
 class MaxDirective extends Directive {
   maxValue = Number.MIN_VALUE;
-  // Define a render method, which may accept arguments:
+  // 下記のような引数を持つrender関数を定義します。
   render(value: number, minValue = Number.MIN_VALUE) {
     this.maxValue = Math.max(value, this.maxValue, minValue);
     return this.maxValue;
@@ -139,11 +139,11 @@ class MaxDirective extends Directive {
 }
 const max = directive(MaxDirective);
 
-// Call the directive with `value` and `minValue` arguments defined for `render()`:
+// `render()`で定義されている`value`および`minValue`引数をディレクティブ関数に渡して実行します。
 const template = html`<div>${max(someNumber, 0)}</div>`;
 ```
 
-### Imperative DOM access: update()
+### 命令的DOMアクセス: update()
 
 In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the `update()` callback.
 
@@ -157,7 +157,7 @@ Your `update()` method should return something Lit can render, or the special va
 - Reading data from the DOM, and using it to generate a value to render.
 - Imperatively updating the DOM using the `element` or `parentNode` reference on the `Part` object. In this case, `update()` usually returns `noChange`, indicating that Lit doesn't need to take any further action to render the directive.
 
-#### Parts
+#### Part
 
 Each expression position has its own specific `Part` object:
 

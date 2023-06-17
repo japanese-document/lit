@@ -281,7 +281,7 @@ classMap(classInfo: {[name: string]: string | boolean | number})
 </tbody>
 </table>
 
-`classMap`ディレクディブは渡されたオブジェクトに応じて`element.classList`を使って効率的にclass属性に値を追加および削除します。
+`classMap`ディレクティブは渡されたオブジェクトに応じて`element.classList`を使って効率的にclass属性に値を追加および削除します。
 オブジェクトの各キーはclass名です。その値がtrueと評価できる場合、要素のclass属性にそのclass名を加えます。
 その後のレンダリングでは、1つ前のレンダリングでclass属性にセットされていたclass名のうち値がfalseと評価できるものやオブジェクトにキーが存在しないものはclass属性から削除されます。
 
@@ -1137,7 +1137,7 @@ template要素の参照が1つ前のレンダリング時と変わらない限�
 
 template要素のコンテンツは見ず知らずの人が作成した信頼できない文字列が含まれないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないtemplate要素のコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
+信頼できないtemplate要素のコンテンツをこのディレクティブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const templateEl = document.querySelector('template#myContent') as HTMLTemplateElement;
@@ -1202,7 +1202,7 @@ Litのテンプレートシンタックスの重要な機能はテンプレー�
 
 `unsafeHTML`渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
+信頼できないコンテンツをこのディレクティブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const markup = '<h3>Some HTML to render.</h3>';
@@ -1266,7 +1266,7 @@ unsafeSVG(value: string | typeof nothing | typeof noChange)
 
 `unsafeSVG`渡される文字列は内容を把握されていて信頼できない物が含まれていないように注意してください。
 信頼できない文字列の例としてクエリパラメータの値やユーザが入力した値があります。
-信頼できないコンテンツをこのディレクディブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
+信頼できないコンテンツをこのディレクティブでレンダリングすることは[クロスサイトスクリプティング(XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)の原因になります。
 
 ```ts
 const svg = '<circle cx="50" cy="50" r="40" fill="red" />';
