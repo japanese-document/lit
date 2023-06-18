@@ -145,9 +145,10 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 
 ### 命令的DOMアクセス: update()
 
-In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the `update()` callback.
+ディレクティブでディレクティブが配置されているDOMにアクセスして命令的にそれを読んだり変更したりする必要がある場合があるかもしれません。
+`update()`コールバックをオーバーライドすればそれができます。
 
-The `update()` callback receives two arguments:
+`update()`コールバックは下記の2つの引数を受け取ります。
 
 *   A `Part` object with an API for directly managing the DOM associated with the expression.
 *   An array containing the `render()` arguments.
@@ -170,8 +171,6 @@ Each expression position has its own specific `Part` object:
 
 In addition to the part-specific metadata contained in `PartInfo`, all `Part` types provide access to the DOM `element` associated with the expression (or `parentNode`, in the case of `ChildPart`), which may be directly accessed in `update()`. For example:
 
-{% switchable-sample %}
-
 ```ts
 // Renders attribute names of parent element to textContent
 class AttributeLogger extends Directive {
@@ -190,26 +189,6 @@ const template = html`<div a b>${attributeLogger()}</div>`;
 // Renders: `<div a b>a b</div>`
 ```
 
-```js
-// Renders attribute names of parent element to textContent
-class AttributeLogger extends Directive {
-  attributeNames = '';
-  update(part) {
-    this.attributeNames = part.parentNode.getAttributeNames?.().join(' ');
-    return this.render();
-  }
-  render() {
-    return this.attributeNames;
-  }
-}
-const attributeLogger = directive(AttributeLogger);
-
-const template = html`<div a b>${attributeLogger()}</div>`;
-// Renders: `<div a b>a b</div>`
-```
-
-{% endswitchable-sample %}
-
 In addition, the `directive-helpers.js` module includes a number of helper functions which act on `Part` objects, and can be used to dynamically create, insert, and move parts within a directive's `ChildPart`.
 
 #### Calling render() from update()
@@ -217,8 +196,6 @@ In addition, the `directive-helpers.js` module includes a number of helper funct
 The default implementation of `update()` simply calls and returns the value from `render()`. If you override `update()` and still want to call `render()` to generate a value, you need to call `render()` explicitly.
 
 The `render()` arguments are passed into `update()` as an array. You can pass the arguments to `render()` like this:
-
-{% switchable-sample %}
 
 ```ts
 class MyDirective extends Directive {
@@ -229,18 +206,6 @@ class MyDirective extends Directive {
   render(fish: number, bananas: number) { ... }
 }
 ```
-
-```js
-class MyDirective extends Directive {
-  update(part, [fish, bananas]) {
-    // ...
-    return this.render(fish, bananas);
-  }
-  render(fish, bananas) { ... }
-}
-```
-
-{% endswitchable-sample %}
 
 ### Differences between update() and render()
 

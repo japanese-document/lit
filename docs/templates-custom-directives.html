@@ -164,8 +164,9 @@ const max = directive(MaxDirective);
 const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 </code></pre>
 <h3 id="命令的DOMアクセス__update()"><a class="anchor" href="#命令的DOMアクセス__update()">#</a>命令的DOMアクセス: update()</h3>
-<p>In more advanced use cases, your directive may need to access the underlying DOM and imperatively read from or mutate it. You can achieve this by overriding the <code>update()</code> callback.</p>
-<p>The <code>update()</code> callback receives two arguments:</p>
+<p>ディレクティブでディレクティブが配置されているDOMにアクセスして命令的にそれを読んだり変更したりする必要がある場合があるかもしれません。
+<code>update()</code>コールバックをオーバーライドすればそれができます。</p>
+<p><code>update()</code>コールバックは下記の2つの引数を受け取ります。</p>
 <ul>
 <li>A <code>Part</code> object with an API for directly managing the DOM associated with the expression.</li>
 <li>An array containing the <code>render()</code> arguments.</li>
@@ -186,7 +187,6 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 <li>{% api "ElementPart" %} for expressions on the element tag.</li>
 </ul>
 <p>In addition to the part-specific metadata contained in <code>PartInfo</code>, all <code>Part</code> types provide access to the DOM <code>element</code> associated with the expression (or <code>parentNode</code>, in the case of <code>ChildPart</code>), which may be directly accessed in <code>update()</code>. For example:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">// Renders attribute names of parent element to textContent
 class AttributeLogger extends Directive {
   attributeNames = '';
@@ -203,28 +203,10 @@ const attributeLogger = directive(AttributeLogger);
 const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 // Renders: `&lt;div a b&gt;a b&lt;/div&gt;`
 </code></pre>
-<pre><code class="language-js">// Renders attribute names of parent element to textContent
-class AttributeLogger extends Directive {
-  attributeNames = '';
-  update(part) {
-    this.attributeNames = part.parentNode.getAttributeNames?.().join(' ');
-    return this.render();
-  }
-  render() {
-    return this.attributeNames;
-  }
-}
-const attributeLogger = directive(AttributeLogger);
-
-const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
-// Renders: `&lt;div a b&gt;a b&lt;/div&gt;`
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
 <h4 id="Calling_render()_from_update()"><a class="anchor" href="#Calling_render()_from_update()">#</a>Calling render() from update()</h4>
 <p>The default implementation of <code>update()</code> simply calls and returns the value from <code>render()</code>. If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
 <p>The <code>render()</code> arguments are passed into <code>update()</code> as an array. You can pass the arguments to <code>render()</code> like this:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class MyDirective extends Directive {
   update(part: Part, [fish, bananas]: DirectiveParameters&lt;this&gt;) {
     // ...
@@ -233,15 +215,6 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
   render(fish: number, bananas: number) { ... }
 }
 </code></pre>
-<pre><code class="language-js">class MyDirective extends Directive {
-  update(part, [fish, bananas]) {
-    // ...
-    return this.render(fish, bananas);
-  }
-  render(fish, bananas) { ... }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h3 id="Differences_between_update()_and_render()"><a class="anchor" href="#Differences_between_update()_and_render()">#</a>Differences between update() and render()</h3>
 <p>While the <code>update()</code> callback is more powerful than the <code>render()</code> callback, there is an important distinction: When using the <code>@lit-labs/ssr</code> package for server-side rendering (SSR), <em>only</em> the <code>render()</code> method is called on the server. To be compatible with SSR, directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
 <h2 id="Signaling_no_change"><a class="anchor" href="#Signaling_no_change">#</a>Signaling no change</h2>
