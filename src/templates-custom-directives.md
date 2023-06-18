@@ -150,8 +150,8 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 
 `update()`コールバックは下記の2つの引数を受け取ります。
 
-*   A `Part` object with an API for directly managing the DOM associated with the expression.
-*   An array containing the `render()` arguments.
+* エクスプレッションに関連しているDOMを直接管理するためのAPIを持つ`Part`オブジェクト
+* `render()`の引数を含む配列
 
 Your `update()` method should return something Lit can render, or the special value `noChange` if no re-rendering is required. The `update()` callback is quite flexible, but typical uses include:
 
