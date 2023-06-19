@@ -85,7 +85,7 @@ html`<main>${bodyText}</main>`
 *   `html`関数で生成される`TemplateResult`オブジェクト
 *   `svg`関数で生成される`SVGTemplateResult`オブジェクト
 *   DOM Nodes
-*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/emplates/custom-directives/#signaling-no-change))
+*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change))
 *   使用可能な型の配列もしくはiterables
 
 ### プリミティブ値

@@ -146,14 +146,15 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 ### 命令的DOMアクセス: update()
 
 ディレクティブでディレクティブが配置されているDOMにアクセスして命令的にそれを読んだり変更したりする必要がある場合があるかもしれません。
-`update()`コールバックをオーバーライドすればそれができます。
+`update()`メソッドをオーバーライドすればそれができます。
 
-`update()`コールバックは下記の2つの引数を受け取ります。
+`update()`メソッドは下記の2つの引数を受け取ります。
 
 * エクスプレッションに関連しているDOMを直接管理するためのAPIを持つ`Part`オブジェクト
 * `render()`の引数を含む配列
 
-Your `update()` method should return something Lit can render, or the special value `noChange` if no re-rendering is required. The `update()` callback is quite flexible, but typical uses include:
+`update()`メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングする必要がない場合は[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change)を返します。
+通常、`update()`メソッドは下記のように実装されます。
 
 - Reading data from the DOM, and using it to generate a value to render.
 - Imperatively updating the DOM using the `element` or `parentNode` reference on the `Part` object. In this case, `update()` usually returns `noChange`, indicating that Lit doesn't need to take any further action to render the directive.

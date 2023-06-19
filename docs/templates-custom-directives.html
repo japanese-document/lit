@@ -165,13 +165,14 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 </code></pre>
 <h3 id="命令的DOMアクセス__update()"><a class="anchor" href="#命令的DOMアクセス__update()">#</a>命令的DOMアクセス: update()</h3>
 <p>ディレクティブでディレクティブが配置されているDOMにアクセスして命令的にそれを読んだり変更したりする必要がある場合があるかもしれません。
-<code>update()</code>コールバックをオーバーライドすればそれができます。</p>
-<p><code>update()</code>コールバックは下記の2つの引数を受け取ります。</p>
+<code>update()</code>メソッドをオーバーライドすればそれができます。</p>
+<p><code>update()</code>メソッドは下記の2つの引数を受け取ります。</p>
 <ul>
 <li>エクスプレッションに関連しているDOMを直接管理するためのAPIを持つ<code>Part</code>オブジェクト</li>
 <li><code>render()</code>の引数を含む配列</li>
 </ul>
-<p>Your <code>update()</code> method should return something Lit can render, or the special value <code>noChange</code> if no re-rendering is required. The <code>update()</code> callback is quite flexible, but typical uses include:</p>
+<p><code>update()</code>メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングする必要がない場合は<a class="Link" href="https://lit.dev/docs/templates/custom-directives/#signaling-no-change"><code>noChange</code></a>を返します。
+通常、<code>update()</code>メソッドは下記のように実装されます。</p>
 <ul>
 <li>Reading data from the DOM, and using it to generate a value to render.</li>
 <li>Imperatively updating the DOM using the <code>element</code> or <code>parentNode</code> reference on the <code>Part</code> object. In this case, <code>update()</code> usually returns <code>noChange</code>, indicating that Lit doesn't need to take any further action to render the directive.</li>
