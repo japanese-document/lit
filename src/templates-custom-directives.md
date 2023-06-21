@@ -153,17 +153,18 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 * エクスプレッションに関連しているDOMを直接管理するためのAPIを持つ`Part`オブジェクト
 * `render()`の引数を含む配列
 
-`update()`メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングする必要がない場合は[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change)を返します。
-通常、`update()`メソッドは下記のように実装されます。
+`update()`メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングの必要がない場合は[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change)を返します。
+通常、`update()`メソッドは次の処理を行います。
 
-- Reading data from the DOM, and using it to generate a value to render.
-- Imperatively updating the DOM using the `element` or `parentNode` reference on the `Part` object. In this case, `update()` usually returns `noChange`, indicating that Lit doesn't need to take any further action to render the directive.
+- DOMからデータを取得して、それを使ってレンダリングする値を生成します。
+- `Part`オブジェクトの`element`もしくは`parentNode`プロパティを操作してDOMを命令的に更新します。
+通常、この場合は、ディレクティブをレンダリングするために何もする必要がないことをLitに通知するために`update()`は`noChange`を返します。
 
 #### Part
 
-Each expression position has its own specific `Part` object:
+`Part`オブジェクトはエクスプレッションの位置に対応する`Part`オブジェクトになります。
 
-*   {% api "ChildPart" %} for expressions in HTML child position.
+* HTMLの子要素の位置にあるエクスプレッションでは[ChildPart](https://lit.dev/docs/api/custom-directives/#ChildPart)です。
 *   {% api "AttributePart" %} for expressions in HTML attribute value position.
 *   {% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with `?`).
 *   {% api "EventPart" %} for expressions in an event listener position (name prefixed with `@`).
