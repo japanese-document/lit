@@ -171,16 +171,17 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 <li>エクスプレッションに関連しているDOMを直接管理するためのAPIを持つ<code>Part</code>オブジェクト</li>
 <li><code>render()</code>の引数を含む配列</li>
 </ul>
-<p><code>update()</code>メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングする必要がない場合は<a class="Link" href="https://lit.dev/docs/templates/custom-directives/#signaling-no-change"><code>noChange</code></a>を返します。
-通常、<code>update()</code>メソッドは下記のように実装されます。</p>
+<p><code>update()</code>メソッドはLitがレンダリング可能な値を返す必要があります。もしくは、再レンダリングの必要がない場合は<a class="Link" href="https://lit.dev/docs/templates/custom-directives/#signaling-no-change"><code>noChange</code></a>を返します。
+通常、<code>update()</code>メソッドは次の処理を行います。</p>
 <ul>
-<li>Reading data from the DOM, and using it to generate a value to render.</li>
-<li>Imperatively updating the DOM using the <code>element</code> or <code>parentNode</code> reference on the <code>Part</code> object. In this case, <code>update()</code> usually returns <code>noChange</code>, indicating that Lit doesn't need to take any further action to render the directive.</li>
+<li>DOMからデータを取得して、それを使ってレンダリングする値を生成します。</li>
+<li><code>Part</code>オブジェクトの<code>element</code>もしくは<code>parentNode</code>プロパティを操作してDOMを命令的に更新します。
+通常、この場合は、ディレクティブをレンダリングするために何もする必要がないことをLitに通知するために<code>update()</code>は<code>noChange</code>を返します。</li>
 </ul>
 <h4 id="Part"><a class="anchor" href="#Part">#</a>Part</h4>
-<p>Each expression position has its own specific <code>Part</code> object:</p>
+<p><code>Part</code>オブジェクトはエクスプレッションの位置に対応する<code>Part</code>オブジェクトになります。</p>
 <ul>
-<li>{% api "ChildPart" %} for expressions in HTML child position.</li>
+<li>HTMLの子要素の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#ChildPart">ChildPart</a>です。</li>
 <li>{% api "AttributePart" %} for expressions in HTML attribute value position.</li>
 <li>{% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with <code>?</code>).</li>
 <li>{% api "EventPart" %} for expressions in an event listener position (name prefixed with <code>@</code>).</li>
