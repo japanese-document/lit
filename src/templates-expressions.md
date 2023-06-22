@@ -1,6 +1,6 @@
 { "header": {"name": "テンプレート", "order": 1}, "order": 0 }
 ---
-# Expressions
+# エクスプレッション
 
 Litテンプレートはエクスプレッション(expressions)と呼ばれる動的な値を`${...}`の形式で埋め込むことができます。
 エクスプレッションをJavaScriptの[式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E5%BC%8F)にすることもできます。
@@ -197,7 +197,7 @@ html`<img src="/images/${this.image}">`;
 Booleanは文字列に変換されます。例えば、`false`は`'false'`に変換されます。
 `undefined`と`null`は空文字(`""`)としてレンダリングされます。
 
-### Boolean attributes
+### Boolean attribute expressions
 
 下記のように属性名の先頭に`?`を付けるとboolean attributesになります。
 エクスプレッションにtrueになる値がセットされると属性は配置されます。
