@@ -165,7 +165,7 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 `Part`オブジェクトはエクスプレッションの位置に対応する`Part`オブジェクトになります。
 
 * HTMLの子要素の位置にあるエクスプレッションでは[ChildPart](https://lit.dev/docs/api/custom-directives/#ChildPart)です。
-*   {% api "AttributePart" %} for expressions in HTML attribute value position.
+* HTMLの属性の値の位置にあるエクスプレッションでは[AttributePart](https://lit.dev/docs/api/custom-directives/#ChildPart)です。
 *   {% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with `?`).
 *   {% api "EventPart" %} for expressions in an event listener position (name prefixed with `@`).
 *   {% api "PropertyPart" %} for expressions in property value position (name prefixed with `.`).
