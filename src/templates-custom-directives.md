@@ -165,16 +165,17 @@ const template = html`<div>${max(someNumber, 0)}</div>`;
 `Part`オブジェクトはエクスプレッションの位置に対応する`Part`オブジェクトになります。
 
 * HTMLの子要素の位置にあるエクスプレッションでは[ChildPart](https://lit.dev/docs/api/custom-directives/#ChildPart)です。
-* HTMLの属性の値の位置にあるエクスプレッションでは[AttributePart](https://lit.dev/docs/api/custom-directives/#ChildPart)です。
-*   {% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with `?`).
-*   {% api "EventPart" %} for expressions in an event listener position (name prefixed with `@`).
-*   {% api "PropertyPart" %} for expressions in property value position (name prefixed with `.`).
-*   {% api "ElementPart" %} for expressions on the element tag.
+* HTMLの属性の値の位置にあるエクスプレッションでは[AttributePart](https://lit.dev/docs/api/custom-directives/#AttributePart)です。
+* 真偽値(属性名の接頭辞が`?`)の値の位置にあるエクスプレッションでは[BooleanAttributePart](https://lit.dev/docs/api/custom-directives/#BooleanAttributePart)です。
+* イベントリスナ(属性名の接頭辞が`@`)の値の位置にあるエクスプレッションでは[EventPart](https://lit.dev/docs/api/custom-directives/#EventPart)です。
+* プロパティ(属性名の接頭辞が`.`)の値の位置にあるエクスプレッションでは[PropertyPart](https://lit.dev/docs/api/custom-directives/#PropertyPart)です。
+* HTMLタグ内にあるエクスプレッションでは[ElementPart](https://lit.dev/docs/api/custom-directives/#ElementPart)です。
 
-In addition to the part-specific metadata contained in `PartInfo`, all `Part` types provide access to the DOM `element` associated with the expression (or `parentNode`, in the case of `ChildPart`), which may be directly accessed in `update()`. For example:
+コンストラクタの引数である`PartInfo`に格納されているエクスプレッションが配置されている位置のメタデータに加えて、
+`update()`メソッドでは、すべての`Part`オブジェクトはエクスプレッションに関連したDOM(`element`もしくは`parentElement`)にアクセスすることができます。
 
 ```ts
-// Renders attribute names of parent element to textContent
+// 属性名のリストを親要素のtextContentにレンダリングします。
 class AttributeLogger extends Directive {
   attributeNames = '';
   update(part: ChildPart) {
@@ -188,7 +189,7 @@ class AttributeLogger extends Directive {
 const attributeLogger = directive(AttributeLogger);
 
 const template = html`<div a b>${attributeLogger()}</div>`;
-// Renders: `<div a b>a b</div>`
+// `<div a b>a b</div>`
 ```
 
 In addition, the `directive-helpers.js` module includes a number of helper functions which act on `Part` objects, and can be used to dynamically create, insert, and move parts within a directive's `ChildPart`.

@@ -182,14 +182,15 @@ const template = html`&lt;div&gt;${max(someNumber, 0)}&lt;/div&gt;`;
 <p><code>Part</code>オブジェクトはエクスプレッションの位置に対応する<code>Part</code>オブジェクトになります。</p>
 <ul>
 <li>HTMLの子要素の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#ChildPart">ChildPart</a>です。</li>
-<li>HTMLの属性の値の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#ChildPart">AttributePart</a>です。</li>
-<li>{% api "BooleanAttributePart" %} for expressions in a boolean attribute value (name prefixed with <code>?</code>).</li>
-<li>{% api "EventPart" %} for expressions in an event listener position (name prefixed with <code>@</code>).</li>
-<li>{% api "PropertyPart" %} for expressions in property value position (name prefixed with <code>.</code>).</li>
-<li>{% api "ElementPart" %} for expressions on the element tag.</li>
+<li>HTMLの属性の値の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#AttributePart">AttributePart</a>です。</li>
+<li>真偽値(属性名の接頭辞が<code>?</code>)の値の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#BooleanAttributePart">BooleanAttributePart</a>です。</li>
+<li>イベントリスナ(属性名の接頭辞が<code>@</code>)の値の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#EventPart">EventPart</a>です。</li>
+<li>プロパティ(属性名の接頭辞が<code>.</code>)の値の位置にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#PropertyPart">PropertyPart</a>です。</li>
+<li>HTMLタグ内にあるエクスプレッションでは<a class="Link" href="https://lit.dev/docs/api/custom-directives/#ElementPart">ElementPart</a>です。</li>
 </ul>
-<p>In addition to the part-specific metadata contained in <code>PartInfo</code>, all <code>Part</code> types provide access to the DOM <code>element</code> associated with the expression (or <code>parentNode</code>, in the case of <code>ChildPart</code>), which may be directly accessed in <code>update()</code>. For example:</p>
-<pre><code class="language-ts">// Renders attribute names of parent element to textContent
+<p>コンストラクタの引数である<code>PartInfo</code>に格納されているエクスプレッションが配置されている位置のメタデータに加えて、
+<code>update()</code>メソッドでは、すべての<code>Part</code>オブジェクトはエクスプレッションに関連したDOM(<code>element</code>もしくは<code>parentElement</code>)にアクセスすることができます。</p>
+<pre><code class="language-ts">// 属性名のリストを親要素のtextContentにレンダリングします。
 class AttributeLogger extends Directive {
   attributeNames = '';
   update(part: ChildPart) {
@@ -203,7 +204,7 @@ class AttributeLogger extends Directive {
 const attributeLogger = directive(AttributeLogger);
 
 const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
-// Renders: `&lt;div a b&gt;a b&lt;/div&gt;`
+// `&lt;div a b&gt;a b&lt;/div&gt;`
 </code></pre>
 <p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
 <h4 id="Calling_render()_from_update()"><a class="anchor" href="#Calling_render()_from_update()">#</a>Calling render() from update()</h4>
