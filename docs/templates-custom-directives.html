@@ -207,8 +207,9 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 // `&lt;div a b&gt;a b&lt;/div&gt;`
 </code></pre>
 <p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
-<h4 id="Calling_render()_from_update()"><a class="anchor" href="#Calling_render()_from_update()">#</a>Calling render() from update()</h4>
-<p>The default implementation of <code>update()</code> simply calls and returns the value from <code>render()</code>. If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
+<h4 id="update()内でrender()を実行する"><a class="anchor" href="#update()内でrender()を実行する">#</a>update()内でrender()を実行する</h4>
+<p>デフォルトの<code>update()</code>の実装は単に<code>render()</code>の戻り値を返すだけです。
+If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
 <p>The <code>render()</code> arguments are passed into <code>update()</code> as an array. You can pass the arguments to <code>render()</code> like this:</p>
 <pre><code class="language-ts">class MyDirective extends Directive {
   update(part: Part, [fish, bananas]: DirectiveParameters&lt;this&gt;) {
@@ -229,7 +230,6 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 <li>In an async directive, a call to <code>update()</code> or <code>render()</code> may return <code>noChange</code> because there's nothing to render <em>yet</em>.</li>
 </ul>
 <p>For example, a directive can keep track of the previous values passed in to it, and perform its own dirty checking to determine whether the directive's output needs to be updated. The <code>update()</code> or <code>render()</code> method can return <code>noChange</code>  to signal that the directive's output doesn't need to be re-rendered.</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">import {Directive} from 'lit/directive.js';
 import {noChange} from 'lit';
 class CalculateDiff extends Directive {
@@ -246,25 +246,9 @@ class CalculateDiff extends Directive {
   }
 }
 </code></pre>
-<pre><code class="language-js">import {Directive} from 'lit/directive.js';
-import {noChange} from 'lit';
-class CalculateDiff extends Directive {
-  render(a, b) {
-    if (this.a !== a || this.b !== b) {
-      this.a = a;
-      this.b = b;
-      // Expensive &amp; fancy text diffing algorithm
-      return calculateDiff(a, b);
-    }
-    return noChange;
-  }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a class="anchor" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">#</a>ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</h2>
 <p>Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.</p>
 <p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class ClassMap extends Directive {
   constructor(partInfo: PartInfo) {
     super(partInfo);
@@ -278,26 +262,11 @@ class CalculateDiff extends Directive {
   ...
 }
 </code></pre>
-<pre><code class="language-js">class ClassMap extends Directive {
-  constructor(partInfo) {
-    super(partInfo);
-    if (
-      partInfo.type !== PartType.ATTRIBUTE ||
-      partInfo.name !== 'class'
-    ) {
-      throw new Error('The `classMap` directive must be used in the `class` attribute');
-    }
-  }
-  ...
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h2 id="非同期ディレクティブ"><a class="anchor" href="#非同期ディレクティブ">#</a>非同期ディレクティブ</h2>
 <p>The previous example directives are synchronous: they return values synchronously from their <code>render()</code>/<code>update()</code> lifecycle callbacks, so their results are written to the DOM during the component's <code>update()</code> callback.</p>
 <p>Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
 <p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
 <p>Here's an example of a simple async directive that renders a Promise value:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class ResolvePromise extends AsyncDirective {
   render(promise: Promise&lt;unknown&gt;) {
     Promise.resolve(promise).then((resolvedValue) =&gt; {
@@ -310,19 +279,6 @@ class CalculateDiff extends Directive {
 }
 export const resolvePromise = directive(ResolvePromise);
 </code></pre>
-<pre><code class="language-js">class ResolvePromise extends AsyncDirective {
-  render(promise) {
-    Promise.resolve(promise).then((resolvedValue) =&gt; {
-      // Rendered asynchronously:
-      this.setValue(resolvedValue);
-    });
-    // Rendered synchronously:
-    return `Waiting for promise to resolve`;
-  }
-}
-export const resolvePromise = directive(ResolvePromise);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>Here, the rendered template shows "Waiting for promise to resolve," followed by the resolved value of the promise, whenever it resolves.</p>
 <p>Async directives often need to subscribe to external resources. To prevent memory leaks async directives should unsubscribe or dispose of resources when the directive instance is no longer in use.  For this purpose, <code>AsyncDirective</code> provides the following extra lifecycle callbacks and API:</p>
 <ul>
@@ -345,7 +301,6 @@ export const resolvePromise = directive(ResolvePromise);
 </div>
 
 <p>Below is an example of a directive that subscribes to an <code>Observable</code> and handles disconnection and reconnection appropriately:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class ObserveDirective extends AsyncDirective {
   observable: Observable&lt;unknown&gt; | undefined;
   unsubscribe: (() =&gt; void) | undefined;
@@ -381,40 +336,6 @@ export const resolvePromise = directive(ResolvePromise);
 }
 export const observe = directive(ObserveDirective);
 </code></pre>
-<pre><code class="language-js">class ObserveDirective extends AsyncDirective {
-  // When the observable changes, unsubscribe to the old one and
-  // subscribe to the new one
-  render(observable) {
-    if (this.observable !== observable) {
-      this.unsubscribe?.();
-      this.observable = observable
-      if (this.isConnected)  {
-        this.subscribe(observable);
-      }
-    }
-    return noChange;
-  }
-  // Subscribes to the observable, calling the directive's asynchronous
-  // setValue API each time the value changes
-  subscribe(observable) {
-    this.unsubscribe = observable.subscribe((v) =&gt; {
-      this.setValue(v);
-    });
-  }
-  // When the directive is disconnected from the DOM, unsubscribe to ensure
-  // the directive instance can be garbage collected
-  disconnected() {
-    this.unsubscribe();
-  }
-  // If the subtree the directive is in was disconneted and subsequently
-  // re-connected, re-subscribe to make the directive operable again
-  reconnected() {
-    this.subscribe(this.observable);
-  }
-}
-export const observe = directive(ObserveDirective);
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <hr>
 <h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
 <h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
@@ -459,7 +380,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#ディレクティブのレンダリング__render()">ディレクティブのレンダリング: render()</a></p>
 <p class="h3"><a href="#命令的DOMアクセス__update()">命令的DOMアクセス: update()</a></p>
 <p class="h4"><a href="#Part">Part</a></p>
-<p class="h4"><a href="#Calling_render()_from_update()">Calling render() from update()</a></p>
+<p class="h4"><a href="#update()内でrender()を実行する">update()内でrender()を実行する</a></p>
 <p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
 <p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
 <p class="h2"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></p>
