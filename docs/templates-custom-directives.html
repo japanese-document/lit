@@ -209,8 +209,9 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 <p>In addition, the <code>directive-helpers.js</code> module includes a number of helper functions which act on <code>Part</code> objects, and can be used to dynamically create, insert, and move parts within a directive's <code>ChildPart</code>.</p>
 <h4 id="update()内でrender()を実行する"><a class="anchor" href="#update()内でrender()を実行する">#</a>update()内でrender()を実行する</h4>
 <p>デフォルトの<code>update()</code>の実装は単に<code>render()</code>の戻り値を返すだけです。
-If you override <code>update()</code> and still want to call <code>render()</code> to generate a value, you need to call <code>render()</code> explicitly.</p>
-<p>The <code>render()</code> arguments are passed into <code>update()</code> as an array. You can pass the arguments to <code>render()</code> like this:</p>
+<code>update()</code>をオーバーライドしても値の生成に<code>render()</code>を使って値を生成したい場合、<code>update()</code>内で<code>render()</code>を実行する必要があります。</p>
+<p><code>render()</code>の引数は配列で<code>update()</code>に引数として渡されます。
+その<code>render()</code>の引数は下記の様に定義します。</p>
 <pre><code class="language-ts">class MyDirective extends Directive {
   update(part: Part, [fish, bananas]: DirectiveParameters&lt;this&gt;) {
     // ...
@@ -219,7 +220,7 @@ If you override <code>update()</code> and still want to call <code>render()</cod
   render(fish: number, bananas: number) { ... }
 }
 </code></pre>
-<h3 id="Differences_between_update()_and_render()"><a class="anchor" href="#Differences_between_update()_and_render()">#</a>Differences between update() and render()</h3>
+<h3 id="update()とrender()の違い"><a class="anchor" href="#update()とrender()の違い">#</a>update()とrender()の違い</h3>
 <p>While the <code>update()</code> callback is more powerful than the <code>render()</code> callback, there is an important distinction: When using the <code>@lit-labs/ssr</code> package for server-side rendering (SSR), <em>only</em> the <code>render()</code> method is called on the server. To be compatible with SSR, directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
 <h2 id="Signaling_no_change"><a class="anchor" href="#Signaling_no_change">#</a>Signaling no change</h2>
 <p>Sometimes a directive may have nothing new for Lit to render. You signal this by returning <code>noChange</code> from the <code>update()</code> or <code>render()</code> method. This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive. Returning <code>noChange</code> leaves the previously rendered value in place.</p>
@@ -381,7 +382,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#命令的DOMアクセス__update()">命令的DOMアクセス: update()</a></p>
 <p class="h4"><a href="#Part">Part</a></p>
 <p class="h4"><a href="#update()内でrender()を実行する">update()内でrender()を実行する</a></p>
-<p class="h3"><a href="#Differences_between_update()_and_render()">Differences between update() and render()</a></p>
+<p class="h3"><a href="#update()とrender()の違い">update()とrender()の違い</a></p>
 <p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
 <p class="h2"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></p>
 <p class="h2"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></p>

@@ -197,9 +197,10 @@ In addition, the `directive-helpers.js` module includes a number of helper funct
 #### update()内でrender()を実行する
 
 デフォルトの`update()`の実装は単に`render()`の戻り値を返すだけです。
-If you override `update()` and still want to call `render()` to generate a value, you need to call `render()` explicitly.
+`update()`をオーバーライドしても値の生成に`render()`を使って値を生成したい場合、`update()`内で`render()`を実行する必要があります。
 
-The `render()` arguments are passed into `update()` as an array. You can pass the arguments to `render()` like this:
+`render()`の引数は配列で`update()`に引数として渡されます。
+その`render()`の引数は下記の様に定義します。
 
 ```ts
 class MyDirective extends Directive {
@@ -211,7 +212,7 @@ class MyDirective extends Directive {
 }
 ```
 
-### Differences between update() and render()
+### update()とrender()の違い
 
 While the `update()` callback is more powerful than the `render()` callback, there is an important distinction: When using the `@lit-labs/ssr` package for server-side rendering (SSR), _only_ the `render()` method is called on the server. To be compatible with SSR, directives should return values from `render()` and only use `update()` for logic that requires access to the DOM.
 
