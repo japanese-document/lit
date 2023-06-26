@@ -221,7 +221,11 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 }
 </code></pre>
 <h3 id="update()とrender()の違い"><a class="anchor" href="#update()とrender()の違い">#</a>update()とrender()の違い</h3>
-<p>While the <code>update()</code> callback is more powerful than the <code>render()</code> callback, there is an important distinction: When using the <code>@lit-labs/ssr</code> package for server-side rendering (SSR), <em>only</em> the <code>render()</code> method is called on the server. To be compatible with SSR, directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
+<p><code>update()</code>メソッドは<code>render()</code>メソッドよりできることが多いですが、
+注意すべき点があります。
+それは<code>@lit-labs/ssr</code>パッケージをサーバーサイドレンダリング(SSR)に使う際、サーバでは<code>render()</code>メソッドのみが実行される点です。
+To be compatible with SSR,
+directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
 <h2 id="Signaling_no_change"><a class="anchor" href="#Signaling_no_change">#</a>Signaling no change</h2>
 <p>Sometimes a directive may have nothing new for Lit to render. You signal this by returning <code>noChange</code> from the <code>update()</code> or <code>render()</code> method. This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive. Returning <code>noChange</code> leaves the previously rendered value in place.</p>
 <p>There are several common reasons for returning <code>noChange</code>:</p>
