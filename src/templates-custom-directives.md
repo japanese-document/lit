@@ -214,7 +214,11 @@ class MyDirective extends Directive {
 
 ### update()とrender()の違い
 
-While the `update()` callback is more powerful than the `render()` callback, there is an important distinction: When using the `@lit-labs/ssr` package for server-side rendering (SSR), _only_ the `render()` method is called on the server. To be compatible with SSR, directives should return values from `render()` and only use `update()` for logic that requires access to the DOM.
+`update()`メソッドは`render()`メソッドよりできることが多いですが、
+注意すべき点があります。
+それは`@lit-labs/ssr`パッケージをサーバーサイドレンダリング(SSR)に使う際、サーバでは`render()`メソッドのみが実行される点です。
+To be compatible with SSR,
+directives should return values from `render()` and only use `update()` for logic that requires access to the DOM.
 
 ## Signaling no change
 
