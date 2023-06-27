@@ -224,9 +224,9 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 <p><code>update()</code>メソッドは<code>render()</code>メソッドよりできることが多いですが、
 注意すべき点があります。
 それは<code>@lit-labs/ssr</code>パッケージをサーバーサイドレンダリング(SSR)に使う際、サーバでは<code>render()</code>メソッドのみが実行される点です。
-To be compatible with SSR,
-directives should return values from <code>render()</code> and only use <code>update()</code> for logic that requires access to the DOM.</p>
-<h2 id="Signaling_no_change"><a class="anchor" href="#Signaling_no_change">#</a>Signaling no change</h2>
+SSRとの互換性のために、
+ディレクティブは<code>render()</code>で値を返して、<code>update()</code>はDOMにアクセスする必要がある場合のみ使用してください。</p>
+<h2 id="変更がないことを伝える"><a class="anchor" href="#変更がないことを伝える">#</a>変更がないことを伝える</h2>
 <p>Sometimes a directive may have nothing new for Lit to render. You signal this by returning <code>noChange</code> from the <code>update()</code> or <code>render()</code> method. This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive. Returning <code>noChange</code> leaves the previously rendered value in place.</p>
 <p>There are several common reasons for returning <code>noChange</code>:</p>
 <ul>
@@ -387,7 +387,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#Part">Part</a></p>
 <p class="h4"><a href="#update()内でrender()を実行する">update()内でrender()を実行する</a></p>
 <p class="h3"><a href="#update()とrender()の違い">update()とrender()の違い</a></p>
-<p class="h2"><a href="#Signaling_no_change">Signaling no change</a></p>
+<p class="h2"><a href="#変更がないことを伝える">変更がないことを伝える</a></p>
 <p class="h2"><a href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</a></p>
 <p class="h2"><a href="#非同期ディレクティブ">非同期ディレクティブ</a></p>
 <p class="h2"><a href="#License">License</a></p>
