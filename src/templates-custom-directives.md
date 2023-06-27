@@ -217,10 +217,10 @@ class MyDirective extends Directive {
 `update()`メソッドは`render()`メソッドよりできることが多いですが、
 注意すべき点があります。
 それは`@lit-labs/ssr`パッケージをサーバーサイドレンダリング(SSR)に使う際、サーバでは`render()`メソッドのみが実行される点です。
-To be compatible with SSR,
-directives should return values from `render()` and only use `update()` for logic that requires access to the DOM.
+SSRとの互換性のために、
+ディレクティブは`render()`で値を返して、`update()`はDOMにアクセスする必要がある場合のみ使用してください。
 
-## Signaling no change
+## 変更がないことを伝える
 
 Sometimes a directive may have nothing new for Lit to render. You signal this by returning `noChange` from the `update()` or `render()` method. This is different from returning `undefined`, which causes Lit to clear the `Part` associated with the directive. Returning `noChange` leaves the previously rendered value in place.
 
