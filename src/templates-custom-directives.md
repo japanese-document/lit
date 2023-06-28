@@ -222,7 +222,10 @@ SSRとの互換性のために、
 
 ## 変更がないことを伝える
 
-Sometimes a directive may have nothing new for Lit to render. You signal this by returning `noChange` from the `update()` or `render()` method. This is different from returning `undefined`, which causes Lit to clear the `Part` associated with the directive. Returning `noChange` leaves the previously rendered value in place.
+ディレクティブのレンダリングをスキップして欲しい場合があるでしょう。
+その場合は`update()`メソッドもしくは`render()`メソッドで`noChange`を返します。
+This is different from returning `undefined`, which causes Lit to clear the `Part` associated with the directive.
+Returning `noChange` leaves the previously rendered value in place.
 
 There are several common reasons for returning `noChange`:
 
