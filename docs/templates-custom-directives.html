@@ -227,11 +227,11 @@ const template = html`&lt;div a b&gt;${attributeLogger()}&lt;/div&gt;`;
 SSRとの互換性のために、
 ディレクティブは<code>render()</code>で値を返して、<code>update()</code>はDOMにアクセスする必要がある場合のみ使用してください。</p>
 <h2 id="変更がないことを伝える"><a class="anchor" href="#変更がないことを伝える">#</a>変更がないことを伝える</h2>
-<p>ディレクティブの部分を新たにレンダリングして欲しくない場合があるでしょう。
+<p>ディレクティブのレンダリングをスキップして欲しい場合があるでしょう。
 その場合は<code>update()</code>メソッドもしくは<code>render()</code>メソッドで<code>noChange</code>を返します。
-This is different from returning <code>undefined</code>, which causes Lit to clear the <code>Part</code> associated with the directive.
-Returning <code>noChange</code> leaves the previously rendered value in place.</p>
-<p>There are several common reasons for returning <code>noChange</code>:</p>
+<code>undefined</code>を返すとディレクティブに関連した<code>Part</code>をクリアされます。
+<code>noChange</code>を返すと1つ前にレンダリングされた値は変更をスキップされます。</p>
+<p>下記は<code>noChange</code>のユースケースです。</p>
 <ul>
 <li>Based on the input values, there's nothing new to render.</li>
 <li>The <code>update()</code> method updated the DOM imperatively.</li>

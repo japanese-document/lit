@@ -224,10 +224,10 @@ SSRとの互換性のために、
 
 ディレクティブのレンダリングをスキップして欲しい場合があるでしょう。
 その場合は`update()`メソッドもしくは`render()`メソッドで`noChange`を返します。
-This is different from returning `undefined`, which causes Lit to clear the `Part` associated with the directive.
-Returning `noChange` leaves the previously rendered value in place.
+`undefined`を返すとディレクティブに関連した`Part`をクリアされます。
+`noChange`を返すと1つ前にレンダリングされた値は変更をスキップされます。
 
-There are several common reasons for returning `noChange`:
+下記は`noChange`のユースケースです。
 
 *   Based on the input values, there's nothing new to render.
 *   The `update()` method updated the DOM imperatively.
