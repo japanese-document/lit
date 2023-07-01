@@ -225,12 +225,12 @@ SSRとの互換性のために、
 ディレクティブのレンダリングをスキップして欲しい場合があるでしょう。
 その場合は`update()`メソッドもしくは`render()`メソッドで`noChange`を返します。
 `undefined`を返すとディレクティブに関連した`Part`をクリアされます。
-`noChange`を返すと1つ前にレンダリングされた値は変更をスキップされます。
+`noChange`を返すとレンダリング結果の変更をスキップされます。
 
-下記は`noChange`のユースケースです。
+下記は`noChange`が必要なケースです。
 
-*   Based on the input values, there's nothing new to render.
-*   The `update()` method updated the DOM imperatively.
+* 入力値に基づいたレンダリング結果に変更が無い場合
+* `update()`メソッド内でDOMを命令的に更新した場合
 *   In an async directive, a call to `update()` or `render()` may return `noChange` because there's nothing to render _yet_.
 
 For example, a directive can keep track of the previous values passed in to it, and perform its own dirty checking to determine whether the directive's output needs to be updated. The `update()` or `render()` method can return `noChange`  to signal that the directive's output doesn't need to be re-rendered.
