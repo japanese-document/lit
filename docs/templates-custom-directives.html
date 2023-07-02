@@ -231,13 +231,16 @@ SSRとの互換性のために、
 その場合は<code>update()</code>メソッドもしくは<code>render()</code>メソッドで<code>noChange</code>を返します。
 <code>undefined</code>を返すとディレクティブに関連した<code>Part</code>をクリアされます。
 <code>noChange</code>を返すとレンダリング結果の変更をスキップされます。</p>
-<p>下記は<code>noChange</code>が必要なケースです。</p>
+<p>下記は<code>noChange</code>を使う動機です。</p>
 <ul>
-<li>入力値に基づいたレンダリング結果に変更が無い場合</li>
-<li><code>update()</code>メソッド内でDOMを命令的に更新した場合</li>
-<li>In an async directive, a call to <code>update()</code> or <code>render()</code> may return <code>noChange</code> because there's nothing to render <em>yet</em>.</li>
+<li>入力値に基づいたレンダリング結果に変更が無い。</li>
+<li><code>update()</code>メソッド内でDOMを命令的に更新した。</li>
+<li>非同期ディレクティブで何もレンダリングしないので<code>update()</code>や<code>render()</code>で<code>noChange</code>を返す。</li>
 </ul>
-<p>For example, a directive can keep track of the previous values passed in to it, and perform its own dirty checking to determine whether the directive's output needs to be updated. The <code>update()</code> or <code>render()</code> method can return <code>noChange</code>  to signal that the directive's output doesn't need to be re-rendered.</p>
+<p>For example,
+a directive can keep track of the previous values passed in to it,
+and perform its own dirty checking to determine whether the directive's output needs to be updated.
+The <code>update()</code> or <code>render()</code> method can return <code>noChange</code> to signal that the directive's output doesn't need to be re-rendered.</p>
 <pre><code class="language-ts">import {Directive} from 'lit/directive.js';
 import {noChange} from 'lit';
 class CalculateDiff extends Directive {
@@ -247,7 +250,7 @@ class CalculateDiff extends Directive {
     if (this.a !== a || this.b !== b) {
       this.a = a;
       this.b = b;
-      // Expensive &amp; fancy text diffing algorithm
+      // 高コストのテキスト差分アルゴリズム
       return calculateDiff(a, b);
     }
     return noChange;

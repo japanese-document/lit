@@ -227,13 +227,16 @@ SSRとの互換性のために、
 `undefined`を返すとディレクティブに関連した`Part`をクリアされます。
 `noChange`を返すとレンダリング結果の変更をスキップされます。
 
-下記は`noChange`が必要なケースです。
+下記は`noChange`を使う動機です。
 
-* 入力値に基づいたレンダリング結果に変更が無い場合
-* `update()`メソッド内でDOMを命令的に更新した場合
-*   In an async directive, a call to `update()` or `render()` may return `noChange` because there's nothing to render _yet_.
+* 入力値に基づいたレンダリング結果に変更が無い。
+* `update()`メソッド内でDOMを命令的に更新した。
+* 非同期ディレクティブで何もレンダリングしないので`update()`や`render()`で`noChange`を返す。
 
-For example, a directive can keep track of the previous values passed in to it, and perform its own dirty checking to determine whether the directive's output needs to be updated. The `update()` or `render()` method can return `noChange`  to signal that the directive's output doesn't need to be re-rendered.
+For example,
+a directive can keep track of the previous values passed in to it,
+and perform its own dirty checking to determine whether the directive's output needs to be updated.
+The `update()` or `render()` method can return `noChange` to signal that the directive's output doesn't need to be re-rendered.
 
 ```ts
 import {Directive} from 'lit/directive.js';
@@ -245,7 +248,7 @@ class CalculateDiff extends Directive {
     if (this.a !== a || this.b !== b) {
       this.a = a;
       this.b = b;
-      // Expensive & fancy text diffing algorithm
+      // 高コストのテキスト差分アルゴリズム
       return calculateDiff(a, b);
     }
     return noChange;
