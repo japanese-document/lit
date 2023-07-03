@@ -237,10 +237,10 @@ SSRとの互換性のために、
 <li><code>update()</code>メソッド内でDOMを命令的に更新した。</li>
 <li>非同期ディレクティブで何もレンダリングしないので<code>update()</code>や<code>render()</code>で<code>noChange</code>を返す。</li>
 </ul>
-<p>For example,
-a directive can keep track of the previous values passed in to it,
-and perform its own dirty checking to determine whether the directive's output needs to be updated.
-The <code>update()</code> or <code>render()</code> method can return <code>noChange</code> to signal that the directive's output doesn't need to be re-rendered.</p>
+<p>下記の例では、
+ディレクティブは前に渡された値を保持して、
+それを使って変更を検知してディレクティブのレンダリング結果を更新する必要があるか判断しています。
+<code>update()</code>もしくは<code>render()</code>は<code>noChange</code>を返すことでディレクティブの再レンダリングが必要ないことを示すことができます。</p>
 <pre><code class="language-ts">import {Directive} from 'lit/directive.js';
 import {noChange} from 'lit';
 class CalculateDiff extends Directive {
@@ -258,7 +258,10 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a class="anchor" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">#</a>ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</h2>
-<p>Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.</p>
+<p>Some directives are only useful in one context,
+such as an attribute expression or a child expression.
+If the directive is placed in the wrong context,
+the directive should throw an appropriate error.</p>
 <p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
 <pre><code class="language-ts">class ClassMap extends Directive {
   constructor(partInfo: PartInfo) {
