@@ -233,10 +233,10 @@ SSRとの互換性のために、
 * `update()`メソッド内でDOMを命令的に更新した。
 * 非同期ディレクティブで何もレンダリングしないので`update()`や`render()`で`noChange`を返す。
 
-For example,
-a directive can keep track of the previous values passed in to it,
-and perform its own dirty checking to determine whether the directive's output needs to be updated.
-The `update()` or `render()` method can return `noChange` to signal that the directive's output doesn't need to be re-rendered.
+下記の例では、
+ディレクティブは前に渡された値を保持して、
+それを使って変更を検知してディレクティブのレンダリング結果を更新する必要があるか判断しています。
+`update()`もしくは`render()`は`noChange`を返すことでディレクティブの再レンダリングが必要ないことを示すことができます。
 
 ```ts
 import {Directive} from 'lit/directive.js';
@@ -258,7 +258,10 @@ class CalculateDiff extends Directive {
 
 ## ディレクティブを使用することができるエクスプレッションの種類を1つに制限する
 
-Some directives are only useful in one context, such as an attribute expression or a child expression. If placed in the wrong context, the directive should throw an appropriate error.
+Some directives are only useful in one context,
+such as an attribute expression or a child expression.
+If the directive is placed in the wrong context,
+the directive should throw an appropriate error.
 
 For example, the `classMap` directive validates that it is only used in an `AttributePart` and only for the `class` attribute`:
 
