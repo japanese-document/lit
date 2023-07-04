@@ -258,10 +258,8 @@ class CalculateDiff extends Directive {
 
 ## ディレクティブを使用することができるエクスプレッションの種類を1つに制限する
 
-Some directives are only useful in one context,
-such as an attribute expression or a child expression.
-If the directive is placed in the wrong context,
-the directive should throw an appropriate error.
+ディレクティブの中には特定のコンテキスト(attribute expressionやchild expression等)でのみ使える物があります。
+そのディレクティブが不適切な位置に配置された場合は適切なエラーを発生させるべきです。
 
 For example, the `classMap` directive validates that it is only used in an `AttributePart` and only for the `class` attribute`:
 
