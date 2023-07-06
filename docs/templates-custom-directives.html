@@ -260,7 +260,7 @@ class CalculateDiff extends Directive {
 <h2 id="ディレクティブを使用することができるエクスプレッションの種類を1つに制限する"><a class="anchor" href="#ディレクティブを使用することができるエクスプレッションの種類を1つに制限する">#</a>ディレクティブを使用することができるエクスプレッションの種類を1つに制限する</h2>
 <p>ディレクティブの中には特定のコンテキスト(attribute expressionやchild expression等)でのみ使える物があります。
 そのディレクティブが不適切な位置に配置された場合は適切なエラーを発生させるべきです。</p>
-<p>For example, the <code>classMap</code> directive validates that it is only used in an <code>AttributePart</code> and only for the <code>class</code> attribute`:</p>
+<p>下記の例では<code>classMap</code>ディレクティブは<code>class</code>属性の値の位置にのみに配置を制限しています。</p>
 <pre><code class="language-ts">class ClassMap extends Directive {
   constructor(partInfo: PartInfo) {
     super(partInfo);
@@ -275,8 +275,11 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <h2 id="非同期ディレクティブ"><a class="anchor" href="#非同期ディレクティブ">#</a>非同期ディレクティブ</h2>
-<p>The previous example directives are synchronous: they return values synchronously from their <code>render()</code>/<code>update()</code> lifecycle callbacks, so their results are written to the DOM during the component's <code>update()</code> callback.</p>
-<p>Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
+<p>これまでの例ではディレクティブは同期的に動作しています。
+それらのディレクティブはそれらの<code>render()</code>/<code>update()</code>コールバックから同期的に値を返します。
+その値はコンポーネントの<code>update()</code>メソッドでDOMに反映されます。</p>
+<p>Sometimes,
+you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
 <p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
 <p>Here's an example of a simple async directive that renders a Promise value:</p>
 <pre><code class="language-ts">class ResolvePromise extends AsyncDirective {

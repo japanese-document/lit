@@ -261,7 +261,7 @@ class CalculateDiff extends Directive {
 ディレクティブの中には特定のコンテキスト(attribute expressionやchild expression等)でのみ使える物があります。
 そのディレクティブが不適切な位置に配置された場合は適切なエラーを発生させるべきです。
 
-For example, the `classMap` directive validates that it is only used in an `AttributePart` and only for the `class` attribute`:
+下記の例では`classMap`ディレクティブは`class`属性の値の位置にのみに配置を制限しています。
 
 ```ts
 class ClassMap extends Directive {
@@ -280,9 +280,12 @@ class ClassMap extends Directive {
 
 ## 非同期ディレクティブ
 
-The previous example directives are synchronous: they return values synchronously from their `render()`/`update()` lifecycle callbacks, so their results are written to the DOM during the component's `update()` callback.
+これまでの例ではディレクティブは同期的に動作しています。
+それらのディレクティブはそれらの`render()`/`update()`コールバックから同期的に値を返します。
+その値はコンポーネントの`update()`メソッドでDOMに反映されます。
 
-Sometimes, you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.
+Sometimes,
+you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.
 
 To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a `setValue()` API. `setValue()` allows a directive to "push" a new value into its template expression, outside of the template's normal `update`/`render` cycle.
 
