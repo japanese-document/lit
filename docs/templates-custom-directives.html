@@ -275,11 +275,10 @@ class CalculateDiff extends Directive {
 }
 </code></pre>
 <h2 id="非同期ディレクティブ"><a class="anchor" href="#非同期ディレクティブ">#</a>非同期ディレクティブ</h2>
-<p>これまでの例ではディレクティブは同期的に動作しています。
-それらのディレクティブはそれらの<code>render()</code>/<code>update()</code>コールバックから同期的に値を返します。
+<p>これまでの例ではディレクティブは同期的に動作します。
+それらのディレクティブはそれらの<code>render()</code>/<code>update()</code>メソッドから同期的に値を返します。
 その値はコンポーネントの<code>update()</code>メソッドでDOMに反映されます。</p>
-<p>Sometimes,
-you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.</p>
+<p>ディレクティブのDOMの更新がネットワークイベントのような非同期のイベントに依存している場合、DOMを非同期で更新したいでしょう。</p>
 <p>To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a <code>setValue()</code> API. <code>setValue()</code> allows a directive to "push" a new value into its template expression, outside of the template's normal <code>update</code>/<code>render</code> cycle.</p>
 <p>Here's an example of a simple async directive that renders a Promise value:</p>
 <pre><code class="language-ts">class ResolvePromise extends AsyncDirective {

@@ -280,12 +280,11 @@ class ClassMap extends Directive {
 
 ## 非同期ディレクティブ
 
-これまでの例ではディレクティブは同期的に動作しています。
-それらのディレクティブはそれらの`render()`/`update()`コールバックから同期的に値を返します。
+これまでの例ではディレクティブは同期的に動作します。
+それらのディレクティブはそれらの`render()`/`update()`メソッドから同期的に値を返します。
 その値はコンポーネントの`update()`メソッドでDOMに反映されます。
 
-Sometimes,
-you want a directive to be able to update the DOM asynchronously—for example, if it depends on an asynchronous event like a network request.
+ディレクティブのDOMの更新がネットワークイベントのような非同期のイベントに依存している場合、DOMを非同期で更新したいでしょう。
 
 To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a `setValue()` API. `setValue()` allows a directive to "push" a new value into its template expression, outside of the template's normal `update`/`render` cycle.
 
