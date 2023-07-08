@@ -286,7 +286,11 @@ class ClassMap extends Directive {
 
 ディレクティブのDOMの更新がネットワークイベントのような非同期のイベントに依存している場合、DOMを非同期で更新したいでしょう。
 
-To update a directive's result asynchronously, a directive needs to extend the {% api "AsyncDirective" %} base class, which provides a `setValue()` API. `setValue()` allows a directive to "push" a new value into its template expression, outside of the template's normal `update`/`render` cycle.
+ディレクティブを非同期で更新するには、
+[AsyncDirective](https://lit.dev/docs/api/custom-directives/#AsyncDirective)を継承します。
+`AsyncDirective`は`setValue()` APIを提供します。
+`setValue()` allows a directive to "push" a new value into its template expression,
+outside of the template's normal `update`/`render` cycle.
 
 Here's an example of a simple async directive that renders a Promise value:
 
