@@ -291,6 +291,7 @@ class ClassMap extends Directive {
 `AsyncDirective`は`setValue()` APIを提供します。
 `setValue()` allows a directive to "push" a new value into its template expression,
 outside of the template's normal `update`/`render` cycle.
+`setValue()`を使うと通常のテンプレートの`update`/`render`サイクル外でディレクティブがテンプレートエクスプレッションで新しい値に置き換えることができます。
 
 Here's an example of a simple async directive that renders a Promise value:
 
