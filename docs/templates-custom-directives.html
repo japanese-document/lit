@@ -282,10 +282,8 @@ class CalculateDiff extends Directive {
 <p>ディレクティブを非同期で更新するには、
 <a class="Link" href="https://lit.dev/docs/api/custom-directives/#AsyncDirective">AsyncDirective</a>を継承します。
 <code>AsyncDirective</code>は<code>setValue()</code> APIを提供します。
-<code>setValue()</code> allows a directive to "push" a new value into its template expression,
-outside of the template's normal <code>update</code>/<code>render</code> cycle.
 <code>setValue()</code>を使うと通常のテンプレートの<code>update</code>/<code>render</code>サイクル外でディレクティブがテンプレートエクスプレッションで新しい値に置き換えることができます。</p>
-<p>Here's an example of a simple async directive that renders a Promise value:</p>
+<p>下記はPromiseの結果をレンダリングする簡単な非同期ディレクティブの例です。</p>
 <pre><code class="language-ts">class ResolvePromise extends AsyncDirective {
   render(promise: Promise&lt;unknown&gt;) {
     Promise.resolve(promise).then((resolvedValue) =&gt; {
