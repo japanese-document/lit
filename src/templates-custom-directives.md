@@ -297,10 +297,10 @@ class ClassMap extends Directive {
 class ResolvePromise extends AsyncDirective {
   render(promise: Promise<unknown>) {
     Promise.resolve(promise).then((resolvedValue) => {
-      // Rendered asynchronously:
+      // 非同期でレンダリングされます。
       this.setValue(resolvedValue);
     });
-    // Rendered synchronously:
+    // 同期でレンダリングされます。
     return `Waiting for promise to resolve`;
   }
 }

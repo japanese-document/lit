@@ -287,10 +287,10 @@ class CalculateDiff extends Directive {
 <pre><code class="language-ts">class ResolvePromise extends AsyncDirective {
   render(promise: Promise&lt;unknown&gt;) {
     Promise.resolve(promise).then((resolvedValue) =&gt; {
-      // Rendered asynchronously:
+      // 非同期でレンダリングされます。
       this.setValue(resolvedValue);
     });
-    // Rendered synchronously:
+    // 同期でレンダリングされます。
     return `Waiting for promise to resolve`;
   }
 }
