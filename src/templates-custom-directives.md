@@ -294,6 +294,9 @@ class ClassMap extends Directive {
 下記はPromiseの結果をレンダリングする簡単な非同期ディレクティブの例です。
 
 ```ts
+import { directive } from 'lit/directive.js';
+import { AsyncDirective } from 'lit/async-directive.js';
+
 class ResolvePromise extends AsyncDirective {
   render(promise: Promise<unknown>) {
     Promise.resolve(promise).then((resolvedValue) => {
@@ -307,9 +310,12 @@ class ResolvePromise extends AsyncDirective {
 export const resolvePromise = directive(ResolvePromise);
 ```
 
-Here, the rendered template shows "Waiting for promise to resolve," followed by the resolved value of the promise, whenever it resolves.
+上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます。その後、Promiseが解決されるとPromiseが解決した値が表示されます。
 
-Async directives often need to subscribe to external resources. To prevent memory leaks async directives should unsubscribe or dispose of resources when the directive instance is no longer in use.  For this purpose, `AsyncDirective` provides the following extra lifecycle callbacks and API:
+非同期ディレクティブは外部リソースをsubscribeする用途によく使われます。
+メモリーリークを防ぐために、
+非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
+For this purpose, `AsyncDirective` provides the following extra lifecycle callbacks and API:
 
 * `disconnected()`: Called when a directive is no longer in use.  Directive instances are disconnected in three cases:
   - When the DOM tree the directive is contained in is removed from the DOM

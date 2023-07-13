@@ -284,7 +284,10 @@ class CalculateDiff extends Directive {
 <code>AsyncDirective</code>は<code>setValue()</code> APIを提供します。
 <code>setValue()</code>を使うと通常のテンプレートの<code>update</code>/<code>render</code>サイクル外でディレクティブがテンプレートエクスプレッションで新しい値に置き換えることができます。</p>
 <p>下記はPromiseの結果をレンダリングする簡単な非同期ディレクティブの例です。</p>
-<pre><code class="language-ts">class ResolvePromise extends AsyncDirective {
+<pre><code class="language-ts">import { directive } from 'lit/directive.js';
+import { AsyncDirective } from 'lit/async-directive.js';
+
+class ResolvePromise extends AsyncDirective {
   render(promise: Promise&lt;unknown&gt;) {
     Promise.resolve(promise).then((resolvedValue) =&gt; {
       // 非同期でレンダリングされます。
@@ -296,8 +299,11 @@ class CalculateDiff extends Directive {
 }
 export const resolvePromise = directive(ResolvePromise);
 </code></pre>
-<p>Here, the rendered template shows "Waiting for promise to resolve," followed by the resolved value of the promise, whenever it resolves.</p>
-<p>Async directives often need to subscribe to external resources. To prevent memory leaks async directives should unsubscribe or dispose of resources when the directive instance is no longer in use.  For this purpose, <code>AsyncDirective</code> provides the following extra lifecycle callbacks and API:</p>
+<p>上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます。その後、Promiseが解決されるとPromiseが解決した値が表示されます。</p>
+<p>非同期ディレクティブは外部リソースをsubscribeする用途によく使われます。
+メモリーリークを防ぐために、
+非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
+For this purpose, <code>AsyncDirective</code> provides the following extra lifecycle callbacks and API:</p>
 <ul>
 <li><p><code>disconnected()</code>: Called when a directive is no longer in use.  Directive instances are disconnected in three cases:</p>
 <ul>
