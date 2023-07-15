@@ -315,7 +315,7 @@ export const resolvePromise = directive(ResolvePromise);
 非同期ディレクティブは外部リソースをsubscribeする用途によく使われます。
 メモリーリークを防ぐために、
 非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
-For this purpose, `AsyncDirective` provides the following extra lifecycle callbacks and API:
+この用途のために、`AsyncDirective`は下記のライフサイクルコールバックとAPIを用意しています。
 
 * `disconnected()`: Called when a directive is no longer in use.  Directive instances are disconnected in three cases:
   - When the DOM tree the directive is contained in is removed from the DOM
