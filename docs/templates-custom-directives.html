@@ -305,11 +305,11 @@ export const resolvePromise = directive(ResolvePromise);
 非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
 この用途のために、<code>AsyncDirective</code>は下記のライフサイクルコールバックとAPIを用意しています。</p>
 <ul>
-<li><p><code>disconnected()</code>: ディレクティブが使われなくなった時に実行されます。ディレクティブインスタンスは下記の3つのケースで<code>disconnected()</code>を実行します。</p>
+<li><p><code>disconnected()</code>: ディレクティブが使われなくなった時に実行されます。ディレクティブインスタンスは下記の3つの場合に<code>disconnected()</code>を実行します。</p>
 <ul>
 <li>ディレクティブを内包しているDOMツリーがDOMから削除された時</li>
 <li>ディレクティブのホストコンポーネントがdisconnectされた時</li>
-<li>When the expression that produced the directive no longer resolves to the same directive.</li>
+<li>ディレクティブを生成したエクスプレッションが引き続き同じディレクティブを適用しないかった時</li>
 </ul>
 <p>After a directive receives a <code>disconnected</code> callback, it should release all resources it may have subscribed to during <code>update</code> or <code>render</code> to prevent memory leaks.</p>
 </li>
