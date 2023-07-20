@@ -311,7 +311,7 @@ export const resolvePromise = directive(ResolvePromise);
 <li>ディレクティブのホストコンポーネントがdisconnectされた時</li>
 <li>ディレクティブを生成したエクスプレッションが引き続き同じディレクティブを適用しないかった時</li>
 </ul>
-<p>After a directive receives a <code>disconnected</code> callback, it should release all resources it may have subscribed to during <code>update</code> or <code>render</code> to prevent memory leaks.</p>
+<p>メモリーリークを防ぐために、ディレクティブが<code>disconnected()</code>コールバックを実行した後、<code>update()</code>や<code>render()</code>メソッドでsubscribeしたすべてのリソースを解放されている必要があります。</p>
 </li>
 <li><p><code>reconnected()</code>: Called when a previously disconnected directive is being returned to use. Because DOM subtrees can be temporarily disconnected and then reconnected again later, a disconnected directive may need to react to being reconnected. Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. The <code>reconnected()</code> callback should always be implemented alongside <code>disconnected()</code>, in order to restore a disconnected directive back to its working state.</p>
 </li>
