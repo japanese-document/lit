@@ -282,7 +282,7 @@ class CalculateDiff extends Directive {
 <p>ディレクティブを非同期で更新するには、
 <a class="Link" href="https://lit.dev/docs/api/custom-directives/#AsyncDirective">AsyncDirective</a>を継承します。
 <code>AsyncDirective</code>は<code>setValue()</code> APIを提供します。
-<code>setValue()</code>を使うと通常のテンプレートの<code>update</code>/<code>render</code>サイクル外でディレクティブがテンプレートエクスプレッションで新しい値に置き換えることができます。</p>
+<code>setValue()</code>を使うと、通常のテンプレートの<code>update</code>/<code>render</code>サイクル外で、テンプレートエクスプレッション内にあるディレクティブを新しい値に置き換えることができます。</p>
 <p>下記はPromiseの結果をレンダリングする簡単な非同期ディレクティブの例です。</p>
 <pre><code class="language-ts">import { directive } from 'lit/directive.js';
 import { AsyncDirective } from 'lit/async-directive.js';
@@ -293,16 +293,21 @@ class ResolvePromise extends AsyncDirective {
       // 非同期でレンダリングされます。
       this.setValue(resolvedValue);
     });
+    // 非同期で3秒後にFooが表示されます。
+    setTimeout(() =&gt; this.setValue('Foo'), 3000)
     // 同期でレンダリングされます。
     return `Waiting for promise to resolve`;
   }
 }
 export const resolvePromise = directive(ResolvePromise);
 </code></pre>
-<p>上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます。その後、Promiseが解決されるとPromiseが解決した値が表示されます。</p>
+<p>上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます
+Promiseが解決されると解決された値が<code>setValue()</code>に渡されます。
+そして、その値が表示されます。
+<code>setValue()</code>が実行される毎、それに渡された値が表示されます。</p>
 <p>非同期ディレクティブは外部リソースをsubscribeする用途によく使われます。
 メモリーリークを防ぐために、
-非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
+非同期ディレクティブのインスタンスが不要になった時にリソースをunsubscribeするか破棄する必要があります。
 この用途のために、<code>AsyncDirective</code>は下記のライフサイクルコールバックとAPIを用意しています。</p>
 <ul>
 <li><p><code>disconnected()</code>: ディレクティブが使われなくなった時に実行されます。ディレクティブインスタンスは下記の3つの場合に<code>disconnected()</code>を実行します。</p>
