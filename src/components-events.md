@@ -233,6 +233,10 @@ class MyElement extends LitElement {
 }
 ```
 
+### Removing event listeners
+
+Passing `null`, `undefined` or `nothing` to an `@` expression will cause any existing listener to be removed.
+
 ## イベントをdispatchする
 
 すべてのDOM Nodeは`dispatchEvent`メソッドでイベントをdispatchすることができます。

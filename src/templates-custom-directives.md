@@ -289,7 +289,7 @@ class ClassMap extends Directive {
 ディレクティブを非同期で更新するには、
 [AsyncDirective](https://lit.dev/docs/api/custom-directives/#AsyncDirective)を継承します。
 `AsyncDirective`は`setValue()` APIを提供します。
-`setValue()`を使うと通常のテンプレートの`update`/`render`サイクル外でディレクティブがテンプレートエクスプレッションで新しい値に置き換えることができます。
+`setValue()`を使うと、通常のテンプレートの`update`/`render`サイクル外で、テンプレートエクスプレッション内にあるディレクティブを新しい値に置き換えることができます。
 
 下記はPromiseの結果をレンダリングする簡単な非同期ディレクティブの例です。
 
@@ -303,6 +303,8 @@ class ResolvePromise extends AsyncDirective {
       // 非同期でレンダリングされます。
       this.setValue(resolvedValue);
     });
+    // 非同期で3秒後にFooが表示されます。
+    setTimeout(() => this.setValue('Foo'), 3000)
     // 同期でレンダリングされます。
     return `Waiting for promise to resolve`;
   }
@@ -310,11 +312,14 @@ class ResolvePromise extends AsyncDirective {
 export const resolvePromise = directive(ResolvePromise);
 ```
 
-上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます。その後、Promiseが解決されるとPromiseが解決した値が表示されます。
+上記の例では、レンダリングされたテンプレートにWaiting for promise to resolveが表示されます
+Promiseが解決されると解決された値が`setValue()`に渡されます。
+そして、その値が表示されます。
+`setValue()`が実行される毎、それに渡された値が表示されます。
 
 非同期ディレクティブは外部リソースをsubscribeする用途によく使われます。
 メモリーリークを防ぐために、
-非同期ディレクティブのインスタンスが不要になった時にunsubscribeするかリソースを破棄する必要があります。
+非同期ディレクティブのインスタンスが不要になった時にリソースをunsubscribeするか破棄する必要があります。
 この用途のために、`AsyncDirective`は下記のライフサイクルコールバックとAPIを用意しています。
 
 * `disconnected()`: ディレクティブが使われなくなった時に実行されます。ディレクティブインスタンスは下記の3つの場合に`disconnected()`を実行します。
