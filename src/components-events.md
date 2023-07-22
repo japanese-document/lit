@@ -233,9 +233,9 @@ class MyElement extends LitElement {
 }
 ```
 
-### Removing event listeners
+### イベントリスナを削除する
 
-Passing `null`, `undefined` or `nothing` to an `@` expression will cause any existing listener to be removed.
+`null`、`undefined`、`nothing`を[Event listener expressions](https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions)に渡すと、既存のイベントリスナは削除されます。
 
 ## イベントをdispatchする
 
