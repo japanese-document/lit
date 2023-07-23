@@ -318,7 +318,13 @@ Promiseが解決されると解決された値が<code>setValue()</code>に渡�
 </ul>
 <p>メモリーリークを防ぐために、ディレクティブが<code>disconnected()</code>コールバックを実行した後、<code>update()</code>や<code>render()</code>メソッドでsubscribeしたすべてのリソースを解放されている必要があります。</p>
 </li>
-<li><p><code>reconnected()</code>: Called when a previously disconnected directive is being returned to use. Because DOM subtrees can be temporarily disconnected and then reconnected again later, a disconnected directive may need to react to being reconnected. Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. The <code>reconnected()</code> callback should always be implemented alongside <code>disconnected()</code>, in order to restore a disconnected directive back to its working state.</p>
+<li><p><code>reconnected()</code>:
+以前、disconnectされたディレクティブが再び使われた時に実行されます。
+Because DOM subtrees can be temporarily disconnected and then reconnected again later,
+a disconnected directive may need to react to being reconnected.
+Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. 
+The <code>reconnected()</code> callback should always be implemented alongside <code>disconnected()</code>,
+in order to restore a disconnected directive back to its working state.</p>
 </li>
 <li><p><code>isConnected</code>: Reflects the current connection state of the directive.</p>
 </li>
