@@ -323,16 +323,16 @@ Promiseが解決されると解決された値が`setValue()`に渡されます�
 この用途のために、`AsyncDirective`は下記のライフサイクルコールバックとAPIを用意しています。
 
 * `disconnected()`: ディレクティブが使われなくなった時に実行されます。ディレクティブインスタンスは下記の3つの場合に`disconnected()`を実行します。
-  - ディレクティブを内包しているDOMツリーがDOMから削除された時
+  - ディレクティブを内包しているDOMツリーが上位のDOMツリーからdisconnectされた時
   - ディレクティブのホストコンポーネントがdisconnectされた時
   - ディレクティブを生成したエクスプレッションが引き続き同じディレクティブを適用しないかった時
 
   メモリーリークを防ぐために、ディレクティブが`disconnected()`コールバックを実行した後、`update()`や`render()`メソッドでsubscribeしたすべてのリソースを解放されている必要があります。
 
 * `reconnected()`:
-以前、disconnectされたディレクティブが再び使われた時に実行されます。
-Because DOM subtrees can be temporarily disconnected and then reconnected again later,
-a disconnected directive may need to react to being reconnected.
+以前にdisconnectされたディレクティブが再び使われた時に実行されます。
+DOMのサブツリーは一時的に上位のDOMツリーからdisconnectされた後にreconnectすることがあります。
+だから、disconnectされたディレクティブはreconnectされることに備える必要がある場合があります。
 Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. 
 The `reconnected()` callback should always be implemented alongside `disconnected()`,
 in order to restore a disconnected directive back to its working state.
