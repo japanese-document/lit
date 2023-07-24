@@ -333,7 +333,7 @@ Promiseが解決されると解決された値が`setValue()`に渡されます�
 以前にdisconnectされたディレクティブが再び使われた時に実行されます。
 DOMのサブツリーは一時的に上位のDOMツリーからdisconnectされた後にreconnectすることがあります。
 だから、disconnectされたディレクティブはreconnectされることに備える必要がある場合があります。
-Examples of this include when DOM is removed and cached for later use, or when a host element is moved causing a disconnection and reconnection. 
+これの具体的な例としては削除されたDOMが後で使うとためにキャッシュされる場合や、ホスト要素が移動することでdisconnectとreconnectが起きる場合があります。
 The `reconnected()` callback should always be implemented alongside `disconnected()`,
 in order to restore a disconnected directive back to its working state.
 
