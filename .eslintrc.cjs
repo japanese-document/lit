@@ -18,7 +18,8 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
-    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/stylistic',
   ],
   parserOptions: {
     sourceType: 'module'
