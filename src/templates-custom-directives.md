@@ -334,15 +334,12 @@ Promiseが解決されると解決された値が`setValue()`に渡されます�
 DOMのサブツリーは一時的に上位のDOMツリーからdisconnectされた後にreconnectすることがあります。
 だから、disconnectされたディレクティブはreconnectされることに備える必要がある場合があります。
 これの具体的な例としては削除されたDOMが後で使うとためにキャッシュされる場合や、ホスト要素が移動することでdisconnectとreconnectが起きる場合があります。
-disconnectされたディレクティブが稼働状態になった時に対応するために`disconnected()`と`reconnected()`は常に両方とも実装されているべきです。
+disconnectされたディレクティブが稼働状態になった時に対応するために`disconnected()`と`reconnected()`は常に両方とも実装されるべきです。
 
-* `isConnected`: Reflects the current connection state of the directive.
+* `isConnected`: ディレクティブのconnectの状態を表します。
 
-<div class="alert alert-info">
-
-Note that it is possible for an `AsyncDirective` to continue receiving updates while it is disconnected if its containing tree is re-rendered. Because of this, `update` and/or `render` should always check the `this.isConnected` flag before subscribing to any long-held resources to prevent memory leaks.
-
-</div>
+Note that it is possible for an `AsyncDirective` to continue receiving updates while it is disconnected if its containing tree is re-rendered.
+Because of this, `update` and/or `render` should always check the `this.isConnected` flag before subscribing to any long-held resources to prevent memory leaks.
 
 Below is an example of a directive that subscribes to an `Observable` and handles disconnection and reconnection appropriately:
 

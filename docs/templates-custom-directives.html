@@ -323,16 +323,13 @@ Promiseが解決されると解決された値が<code>setValue()</code>に渡�
 DOMのサブツリーは一時的に上位のDOMツリーからdisconnectされた後にreconnectすることがあります。
 だから、disconnectされたディレクティブはreconnectされることに備える必要がある場合があります。
 これの具体的な例としては削除されたDOMが後で使うとためにキャッシュされる場合や、ホスト要素が移動することでdisconnectとreconnectが起きる場合があります。
-disconnectされたディレクティブが稼働状態になった時に対応するために<code>disconnected()</code>と<code>reconnected()</code>は常に両方とも実装されているべきです。</p>
+disconnectされたディレクティブが稼働状態になった時に対応するために<code>disconnected()</code>と<code>reconnected()</code>は常に両方とも実装されるべきです。</p>
 </li>
-<li><p><code>isConnected</code>: Reflects the current connection state of the directive.</p>
+<li><p><code>isConnected</code>: ディレクティブのconnectの状態を表します。</p>
 </li>
 </ul>
-<div class="alert alert-info">
-
-<p>Note that it is possible for an <code>AsyncDirective</code> to continue receiving updates while it is disconnected if its containing tree is re-rendered. Because of this, <code>update</code> and/or <code>render</code> should always check the <code>this.isConnected</code> flag before subscribing to any long-held resources to prevent memory leaks.</p>
-</div>
-
+<p>Note that it is possible for an <code>AsyncDirective</code> to continue receiving updates while it is disconnected if its containing tree is re-rendered.
+Because of this, <code>update</code> and/or <code>render</code> should always check the <code>this.isConnected</code> flag before subscribing to any long-held resources to prevent memory leaks.</p>
 <p>Below is an example of a directive that subscribes to an <code>Observable</code> and handles disconnection and reconnection appropriately:</p>
 <pre><code class="language-ts">class ObserveDirective extends AsyncDirective {
   observable: Observable&lt;unknown&gt; | undefined;
