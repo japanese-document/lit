@@ -329,8 +329,8 @@ disconnectされたディレクティブが稼働状態になった時に対応�
 </li>
 </ul>
 <p>Note that it is possible for an <code>AsyncDirective</code> to continue receiving updates while it is disconnected if its containing tree is re-rendered.
-Because of this, <code>update</code> and/or <code>render</code> should always check the <code>this.isConnected</code> flag before subscribing to any long-held resources to prevent memory leaks.</p>
-<p>Below is an example of a directive that subscribes to an <code>Observable</code> and handles disconnection and reconnection appropriately:</p>
+メモリーリークを防ぐために、<code>update</code>や<code>render</code>が長期間保持される資源をsubscribeする前に常に<code>this.isConnected</code>を確認する必要があります。</p>
+<p>下記は<code>Observable</code>をsubscribeして適切にdisconnectionとreconnectionを処理する例です。</p>
 <pre><code class="language-ts">class ObserveDirective extends AsyncDirective {
   observable: Observable&lt;unknown&gt; | undefined;
   unsubscribe: (() =&gt; void) | undefined;
