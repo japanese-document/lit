@@ -334,8 +334,7 @@ disconnectされたディレクティブが稼働状態になった時に対応�
 <pre><code class="language-ts">class ObserveDirective extends AsyncDirective {
   observable: Observable&lt;unknown&gt; | undefined;
   unsubscribe: (() =&gt; void) | undefined;
-  // When the observable changes, unsubscribe to the old one and
-  // subscribe to the new one
+  // observableが変わった時、古いobservableをunsubscribeして、新しいobservableをsbuscribeします。
   render(observable: Observable&lt;unknown&gt;) {
     if (this.observable !== observable) {
       this.unsubscribe?.();
