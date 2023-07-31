@@ -347,8 +347,7 @@ Note that it is possible for an `AsyncDirective` to continue receiving updates w
 class ObserveDirective extends AsyncDirective {
   observable: Observable<unknown> | undefined;
   unsubscribe: (() => void) | undefined;
-  // When the observable changes, unsubscribe to the old one and
-  // subscribe to the new one
+  // observableが変わった時、古いobservableをunsubscribeして、新しいobservableをsbuscribeします。
   render(observable: Observable<unknown>) {
     if (this.observable !== observable) {
       this.unsubscribe?.();
