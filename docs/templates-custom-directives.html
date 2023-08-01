@@ -345,8 +345,7 @@ disconnectされたディレクティブが稼働状態になった時に対応�
     }
     return noChange;
   }
-  // Subscribes to the observable, calling the directive's asynchronous
-  // setValue API each time the value changes
+  // observableをsubscribeします。値が変わるたび、ディレクティブのsetValueをじっこうします。
   subscribe(observable: Observable&lt;unknown&gt;) {
     this.unsubscribe = observable.subscribe((v: unknown) =&gt; {
       this.setValue(v);

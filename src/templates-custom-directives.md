@@ -358,8 +358,7 @@ class ObserveDirective extends AsyncDirective {
     }
     return noChange;
   }
-  // Subscribes to the observable, calling the directive's asynchronous
-  // setValue API each time the value changes
+  // observableをsubscribeします。値が変わるたび、ディレクティブのsetValueをじっこうします。
   subscribe(observable: Observable<unknown>) {
     this.unsubscribe = observable.subscribe((v: unknown) => {
       this.setValue(v);
