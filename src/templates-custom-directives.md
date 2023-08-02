@@ -339,7 +339,7 @@ disconnectされたディレクティブが稼働状態になった時に対応�
 * `isConnected`: ディレクティブのconnectの状態を表します。
 
 Note that it is possible for an `AsyncDirective` to continue receiving updates while it is disconnected if its containing tree is re-rendered.
-メモリーリークを防ぐために、`update`や`render`が長期間保持される資源をsubscribeする前に常に`this.isConnected`を確認する必要があります。
+メモリーリークを防ぐために、`update`や`render`で長期間保持される資源をsubscribeする前に常に`this.isConnected`を確認する必要があります。
 
 下記は`Observable`をsubscribeして適切にdisconnectionとreconnectionを処理する例です。
 
@@ -358,14 +358,13 @@ class ObserveDirective extends AsyncDirective {
     }
     return noChange;
   }
-  // observableをsubscribeします。値が変わるたび、ディレクティブのsetValueをじっこうします。
+  // observableをsubscribeします。値が変わるたび、ディレクティブのsetValue()を実行します。
   subscribe(observable: Observable<unknown>) {
     this.unsubscribe = observable.subscribe((v: unknown) => {
       this.setValue(v);
     });
   }
-  // When the directive is disconnected from the DOM, unsubscribe to ensure
-  // the directive instance can be garbage collected
+  // ディレクティブがDOMからdisconnectされる時、確実にディレクティブインスタンスがガベージコレクトされるようにunsubscribeします。
   disconnected() {
     this.unsubscribe!();
   }
