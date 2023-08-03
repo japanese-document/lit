@@ -368,8 +368,7 @@ class ObserveDirective extends AsyncDirective {
   disconnected() {
     this.unsubscribe!();
   }
-  // If the subtree the directive is in was disconnected and subsequently
-  // re-connected, re-subscribe to make the directive operable again
+  // ディレクティブがdisconnectされた後に再びconnectされた際にディレクティブを再度操作可能にするために再subscribeします。
   reconnected() {
     this.subscribe(this.observable!);
   }
