@@ -50,7 +50,11 @@ const renderer = {
   }
 }
 
-marked.use({ renderer })
+marked.use({
+  mangle: false,
+  headerIds: false,
+  renderer
+})
 
 interface Meta {
   header: {
