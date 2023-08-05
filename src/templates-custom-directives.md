@@ -368,7 +368,7 @@ class ObserveDirective extends AsyncDirective {
   disconnected() {
     this.unsubscribe!();
   }
-  // ディレクティブがdisconnectされた後に再びconnectされた際にディレクティブを再度操作可能にするために再subscribeします。
+  // ディレクティブを内包するサブツリーがdisconnectされた後に再びconnectされた際にディレクティブを再度操作可能にするために再subscribeします。
   reconnected() {
     this.subscribe(this.observable!);
   }
