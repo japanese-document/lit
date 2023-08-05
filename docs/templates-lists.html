@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/templates-lists.html" />
+    <meta property="og:title" content="リスト" />
+    <meta property="og:description" content="You can use standard JavaScript constructs to create repeating templates.Lit also provides a repeat directive to build certain kinds of dynamic lists more efficiently.#Rendering arraysWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="You can use standard JavaScript constructs to create repeating templates.Lit also provides a repeat directive to build certain kinds of dynamic lists more efficiently.#Rendering arraysWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>リスト</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <nav class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-lists.html">リスト</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </nav></div>
+    <main class="main markdown-body">
+      <h1 id="リスト"><a class="anchor" href="#リスト">#</a>リスト</h1>
+<p>You can use standard JavaScript constructs to create repeating templates.</p>
+<p>Lit also provides a <code>repeat</code> directive to build certain kinds of dynamic lists more efficiently.</p>
+<h2 id="Rendering_arrays"><a class="anchor" href="#Rendering_arrays">#</a>Rendering arrays</h2>
+<p>When an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:</p>
+<p>{% playground-example "v2-docs/templates/lists-arrays/" "my-element.ts" %}</p>
+<p>In most cases, you'll want to transform the array items into a more useful form.</p>
+<h2 id="Repeating_templates_with_map"><a class="anchor" href="#Repeating_templates_with_map">#</a>Repeating templates with map</h2>
+<p>To render lists, you can use <code>map</code> to transform a list of data into a list of templates:</p>
+<p>{% playground-example "v2-docs/templates/lists-map/" "my-element.ts" %}</p>
+<p>Note that this expression returns an array of <code>TemplateResult</code> objects. Lit will render an array or iterable of sub-templates and other values.</p>
+<h2 id="Repeating_templates_with_looping_statements"><a class="anchor" href="#Repeating_templates_with_looping_statements">#</a>Repeating templates with looping statements</h2>
+<p>You can also build an array of templates and pass it into a template expression.</p>
+<pre><code class="language-ts">render() {
+  const itemTemplates = [];
+  for (const i of this.items) {
+    itemTemplates.push(html`&lt;li&gt;${i}&lt;/li&gt;`);
+  }
+
+  return html`
+    &lt;ul&gt;
+      ${itemTemplates}
+    &lt;/ul&gt;
+  `;
+}
+</code></pre>
+<h2 id="The_repeat_directive"><a class="anchor" href="#The_repeat_directive">#</a>The repeat directive</h2>
+<p>In most cases, using loops or <code>map</code> is an efficient way to build repeating templates. However, if you want to reorder a large list, or mutate it by adding and removing individual entries, this approach can involve updating a large number of DOM nodes.</p>
+<p>The <code>repeat</code> directive can help here.</p>
+<p>The repeat directive performs efficient updates of lists based on user-supplied keys:</p>
+<pre><code class="language-ts">repeat(items, keyFunction, itemTemplate)
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>items</code> is an array or iterable.</li>
+<li><code>keyFunction</code> is a function that takes a single item as an argument and returns a guaranteed unique key for that item.</li>
+<li><code>itemTemplate</code> is a template function that takes the item and its current index as arguments, and returns a <code>TemplateResult</code>.</li>
+</ul>
+<p>For example:</p>
+<p>{% playground-example "v2-docs/templates/lists-repeat/" "my-element.ts" %}</p>
+<p>If you re-sort the <code>employees</code> array, the <code>repeat</code> directive reorders the existing DOM nodes.</p>
+<p>To compare this to Lit's default handling for lists, consider reversing a large list of names:</p>
+<ul>
+<li>For a list created using <code>map</code>, Lit maintains the DOM nodes for the list items, but reassigns the values.</li>
+<li>For a list created using <code>repeat</code>, the <code>repeat</code> directive reorders the <em>existing</em> DOM nodes, so the nodes representing the first list item move to the last position.</li>
+</ul>
+<h3 id="When_to_use_map_or_repeat"><a class="anchor" href="#When_to_use_map_or_repeat">#</a>When to use map or repeat</h3>
+<p>Which repeat is more efficient depends on your use case:</p>
+<ul>
+<li><p>If updating the DOM nodes is more expensive than moving them, use the <code>repeat</code> directive.</p>
+</li>
+<li><p>If the DOM nodes have state that <em>isn't</em> controlled by a template expression, use the <code>repeat</code> directive.</p>
+<p>For example, consider this list:</p>
+<pre><code class="language-js">html`${this.users.map((user) =&gt;
+  html`
+    &lt;div&gt;&lt;input type="checkbox"&gt; ${user.name}&lt;/div&gt;
+  `)
+}`
+</code></pre>
+<p>The checkbox has a checked or unchecked state, but it isn't controlled by a template expression.</p>
+<p>If  you reorder the list after the user has checked one or more checkboxes, Lit would update the names associated with the checkboxes, but not the state of the checkboxes.</p>
+</li>
+</ul>
+<p> If neither of these situations apply, use <code>map</code> or looping statements.</p>
+<hr>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#リスト">リスト</a></p>
+<p class="h2"><a href="#Rendering_arrays">Rendering arrays</a></p>
+<p class="h2"><a href="#Repeating_templates_with_map">Repeating templates with map</a></p>
+<p class="h2"><a href="#Repeating_templates_with_looping_statements">Repeating templates with looping statements</a></p>
+<p class="h2"><a href="#The_repeat_directive">The repeat directive</a></p>
+<p class="h3"><a href="#When_to_use_map_or_repeat">When to use map or repeat</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></nav></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
