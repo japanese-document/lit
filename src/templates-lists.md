@@ -2,9 +2,9 @@
 ---
 # リスト
 
-You can use standard JavaScript constructs to create repeating templates.
+標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することは可能です。
 
-Lit also provides a `repeat` directive to build certain kinds of dynamic lists more efficiently.
+Litは特定の条件下にあるリストからテンプレートをより効率的に生成するための`repeat`ディレクティブを用意しています。
 
 ## Rendering arrays
 
