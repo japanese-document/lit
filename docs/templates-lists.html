@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-lists.html" />
     <meta property="og:title" content="リスト" />
-    <meta property="og:description" content="標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することは可能です。Litは特定の条件下にあるリストからテンプレートをより効率的に生成するためのrepeatディレクティブを用意しています。#Rendering arraysWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:{% playground-example &quot;v2-docs/templates/lists-arrays/&qu" />
+    <meta property="og:description" content="Litでは標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することができます。また、Litは特定の条件を満たすリストからテンプレートをより効率的に生成するためのrepeatディレクティブを用意しています。#配列をレンダリングするWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:@property() colors = ['red', 'green', 'blue'];render() {  r" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することは可能です。Litは特定の条件下にあるリストからテンプレートをより効率的に生成するためのrepeatディレクティブを用意しています。#Rendering arraysWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:{% playground-example &quot;v2-docs/templates/lists-arrays/&qu" />
+    <meta name="description" content="Litでは標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することができます。また、Litは特定の条件を満たすリストからテンプレートをより効率的に生成するためのrepeatディレクティブを用意しています。#配列をレンダリングするWhen an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:@property() colors = ['red', 'green', 'blue'];render() {  r" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>リスト</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -54,15 +54,35 @@
     </nav></div>
     <main class="main markdown-body">
       <h1 id="リスト"><a class="anchor" href="#リスト">#</a>リスト</h1>
-<p>標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することは可能です。</p>
-<p>Litは特定の条件下にあるリストからテンプレートをより効率的に生成するための<code>repeat</code>ディレクティブを用意しています。</p>
-<h2 id="Rendering_arrays"><a class="anchor" href="#Rendering_arrays">#</a>Rendering arrays</h2>
+<p>Litでは標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することができます。
+また、Litは特定の条件を満たすリストからテンプレートをより効率的に生成するための<code>repeat</code>ディレクティブを用意しています。</p>
+<h2 id="配列をレンダリングする"><a class="anchor" href="#配列をレンダリングする">#</a>配列をレンダリングする</h2>
 <p>When an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:</p>
-<p>{% playground-example "v2-docs/templates/lists-arrays/" "my-element.ts" %}</p>
+<pre><code class="language-ts">@property() colors = ['red', 'green', 'blue'];
+
+render() {
+  return html`&lt;p&gt;Colors: ${this.colors}&lt;/p&gt;`;
+}
+// Colors: redgreenblue
+</code></pre>
 <p>In most cases, you'll want to transform the array items into a more useful form.</p>
 <h2 id="Repeating_templates_with_map"><a class="anchor" href="#Repeating_templates_with_map">#</a>Repeating templates with map</h2>
 <p>To render lists, you can use <code>map</code> to transform a list of data into a list of templates:</p>
-<p>{% playground-example "v2-docs/templates/lists-map/" "my-element.ts" %}</p>
+<pre><code class="language-ts">@property() colors = ['red', 'green', 'blue'];
+
+render() {
+  return html`
+    &lt;ul&gt;
+      ${this.colors.map((color) =&gt;
+        html`&lt;li style="color: ${color}"&gt;${color}&lt;/li&gt;`
+      )}
+    &lt;/ul&gt;
+  `;
+}
+// ・ red
+// ・ green
+// ・ blue
+</code></pre>
 <p>Note that this expression returns an array of <code>TemplateResult</code> objects. Lit will render an array or iterable of sub-templates and other values.</p>
 <h2 id="Repeating_templates_with_looping_statements"><a class="anchor" href="#Repeating_templates_with_looping_statements">#</a>Repeating templates with looping statements</h2>
 <p>You can also build an array of templates and pass it into a template expression.</p>
@@ -155,7 +175,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#リスト">リスト</a></p>
-<p class="h2"><a href="#Rendering_arrays">Rendering arrays</a></p>
+<p class="h2"><a href="#配列をレンダリングする">配列をレンダリングする</a></p>
 <p class="h2"><a href="#Repeating_templates_with_map">Repeating templates with map</a></p>
 <p class="h2"><a href="#Repeating_templates_with_looping_statements">Repeating templates with looping statements</a></p>
 <p class="h2"><a href="#The_repeat_directive">The repeat directive</a></p>

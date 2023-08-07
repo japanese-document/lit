@@ -2,23 +2,43 @@
 ---
 # リスト
 
-標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することは可能です。
+Litでは標準のJavaScriptを使って繰り返し処理をするテンプレートを作成することができます。
+また、Litは特定の条件を満たすリストからテンプレートをより効率的に生成するための`repeat`ディレクティブを用意しています。
 
-Litは特定の条件下にあるリストからテンプレートをより効率的に生成するための`repeat`ディレクティブを用意しています。
-
-## Rendering arrays
+## 配列をレンダリングする
 
 When an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:
 
-{% playground-example "v2-docs/templates/lists-arrays/" "my-element.ts" %}
+```ts
+@property() colors = ['red', 'green', 'blue'];
 
+render() {
+  return html`<p>Colors: ${this.colors}</p>`;
+}
+// Colors: redgreenblue
+```
 In most cases, you'll want to transform the array items into a more useful form.
 
 ##  Repeating templates with map
 
 To render lists, you can use `map` to transform a list of data into a list of templates:
 
-{% playground-example "v2-docs/templates/lists-map/" "my-element.ts" %}
+```ts
+@property() colors = ['red', 'green', 'blue'];
+
+render() {
+  return html`
+    <ul>
+      ${this.colors.map((color) =>
+        html`<li style="color: ${color}">${color}</li>`
+      )}
+    </ul>
+  `;
+}
+// ・ red
+// ・ green
+// ・ blue
+```
 
 Note that this expression returns an array of `TemplateResult` objects. Lit will render an array or iterable of sub-templates and other values.
 
