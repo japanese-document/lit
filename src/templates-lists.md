@@ -7,7 +7,7 @@ Litでは標準のJavaScriptを使って繰り返し処理をするテンプレ�
 
 ## 配列をレンダリングする
 
-When an expression in the child position in returns an array or iterable, Lit renders all of the items in the array:
+child expressionの位置に配列やiterableを置くと、Litは下記のように配列内のすべての要素をレンダリングします。
 
 ```ts
 @property() colors = ['red', 'green', 'blue'];
@@ -19,7 +19,7 @@ render() {
 ```
 In most cases, you'll want to transform the array items into a more useful form.
 
-##  Repeating templates with map
+## mapを使って繰り返し処理をする
 
 To render lists, you can use `map` to transform a list of data into a list of templates:
 
