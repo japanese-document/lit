@@ -17,7 +17,8 @@ render() {
 }
 // Colors: redgreenblue
 ```
-In most cases, you'll want to transform the array items into a more useful form.
+
+ほとんどの場合、上記のようにそのまま使うことはないでしょう。
 
 ## mapを使って繰り返し処理をする
 
