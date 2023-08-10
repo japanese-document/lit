@@ -22,7 +22,7 @@ render() {
 
 ## mapを使って繰り返し処理をする
 
-To render lists, you can use `map` to transform a list of data into a list of templates:
+リストをレンダリングする際に、下記のように`map`を使って、データのリストをテンプレートのリストに変更することができます。
 
 ```ts
 @property() colors = ['red', 'green', 'blue'];
@@ -41,7 +41,8 @@ render() {
 // ・ blue
 ```
 
-Note that this expression returns an array of `TemplateResult` objects. Lit will render an array or iterable of sub-templates and other values.
+Note that this expression returns an array of `TemplateResult` objects.
+Lit will render an array or iterable of sub-templates and other values.
 
 ## Repeating templates with looping statements
 

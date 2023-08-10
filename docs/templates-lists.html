@@ -67,7 +67,7 @@ render() {
 </code></pre>
 <p>ほとんどの場合、上記のようにそのまま使うことはないでしょう。</p>
 <h2 id="mapを使って繰り返し処理をする"><a class="anchor" href="#mapを使って繰り返し処理をする">#</a>mapを使って繰り返し処理をする</h2>
-<p>To render lists, you can use <code>map</code> to transform a list of data into a list of templates:</p>
+<p>リストをレンダリングする際に、下記のように<code>map</code>を使って、データのリストをテンプレートのリストに変更することができます。</p>
 <pre><code class="language-ts">@property() colors = ['red', 'green', 'blue'];
 
 render() {
@@ -83,7 +83,8 @@ render() {
 // ・ green
 // ・ blue
 </code></pre>
-<p>Note that this expression returns an array of <code>TemplateResult</code> objects. Lit will render an array or iterable of sub-templates and other values.</p>
+<p>Note that this expression returns an array of <code>TemplateResult</code> objects.
+Lit will render an array or iterable of sub-templates and other values.</p>
 <h2 id="Repeating_templates_with_looping_statements"><a class="anchor" href="#Repeating_templates_with_looping_statements">#</a>Repeating templates with looping statements</h2>
 <p>You can also build an array of templates and pass it into a template expression.</p>
 <pre><code class="language-ts">render() {
