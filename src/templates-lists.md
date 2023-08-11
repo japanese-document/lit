@@ -41,8 +41,8 @@ render() {
 // ・ blue
 ```
 
-Note that this expression returns an array of `TemplateResult` objects.
-Lit will render an array or iterable of sub-templates and other values.
+上記のエクスプレッションが`TemplateResult`オブジェクトの配列を返していることに注目してください。
+Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。
 
 ## Repeating templates with looping statements
 
