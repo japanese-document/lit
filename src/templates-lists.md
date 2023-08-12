@@ -20,7 +20,7 @@ render() {
 
 ほとんどの場合、上記のようにそのまま使うことはないでしょう。
 
-## mapを使って繰り返し処理をする
+## mapを使って繰り返すテンプレートを作成する
 
 リストをレンダリングする際に、下記のように`map`を使って、データのリストをテンプレートのリストに変更することができます。
 
@@ -44,7 +44,7 @@ render() {
 上記のエクスプレッションが`TemplateResult`オブジェクトの配列を返していることに注目してください。
 Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。
 
-## Repeating templates with looping statements
+## ループを使って繰り返すテンプレートを作成する
 
 You can also build an array of templates and pass it into a template expression.
 
