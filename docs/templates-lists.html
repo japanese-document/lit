@@ -66,7 +66,7 @@ render() {
 // Colors: redgreenblue
 </code></pre>
 <p>ほとんどの場合、上記のようにそのまま使うことはないでしょう。</p>
-<h2 id="mapを使って繰り返し処理をする"><a class="anchor" href="#mapを使って繰り返し処理をする">#</a>mapを使って繰り返し処理をする</h2>
+<h2 id="mapを使って繰り返すテンプレートを作成する"><a class="anchor" href="#mapを使って繰り返すテンプレートを作成する">#</a>mapを使って繰り返すテンプレートを作成する</h2>
 <p>リストをレンダリングする際に、下記のように<code>map</code>を使って、データのリストをテンプレートのリストに変更することができます。</p>
 <pre><code class="language-ts">@property() colors = ['red', 'green', 'blue'];
 
@@ -85,7 +85,7 @@ render() {
 </code></pre>
 <p>上記のエクスプレッションが<code>TemplateResult</code>オブジェクトの配列を返していることに注目してください。
 Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。</p>
-<h2 id="Repeating_templates_with_looping_statements"><a class="anchor" href="#Repeating_templates_with_looping_statements">#</a>Repeating templates with looping statements</h2>
+<h2 id="ループを使って繰り返すテンプレートを作成する"><a class="anchor" href="#ループを使って繰り返すテンプレートを作成する">#</a>ループを使って繰り返すテンプレートを作成する</h2>
 <p>You can also build an array of templates and pass it into a template expression.</p>
 <pre><code class="language-ts">render() {
   const itemTemplates = [];
@@ -177,8 +177,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#リスト">リスト</a></p>
 <p class="h2"><a href="#配列をレンダリングする">配列をレンダリングする</a></p>
-<p class="h2"><a href="#mapを使って繰り返し処理をする">mapを使って繰り返し処理をする</a></p>
-<p class="h2"><a href="#Repeating_templates_with_looping_statements">Repeating templates with looping statements</a></p>
+<p class="h2"><a href="#mapを使って繰り返すテンプレートを作成する">mapを使って繰り返すテンプレートを作成する</a></p>
+<p class="h2"><a href="#ループを使って繰り返すテンプレートを作成する">ループを使って繰り返すテンプレートを作成する</a></p>
 <p class="h2"><a href="#The_repeat_directive">The repeat directive</a></p>
 <p class="h3"><a href="#When_to_use_map_or_repeat">When to use map or repeat</a></p>
 <p class="h2"><a href="#License">License</a></p>
