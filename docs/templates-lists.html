@@ -86,7 +86,7 @@ render() {
 <p>上記のエクスプレッションが<code>TemplateResult</code>オブジェクトの配列を返していることに注目してください。
 Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。</p>
 <h2 id="ループを使って繰り返すテンプレートを作成する"><a class="anchor" href="#ループを使って繰り返すテンプレートを作成する">#</a>ループを使って繰り返すテンプレートを作成する</h2>
-<p>You can also build an array of templates and pass it into a template expression.</p>
+<p>下記のようにテンプレートの配列を作成して、それをエクスプレッション内に配置することができます。</p>
 <pre><code class="language-ts">render() {
   const itemTemplates = [];
   for (const i of this.items) {
@@ -100,8 +100,10 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
   `;
 }
 </code></pre>
-<h2 id="The_repeat_directive"><a class="anchor" href="#The_repeat_directive">#</a>The repeat directive</h2>
-<p>In most cases, using loops or <code>map</code> is an efficient way to build repeating templates. However, if you want to reorder a large list, or mutate it by adding and removing individual entries, this approach can involve updating a large number of DOM nodes.</p>
+<h2 id="repeatディレクティブ"><a class="anchor" href="#repeatディレクティブ">#</a>repeatディレクティブ</h2>
+<p>In most cases, using loops or <code>map</code> is an efficient way to build repeating templates.
+However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
+this approach can involve updating a large number of DOM nodes.</p>
 <p>The <code>repeat</code> directive can help here.</p>
 <p>The repeat directive performs efficient updates of lists based on user-supplied keys:</p>
 <pre><code class="language-ts">repeat(items, keyFunction, itemTemplate)
@@ -179,7 +181,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#配列をレンダリングする">配列をレンダリングする</a></p>
 <p class="h2"><a href="#mapを使って繰り返すテンプレートを作成する">mapを使って繰り返すテンプレートを作成する</a></p>
 <p class="h2"><a href="#ループを使って繰り返すテンプレートを作成する">ループを使って繰り返すテンプレートを作成する</a></p>
-<p class="h2"><a href="#The_repeat_directive">The repeat directive</a></p>
+<p class="h2"><a href="#repeatディレクティブ">repeatディレクティブ</a></p>
 <p class="h3"><a href="#When_to_use_map_or_repeat">When to use map or repeat</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
