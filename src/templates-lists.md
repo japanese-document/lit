@@ -46,7 +46,7 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
 
 ## ループを使って繰り返すテンプレートを作成する
 
-You can also build an array of templates and pass it into a template expression.
+下記のようにテンプレートの配列を作成して、それをエクスプレッション内に配置することができます。
 
 ```ts
 render() {
@@ -63,9 +63,11 @@ render() {
 }
 ```
 
-## The repeat directive
+## repeatディレクティブ
 
-In most cases, using loops or `map` is an efficient way to build repeating templates. However, if you want to reorder a large list, or mutate it by adding and removing individual entries, this approach can involve updating a large number of DOM nodes.
+In most cases, using loops or `map` is an efficient way to build repeating templates.
+However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
+this approach can involve updating a large number of DOM nodes.
 
 The `repeat` directive can help here.
 
