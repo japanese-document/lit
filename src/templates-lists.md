@@ -20,7 +20,7 @@ render() {
 
 ほとんどの場合、上記のようにそのまま使うことはないでしょう。
 
-## mapを使って繰り返すテンプレートを作成する
+## mapを使って繰り返しテンプレートを作成する
 
 リストをレンダリングする際に、下記のように`map`を使って、データのリストをテンプレートのリストに変更することができます。
 
@@ -44,7 +44,7 @@ render() {
 上記のエクスプレッションが`TemplateResult`オブジェクトの配列を返していることに注目してください。
 Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。
 
-## ループを使って繰り返すテンプレートを作成する
+## ループを使って繰り返しテンプレートを作成する
 
 下記のようにテンプレートの配列を作成して、それをエクスプレッション内に配置することができます。
 
@@ -65,7 +65,7 @@ render() {
 
 ## repeatディレクティブ
 
-In most cases, using loops or `map` is an efficient way to build repeating templates.
+ほとんどの場合、ループや`map`を使って繰り返しテンプレートを作成することは効率的です。
 However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
 this approach can involve updating a large number of DOM nodes.
 

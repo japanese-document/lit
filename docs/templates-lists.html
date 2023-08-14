@@ -66,7 +66,7 @@ render() {
 // Colors: redgreenblue
 </code></pre>
 <p>ほとんどの場合、上記のようにそのまま使うことはないでしょう。</p>
-<h2 id="mapを使って繰り返すテンプレートを作成する"><a class="anchor" href="#mapを使って繰り返すテンプレートを作成する">#</a>mapを使って繰り返すテンプレートを作成する</h2>
+<h2 id="mapを使って繰り返しテンプレートを作成する"><a class="anchor" href="#mapを使って繰り返しテンプレートを作成する">#</a>mapを使って繰り返しテンプレートを作成する</h2>
 <p>リストをレンダリングする際に、下記のように<code>map</code>を使って、データのリストをテンプレートのリストに変更することができます。</p>
 <pre><code class="language-ts">@property() colors = ['red', 'green', 'blue'];
 
@@ -85,7 +85,7 @@ render() {
 </code></pre>
 <p>上記のエクスプレッションが<code>TemplateResult</code>オブジェクトの配列を返していることに注目してください。
 Litはサブテンプレートやそれ以外の値を値に持つ配列やiterableをレンダリングします。</p>
-<h2 id="ループを使って繰り返すテンプレートを作成する"><a class="anchor" href="#ループを使って繰り返すテンプレートを作成する">#</a>ループを使って繰り返すテンプレートを作成する</h2>
+<h2 id="ループを使って繰り返しテンプレートを作成する"><a class="anchor" href="#ループを使って繰り返しテンプレートを作成する">#</a>ループを使って繰り返しテンプレートを作成する</h2>
 <p>下記のようにテンプレートの配列を作成して、それをエクスプレッション内に配置することができます。</p>
 <pre><code class="language-ts">render() {
   const itemTemplates = [];
@@ -101,7 +101,7 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
 }
 </code></pre>
 <h2 id="repeatディレクティブ"><a class="anchor" href="#repeatディレクティブ">#</a>repeatディレクティブ</h2>
-<p>In most cases, using loops or <code>map</code> is an efficient way to build repeating templates.
+<p>ほとんどの場合、ループや<code>map</code>を使って繰り返しテンプレートを作成することは効率的です。
 However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
 this approach can involve updating a large number of DOM nodes.</p>
 <p>The <code>repeat</code> directive can help here.</p>
@@ -179,8 +179,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#リスト">リスト</a></p>
 <p class="h2"><a href="#配列をレンダリングする">配列をレンダリングする</a></p>
-<p class="h2"><a href="#mapを使って繰り返すテンプレートを作成する">mapを使って繰り返すテンプレートを作成する</a></p>
-<p class="h2"><a href="#ループを使って繰り返すテンプレートを作成する">ループを使って繰り返すテンプレートを作成する</a></p>
+<p class="h2"><a href="#mapを使って繰り返しテンプレートを作成する">mapを使って繰り返しテンプレートを作成する</a></p>
+<p class="h2"><a href="#ループを使って繰り返しテンプレートを作成する">ループを使って繰り返しテンプレートを作成する</a></p>
 <p class="h2"><a href="#repeatディレクティブ">repeatディレクティブ</a></p>
 <p class="h3"><a href="#When_to_use_map_or_repeat">When to use map or repeat</a></p>
 <p class="h2"><a href="#License">License</a></p>
