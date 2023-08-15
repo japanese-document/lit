@@ -102,10 +102,10 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
 </code></pre>
 <h2 id="repeatディレクティブ"><a class="anchor" href="#repeatディレクティブ">#</a>repeatディレクティブ</h2>
 <p>ほとんどの場合、ループや<code>map</code>を使って繰り返しテンプレートを作成することは効率的です。
-However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
-this approach can involve updating a large number of DOM nodes.</p>
-<p>The <code>repeat</code> directive can help here.</p>
-<p>The repeat directive performs efficient updates of lists based on user-supplied keys:</p>
+しかし、大きなリストの順番を入れ替える、要素を追加する、要素を削除する場合では、
+このアプローチは多数のDOM Nodeの更新を引き起こす可能性があります。</p>
+<p>そんな時は<code>repeat</code>ディレクティブが役立ちます。</p>
+<p>The <code>repeat</code> directive performs efficient updates of lists based on user-supplied keys:</p>
 <pre><code class="language-ts">repeat(items, keyFunction, itemTemplate)
 </code></pre>
 <p>Where:</p>
