@@ -66,12 +66,12 @@ render() {
 ## repeatディレクティブ
 
 ほとんどの場合、ループや`map`を使って繰り返しテンプレートを作成することは効率的です。
-However, if you want to reorder a large list, or mutate it by adding and removing individual entries,
-this approach can involve updating a large number of DOM nodes.
+しかし、大きなリストの順番を入れ替える、要素を追加する、要素を削除する場合では、
+このアプローチは多数のDOM Nodeの更新を引き起こす可能性があります。
 
-The `repeat` directive can help here.
+そんな時は`repeat`ディレクティブが役立ちます。
 
-The repeat directive performs efficient updates of lists based on user-supplied keys:
+The `repeat` directive performs efficient updates of lists based on user-supplied keys:
 
 ```ts
 repeat(items, keyFunction, itemTemplate)
