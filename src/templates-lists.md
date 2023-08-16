@@ -69,9 +69,9 @@ render() {
 しかし、大きなリストの順番を入れ替える、要素を追加する、要素を削除する場合では、
 このアプローチは多数のDOM Nodeの更新を引き起こす可能性があります。
 
-そんな時は`repeat`ディレクティブが役立ちます。
+そんな時は`repeat`ディレクティブの出番です。
 
-The `repeat` directive performs efficient updates of lists based on user-supplied keys:
+`repeat`ディレクティブは渡されたキーに基づいてリストを効率的に更新します。
 
 ```ts
 repeat(items, keyFunction, itemTemplate)
