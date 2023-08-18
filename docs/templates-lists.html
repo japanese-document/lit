@@ -108,9 +108,8 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
 <p><code>repeat</code>ディレクティブは渡されたキーに基づいてリストを効率的に更新します。</p>
 <pre><code class="language-ts">repeat(items, keyFunction, itemTemplate)
 </code></pre>
-<p>Where:</p>
 <ul>
-<li><code>items</code> is an array or iterable.</li>
+<li><code>items</code>は配列もしくはiterableです。</li>
 <li><code>keyFunction</code> is a function that takes a single item as an argument and returns a guaranteed unique key for that item.</li>
 <li><code>itemTemplate</code> is a template function that takes the item and its current index as arguments, and returns a <code>TemplateResult</code>.</li>
 </ul>
