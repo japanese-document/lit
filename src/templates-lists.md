@@ -77,11 +77,9 @@ render() {
 repeat(items, keyFunction, itemTemplate)
 ```
 
-Where:
-
-*   `items` is an array or iterable.
-*   `keyFunction` is a function that takes a single item as an argument and returns a guaranteed unique key for that item.
-*   `itemTemplate` is a template function that takes the item and its current index as arguments, and returns a `TemplateResult`.
+* `items`は配列もしくはiterableです。
+* `keyFunction` is a function that takes a single item as an argument and returns a guaranteed unique key for that item.
+* `itemTemplate` is a template function that takes the item and its current index as arguments, and returns a `TemplateResult`.
 
 For example:
 
