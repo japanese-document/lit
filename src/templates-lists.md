@@ -78,12 +78,26 @@ repeat(items, keyFunction, itemTemplate)
 ```
 
 * `items`は配列もしくはiterableです。
-* `keyFunction` is a function that takes a single item as an argument and returns a guaranteed unique key for that item.
+* `keyFunction`は1つの値を引数に取り、その値からユニークなキーを返す関数です。
 * `itemTemplate` is a template function that takes the item and its current index as arguments, and returns a `TemplateResult`.
 
-For example:
+例:
 
-{% playground-example "v2-docs/templates/lists-repeat/" "my-element.ts" %}
+```ts
+import {repeat} from 'lit/directives/repeat.js';
+// ...
+render() {
+  return html`
+    <ul>
+      ${repeat(this.employees, (employee) => employee.id, (employee, index) => html`
+        <li>${index}: ${employee.familyName}, ${employee.givenName}</li>
+      `)}
+    </ul>
+    <button @click=${this.toggleSort}>Toggle sort</button>
+  `;
+}
+// ...
+```
 
 If you re-sort the `employees` array, the `repeat` directive reorders the existing DOM nodes.
 
@@ -93,7 +107,7 @@ To compare this to Lit's default handling for lists, consider reversing a large 
 *   For a list created using `repeat`, the `repeat` directive reorders the _existing_ DOM nodes, so the nodes representing the first list item move to the last position.
 
 
-### When to use map or repeat
+### mapとrepeatの使い分け
 
 Which repeat is more efficient depends on your use case:
 
