@@ -110,11 +110,11 @@ Litはサブテンプレートやそれ以外の値を値に持つ配列やitera
 </code></pre>
 <ul>
 <li><code>items</code>は配列もしくはiterableです。</li>
-<li><code>keyFunction</code>は1つの値を引数に取り、その値からユニークなキーを返す関数です。</li>
-<li><code>itemTemplate</code> is a template function that takes the item and its current index as arguments, and returns a <code>TemplateResult</code>.</li>
+<li><code>keyFunction</code>は<code>items</code>の要素を引数に取り、その値からユニークなキーを返す関数です。</li>
+<li><code>itemTemplate</code> は<code>items</code>の要素とそのインデックスを引数に取り、<code>TemplateResult</code>を返す関数です。</li>
 </ul>
 <p>例:</p>
-<pre><code class="language-ts">import {repeat} from 'lit/directives/repeat.js';
+<pre><code class="language-js">import {repeat} from 'lit/directives/repeat.js';
 // ...
 render() {
   return html`
