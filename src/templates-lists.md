@@ -78,12 +78,12 @@ repeat(items, keyFunction, itemTemplate)
 ```
 
 * `items`は配列もしくはiterableです。
-* `keyFunction`は1つの値を引数に取り、その値からユニークなキーを返す関数です。
-* `itemTemplate` is a template function that takes the item and its current index as arguments, and returns a `TemplateResult`.
+* `keyFunction`は`items`の要素を引数に取り、その値からユニークなキーを返す関数です。
+* `itemTemplate` は`items`の要素とそのインデックスを引数に取り、`TemplateResult`を返す関数です。
 
 例:
 
-```ts
+```js
 import {repeat} from 'lit/directives/repeat.js';
 // ...
 render() {
