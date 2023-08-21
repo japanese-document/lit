@@ -99,7 +99,7 @@ render() {
 // ...
 ```
 
-If you re-sort the `employees` array, the `repeat` directive reorders the existing DOM nodes.
+配列の`employees`を再ソートすると、`repeat`ディレクティブは既存のNodeを並び変えます。
 
 To compare this to Lit's default handling for lists, consider reversing a large list of names:
 
