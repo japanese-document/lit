@@ -101,7 +101,7 @@ render() {
 
 配列の`employees`を再ソートすると、`repeat`ディレクティブは既存のNodeを並び変えます。
 
-To compare this to Lit's default handling for lists, consider reversing a large list of names:
+巨大なリストをリバースするとして、`repeat`ディレクティブと`map`を比べます。
 
 *   For a list created using `map`, Lit maintains the DOM nodes for the list items, but reassigns the values.
 *   For a list created using `repeat`, the `repeat` directive reorders the _existing_ DOM nodes, so the nodes representing the first list item move to the last position.
