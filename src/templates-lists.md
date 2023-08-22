@@ -101,10 +101,10 @@ render() {
 
 配列の`employees`を再ソートすると、`repeat`ディレクティブは既存のNodeを並び変えます。
 
-巨大なリストをリバースするとして、`repeat`ディレクティブと`map`を比べます。
+上記の名前のリストをリバースすると仮定して、`repeat`ディレクティブと`map`を比べます。
 
-*   For a list created using `map`, Lit maintains the DOM nodes for the list items, but reassigns the values.
-*   For a list created using `repeat`, the `repeat` directive reorders the _existing_ DOM nodes, so the nodes representing the first list item move to the last position.
+* `map`を使って生成したリストの場合、Litは既存のDOM Nodeに対応するリストの値を適用します。
+* For a list created using `repeat`, the `repeat` directive reorders the _existing_ DOM nodes, so the nodes representing the first list item move to the last position.
 
 
 ### mapとrepeatの使い分け
