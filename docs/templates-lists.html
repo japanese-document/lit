@@ -129,10 +129,10 @@ render() {
 // ...
 </code></pre>
 <p>配列の<code>employees</code>を再ソートすると、<code>repeat</code>ディレクティブは既存のNodeを並び変えます。</p>
-<p>上記の名前のリストをリバースすると仮定して、<code>repeat</code>ディレクティブと<code>map</code>を比べます。</p>
+<p>上記の名前の<code>&lt;li&gt;</code>をリバースすると仮定して、<code>repeat</code>ディレクティブと<code>map</code>を使った処理内容を比べます。</p>
 <ul>
-<li><code>map</code>を使って生成したリストの場合、Litは既存のDOM Nodeに対応するリストの値を適用します。</li>
-<li>For a list created using <code>repeat</code>, the <code>repeat</code> directive reorders the <em>existing</em> DOM nodes, so the nodes representing the first list item move to the last position.</li>
+<li><code>map</code>を使って<code>&lt;li&gt;</code>を生成した場合、Litは既存のDOM Nodeに対応するリストの値を適用します。</li>
+<li><code>repeat</code>を使って<code>&lt;li&gt;</code>を生成した場合、<code>repeat</code>ディレクティブは既存のDOM Node(<code>&lt;li&gt;</code>)を並び変えます。(最初のNodeは最後に移動します。)</li>
 </ul>
 <h3 id="mapとrepeatの使い分け"><a class="anchor" href="#mapとrepeatの使い分け">#</a>mapとrepeatの使い分け</h3>
 <p>Which repeat is more efficient depends on your use case:</p>
