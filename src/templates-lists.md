@@ -101,10 +101,10 @@ render() {
 
 配列の`employees`を再ソートすると、`repeat`ディレクティブは既存のNodeを並び変えます。
 
-上記の名前のリストをリバースすると仮定して、`repeat`ディレクティブと`map`を比べます。
+上記の名前の`<li>`をリバースすると仮定して、`repeat`ディレクティブと`map`を使った処理内容を比べます。
 
-* `map`を使って生成したリストの場合、Litは既存のDOM Nodeに対応するリストの値を適用します。
-* For a list created using `repeat`, the `repeat` directive reorders the _existing_ DOM nodes, so the nodes representing the first list item move to the last position.
+* `map`を使って`<li>`を生成した場合、Litは既存のDOM Nodeに対応するリストの値を適用します。
+* `repeat`を使って`<li>`を生成した場合、`repeat`ディレクティブは既存のDOM Node(`<li>`)を並び変えます。(最初のNodeは最後に移動します。)
 
 
 ### mapとrepeatの使い分け
