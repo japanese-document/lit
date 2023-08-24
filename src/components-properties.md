@@ -38,7 +38,7 @@ custom elementsにセットされているプロパティや属性をコンポ�
 例えばメニューコンポーネントに`selected`プロパティがあったとして、それは要素の属性として初期値を指定することができるとします。
 ユーザが項目を選択した場合はコンポーネントが`selected`プロパティを更新するべきです。
 この場合、コンポーネントはイベントをでティスパッチ(dispatch)してコンポーネントの親コンポーネントに`selected`プロパティが変更されたことを示す必要があるかもしれません。
-詳しくは[Dispatching events](https://lit.dev/docs/components/events/#dispatching-events)を見てください。
+詳しくは[イベントをdispatchする](https://japanese-document.github.io/lit/components-events.html#イベントをdispatchする)を見てください。
 
 Litにはインターナルリアクティブステート(internal reactive state)機能があります。
 インターナルリアクティブステートはコンポーネントのAPIに含まれないリアクティブプロパティです。
