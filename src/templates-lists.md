@@ -109,7 +109,7 @@ render() {
 
 ### mapとrepeatの使い分け
 
-Which repeat is more efficient depends on your use case:
+mapとrepeat、どちらが効率的かはユースケースによります。
 
 *   If updating the DOM nodes is more expensive than moving them, use the `repeat` directive.
 
