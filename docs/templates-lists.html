@@ -137,21 +137,23 @@ render() {
 <h3 id="mapとrepeatの使い分け"><a class="anchor" href="#mapとrepeatの使い分け">#</a>mapとrepeatの使い分け</h3>
 <p>mapとrepeat、どちらが効率的かはユースケースによります。</p>
 <ul>
-<li><p>If updating the DOM nodes is more expensive than moving them, use the <code>repeat</code> directive.</p>
+<li><p>DOM Nodeを更新するコストが移動するコストよりも高い場合は<code>repeat</code>ディレクティブを使います。</p>
 </li>
-<li><p>If the DOM nodes have state that <em>isn't</em> controlled by a template expression, use the <code>repeat</code> directive.</p>
-<p>For example, consider this list:</p>
+<li><p>DOM Nodeのステートがテンプレートエクスプレッションで制御されていない場合は<code>repeat</code>ディレクティブを使います。</p>
+<p>  例えば、下記のようなリスト処理を考えてみましょう。</p>
 <pre><code class="language-js">html`${this.users.map((user) =&gt;
-  html`
+    html`
     &lt;div&gt;&lt;input type="checkbox"&gt; ${user.name}&lt;/div&gt;
-  `)
+    `)
 }`
 </code></pre>
-<p>The checkbox has a checked or unchecked state, but it isn't controlled by a template expression.</p>
-<p>If  you reorder the list after the user has checked one or more checkboxes, Lit would update the names associated with the checkboxes, but not the state of the checkboxes.</p>
+<p>  チェックボックスにはチェックされている/されていないというステートがあります。
+  上記の例では、そのステートはテンプレートエクスプレッションで制御されていません。</p>
+<p>  上記の例でチェックボックスをチェックして並べ替えると、
+  チェックボックスの名前は関連した名前に更新されますが、チェックボックスのステートは引き継がれません。</p>
 </li>
 </ul>
-<p> If neither of these situations apply, use <code>map</code> or looping statements.</p>
+<p> 上記2つの場合に該当しない場合は<code>map</code>かループを使います。</p>
 <hr>
 <h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
 <h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
