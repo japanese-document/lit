@@ -111,25 +111,27 @@ render() {
 
 mapとrepeat、どちらが効率的かはユースケースによります。
 
-*   If updating the DOM nodes is more expensive than moving them, use the `repeat` directive.
+* DOM Nodeを更新するコストが移動するコストよりも高い場合は`repeat`ディレクティブを使います。
 
-*   If the DOM nodes have state that _isn't_ controlled by a template expression, use the `repeat` directive.
+* DOM Nodeのステートがテンプレートエクスプレッションで制御されていない場合は`repeat`ディレクティブを使います。
 
-    For example, consider this list:
+    例えば、下記のようなリスト処理を考えてみましょう。
 
     ```js
     html`${this.users.map((user) =>
-      html`
+        html`
         <div><input type="checkbox"> ${user.name}</div>
-      `)
+        `)
     }`
     ```
 
-    The checkbox has a checked or unchecked state, but it isn't controlled by a template expression.
+    チェックボックスにはチェックされている/されていないというステートがあります。
+    上記の例では、そのステートはテンプレートエクスプレッションで制御されていません。
 
-    If  you reorder the list after the user has checked one or more checkboxes, Lit would update the names associated with the checkboxes, but not the state of the checkboxes.
+    上記の例でチェックボックスをチェックして並べ替えると、
+    チェックボックスの名前は関連した名前に更新されますが、チェックボックスのステートは引き継がれません。
 
- If neither of these situations apply, use `map` or looping statements.
+ 上記2つの場合に該当しない場合は`map`かループを使います。
 
 ---
 
