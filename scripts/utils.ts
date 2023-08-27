@@ -73,10 +73,7 @@ export interface Page {
 
 interface IndexItem {
   name: string
-  pages: {
-    title: string
-    url: string
-  }[]
+  pages: Pick<Page, 'title' | 'url'>[]
 }
 
 export function createTitle(md: string) {
