@@ -1,4 +1,4 @@
-{ "header": {"name": "テンプレート", "order": 1}, "order": 3 }
+{ "header": {"name": "テンプレート", "order": 1}, "order": 4 }
 ---
 # カスタムディレクティブ
 

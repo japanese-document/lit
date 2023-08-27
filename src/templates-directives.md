@@ -1,4 +1,4 @@
-{ "header": {"name": "テンプレート", "order": 1}, "order": 2 }
+{ "header": {"name": "テンプレート", "order": 1}, "order": 3 }
 ---
 # ビルトインディレクティブ
 
