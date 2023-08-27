@@ -1,4 +1,4 @@
-{ "header": {"name": "テンプレート", "order": 1}, "order": 1 }
+{ "header": {"name": "テンプレート", "order": 1}, "order": 2 }
 ---
 # リスト
 

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/templates-conditionals.html" />
+    <meta property="og:title" content="条件" />
+    <meta property="og:description" content="Since Lit leverages normal Javascript expressions, you can use standard Javascript control flow constructs like conditional operators, function calls, and if or switch statements to render conditional content.JavaScript conditionals also let you combine nested template expressions, and you can even " />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Since Lit leverages normal Javascript expressions, you can use standard Javascript control flow constructs like conditional operators, function calls, and if or switch statements to render conditional content.JavaScript conditionals also let you combine nested template expressions, and you can even " />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>条件</title>
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <nav class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-conditionals.html">条件</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-lists.html">リスト</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </nav></div>
+    <main class="main markdown-body">
+      <h1 id="条件"><a class="anchor" href="#条件">#</a>条件</h1>
+<p>Since Lit leverages normal Javascript expressions, you can use standard Javascript control flow constructs like <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">conditional operators</a>, function calls, and <code>if</code> or <code>switch</code> statements to render conditional content.</p>
+<p>JavaScript conditionals also let you combine nested template expressions, and you can even store template results in variables to use elsewhere.</p>
+<h2 id="Conditionals_with_the_conditional_(ternary)_operator"><a class="anchor" href="#Conditionals_with_the_conditional_(ternary)_operator">#</a>Conditionals with the conditional (ternary) operator</h2>
+<p>Ternary expressions with the conditional operator, <code>?</code>, are a great way to add inline conditionals:</p>
+<pre><code class="language-ts">render() {
+  return this.userName
+    ? html`Welcome ${this.userName}`
+    : html`Please log in &lt;button&gt;Login&lt;/button&gt;`;
+}
+</code></pre>
+<h2 id="Conditionals_with_if_statements"><a class="anchor" href="#Conditionals_with_if_statements">#</a>Conditionals with if statements</h2>
+<p>You can express conditional logic with if statements outside of a template to compute values to use inside of the template:</p>
+<pre><code class="language-ts">render() {
+  let message;
+  if (this.userName) {
+    message = html`Welcome ${this.userName}`;
+  } else {
+    message = html`Please log in &lt;button&gt;Login&lt;/button&gt;`;
+  }
+  return html`&lt;p class="message"&gt;${message}&lt;/p&gt;`;
+}
+</code></pre>
+<p>Alternately, you can factor logic into a separate function to simplify your template:</p>
+<pre><code class="language-ts">getUserMessage() {
+  if (this.userName) {
+    return html`Welcome ${this.userName}`;
+  } else {
+    return html`Please log in &lt;button&gt;Login&lt;/button&gt;`;
+  }
+}
+render() {
+  return html`&lt;p&gt;${this.getUserMessage()}&lt;/p&gt;`;
+}
+</code></pre>
+<h2 id="Caching_template_results__the_cache_directive"><a class="anchor" href="#Caching_template_results__the_cache_directive">#</a>Caching template results: the cache directive</h2>
+<p>In most cases, JavaScript conditionals are all you need for conditional templates. However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.</p>
+<p>In this case, you can use the <code>cache</code> <em>directive</em>. The cache directive caches DOM for templates that aren't being rendered currently.</p>
+<pre><code class="language-ts">render() {
+  return html`${cache(this.userName ?
+    html`Welcome ${this.userName}`:
+    html`Please log in &lt;button&gt;Login&lt;/button&gt;`)
+  }`;
+}
+</code></pre>
+<p>See the <a class="Link" href="/docs/v2/templates/directives/#cache">cache directive</a> for more information.</p>
+<h2 id="Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}"><a class="anchor" href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">#</a>Conditionally rendering nothing { #conditionally-rendering-nothing }</h2>
+<p>Sometimes, you may want to render nothing in one branch of a conditional operator. This is commonly needed for child expressions and also sometimes needed in attribute expressions.</p>
+<p>For child expressions, the values <code>undefined</code>, <code>null</code>, the empty string (<code>''</code>), and Lit's <a class="Link" href="/docs/v2/api/templates/#nothing">nothing</a> sentinel value all render no nodes. See <a class="Link" href="/docs/v2/templates/expressions/#removing-child">Removing child content</a> for more information.</p>
+<p>This example renders a value if it exists, and otherwise renders nothing:</p>
+<pre><code class="language-ts">render() {
+  return html`&lt;user-name&gt;${this.userName ?? nothing}&lt;/user-name&gt;`;
+}
+</code></pre>
+<p>For attribute expressions, Lit's <a class="Link" href="/docs/v2/api/templates/#nothing">nothing</a> sentinel value removes the attribute. See <a class="Link" href="/docs/v2/templates/expressions/#removing-attribute">Removing an attribute</a> for more information.</p>
+<p>This example conditionally renders the <code>aria-label</code> attribute:</p>
+<pre><code class="language-ts">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
+</code></pre>
+<hr>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#条件">条件</a></p>
+<p class="h2"><a href="#Conditionals_with_the_conditional_(ternary)_operator">Conditionals with the conditional (ternary) operator</a></p>
+<p class="h2"><a href="#Conditionals_with_if_statements">Conditionals with if statements</a></p>
+<p class="h2"><a href="#Caching_template_results__the_cache_directive">Caching template results: the cache directive</a></p>
+<p class="h2"><a href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">Conditionally rendering nothing { #conditionally-rendering-nothing }</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></nav></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
