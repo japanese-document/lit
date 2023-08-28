@@ -2,7 +2,8 @@
 ---
 # 条件
 
-Since Lit leverages normal Javascript expressions, you can use standard Javascript control flow constructs like [conditional operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), function calls, and `if` or `switch` statements to render conditional content.
+Litは通常のJavaScriptの表現を使うことができるので、
+[conditional operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)、関数の実行、`if`文や`switch`文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。
 
 JavaScript conditionals also let you combine nested template expressions, and you can even store template results in variables to use elsewhere.
 
