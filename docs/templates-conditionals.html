@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-conditionals.html" />
     <meta property="og:title" content="条件" />
-    <meta property="og:description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScript conditionals also let you combine nested template expressions, and you can even store template results in variables to use elsewhere.#Conditionals with the conditio" />
+    <meta property="og:description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#Conditionals with the conditional (ternary) operatorTernary expressions with the c" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScript conditionals also let you combine nested template expressions, and you can even store template results in variables to use elsewhere.#Conditionals with the conditio" />
+    <meta name="description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#Conditionals with the conditional (ternary) operatorTernary expressions with the c" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>条件</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -57,7 +57,8 @@
       <h1 id="条件"><a class="anchor" href="#条件">#</a>条件</h1>
 <p>Litは通常のJavaScriptの表現を使うことができるので、
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">conditional operators</a>、関数の実行、<code>if</code>文や<code>switch</code>文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。</p>
-<p>JavaScript conditionals also let you combine nested template expressions, and you can even store template results in variables to use elsewhere.</p>
+<p>JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。
+<a class="Link" href="https://lit.dev/docs/api/templates/#TemplateResult">テンプレートに変換した結果</a>を変数に保存してそれを別の場所で使うことができます。</p>
 <h2 id="Conditionals_with_the_conditional_(ternary)_operator"><a class="anchor" href="#Conditionals_with_the_conditional_(ternary)_operator">#</a>Conditionals with the conditional (ternary) operator</h2>
 <p>Ternary expressions with the conditional operator, <code>?</code>, are a great way to add inline conditionals:</p>
 <pre><code class="language-ts">render() {
