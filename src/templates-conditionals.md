@@ -8,7 +8,7 @@ Litは通常のJavaScriptの表現を使うことができるので、
 JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。
 [テンプレートに変換した結果](https://lit.dev/docs/api/templates/#TemplateResult)を変数に保存してそれを別の場所で使うことができます。
 
-## Conditionals with the conditional (ternary) operator
+## 三項演算子を使った条件文
 
 Ternary expressions with the conditional operator, `?`, are a great way to add inline conditionals:
 
