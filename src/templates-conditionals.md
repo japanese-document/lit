@@ -8,9 +8,9 @@ Litは通常のJavaScriptの表現を使うことができるので、
 JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。
 [テンプレートに変換した結果](https://lit.dev/docs/api/templates/#TemplateResult)を変数に保存してそれを別の場所で使うことができます。
 
-## 三項演算子を使った条件文
+## 三項演算子を使う
 
-Ternary expressions with the conditional operator, `?`, are a great way to add inline conditionals:
+下記のように三項演算子を使って条件に応じてテンプレートを構築することができます。
 
 ```ts
 render() {
@@ -20,9 +20,9 @@ render() {
 }
 ```
 
-## Conditionals with if statements
+## if文を使う
 
-You can express conditional logic with if statements outside of a template to compute values to use inside of the template:
+下記のようにif文を使って条件に応じてテンプレートを構築することができます。
 
 ```ts
 render() {
@@ -36,7 +36,7 @@ render() {
 }
 ```
 
-Alternately, you can factor logic into a separate function to simplify your template:
+上記は下記のようにロジック部分を関数に分離することができます。
 
 ```ts
 getUserMessage() {
