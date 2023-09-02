@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/templates-conditionals.html" />
     <meta property="og:title" content="条件" />
-    <meta property="og:description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#三項演算子を使った条件文Ternary expressions with the conditional operator, ?, are a great way " />
+    <meta property="og:description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#三項演算子を使う下記のように三項演算子を使って条件に応じてテンプレートを構築することができます。render() {  return this.userName  " />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#三項演算子を使った条件文Ternary expressions with the conditional operator, ?, are a great way " />
+    <meta name="description" content="Litは通常のJavaScriptの表現を使うことができるので、conditional operators、関数の実行、if文やswitch文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。テンプレートに変換した結果を変数に保存してそれを別の場所で使うことができます。#三項演算子を使う下記のように三項演算子を使って条件に応じてテンプレートを構築することができます。render() {  return this.userName  " />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>条件</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -59,16 +59,16 @@
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">conditional operators</a>、関数の実行、<code>if</code>文や<code>switch</code>文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。</p>
 <p>JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。
 <a class="Link" href="https://lit.dev/docs/api/templates/#TemplateResult">テンプレートに変換した結果</a>を変数に保存してそれを別の場所で使うことができます。</p>
-<h2 id="三項演算子を使った条件文"><a class="anchor" href="#三項演算子を使った条件文">#</a>三項演算子を使った条件文</h2>
-<p>Ternary expressions with the conditional operator, <code>?</code>, are a great way to add inline conditionals:</p>
+<h2 id="三項演算子を使う"><a class="anchor" href="#三項演算子を使う">#</a>三項演算子を使う</h2>
+<p>下記のように三項演算子を使って条件に応じてテンプレートを構築することができます。</p>
 <pre><code class="language-ts">render() {
   return this.userName
     ? html`Welcome ${this.userName}`
     : html`Please log in &lt;button&gt;Login&lt;/button&gt;`;
 }
 </code></pre>
-<h2 id="Conditionals_with_if_statements"><a class="anchor" href="#Conditionals_with_if_statements">#</a>Conditionals with if statements</h2>
-<p>You can express conditional logic with if statements outside of a template to compute values to use inside of the template:</p>
+<h2 id="if文を使う"><a class="anchor" href="#if文を使う">#</a>if文を使う</h2>
+<p>下記のようにif文を使って条件に応じてテンプレートを構築することができます。</p>
 <pre><code class="language-ts">render() {
   let message;
   if (this.userName) {
@@ -79,7 +79,7 @@
   return html`&lt;p class="message"&gt;${message}&lt;/p&gt;`;
 }
 </code></pre>
-<p>Alternately, you can factor logic into a separate function to simplify your template:</p>
+<p>上記は下記のようにロジック部分を関数に分離することができます。</p>
 <pre><code class="language-ts">getUserMessage() {
   if (this.userName) {
     return html`Welcome ${this.userName}`;
@@ -152,8 +152,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#条件">条件</a></p>
-<p class="h2"><a href="#三項演算子を使った条件文">三項演算子を使った条件文</a></p>
-<p class="h2"><a href="#Conditionals_with_if_statements">Conditionals with if statements</a></p>
+<p class="h2"><a href="#三項演算子を使う">三項演算子を使う</a></p>
+<p class="h2"><a href="#if文を使う">if文を使う</a></p>
 <p class="h2"><a href="#Caching_template_results__the_cache_directive">Caching template results: the cache directive</a></p>
 <p class="h2"><a href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">Conditionally rendering nothing { #conditionally-rendering-nothing }</a></p>
 <p class="h2"><a href="#License">License</a></p>
