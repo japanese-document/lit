@@ -51,7 +51,7 @@ render() {
 }
 ```
 
-## Caching template results: the cache directive
+## cacheディレクティブを使ってDOMをキャッシュする
 
 In most cases, JavaScript conditionals are all you need for conditional templates. However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.
 
@@ -66,7 +66,7 @@ render() {
 }
 ```
 
-See the [cache directive](/docs/v2/templates/directives/#cache) for more information.
+詳しくは[cacheディレクティブ](https://japanese-document.github.io/lit/templates-directives.html#cache)を見てください。
 
 ## Conditionally rendering nothing { #conditionally-rendering-nothing }
 

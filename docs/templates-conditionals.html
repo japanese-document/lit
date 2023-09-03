@@ -91,7 +91,7 @@ render() {
   return html`&lt;p&gt;${this.getUserMessage()}&lt;/p&gt;`;
 }
 </code></pre>
-<h2 id="Caching_template_results__the_cache_directive"><a class="anchor" href="#Caching_template_results__the_cache_directive">#</a>Caching template results: the cache directive</h2>
+<h2 id="cacheディレクティブを使ってDOMをキャッシュする"><a class="anchor" href="#cacheディレクティブを使ってDOMをキャッシュする">#</a>cacheディレクティブを使ってDOMをキャッシュする</h2>
 <p>In most cases, JavaScript conditionals are all you need for conditional templates. However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.</p>
 <p>In this case, you can use the <code>cache</code> <em>directive</em>. The cache directive caches DOM for templates that aren't being rendered currently.</p>
 <pre><code class="language-ts">render() {
@@ -101,7 +101,7 @@ render() {
   }`;
 }
 </code></pre>
-<p>See the <a class="Link" href="/docs/v2/templates/directives/#cache">cache directive</a> for more information.</p>
+<p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache">cacheディレクティブ</a>を見てください。</p>
 <h2 id="Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}"><a class="anchor" href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">#</a>Conditionally rendering nothing { #conditionally-rendering-nothing }</h2>
 <p>Sometimes, you may want to render nothing in one branch of a conditional operator. This is commonly needed for child expressions and also sometimes needed in attribute expressions.</p>
 <p>For child expressions, the values <code>undefined</code>, <code>null</code>, the empty string (<code>''</code>), and Lit's <a class="Link" href="/docs/v2/api/templates/#nothing">nothing</a> sentinel value all render no nodes. See <a class="Link" href="/docs/v2/templates/expressions/#removing-child">Removing child content</a> for more information.</p>
@@ -154,7 +154,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#条件">条件</a></p>
 <p class="h2"><a href="#三項演算子を使う">三項演算子を使う</a></p>
 <p class="h2"><a href="#if文を使う">if文を使う</a></p>
-<p class="h2"><a href="#Caching_template_results__the_cache_directive">Caching template results: the cache directive</a></p>
+<p class="h2"><a href="#cacheディレクティブを使ってDOMをキャッシュする">cacheディレクティブを使ってDOMをキャッシュする</a></p>
 <p class="h2"><a href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">Conditionally rendering nothing { #conditionally-rendering-nothing }</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
