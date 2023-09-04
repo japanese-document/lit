@@ -102,15 +102,16 @@ render() {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache">cacheディレクティブ</a>を見てください。</p>
-<h2 id="Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}"><a class="anchor" href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">#</a>Conditionally rendering nothing { #conditionally-rendering-nothing }</h2>
+<h2 id="Conditionally_rendering_nothing"><a class="anchor" href="#Conditionally_rendering_nothing">#</a>Conditionally rendering nothing</h2>
 <p>Sometimes, you may want to render nothing in one branch of a conditional operator. This is commonly needed for child expressions and also sometimes needed in attribute expressions.</p>
-<p>For child expressions, the values <code>undefined</code>, <code>null</code>, the empty string (<code>''</code>), and Lit's <a class="Link" href="/docs/v2/api/templates/#nothing">nothing</a> sentinel value all render no nodes. See <a class="Link" href="/docs/v2/templates/expressions/#removing-child">Removing child content</a> for more information.</p>
+<p>For child expressions, the values <code>undefined</code>, <code>null</code>, the empty string (<code>''</code>), and Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value all render no nodes.
+See <a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">Removing child content</a> for more information.</p>
 <p>This example renders a value if it exists, and otherwise renders nothing:</p>
 <pre><code class="language-ts">render() {
   return html`&lt;user-name&gt;${this.userName ?? nothing}&lt;/user-name&gt;`;
 }
 </code></pre>
-<p>For attribute expressions, Lit's <a class="Link" href="/docs/v2/api/templates/#nothing">nothing</a> sentinel value removes the attribute. See <a class="Link" href="/docs/v2/templates/expressions/#removing-attribute">Removing an attribute</a> for more information.</p>
+<p>For attribute expressions, Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value removes the attribute. See <a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#属性の削除">Removing an attribute</a> for more information.</p>
 <p>This example conditionally renders the <code>aria-label</code> attribute:</p>
 <pre><code class="language-ts">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
@@ -155,7 +156,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#三項演算子を使う">三項演算子を使う</a></p>
 <p class="h2"><a href="#if文を使う">if文を使う</a></p>
 <p class="h2"><a href="#cacheディレクティブを使ってDOMをキャッシュする">cacheディレクティブを使ってDOMをキャッシュする</a></p>
-<p class="h2"><a href="#Conditionally_rendering_nothing_{_#conditionally-rendering-nothing_}">Conditionally rendering nothing { #conditionally-rendering-nothing }</a></p>
+<p class="h2"><a href="#Conditionally_rendering_nothing">Conditionally rendering nothing</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
