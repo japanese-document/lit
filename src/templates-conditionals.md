@@ -68,11 +68,12 @@ render() {
 
 詳しくは[cacheディレクティブ](https://japanese-document.github.io/lit/templates-directives.html#cache)を見てください。
 
-## Conditionally rendering nothing { #conditionally-rendering-nothing }
+## Conditionally rendering nothing
 
 Sometimes, you may want to render nothing in one branch of a conditional operator. This is commonly needed for child expressions and also sometimes needed in attribute expressions.
 
-For child expressions, the values `undefined`, `null`, the empty string (`''`), and Lit's [nothing](/docs/v2/api/templates/#nothing) sentinel value all render no nodes. See [Removing child content](/docs/v2/templates/expressions/#removing-child) for more information.
+For child expressions, the values `undefined`, `null`, the empty string (`''`), and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value all render no nodes.
+See [Removing child content](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除) for more information.
 
 This example renders a value if it exists, and otherwise renders nothing:
 
@@ -82,7 +83,7 @@ render() {
 }
 ```
 
-For attribute expressions, Lit's [nothing](/docs/v2/api/templates/#nothing) sentinel value removes the attribute. See [Removing an attribute](/docs/v2/templates/expressions/#removing-attribute) for more information.
+For attribute expressions, Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value removes the attribute. See [Removing an attribute](https://japanese-document.github.io/lit/templates-expressions.html#属性の削除) for more information.
 
 This example conditionally renders the `aria-label` attribute:
 
