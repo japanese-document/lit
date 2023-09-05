@@ -53,7 +53,8 @@ render() {
 
 ## cacheディレクティブを使ってDOMをキャッシュする
 
-In most cases, JavaScript conditionals are all you need for conditional templates. However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.
+ほとんどの場合、JavaScriptの条件文で充分です。
+However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.
 
 In this case, you can use the `cache` _directive_. The cache directive caches DOM for templates that aren't being rendered currently.
 

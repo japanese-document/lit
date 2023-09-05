@@ -92,7 +92,8 @@ render() {
 }
 </code></pre>
 <h2 id="cacheディレクティブを使ってDOMをキャッシュする"><a class="anchor" href="#cacheディレクティブを使ってDOMをキャッシュする">#</a>cacheディレクティブを使ってDOMをキャッシュする</h2>
-<p>In most cases, JavaScript conditionals are all you need for conditional templates. However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.</p>
+<p>ほとんどの場合、JavaScriptの条件文で充分です。
+However, if you're switching between large, complicated templates, you might want to save the cost of recreating DOM on each switch.</p>
 <p>In this case, you can use the <code>cache</code> <em>directive</em>. The cache directive caches DOM for templates that aren't being rendered currently.</p>
 <pre><code class="language-ts">render() {
   return html`${cache(this.userName ?
