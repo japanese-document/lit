@@ -57,7 +57,7 @@ render() {
 複雑で大規模なテンプレートを切り替える場合、各テンプレートからDOMを再生成するコストを節約したいと思うでしょう。
 
 そんな時は`cache`ディレクティブの出番です。
-The cache directive caches DOM for templates that aren't being rendered currently.
+`cache`ディテクティブは切り替えられたレンダリングされていないテンプレートのDOMをキャッシュします。
 
 ```ts
 render() {

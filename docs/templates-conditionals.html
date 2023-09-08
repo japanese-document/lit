@@ -95,7 +95,7 @@ render() {
 <p>ほとんどの場合、JavaScriptの条件文で充分ですが、
 複雑で大規模なテンプレートを切り替える場合、各テンプレートからDOMを再生成するコストを節約したいと思うでしょう。</p>
 <p>そんな時は<code>cache</code>ディレクティブの出番です。
-The cache directive caches DOM for templates that aren't being rendered currently.</p>
+<code>cache</code>ディテクティブは切り替えられたレンダリングされていないテンプレートのDOMをキャッシュします。</p>
 <pre><code class="language-ts">render() {
   return html`${cache(this.userName ?
     html`Welcome ${this.userName}`:
