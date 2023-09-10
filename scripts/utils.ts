@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { glob } from 'glob'
 import createDOMPurify from 'dompurify'
@@ -20,8 +20,8 @@ export function createHash(text: string) {
     .replaceAll(/>/g, '_-')
 }
 
-async function createPageData(markDownFileName: string): Promise<Page> {
-  const content = await fs.promises.readFile(markDownFileName, 'utf8')
+export async function createPageData(markDownFileName: string): Promise<Page> {
+  const content = await readFile(markDownFileName, 'utf8')
   const [meta, md] = getMetaAndMd(content)
   const title = createTitle(md)
   const { name, dir } = path.parse(markDownFileName)
