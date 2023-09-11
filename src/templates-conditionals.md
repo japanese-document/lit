@@ -72,7 +72,7 @@ render() {
 
 ## 条件に応じて何もレンダリングしない
 
-Sometimes, you may want to render nothing in one branch of a conditional operator.
+条件に応じて何もレンダリングしないことがあるでしょう。
 This is commonly needed for child expressions and also sometimes needed in attribute expressions.
 
 For child expressions, the values `undefined`, `null`, the empty string (`''`), and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value all render no nodes.
