@@ -73,7 +73,8 @@ render() {
 ## 条件に応じて何もレンダリングしない
 
 条件に応じて何もレンダリングしないことがあるでしょう。
-This is commonly needed for child expressions and also sometimes needed in attribute expressions.
+何もレンダリングしないことはchild expressionsでよくあります。
+たまにattribute expressionsでもあります。
 
 For child expressions, the values `undefined`, `null`, the empty string (`''`), and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value all render no nodes.
 See [Removing child content](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除) for more information.
