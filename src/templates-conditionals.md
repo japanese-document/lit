@@ -77,7 +77,7 @@ render() {
 たまにattribute expressionsでもあります。
 
 For child expressions, the values `undefined`, `null`, the empty string (`''`), and Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value all render no nodes.
-See [Removing child content](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除) for more information.
+詳しくは[子コンテンツの削除](https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除)を見てください。
 
 This example renders a value if it exists, and otherwise renders nothing:
 
@@ -87,7 +87,8 @@ render() {
 }
 ```
 
-For attribute expressions, Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value removes the attribute. See [Removing an attribute](https://japanese-document.github.io/lit/templates-expressions.html#属性の削除) for more information.
+For attribute expressions, Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value removes the attribute.
+See [Removing an attribute](https://japanese-document.github.io/lit/templates-expressions.html#属性の削除) for more information.
 
 This example conditionally renders the `aria-label` attribute:
 
