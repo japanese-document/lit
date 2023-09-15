@@ -111,7 +111,7 @@ Litはchild expressionに使うことができるいくつかの特別なセン�
 
 `noChange`センチネル値はエクスプレッションの既存の値を変更しません。
 これは通常、カスタムディレクティブで使われます。
-詳しくは[Signaling no change](https://lit.dev/docs/templates/custom-directives/#signaling-no-change)を見てください。
+詳しくは[変更がないことを伝える](https://japanese-document.github.io/lit/templates-custom-directives.html#変更がないことを伝える)を見てください。
 
 `nothing`センチネルは何もレンダリングしません。
 詳しくは[子コンテンツの削除](#子コンテンツの削除)を見てください。
@@ -139,9 +139,9 @@ html`
 `;
 ```
 
-条件分岐のあるテンプレートに関する詳しい説明は[Conditionals](https://lit.dev/docs/templates/conditionals/)にあります。
+条件分岐のあるテンプレートに関する詳しい説明は[条件](https://japanese-document.github.io/lit/templates-conditionals.html)にあります。
 
-繰り返しがあるテンプレートに関する詳しい説明は[Lists](https://lit.dev/docs/templates/lists/)にあります。
+繰り返しがあるテンプレートに関する詳しい説明は[リスト](https://japanese-document.github.io/lit/templates-lists.html)にあります。
 
 ### DOM nodes
 
@@ -162,17 +162,17 @@ const page = html`
 
 エクスプレッションは使用可能な型を格納する配列、iterable、それらの組み合わせを返すことができます。
 つまり、`Array.map()`を使って繰り返し表現を生成することができます。
-詳しくは[リスト](https://lit.dev/docs/templates/lists/)を見てください。
+詳しくは[リスト](https://japanese-document.github.io/lit/templates-lists.html)を見てください。
 
 ### 子コンテンツの削除
 
 `null`、`undefined`、空文字列(`''`)、Litの[nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)センチネル値は、1つ前のレンダリングされたコンテンツを削除します。そして、Nodeをレンダリングしません。
 
 子コンテンツの配置もしくは削除はよく条件分岐によって行われます。
-詳しくは[Conditionally rendering nothing](https://lit.dev/docs/templates/conditionals/#conditionally-rendering-nothing)を見てください。
+詳しくは[条件に応じて何もレンダリングしない](https://japanese-document.github.io/lit/templates-conditionals.html#条件に応じて何もレンダリングしない)を見てください。
 
 フォールバックコンテンツを持つ`slot`に対応するコンテンツがない場合、フォールバックコンテンツがレンダリングされます。
-詳しくは[fallback content](https://japanese-document.github.io/lit/components-shadow-dom.html#デフォルトでslotに適用されるコンテンツを指定する)を見てください。
+詳しくは[デフォルトでslotに適用されるコンテンツを指定する](https://japanese-document.github.io/lit/components-shadow-dom.html#デフォルトでslotに適用されるコンテンツを指定する)を見てください。
 
 ## Attribute expressions
 
@@ -293,7 +293,7 @@ Element expressionsで要素インスタンスにアクセスすることがで�
 html`<div ${myDirective()}></div>`
 ```
 
-Element expressionsには[ディレクティブ](https://lit.dev/docs/templates/directives/)のみ渡すことができます。
+Element expressionsには[ディレクティブ](https://japanese-document.github.io/lit/templates-directives.html)のみ渡すことができます。
 それ以外の値が渡された場合は無視されます。
 
 Element expressionで使うことができるビルドインディレクティブの1つに`ref`ディレクティブがあります。
@@ -303,7 +303,7 @@ Element expressionで使うことができるビルドインディレクティ�
 html`<button ${ref(this.myRef)}`;
 ```
 
-詳しくは[ref](https://lit.dev/docs/templates/directives/#ref)を見てください。
+詳しくは[ref](https://japanese-document.github.io/lit/templates-directives.html#ref)を見てください。
 
 ## Well-formed HTML
 
