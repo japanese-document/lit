@@ -16,7 +16,7 @@ Litコンポーネントは`render`メソッドを実行する毎にこれをし
 一般的に全てのエクスプレッションは文字列や数値などのプリミティブな値を受け入れます。そして、いくつかのエクスプレッションはそれに加えていくつかの型が使用可能です。
 それに加えて、全てのエクスプレッションはディレクティブを受け入れることができます。
 ディレクティブはエクスプレッションはの処理を変更してレンダリングする特別な関数です。
-詳しくは[カスタムディレクティブ](https://lit.dev/docs/templates/custom-directives/)を見てください。
+詳しくは[カスタムディレクティブ](https://japanese-document.github.io/lit/templates-custom-directives.html)を見てください。
 
 以下に各エクスプレッションタイプのクイックリファレンスと詳しい説明へのリンクを記載します。
 
@@ -85,7 +85,7 @@ html`<main>${bodyText}</main>`
 *   `html`関数で生成される`TemplateResult`オブジェクト
 *   `svg`関数で生成される`SVGTemplateResult`オブジェクト
 *   DOM Nodes
-*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://lit.dev/docs/templates/custom-directives/#signaling-no-change))
+*   センチネル値([`nothing`](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)と[`noChange`](https://japanese-document.github.io/lit/templates-custom-directives.html#変更がないことを伝える))
 *   使用可能な型の配列もしくはiterables
 
 ### プリミティブ値
@@ -94,10 +94,10 @@ Litはほとんどすべての[プリミティブ値](https://developer.mozilla.
 そして、テキストコンテントに挿入される場合はそれらを文字列に変換します。
 
 `5`のような数値は`'5'`の文字列にレンダリングされます。
-Bigintも同様に扱われます。
+BigIntも同様に扱われます。
 
-booleanは`true`は`'true'`にレンダリングされます。`false`は`'false'`にレンダリングされます。でも、ふつうはbooleanでこういうことはしません。
-通常、booleanは条件として使われるます。詳しくは[Conditionals](https://lit.dev/docs/templates/conditionals/)見てください。
+booleanの`true`は`'true'`にレンダリングされます。`false`は`'false'`にレンダリングされます。でも、ふつうはbooleanでこういうことはしません。
+通常、booleanは条件として使われるます。詳しくは[条件](https://japanese-document.github.io/lit/templates-conditionals.html)見てください。
 
 空文字(`''`)、`null`、`undefined`は特別な意味を持ちます。
 そして、それらは何もレンダリングしません。
