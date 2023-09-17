@@ -108,15 +108,15 @@ render() {
 <p>条件に応じて何もレンダリングしないことがあるでしょう。
 何もレンダリングしないことはchild expressionsでよくあります。
 たまにattribute expressionsでもあります。</p>
-<p>For child expressions, the values <code>undefined</code>, <code>null</code>, the empty string (<code>''</code>), and Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value all render no nodes.
+<p>child expressionsで<code>undefined</code>、<code>null</code>、空文字(<code>''</code>)、そしてLitの<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a>を値にすると何もレンダリングしません。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#子コンテンツの削除">子コンテンツの削除</a>を見てください。</p>
-<p>This example renders a value if it exists, and otherwise renders nothing:</p>
+<p>下記の例では値が存在している場合はそれをレンダリングします。そうじゃない場合は何もレンダリングしません。</p>
 <pre><code class="language-ts">render() {
   return html`&lt;user-name&gt;${this.userName ?? nothing}&lt;/user-name&gt;`;
 }
 </code></pre>
 <p>For attribute expressions, Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value removes the attribute.
-See <a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#属性の削除">Removing an attribute</a> for more information.</p>
+詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#属性の削除">属性の削除</a>を見てください。</p>
 <p>This example conditionally renders the <code>aria-label</code> attribute:</p>
 <pre><code class="language-ts">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
