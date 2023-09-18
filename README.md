@@ -4,7 +4,8 @@ This is memo for 38elements. This document is improved Lit's document by 38eleme
 
 ## Contribution
 
-Please do not send pull request.
+**Please do not send pull request.**
+**This repository is interaction limits.**
 
 ## License
 
