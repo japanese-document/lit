@@ -1,4 +1,4 @@
-{ "header": {"name": "組み合わせ", "order": 2}, "order": 0 }
+{ "header": {"name": "組み合わせ", "order": 2}, "order": 1 }
 ---
 # リアクティブコントローラ
 
