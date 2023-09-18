@@ -87,10 +87,10 @@ render() {
 }
 ```
 
-For attribute expressions, Lit's [nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol) sentinel value removes the attribute.
+attribute expressionsにLitの[nothing](https://japanese-document.github.io/lit/api-templates.html#nothing__symbol)センチネル値をセットすると属性が削除されます。
 詳しくは[属性の削除](https://japanese-document.github.io/lit/templates-expressions.html#属性の削除)を見てください。
 
-This example conditionally renders the `aria-label` attribute:
+下記の例では条件に応じて`aria-label`属性をレンダリングします。
 
 ```ts
 html`<button aria-label="${this.ariaLabel || nothing}"></button>`
