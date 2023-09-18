@@ -115,9 +115,9 @@ render() {
   return html`&lt;user-name&gt;${this.userName ?? nothing}&lt;/user-name&gt;`;
 }
 </code></pre>
-<p>For attribute expressions, Lit's <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a> sentinel value removes the attribute.
+<p>attribute expressionsにLitの<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#nothing__symbol">nothing</a>センチネル値をセットすると属性が削除されます。
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#属性の削除">属性の削除</a>を見てください。</p>
-<p>This example conditionally renders the <code>aria-label</code> attribute:</p>
+<p>下記の例では条件に応じて<code>aria-label</code>属性をレンダリングします。</p>
 <pre><code class="language-ts">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
 <hr>
