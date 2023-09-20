@@ -2,7 +2,8 @@
 ---
 # コンポーネントを組み合わせる
 
-The most common way to handle complexity and factor Lit code into separate units is _component composition_: that is, the process of building a large, complex component out of smaller, simpler components. Imagine you've been tasked with implementing a screen of UI:
+複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。
+that is, the process of building a large, complex component out of smaller, simpler components. Imagine you've been tasked with implementing a screen of UI:
 
 You can probably identify the areas which will involve some complexity to implement. Chances are, those could be components.
 
