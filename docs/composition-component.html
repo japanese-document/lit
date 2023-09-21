@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/composition-component.html" />
     <meta property="og:title" content="コンポーネントを組み合わせる" />
-    <meta property="og:description" content="複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。that is, the process of building a large, complex component out of smaller, simpler components. Imagine you've been tasked with implementing a screen of UI:You can probably identify the areas which will involve some complexity to impleme" />
+    <meta property="og:description" content="複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。これはシンプルで小さいコンポーネントを組み合わせて大きくて複雑なコンポーネントを構築することを意味します。Imagine you've been tasked with implementing a screen of UI:You can probably identify the areas which will involve some complexity to implement. Chances are, those could be components." />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。that is, the process of building a large, complex component out of smaller, simpler components. Imagine you've been tasked with implementing a screen of UI:You can probably identify the areas which will involve some complexity to impleme" />
+    <meta name="description" content="複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。これはシンプルで小さいコンポーネントを組み合わせて大きくて複雑なコンポーネントを構築することを意味します。Imagine you've been tasked with implementing a screen of UI:You can probably identify the areas which will involve some complexity to implement. Chances are, those could be components." />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>コンポーネントを組み合わせる</title>
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
@@ -57,7 +57,8 @@
     <main class="main markdown-body">
       <h1 id="コンポーネントを組み合わせる"><a class="anchor" href="#コンポーネントを組み合わせる">#</a>コンポーネントを組み合わせる</h1>
 <p>複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。
-that is, the process of building a large, complex component out of smaller, simpler components. Imagine you've been tasked with implementing a screen of UI:</p>
+これはシンプルで小さいコンポーネントを組み合わせて大きくて複雑なコンポーネントを構築することを意味します。
+Imagine you've been tasked with implementing a screen of UI:</p>
 <p>You can probably identify the areas which will involve some complexity to implement. Chances are, those could be components.</p>
 <p>By isolating the complexity into specific components, you make the job much simpler, and you can then compose these components together to create the overall design.</p>
 <p>For example, the fairly simple screenshot above involves a number of possible components: a top bar, a menu button,  a drawer with menu items for navigating the current section; and a main content area. Each of these could be represented by a component. A complex component, like a drawer with a navigation menu, might be broken into many smaller components: the drawer itself, a button to open and close the drawer, the menu, individual menu items.</p>
