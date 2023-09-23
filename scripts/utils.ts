@@ -87,7 +87,7 @@ export function getMarkDownFileNames(): Promise<string[]> {
   })
 }
 
-export function getMetaAndMd(content: string): [Meta, string] {
+export function getMetaAndMd(content: string): [meta: Meta, md: string] {
   const [meta, md] = content.split(SEPARATOR)
   return [JSON.parse(meta), md.trim()]
 }
