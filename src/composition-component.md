@@ -25,9 +25,10 @@ render() {
 }
 ```
 
-##  What makes a good component
+## 良いコンポーネントとは
 
-When deciding how to break up functionality, there are several things that help identify when to make a new component. A piece of UI may be a good candidate for a component if one or more of the following applies:
+When deciding how to break up functionality, there are several things that help identify when to make a new component.
+A piece of UI may be a good candidate for a component if one or more of the following applies:
 
 *   It has its own state.
 *   It has its own template.
