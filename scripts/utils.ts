@@ -168,12 +168,12 @@ export function createHeaderList(md: string) {
     .filter((l) => l.slice(0, 2) === '# ' || l.slice(0, 3) === '## ' || l.slice(0, 4) === '### ' || l.slice(0, 5) === '#### ')
     .map((l) => {
       for (let i = 2; i <= 5; i++ ) {
-        if (l.slice(0, i) === `${'#'.repeat(i -1)} `) {
+        if (l.slice(0, i) === `${'#'.repeat(i - 1)} `) {
           const _header = l.slice(i).trim()
           const header = marked.parse(_header).trim()
           const href = createHash(header)
           const document = new window.DOMParser().parseFromString(header, 'text/html')
-          return `<p class="h${i -1}"><a href="#${href}">${document.body.textContent}</a></p>`
+          return `<p class="h${i - 1}"><a href="#${href}">${document.body.textContent}</a></p>`
         }
       }
     })
