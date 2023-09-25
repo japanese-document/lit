@@ -283,7 +283,7 @@ clickHandler() {
 }
 ```
 
-コンポーネントイベントに関する詳しい情報は[イベント](https://lit.dev/docs/components/events/)を見てください。
+コンポーネントイベントに関する詳しい情報は[イベント](https://japanese-document.github.io/lit/components-events.html)を見てください。
 
 ## Element expressions
 
