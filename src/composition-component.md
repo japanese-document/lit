@@ -27,8 +27,8 @@ render() {
 
 ## 良いコンポーネントとは
 
-When deciding how to break up functionality, there are several things that help identify when to make a new component.
-A piece of UI may be a good candidate for a component if one or more of the following applies:
+画面の一部分をコンポーネントに分割する判断基準があると良いでしょう。
+下記の5つの条件のうち1つでもあてはまるならコンポーネントを作成することをお勧めします。
 
 * 固有のステートがある。
 * 固有のテンプレートがある。
