@@ -27,14 +27,13 @@ render() {
 
 ## 良いコンポーネントとは
 
-画面の一部分をコンポーネントに分割する判断基準があると良いでしょう。
-下記の5つの条件のうち1つでもあてはまるならコンポーネントを作成することをお勧めします。
+When deciding how to break up functionality, there are several things that help identify when to make a new component. A piece of UI may be a good candidate for a component if one or more of the following applies:
 
-* 固有のステートがある。
-* 固有のテンプレートがある。
-*   It's used in more than one place, either in this component or in multiple components.
-*   It focuses on doing one thing well.
-*   It has a well-defined API.
+* It has its own state.
+* It has its own template.
+* It's used in more than one place, either in this component or in multiple components.
+* It focuses on doing one thing well.
+* It has a well-defined API.
 
 Reusable controls like buttons, checkboxes, and input fields can make great components. But more complex UI pieces like drawers and carousels are also great candidates for componentization.
 
