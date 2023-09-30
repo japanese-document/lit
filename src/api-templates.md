@@ -57,6 +57,7 @@ import {html, render} from 'lit';
 const name = "Zoe";
 render(html`<p>Hello, ${name}!</p>`, document.body);
 ```
+
 ## svg(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
 ### import
@@ -65,7 +66,7 @@ render(html`<p>Hello, ${name}!</p>`, document.body);
 import { svg } from 'lit';
 ```
 
-Interprets a template literal as an SVG fragment that can efficiently render to and update a container.
+テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
 The svg tag function should only be used for SVG fragments, or elements that would be contained inside an `<svg>` HTML element.
 A common error is placing an `<svg>` element in a template tagged with the svg tag function.
 The `<svg>` element is an HTML element and should be used within a template tagged with the `html` tag function.
