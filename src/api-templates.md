@@ -67,7 +67,7 @@ import { svg } from 'lit';
 ```
 
 テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
-The svg tag function should only be used for SVG fragments, or elements that would be contained inside an `<svg>` HTML element.
+svgタグ関数はSVGフラグメントもしくは`<svg>`タグ内の要素のみを取り扱います。
 A common error is placing an `<svg>` element in a template tagged with the svg tag function.
 The `<svg>` element is an HTML element and should be used within a template tagged with the `html` tag function.
 
