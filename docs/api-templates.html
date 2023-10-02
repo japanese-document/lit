@@ -97,7 +97,7 @@ render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
 <pre><code>import { svg } from 'lit';
 </code></pre>
 <p>テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
-The svg tag function should only be used for SVG fragments, or elements that would be contained inside an <code>&lt;svg&gt;</code> HTML element.
+svgタグ関数はSVGフラグメントもしくは<code>&lt;svg&gt;</code>タグ内の要素のみを取り扱います。
 A common error is placing an <code>&lt;svg&gt;</code> element in a template tagged with the svg tag function.
 The <code>&lt;svg&gt;</code> element is an HTML element and should be used within a template tagged with the <code>html</code> tag function.</p>
 <p>In LitElement usage, it's invalid to return an SVG fragment from the <code>render()</code> method,
