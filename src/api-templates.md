@@ -68,7 +68,7 @@ import { svg } from 'lit';
 
 テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
 svgタグ関数はSVGフラグメントもしくは`<svg>`タグ内の要素のみを取り扱います。
-よくある間違いとしてsvgタグ関数が付与されたテンプレートに`<svg>`要素を配置することです。
+よくある間違いとしてsvgタグ関数が付与されたテンプレートに`<svg>`要素を配置することがあります。
 The `<svg>` element is an HTML element and should be used within a template tagged with the `html` tag function.
 
 In LitElement usage, it's invalid to return an SVG fragment from the `render()` method,
