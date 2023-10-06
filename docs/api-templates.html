@@ -102,6 +102,12 @@ svgタグ関数はSVGフラグメントもしくは<code>&lt;svg&gt;</code>タ�
 The <code>&lt;svg&gt;</code> element is an HTML element and should be used within a template tagged with the <code>html</code> tag function.</p>
 <p>In LitElement usage, it's invalid to return an SVG fragment from the <code>render()</code> method,
 as the SVG fragment will be contained within the element's shadow root and thus cannot be used within an <code>&lt;svg&gt;</code> HTML element.</p>
+<pre><code>const rect = svg`&lt;rect width="10" height="10"&gt;&lt;/rect&gt;`;
+const myImage = html`
+  &lt;svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
+    ${rect}
+  &lt;/svg&gt;`;
+</code></pre>
 <hr>
 <h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
 <h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
