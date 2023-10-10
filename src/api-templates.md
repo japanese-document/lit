@@ -66,13 +66,13 @@ render(html`<p>Hello, ${name}!</p>`, document.body);
 import { svg } from 'lit';
 ```
 
-テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
+テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメント(SVG用のTemplateResult)に変換します。
 svgタグ関数はSVGフラグメントもしくは`<svg>`タグ内の要素のみを取り扱います。
 よくある間違いとしてsvgタグ関数が付与されたテンプレートに`<svg>`要素を配置することがあります。
 `<svg>`要素はHTML要素です。だから、`<svg>`要素は`html`タグ関数が付与されたテンプレート内で使われる必要があります。
 
-In LitElement usage, it's invalid to return an SVG fragment from the `render()` method,
-as the SVG fragment will be contained within the element's shadow root and thus cannot be used within an `<svg>` HTML element.
+SVGフラグメントは要素のshadow root内にあります。だから、`<svg>`HTML要素内でSVGフラグメントを使うことはできません。
+だから、LitElementの`render()`メソッドはSVGフラグメントを返しても正常に動作しません。
 
 ```
 const rect = svg`<rect width="10" height="10"></rect>`;

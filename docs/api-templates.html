@@ -96,12 +96,12 @@ render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
 <h3 id="import"><a class="anchor" href="#import">#</a>import</h3>
 <pre><code>import { svg } from 'lit';
 </code></pre>
-<p>テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメントに変換します。
+<p>テンプレートリテラルを効率的にレンダリングしてコンテナを更新するSVGフラグメント(SVG用のTemplateResult)に変換します。
 svgタグ関数はSVGフラグメントもしくは<code>&lt;svg&gt;</code>タグ内の要素のみを取り扱います。
 よくある間違いとしてsvgタグ関数が付与されたテンプレートに<code>&lt;svg&gt;</code>要素を配置することがあります。
 <code>&lt;svg&gt;</code>要素はHTML要素です。だから、<code>&lt;svg&gt;</code>要素は<code>html</code>タグ関数が付与されたテンプレート内で使われる必要があります。</p>
-<p>In LitElement usage, it's invalid to return an SVG fragment from the <code>render()</code> method,
-as the SVG fragment will be contained within the element's shadow root and thus cannot be used within an <code>&lt;svg&gt;</code> HTML element.</p>
+<p>SVGフラグメントは要素のshadow root内にあります。だから、<code>&lt;svg&gt;</code>HTML要素内でSVGフラグメントを使うことはできません。
+だから、LitElementの<code>render()</code>メソッドはSVGフラグメントを返しても正常に動作しません。</p>
 <pre><code>const rect = svg`&lt;rect width="10" height="10"&gt;&lt;/rect&gt;`;
 const myImage = html`
   &lt;svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
