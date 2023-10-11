@@ -21,7 +21,7 @@ const header = (title: string) => html`<h1>${title}</h1>`;
 
 ## nothing: symbol
 
-### inport
+### import
 
 ```
 import { nothing } from 'lit';
@@ -81,6 +81,20 @@ const myImage = html`
     ${rect}
   </svg>`;
 ```
+
+## type SanitizerFactory
+
+### import
+
+```
+import { SanitizerFactory } from 'lit';
+```
+
+### type
+
+(node: Node, name: string, type: "property" | "attribute") => [ValueSanitizer](https://lit.dev/docs/api/misc/#ValueSanitizer)
+
+### 詳細
 
 ---
 

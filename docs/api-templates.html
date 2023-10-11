@@ -67,7 +67,7 @@ LitコンポーネントはLitテンプレートがレンダリングされる�
 <pre><code>const header = (title: string) =&gt; html`&lt;h1&gt;${title}&lt;/h1&gt;`;
 </code></pre>
 <h2 id="nothing__symbol"><a class="anchor" href="#nothing__symbol">#</a>nothing: symbol</h2>
-<h3 id="inport"><a class="anchor" href="#inport">#</a>inport</h3>
+<h3 id="import"><a class="anchor" href="#import">#</a>import</h3>
 <pre><code>import { nothing } from 'lit';
 </code></pre>
 <p>child expressionsでは、<code>undefined</code>、<code>null</code>、<code>''</code>、<code>nothing</code>はNodeをレンダリングしません。
@@ -108,6 +108,13 @@ const myImage = html`
     ${rect}
   &lt;/svg&gt;`;
 </code></pre>
+<h2 id="type_SanitizerFactory"><a class="anchor" href="#type_SanitizerFactory">#</a>type SanitizerFactory</h2>
+<h3 id="import"><a class="anchor" href="#import">#</a>import</h3>
+<pre><code>import { SanitizerFactory } from 'lit';
+</code></pre>
+<h3 id="type"><a class="anchor" href="#type">#</a>type</h3>
+<p>(node: Node, name: string, type: "property" | "attribute") =&gt; <a class="Link" href="https://lit.dev/docs/api/misc/#ValueSanitizer">ValueSanitizer</a></p>
+<h3 id="詳細"><a class="anchor" href="#詳細">#</a>詳細</h3>
 <hr>
 <h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
 <h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
@@ -149,11 +156,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">html(strings: TemplateStringsArray, values: Array): TemplateResult</a></p>
 <p class="h3"><a href="#import">import</a></p>
 <p class="h2"><a href="#nothing__symbol">nothing: symbol</a></p>
-<p class="h3"><a href="#inport">inport</a></p>
+<p class="h3"><a href="#import">import</a></p>
 <p class="h2"><a href="#render(value__unknown,_container__HTMLElement_|_DocumentFragment,_options___RenderOptions)__RootPart">render(value: unknown, container: HTMLElement | DocumentFragment, options?: RenderOptions): RootPart</a></p>
 <p class="h3"><a href="#Import">Import</a></p>
 <p class="h2"><a href="#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult">svg(strings: TemplateStringsArray, values: Array): TemplateResult</a></p>
 <p class="h3"><a href="#import">import</a></p>
+<p class="h2"><a href="#type_SanitizerFactory">type SanitizerFactory</a></p>
+<p class="h3"><a href="#import">import</a></p>
+<p class="h3"><a href="#type">type</a></p>
+<p class="h3"><a href="#詳細">詳細</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
