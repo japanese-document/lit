@@ -97,7 +97,7 @@ import { SanitizerFactory } from 'lit';
 ### 詳細
 
 値をDOMに書き込む前に、値をサニタイズします。
-This can be used to implement a security policy of allowed and disallowed values in order to prevent XSS attacks.
+XSSを防ぐために許可する値と許可しない値を判別する用途で、これを実装します。
 One way of using this callback would be to check attributes and properties against a list of high risk fields,
 and require that values written to such fields be instances of a class which is safe by construction.
 Closure's Safe HTML Types is one implementation of [this technique](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md). 
