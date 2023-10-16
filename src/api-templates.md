@@ -98,8 +98,8 @@ import { SanitizerFactory } from 'lit';
 
 値をDOMに書き込む前に、値をサニタイズします。
 XSSを防ぐために許可する値と許可しない値を判別する用途で、これを実装します。
-One way of using this callback would be to check attributes and properties against a list of high risk fields,
-and require that values written to such fields be instances of a class which is safe by construction.
+このコールバックの使い方の一例として、リスクの高いフィールドのリストに対応する属性とプロパティをチェックして、
+それらのフィールドの値の安全性を点検することがあります。
 Closure's Safe HTML Types is one implementation of [this technique](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md). 
 The TrustedTypes polyfill in API-only mode could also be used as a basis for [this technique](https://github.com/WICG/trusted-types).
 
