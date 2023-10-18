@@ -100,8 +100,8 @@ import { SanitizerFactory } from 'lit';
 XSSを防ぐために許可する値と許可しない値を判別する用途で、これを実装します。
 このコールバックの使い方の一例として、リスクの高いフィールドのリストに対応する属性とプロパティをチェックして、
 それらのフィールドの値の安全性を点検することがあります。
-Closure's Safe HTML Types is one implementation of [this technique](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md). 
-The TrustedTypes polyfill in API-only mode could also be used as a basis for [this technique](https://github.com/WICG/trusted-types).
+Closure's [Safe HTML Types](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md) is one implementation of this technique. 
+The [TrustedTypes polyfill](https://github.com/WICG/trusted-types) in API-only mode could also be used as a basis for this technique.
 
 ---
 
