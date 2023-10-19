@@ -373,7 +373,7 @@ class MyButton extends LitElement {
 
   render() {
     return html`
-      &lt;${this.tag} ${this.activeAttribute}?=${this.active}&gt;
+      &lt;${this.tag} ${this.activeAttribute}=${this.active}&gt;
         &lt;p&gt;${this.caption}&lt;/p&gt;
       &lt;/${this.tag}&gt;`;
   }
@@ -425,7 +425,7 @@ class MyButton extends LitElement {
     const tag = getTagName();
     const activeAttribute = getActiveAttribute();
     return html`
-      &lt;${unsafeStatic(tag)} ${unsafeStatic(activeAttribute)}?=${this.active}&gt;
+      &lt;${unsafeStatic(tag)} ${unsafeStatic(activeAttribute)}=${this.active}&gt;
         &lt;p&gt;${this.caption}&lt;/p&gt;
       &lt;/${unsafeStatic(tag)}&gt;`;
   }
