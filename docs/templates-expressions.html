@@ -221,6 +221,9 @@ falseになる値がセットされると属性は削除されます。</p>
 <p>プロパティ名の先頭に<code>.</code>を付けるとプロパティにJavaScriptの値ままセットすることができます。</p>
 <pre><code class="language-js">html`&lt;input .value=${this.itemCount}&gt;`;
 </code></pre>
+<p>上記のコードは下記のように<code>input</code>要素の<code>value</code>プロパティに直接セットすることと同じです。</p>
+<pre><code class="language-js">inputEl.value = this.itemCount;
+</code></pre>
 <p>この構文を使うと子コンポーネントに複雑なデータを渡すことができます。
 下記の例では、<code>listItems</code>プロパティを持つ<code>my-list</code>コンポーネントにオブジェクトの配列を渡すことができます。</p>
 <pre><code class="language-js">html`&lt;my-list .listItems=${this.items}&gt;&lt;/my-list&gt;`;
