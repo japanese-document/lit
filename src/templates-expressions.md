@@ -248,6 +248,12 @@ html`<button aria-label="${this.ariaLabel || nothing}"></button>`
 html`<input .value=${this.itemCount}>`;
 ```
 
+上記のコードは下記のように`input`要素の`value`プロパティに直接セットすることと同じです。
+
+```js
+inputEl.value = this.itemCount;
+```
+
 この構文を使うと子コンポーネントに複雑なデータを渡すことができます。
 下記の例では、`listItems`プロパティを持つ`my-list`コンポーネントにオブジェクトの配列を渡すことができます。
 
