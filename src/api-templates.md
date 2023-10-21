@@ -101,7 +101,7 @@ XSSを防ぐために許可する値と許可しない値を判別する用途�
 このコールバックの使い方の一例として、リスクの高いフィールドのリストに対応する属性とプロパティをチェックして、
 それらのフィールドの値の安全性を点検することがあります。
 Closureの[Safe HTML Types](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md)はこのテクニックを使った実装の一例です。
-The [TrustedTypes polyfill](https://github.com/WICG/trusted-types) in API-only mode could also be used as a basis for this technique.
+[TrustedTypes polyfill](https://github.com/WICG/trusted-types)のAPI専用モードもこのテクニックに使うことができます。
 
 ---
 
