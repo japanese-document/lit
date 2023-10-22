@@ -4,7 +4,7 @@
 
 ## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
-### import
+### Import
 
 ```
 import { html } from 'lit';
@@ -21,7 +21,7 @@ const header = (title: string) => html`<h1>${title}</h1>`;
 
 ## nothing: symbol
 
-### import
+### Import
 
 ```
 import { nothing } from 'lit';
@@ -60,7 +60,7 @@ render(html`<p>Hello, ${name}!</p>`, document.body);
 
 ## svg(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
 
-### import
+### Import
 
 ```
 import { svg } from 'lit';
@@ -84,13 +84,13 @@ const myImage = html`
 
 ## type SanitizerFactory
 
-### import
+### Import
 
 ```
 import { SanitizerFactory } from 'lit';
 ```
 
-### type
+### Type
 
 (node: Node, name: string, type: "property" | "attribute") => [ValueSanitizer](https://lit.dev/docs/api/misc/#ValueSanitizer)
 
@@ -102,6 +102,36 @@ XSSを防ぐために許可する値と許可しない値を判別する用途�
 それらのフィールドの値の安全性を点検することがあります。
 Closureの[Safe HTML Types](https://github.com/google/safe-html-types/blob/master/doc/safehtml-types.md)はこのテクニックを使った実装の一例です。
 [TrustedTypes polyfill](https://github.com/WICG/trusted-types)のAPI専用モードもこのテクニックに使うことができます。
+
+## type SVGTemplateResult
+
+### Import
+
+```
+import { TemplateResult } from 'lit';
+```
+
+### Type
+
+TemplateResult&lt;SVG_RESULT&gt;
+
+## type TemplateResult
+
+### Import
+
+```
+import { TemplateResult } from 'lit';
+```
+
+### Type
+
+{_$litType$: T, strings: TemplateStringsArray, values: Array&lt;unknown&gt;}
+
+### 詳細
+
+A TemplateResult object holds all the information about a template expression required to render it: the template strings, expression values, and type of template (html or svg).
+`TemplateResult`` objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
+See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
 
 ---
 
