@@ -129,9 +129,9 @@ import { TemplateResult } from 'lit';
 
 ### 詳細
 
-A TemplateResult object holds all the information about a template expression required to render it: the template strings, expression values, and type of template (html or svg).
-`TemplateResult`` objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
-See [Rendering](https://japanese-document.github.io/lit/components-rendering.html) for more information.
+A `TemplateResult` object holds all the information about a template expression required to render it: the template strings, expression values, and type of template (html or svg).
+`TemplateResult` objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
+詳しくは[レンダリング](https://japanese-document.github.io/lit/components-rendering.html)を見てください。
 
 ---
 
