@@ -57,7 +57,7 @@
     </nav></div>
     <main class="main markdown-body">
       <h1 id="テンプレート"><a class="anchor" href="#テンプレート">#</a>テンプレート</h1>
-<h2 id="html(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a class="anchor" href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">#</a>html(strings: TemplateStringsArray, values: Array): TemplateResult</h2>
+<h2 id="html(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a class="anchor" href="#html(strings__TemplateStringsArray,_values__Array)__TemplateResult">#</a>html(strings: TemplateStringsArray, values: Array): <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#type_TemplateResult">TemplateResult</a></h2>
 <h3 id="Import"><a class="anchor" href="#Import">#</a>Import</h3>
 <pre><code>import { html } from 'lit';
 </code></pre>
@@ -92,7 +92,7 @@ attribute expressionsでは<code>nothing</code>は属性を削除しますが、
 const name = "Zoe";
 render(html`&lt;p&gt;Hello, ${name}!&lt;/p&gt;`, document.body);
 </code></pre>
-<h2 id="svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a class="anchor" href="#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult">#</a>svg(strings: TemplateStringsArray, values: Array): TemplateResult</h2>
+<h2 id="svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><a class="anchor" href="#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult">#</a>svg(strings: TemplateStringsArray, values: Array): <a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#type_TemplateResult">TemplateResult</a></h2>
 <h3 id="Import"><a class="anchor" href="#Import">#</a>Import</h3>
 <pre><code>import { svg } from 'lit';
 </code></pre>
@@ -134,7 +134,7 @@ Closureの<a class="Link" href="https://github.com/google/safe-html-types/blob/m
 <h3 id="Type"><a class="anchor" href="#Type">#</a>Type</h3>
 <p>{_$litType$: T, strings: TemplateStringsArray, values: Array&lt;unknown&gt;}</p>
 <h3 id="詳細"><a class="anchor" href="#詳細">#</a>詳細</h3>
-<p>A <code>TemplateResult</code> object holds all the information about a template expression required to render it: the template strings, expression values, and type of template (html or svg).
+<p><code>TemplateResult</code>はテンプレートをレンダリングすることに必要なすべての情報を持っています。それはテンプレートの文字列、エクスプレッションの値、テンプレートのタイプ(svg、html)です。
 <code>TemplateResult</code> objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
 詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a>を見てください。</p>
 <hr>

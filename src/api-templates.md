@@ -2,7 +2,7 @@
 ---
 # テンプレート
 
-## html(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
+## html(strings: TemplateStringsArray, values: Array<unknown>): [TemplateResult](https://japanese-document.github.io/lit/api-templates.html#type_TemplateResult)
 
 ### Import
 
@@ -58,7 +58,7 @@ const name = "Zoe";
 render(html`<p>Hello, ${name}!</p>`, document.body);
 ```
 
-## svg(strings: TemplateStringsArray, values: Array<unknown>): TemplateResult 
+## svg(strings: TemplateStringsArray, values: Array<unknown>): [TemplateResult](https://japanese-document.github.io/lit/api-templates.html#type_TemplateResult)
 
 ### Import
 
@@ -129,7 +129,7 @@ import { TemplateResult } from 'lit';
 
 ### 詳細
 
-A `TemplateResult` object holds all the information about a template expression required to render it: the template strings, expression values, and type of template (html or svg).
+`TemplateResult`はテンプレートをレンダリングすることに必要なすべての情報を持っています。それはテンプレートの文字列、エクスプレッションの値、テンプレートのタイプ(svg、html)です。
 `TemplateResult` objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
 詳しくは[レンダリング](https://japanese-document.github.io/lit/components-rendering.html)を見てください。
 
