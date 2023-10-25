@@ -130,7 +130,8 @@ import { TemplateResult } from 'lit';
 ### 詳細
 
 `TemplateResult`はテンプレートをレンダリングすることに必要なすべての情報を持っています。それはテンプレートの文字列、エクスプレッションの値、テンプレートのタイプ(svg、html)です。
-`TemplateResult` objects do not create any DOM on their own. To create or update DOM you need to render the TemplateResult.
+`TemplateResult`オブジェクト自身はDOMを生成しません。
+DOMを生成もしくは更新するには、`TemplateResult`をレンダリングします。
 詳しくは[レンダリング](https://japanese-document.github.io/lit/components-rendering.html)を見てください。
 
 ---
