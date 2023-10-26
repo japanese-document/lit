@@ -487,13 +487,11 @@ this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサ
 <p>下記のようにプロパティのゲッタとセッタを変更することで、プロパティを取得する処理やセットする処理を変更することができます。</p>
 <pre><code class="language-ts">private _prop = 0;
 
+@property()
 set prop(val: number) {
-  let oldVal = this._prop;
   this._prop = Math.floor(val);
-  this.requestUpdate('prop', oldVal);
 }
 
-@property()
 get prop() { return this._prop; }
 </code></pre>
 <pre><code class="language-js">static properties = {
@@ -503,16 +501,13 @@ get prop() { return this._prop; }
 _prop = 0;
 
 set prop(val) {
-  let oldVal = this._prop;
   this._prop = Math.floor(val);
-  this.requestUpdate('prop', oldVal);
 }
 
 get prop() { return this._prop; }
 </code></pre>
-<p><code>@property</code>や<code>@state</code>と一緒にカスタムプロパティアクセサを設定する際は、上記のようにゲッタにデコレータを配置します。</p>
-<p>Litが生成したセッタは自動的に<code>requestUpdate()</code>を実行します。
-セッタを変更する場合、上記のようにプロパティ名とその変更前の値を<code>requestUpdate()</code>を渡して実行する必要があります。</p>
+<p>To use custom property accessors with the <code>@property</code> or <code>@state</code> decorators, put the decorator on the setter, as shown above.
+<code>@property</code> or <code>@state</code> decorated setters call <code>requestUpdate()</code>.</p>
 <p>ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
 変更後のプロパティを使った処理を行う場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#willupdate"><code>willUpdate</code></a>コールバックを使うことを推奨します。この方法ではアップデートサイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
 要素が更新された後に実行される処理を変更したい場合は<a class="Link" href="https://lit.dev/docs/components/lifecycle/#updated"><code>updated</code></a>コールバックを使うことを推奨します。</p>

@@ -542,13 +542,11 @@ this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサ
 ```ts
 private _prop = 0;
 
+@property()
 set prop(val: number) {
-  let oldVal = this._prop;
   this._prop = Math.floor(val);
-  this.requestUpdate('prop', oldVal);
 }
 
-@property()
 get prop() { return this._prop; }
 ```
 
@@ -560,18 +558,13 @@ static properties = {
 _prop = 0;
 
 set prop(val) {
-  let oldVal = this._prop;
   this._prop = Math.floor(val);
-  this.requestUpdate('prop', oldVal);
 }
 
 get prop() { return this._prop; }
 ```
-
-`@property`や`@state`と一緒にカスタムプロパティアクセサを設定する際は、上記のようにゲッタにデコレータを配置します。
-
-Litが生成したセッタは自動的に`requestUpdate()`を実行します。
-セッタを変更する場合、上記のようにプロパティ名とその変更前の値を`requestUpdate()`を渡して実行する必要があります。
+To use custom property accessors with the `@property` or `@state` decorators, put the decorator on the setter, as shown above.
+`@property` or `@state` decorated setters call `requestUpdate()`.
 
 ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
 変更後のプロパティを使った処理を行う場合は[`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate)コールバックを使うことを推奨します。この方法ではアップデートサイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
