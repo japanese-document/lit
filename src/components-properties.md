@@ -563,12 +563,12 @@ set prop(val) {
 
 get prop() { return this._prop; }
 ```
-To use custom property accessors with the `@property` or `@state` decorators, put the decorator on the setter, as shown above.
-`@property` or `@state` decorated setters call `requestUpdate()`.
+上記のように`@property`もしくは`@state`デコレータをセッタに付与してカスタムプロパティアクセサを作成します。
+`@property`もしくは`@state`が付与されたセッタは`requestUpdate()`を実行します。
 
 ほとんどの場合、カスタムプロパティアクセサを設定する必要はありません。
-変更後のプロパティを使った処理を行う場合は[`willUpdate`](https://lit.dev/docs/components/lifecycle/#willupdate)コールバックを使うことを推奨します。この方法ではアップデートサイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
-要素が更新された後に実行される処理を変更したい場合は[`updated`](https://lit.dev/docs/components/lifecycle/#updated)コールバックを使うことを推奨します。
+変更後のプロパティを使った処理を行う場合は[`willUpdate`](https://japanese-document.github.io/lit/components-lifecycle.html#willUpdate())コールバックを使うことを推奨します。この方法ではアップデートサイクル中にプロパティの値を変更したとしても、新たな更新は発動しません。
+要素が更新された後に実行される処理を変更したい場合は[`updated`](https://japanese-document.github.io/lit/components-lifecycle.html#updated())コールバックを使うことを推奨します。
 
 クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
 クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。
@@ -592,7 +592,7 @@ static properties = {
 
 `hasChanged`はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
 `hasChanged()`がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
-更新に関する詳しい情報は[リアクティブアップデートサイクル](https://lit.dev/docs/components/lifecycle/#reactive-update-cycle)を見てください。
+更新に関する詳しい情報は[リアクティブアップデートサイクル](https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル)を見てください。
 
 `hasChanged()`のデフォルトの実装は`newVal !== oldVal`です。
 
