@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/data-context.html" />
+    <meta property="og:title" content="コンテキスト" />
+    <meta property="og:description" content="Context is a way of making data available to entire component subtrees without having to manually bind properties to every component. The data is &quot;contextually&quot; available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.Lit's context i" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="Context is a way of making data available to entire component subtrees without having to manually bind properties to every component. The data is &quot;contextually&quot; available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.Lit's context i" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>コンテキスト</title>
+    <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <nav class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-conditionals.html">条件</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-lists.html">リスト</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-component.html">コンポーネントを組み合わせる</a></p>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>データ管理</summary>
+        <p><a href="https://japanese-document.github.io/lit/data-context.html">コンテキスト</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </nav></div>
+    <main class="main markdown-body">
+      <h1 id="コンテキスト"><a class="anchor" href="#コンテキスト">#</a>コンテキスト</h1>
+<p>Context is a way of making data available to entire component subtrees without having to manually bind properties to every component. The data is "contextually" available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.</p>
+<p>Lit's context implementation is available in the <code>@lit/context</code> package:</p>
+<pre><code class="language-bash">npm i @lit/context
+</code></pre>
+<p>Context is useful for data that needs to be consumed by a wide variety and large number of components - things like an app's data store, the current user, a UI theme - or when data-binding isn't an option, such as when an element needs to provide data to its light DOM children.</p>
+<p>Context is very similar to React's Context, or to dependency injection systems like Angular's, with some important differences that make Context work with the dynamic nature of the DOM, and enable interoperability across different web components libraries, frameworks and plain JavaScript.</p>
+<h2 id="Example"><a class="anchor" href="#Example">#</a>Example</h2>
+<p>Using context involves a <em>context object</em> (sometimes called a key), a <em>provider</em> and a <em>consumer</em>, which communicate using the context object.</p>
+<p>Context definition (<code>logger-context.ts</code>):</p>
+<pre><code class="language-ts">import {createContext} from '@lit/context';
+import type {Logger} from 'my-logging-library';
+export type {Logger} from 'my-logging-library';
+export const loggerContext = createContext&lt;Logger&gt;('logger');
+</code></pre>
+<p>Provider:</p>
+<pre><code class="language-ts">import {LitElement, property, html} from 'lit';
+import {provide} from '@lit/context';
+
+import {Logger} from 'my-logging-library';
+import {loggerContext} from './logger-context.js';
+
+@customElement('my-app')
+class MyApp extends LitElement {
+
+  @provide({context: loggerContext})
+  logger = new Logger();
+
+  render() {
+    return html`...`;
+  }
+}
+</code></pre>
+<p>Consumer:</p>
+<pre><code class="language-ts">import {LitElement, property} from 'lit';
+import {consume} from '@lit/context';
+
+import {type Logger, loggerContext} from './logger-context.js';
+
+export class MyElement extends LitElement {
+
+  @consume({context: loggerContext})
+  @property({attribute: false})
+  public logger?: Logger;
+
+  private doThing() {
+    this.logger?.log('A thing was done');
+  }
+}
+</code></pre>
+<h2 id="Key_Concepts"><a class="anchor" href="#Key_Concepts">#</a>Key Concepts</h2>
+<h3 id="Context_Protocol"><a class="anchor" href="#Context_Protocol">#</a>Context Protocol</h3>
+<p>Lit's context is based on the <a class="Link" href="https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md">Context Community Protocol</a> by the W3C's <a class="Link" href="https://www.w3.org/community/webcomponents/">Web Components Community Group</a>.</p>
+<p>This protocol enables interoperability between elements (or even non-element code) regardless of how they were built. Via the context protocol, a Lit-based element can provide data to a consumer not built with Lit, or vice versa.</p>
+<p>The Context Protocol is based on DOM events. A consumer fires a <code>context-request</code> event that carries the context key that it wants, and any element above it can listen for the <code>context-request</code> event and provide data for that context key.</p>
+<p><code>@lit/context</code> implements this event-based protocol and makes it available via a few reactive controllers and decorators.</p>
+<h3 id="Context_Objects"><a class="anchor" href="#Context_Objects">#</a>Context Objects</h3>
+<p>Contexts are identified by <em>context objects</em> or <em>context keys</em>. They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.</p>
+<h3 id="Providers"><a class="anchor" href="#Providers">#</a>Providers</h3>
+<p>Providers are usually elements (but can be any event handler code) that provide data for specific context keys.</p>
+<h3 id="Consumers"><a class="anchor" href="#Consumers">#</a>Consumers</h3>
+<p>Consumers request data for specific context keys.</p>
+<h3 id="Subscriptions"><a class="anchor" href="#Subscriptions">#</a>Subscriptions</h3>
+<p>When a consumer requests data for a context, it can tell the provider that it wants to <em>subscribe</em> to changes in the context. If the provider has new data, the consumer will be notified and can automatically update.</p>
+<h2 id="Usage"><a class="anchor" href="#Usage">#</a>Usage</h2>
+<h3 id="Defining_a_context"><a class="anchor" href="#Defining_a_context">#</a>Defining a context</h3>
+<p>Every usage of context must have a context object to coordinate the data request. This context object represents the identity and type of data that is provided.</p>
+<p>Context objects are created with the <code>createContext()</code> function:</p>
+<pre><code class="language-ts">export const myContext = createContext(Symbol('my-context'));
+</code></pre>
+<p>It is recommended to put context objects in their own module so that they're importable independent of specific providers and consumers.</p>
+<h4 id="Context_type-checking"><a class="anchor" href="#Context_type-checking">#</a>Context type-checking</h4>
+<p><code>createContext()</code> takes any value and returns it directly. In TypeScript, the value is cast to a typed <code>Context</code> object, which carries the type of the context <em>value</em> with it.</p>
+<p>In case of a mistake like this:</p>
+<pre><code class="language-ts">const myContext = createContext&lt;Logger&gt;(Symbol('logger'));
+
+class MyElement extends LitElement {
+  @provide({context: myContext})
+  name: string
+}
+</code></pre>
+<p>TypeScript will warn that the type <code>string</code> is not assignable to the type <code>Logger</code>. Note that this check is currently only for public fields.</p>
+
+
+<h4 id="Context_equality"><a class="anchor" href="#Context_equality">#</a>Context equality</h4>
+<p>Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (<code>===</code>), so a provider will only handle a context request if its context key equals the context key of the request.</p>
+<p>This means that there are two main ways to create a context object:</p>
+<ol>
+<li>With a value that is globally unique, like an object (<code>{}</code>)  or symbol (<code>Symbol()</code>)</li>
+<li>With a value that is not globally unique, so that it can be equal under strict equality, like a string (<code>'logger'</code>) or <em>global</em> symbol (<code>Symbol.for('logger')</code>).</li>
+</ol>
+<p>If you want two <em>separate</em> <code>createContext()</code> calls to refer to the same
+context, then use a key that will be equal under strict equality like a
+string:</p>
+<pre><code class="language-ts">// true
+createContext('my-context') === createContext('my-context')
+</code></pre>
+<p>Beware though that two modules in your app could use the same context key to refer to different objects. To avoid unintended collisions you may want to use a relatively unique string, e.g. like <code>'console-logger'</code> instead of <code>'logger'</code>.</p>
+<p>Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.</p>
+<h3 id="Providing_a_context"><a class="anchor" href="#Providing_a_context">#</a>Providing a context</h3>
+<p>There are two ways in <code>@lit/context</code> to provide a context value: the ContextProvider controller and the <code>@provide()</code> decorator.</p>
+<h4 id="_provide()"><a class="anchor" href="#_provide()">#</a><code>@provide()</code></h4>
+<p>The <code>@provide()</code> decorator is the easiest way to provide a value if you're using decorators. It creates a ContextProvider controller for you.</p>
+<p>Decorate a property with <code>@provide()</code> and give it the context key:</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {property} from 'lit/decorators.js';
+import {provide} from '@lit/context';
+import {myContext, MyData} from './my-context.js';
+
+class MyApp extends LitElement {
+  @provide({context: myContext})
+  myData: MyData;
+}
+</code></pre>
+<p>You can make the property also a reactive property with <code>@property()</code> or <code>@state()</code> so that setting it will update the provider element as well as context consumers.</p>
+<pre><code class="language-ts">  @provide({context: myContext})
+  @property({attribute: false})
+  myData: MyData;
+</code></pre>
+<p>Context properties are often intended to be private. You can make private properties reactive with <code>@state()</code>:</p>
+<pre><code class="language-ts">  @provide({context: myContext})
+  @state()
+  private _myData: MyData;
+</code></pre>
+<p>Making a context property public lets an element provide a public field to its child tree:</p>
+<pre><code class="language-ts">  html`&lt;my-provider-element .myData=${someData}&gt;`
+</code></pre>
+<h4 id="ContextProvider"><a class="anchor" href="#ContextProvider">#</a>ContextProvider</h4>
+<p><code>ContextProvider</code> is a reactive controller that manages <code>context-request</code> event handlers for you.</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {ContextProvider} from '@lit/context';
+import {myContext} from './my-context.js';
+
+export class MyApp extends LitElement {
+  private _provider = new ContextProvider(this, {context: myContext});
+}
+</code></pre>
+<p>ContextProvider can take an initial value as an option in the constructor:</p>
+<pre><code class="language-ts">  private _provider = new ContextProvider(this, {context: myContext, initialValue: myData});
+</code></pre>
+<p>Or you can call <code>setValue()</code>:</p>
+<pre><code class="language-ts">  this._provider.setValue(myData);
+</code></pre>
+<h3 id="Consuming_a_context"><a class="anchor" href="#Consuming_a_context">#</a>Consuming a context</h3>
+<h4 id="_consume()_decorator"><a class="anchor" href="#_consume()_decorator">#</a><code>@consume()</code> decorator</h4>
+<p>The <code>@consume()</code> decorator is the easiest way to consume a value if you're using decorators. It creates a ContextConsumer controller for you.</p>
+<p>Decorate a property with <code>@consume()</code> and give it the context key:</p>
+<pre><code class="language-ts">import {LitElement, html} from 'lit';
+import {consume} from '@lit/context';
+import {myContext, MyData} from './my-context.js';
+
+class MyElement extends LitElement {
+  @consume({context: myContext})
+  myData: MyData;
+}
+</code></pre>
+<p>When this element is connected to the document, it will automatically fire a <code>context-request</code> event, get a provided value, assign it to the property, and trigger an update of the element.</p>
+<h4 id="ContextConsumer"><a class="anchor" href="#ContextConsumer">#</a>ContextConsumer</h4>
+<p>ContextConsumer is a reactive controller that manages dispatching the <code>context-request</code> event for you. The controller will cause the host element to update when new values are provided. The provided value is then available at the <code>.value</code> property of the controller.</p>
+<pre><code class="language-ts">import {LitElement, property} from 'lit';
+import {ContextConsumer} from '@lit/context';
+import {myContext} from './my-context.js';
+
+export class MyElement extends LitElement {
+  private _myData = new ContextConsumer(this, {context: myContext});
+
+  render() {
+    const myData = this._myData.value;
+    return html`...`;
+  }
+}
+</code></pre>
+<h4 id="Subscribing_to_contexts"><a class="anchor" href="#Subscribing_to_contexts">#</a>Subscribing to contexts</h4>
+<p>Consumers can subscribe to context values so that if a provider has a new value, it can give it to all subscribed consumers, causing them to update.</p>
+<p>You can subscribe with the <code>@consume()</code> decorator:</p>
+<pre><code class="language-ts">  @consume({context: myContext, subscribe: true})
+  myData: MyData;
+</code></pre>
+<p>and the ContextConsumer controller:</p>
+<pre><code class="language-ts">  private _myData = new ContextConsumer(this,
+    {
+      context: myContext,
+      subscribe: true,
+    }
+  );
+</code></pre>
+<h2 id="Example_Use_Cases"><a class="anchor" href="#Example_Use_Cases">#</a>Example Use Cases</h2>
+<h3 id="Current_user,_locale,_etc."><a class="anchor" href="#Current_user,_locale,_etc.">#</a>Current user, locale, etc.</h3>
+<p>The most common context use cases involve data that is global to a page and possibly only sparsely needed in components throughout the page. Without context it's possible that most or all components would need to accept and propagate reactive properties for the data.</p>
+<h3 id="Services"><a class="anchor" href="#Services">#</a>Services</h3>
+<p>App-global services, like loggers, analytics, data stores, can be provided by context. An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides. Tests can easily provide mock services, or different parts of the page can be given different service instances.</p>
+<h3 id="Themes"><a class="anchor" href="#Themes">#</a>Themes</h3>
+<p>Themes are sets of styles that apply to the entire page or entire subtrees within the page - exactly the kind of scope of data that context provides.</p>
+<p>One way of building a theme system would be to define a <code>Theme</code> type that containers can provide that holds named styles. Elements that want to apply a theme can consume the theme object and look up styles by name. Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>
+<h3 id="HTML-based_plugins"><a class="anchor" href="#HTML-based_plugins">#</a>HTML-based plugins</h3>
+<p>Context can be used to pass data from a parent to its light DOM children. Since the parent does usually not create the light DOM children, it cannot leverage template-based data-binding to pass data to them, but it can listen to and respond to <code>context-request</code> events.</p>
+<p>For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:</p>
+<pre><code class="language-html">&lt;code-editor&gt;
+  &lt;code-editor-javascript-mode&gt;&lt;/code-editor-javascript-mode&gt;
+  &lt;code-editor-python-mode&gt;&lt;/code-editor-python-mode&gt;
+&lt;/code-editor&gt;
+</code></pre>
+<p>In this case <code>&lt;code-editor&gt;</code> would provide an API for adding language modes via context, and plugin elements would consume that API and add themselves to the editor.</p>
+<h3 id="Data_formatters,_link_generators,_etc."><a class="anchor" href="#Data_formatters,_link_generators,_etc.">#</a>Data formatters, link generators, etc.</h3>
+<p>Sometimes reusable components will need to format data or URLs in an application-specific way. For example, a documentation viewer that renders a link to another item. The component will not know the URL space of the application.</p>
+<p>In these cases the component can depend on a context-provided function that will apply the application-specific formatting to the data or link.</p>
+<h2 id="API"><a class="anchor" href="#API">#</a>API</h2>
+<div class="alert alert-info">
+
+<p>These API docs are a summary until generated API docs are available</p>
+</div>
+
+<h3 id="createContext()"><a class="anchor" href="#createContext()">#</a><code>createContext()</code></h3>
+<p>Creates a typed Context object</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {property} from '@lit/context';
+</code></pre>
+<p><strong>Signature</strong>:</p>
+<pre><code class="language-ts">function createContext&lt;ValueType, K = unknown&gt;(key: K): Context&lt;K, ValueType&gt;;
+</code></pre>
+<p>Contexts are compared with with strict equality.</p>
+<p>If you want two separate <code>createContext()</code> calls to referrer to the same context, then use a key that will by equal under strict equality like a string for <code>Symbol.for()</code>:</p>
+<pre><code class="language-ts">// true
+createContext('my-context') === createContext('my-context')
+// true
+createContext(Symbol.for('my-context')) === createContext(Symbol.for('my-context'))
+</code></pre>
+<p>If you want a context to be unique so that it's guaranteed to not collide with other contexts, use a key that's unique under strict equality, like a <code>Symbol()</code> or object.:</p>
+<pre><code class="language-ts">// false
+createContext(Symbol('my-context')) === createContext(Symbol('my-context'))
+// false
+createContext({}) === createContext({})
+</code></pre>
+<p>The <code>ValueType</code> type parameter is the type of value that can be provided by this context. It's uses to provide accurate types in the other context APIs.</p>
+<h3 id="_provide()"><a class="anchor" href="#_provide()">#</a><code>@provide()</code></h3>
+<p>A property decorator that adds a ContextConsumer controller to the component which will try and retrieve a value for the property via the Context API.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {provide} from '@lit/context';
+</code></pre>
+<p><strong>Signature</strong>:</p>
+<pre><code class="language-ts">@provide({context: Context})
+</code></pre>
+<h3 id="_consume()"><a class="anchor" href="#_consume()">#</a><code>@consume()</code></h3>
+<p>A property decorator that adds a ContextConsumer controller to the component which will retrieve a value for the property via the Context protocol.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {consume} from '@lit/context';
+</code></pre>
+<p><strong>Signature</strong>:</p>
+<pre><code class="language-ts">@consume({context: Context, subscribe?: boolean})
+</code></pre>
+<p><code>subscribe</code> is <code>false</code> by default. Set it to <code>true</code> to subscribe to updates to the context provided value.</p>
+<h3 id="ContextProvider"><a class="anchor" href="#ContextProvider">#</a><code>ContextProvider</code></h3>
+<p>A ReactiveController which adds context provider behavior to a custom element by listening to <code>context-request</code> events.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {ContextProvider} from '@lit/context';
+</code></pre>
+<p><strong>Constructor</strong>:</p>
+<pre><code class="language-ts">ContextProvider(
+  host: ReactiveElement,
+  options: {
+    context: T,
+    initialValue?: ContextType&lt;T&gt;
+  }
+)
+</code></pre>
+<p><strong>Members</strong></p>
+<ul>
+<li><p><code>setValue(v: T, force = false): void</code></p>
+<p>  Sets the value provided, and notifies any subscribed consumers of the new value if the value changed. <code>force</code> causes a notification even if the value didn't change, which can be useful if an object had a deep property change.</p>
+</li>
+</ul>
+<h3 id="ContextConsumer"><a class="anchor" href="#ContextConsumer">#</a><code>ContextConsumer</code></h3>
+<p>A ReactiveController which adds context consuming behavior to a custom element by dispatching <code>context-request</code> events.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {ContextConsumer} from '@lit/context';
+</code></pre>
+<p><strong>Constructor</strong>:</p>
+<pre><code class="language-ts">ContextConsumer(
+  host: HostElement,
+  options: {
+    context: C,
+    callback?: (value: ContextType&lt;C&gt;, dispose?: () =&gt; void) =&gt; void,
+    subscribe?: boolean = false
+  }
+)
+</code></pre>
+<p><strong>Members</strong></p>
+<ul>
+<li><p><code>value: ContextType&lt;C&gt;</code></p>
+<p> The current value for the context.</p>
+</li>
+</ul>
+<p>When the host element is connected to the document it will emit a <code>context-request</code> event with its context key. When the context request is satisfied the controller will invoke the callback, if present, and trigger a host update so it can respond to the new value.</p>
+<p>It will also call the dispose method given by the provider when the host element is disconnected.</p>
+<h3 id="ContextRoot"><a class="anchor" href="#ContextRoot">#</a><code>ContextRoot</code></h3>
+<p>A ContextRoot can be used to gather unsatisfied context requests and re-dispatch them when new providers which satisfy matching context keys are available. This allows providers to be added to a DOM tree, or upgraded, after the consumers.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {ContextRoot} from '@lit/context';
+</code></pre>
+<p><strong>Constructor</strong>:</p>
+<pre><code class="language-ts">ContextRoot()
+</code></pre>
+<p><strong>Members</strong></p>
+<ul>
+<li><p><code>attach(element: HTMLElement): void</code></p>
+<p>  Attaches the ContextRoot to this element and starts listening to <code>context-request</code> events.</p>
+</li>
+<li><p><code>detach(element: HTMLElement): void</code></p>
+<p>  Detaches the ContextRoot from this element, stops listening to <code>context-request</code> events.</p>
+</li>
+</ul>
+<h3 id="ContextRequestEvent"><a class="anchor" href="#ContextRequestEvent">#</a><code>ContextRequestEvent</code></h3>
+<p>The event fired by consumers to request a context value. The API and behavior of this event is specified by the <a class="Link" href="https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md">Context Protocol</a>.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {ContextRequestEvent} from '@lit/context';
+</code></pre>
+<p>The <code>context-request</code> bubbles and is composed.</p>
+<p><strong>Members</strong></p>
+<ul>
+<li><p><code>readonly context: C</code></p>
+<p>  The context object this event is requesting a value for</p>
+</li>
+<li><p><code>readonly callback: ContextCallback&lt;ContextType&lt;C&gt;&gt;</code></p>
+<p>  The function to call to provide a context value</p>
+</li>
+<li><p><code>readonly subscribe?: boolean</code></p>
+<p>  Whether the consumers wants to subscribe to new context values</p>
+</li>
+</ul>
+<h3 id="ContextCallback"><a class="anchor" href="#ContextCallback">#</a><code>ContextCallback</code></h3>
+<p>A callback which is provided by a context requester and is called with the value satisfying the request.</p>
+<p>This callback can be called multiple times by context providers as the requested value is changed.</p>
+<p><strong>Import</strong>:</p>
+<pre><code class="language-ts">import {type ContextCallback} from '@lit/context';
+</code></pre>
+<p><strong>Signature</strong>:</p>
+<pre><code class="language-ts">type ContextCallback&lt;ValueType&gt; = (
+  value: ValueType,
+  unsubscribe?: () =&gt; void
+) =&gt; void;
+</code></pre>
+<hr>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#コンテキスト">コンテキスト</a></p>
+<p class="h2"><a href="#Example">Example</a></p>
+<p class="h2"><a href="#Key_Concepts">Key Concepts</a></p>
+<p class="h3"><a href="#Context_Protocol">Context Protocol</a></p>
+<p class="h3"><a href="#Context_Objects">Context Objects</a></p>
+<p class="h3"><a href="#Providers">Providers</a></p>
+<p class="h3"><a href="#Consumers">Consumers</a></p>
+<p class="h3"><a href="#Subscriptions">Subscriptions</a></p>
+<p class="h2"><a href="#Usage">Usage</a></p>
+<p class="h3"><a href="#Defining_a_context">Defining a context</a></p>
+<p class="h4"><a href="#Context_type-checking">Context type-checking</a></p>
+<p class="h4"><a href="#Context_equality">Context equality</a></p>
+<p class="h3"><a href="#Providing_a_context">Providing a context</a></p>
+<p class="h4"><a href="#_provide()">@provide()</a></p>
+<p class="h4"><a href="#ContextProvider">ContextProvider</a></p>
+<p class="h3"><a href="#Consuming_a_context">Consuming a context</a></p>
+<p class="h4"><a href="#_consume()_decorator">@consume() decorator</a></p>
+<p class="h4"><a href="#ContextConsumer">ContextConsumer</a></p>
+<p class="h4"><a href="#Subscribing_to_contexts">Subscribing to contexts</a></p>
+<p class="h2"><a href="#Example_Use_Cases">Example Use Cases</a></p>
+<p class="h3"><a href="#Current_user,_locale,_etc.">Current user, locale, etc.</a></p>
+<p class="h3"><a href="#Services">Services</a></p>
+<p class="h3"><a href="#Themes">Themes</a></p>
+<p class="h3"><a href="#HTML-based_plugins">HTML-based plugins</a></p>
+<p class="h3"><a href="#Data_formatters,_link_generators,_etc.">Data formatters, link generators, etc.</a></p>
+<p class="h2"><a href="#API">API</a></p>
+<p class="h3"><a href="#createContext()">createContext()</a></p>
+<p class="h3"><a href="#_provide()">@provide()</a></p>
+<p class="h3"><a href="#_consume()">@consume()</a></p>
+<p class="h3"><a href="#ContextProvider">ContextProvider</a></p>
+<p class="h3"><a href="#ContextConsumer">ContextConsumer</a></p>
+<p class="h3"><a href="#ContextRoot">ContextRoot</a></p>
+<p class="h3"><a href="#ContextRequestEvent">ContextRequestEvent</a></p>
+<p class="h3"><a href="#ContextCallback">ContextCallback</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></nav></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
