@@ -2,7 +2,8 @@
 ---
 # コンテキスト
 
-Context is a way of making data available to entire component subtrees without having to manually bind properties to every component. The data is "contextually" available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.
+コンテクスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。
+The data is "contextually" available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.
 
 Lit's context implementation is available in the `@lit/context` package:
 
