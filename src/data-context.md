@@ -2,8 +2,8 @@
 ---
 # コンテキスト
 
-コンテクスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。
-The data is "contextually" available, such that ancestor elements in between a provider of data and consumer of data aren't even aware of it.
+コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。
+データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。
 
 Lit's context implementation is available in the `@lit/context` package:
 
