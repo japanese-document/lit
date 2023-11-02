@@ -5,13 +5,14 @@
 コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。
 データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。
 
-Lit's context implementation is available in the `@lit/context` package:
+Litのコンテキストは`@lit/context`で実装されています。
 
 ```bash
 npm i @lit/context
 ```
 
-Context is useful for data that needs to be consumed by a wide variety and large number of components - things like an app's data store, the current user, a UI theme - or when data-binding isn't an option, such as when an element needs to provide data to its light DOM children.
+コンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。
+また、普通のDOMの子要素にデータを渡す必要があるような、データを渡すことができない場合にも使用します。
 
 Context is very similar to React's Context, or to dependency injection systems like Angular's, with some important differences that make Context work with the dynamic nature of the DOM, and enable interoperability across different web components libraries, frameworks and plain JavaScript.
 

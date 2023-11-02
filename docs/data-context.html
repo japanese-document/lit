@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/data-context.html" />
     <meta property="og:title" content="コンテキスト" />
-    <meta property="og:description" content="コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。Lit's context implementation is available in the @lit/context package:npm i @lit/contextContext is useful for data that needs to be consumed by " />
+    <meta property="og:description" content="コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。Litのコンテキストは@lit/contextで実装されています。npm i @lit/contextコンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。また、普通のDOMの子要素にデータを渡す必要があるような、デ" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。Lit's context implementation is available in the @lit/context package:npm i @lit/contextContext is useful for data that needs to be consumed by " />
+    <meta name="description" content="コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。Litのコンテキストは@lit/contextで実装されています。npm i @lit/contextコンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。また、普通のDOMの子要素にデータを渡す必要があるような、デ" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>コンテキスト</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
@@ -63,10 +63,11 @@
       <h1 id="コンテキスト"><a class="anchor" href="#コンテキスト">#</a>コンテキスト</h1>
 <p>コンテキスト(Context)を使うと各コンポーネントのプロパティに値を手動でセットすることなしに、コンポーネントのサブツリー全体にデータを行き渡らせることができます。
 データはコンテキスト上で利用することができます。だから、データのプロバイダとコンシューマの間にある要素はコンテキストを効力する必要はありません。</p>
-<p>Lit's context implementation is available in the <code>@lit/context</code> package:</p>
+<p>Litのコンテキストは<code>@lit/context</code>で実装されています。</p>
 <pre><code class="language-bash">npm i @lit/context
 </code></pre>
-<p>Context is useful for data that needs to be consumed by a wide variety and large number of components - things like an app's data store, the current user, a UI theme - or when data-binding isn't an option, such as when an element needs to provide data to its light DOM children.</p>
+<p>コンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。
+また、普通のDOMの子要素にデータを渡す必要があるような、データを渡すことができない場合にも使用します。</p>
 <p>Context is very similar to React's Context, or to dependency injection systems like Angular's, with some important differences that make Context work with the dynamic nature of the DOM, and enable interoperability across different web components libraries, frameworks and plain JavaScript.</p>
 <h2 id="Example"><a class="anchor" href="#Example">#</a>Example</h2>
 <p>Using context involves a <em>context object</em> (sometimes called a key), a <em>provider</em> and a <em>consumer</em>, which communicate using the context object.</p>
