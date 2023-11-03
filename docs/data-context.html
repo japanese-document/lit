@@ -68,9 +68,10 @@
 </code></pre>
 <p>コンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。
 また、普通のDOMの子要素にデータを渡す必要があるような、データを渡すことができない場合にも使用します。</p>
-<p>Context is very similar to React's Context, or to dependency injection systems like Angular's, with some important differences that make Context work with the dynamic nature of the DOM, and enable interoperability across different web components libraries, frameworks and plain JavaScript.</p>
-<h2 id="Example"><a class="anchor" href="#Example">#</a>Example</h2>
-<p>Using context involves a <em>context object</em> (sometimes called a key), a <em>provider</em> and a <em>consumer</em>, which communicate using the context object.</p>
+<p>LitのコンテキストはReactのコンテキストやAngularのDIシステムにとても似ています。
+しかし、Litのコンテキストは動的なDOM構造の変化に対応しています。また、他のweb componentを使ったライブラリやフレームワークや素のJavaScriptでも利用することができます。</p>
+<h2 id="例"><a class="anchor" href="#例">#</a>例</h2>
+<p>Using context involves a <em>context object</em> (キーと呼ばれることもある), a <em>provider</em> and a <em>consumer</em>, which communicate using the context object.</p>
 <p>Context definition (<code>logger-context.ts</code>):</p>
 <pre><code class="language-ts">import {createContext} from '@lit/context';
 import type {Logger} from 'my-logging-library';
@@ -441,7 +442,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#コンテキスト">コンテキスト</a></p>
-<p class="h2"><a href="#Example">Example</a></p>
+<p class="h2"><a href="#例">例</a></p>
 <p class="h2"><a href="#Key_Concepts">Key Concepts</a></p>
 <p class="h3"><a href="#Context_Protocol">Context Protocol</a></p>
 <p class="h3"><a href="#Context_Objects">Context Objects</a></p>
