@@ -14,11 +14,12 @@ npm i @lit/context
 コンテキストはアプリのデータストア、ユーザのデータ、UIテーマのようなデータを多数のコンポーネントに流通することに使用します。
 また、普通のDOMの子要素にデータを渡す必要があるような、データを渡すことができない場合にも使用します。
 
-Context is very similar to React's Context, or to dependency injection systems like Angular's, with some important differences that make Context work with the dynamic nature of the DOM, and enable interoperability across different web components libraries, frameworks and plain JavaScript.
+LitのコンテキストはReactのコンテキストやAngularのDIシステムにとても似ています。
+しかし、Litのコンテキストは動的なDOM構造の変化に対応しています。また、他のweb componentを使ったライブラリやフレームワークや素のJavaScriptでも利用することができます。
 
-## Example
+## 例
 
-Using context involves a _context object_ (sometimes called a key), a _provider_ and a _consumer_, which communicate using the context object.
+Using context involves a _context object_ (キーと呼ばれることもある), a _provider_ and a _consumer_, which communicate using the context object.
 
 Context definition (`logger-context.ts`):
 ```ts
