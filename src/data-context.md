@@ -19,7 +19,8 @@ LitのコンテキストはReactのコンテキストやAngularのDIシステム
 
 ## 例
 
-Using context involves a _context object_ (キーと呼ばれることもある), a _provider_ and a _consumer_, which communicate using the context object.
+コンテキストはコンテキストオブジェクト、プロバイダ(provider)、コンシューマ(consumer)で構成されています。
+コンテキストオブジェクトを使ってデータを流通させます。
 
 Context definition (`logger-context.ts`):
 ```ts
@@ -71,6 +72,7 @@ export class MyElement extends LitElement {
 ## Key Concepts
 
 ### Context Protocol
+
 Lit's context is based on the [Context Community Protocol](https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md) by the W3C's [Web Components Community Group](https://www.w3.org/community/webcomponents/).
 
 This protocol enables interoperability between elements (or even non-element code) regardless of how they were built. Via the context protocol, a Lit-based element can provide data to a consumer not built with Lit, or vice versa.

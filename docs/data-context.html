@@ -71,7 +71,8 @@
 <p>LitのコンテキストはReactのコンテキストやAngularのDIシステムにとても似ています。
 しかし、Litのコンテキストは動的なDOM構造の変化に対応しています。また、他のweb componentを使ったライブラリやフレームワークや素のJavaScriptでも利用することができます。</p>
 <h2 id="例"><a class="anchor" href="#例">#</a>例</h2>
-<p>Using context involves a <em>context object</em> (キーと呼ばれることもある), a <em>provider</em> and a <em>consumer</em>, which communicate using the context object.</p>
+<p>コンテキストはコンテキストオブジェクト、プロバイダ(provider)、コンシューマ(consumer)で構成されています。
+コンテキストオブジェクトを使ってデータを流通させます。</p>
 <p>Context definition (<code>logger-context.ts</code>):</p>
 <pre><code class="language-ts">import {createContext} from '@lit/context';
 import type {Logger} from 'my-logging-library';
