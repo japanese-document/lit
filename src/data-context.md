@@ -22,7 +22,8 @@ LitのコンテキストはReactのコンテキストやAngularのDIシステム
 コンテキストはコンテキストオブジェクト、プロバイダ(provider)、コンシューマ(consumer)で構成されています。
 コンテキストオブジェクトを使ってデータを流通させます。
 
-Context definition (`logger-context.ts`):
+コンテキストの定義(`logger-context.ts`)
+
 ```ts
 import {createContext} from '@lit/context';
 import type {Logger} from 'my-logging-library';
