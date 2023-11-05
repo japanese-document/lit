@@ -73,13 +73,17 @@
 <h2 id="例"><a class="anchor" href="#例">#</a>例</h2>
 <p>コンテキストはコンテキストオブジェクト、プロバイダ(provider)、コンシューマ(consumer)で構成されています。
 コンテキストオブジェクトを使ってデータを流通させます。</p>
-<p>コンテキストの定義(<code>logger-context.ts</code>)</p>
+<ul>
+<li>コンテキストの定義(<code>logger-context.ts</code>)</li>
+</ul>
 <pre><code class="language-ts">import {createContext} from '@lit/context';
 import type {Logger} from 'my-logging-library';
 export type {Logger} from 'my-logging-library';
 export const loggerContext = createContext&lt;Logger&gt;('logger');
 </code></pre>
-<p>Provider:</p>
+<ul>
+<li>プロバイダ</li>
+</ul>
 <pre><code class="language-ts">import {LitElement, property, html} from 'lit';
 import {provide} from '@lit/context';
 
@@ -97,7 +101,9 @@ class MyApp extends LitElement {
   }
 }
 </code></pre>
-<p>Consumer:</p>
+<ul>
+<li>コンシューマ</li>
+</ul>
 <pre><code class="language-ts">import {LitElement, property} from 'lit';
 import {consume} from '@lit/context';
 
@@ -114,7 +120,7 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h2 id="Key_Concepts"><a class="anchor" href="#Key_Concepts">#</a>Key Concepts</h2>
+<h2 id="キーコンセプト"><a class="anchor" href="#キーコンセプト">#</a>キーコンセプト</h2>
 <h3 id="Context_Protocol"><a class="anchor" href="#Context_Protocol">#</a>Context Protocol</h3>
 <p>Lit's context is based on the <a class="Link" href="https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md">Context Community Protocol</a> by the W3C's <a class="Link" href="https://www.w3.org/community/webcomponents/">Web Components Community Group</a>.</p>
 <p>This protocol enables interoperability between elements (or even non-element code) regardless of how they were built. Via the context protocol, a Lit-based element can provide data to a consumer not built with Lit, or vice versa.</p>
@@ -444,7 +450,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#コンテキスト">コンテキスト</a></p>
 <p class="h2"><a href="#例">例</a></p>
-<p class="h2"><a href="#Key_Concepts">Key Concepts</a></p>
+<p class="h2"><a href="#キーコンセプト">キーコンセプト</a></p>
 <p class="h3"><a href="#Context_Protocol">Context Protocol</a></p>
 <p class="h3"><a href="#Context_Objects">Context Objects</a></p>
 <p class="h3"><a href="#Providers">Providers</a></p>
