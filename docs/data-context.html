@@ -121,8 +121,8 @@ export class MyElement extends LitElement {
 }
 </code></pre>
 <h2 id="キーコンセプト"><a class="anchor" href="#キーコンセプト">#</a>キーコンセプト</h2>
-<h3 id="Context_Protocol"><a class="anchor" href="#Context_Protocol">#</a>Context Protocol</h3>
-<p>Lit's context is based on the <a class="Link" href="https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md">Context Community Protocol</a> by the W3C's <a class="Link" href="https://www.w3.org/community/webcomponents/">Web Components Community Group</a>.</p>
+<h3 id="コンテキストプロトコル"><a class="anchor" href="#コンテキストプロトコル">#</a>コンテキストプロトコル</h3>
+<p>LitのコンテキストはW3Cの<a class="Link" href="https://www.w3.org/community/webcomponents/">Web Components Community Group</a>によって作成された<a class="Link" href="https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md">Context Community Protocol</a>に基づいています。</p>
 <p>This protocol enables interoperability between elements (or even non-element code) regardless of how they were built. Via the context protocol, a Lit-based element can provide data to a consumer not built with Lit, or vice versa.</p>
 <p>The Context Protocol is based on DOM events. A consumer fires a <code>context-request</code> event that carries the context key that it wants, and any element above it can listen for the <code>context-request</code> event and provide data for that context key.</p>
 <p><code>@lit/context</code> implements this event-based protocol and makes it available via a few reactive controllers and decorators.</p>
@@ -451,7 +451,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#コンテキスト">コンテキスト</a></p>
 <p class="h2"><a href="#例">例</a></p>
 <p class="h2"><a href="#キーコンセプト">キーコンセプト</a></p>
-<p class="h3"><a href="#Context_Protocol">Context Protocol</a></p>
+<p class="h3"><a href="#コンテキストプロトコル">コンテキストプロトコル</a></p>
 <p class="h3"><a href="#Context_Objects">Context Objects</a></p>
 <p class="h3"><a href="#Providers">Providers</a></p>
 <p class="h3"><a href="#Consumers">Consumers</a></p>
