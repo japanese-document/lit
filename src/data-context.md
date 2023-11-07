@@ -74,9 +74,9 @@ export class MyElement extends LitElement {
 
 ## キーコンセプト
 
-### Context Protocol
+### コンテキストプロトコル
 
-Lit's context is based on the [Context Community Protocol](https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md) by the W3C's [Web Components Community Group](https://www.w3.org/community/webcomponents/).
+LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3.org/community/webcomponents/)によって作成された[Context Community Protocol](https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md)に基づいています。
 
 This protocol enables interoperability between elements (or even non-element code) regardless of how they were built. Via the context protocol, a Lit-based element can provide data to a consumer not built with Lit, or vice versa.
 
