@@ -82,10 +82,10 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 このコンテキストプロトコルを経由して、Litの要素はLitで作られていないコンシューマでもデータを供給できます。また、その逆も可能です。
 
 コンテキストプロトコルはDOMイベントをベースにしています。
-A consumer fires a `context-request` event that carries the context key that it wants,
-and any element above it can listen for the `context-request` event and provide data for that context key.
+コンシューマは必要なコンテキストオブジェクトを取得するために`context-request`イベントを送出します。
+コンシューマより上位の要素は`context-request`イベントをリッスンすることができます。そして、コンテキストオブジェクトに対応するデータを供給します。
 
-`@lit/context` implements this event-based protocol and makes it available via a few reactive controllers and decorators.
+`@lit/context`はこのイベントベースのプロトコルを実装しています。リアクティブコントローラやデコレータを使ってこれを使います。
 
 ### Context Objects
 
