@@ -126,9 +126,9 @@ export class MyElement extends LitElement {
 <p>このプロトコルに従うとライブラリ関係なく要素(もしくは要素ではないコードでも)にコンテキストを介してデータを共有することができます。
 このコンテキストプロトコルを経由して、Litの要素はLitで作られていないコンシューマでもデータを供給できます。また、その逆も可能です。</p>
 <p>コンテキストプロトコルはDOMイベントをベースにしています。
-A consumer fires a <code>context-request</code> event that carries the context key that it wants,
-and any element above it can listen for the <code>context-request</code> event and provide data for that context key.</p>
-<p><code>@lit/context</code> implements this event-based protocol and makes it available via a few reactive controllers and decorators.</p>
+コンシューマは必要なコンテキストオブジェクトを取得するために<code>context-request</code>イベントを送出します。
+コンシューマより上位の要素は<code>context-request</code>イベントをリッスンすることができます。そして、コンテキストオブジェクトに対応するデータを供給します。</p>
+<p><code>@lit/context</code>はこのイベントベースのプロトコルを実装しています。リアクティブコントローラやデコレータを使ってこれを使います。</p>
 <h3 id="Context_Objects"><a class="anchor" href="#Context_Objects">#</a>Context Objects</h3>
 <p>Contexts are identified by <em>context objects</em> or <em>context keys</em>. They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.</p>
 <h3 id="Providers"><a class="anchor" href="#Providers">#</a>Providers</h3>
