@@ -89,18 +89,18 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 ### コンテキストオブジェクト
 
-Contexts are identified by _context objects_ or _context keys_.
-They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.
+コンテキストの値はコンテキストオブジェクトに紐づいています。
+コンテキストオブジェクトとコンテキストの値は`Map`のキーと値に似ています。
 
-### Providers
+### プロバイダ
 
 Providers are usually elements (but can be any event handler code) that provide data for specific context keys.
 
-### Consumers
+### コンシューマ
 
 Consumers request data for specific context keys.
 
-### Subscriptions
+### サブスクリプション
 
 When a consumer requests data for a context, it can tell the provider that it wants to _subscribe_ to changes in the context. If the provider has new data, the consumer will be notified and can automatically update.
 
