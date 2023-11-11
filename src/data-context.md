@@ -87,9 +87,10 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 `@lit/context`はこのイベントベースのプロトコルを実装しています。リアクティブコントローラやデコレータを使ってこれを使います。
 
-### Context Objects
+### コンテキストオブジェクト
 
-Contexts are identified by _context objects_ or _context keys_. They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.
+Contexts are identified by _context objects_ or _context keys_.
+They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.
 
 ### Providers
 

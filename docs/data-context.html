@@ -129,8 +129,9 @@ export class MyElement extends LitElement {
 コンシューマは必要なコンテキストオブジェクトを取得するために<code>context-request</code>イベントを送出します。
 コンシューマより上位の要素は<code>context-request</code>イベントをリッスンすることができます。そして、コンテキストオブジェクトに対応するデータを供給します。</p>
 <p><code>@lit/context</code>はこのイベントベースのプロトコルを実装しています。リアクティブコントローラやデコレータを使ってこれを使います。</p>
-<h3 id="Context_Objects"><a class="anchor" href="#Context_Objects">#</a>Context Objects</h3>
-<p>Contexts are identified by <em>context objects</em> or <em>context keys</em>. They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.</p>
+<h3 id="コンテキストオブジェクト"><a class="anchor" href="#コンテキストオブジェクト">#</a>コンテキストオブジェクト</h3>
+<p>Contexts are identified by <em>context objects</em> or <em>context keys</em>.
+They are objects that represent some potential data to be shared by the context object identity. You can think of them as similar to Map keys.</p>
 <h3 id="Providers"><a class="anchor" href="#Providers">#</a>Providers</h3>
 <p>Providers are usually elements (but can be any event handler code) that provide data for specific context keys.</p>
 <h3 id="Consumers"><a class="anchor" href="#Consumers">#</a>Consumers</h3>
@@ -455,7 +456,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#例">例</a></p>
 <p class="h2"><a href="#キーコンセプト">キーコンセプト</a></p>
 <p class="h3"><a href="#コンテキストプロトコル">コンテキストプロトコル</a></p>
-<p class="h3"><a href="#Context_Objects">Context Objects</a></p>
+<p class="h3"><a href="#コンテキストオブジェクト">コンテキストオブジェクト</a></p>
 <p class="h3"><a href="#Providers">Providers</a></p>
 <p class="h3"><a href="#Consumers">Consumers</a></p>
 <p class="h3"><a href="#Subscriptions">Subscriptions</a></p>
