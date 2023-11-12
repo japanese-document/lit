@@ -50,7 +50,7 @@ const renderer = {
   },
   image(src: string) {
     const alt = src.split('/').at(-1)
-    return `<img alt="${alt}" href="${src}" loading="lazy">`
+    return `<img alt="${alt}" src="${src}" loading="lazy">`
   }
 }
 
