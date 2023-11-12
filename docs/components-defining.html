@@ -82,7 +82,7 @@ customElements.define('simple-greeting', SimpleGreeting);
 だから、LitコンポーネントはWeb標準の<code>HTMLElement</code>のプロパティとメソッドをすべて継承します。
 正確には、<code>LitElement</code>は<code>ReactiveElement</code>を継承しています。
 <code>ReactiveElement</code>は<code>HTMLElement</code>を継承して<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を実装しています。</p>
-<p><img alt="lit-element-inheritance.png" src="https://japanese-document.github.io/lit/images/lit-element-inheritance.png"></p>
+<p><img loading="lazy" href="https://japanese-document.github.io/lit/images/lit-element-inheritance.png" alt="lit-element-inheritance.png"></p>
 <h2 id="TypeScriptの型を提供する"><a class="anchor" href="#TypeScriptの型を提供する">#</a>TypeScriptの型を提供する</h2>
 <p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
 例えば、<code>document.createElement('img')</code>は<code>src: string</code>プロパティを持つ<code>HTMLImageElement</code>を返します。
