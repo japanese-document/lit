@@ -47,6 +47,10 @@ const renderer = {
   heading(text: string, level: number) {
     const hash = createHash(text)
     return `<h${level} id="${hash}"><a href="#${hash}" class="anchor">#</a>${text}</h${level}>\n`
+  },
+  image(src: string) {
+    const alt = src.split('/').at(-1)
+    return `<img alt="${alt}" href="${src}" loading="lazy">`
   }
 }
 
