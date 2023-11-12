@@ -166,14 +166,18 @@ export function createIndexMenu(items: IndexItem[]) {
     </nav>`
 }
 
+function isHeader(line: string) {
+  return [2, 3, 4, 5].some((maxCharacter) => line.slice(0, maxCharacter) === `${'#'.repeat(maxCharacter - 1)} `)
+}
+
 export function createHeaderList(md: string) {
   const list = md
     .split('\n')
-    .filter((l) => l.slice(0, 2) === '# ' || l.slice(0, 3) === '## ' || l.slice(0, 4) === '### ' || l.slice(0, 5) === '#### ')
-    .map((l) => {
+    .filter(line => isHeader(line))
+    .map((line) => {
       for (let i = 2; i <= 5; i++ ) {
-        if (l.slice(0, i) === `${'#'.repeat(i - 1)} `) {
-          const _header = l.slice(i).trim()
+        if (line.slice(0, i) === `${'#'.repeat(i - 1)} `) {
+          const _header = line.slice(i).trim()
           const header = marked.parse(_header).trim()
           const href = createHash(header)
           const document = new window.DOMParser().parseFromString(header, 'text/html')
