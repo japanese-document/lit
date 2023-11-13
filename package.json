@@ -16,7 +16,7 @@
     "build": "node --loader @swc-node/register/esm scripts/index.ts && npm run css && npm run image",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "engines": {
     "node": ">=18.3.0"
