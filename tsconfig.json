@@ -11,11 +11,6 @@
     "typeRoots": ["node_modules/@types"],
     "sourceMap": false
   },
-  "ts-node": {
-    "esm": true,
-    "swc": true,
-    "require": ["tsconfig-paths/register"]
-  },
   "include": [
     "./scripts/**/*"
   ]
