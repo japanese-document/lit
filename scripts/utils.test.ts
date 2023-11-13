@@ -1,6 +1,7 @@
-import { readFile } from 'node:fs/promises'
-jest.mock('node:fs/promises')
-import { createTitle, createDescription, getMetaAndMd, createURL, createHash, createIndexItems, createPageData }  from './utils.js'
+import { jest } from '@jest/globals'
+jest.unstable_mockModule('node:fs/promises', () => ({ readFile: jest.fn() }))
+const { readFile } = await import ('node:fs/promises')
+const { createTitle, createDescription, getMetaAndMd, createURL, createHash, createIndexItems, createPageData } = await import('./utils.js')
 
 describe('createTitle', () => {
   test('output', () => {
