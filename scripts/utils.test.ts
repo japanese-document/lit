@@ -90,7 +90,7 @@ describe('createIndexItems', () => {
     }))
   }
 
-  let spy: jest.SpyInstance
+  let spy: ReturnType<typeof jest.spyOn>
 
   beforeAll(() => {
     spy = jest.spyOn(console, 'log')
