@@ -13,7 +13,8 @@
     "css": "npm run css:links && npm run css:md && npm run css:cat && npm run css:minify",
     "docs": "rm -rf docs && mkdir docs",
     "prebuild": "npm run docs",
-    "build": "node --loader @swc-node/register/esm scripts/index.ts && npm run css && npm run image",
+    "build:md": "node --loader @swc-node/register/esm scripts/index.ts",
+    "build": "npm run build:md && npm run css && npm run image",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
