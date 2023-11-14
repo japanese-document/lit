@@ -94,7 +94,7 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 ### プロバイダ
 
-Providers are usually elements (but can be any event handler code) that provide data for specific context keys.
+一般的にプロバイダは要素です。(イベントハンドラでも可能です。)プロバイダはコンテキストオブジェクトに対応したデータを提供します。
 
 ### コンシューマ
 

@@ -2,12 +2,14 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "ts-node",
+            "name": "build",
             "type": "node",
             "request": "launch",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "npm",
             "args": [
-                "${workspaceFolder}/scripts/index.ts"
+                "run",
+                "build:md"
             ]
         }
     ]
