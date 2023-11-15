@@ -98,7 +98,7 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 ### コンシューマ
 
-Consumers request data for specific context keys.
+コンシューマはコンテキストオブジェクトに対応するデータをリクエストします。
 
 ### サブスクリプション
 

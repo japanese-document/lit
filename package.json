@@ -13,14 +13,14 @@
     "css": "npm run css:links && npm run css:md && npm run css:cat && npm run css:minify",
     "docs": "rm -rf docs && mkdir docs",
     "prebuild": "npm run docs",
-    "build:md": "node --loader @swc-node/register/esm scripts/index.ts",
+    "build:md": "node --env-file=scripts/.env --loader @swc-node/register/esm scripts/index.ts",
     "build": "npm run build:md && npm run css && npm run image",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "node --experimental-vm-modules --env-file=scripts/.env node_modules/.bin/jest"
   },
   "engines": {
-    "node": ">=18.3.0"
+    "node": ">=20.9.0"
   },
   "dependencies": {
     "@primer/css": "^21.0.7",
