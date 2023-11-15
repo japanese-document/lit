@@ -4,10 +4,21 @@ import { glob } from 'glob'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import { marked } from 'marked'
-import {
-  BASE_URL, BODY, CSS_PATH, DESCRIPTION, SEPARATOR, TITLE, CSS, URL, INDEX,
-  INDEX_PAGE_DESCRIPTION, INDEX_PAGE_HEADER, INDEX_PAGE_TITLE, SOURCE_DIR, HEADER
-} from './config.js'
+
+const BASE_URL = process.env.BASE_URL || ''
+const CSS_PATH = process.env.CSS_PATH || ''
+const INDEX_PAGE_DESCRIPTION = process.env.INDEX_PAGE_DESCRIPTION || ''
+const INDEX_PAGE_HEADER = process.env.INDEX_PAGE_HEADER || ''
+const INDEX_PAGE_TITLE = process.env.INDEX_PAGE_TITLE ||''
+const SOURCE_DIR = process.env.SOURCE_DIR || ''
+const TITLE = /__TITLE__/g
+const BODY = '__BODY__'
+const HEADER = '__HEADER__'
+const INDEX = '__INDEX__'
+const CSS = '__CSS__'
+const URL = '__URL__'
+const DESCRIPTION = /__DESCRIPTION__/g
+const SEPARATOR = /---(.*)/s
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window as unknown as Window)
