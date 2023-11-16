@@ -137,10 +137,12 @@ export class MyElement extends LitElement {
 <h3 id="コンシューマ"><a class="anchor" href="#コンシューマ">#</a>コンシューマ</h3>
 <p>コンシューマはコンテキストオブジェクトに対応するデータをリクエストします。</p>
 <h3 id="サブスクリプション"><a class="anchor" href="#サブスクリプション">#</a>サブスクリプション</h3>
-<p>When a consumer requests data for a context, it can tell the provider that it wants to <em>subscribe</em> to changes in the context. If the provider has new data, the consumer will be notified and can automatically update.</p>
-<h2 id="Usage"><a class="anchor" href="#Usage">#</a>Usage</h2>
-<h3 id="Defining_a_context"><a class="anchor" href="#Defining_a_context">#</a>Defining a context</h3>
-<p>Every usage of context must have a context object to coordinate the data request. This context object represents the identity and type of data that is provided.</p>
+<p>コンシューマがコンテキストのデータをリクエストする時、プロバイダにコンテキストのデータをサブスクライブ(subscribe)することを通知することができます。
+プロバイダに新しい値をセットすると、コンシューマに通知されて自動的に更新されます。</p>
+<h2 id="使い方"><a class="anchor" href="#使い方">#</a>使い方</h2>
+<h3 id="コンテキストを定義する"><a class="anchor" href="#コンテキストを定義する">#</a>コンテキストを定義する</h3>
+<p>Every usage of context must have a context object to coordinate the data request.
+This context object represents the identity and type of data that is provided.</p>
 <p>Context objects are created with the <code>createContext()</code> function:</p>
 <pre><code class="language-ts">export const myContext = createContext(Symbol('my-context'));
 </code></pre>
@@ -460,8 +462,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#プロバイダ">プロバイダ</a></p>
 <p class="h3"><a href="#コンシューマ">コンシューマ</a></p>
 <p class="h3"><a href="#サブスクリプション">サブスクリプション</a></p>
-<p class="h2"><a href="#Usage">Usage</a></p>
-<p class="h3"><a href="#Defining_a_context">Defining a context</a></p>
+<p class="h2"><a href="#使い方">使い方</a></p>
+<p class="h3"><a href="#コンテキストを定義する">コンテキストを定義する</a></p>
 <p class="h4"><a href="#Context_type-checking">Context type-checking</a></p>
 <p class="h4"><a href="#Context_equality">Context equality</a></p>
 <p class="h3"><a href="#Providing_a_context">Providing a context</a></p>
