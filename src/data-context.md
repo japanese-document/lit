@@ -102,13 +102,15 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 ### サブスクリプション
 
-When a consumer requests data for a context, it can tell the provider that it wants to _subscribe_ to changes in the context. If the provider has new data, the consumer will be notified and can automatically update.
+コンシューマがコンテキストのデータをリクエストする時、プロバイダにコンテキストのデータをサブスクライブ(subscribe)することを通知することができます。
+プロバイダに新しい値をセットすると、コンシューマに通知されて自動的に更新されます。
 
-## Usage
+## 使い方
 
-### Defining a context
+### コンテキストを定義する
 
-Every usage of context must have a context object to coordinate the data request. This context object represents the identity and type of data that is provided.
+Every usage of context must have a context object to coordinate the data request.
+This context object represents the identity and type of data that is provided.
 
 Context objects are created with the `createContext()` function:
 
