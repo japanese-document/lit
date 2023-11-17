@@ -2,11 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
   createIndexItems, createIndexMenu, createHeaderList, createPages } from './utils.js'
-
-const INDEX_PAGE_LAYOUT = process.env.INDEX_PAGE_LAYOUT || ''
-const OUTPUT_DIR = process.env.OUTPUT_DIR || ''
-const PAGE_LAYOUT = process.env.PAGE_LAYOUT || ''
-const SOURCE_DIR = process.env.SOURCE_DIR || ''
+import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR } from './const.js'
 
 const markDownFileNames = await getMarkDownFileNames()
 

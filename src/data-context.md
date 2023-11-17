@@ -109,10 +109,10 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 
 ### コンテキストを定義する
 
-Every usage of context must have a context object to coordinate the data request.
-This context object represents the identity and type of data that is provided.
+コンテキストはデータリクエストに対応したコンテキストオブジェクトを持つ必要があります。
+コンテキストオブジェクトはそのデータのidと型を表します。
 
-Context objects are created with the `createContext()` function:
+下記のように`createContext()`を使って生成します。
 
 ```ts
 export const myContext = createContext(Symbol('my-context'));

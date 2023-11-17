@@ -141,9 +141,9 @@ export class MyElement extends LitElement {
 プロバイダに新しい値をセットすると、コンシューマに通知されて自動的に更新されます。</p>
 <h2 id="使い方"><a class="anchor" href="#使い方">#</a>使い方</h2>
 <h3 id="コンテキストを定義する"><a class="anchor" href="#コンテキストを定義する">#</a>コンテキストを定義する</h3>
-<p>Every usage of context must have a context object to coordinate the data request.
-This context object represents the identity and type of data that is provided.</p>
-<p>Context objects are created with the <code>createContext()</code> function:</p>
+<p>コンテキストはデータリクエストに対応したコンテキストオブジェクトを持つ必要があります。
+コンテキストオブジェクトはそのデータのidと型を表します。</p>
+<p>下記のように<code>createContext()</code>を使って生成します。</p>
 <pre><code class="language-ts">export const myContext = createContext(Symbol('my-context'));
 </code></pre>
 <p>It is recommended to put context objects in their own module so that they're importable independent of specific providers and consumers.</p>
