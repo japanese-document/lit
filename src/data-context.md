@@ -112,19 +112,22 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 コンテキストはデータリクエストに対応したコンテキストオブジェクトを持つ必要があります。
 コンテキストオブジェクトはそのデータのidと型を表します。
 
-下記のように`createContext()`を使って生成します。
+コンテキストオブジェクトは下記のように`createContext()`を使って生成します。
 
 ```ts
 export const myContext = createContext(Symbol('my-context'));
 ```
 
-It is recommended to put context objects in their own module so that they're importable independent of specific providers and consumers.
+#### コンテキストの型 
 
-#### Context type-checking
+`createContext()`は任意の値を受け取って、受け取った値をそのまま返します。
+TypeScriptでは、戻り値を`Context`型のオブジェクトにキャストします。
+そのオブジェクトはコンテクストオブジェクトとそれに対応する値の型を内包しています。
 
-`createContext()` takes any value and returns it directly. In TypeScript, the value is cast to a typed `Context` object, which carries the type of the context _value_ with it.
+下記のコードには間違いがあります。
+TypeScript will warn that the type `string` is not assignable to the type `Logger`.
+Note that this check is currently only for public fields.
 
-In case of a mistake like this:
 ```ts
 const myContext = createContext<Logger>(Symbol('logger'));
 
@@ -133,12 +136,6 @@ class MyElement extends LitElement {
   name: string
 }
 ```
-
-TypeScript will warn that the type `string` is not assignable to the type `Logger`. Note that this check is currently only for public fields.
-
-<!-- 
-  TODO https://github.com/lit/lit/issues/3926 this will likely need to be updated once we move to standard decorators.
- -->
 
 #### Context equality
 
