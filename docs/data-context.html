@@ -143,13 +143,16 @@ export class MyElement extends LitElement {
 <h3 id="コンテキストを定義する"><a class="anchor" href="#コンテキストを定義する">#</a>コンテキストを定義する</h3>
 <p>コンテキストはデータリクエストに対応したコンテキストオブジェクトを持つ必要があります。
 コンテキストオブジェクトはそのデータのidと型を表します。</p>
-<p>下記のように<code>createContext()</code>を使って生成します。</p>
+<p>コンテキストオブジェクトは下記のように<code>createContext()</code>を使って生成します。</p>
 <pre><code class="language-ts">export const myContext = createContext(Symbol('my-context'));
 </code></pre>
-<p>It is recommended to put context objects in their own module so that they're importable independent of specific providers and consumers.</p>
-<h4 id="Context_type-checking"><a class="anchor" href="#Context_type-checking">#</a>Context type-checking</h4>
-<p><code>createContext()</code> takes any value and returns it directly. In TypeScript, the value is cast to a typed <code>Context</code> object, which carries the type of the context <em>value</em> with it.</p>
-<p>In case of a mistake like this:</p>
+<h4 id="コンテキストの型"><a class="anchor" href="#コンテキストの型">#</a>コンテキストの型</h4>
+<p><code>createContext()</code>は任意の値を受け取って、受け取った値をそのまま返します。
+TypeScriptでは、戻り値を<code>Context</code>型のオブジェクトにキャストします。
+そのオブジェクトはコンテクストオブジェクトとそれに対応する値の型を内包しています。</p>
+<p>下記のコードには間違いがあります。
+TypeScript will warn that the type <code>string</code> is not assignable to the type <code>Logger</code>.
+Note that this check is currently only for public fields.</p>
 <pre><code class="language-ts">const myContext = createContext&lt;Logger&gt;(Symbol('logger'));
 
 class MyElement extends LitElement {
@@ -157,9 +160,6 @@ class MyElement extends LitElement {
   name: string
 }
 </code></pre>
-<p>TypeScript will warn that the type <code>string</code> is not assignable to the type <code>Logger</code>. Note that this check is currently only for public fields.</p>
-
-
 <h4 id="Context_equality"><a class="anchor" href="#Context_equality">#</a>Context equality</h4>
 <p>Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (<code>===</code>), so a provider will only handle a context request if its context key equals the context key of the request.</p>
 <p>This means that there are two main ways to create a context object:</p>
@@ -464,7 +464,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#サブスクリプション">サブスクリプション</a></p>
 <p class="h2"><a href="#使い方">使い方</a></p>
 <p class="h3"><a href="#コンテキストを定義する">コンテキストを定義する</a></p>
-<p class="h4"><a href="#Context_type-checking">Context type-checking</a></p>
+<p class="h4"><a href="#コンテキストの型">コンテキストの型</a></p>
 <p class="h4"><a href="#Context_equality">Context equality</a></p>
 <p class="h3"><a href="#Providing_a_context">Providing a context</a></p>
 <p class="h4"><a href="#_provide()">@provide()</a></p>
