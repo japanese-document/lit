@@ -118,7 +118,7 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 export const myContext = createContext(Symbol('my-context'));
 ```
 
-#### コンテキストの型 
+#### コンテキストの型
 
 `createContext()`は任意の値を受け取って、受け取った値をそのまま返します。
 TypeScriptでは、戻り値を`Context`型のオブジェクトにキャストします。
