@@ -146,13 +146,14 @@ export class MyElement extends LitElement {
 <p>コンテキストオブジェクトは下記のように<code>createContext()</code>を使って生成します。</p>
 <pre><code class="language-ts">export const myContext = createContext(Symbol('my-context'));
 </code></pre>
-<h4 id="コンテキストの型"><a class="anchor" href="#コンテキストの型">#</a>コンテキストの型</h4>
+<h4 id="コンテキストの型チェック"><a class="anchor" href="#コンテキストの型チェック">#</a>コンテキストの型チェック</h4>
 <p><code>createContext()</code>は任意の値を受け取って、受け取った値をそのまま返します。
 TypeScriptでは、戻り値を<code>Context</code>型のオブジェクトにキャストします。
 そのオブジェクトはコンテクストオブジェクトとそれに対応する値の型を内包しています。</p>
 <p>下記のコードには間違いがあります。
 TypeScript will warn that the type <code>string</code> is not assignable to the type <code>Logger</code>.
-Note that this check is currently only for public fields.</p>
+下記のコードでは、TypeScriptは<code>string</code>型は<code>Logger</code>型に割り当てることができないという警告を出すでしょう。
+このチェックは現時点ではpublicフィールドのみ対象となります。</p>
 <pre><code class="language-ts">const myContext = createContext&lt;Logger&gt;(Symbol('logger'));
 
 class MyElement extends LitElement {
@@ -160,7 +161,7 @@ class MyElement extends LitElement {
   name: string
 }
 </code></pre>
-<h4 id="Context_equality"><a class="anchor" href="#Context_equality">#</a>Context equality</h4>
+<h4 id="コンテキストの比較"><a class="anchor" href="#コンテキストの比較">#</a>コンテキストの比較</h4>
 <p>Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (<code>===</code>), so a provider will only handle a context request if its context key equals the context key of the request.</p>
 <p>This means that there are two main ways to create a context object:</p>
 <ol>
@@ -464,8 +465,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#サブスクリプション">サブスクリプション</a></p>
 <p class="h2"><a href="#使い方">使い方</a></p>
 <p class="h3"><a href="#コンテキストを定義する">コンテキストを定義する</a></p>
-<p class="h4"><a href="#コンテキストの型">コンテキストの型</a></p>
-<p class="h4"><a href="#Context_equality">Context equality</a></p>
+<p class="h4"><a href="#コンテキストの型チェック">コンテキストの型チェック</a></p>
+<p class="h4"><a href="#コンテキストの比較">コンテキストの比較</a></p>
 <p class="h3"><a href="#Providing_a_context">Providing a context</a></p>
 <p class="h4"><a href="#_provide()">@provide()</a></p>
 <p class="h4"><a href="#ContextProvider">ContextProvider</a></p>
