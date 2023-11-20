@@ -118,7 +118,7 @@ LitのコンテキストはW3Cの[Web Components Community Group](https://www.w3
 export const myContext = createContext(Symbol('my-context'));
 ```
 
-#### コンテキストの型
+#### コンテキストの型チェック
 
 `createContext()`は任意の値を受け取って、受け取った値をそのまま返します。
 TypeScriptでは、戻り値を`Context`型のオブジェクトにキャストします。
@@ -126,7 +126,8 @@ TypeScriptでは、戻り値を`Context`型のオブジェクトにキャスト�
 
 下記のコードには間違いがあります。
 TypeScript will warn that the type `string` is not assignable to the type `Logger`.
-Note that this check is currently only for public fields.
+下記のコードでは、TypeScriptは`string`型は`Logger`型に割り当てることができないという警告を出すでしょう。
+このチェックは現時点ではpublicフィールドのみ対象となります。
 
 ```ts
 const myContext = createContext<Logger>(Symbol('logger'));
@@ -137,7 +138,7 @@ class MyElement extends LitElement {
 }
 ```
 
-#### Context equality
+#### コンテキストの比較
 
 Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (`===`), so a provider will only handle a context request if its context key equals the context key of the request.
 
