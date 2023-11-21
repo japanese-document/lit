@@ -162,7 +162,9 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h4 id="コンテキストの比較"><a class="anchor" href="#コンテキストの比較">#</a>コンテキストの比較</h4>
-<p>Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (<code>===</code>), so a provider will only handle a context request if its context key equals the context key of the request.</p>
+<p>プロバイダはコンテクストオブジェクトをコンテキストリクエストイベントに対応する値を取得することに使いします。
+Contexts are compared with strict equality (<code>===</code>),
+so a provider will only handle a context request if its context key equals the context key of the request.</p>
 <p>This means that there are two main ways to create a context object:</p>
 <ol>
 <li>With a value that is globally unique, like an object (<code>{}</code>)  or symbol (<code>Symbol()</code>)</li>

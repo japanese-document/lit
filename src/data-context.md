@@ -140,7 +140,9 @@ class MyElement extends LitElement {
 
 #### コンテキストの比較
 
-Context objects are used by providers to match a context request event to a value. Contexts are compared with strict equality (`===`), so a provider will only handle a context request if its context key equals the context key of the request.
+プロバイダはコンテクストオブジェクトをコンテキストリクエストイベントに対応する値を取得することに使いします。
+Contexts are compared with strict equality (`===`),
+so a provider will only handle a context request if its context key equals the context key of the request.
 
 This means that there are two main ways to create a context object:
 1. With a value that is globally unique, like an object (`{}`)  or symbol (`Symbol()`)
