@@ -125,7 +125,6 @@ TypeScriptでは、戻り値を`Context`型のオブジェクトにキャスト�
 そのオブジェクトはコンテクストオブジェクトとそれに対応する値の型を内包しています。
 
 下記のコードには間違いがあります。
-TypeScript will warn that the type `string` is not assignable to the type `Logger`.
 下記のコードでは、TypeScriptは`string`型は`Logger`型に割り当てることができないという警告を出すでしょう。
 このチェックは現時点ではpublicフィールドのみ対象となります。
 
@@ -141,8 +140,8 @@ class MyElement extends LitElement {
 #### コンテキストの比較
 
 プロバイダはコンテクストオブジェクトをコンテキストリクエストイベントに対応する値を取得することに使いします。
-Contexts are compared with strict equality (`===`),
-so a provider will only handle a context request if its context key equals the context key of the request.
+プロバイダはプロバイダに設定されたコンテキストオブジェクトとリクエストのコンテキストオブジェクトが一致した場合のみ処理を行います。
+その比較は`===`で行います。
 
 This means that there are two main ways to create a context object:
 1. With a value that is globally unique, like an object (`{}`)  or symbol (`Symbol()`)
