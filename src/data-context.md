@@ -141,9 +141,10 @@ class MyElement extends LitElement {
 
 プロバイダはコンテクストオブジェクトをコンテキストリクエストイベントに対応する値を取得することに使いします。
 プロバイダはプロバイダに設定されたコンテキストオブジェクトとリクエストのコンテキストオブジェクトが一致した場合のみ処理を行います。
-その比較は`===`で行います。
+その比較は`===`で行われます。
 
-This means that there are two main ways to create a context object:
+これを考慮するとコンテキストオブジェクトを生成する方法は主に下記の2つです。
+
 1. With a value that is globally unique, like an object (`{}`)  or symbol (`Symbol()`)
 2. With a value that is not globally unique, so that it can be equal under strict equality, like a string (`'logger'`) or _global_ symbol (`Symbol.for('logger')`).
 
