@@ -166,8 +166,8 @@ class MyElement extends LitElement {
 その比較は<code>===</code>で行われます。</p>
 <p>これを考慮するとコンテキストオブジェクトを生成する方法は主に下記の2つです。</p>
 <ol>
-<li>With a value that is globally unique, like an object (<code>{}</code>)  or symbol (<code>Symbol()</code>)</li>
-<li>With a value that is not globally unique, so that it can be equal under strict equality, like a string (<code>'logger'</code>) or <em>global</em> symbol (<code>Symbol.for('logger')</code>).</li>
+<li>オブジェクト(<code>{}</code>)やシンボル(<code>Symbol()</code>)などglobalに同じ値が1つのみ存在しないものを値にする。(<code>{} === {}</code>は<code>false</code>になる。)</li>
+<li>文字列やグローバルシンボル(<code>Symbol.for('logger')</code>)のようにglobalに複数の同じ値が存在するものを値にする。(<code>'foo' === 'foo'</code>は<code>true</code>になる。)</li>
 </ol>
 <p>If you want two <em>separate</em> <code>createContext()</code> calls to refer to the same
 context, then use a key that will be equal under strict equality like a

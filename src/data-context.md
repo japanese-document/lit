@@ -145,8 +145,8 @@ class MyElement extends LitElement {
 
 これを考慮するとコンテキストオブジェクトを生成する方法は主に下記の2つです。
 
-1. With a value that is globally unique, like an object (`{}`)  or symbol (`Symbol()`)
-2. With a value that is not globally unique, so that it can be equal under strict equality, like a string (`'logger'`) or _global_ symbol (`Symbol.for('logger')`).
+1. オブジェクト(`{}`)やシンボル(`Symbol()`)などglobalに同じ値が1つのみ存在しないものを値にする。(`{} === {}`は`false`になる。)
+2. 文字列やグローバルシンボル(`Symbol.for('logger')`)のようにglobalに複数の同じ値が存在するものを値にする。(`'foo' === 'foo'`は`true`になる。)
 
 If you want two _separate_ `createContext()` calls to refer to the same
 context, then use a key that will be equal under strict equality like a
