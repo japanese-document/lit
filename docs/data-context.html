@@ -163,8 +163,8 @@ class MyElement extends LitElement {
 <h4 id="コンテキストの比較"><a class="anchor" href="#コンテキストの比較">#</a>コンテキストの比較</h4>
 <p>プロバイダはコンテクストオブジェクトをコンテキストリクエストイベントに対応する値を取得することに使いします。
 プロバイダはプロバイダに設定されたコンテキストオブジェクトとリクエストのコンテキストオブジェクトが一致した場合のみ処理を行います。
-その比較は<code>===</code>で行います。</p>
-<p>This means that there are two main ways to create a context object:</p>
+その比較は<code>===</code>で行われます。</p>
+<p>これを考慮するとコンテキストオブジェクトを生成する方法は主に下記の2つです。</p>
 <ol>
 <li>With a value that is globally unique, like an object (<code>{}</code>)  or symbol (<code>Symbol()</code>)</li>
 <li>With a value that is not globally unique, so that it can be equal under strict equality, like a string (<code>'logger'</code>) or <em>global</em> symbol (<code>Symbol.for('logger')</code>).</li>
