@@ -151,6 +151,9 @@ class MyElement extends LitElement {
 If you want two _separate_ `createContext()` calls to refer to the same
 context, then use a key that will be equal under strict equality like a
 string:
+
+2つの別の`createContext()`の結果を使って同じコンテキストを参照するには、下記のように文字列のように`===`で比較すると等価になる値を渡します。
+
 ```ts
 // true
 createContext('my-context') === createContext('my-context')
