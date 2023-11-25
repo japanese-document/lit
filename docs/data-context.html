@@ -169,14 +169,12 @@ class MyElement extends LitElement {
 <li>オブジェクト(<code>{}</code>)やシンボル(<code>Symbol()</code>)などglobalに同じ値が1つのみ存在しないものを値にする。(<code>{} === {}</code>は<code>false</code>になる。)</li>
 <li>文字列やグローバルシンボル(<code>Symbol.for('logger')</code>)のようにglobalに複数の同じ値が存在するものを値にする。(<code>'foo' === 'foo'</code>は<code>true</code>になる。)</li>
 </ol>
-<p>If you want two <em>separate</em> <code>createContext()</code> calls to refer to the same
-context, then use a key that will be equal under strict equality like a
-string:</p>
 <p>2つの別の<code>createContext()</code>の結果を使って同じコンテキストを参照するには、下記のように文字列のように<code>===</code>で比較すると等価になる値を渡します。</p>
 <pre><code class="language-ts">// true
 createContext('my-context') === createContext('my-context')
 </code></pre>
-<p>Beware though that two modules in your app could use the same context key to refer to different objects. To avoid unintended collisions you may want to use a relatively unique string, e.g. like <code>'console-logger'</code> instead of <code>'logger'</code>.</p>
+<p>Beware though that two modules in your app could use the same context key to refer to different objects.
+To avoid unintended collisions you may want to use a relatively unique string, e.g. like <code>'console-logger'</code> instead of <code>'logger'</code>.</p>
 <p>Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.</p>
 <h3 id="Providing_a_context"><a class="anchor" href="#Providing_a_context">#</a>Providing a context</h3>
 <p>There are two ways in <code>@lit/context</code> to provide a context value: the ContextProvider controller and the <code>@provide()</code> decorator.</p>

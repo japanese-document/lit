@@ -148,10 +148,6 @@ class MyElement extends LitElement {
 1. オブジェクト(`{}`)やシンボル(`Symbol()`)などglobalに同じ値が1つのみ存在しないものを値にする。(`{} === {}`は`false`になる。)
 2. 文字列やグローバルシンボル(`Symbol.for('logger')`)のようにglobalに複数の同じ値が存在するものを値にする。(`'foo' === 'foo'`は`true`になる。)
 
-If you want two _separate_ `createContext()` calls to refer to the same
-context, then use a key that will be equal under strict equality like a
-string:
-
 2つの別の`createContext()`の結果を使って同じコンテキストを参照するには、下記のように文字列のように`===`で比較すると等価になる値を渡します。
 
 ```ts
@@ -159,7 +155,8 @@ string:
 createContext('my-context') === createContext('my-context')
 ```
 
-Beware though that two modules in your app could use the same context key to refer to different objects. To avoid unintended collisions you may want to use a relatively unique string, e.g. like `'console-logger'` instead of `'logger'`.
+Beware though that two modules in your app could use the same context key to refer to different objects.
+To avoid unintended collisions you may want to use a relatively unique string, e.g. like `'console-logger'` instead of `'logger'`.
 
 Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.
 
