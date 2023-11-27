@@ -155,8 +155,8 @@ class MyElement extends LitElement {
 createContext('my-context') === createContext('my-context')
 ```
 
-Beware though that two modules in your app could use the same context key to refer to different objects.
-To avoid unintended collisions you may want to use a relatively unique string, e.g. like `'console-logger'` instead of `'logger'`.
+アプリケーション内にある2つのモジュールが同じコンテキストオブジェクトを使って意図せず異なるオブジェクトを参照する場合に注意してください。
+この意図しない衝突を避けるために(`'logger'`の代わりに`'console-logger'`を使うように)ユニークな値を`createContext()`に渡した方が良いかもしれません。
 
 Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.
 
