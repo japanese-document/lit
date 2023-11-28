@@ -175,11 +175,14 @@ createContext('my-context') === createContext('my-context')
 </code></pre>
 <p>アプリケーション内にある2つのモジュールが同じコンテキストオブジェクトを使って意図せず異なるオブジェクトを参照する場合に注意してください。
 この意図しない衝突を避けるために(<code>'logger'</code>の代わりに<code>'console-logger'</code>を使うように)ユニークな値を<code>createContext()</code>に渡した方が良いかもしれません。</p>
-<p>Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.</p>
-<h3 id="Providing_a_context"><a class="anchor" href="#Providing_a_context">#</a>Providing a context</h3>
-<p>There are two ways in <code>@lit/context</code> to provide a context value: the ContextProvider controller and the <code>@provide()</code> decorator.</p>
+<p>通常、コンテキストオブジェクトの生成時に渡される値はglobalに同じ値が1つのみがベストです。
+シンボル(<code>Symbol()</code>)を使うとこれが簡単にできます。</p>
+<h3 id="値をセットする"><a class="anchor" href="#値をセットする">#</a>値をセットする</h3>
+<p><code>@lit/context</code>にはコンテキストの値をセットする2つの方法があります。
+それは<code>ContextProvider</code>コントローラと<code>@provide()</code>デコレータです。</p>
 <h4 id="_provide()"><a class="anchor" href="#_provide()">#</a><code>@provide()</code></h4>
-<p>The <code>@provide()</code> decorator is the easiest way to provide a value if you're using decorators. It creates a ContextProvider controller for you.</p>
+<p>The <code>@provide()</code> decorator is the easiest way to provide a value if you're using decorators.
+It creates a ContextProvider controller for you.</p>
 <p>Decorate a property with <code>@provide()</code> and give it the context key:</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {property} from 'lit/decorators.js';
@@ -467,7 +470,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#コンテキストを定義する">コンテキストを定義する</a></p>
 <p class="h4"><a href="#コンテキストの型チェック">コンテキストの型チェック</a></p>
 <p class="h4"><a href="#コンテキストの比較">コンテキストの比較</a></p>
-<p class="h3"><a href="#Providing_a_context">Providing a context</a></p>
+<p class="h3"><a href="#値をセットする">値をセットする</a></p>
 <p class="h4"><a href="#_provide()">@provide()</a></p>
 <p class="h4"><a href="#ContextProvider">ContextProvider</a></p>
 <p class="h3"><a href="#Consuming_a_context">Consuming a context</a></p>
