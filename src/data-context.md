@@ -158,15 +158,18 @@ createContext('my-context') === createContext('my-context')
 アプリケーション内にある2つのモジュールが同じコンテキストオブジェクトを使って意図せず異なるオブジェクトを参照する場合に注意してください。
 この意図しない衝突を避けるために(`'logger'`の代わりに`'console-logger'`を使うように)ユニークな値を`createContext()`に渡した方が良いかもしれません。
 
-Usually it's best to use a globally unique context object. Symbols are one of the easiest ways to do this.
+通常、コンテキストオブジェクトの生成時に渡される値はglobalに同じ値が1つのみがベストです。
+シンボル(`Symbol()`)を使うとこれが簡単にできます。
 
-### Providing a context
+### 値をセットする
 
-There are two ways in `@lit/context` to provide a context value: the ContextProvider controller and the `@provide()` decorator.
+`@lit/context`にはコンテキストの値をセットする2つの方法があります。
+それは`ContextProvider`コントローラと`@provide()`デコレータです。
 
 #### `@provide()`
 
-The `@provide()` decorator is the easiest way to provide a value if you're using decorators. It creates a ContextProvider controller for you.
+The `@provide()` decorator is the easiest way to provide a value if you're using decorators.
+It creates a ContextProvider controller for you.
 
 Decorate a property with `@provide()` and give it the context key:
 ```ts
