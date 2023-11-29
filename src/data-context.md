@@ -168,10 +168,11 @@ createContext('my-context') === createContext('my-context')
 
 #### `@provide()`
 
-The `@provide()` decorator is the easiest way to provide a value if you're using decorators.
-It creates a ContextProvider controller for you.
+デコレータを使うことができるなら、`@provide()`デコレータがプロバイダに値をセットする最も簡単な方法です。
+このデコレータは`ContextProvider`コントローラを生成します。
 
-Decorate a property with `@provide()` and give it the context key:
+下記のように`@provide()`デコレータをプロパティに付与して、それにコンテキストオブジェクトを渡します。
+
 ```ts
 import {LitElement, html} from 'lit';
 import {property} from 'lit/decorators.js';
@@ -184,7 +185,8 @@ class MyApp extends LitElement {
 }
 ```
 
-You can make the property also a reactive property with `@property()` or `@state()` so that setting it will update the provider element as well as context consumers.
+`@property()`もしくは`@state()`をセットしたプロパティはリアクティブプロパティになります。
+だから、そのプロパティを更新すると、プロバイダが存在する要素と同じようにコンテキストコンシューマも更新されます。
 
 ```ts
   @provide({context: myContext})

@@ -181,9 +181,9 @@ createContext('my-context') === createContext('my-context')
 <p><code>@lit/context</code>にはコンテキストの値をセットする2つの方法があります。
 それは<code>ContextProvider</code>コントローラと<code>@provide()</code>デコレータです。</p>
 <h4 id="_provide()"><a class="anchor" href="#_provide()">#</a><code>@provide()</code></h4>
-<p>The <code>@provide()</code> decorator is the easiest way to provide a value if you're using decorators.
-It creates a ContextProvider controller for you.</p>
-<p>Decorate a property with <code>@provide()</code> and give it the context key:</p>
+<p>デコレータを使うことができるなら、<code>@provide()</code>デコレータがプロバイダに値をセットする最も簡単な方法です。
+このデコレータは<code>ContextProvider</code>コントローラを生成します。</p>
+<p>下記のように<code>@provide()</code>デコレータをプロパティに付与して、それにコンテキストオブジェクトを渡します。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {property} from 'lit/decorators.js';
 import {provide} from '@lit/context';
@@ -194,7 +194,8 @@ class MyApp extends LitElement {
   myData: MyData;
 }
 </code></pre>
-<p>You can make the property also a reactive property with <code>@property()</code> or <code>@state()</code> so that setting it will update the provider element as well as context consumers.</p>
+<p><code>@property()</code>もしくは<code>@state()</code>をセットしたプロパティはリアクティブプロパティになります。
+だから、そのプロパティを更新すると、プロバイダが存在する要素と同じようにコンテキストコンシューマも更新されます。</p>
 <pre><code class="language-ts">  @provide({context: myContext})
   @property({attribute: false})
   myData: MyData;
