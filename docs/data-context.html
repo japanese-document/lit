@@ -200,7 +200,8 @@ class MyApp extends LitElement {
   @property({attribute: false})
   myData: MyData;
 </code></pre>
-<p>Context properties are often intended to be private. You can make private properties reactive with <code>@state()</code>:</p>
+<p>Context properties are often intended to be private.
+You can make private properties reactive with <code>@state()</code>:</p>
 <pre><code class="language-ts">  @provide({context: myContext})
   @state()
   private _myData: MyData;
