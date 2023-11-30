@@ -27,7 +27,7 @@
     "dompurify": "^3.0.1",
     "glob": "^10.1.0",
     "jsdom": "^21.1.1",
-    "marked": "^5.1.2"
+    "marked": "^11.0.0"
   },
   "devDependencies": {
     "@swc-node/register": "^1.6.8",
