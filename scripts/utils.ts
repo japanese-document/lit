@@ -39,7 +39,7 @@ export async function createPages(markDownFileNames: string[]) {
 }
 
 const renderer = {
-  link(href: string, _title: string, text: string) {
+  link(href: string, title: string | null | undefined, text: string) {
     return `<a href="${href}" class="Link">${text}</a>`
   },
   heading(text: string, level: number) {
@@ -53,8 +53,6 @@ const renderer = {
 }
 
 marked.use({
-  mangle: false,
-  headerIds: false,
   renderer
 })
 
@@ -124,7 +122,7 @@ export function createHTML(
 
 export async function createPage(
   layout: string, md: string, title: string, url: string, indexMenu: string, headerList: string) {
-  const body = marked.parse(md)
+  const body = await marked.parse(md)
   const description = createDescription(body)
   return createHTML(layout, title, body, description, url, CSS_PATH, indexMenu, headerList)
 }
@@ -176,7 +174,7 @@ export function createHeaderList(md: string) {
       for (let i = 2; i <= 5; i++ ) {
         if (line.slice(0, i) === `${'#'.repeat(i - 1)} `) {
           const _header = line.slice(i).trim()
-          const header = marked.parse(_header).trim()
+          const header =  (marked.parse(_header) as string).trim()
           const href = createHash(header)
           const document = new window.DOMParser().parseFromString(header, 'text/html')
           return `<p class="h${i - 1}"><a href="#${href}">${document.body.textContent}</a></p>`
@@ -191,6 +189,6 @@ export function createIndexPage(layout: string, indexItems: IndexItem[]) {
   const md = indexItems.reduce((md: string, p) => {
     return `${md}\n## ${p.name}\n${p.pages.map(p => `* [${p.title}](${p.url})`).join('\n')}`
   }, `# ${INDEX_PAGE_HEADER}\n`)
-  const body = marked.parse(md)
+  const body = marked.parse(md) as string
   return createHTML(layout, INDEX_PAGE_TITLE, body, INDEX_PAGE_DESCRIPTION, BASE_URL, CSS_PATH, '', '')
 }
