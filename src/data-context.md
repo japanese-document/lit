@@ -194,8 +194,8 @@ class MyApp extends LitElement {
   myData: MyData;
 ```
 
-Context properties are often intended to be private.
-You can make private properties reactive with `@state()`:
+コンテキストを取り扱うプロパティをprivateにすることはよくあります。
+下記のように`@state()`を付与されたprivateなリアクティブプロパティをプロバイダにすることができます。
 
 ```ts
   @provide({context: myContext})
@@ -203,7 +203,7 @@ You can make private properties reactive with `@state()`:
   private _myData: MyData;
 ```
 
-Making a context property public lets an element provide a public field to its child tree:
+コンテキストを扱うプロパティをpublicと`@property()`にすると、下記のようにテンプレートで値をセットすることができます。
 
 ```ts
   html`<my-provider-element .myData=${someData}>`
