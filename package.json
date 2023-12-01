@@ -17,7 +17,8 @@
     "build": "npm run build:md && npm run css && npm run image",
     "fix": "eslint 'scripts/**/*.ts' --fix",
     "lint": "eslint 'scripts/**/*.ts'",
-    "test": "node --experimental-vm-modules --env-file=scripts/.env node_modules/.bin/jest"
+    "test": "node --experimental-vm-modules --env-file=scripts/.env node_modules/.bin/jest",
+    "test:type": "tsc --noEmit"
   },
   "engines": {
     "node": ">=20.9.0"
