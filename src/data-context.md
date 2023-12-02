@@ -211,7 +211,7 @@ class MyApp extends LitElement {
 
 #### ContextProvider
 
-`ContextProvider` is a reactive controller that manages `context-request` event handlers for you.
+`ContextProvider`は`context-request`を管理するリアクティブコントローラです。
 
 ```ts
 import {LitElement, html} from 'lit';
