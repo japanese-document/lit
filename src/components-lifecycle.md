@@ -142,17 +142,17 @@ microtaskの説明は[Jake Archibaldの記事](https://jakearchibald.com/2015/ta
 
 **更新前**
 
-![update-1](/lit/images/components-update-1.jpg)
+![update-1](images/components-update-1.jpg)
 
-![update-2](/lit/images/components-update-2.jpg)
+![update-2](images/components-update-2.jpg)
 
 **更新**
 
-![update-3](/lit/images/components-update-3.jpg)
+![update-3](images/components-update-3.jpg)
 
 **更新後**
 
-![update-4](/lit/images/components-update-4.jpg)
+![update-4](images/components-update-4.jpg)
 
 ### changedProperties
 
@@ -543,7 +543,7 @@ Litの[サーバーサイドレンダリングパッケージ](https://lit.dev/d
 Litをサーバでレンダリングする時はすべてのアップデートサイクルが実行されるわけではありません。
 次のメソッドはサーバで実行されます。
 
-![update-server](/lit/images/components-update-server.jpg)
+![update-server](images/components-update-server.jpg)
 
 ---
 

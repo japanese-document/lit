@@ -48,7 +48,8 @@ const renderer = {
   },
   image(src: string) {
     const alt = src.split('/').at(-1)
-    return `<img alt="${alt}" src="${src}" loading="lazy">`
+    const url = path.join(BASE_URL, src)
+    return `<img alt="${alt}" src="${url}" loading="lazy">`
   }
 }
 
