@@ -166,7 +166,7 @@ createContext('my-context') === createContext('my-context')
 `@lit/context`にはコンテキストの値をセットする2つの方法があります。
 それは`ContextProvider`コントローラと`@provide()`デコレータです。
 
-#### `@provide()`
+#### `@provide()`デコレータ
 
 デコレータを使うことができるなら、`@provide()`デコレータがプロバイダに値をセットする最も簡単な方法です。
 このデコレータは`ContextProvider`コントローラを生成します。
@@ -223,7 +223,7 @@ export class MyApp extends LitElement {
 }
 ```
 
-ContextProvider can take an initial value as an option in the constructor:
+下記のように`ContextProvider`のコンストラクタで初期値を指定することができます。
 
 ```ts
   private _provider = new ContextProvider(this, {context: myContext, initialValue: myData});
@@ -234,11 +234,12 @@ Or you can call `setValue()`:
   this._provider.setValue(myData);
 ```
 
-### Consuming a context
+### コンシューマ
 
-#### `@consume()` decorator
+#### `@consume()`デコレータ
 
-The `@consume()` decorator is the easiest way to consume a value if you're using decorators. It creates a ContextConsumer controller for you.
+The `@consume()` decorator is the easiest way to consume a value if you're using decorators.
+It creates a ContextConsumer controller for you.
 
 Decorate a property with `@consume()` and give it the context key:
 ```ts
