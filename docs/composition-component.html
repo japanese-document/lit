@@ -103,7 +103,6 @@ Imagine you've been tasked with implementing a screen of UI:</p>
 </li>
 </ul>
 <p>Consider a menu component that includes a set of menu items and exposes <code>items</code> and <code>selectedItem</code> properties as part of its public API. Its DOM structure might look like this:</p>
-<p><img loading="lazy" src="https://japanese-document.github.io/lit//images/docs/composition/composition-menu-component.png" alt="composition-menu-component.png"></p>
 <p>When the user selects an item, the <code>my-menu</code> element should update its <code>selectedItem</code> property. It should also fire an event to notify any owning component that the selection has changed. The complete sequence would be something like this:</p>
 <ul>
 <li>The user interacts with an item, causing an event to fire (either a standard event like <code>click</code>, or some event specific to the <code>my-item</code> component).</li>
