@@ -4,6 +4,7 @@ import { glob } from 'glob'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import { marked } from 'marked'
+import { imageSize } from 'image-size'
 import { URL, CSS, BASE_URL, BODY, CSS_PATH, DESCRIPTION, HEADER, INDEX, INDEX_PAGE_DESCRIPTION,
   INDEX_PAGE_HEADER, INDEX_PAGE_TITLE, SEPARATOR, SOURCE_DIR, TITLE } from './const.js'
 
@@ -49,7 +50,14 @@ const renderer = {
   image(src: string) {
     const alt = src.split('/').at(-1)
     const url = `${BASE_URL}/${src}`
-    return `<img alt="${alt}" src="${url}" loading="lazy">`
+    try {
+      const { height, width } = imageSize(`${SOURCE_DIR}/${src}`)
+      return `<img alt="${alt}" src="${url}" width="${width}" height="${height}" loading="lazy">`
+    }
+    catch(e) {
+      console.warn(e)
+      return `<img alt="${alt}" src="${url}" loading="lazy">`
+    }
   }
 }
 
