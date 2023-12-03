@@ -37,7 +37,7 @@ const greeting = document.createElement('simple-greeting');
 正確には、`LitElement`は`ReactiveElement`を継承しています。
 `ReactiveElement`は`HTMLElement`を継承して[リアクティブプロパティ](https://japanese-document.github.io/lit/components-properties.html)を実装しています。
 
-![lit-element-inheritance.png](https://japanese-document.github.io/lit/images/lit-element-inheritance.png)
+![lit-element-inheritance.png](images/lit-element-inheritance.png)
 
 ## TypeScriptの型を提供する
 
