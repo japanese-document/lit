@@ -181,7 +181,7 @@ createContext('my-context') === createContext('my-context')
 <p><code>@lit/context</code>にはコンテキストの値をセットする2つの方法があります。
 それは<code>ContextProvider</code>コントローラと<code>@provide()</code>デコレータです。</p>
 <h4 id="_provide()デコレータ"><a class="anchor" href="#_provide()デコレータ">#</a><code>@provide()</code>デコレータ</h4>
-<p>デコレータを使うことができるなら、<code>@provide()</code>デコレータがプロバイダに値をセットする最も簡単な方法です。
+<p>デコレータが利用可能なら、<code>@provide()</code>デコレータはプロバイダに値をセットする最も簡単な方法です。
 このデコレータは<code>ContextProvider</code>コントローラを生成します。</p>
 <p>下記のように<code>@provide()</code>デコレータをプロパティに付与して、それにコンテキストオブジェクトを渡します。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
@@ -227,9 +227,9 @@ export class MyApp extends LitElement {
 </code></pre>
 <h3 id="コンシューマ"><a class="anchor" href="#コンシューマ">#</a>コンシューマ</h3>
 <h4 id="_consume()デコレータ"><a class="anchor" href="#_consume()デコレータ">#</a><code>@consume()</code>デコレータ</h4>
-<p>The <code>@consume()</code> decorator is the easiest way to consume a value if you're using decorators.
-It creates a ContextConsumer controller for you.</p>
-<p>Decorate a property with <code>@consume()</code> and give it the context key:</p>
+<p>デコレータが利用可能なら、<code>@consume()</code>デコレータは値を取得する最も簡単な方法です。
+このデコレータは<code>ContextConsumer</code>コントローラを生成します。</p>
+<p>下記のように<code>@consume</code>にコンテキストオブジェクトを渡します。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {consume} from '@lit/context';
 import {myContext, MyData} from './my-context.js';

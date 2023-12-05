@@ -168,7 +168,7 @@ createContext('my-context') === createContext('my-context')
 
 #### `@provide()`デコレータ
 
-デコレータを使うことができるなら、`@provide()`デコレータがプロバイダに値をセットする最も簡単な方法です。
+デコレータが利用可能なら、`@provide()`デコレータはプロバイダに値をセットする最も簡単な方法です。
 このデコレータは`ContextProvider`コントローラを生成します。
 
 下記のように`@provide()`デコレータをプロパティに付与して、それにコンテキストオブジェクトを渡します。
@@ -238,10 +238,11 @@ Or you can call `setValue()`:
 
 #### `@consume()`デコレータ
 
-The `@consume()` decorator is the easiest way to consume a value if you're using decorators.
-It creates a ContextConsumer controller for you.
+デコレータが利用可能なら、`@consume()`デコレータは値を取得する最も簡単な方法です。
+このデコレータは`ContextConsumer`コントローラを生成します。
 
-Decorate a property with `@consume()` and give it the context key:
+下記のように`@consume`にコンテキストオブジェクトを渡します。
+
 ```ts
 import {LitElement, html} from 'lit';
 import {consume} from '@lit/context';
