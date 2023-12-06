@@ -222,7 +222,7 @@ export class MyApp extends LitElement {
 <p>下記のように<code>ContextProvider</code>のコンストラクタで初期値を指定することができます。</p>
 <pre><code class="language-ts">  private _provider = new ContextProvider(this, {context: myContext, initialValue: myData});
 </code></pre>
-<p>Or you can call <code>setValue()</code>:</p>
+<p>もしくは下記のように<code>setValue()</code>を使います。</p>
 <pre><code class="language-ts">  this._provider.setValue(myData);
 </code></pre>
 <h3 id="コンシューマ"><a class="anchor" href="#コンシューマ">#</a>コンシューマ</h3>
@@ -239,7 +239,8 @@ class MyElement extends LitElement {
   myData: MyData;
 }
 </code></pre>
-<p>When this element is connected to the document, it will automatically fire a <code>context-request</code> event, get a provided value, assign it to the property, and trigger an update of the element.</p>
+<p>When this element is connected to the document,
+it will automatically fire a <code>context-request</code> event, get a provided value, assign it to the property, and trigger an update of the element.</p>
 <h4 id="ContextConsumer"><a class="anchor" href="#ContextConsumer">#</a>ContextConsumer</h4>
 <p>ContextConsumer is a reactive controller that manages dispatching the <code>context-request</code> event for you. The controller will cause the host element to update when new values are provided. The provided value is then available at the <code>.value</code> property of the controller.</p>
 <pre><code class="language-ts">import {LitElement, property} from 'lit';

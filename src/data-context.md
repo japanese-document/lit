@@ -229,7 +229,8 @@ export class MyApp extends LitElement {
   private _provider = new ContextProvider(this, {context: myContext, initialValue: myData});
 ```
 
-Or you can call `setValue()`:
+もしくは下記のように`setValue()`を使います。
+
 ```ts
   this._provider.setValue(myData);
 ```
@@ -254,7 +255,8 @@ class MyElement extends LitElement {
 }
 ```
 
-When this element is connected to the document, it will automatically fire a `context-request` event, get a provided value, assign it to the property, and trigger an update of the element.
+When this element is connected to the document,
+it will automatically fire a `context-request` event, get a provided value, assign it to the property, and trigger an update of the element.
 
 #### ContextConsumer
 
