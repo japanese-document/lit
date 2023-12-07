@@ -210,7 +210,7 @@ class MyApp extends LitElement {
 <pre><code class="language-ts">  html`&lt;my-provider-element .myData=${someData}&gt;`
 </code></pre>
 <h4 id="ContextProvider"><a class="anchor" href="#ContextProvider">#</a>ContextProvider</h4>
-<p><code>ContextProvider</code>は<code>context-request</code>を管理するリアクティブコントローラです。</p>
+<p><code>ContextProvider</code>は<code>context-request</code>を取り扱うリアクティブコントローラです。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
 import {ContextProvider} from '@lit/context';
 import {myContext} from './my-context.js';
@@ -239,10 +239,15 @@ class MyElement extends LitElement {
   myData: MyData;
 }
 </code></pre>
-<p>When this element is connected to the document,
-it will automatically fire a <code>context-request</code> event, get a provided value, assign it to the property, and trigger an update of the element.</p>
+<p>上記の要素がdocumentに接続すると、
+自動的に<code>context-request</code>イベントが発生します。
+そして、その要素はプロバイダから提供された値を取得します。
+その値は要素のプロパティにセットされます。
+その要素の更新が発動されます。</p>
 <h4 id="ContextConsumer"><a class="anchor" href="#ContextConsumer">#</a>ContextConsumer</h4>
-<p>ContextConsumer is a reactive controller that manages dispatching the <code>context-request</code> event for you. The controller will cause the host element to update when new values are provided. The provided value is then available at the <code>.value</code> property of the controller.</p>
+<p><code>ContextConsumer</code>は<code>context-request</code>イベントのdispatchを取り扱うリアクティブコントローラです。
+The controller will cause the host element to update when new values are provided.
+The provided value is then available at the <code>.value</code> property of the controller.</p>
 <pre><code class="language-ts">import {LitElement, property} from 'lit';
 import {ContextConsumer} from '@lit/context';
 import {myContext} from './my-context.js';
