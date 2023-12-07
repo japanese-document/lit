@@ -211,7 +211,7 @@ class MyApp extends LitElement {
 
 #### ContextProvider
 
-`ContextProvider`は`context-request`を管理するリアクティブコントローラです。
+`ContextProvider`は`context-request`を取り扱うリアクティブコントローラです。
 
 ```ts
 import {LitElement, html} from 'lit';
@@ -255,12 +255,17 @@ class MyElement extends LitElement {
 }
 ```
 
-When this element is connected to the document,
-it will automatically fire a `context-request` event, get a provided value, assign it to the property, and trigger an update of the element.
+上記の要素がdocumentに接続すると、
+自動的に`context-request`イベントが発生します。
+そして、その要素はプロバイダから提供された値を取得します。
+その値は要素のプロパティにセットされます。
+その要素の更新が発動されます。
 
 #### ContextConsumer
 
-ContextConsumer is a reactive controller that manages dispatching the `context-request` event for you. The controller will cause the host element to update when new values are provided. The provided value is then available at the `.value` property of the controller.
+`ContextConsumer`は`context-request`イベントのdispatchを取り扱うリアクティブコントローラです。
+The controller will cause the host element to update when new values are provided.
+The provided value is then available at the `.value` property of the controller.
 
 ```ts
 import {LitElement, property} from 'lit';
