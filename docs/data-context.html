@@ -246,8 +246,8 @@ class MyElement extends LitElement {
 その要素の更新が発動されます。</p>
 <h4 id="ContextConsumer"><a class="anchor" href="#ContextConsumer">#</a>ContextConsumer</h4>
 <p><code>ContextConsumer</code>は<code>context-request</code>イベントのdispatchを取り扱うリアクティブコントローラです。
-The controller will cause the host element to update when new values are provided.
-The provided value is then available at the <code>.value</code> property of the controller.</p>
+新しい値がプロバイダから提供されると、このコントローラはホストコンポーネントを更新します。
+その提供された値はコントローラの<code>value</code>プロパティで使うことができます。</p>
 <pre><code class="language-ts">import {LitElement, property} from 'lit';
 import {ContextConsumer} from '@lit/context';
 import {myContext} from './my-context.js';
