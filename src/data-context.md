@@ -264,8 +264,8 @@ class MyElement extends LitElement {
 #### ContextConsumer
 
 `ContextConsumer`は`context-request`イベントのdispatchを取り扱うリアクティブコントローラです。
-The controller will cause the host element to update when new values are provided.
-The provided value is then available at the `.value` property of the controller.
+新しい値がプロバイダから提供されると、このコントローラはホストコンポーネントを更新します。
+その提供された値はコントローラの`value`プロパティで使うことができます。
 
 ```ts
 import {LitElement, property} from 'lit';
