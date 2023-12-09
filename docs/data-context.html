@@ -261,8 +261,10 @@ export class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h4 id="Subscribing_to_contexts"><a class="anchor" href="#Subscribing_to_contexts">#</a>Subscribing to contexts</h4>
-<p>Consumers can subscribe to context values so that if a provider has a new value, it can give it to all subscribed consumers, causing them to update.</p>
+<h4 id="サブスクライブ"><a class="anchor" href="#サブスクライブ">#</a>サブスクライブ</h4>
+<p>コンシューマはプロバイダに新しい値がセットされるタイミングで、コンテキストの値の更新をサブスクライブすることができます。
+プロバイダはその値をサブスクライブしているすべてのコンシューマに渡します。
+そして、それらのコンシューマのホストコンポーネントの更新を引き起こします。</p>
 <p>You can subscribe with the <code>@consume()</code> decorator:</p>
 <pre><code class="language-ts">  @consume({context: myContext, subscribe: true})
   myData: MyData;
@@ -485,7 +487,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#コンシューマ">コンシューマ</a></p>
 <p class="h4"><a href="#_consume()デコレータ">@consume()デコレータ</a></p>
 <p class="h4"><a href="#ContextConsumer">ContextConsumer</a></p>
-<p class="h4"><a href="#Subscribing_to_contexts">Subscribing to contexts</a></p>
+<p class="h4"><a href="#サブスクライブ">サブスクライブ</a></p>
 <p class="h2"><a href="#Example_Use_Cases">Example Use Cases</a></p>
 <p class="h3"><a href="#Current_user,_locale,_etc.">Current user, locale, etc.</a></p>
 <p class="h3"><a href="#Services">Services</a></p>

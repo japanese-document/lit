@@ -282,9 +282,11 @@ export class MyElement extends LitElement {
 }
 ```
 
-#### Subscribing to contexts
+#### サブスクライブ
 
-Consumers can subscribe to context values so that if a provider has a new value, it can give it to all subscribed consumers, causing them to update.
+コンシューマはプロバイダに新しい値がセットされるタイミングで、コンテキストの値の更新をサブスクライブすることができます。
+プロバイダはその値をサブスクライブしているすべてのコンシューマに渡します。
+そして、それらのコンシューマのホストコンポーネントの更新を引き起こします。
 
 You can subscribe with the `@consume()` decorator:
 
