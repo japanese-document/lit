@@ -288,14 +288,14 @@ export class MyElement extends LitElement {
 プロバイダはその値をサブスクライブしているすべてのコンシューマに渡します。
 そして、それらのコンシューマのホストコンポーネントの更新を引き起こします。
 
-You can subscribe with the `@consume()` decorator:
+サブスクライブを有効にするには、下記のように`@consume()`デコレータを設定します。
 
 ```ts
   @consume({context: myContext, subscribe: true})
   myData: MyData;
 ```
 
-and the ContextConsumer controller:
+`@consume()`デコレータではなく`ContextConsumer`コントローラを使う場合は、下記のようにします。
 
 ```ts
   private _myData = new ContextConsumer(this,
@@ -306,7 +306,7 @@ and the ContextConsumer controller:
   );
 ```
 
-## Example Use Cases
+## ユースケース
 
 ### Current user, locale, etc.
 

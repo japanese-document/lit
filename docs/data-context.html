@@ -265,11 +265,11 @@ export class MyElement extends LitElement {
 <p>コンシューマはプロバイダに新しい値がセットされるタイミングで、コンテキストの値の更新をサブスクライブすることができます。
 プロバイダはその値をサブスクライブしているすべてのコンシューマに渡します。
 そして、それらのコンシューマのホストコンポーネントの更新を引き起こします。</p>
-<p>You can subscribe with the <code>@consume()</code> decorator:</p>
+<p>サブスクライブを有効にするには、下記のように<code>@consume()</code>デコレータを設定します。</p>
 <pre><code class="language-ts">  @consume({context: myContext, subscribe: true})
   myData: MyData;
 </code></pre>
-<p>and the ContextConsumer controller:</p>
+<p><code>@consume()</code>デコレータではなく<code>ContextConsumer</code>コントローラを使う場合は、下記のようにします。</p>
 <pre><code class="language-ts">  private _myData = new ContextConsumer(this,
     {
       context: myContext,
@@ -277,7 +277,7 @@ export class MyElement extends LitElement {
     }
   );
 </code></pre>
-<h2 id="Example_Use_Cases"><a class="anchor" href="#Example_Use_Cases">#</a>Example Use Cases</h2>
+<h2 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h2>
 <h3 id="Current_user,_locale,_etc."><a class="anchor" href="#Current_user,_locale,_etc.">#</a>Current user, locale, etc.</h3>
 <p>The most common context use cases involve data that is global to a page and possibly only sparsely needed in components throughout the page. Without context it's possible that most or all components would need to accept and propagate reactive properties for the data.</p>
 <h3 id="Services"><a class="anchor" href="#Services">#</a>Services</h3>
@@ -488,7 +488,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#_consume()デコレータ">@consume()デコレータ</a></p>
 <p class="h4"><a href="#ContextConsumer">ContextConsumer</a></p>
 <p class="h4"><a href="#サブスクライブ">サブスクライブ</a></p>
-<p class="h2"><a href="#Example_Use_Cases">Example Use Cases</a></p>
+<p class="h2"><a href="#ユースケース">ユースケース</a></p>
 <p class="h3"><a href="#Current_user,_locale,_etc.">Current user, locale, etc.</a></p>
 <p class="h3"><a href="#Services">Services</a></p>
 <p class="h3"><a href="#Themes">Themes</a></p>
