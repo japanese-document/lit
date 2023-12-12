@@ -278,10 +278,13 @@ export class MyElement extends LitElement {
   );
 </code></pre>
 <h2 id="ユースケース"><a class="anchor" href="#ユースケース">#</a>ユースケース</h2>
-<h3 id="Current_user,_locale,_etc."><a class="anchor" href="#Current_user,_locale,_etc.">#</a>Current user, locale, etc.</h3>
-<p>The most common context use cases involve data that is global to a page and possibly only sparsely needed in components throughout the page. Without context it's possible that most or all components would need to accept and propagate reactive properties for the data.</p>
-<h3 id="Services"><a class="anchor" href="#Services">#</a>Services</h3>
-<p>App-global services, like loggers, analytics, data stores, can be provided by context. An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides. Tests can easily provide mock services, or different parts of the page can be given different service instances.</p>
+<h3 id="ユーザデータ、ロケール等"><a class="anchor" href="#ユーザデータ、ロケール等">#</a>ユーザデータ、ロケール等</h3>
+<p>もっとも一般的なコンテキストのユースケースはページに分散しているコンポーネントにデータを提供することです。
+この場合、コンポーネントを使わないとほぼすべてのコンポーネントのリアクティブプロパティにデータを流通させることが必要になるかもしれません。</p>
+<h3 id="サービス"><a class="anchor" href="#サービス">#</a>サービス</h3>
+<p>コンテキストはロガー(logger)、ウェブ分析、データストアのようなアプリケーション全体で使われるサービスを提供することに適しています。
+An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides.
+Tests can easily provide mock services, or different parts of the page can be given different service instances.</p>
 <h3 id="Themes"><a class="anchor" href="#Themes">#</a>Themes</h3>
 <p>Themes are sets of styles that apply to the entire page or entire subtrees within the page - exactly the kind of scope of data that context provides.</p>
 <p>One way of building a theme system would be to define a <code>Theme</code> type that containers can provide that holds named styles. Elements that want to apply a theme can consume the theme object and look up styles by name. Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>
@@ -306,7 +309,7 @@ export class MyElement extends LitElement {
 <h3 id="createContext()"><a class="anchor" href="#createContext()">#</a><code>createContext()</code></h3>
 <p>Creates a typed Context object</p>
 <p><strong>Import</strong>:</p>
-<pre><code class="language-ts">import {property} from '@lit/context';
+<pre><code class="language-ts">import {createContext} from '@lit/context';
 </code></pre>
 <p><strong>Signature</strong>:</p>
 <pre><code class="language-ts">function createContext&lt;ValueType, K = unknown&gt;(key: K): Context&lt;K, ValueType&gt;;
@@ -489,8 +492,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#ContextConsumer">ContextConsumer</a></p>
 <p class="h4"><a href="#サブスクライブ">サブスクライブ</a></p>
 <p class="h2"><a href="#ユースケース">ユースケース</a></p>
-<p class="h3"><a href="#Current_user,_locale,_etc.">Current user, locale, etc.</a></p>
-<p class="h3"><a href="#Services">Services</a></p>
+<p class="h3"><a href="#ユーザデータ、ロケール等">ユーザデータ、ロケール等</a></p>
+<p class="h3"><a href="#サービス">サービス</a></p>
 <p class="h3"><a href="#Themes">Themes</a></p>
 <p class="h3"><a href="#HTML-based_plugins">HTML-based plugins</a></p>
 <p class="h3"><a href="#Data_formatters,_link_generators,_etc.">Data formatters, link generators, etc.</a></p>
