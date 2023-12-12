@@ -308,13 +308,16 @@ export class MyElement extends LitElement {
 
 ## ユースケース
 
-### Current user, locale, etc.
+### ユーザデータ、ロケール等
 
-The most common context use cases involve data that is global to a page and possibly only sparsely needed in components throughout the page. Without context it's possible that most or all components would need to accept and propagate reactive properties for the data.
+もっとも一般的なコンテキストのユースケースはページに分散しているコンポーネントにデータを提供することです。
+この場合、コンポーネントを使わないとほぼすべてのコンポーネントのリアクティブプロパティにデータを流通させることが必要になるかもしれません。
 
-### Services
+### サービス
 
-App-global services, like loggers, analytics, data stores, can be provided by context. An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides. Tests can easily provide mock services, or different parts of the page can be given different service instances.
+コンテキストはロガー(logger)、ウェブ分析、データストアのようなアプリケーション全体で使われるサービスを提供することに適しています。
+An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides.
+Tests can easily provide mock services, or different parts of the page can be given different service instances.
 
 ### Themes
 
@@ -358,7 +361,7 @@ Creates a typed Context object
 **Import**:
 
 ```ts
-import {property} from '@lit/context';
+import {createContext} from '@lit/context';
 ```
 
 **Signature**:
