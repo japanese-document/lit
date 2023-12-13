@@ -283,8 +283,9 @@ export class MyElement extends LitElement {
 この場合、コンポーネントを使わないとほぼすべてのコンポーネントのリアクティブプロパティにデータを流通させることが必要になるかもしれません。</p>
 <h3 id="サービス"><a class="anchor" href="#サービス">#</a>サービス</h3>
 <p>コンテキストはロガー(logger)、ウェブ分析、データストアのようなアプリケーション全体で使われるサービスを提供することに適しています。
-An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides.
-Tests can easily provide mock services, or different parts of the page can be given different service instances.</p>
+これらのサービスをモジュールにしてコンポーネントのファイルにimportするよりコンテキストを使う利点は、
+実行時にサービスを動的に指定することができる点やDOMツリーごとにサービスを指定できる点です。
+具体的には、テストではサービスのモックを使いやすいです。また、ページ内の異なる部分(コンポーネント)に異なるサービスインスタンスを渡すことができます。</p>
 <h3 id="Themes"><a class="anchor" href="#Themes">#</a>Themes</h3>
 <p>Themes are sets of styles that apply to the entire page or entire subtrees within the page - exactly the kind of scope of data that context provides.</p>
 <p>One way of building a theme system would be to define a <code>Theme</code> type that containers can provide that holds named styles. Elements that want to apply a theme can consume the theme object and look up styles by name. Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>

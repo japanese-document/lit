@@ -316,8 +316,9 @@ export class MyElement extends LitElement {
 ### サービス
 
 コンテキストはロガー(logger)、ウェブ分析、データストアのようなアプリケーション全体で使われるサービスを提供することに適しています。
-An advantage of context over importing from a common module are the late coupling and tree-scoping that context provides.
-Tests can easily provide mock services, or different parts of the page can be given different service instances.
+これらのサービスをモジュールにしてコンポーネントのファイルにimportするよりコンテキストを使う利点は、
+実行時にサービスを動的に指定することができる点やDOMツリーごとにサービスを指定できる点です。
+具体的には、テストではサービスのモックを使いやすいです。また、ページ内の異なる部分(コンポーネント)に異なるサービスインスタンスを渡すことができます。
 
 ### Themes
 
