@@ -286,9 +286,12 @@ export class MyElement extends LitElement {
 これらのサービスをモジュールにしてコンポーネントのファイルにimportするよりコンテキストを使う利点は、
 実行時にサービスを動的に指定することができる点やDOMツリーごとにサービスを指定できる点です。
 具体的には、テストではサービスのモックを使いやすいです。また、ページ内の異なる部分(コンポーネント)に異なるサービスインスタンスを渡すことができます。</p>
-<h3 id="Themes"><a class="anchor" href="#Themes">#</a>Themes</h3>
-<p>Themes are sets of styles that apply to the entire page or entire subtrees within the page - exactly the kind of scope of data that context provides.</p>
-<p>One way of building a theme system would be to define a <code>Theme</code> type that containers can provide that holds named styles. Elements that want to apply a theme can consume the theme object and look up styles by name. Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>
+<h3 id="テーマ"><a class="anchor" href="#テーマ">#</a>テーマ</h3>
+<p>テーマはページ全体もしくはページのサブツリー全体に適用されるスタイルの集合です。
+これはコンテキストが提供するデータの適用範囲と同じです。</p>
+<p>One way of building a theme system would be to define a <code>Theme</code> type that containers can provide that holds named styles.
+Elements that want to apply a theme can consume the theme object and look up styles by name.
+Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>
 <h3 id="HTML-based_plugins"><a class="anchor" href="#HTML-based_plugins">#</a>HTML-based plugins</h3>
 <p>Context can be used to pass data from a parent to its light DOM children. Since the parent does usually not create the light DOM children, it cannot leverage template-based data-binding to pass data to them, but it can listen to and respond to <code>context-request</code> events.</p>
 <p>For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:</p>
@@ -495,7 +498,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h2"><a href="#ユースケース">ユースケース</a></p>
 <p class="h3"><a href="#ユーザデータ、ロケール等">ユーザデータ、ロケール等</a></p>
 <p class="h3"><a href="#サービス">サービス</a></p>
-<p class="h3"><a href="#Themes">Themes</a></p>
+<p class="h3"><a href="#テーマ">テーマ</a></p>
 <p class="h3"><a href="#HTML-based_plugins">HTML-based plugins</a></p>
 <p class="h3"><a href="#Data_formatters,_link_generators,_etc.">Data formatters, link generators, etc.</a></p>
 <p class="h2"><a href="#API">API</a></p>

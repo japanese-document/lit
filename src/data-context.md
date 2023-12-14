@@ -320,11 +320,14 @@ export class MyElement extends LitElement {
 実行時にサービスを動的に指定することができる点やDOMツリーごとにサービスを指定できる点です。
 具体的には、テストではサービスのモックを使いやすいです。また、ページ内の異なる部分(コンポーネント)に異なるサービスインスタンスを渡すことができます。
 
-### Themes
+### テーマ
 
-Themes are sets of styles that apply to the entire page or entire subtrees within the page - exactly the kind of scope of data that context provides.
+テーマはページ全体もしくはページのサブツリー全体に適用されるスタイルの集合です。
+これはコンテキストが提供するデータの適用範囲と同じです。
 
-One way of building a theme system would be to define a `Theme` type that containers can provide that holds named styles. Elements that want to apply a theme can consume the theme object and look up styles by name. Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.
+One way of building a theme system would be to define a `Theme` type that containers can provide that holds named styles.
+Elements that want to apply a theme can consume the theme object and look up styles by name.
+Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.
 
 ### HTML-based plugins
 
