@@ -325,8 +325,9 @@ export class MyElement extends LitElement {
 テーマはページ全体もしくはページのサブツリー全体に適用されるスタイルの集合です。
 これはコンテキストが提供するデータの適用範囲と同じです。
 
-One way of building a theme system would be to define a `Theme` type that containers can provide that holds named styles.
-Elements that want to apply a theme can consume the theme object and look up styles by name.
+テーマシステムを構築する1つの方法はコンテナ要素に適用する`Theme`型を定義することです。
+その型はスタイル名とスタイルで構成されてるオブジェクトです。
+テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
 Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.
 
 ### HTML-based plugins
