@@ -328,7 +328,7 @@ export class MyElement extends LitElement {
 テーマシステムを構築する1つの方法はコンテナ要素に適用する`Theme`型を定義することです。
 その型はスタイル名とスタイルで構成されてるオブジェクトです。
 テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
-Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.
+ContextProviderとContextConsumerをラップしたカスタムテーマリアクティブコントローラを作成すると、繰り返し同じコードを書く量が減るでしょう。
 
 ### HTML-based plugins
 

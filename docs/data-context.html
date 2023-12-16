@@ -292,7 +292,7 @@ export class MyElement extends LitElement {
 <p>テーマシステムを構築する1つの方法はコンテナ要素に適用する<code>Theme</code>型を定義することです。
 その型はスタイル名とスタイルで構成されてるオブジェクトです。
 テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
-Custom theme reactive controllers can wrap ContextProvider and ContextConsumer to reduce boilerplate.</p>
+ContextProviderとContextConsumerをラップしたカスタムテーマリアクティブコントローラを作成すると、繰り返し同じコードを書く量が減るでしょう。</p>
 <h3 id="HTML-based_plugins"><a class="anchor" href="#HTML-based_plugins">#</a>HTML-based plugins</h3>
 <p>Context can be used to pass data from a parent to its light DOM children. Since the parent does usually not create the light DOM children, it cannot leverage template-based data-binding to pass data to them, but it can listen to and respond to <code>context-request</code> events.</p>
 <p>For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:</p>
