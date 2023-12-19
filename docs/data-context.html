@@ -293,8 +293,11 @@ export class MyElement extends LitElement {
 その型はスタイル名とスタイルで構成されてるオブジェクトです。
 テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
 ContextProviderとContextConsumerをラップしたカスタムテーマリアクティブコントローラを作成すると、繰り返し同じコードを書く量が減るでしょう。</p>
-<h3 id="HTML-based_plugins"><a class="anchor" href="#HTML-based_plugins">#</a>HTML-based plugins</h3>
-<p>Context can be used to pass data from a parent to its light DOM children. Since the parent does usually not create the light DOM children, it cannot leverage template-based data-binding to pass data to them, but it can listen to and respond to <code>context-request</code> events.</p>
+<h3 id="HTMLベースのプラグイン"><a class="anchor" href="#HTMLベースのプラグイン">#</a>HTMLベースのプラグイン</h3>
+<p>Context can be used to pass data from a parent to its light DOM children. 
+Since the parent does usually not create the light DOM children,
+it cannot leverage template-based data-binding to pass data to them,
+but it can listen to and respond to <code>context-request</code> events.</p>
 <p>For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:</p>
 <pre><code class="language-html">&lt;code-editor&gt;
   &lt;code-editor-javascript-mode&gt;&lt;/code-editor-javascript-mode&gt;
@@ -302,8 +305,10 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
 &lt;/code-editor&gt;
 </code></pre>
 <p>In this case <code>&lt;code-editor&gt;</code> would provide an API for adding language modes via context, and plugin elements would consume that API and add themselves to the editor.</p>
-<h3 id="Data_formatters,_link_generators,_etc."><a class="anchor" href="#Data_formatters,_link_generators,_etc.">#</a>Data formatters, link generators, etc.</h3>
-<p>Sometimes reusable components will need to format data or URLs in an application-specific way. For example, a documentation viewer that renders a link to another item. The component will not know the URL space of the application.</p>
+<h3 id="データフォーマッタ、リンクジェネレータ等"><a class="anchor" href="#データフォーマッタ、リンクジェネレータ等">#</a>データフォーマッタ、リンクジェネレータ等</h3>
+<p>Sometimes reusable components will need to format data or URLs in an application-specific way.
+For example, a documentation viewer that renders a link to another item.
+The component will not know the URL space of the application.</p>
 <p>In these cases the component can depend on a context-provided function that will apply the application-specific formatting to the data or link.</p>
 <h2 id="API"><a class="anchor" href="#API">#</a>API</h2>
 <div class="alert alert-info">
@@ -500,8 +505,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#ユーザデータ、ロケール等">ユーザデータ、ロケール等</a></p>
 <p class="h3"><a href="#サービス">サービス</a></p>
 <p class="h3"><a href="#テーマ">テーマ</a></p>
-<p class="h3"><a href="#HTML-based_plugins">HTML-based plugins</a></p>
-<p class="h3"><a href="#Data_formatters,_link_generators,_etc.">Data formatters, link generators, etc.</a></p>
+<p class="h3"><a href="#HTMLベースのプラグイン">HTMLベースのプラグイン</a></p>
+<p class="h3"><a href="#データフォーマッタ、リンクジェネレータ等">データフォーマッタ、リンクジェネレータ等</a></p>
 <p class="h2"><a href="#API">API</a></p>
 <p class="h3"><a href="#createContext()">createContext()</a></p>
 <p class="h3"><a href="#_provide()">@provide()</a></p>

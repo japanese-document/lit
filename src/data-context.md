@@ -330,9 +330,12 @@ export class MyElement extends LitElement {
 テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
 ContextProviderとContextConsumerをラップしたカスタムテーマリアクティブコントローラを作成すると、繰り返し同じコードを書く量が減るでしょう。
 
-### HTML-based plugins
+### HTMLベースのプラグイン
 
-Context can be used to pass data from a parent to its light DOM children. Since the parent does usually not create the light DOM children, it cannot leverage template-based data-binding to pass data to them, but it can listen to and respond to `context-request` events.
+Context can be used to pass data from a parent to its light DOM children. 
+Since the parent does usually not create the light DOM children,
+it cannot leverage template-based data-binding to pass data to them,
+but it can listen to and respond to `context-request` events.
 
 For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:
 
@@ -345,9 +348,11 @@ For example, consider a code editor element with plugins for different language 
 
 In this case `<code-editor>` would provide an API for adding language modes via context, and plugin elements would consume that API and add themselves to the editor.
 
-### Data formatters, link generators, etc.
+### データフォーマッタ、リンクジェネレータ等
 
-Sometimes reusable components will need to format data or URLs in an application-specific way. For example, a documentation viewer that renders a link to another item. The component will not know the URL space of the application.
+Sometimes reusable components will need to format data or URLs in an application-specific way.
+For example, a documentation viewer that renders a link to another item.
+The component will not know the URL space of the application.
 
 In these cases the component can depend on a context-provided function that will apply the application-specific formatting to the data or link.
 
