@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/data-tasks.html" />
+    <meta property="og:title" content="Async Tasks" />
+    <meta property="og:description" content="#OverviewSometimes a component needs to render data that is only available asynchronously. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchr" />
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
+    <meta name="theme-color" content="#f1f7fe" />
+    <meta name="description" content="#OverviewSometimes a component needs to render data that is only available asynchronously. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchr" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
+    <title>Async Tasks</title>
+    <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
+    <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9VVC74WWF');
+    </script>
+  </head>
+  <body class="container">
+    <div class="left-side">
+    <nav class="index-menu">
+      <details open="">
+        <summary>コンポーネント</summary>
+        <p><a href="https://japanese-document.github.io/lit/components-defining.html">定義</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-rendering.html">レンダリング</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-styles.html">スタイル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-lifecycle.html">ライフサイクル</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-shadow-dom.html">Shadow DOM</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-events.html">イベント</a></p>
+        <p><a href="https://japanese-document.github.io/lit/components-decorators.html">デコレータ</a></p>
+      </details>
+      <details open="">
+        <summary>テンプレート</summary>
+        <p><a href="https://japanese-document.github.io/lit/templates-expressions.html">エクスプレッション</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-conditionals.html">条件</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-lists.html">リスト</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-directives.html">ビルトインディレクティブ</a></p>
+        <p><a href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a></p>
+      </details>
+      <details open="">
+        <summary>組み合わせ</summary>
+        <p><a href="https://japanese-document.github.io/lit/composition-component.html">コンポーネントを組み合わせる</a></p>
+        <p><a href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a></p>
+      </details>
+      <details open="">
+        <summary>データ管理</summary>
+        <p><a href="https://japanese-document.github.io/lit/data-context.html">コンテキスト</a></p>
+        <p><a href="https://japanese-document.github.io/lit/data-tasks.html">Async Tasks</a></p>
+      </details>
+      <details open="">
+        <summary>API</summary>
+        <p><a href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a></p>
+        <p><a href="https://japanese-document.github.io/lit/api-templates.html">テンプレート</a></p>
+      </details>
+    </nav></div>
+    <main class="main markdown-body">
+      <h1 id="Async_Tasks"><a class="anchor" href="#Async_Tasks">#</a>Async Tasks</h1>
+<h2 id="Overview"><a class="anchor" href="#Overview">#</a>Overview</h2>
+<p>Sometimes a component needs to render data that is only available <em>asynchronously</em>. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.</p>
+<p>While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render <em>synchronously</em>. The data used in a template must be readable at the time of rendering. To render async data in a Lit component, you must wait for the data to be ready, store it so that it's readable, then trigger a new render which can use the data synchronously. Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.</p>
+<p>The <code>@lit/task</code> package provides a <code>Task</code> reactive controller to help manage this async data workflow.</p>
+<p><code>Task</code> is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
+<h3 id="Example"><a class="anchor" href="#Example">#</a>Example</h3>
+<p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>. The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">import {Task} from '@lit/task';
+
+class MyElement extends LitElement {
+  @property() productId?: string;
+
+  private _productTask = new Task(this, {
+    task: async ([productId], {signal}) =&gt; {
+      const response = await fetch(`http://example.com/product/${productId}`, {signal});
+      if (!response.ok) { throw new Error(response.status); }
+      return response.json() as Product;
+    },
+    args: () =&gt; [this.productId]
+  });
+
+  render() {
+    return this._productTask.render({
+      pending: () =&gt; html`&lt;p&gt;Loading product...&lt;/p&gt;`,
+      complete: (product) =&gt; html`
+          &lt;h1&gt;${product.name}&lt;/h1&gt;
+          &lt;p&gt;${product.price}&lt;/p&gt;
+        `,
+      error: (e) =&gt; html`&lt;p&gt;Error: ${e}&lt;/p&gt;`
+    });
+  }
+}
+</code></pre>
+<pre><code class="language-js">import {Task} from '@lit/task';
+
+class MyElement extends LitElement {
+  static properties = {
+    productId: {},
+  };
+
+  _productTask = new Task(this, {
+    task: async ([productId], {signal}) =&gt; {
+      const response = await fetch(`http://example.com/product/${productId}`, {signal});
+      if (!response.ok) { throw new Error(response.status); }
+      return response.json();
+    },
+    args: () =&gt; [this.productId]
+  });
+
+  render() {
+    return this._productTask.render({
+      pending: () =&gt; html`&lt;p&gt;Loading product...&lt;/p&gt;`,
+      complete: (product) =&gt; html`
+          &lt;h1&gt;${product.name}&lt;/h1&gt;
+          &lt;p&gt;${product.price}&lt;/p&gt;
+        `,
+      error: (e) =&gt; html`&lt;p&gt;Error: ${e}&lt;/p&gt;`
+    });
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="Features"><a class="anchor" href="#Features">#</a>Features</h3>
+<p>Task takes care of a number of things needed to properly manage async work:</p>
+<ul>
+<li>Gathers task arguments when the host updates</li>
+<li>Runs task functions when arguments change</li>
+<li>Tracks the task status (initial, pending, complete, or error)</li>
+<li>Saves the last completion value or error of the task function</li>
+<li>Triggers a host update when the task changes status</li>
+<li>Handles race conditions, ensuring that only the latest task invocation completes the task</li>
+<li>Renders the correct template for the current task status</li>
+<li>Allows aborting tasks with an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"><code>AbortController</code></a></li>
+</ul>
+<p>This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.</p>
+<h2 id="What_is_async_data_"><a class="anchor" href="#What_is_async_data_">#</a>What is async data?</h2>
+<p>Async data is data that's not available immediately, but may be available at some time in the future. For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.</p>
+<p>Async data is usually returned from an async API, which can come in a few forms:</p>
+<ul>
+<li>Promises or async functions, like <code>fetch()</code></li>
+<li>Functions that accept callbacks</li>
+<li>Objects that emit events, such as DOM events</li>
+<li>Libraries like observables and signals</li>
+</ul>
+<p>The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.</p>
+<h2 id="What_is_a_task_"><a class="anchor" href="#What_is_a_task_">#</a>What is a task?</h2>
+<p>At the core of the Task controller is the concept of a "task" itself.</p>
+<p>A task is an async operation which does some work to produce data and return it in a Promise. A task can be in a few different states (initial, pending, complete, and error) and can take parameters.</p>
+<p>A task is a generic concept and could represent any async operation. They apply best when there is a request/response structure, such as a network fetch, database query, or waiting for a single event in response to some action. They're less applicable to spontaneous or streaming operations like an open-ended stream of events, a streaming database response, etc.</p>
+<h2 id="Installation"><a class="anchor" href="#Installation">#</a>Installation</h2>
+<pre><code class="language-bash">npm install @lit/task
+</code></pre>
+<h2 id="Usage"><a class="anchor" href="#Usage">#</a>Usage</h2>
+<p><code>Task</code> is a <a class="Link" href="/docs/v3/composition/controllers/">reactive controller</a>, so it can respond to and trigger updates to Lit's reactive update lifecycle.</p>
+<p>You'll generally have one Task object for each logical task that your component needs to perform. Install tasks as fields on your class:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  private _myTask = new Task(this, {/*...*/});
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  _myTask = new Task(this, {/*...*/});
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>As a class field, the task status and value are easily available:</p>
+<pre><code class="language-ts">this._task.status;
+this._task.value;
+</code></pre>
+<h3 id="The_task_function"><a class="anchor" href="#The_task_function">#</a>The task function</h3>
+<p>The most critical part of a task declaration is the <em>task function</em>. This is the function that does the actual work.</p>
+<p>The task function is given in the <code>task</code> option. The Task controller will automatically call the task function with arguments, which are supplied with a separate <code>args</code> callback. Arguments are checked for changes and the task function is only called if the arguments have changed.</p>
+<p>The task function takes the task arguments as an <em>array</em> passed as the first parameter, and an options argument as the second parameter:</p>
+<pre><code class="language-ts">new Task(this, {
+  task: async ([arg1, arg2], {signal}) =&gt; {
+    // do async work here
+  },
+  args: () =&gt; [this.field1, this.field2]
+})
+</code></pre>
+<p>The task function's args array and the args callback should be the same length.</p>
+<p>{% aside "positive" "no-header" %}</p>
+<p>Write the <code>task</code> and <code>args</code> functions as arrow functions so that the <code>this</code> reference points to the host element.</p>
+<p>{% endaside %}</p>
+<h3 id="Task_status"><a class="anchor" href="#Task_status">#</a>Task status</h3>
+<p>Tasks can be in one of four states:</p>
+<ul>
+<li><code>INITIAL</code>: The task has not been run</li>
+<li><code>PENDING</code>: The task is running and awaiting a new value</li>
+<li><code>COMPLETE</code>: The task completed successfully</li>
+<li><code>ERROR</code>: The task errored</li>
+</ul>
+<p>The Task status is available at the <code>status</code> field of the Task controller, and is represented by the <code>TaskStatus</code> enum-like object, which has properties <code>INITIAL</code>, <code>PENDING</code>, <code>COMPLETE</code>, and <code>ERROR</code>.</p>
+<pre><code class="language-ts">import {TaskStatus} from '@lit/task';
+
+// ...
+  if (this.task.status === TaskStatus.ERROR) {
+    // ...
+  }
+</code></pre>
+<p>Usually a Task will proceed from <code>INITIAL</code> to <code>PENDING</code> to one of <code>COMPLETE</code> or <code>ERROR</code>, and then back to <code>PENDING</code> if the task is re-run. When a task changes status it triggers a host update so the host element can handle the new task status and render if needed.</p>
+<p>{% aside "info" "no-header" %}</p>
+<p>It's important to understand the status a task can be in, but it's not usually necessary to access it directly.</p>
+<p>{% endaside %}</p>
+<p>There are a few members on the Task controller that relate to the state of the task:</p>
+<ul>
+<li><code>status</code>: the status of the task.</li>
+<li><code>value</code>: the current value of the task, if it has completed.</li>
+<li><code>error</code>: the current error of the task, if it has errored.</li>
+<li><code>render()</code>: a method that chooses a callback to run based on the current status.</li>
+</ul>
+<h3 id="Rendering_Tasks"><a class="anchor" href="#Rendering_Tasks">#</a>Rendering Tasks</h3>
+<p>The simplest and most common API to use to render a task is <code>task.render()</code>, since it chooses the right code to run and provides it the relevant data.</p>
+<p><code>render()</code> takes a config object with an optional callback for each task status:</p>
+<ul>
+<li><code>initial()</code></li>
+<li><code>pending()</code></li>
+<li><code>complete(value)</code></li>
+<li><code>error(err)</code></li>
+</ul>
+<p>You can use <code>task.render()</code> inside a Lit <code>render()</code> method to render templates based on the task status:</p>
+<pre><code class="language-ts">  render() {
+    return html`
+      ${this._myTask.render({
+        initial: () =&gt; html`&lt;p&gt;Waiting to start task&lt;/p&gt;`,
+        pending: () =&gt; html`&lt;p&gt;Running task...&lt;/p&gt;`,
+        complete: (value) =&gt; html`&lt;p&gt;The task completed with: ${value}&lt;/p&gt;`,
+        error: (error) =&gt; html`&lt;p&gt;Oops, something went wrong: ${error}&lt;/p&gt;`,
+      })}
+    `;
+  }
+</code></pre>
+<h3 id="Running_tasks"><a class="anchor" href="#Running_tasks">#</a>Running tasks</h3>
+<p>By default, Tasks will run any time the arguments change. This is controlled by the <code>autoRun</code> option, which defaults to <code>true</code>.</p>
+<h4 id="Auto-run"><a class="anchor" href="#Auto-run">#</a>Auto-run</h4>
+<p>In <em>auto-run</em> mode, the task will call the <code>args</code> function when the host has updated, compare the args to the previous args, and invoke the task function if they have changed. A task without <code>args</code> defined is in manual mode.</p>
+<h4 id="Manual_mode"><a class="anchor" href="#Manual_mode">#</a>Manual mode</h4>
+<p>If <code>autoRun</code> is set to false, the task will be in <em>manual</em> mode. In manual mode you can run the task by calling the <code>.run()</code> method, possibly from an event handler:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+
+  private _getDataTask = new Task(
+    this,
+    {
+      task: async () =&gt; {
+        const response = await fetch(`example.com/data/`);
+        return response.json();
+      },
+      args: () =&gt; []
+    }
+  );
+
+  render() {
+    return html`
+      &lt;button @click=${this._onClick}&gt;Get Data&lt;/button&gt;
+    `;
+  }
+
+  private _onClick() {
+    this._getDataTask.run();
+  }
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+
+  _getDataTask = new Task(
+    this,
+    {
+      task: async () =&gt; {
+        const response = await fetch(`example.com/data/`);
+        return response.json();
+      },
+      args: () =&gt; []
+    }
+  );
+
+  render() {
+    return html`
+      &lt;button @click=${this._onClick}&gt;Get Data&lt;/button&gt;
+    `;
+  }
+
+  _onClick() {
+    this._getDataTask.run();
+  }
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>In manual mode you can provide new arguments directly to <code>run()</code>:</p>
+<pre><code class="language-ts">this._task.run('arg1', 'arg2');
+</code></pre>
+<p>If arguments are not provided to <code>run()</code>, they are gathered from the <code>args</code> callback.</p>
+<h3 id="Aborting_tasks"><a class="anchor" href="#Aborting_tasks">#</a>Aborting tasks</h3>
+<p>A task function can be called while previous task runs are still pending. In these cases the result of the pending task runs will be ignored, and you should try to cancel any outstanding work or network I/O in order to save resources.</p>
+<p>You can do with with the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal"><code>AbortSignal</code></a> that is passed in the <code>signal</code> property of the second argument to the task function. When a pending task run is superseded by a new run, the <code>AbortSignal</code> that was passed to the pending run is aborted to signal the task run to cancel any pending work.</p>
+<p><code>AbortSignal</code> doesn't cancel any work automatically - it is just a signal. To cancel some work you must either do it yourself by checking the signal, or forward the signal to another API that accepts <code>AbortSignal</code>s like <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/fetch"><code>fetch()</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>.</p>
+<p>The easiest way to use the <code>AbortSignal</code> is to forward it to an API that accepts it, like <code>fetch()</code>.</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">  private _task = new Task(this, {
+    task: async (args, {signal}) =&gt; {
+      const response = await fetch(someUrl, {signal});
+      // ...
+    },
+  });
+</code></pre>
+<pre><code class="language-js">  _task = new Task(this, {
+    task: async (args, {signal}) =&gt; {
+      const response = await fetch(someUrl, {signal});
+      // ...
+    },
+  });
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>Forwarding the signal to <code>fetch()</code> will cause the browser to cancel the network request if the signal is aborted.</p>
+<p>You can also check if a signal has been aborted in your task function. You should check the signal after returning to a task function from an async call. <code>throwIfAborted()</code> is a convenient way to do this:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">  private _task = new Task(this, {
+    task: async ([arg1], {signal}) =&gt; {
+      const firstResult = await doSomeWork(arg1);
+      signal.throwIfAborted();
+      const secondResult = await doMoreWork(firstResult);
+      signal.throwIfAborted();
+      return secondResult;
+    },
+  });
+</code></pre>
+<pre><code class="language-js">  _task = new Task(this, {
+    task: async ([arg1], {signal}) =&gt; {
+      const firstResult = await doSomeWork(arg1);
+      signal.throwIfAborted();
+      const secondResult = await doMoreWork(firstResult);
+      signal.throwIfAborted();
+      return secondResult;
+    },
+  });
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<h3 id="Task_chaining"><a class="anchor" href="#Task_chaining">#</a>Task chaining</h3>
+<p>Sometimes you want to run one task when another task completes.
+This can be useful if the tasks have different arguments so that the chained task may run without the first task running again.
+In this case it'll use the first task like a cache. To do this you can use the value of a task as an argument to another task:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  private _getDataTask = new Task(this, {
+    task: ([dataId]) =&gt; getData(dataId),
+    args: () =&gt; [this.dataId],
+  });
+
+  private _processDataTask = new Task(this, {
+    task: ([data, param]) =&gt; processData(data, param),
+    args: () =&gt; [this._getDataTask.value, this.param],
+  });
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  _getDataTask = new Task(this, {
+    task: ([dataId]) =&gt; getData(dataId),
+    args: () =&gt; [this.dataId],
+  });
+
+  _processDataTask = new Task(this, {
+    task: ([data, param]) =&gt; processData(data, param),
+    args: () =&gt; [this._getDataTask.value, this.param],
+  });
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<p>You can also often use one task function and await intermediate results:</p>
+<p>{% switchable-sample %}</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  private _getDataTask = new Task(this, {
+    task: ([dataId, param]) =&gt; {
+      const data = await getData(dataId);
+      return processData(data, param);
+    },
+    args: () =&gt; [this.dataId, this.param],
+  });
+}
+</code></pre>
+<pre><code class="language-js">class MyElement extends LitElement {
+  _getDataTask = new Task(this, {
+    task: ([dataId, param]) =&gt; {
+      const data = await getData(dataId);
+      return processData(data, param);
+    },
+    args: () =&gt; [this.dataId, this.param],
+  });
+}
+</code></pre>
+<p>{% endswitchable-sample %}</p>
+<hr>
+<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
+<p>Copyright (c) 2022 38elements</p>
+<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</p>
+</li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</p>
+</li>
+<li><p>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</p>
+</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </main>
+    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#Async_Tasks">Async Tasks</a></p>
+<p class="h2"><a href="#Overview">Overview</a></p>
+<p class="h3"><a href="#Example">Example</a></p>
+<p class="h3"><a href="#Features">Features</a></p>
+<p class="h2"><a href="#What_is_async_data_">What is async data?</a></p>
+<p class="h2"><a href="#What_is_a_task_">What is a task?</a></p>
+<p class="h2"><a href="#Installation">Installation</a></p>
+<p class="h2"><a href="#Usage">Usage</a></p>
+<p class="h3"><a href="#The_task_function">The task function</a></p>
+<p class="h3"><a href="#Task_status">Task status</a></p>
+<p class="h3"><a href="#Rendering_Tasks">Rendering Tasks</a></p>
+<p class="h3"><a href="#Running_tasks">Running tasks</a></p>
+<p class="h4"><a href="#Auto-run">Auto-run</a></p>
+<p class="h4"><a href="#Manual_mode">Manual mode</a></p>
+<p class="h3"><a href="#Aborting_tasks">Aborting tasks</a></p>
+<p class="h3"><a href="#Task_chaining">Task chaining</a></p>
+<p class="h2"><a href="#License">License</a></p>
+<p class="h3"><a href="#Japanese_part">Japanese part</a></p>
+<p class="h3"><a href="#Other">Other</a></p></nav></div>
+    <footer class="footer markdown-body">
+      <a href="/lit">Top</a>
+    </footer>
+  </body>
+</html>
