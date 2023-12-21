@@ -2,9 +2,10 @@
 ---
 # Async Tasks
 
-## Overview
+## 概要
 
-Sometimes a component needs to render data that is only available _asynchronously_. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.
+コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。
+Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.
 
 While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render _synchronously_. The data used in a template must be readable at the time of rendering. To render async data in a Lit component, you must wait for the data to be ready, store it so that it's readable, then trigger a new render which can use the data synchronously. Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.
 
