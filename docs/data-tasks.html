@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/data-tasks.html" />
     <meta property="og:title" content="Async Tasks" />
-    <meta property="og:description" content="#OverviewSometimes a component needs to render data that is only available asynchronously. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchr" />
+    <meta property="og:description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchronously. The data used in a template must " />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="#OverviewSometimes a component needs to render data that is only available asynchronously. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchr" />
+    <meta name="description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render synchronously. The data used in a template must " />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>Async Tasks</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
@@ -62,8 +62,9 @@
     </nav></div>
     <main class="main markdown-body">
       <h1 id="Async_Tasks"><a class="anchor" href="#Async_Tasks">#</a>Async Tasks</h1>
-<h2 id="Overview"><a class="anchor" href="#Overview">#</a>Overview</h2>
-<p>Sometimes a component needs to render data that is only available <em>asynchronously</em>. Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.</p>
+<h2 id="概要"><a class="anchor" href="#概要">#</a>概要</h2>
+<p>コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。
+Such data might be fetched from a server, a database, or in general retrieved or computed from an async API.</p>
 <p>While Lit's reactive update lifecycle is batched and asynchronous, Lit templates always render <em>synchronously</em>. The data used in a template must be readable at the time of rendering. To render async data in a Lit component, you must wait for the data to be ready, store it so that it's readable, then trigger a new render which can use the data synchronously. Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.</p>
 <p>The <code>@lit/task</code> package provides a <code>Task</code> reactive controller to help manage this async data workflow.</p>
 <p><code>Task</code> is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
@@ -431,7 +432,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#Async_Tasks">Async Tasks</a></p>
-<p class="h2"><a href="#Overview">Overview</a></p>
+<p class="h2"><a href="#概要">概要</a></p>
 <p class="h3"><a href="#Example">Example</a></p>
 <p class="h3"><a href="#Features">Features</a></p>
 <p class="h2"><a href="#What_is_async_data_">What is async data?</a></p>
