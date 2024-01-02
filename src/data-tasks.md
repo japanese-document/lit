@@ -11,7 +11,8 @@
 Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。
 一方、Litテンプレートは常に同期処理を行います。
 テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。
-To render async data in a Lit component, you must wait for the data to be ready, store it so that it's readable, then trigger a new render which can use the data synchronously.
+Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするために保存して、データを同期的に使う新しいレンダリングを発動します。
+
 Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.
 
 The `@lit/task` package provides a `Task` reactive controller to help manage this async data workflow.
