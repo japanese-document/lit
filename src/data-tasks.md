@@ -11,11 +11,11 @@
 Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。
 一方、Litテンプレートは常に同期処理を行います。
 テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。
-Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするために保存して、データを同期的に使う新しいレンダリングを発動します。
+Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期的に使う新しいレンダリングを発動します。
 
-Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.
+データをfetchしている間やデータのfetchが失敗したときに何か表示した方が良いでしょう。
 
-The `@lit/task` package provides a `Task` reactive controller to help manage this async data workflow.
+`@lit/task`パッケージにこの非同期データを扱う処理を扱うための`Task`リアクティブコントローラを用意しています。
 
 `Task` is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.
 

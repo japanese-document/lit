@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/data-tasks.html" />
     <meta property="og:title" content="Async Tasks" />
-    <meta property="og:description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするために保存して、データを同期的に" />
+    <meta property="og:description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするために保存して、データを同期的に" />
+    <meta name="description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>Async Tasks</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
@@ -69,9 +69,9 @@
 <p>Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。
 一方、Litテンプレートは常に同期処理を行います。
 テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。
-Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするために保存して、データを同期的に使う新しいレンダリングを発動します。</p>
-<p>Considerations must often be made on what to render while the data is being fetched, or when the data fetch fails as well.</p>
-<p>The <code>@lit/task</code> package provides a <code>Task</code> reactive controller to help manage this async data workflow.</p>
+Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期的に使う新しいレンダリングを発動します。</p>
+<p>データをfetchしている間やデータのfetchが失敗したときに何か表示した方が良いでしょう。</p>
+<p><code>@lit/task</code>パッケージにこの非同期データを扱う処理を扱うための<code>Task</code>リアクティブコントローラを用意しています。</p>
 <p><code>Task</code> is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
 <h3 id="Example"><a class="anchor" href="#Example">#</a>Example</h3>
 <p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>. The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
