@@ -7,6 +7,7 @@ export const INDEX_PAGE_DESCRIPTION = process.env.INDEX_PAGE_DESCRIPTION || ''
 export const INDEX_PAGE_HEADER = process.env.INDEX_PAGE_HEADER || ''
 export const INDEX_PAGE_TITLE = process.env.INDEX_PAGE_TITLE ||''
 export const SOURCE_DIR = process.env.SOURCE_DIR || ''
+export const MD_TO_HTML = process.env.MD_TO_HTML === 'true'
 export const TITLE = /__TITLE__/g
 export const BODY = '__BODY__'
 export const HEADER = '__HEADER__'
