@@ -17,7 +17,8 @@ Litコンポーネントで非同期データをレンダリングするには�
 
 `@lit/task`パッケージにこの非同期データを扱う処理を扱うための`Task`リアクティブコントローラを用意しています。
 
-`Task` is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.
+`Task`はasyncの`task`関数を受け取りって手動または`args`が変更されたときに自動的に`task`関数を実行するコントローラです。
+Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.
 
 ### Example
 

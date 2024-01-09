@@ -72,7 +72,8 @@
 Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期的に使う新しいレンダリングを発動します。</p>
 <p>データをfetchしている間やデータのfetchが失敗したときに何か表示した方が良いでしょう。</p>
 <p><code>@lit/task</code>パッケージにこの非同期データを扱う処理を扱うための<code>Task</code>リアクティブコントローラを用意しています。</p>
-<p><code>Task</code> is a controller that takes an async task function and runs it either manually or automatically when its arguments change. Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
+<p><code>Task</code>はasyncの<code>task</code>関数を受け取りって手動または<code>args</code>が変更されたときに自動的に<code>task</code>関数を実行するコントローラです。
+Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
 <h3 id="Example"><a class="anchor" href="#Example">#</a>Example</h3>
 <p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>. The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
 <p>{% switchable-sample %}</p>
