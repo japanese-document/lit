@@ -11,6 +11,7 @@ import { URL, CSS, BASE_URL, BODY, CSS_PATH, DESCRIPTION, HEADER, INDEX, INDEX_P
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window as unknown as Window)
 const httpsRe = /(^https:\/\/)|(^http:\/\/)/
+const mdRe = /(\.md$)|(\.md#)/
 
 export function createHash(text: string) {
   const document = new window.DOMParser().parseFromString(text, 'text/html')
@@ -42,8 +43,8 @@ export async function createPages(markDownFileNames: string[]) {
 
 const renderer = {
   link(href: string, title: string | null | undefined, text: string) {
-    if (MD_TO_HTML && !href.match(httpsRe) && href.slice(-3) === '.md') {
-      const _href = `${BASE_URL}/${href.slice(-3)}.html`
+    if (MD_TO_HTML && !href.match(httpsRe) && href.match(mdRe)) {
+      const _href = `${BASE_URL}/${href.replace('.md', '.html')}`
       return `<a href="${_href}" class="Link">${text}</a>`
     }
     return `<a href="${href}" class="Link">${text}</a>`
