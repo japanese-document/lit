@@ -17,14 +17,13 @@ Litコンポーネントで非同期データをレンダリングするには�
 
 `@lit/task`パッケージにこの非同期データを扱う処理を扱うための`Task`リアクティブコントローラを用意しています。
 
-`Task`はasyncの`task`関数を受け取りって手動または`args`が変更されたときに自動的に`task`関数を実行するコントローラです。
-Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.
+`Task`はasyncの`task`関数を受け取って、手動または`args`が変更されたときに自動的に`task`関数を実行するコントローラです。
+`Task`は`task`関数の結果を保存します。そして、`task`関数が完了した際にその結果をレンダリングしてホストコンポーネントを更新します。
 
-### Example
+### 例
 
-This is an example of using `Task` to call an HTTP API via [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The API is called whenever the `productId` parameter changes, and the component renders a loading message when the data is being fetched.
-
-{% switchable-sample %}
+This is an example of using `Task` to call an HTTP API via [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+The API is called whenever the `productId` parameter changes, and the component renders a loading message when the data is being fetched.
 
 ```ts
 import {Task} from '@lit/task';
@@ -54,38 +53,6 @@ class MyElement extends LitElement {
 }
 ```
 
-```js
-import {Task} from '@lit/task';
-
-class MyElement extends LitElement {
-  static properties = {
-    productId: {},
-  };
-
-  _productTask = new Task(this, {
-    task: async ([productId], {signal}) => {
-      const response = await fetch(`http://example.com/product/${productId}`, {signal});
-      if (!response.ok) { throw new Error(response.status); }
-      return response.json();
-    },
-    args: () => [this.productId]
-  });
-
-  render() {
-    return this._productTask.render({
-      pending: () => html`<p>Loading product...</p>`,
-      complete: (product) => html`
-          <h1>${product.name}</h1>
-          <p>${product.price}</p>
-        `,
-      error: (e) => html`<p>Error: ${e}</p>`
-    });
-  }
-}
-```
-
-{% endswitchable-sample %}
-
 ### Features
 
 Task takes care of a number of things needed to properly manage async work:
@@ -100,7 +67,7 @@ Task takes care of a number of things needed to properly manage async work:
 
 This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.
 
-## What is async data?
+## 非同期データ(Async data)
 
 Async data is data that's not available immediately, but may be available at some time in the future. For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.
 
@@ -112,7 +79,7 @@ Async data is usually returned from an async API, which can come in a few forms:
 
 The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.
 
-## What is a task?
+## タスク(task)
 
 At the core of the Task controller is the concept of a "task" itself.
 
