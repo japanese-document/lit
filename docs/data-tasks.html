@@ -72,11 +72,11 @@
 Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期的に使う新しいレンダリングを発動します。</p>
 <p>データをfetchしている間やデータのfetchが失敗したときに何か表示した方が良いでしょう。</p>
 <p><code>@lit/task</code>パッケージにこの非同期データを扱う処理を扱うための<code>Task</code>リアクティブコントローラを用意しています。</p>
-<p><code>Task</code>はasyncの<code>task</code>関数を受け取りって手動または<code>args</code>が変更されたときに自動的に<code>task</code>関数を実行するコントローラです。
-Task stores the result of the task function and updates the host element when the task function completes so the result can be used in rendering.</p>
-<h3 id="Example"><a class="anchor" href="#Example">#</a>Example</h3>
-<p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>. The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
-<p>{% switchable-sample %}</p>
+<p><code>Task</code>はasyncの<code>task</code>関数を受け取って、手動または<code>args</code>が変更されたときに自動的に<code>task</code>関数を実行するコントローラです。
+<code>Task</code>は<code>task</code>関数の結果を保存します。そして、<code>task</code>関数が完了した際にその結果をレンダリングしてホストコンポーネントを更新します。</p>
+<h3 id="例"><a class="anchor" href="#例">#</a>例</h3>
+<p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>.
+The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
 <pre><code class="language-ts">import {Task} from '@lit/task';
 
 class MyElement extends LitElement {
@@ -103,35 +103,6 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<pre><code class="language-js">import {Task} from '@lit/task';
-
-class MyElement extends LitElement {
-  static properties = {
-    productId: {},
-  };
-
-  _productTask = new Task(this, {
-    task: async ([productId], {signal}) =&gt; {
-      const response = await fetch(`http://example.com/product/${productId}`, {signal});
-      if (!response.ok) { throw new Error(response.status); }
-      return response.json();
-    },
-    args: () =&gt; [this.productId]
-  });
-
-  render() {
-    return this._productTask.render({
-      pending: () =&gt; html`&lt;p&gt;Loading product...&lt;/p&gt;`,
-      complete: (product) =&gt; html`
-          &lt;h1&gt;${product.name}&lt;/h1&gt;
-          &lt;p&gt;${product.price}&lt;/p&gt;
-        `,
-      error: (e) =&gt; html`&lt;p&gt;Error: ${e}&lt;/p&gt;`
-    });
-  }
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <h3 id="Features"><a class="anchor" href="#Features">#</a>Features</h3>
 <p>Task takes care of a number of things needed to properly manage async work:</p>
 <ul>
@@ -145,7 +116,7 @@ class MyElement extends LitElement {
 <li>Allows aborting tasks with an <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"><code>AbortController</code></a></li>
 </ul>
 <p>This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.</p>
-<h2 id="What_is_async_data_"><a class="anchor" href="#What_is_async_data_">#</a>What is async data?</h2>
+<h2 id="非同期データ(Async_data)"><a class="anchor" href="#非同期データ(Async_data)">#</a>非同期データ(Async data)</h2>
 <p>Async data is data that's not available immediately, but may be available at some time in the future. For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.</p>
 <p>Async data is usually returned from an async API, which can come in a few forms:</p>
 <ul>
@@ -155,7 +126,7 @@ class MyElement extends LitElement {
 <li>Libraries like observables and signals</li>
 </ul>
 <p>The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.</p>
-<h2 id="What_is_a_task_"><a class="anchor" href="#What_is_a_task_">#</a>What is a task?</h2>
+<h2 id="タスク(task)"><a class="anchor" href="#タスク(task)">#</a>タスク(task)</h2>
 <p>At the core of the Task controller is the concept of a "task" itself.</p>
 <p>A task is an async operation which does some work to produce data and return it in a Promise. A task can be in a few different states (initial, pending, complete, and error) and can take parameters.</p>
 <p>A task is a generic concept and could represent any async operation. They apply best when there is a request/response structure, such as a network fetch, database query, or waiting for a single event in response to some action. They're less applicable to spontaneous or streaming operations like an open-ended stream of events, a streaming database response, etc.</p>
@@ -439,10 +410,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
     </main>
     <div class="right-side"><nav class="header-list"><p class="h1"><a href="#Async_Tasks">Async Tasks</a></p>
 <p class="h2"><a href="#概要">概要</a></p>
-<p class="h3"><a href="#Example">Example</a></p>
+<p class="h3"><a href="#例">例</a></p>
 <p class="h3"><a href="#Features">Features</a></p>
-<p class="h2"><a href="#What_is_async_data_">What is async data?</a></p>
-<p class="h2"><a href="#What_is_a_task_">What is a task?</a></p>
+<p class="h2"><a href="#非同期データ(Async_data)">非同期データ(Async data)</a></p>
+<p class="h2"><a href="#タスク(task)">タスク(task)</a></p>
 <p class="h2"><a href="#Installation">Installation</a></p>
 <p class="h2"><a href="#Usage">Usage</a></p>
 <p class="h3"><a href="#The_task_function">The task function</a></p>
