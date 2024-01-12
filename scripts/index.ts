@@ -2,11 +2,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
   createIndexItems, createIndexMenu, createHeaderList, createPages } from './utils.js'
-import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR } from './const.js'
+import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR, SINGLE_PAGE } from './const.js'
 
 const markDownFileNames = await getMarkDownFileNames()
 
-const pages = await createPages(markDownFileNames)
+const pages = SINGLE_PAGE ? [] : await createPages(markDownFileNames)
 const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
 
@@ -39,6 +39,10 @@ async function createIndexHtmlFile(layout: string, outputDir: string, indexItems
   await fs.promises.writeFile(`${outputDir}/index.html`, indexPage)
 }
 
-const createIndexHtmlFilePromise = createIndexHtmlFile(INDEX_PAGE_LAYOUT, OUTPUT_DIR, indexItems)
-
-await Promise.all([createIndexHtmlFilePromise, ...createPageHtmlFilePromises])
+if (SINGLE_PAGE) {
+  await Promise.all(createPageHtmlFilePromises)
+}
+else {
+  const createIndexHtmlFilePromise = createIndexHtmlFile(INDEX_PAGE_LAYOUT, OUTPUT_DIR, indexItems)
+  await Promise.all([createIndexHtmlFilePromise, ...createPageHtmlFilePromises])
+}
