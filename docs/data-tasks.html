@@ -75,7 +75,7 @@ Litコンポーネントで非同期データをレンダリングするには�
 <p><code>Task</code>はasyncの<code>task</code>関数を受け取って、手動または<code>args</code>が変更されたときに自動的に<code>task</code>関数を実行するコントローラです。
 <code>Task</code>は<code>task</code>関数の結果を保存します。そして、<code>task</code>関数が完了した際にその結果をレンダリングしてホストコンポーネントを更新します。</p>
 <h3 id="例"><a class="anchor" href="#例">#</a>例</h3>
-<p>This is an example of using <code>Task</code> to call an HTTP API via <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>.
+<p>下記は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>を使ってHTTP APIを利用する<code>Task</code>の例です。
 The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
 <pre><code class="language-ts">import {Task} from '@lit/task';
 

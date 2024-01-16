@@ -22,7 +22,7 @@ Litコンポーネントで非同期データをレンダリングするには�
 
 ### 例
 
-This is an example of using `Task` to call an HTTP API via [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+下記は[`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)を使ってHTTP APIを利用する`Task`の例です。
 The API is called whenever the `productId` parameter changes, and the component renders a loading message when the data is being fetched.
 
 ```ts
