@@ -23,7 +23,8 @@ Litコンポーネントで非同期データをレンダリングするには�
 ### 例
 
 下記は[`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)を使ってHTTP APIを利用する`Task`の例です。
-The API is called whenever the `productId` parameter changes, and the component renders a loading message when the data is being fetched.
+このAPIは`productId`変数が変更される毎に実行されます。
+そして、コンポーネントはfetch中にローディングメッセージをレンダリングします。
 
 ```ts
 import {Task} from '@lit/task';
