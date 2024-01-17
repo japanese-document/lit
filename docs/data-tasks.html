@@ -76,7 +76,8 @@ Litコンポーネントで非同期データをレンダリングするには�
 <code>Task</code>は<code>task</code>関数の結果を保存します。そして、<code>task</code>関数が完了した際にその結果をレンダリングしてホストコンポーネントを更新します。</p>
 <h3 id="例"><a class="anchor" href="#例">#</a>例</h3>
 <p>下記は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>を使ってHTTP APIを利用する<code>Task</code>の例です。
-The API is called whenever the <code>productId</code> parameter changes, and the component renders a loading message when the data is being fetched.</p>
+このAPIは<code>productId</code>変数が変更される毎に実行されます。
+そして、コンポーネントはfetch中にローディングメッセージをレンダリングします。</p>
 <pre><code class="language-ts">import {Task} from '@lit/task';
 
 class MyElement extends LitElement {
