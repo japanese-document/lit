@@ -54,9 +54,10 @@ class MyElement extends LitElement {
 }
 ```
 
-### Features
+### 機能
 
 Task takes care of a number of things needed to properly manage async work:
+
 - Gathers task arguments when the host updates
 - Runs task functions when arguments change
 - Tracks the task status (initial, pending, complete, or error)
