@@ -56,7 +56,7 @@ class MyElement extends LitElement {
 
 ### 機能
 
-Task takes care of a number of things needed to properly manage async work:
+タスク(Task)は非同期での処理を適切に遂行するために以下のような補助をしてくれます。
 
 - Gathers task arguments when the host updates
 - Runs task functions when arguments change
@@ -81,7 +81,7 @@ Async data is usually returned from an async API, which can come in a few forms:
 
 The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.
 
-## タスク(task)
+## タスク(Task)
 
 At the core of the Task controller is the concept of a "task" itself.
 

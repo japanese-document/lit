@@ -105,7 +105,7 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <h3 id="機能"><a class="anchor" href="#機能">#</a>機能</h3>
-<p>Task takes care of a number of things needed to properly manage async work:</p>
+<p>タスク(Task)は非同期での処理を適切に遂行するために以下のような補助をしてくれます。</p>
 <ul>
 <li>Gathers task arguments when the host updates</li>
 <li>Runs task functions when arguments change</li>
@@ -127,7 +127,7 @@ class MyElement extends LitElement {
 <li>Libraries like observables and signals</li>
 </ul>
 <p>The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.</p>
-<h2 id="タスク(task)"><a class="anchor" href="#タスク(task)">#</a>タスク(task)</h2>
+<h2 id="タスク(Task)"><a class="anchor" href="#タスク(Task)">#</a>タスク(Task)</h2>
 <p>At the core of the Task controller is the concept of a "task" itself.</p>
 <p>A task is an async operation which does some work to produce data and return it in a Promise. A task can be in a few different states (initial, pending, complete, and error) and can take parameters.</p>
 <p>A task is a generic concept and could represent any async operation. They apply best when there is a request/response structure, such as a network fetch, database query, or waiting for a single event in response to some action. They're less applicable to spontaneous or streaming operations like an open-ended stream of events, a streaming database response, etc.</p>
@@ -414,7 +414,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#例">例</a></p>
 <p class="h3"><a href="#機能">機能</a></p>
 <p class="h2"><a href="#非同期データ(Async_data)">非同期データ(Async data)</a></p>
-<p class="h2"><a href="#タスク(task)">タスク(task)</a></p>
+<p class="h2"><a href="#タスク(Task)">タスク(Task)</a></p>
 <p class="h2"><a href="#Installation">Installation</a></p>
 <p class="h2"><a href="#Usage">Usage</a></p>
 <p class="h3"><a href="#The_task_function">The task function</a></p>
