@@ -1,4 +1,5 @@
-import fs from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
+import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
   createIndexItems, createIndexMenu, createHeaderList, createPages } from './utils.js'
@@ -10,11 +11,11 @@ const pages = SINGLE_PAGE ? [] : await createPages(markDownFileNames)
 const indexItems = createIndexItems(pages)
 const indexMenu = createIndexMenu(indexItems)
 
-const pageLayout = fs.readFileSync(PAGE_LAYOUT, 'utf8')
+const pageLayout = readFileSync(PAGE_LAYOUT, 'utf8')
 
 async function createPageHtmlFile(
   markDownFileName: string, indexMenu: string, pageLayout: string, sourceDir: string, outputDir: string) {
-  const content = await fs.promises.readFile(markDownFileName, 'utf8')
+  const content = await readFile(markDownFileName, 'utf8')
   const [, md] = getMetaAndMd(content)
   const title = createTitle(md)
   const { name, dir } = path.parse(markDownFileName)
@@ -23,20 +24,20 @@ async function createPageHtmlFile(
   const page = await createPage(pageLayout, md, title, url, indexMenu, headerList)
   const prefixDirCount = sourceDir.length + 1
   const dirPath = `${outputDir}/${dir.slice(prefixDirCount)}`
-  if (!fs.existsSync(dirPath)) {
-    await fs.promises.mkdir(dirPath)
+  if (!existsSync(dirPath)) {
+    await mkdir(dirPath)
   }
   const htmlFileName = `${dirPath}/${name}.html`
-  await fs.promises.writeFile(htmlFileName, page)
+  await writeFile(htmlFileName, page)
 }
 
 const createPageHtmlFilePromises = markDownFileNames.map(
   (markDownFileName) => createPageHtmlFile(markDownFileName, indexMenu, pageLayout, SOURCE_DIR, OUTPUT_DIR))
 
 async function createIndexHtmlFile(layout: string, outputDir: string, indexItems: ReturnType<typeof createIndexItems>) {
-  const indexPageLayout = await fs.promises.readFile(layout, 'utf8')
+  const indexPageLayout = await readFile(layout, 'utf8')
   const indexPage = createIndexPage(indexPageLayout, indexItems)
-  await fs.promises.writeFile(`${outputDir}/index.html`, indexPage)
+  await writeFile(`${outputDir}/index.html`, indexPage)
 }
 
 if (SINGLE_PAGE) {
