@@ -58,8 +58,8 @@ class MyElement extends LitElement {
 
 タスク(Task)は非同期での処理を適切に遂行するために以下のような補助をしてくれます。
 
-- ホストコンポーネントが更新される時、タスクの引数の更新処理をします。
-- Runs task functions when arguments change
+- ホストコンポーネントが更新される時、タスク(task)の引数の更新処理をします。
+- タスクの引数が変更されている場合、タスク関数を実行します。
 - Tracks the task status (initial, pending, complete, or error)
 - Saves the last completion value or error of the task function
 - Triggers a host update when the task changes status
