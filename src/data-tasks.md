@@ -60,7 +60,7 @@ class MyElement extends LitElement {
 
 - ホストコンポーネントが更新される時、タスク(task)の引数の更新処理をします。
 - タスクの引数が変更されている場合、タスク関数を実行します。
-- Tracks the task status (initial, pending, complete, or error)
+- タスクのステータスを追跡します(initial、 pending、 complete、 error)。
 - Saves the last completion value or error of the task function
 - Triggers a host update when the task changes status
 - Handles race conditions, ensuring that only the latest task invocation completes the task
