@@ -62,8 +62,8 @@ class MyElement extends LitElement {
 - タスクの引数が変更されている場合、タスク関数を実行します。
 - タスクのステータスを追跡します(initial、 pending、 complete、 error)。
 - タスク関数の最終結果(値もしくはエラー)を保存します。
-- Triggers a host update when the task changes status
-- Handles race conditions, ensuring that only the latest task invocation completes the task
+- タスクのステータスが変更されると、ホストコンポーネントの更新を発動します。
+- 競合状態(race condition)を制御します。最新のタスクのみがタスクをcompleteすることを保証します。
 - Renders the correct template for the current task status
 - Allows aborting tasks with an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
 
