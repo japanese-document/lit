@@ -60,12 +60,12 @@ class MyElement extends LitElement {
 
 - ホストコンポーネントが更新される時、タスク(task)の引数の更新処理をします。
 - タスクの引数が変更されている場合、タスク関数を実行します。
-- タスクのステータスを追跡します(initial、 pending、 complete、 error)。
+- タスクステータス(initial、 pending、 complete、 error)を追跡します。
 - タスク関数の最終結果(値もしくはエラー)を保存します。
-- タスクのステータスが変更されると、ホストコンポーネントの更新を発動します。
+- タスクステータスが変更されると、ホストコンポーネントの更新を発動します。
 - 競合状態(race condition)を制御します。最新のタスクのみがタスクをcompleteすることを保証します。
-- Renders the correct template for the current task status
-- Allows aborting tasks with an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
+- 現在のタスクステータスに対応するテンプレートをレンダリングします。
+- [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)を使ってタスクを中止することができます。
 
 This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.
 
