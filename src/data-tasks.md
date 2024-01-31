@@ -67,11 +67,13 @@ class MyElement extends LitElement {
 - 現在のタスクステータスに対応するテンプレートをレンダリングします。
 - [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)を使ってタスクを中止することができます。
 
-This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.
+タスクを使うと非同期データ(Async data)を処理するための同じようなコードを複数回書かなくてすみます。
+そして、競合状態や他のエッジケースを確実に制御することができます。
 
 ## 非同期データ(Async data)
 
-Async data is data that's not available immediately, but may be available at some time in the future. For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.
+Async data is data that's not available immediately, but may be available at some time in the future.
+For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.
 
 Async data is usually returned from an async API, which can come in a few forms:
 - Promises or async functions, like `fetch()`
@@ -101,22 +103,11 @@ npm install @lit/task
 
 You'll generally have one Task object for each logical task that your component needs to perform. Install tasks as fields on your class:
 
-{% switchable-sample %}
-
 ```ts
 class MyElement extends LitElement {
   private _myTask = new Task(this, {/*...*/});
 }
 ```
-
-```js
-class MyElement extends LitElement {
-  _myTask = new Task(this, {/*...*/});
-}
-```
-
-{% endswitchable-sample %}
-
 
 As a class field, the task status and value are easily available:
 
