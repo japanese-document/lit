@@ -116,9 +116,11 @@ class MyElement extends LitElement {
 <li>現在のタスクステータスに対応するテンプレートをレンダリングします。</li>
 <li><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"><code>AbortController</code></a>を使ってタスクを中止することができます。</li>
 </ul>
-<p>This removes most of the boilerplate for correctly using async data from your code, and ensures robust handling of race conditions and other edge-cases.</p>
+<p>タスクを使うと非同期データ(Async data)を処理するための同じようなコードを複数回書かなくてすみます。
+そして、競合状態や他のエッジケースを確実に制御することができます。</p>
 <h2 id="非同期データ(Async_data)"><a class="anchor" href="#非同期データ(Async_data)">#</a>非同期データ(Async data)</h2>
-<p>Async data is data that's not available immediately, but may be available at some time in the future. For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.</p>
+<p>Async data is data that's not available immediately, but may be available at some time in the future.
+For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.</p>
 <p>Async data is usually returned from an async API, which can come in a few forms:</p>
 <ul>
 <li>Promises or async functions, like <code>fetch()</code></li>
@@ -137,16 +139,10 @@ class MyElement extends LitElement {
 <h2 id="Usage"><a class="anchor" href="#Usage">#</a>Usage</h2>
 <p><code>Task</code> is a <a class="Link" href="/docs/v3/composition/controllers/">reactive controller</a>, so it can respond to and trigger updates to Lit's reactive update lifecycle.</p>
 <p>You'll generally have one Task object for each logical task that your component needs to perform. Install tasks as fields on your class:</p>
-<p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   private _myTask = new Task(this, {/*...*/});
 }
 </code></pre>
-<pre><code class="language-js">class MyElement extends LitElement {
-  _myTask = new Task(this, {/*...*/});
-}
-</code></pre>
-<p>{% endswitchable-sample %}</p>
 <p>As a class field, the task status and value are easily available:</p>
 <pre><code class="language-ts">this._task.status;
 this._task.value;
