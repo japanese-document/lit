@@ -72,7 +72,7 @@ class MyElement extends LitElement {
 
 ## 非同期データ(Async data)
 
-Async data is data that's not available immediately, but may be available at some time in the future.
+非同期データ(Async data)はすぐに利用することはできませんが、将来のある時点では利用できるかもしれないデータです。
 For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.
 
 Async data is usually returned from an async API, which can come in a few forms:
