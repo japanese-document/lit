@@ -332,12 +332,13 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
 
 ### HTMLベースのプラグイン
 
-Context can be used to pass data from a parent to its light DOM children. 
-Since the parent does usually not create the light DOM children,
-it cannot leverage template-based data-binding to pass data to them,
-but it can listen to and respond to `context-request` events.
+コンテキストを使うと普通の子要素にデータを渡すことができます。
+親コンポーネントが普通の子要素を生成しない場合、
+親コンポーネントはテンプレートのデータバインディングを通じてデータを子要素に渡すことができません。
+しかし、子要素は`context-request`イベントに応答することはできます。
 
-For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:
+例として、下記のようないろいろな言語モードのプラグインと一緒に使われる`code-editor`要素について考えてみましょう。
+コンテキストを使うことで、素のHTMLの仕組みを使って機能を追加することができます。
 
 ```html
 <code-editor>
