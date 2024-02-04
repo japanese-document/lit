@@ -295,11 +295,12 @@ export class MyElement extends LitElement {
 テーマを適用したい要素はテーマオブジェクトを取得して、それからスタイル名でスタイルを取得します。
 ContextProviderとContextConsumerをラップしたカスタムテーマリアクティブコントローラを作成すると、繰り返し同じコードを書く量が減るでしょう。</p>
 <h3 id="HTMLベースのプラグイン"><a class="anchor" href="#HTMLベースのプラグイン">#</a>HTMLベースのプラグイン</h3>
-<p>Context can be used to pass data from a parent to its light DOM children. 
-Since the parent does usually not create the light DOM children,
-it cannot leverage template-based data-binding to pass data to them,
-but it can listen to and respond to <code>context-request</code> events.</p>
-<p>For example, consider a code editor element with plugins for different language modes. You can make a plain HTML system for adding features using context:</p>
+<p>コンテキストを使うと普通の子要素にデータを渡すことができます。
+親コンポーネントが普通の子要素を生成しない場合、
+親コンポーネントはテンプレートのデータバインディングを通じてデータを子要素に渡すことができません。
+しかし、子要素は<code>context-request</code>イベントに応答することはできます。</p>
+<p>例として、下記のようないろいろな言語モードのプラグインと一緒に使われる<code>code-editor</code>要素について考えてみましょう。
+コンテキストを使うことで、素のHTMLの仕組みを使って機能を追加することができます。</p>
 <pre><code class="language-html">&lt;code-editor&gt;
   &lt;code-editor-javascript-mode&gt;&lt;/code-editor-javascript-mode&gt;
   &lt;code-editor-python-mode&gt;&lt;/code-editor-python-mode&gt;
