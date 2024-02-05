@@ -347,7 +347,8 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
 </code-editor>
 ```
 
-In this case `<code-editor>` would provide an API for adding language modes via context, and plugin elements would consume that API and add themselves to the editor.
+上記の場合、`code-editor`はコンテキストを経由して言語モードを追加するAPIをプラグインに提供します。
+そして、プラグイン要素はAPIをconsumeして自身をエディタに追加します。
 
 ### データフォーマッタ、リンクジェネレータ等
 
