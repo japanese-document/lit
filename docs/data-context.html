@@ -306,7 +306,8 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
   &lt;code-editor-python-mode&gt;&lt;/code-editor-python-mode&gt;
 &lt;/code-editor&gt;
 </code></pre>
-<p>In this case <code>&lt;code-editor&gt;</code> would provide an API for adding language modes via context, and plugin elements would consume that API and add themselves to the editor.</p>
+<p>上記の場合、<code>code-editor</code>はコンテキストを経由して言語モードを追加するAPIをプラグインに提供します。
+そして、プラグイン要素はAPIをconsumeして自身をエディタに追加します。</p>
 <h3 id="データフォーマッタ、リンクジェネレータ等"><a class="anchor" href="#データフォーマッタ、リンクジェネレータ等">#</a>データフォーマッタ、リンクジェネレータ等</h3>
 <p>Sometimes reusable components will need to format data or URLs in an application-specific way.
 For example, a documentation viewer that renders a link to another item.
