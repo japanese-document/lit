@@ -309,7 +309,7 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
 <p>上記の場合、<code>code-editor</code>はコンテキストを経由して言語モードを追加するAPIをプラグインに提供します。
 そして、プラグイン要素はAPIをconsumeして自身をエディタに追加します。</p>
 <h3 id="データフォーマッタ、リンクジェネレータ等"><a class="anchor" href="#データフォーマッタ、リンクジェネレータ等">#</a>データフォーマッタ、リンクジェネレータ等</h3>
-<p>Sometimes reusable components will need to format data or URLs in an application-specific way.
+<p>再利用可能なコンポーネントでもアプリケーションを固有のデータフォーマットやURLのフォーマットに対応する必要がある場合があります。
 For example, a documentation viewer that renders a link to another item.
 The component will not know the URL space of the application.</p>
 <p>In these cases the component can depend on a context-provided function that will apply the application-specific formatting to the data or link.</p>

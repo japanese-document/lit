@@ -352,7 +352,7 @@ ContextProviderとContextConsumerをラップしたカスタムテーマリア�
 
 ### データフォーマッタ、リンクジェネレータ等
 
-Sometimes reusable components will need to format data or URLs in an application-specific way.
+再利用可能なコンポーネントでもアプリケーションを固有のデータフォーマットやURLのフォーマットに対応する必要がある場合があります。
 For example, a documentation viewer that renders a link to another item.
 The component will not know the URL space of the application.
 
