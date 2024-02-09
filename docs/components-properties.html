@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="リアクティブプロパティ"><a class="anchor" href="#リアクティブプロパティ">リアクティブプロパティ</a></h1>
+      <h1 id="リアクティブプロパティ"><a href="#リアクティブプロパティ">リアクティブプロパティ</a></h1>
 <p>Litコンポーネントは(要素の属性やプロパティからの)入力を受け取ってステートをクラスフィールドもしくはプロパティに保存します。
 リアクティブプロパティ(Reactive properties)は値が変更されるとリアクティブアップデートサイクルが発動され、コンポーネントが再レンダリングされます。
 そして、<a class="Link" href="#attribute">オプションの設定</a>によって要素の属性を読み書きすることが可能です。</p>
@@ -84,7 +84,7 @@
 <li><strong>Element upgrade</strong> コンポーネントに対応しているcustom elementsが既にDOMに存在ている状態でLitコンポーネントの定義が実行された場合、Litはcustom elementsにコンポーネントを適用します。
 custom elementsにセットされているプロパティや属性をコンポーネントに反映します。</li>
 </ul>
-<h2 id="パブリックプロパティとインターナルステート"><a class="anchor" href="#パブリックプロパティとインターナルステート">パブリックプロパティとインターナルステート</a></h2>
+<h2 id="パブリックプロパティとインターナルステート"><a href="#パブリックプロパティとインターナルステート">パブリックプロパティとインターナルステート</a></h2>
 <p>パブリックプロパティはコンポーネントのパブリックAPIの一部です。
 一般的に、パブリックプロパティ、その中でもリアクティブプロパティは入力を扱います。</p>
 <p>ユーザの入力に対応する以外でコンポーネントのパブリックプロパティを変更するべきではありません。
@@ -110,10 +110,10 @@ constructor()
 <p>コンポーネントはインターナルリアクティブステートを扱います。
 パブリックプロパティと同様にインターナルリアクティブステートを更新するとアップデートサイクルが発動します。
 詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
-<h2 id="パブリックリアクティブプロパティ"><a class="anchor" href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></h2>
+<h2 id="パブリックリアクティブプロパティ"><a href="#パブリックリアクティブプロパティ">パブリックリアクティブプロパティ</a></h2>
 <p>要素のリアクティブプロパティはデコレータもしくは<code>static properties</code>を使って宣言します。</p>
 <p>いづれの場合も、オプションオブジェクトを渡すことでプロパティの動作を変更することができます。</p>
-<h3 id="デコレータでプロパティを設定する"><a class="anchor" href="#デコレータでプロパティを設定する">デコレータでプロパティを設定する</a></h3>
+<h3 id="デコレータでプロパティを設定する"><a href="#デコレータでプロパティを設定する">デコレータでプロパティを設定する</a></h3>
 <p>下記のように<code>@property</code>デコレータをクラスフィールドの宣言に付与することでリアクティブプロパティを宣言します。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   @property({type: String})
@@ -125,7 +125,7 @@ constructor()
 </code></pre>
 <p><code>@property</code>デコレータの引数は<a class="Link" href="#プロパティオプション">プロパティオプション</a>です。
 プロパティオプションを渡さないと全てのオプションのデフォルト値が適用されます。</p>
-<h3 id="static_propertiesフィールドでプロパティを設定する"><a class="anchor" href="#static_propertiesフィールドでプロパティを設定する">static propertiesフィールドでプロパティを設定する</a></h3>
+<h3 id="static_propertiesフィールドでプロパティを設定する"><a href="#static_propertiesフィールドでプロパティを設定する">static propertiesフィールドでプロパティを設定する</a></h3>
 <p>下記のように<code>static properties</code>を使ってプロパティを設定します。</p>
 <pre><code class="language-js">class MyElement extends LitElement {
   static properties = {
@@ -140,30 +140,30 @@ constructor()
 }
 </code></pre>
 <p>空のオプションオブジェクト(<code>{}</code>)が渡された場合はデフォルトのオプションが適用されます。</p>
-<h3 id="プロパティオプション"><a class="anchor" href="#プロパティオプション">プロパティオプション</a></h3>
+<h3 id="プロパティオプション"><a href="#プロパティオプション">プロパティオプション</a></h3>
 <p>オプションオブジェクトに以下のプロパティを設定することができます。</p>
-<h4 id="attribute"><a class="anchor" href="#attribute">attribute</a></h4>
+<h4 id="attribute"><a href="#attribute">attribute</a></h4>
 <p>プロパティに関連した属性を有効にするか、またはその属性名を変更したい場合はその属性名を渡します。
 デフォルトはtrueです。
 <code>attribute</code>をfalseにすると<code>converter</code>、<code>reflect</code>、<code>type</code>オプションは無視されます。
 詳しくは<a class="Link" href="#attributeオプション">attributeオプション</a>を見てください。</p>
-<h4 id="converter"><a class="anchor" href="#converter">converter</a></h4>
+<h4 id="converter"><a href="#converter">converter</a></h4>
 <p>プロパティと属性を相互に変換するための<a class="Link" href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a>を渡します。
 渡されない場合は<a class="Link" href="#デフォルトプロパティコンバータ">デフォルトプロパティコンバータ</a>を使います。</p>
-<h4 id="hasChanged"><a class="anchor" href="#hasChanged">hasChanged</a></h4>
+<h4 id="hasChanged"><a href="#hasChanged">hasChanged</a></h4>
 <p>プロパティがセットされる毎に実行されます。更新を発動するか判定します。
 デフォルトでは不等式(<code>newValue !== oldValue</code>)による判定を行います。
 詳しくは<a class="Link" href="#変更判定の変更">変更判定の変更</a>を見てください。</p>
-<h4 id="noAccessor"><a class="anchor" href="#noAccessor">noAccessor</a></h4>
+<h4 id="noAccessor"><a href="#noAccessor">noAccessor</a></h4>
 <p>trueをセットするとデフォルトのプロパティアクセサを生成しません。
 このオプションを使うことはほとんどないでしょう。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#noAccessorオプション">noAccessorオプション</a>を見てください。</p>
-<h4 id="reflect"><a class="anchor" href="#reflect">reflect</a></h4>
+<h4 id="reflect"><a href="#reflect">reflect</a></h4>
 <p>trueをセットするとプロパティの値をcustom elementのプロパティに対応する属性に反映します。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#reflectオプション">reflectオプション</a>を見てください。</p>
-<h4 id="state"><a class="anchor" href="#state">state</a></h4>
+<h4 id="state"><a href="#state">state</a></h4>
 <p>trueをセットするとプロパティはインターナルリアクティブステートになります。
 インターナルリアクティブステートはパブリックリアクティブプロパティのように更新を発動しますが、
 Litはプロパティに対応する属性を生成しません。
@@ -171,7 +171,7 @@ Litはプロパティに対応する属性を生成しません。
 このオプションは<code>@state</code>デコレータと同じ効果を付与します。
 デフォルトはfalseです。
 詳しくは<a class="Link" href="#インターナルリアクティブステート">インターナルリアクティブステート</a>を見てください。</p>
-<h4 id="type"><a class="anchor" href="#type">type</a></h4>
+<h4 id="type"><a href="#type">type</a></h4>
 <p>文字列である属性をプロパティに変換する際に
 Litのデフォルトのコンバータはその文字列の値を指定された型(<code>type</code>)に変換します。
 プロパティから属性に変換する場合は、その逆です。
@@ -183,7 +183,7 @@ Litのデフォルトのコンバータはその文字列の値を指定され�
 <code>type</code>オプションはLitのランタイムではシリアライズとデシリアライズに使われます。
 TypeScriptの型チェックと混同しないように注意してください。</p>
 <p>オプションオブジェクトを指定しないもしくは空のオプションオブジェクトを指定することは、すべてのオプションにデフォルトの値を指定することと等価です。</p>
-<h2 id="インターナルリアクティブステート"><a class="anchor" href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
+<h2 id="インターナルリアクティブステート"><a href="#インターナルリアクティブステート">インターナルリアクティブステート</a></h2>
 <p>インターナルリアクティブステートはコンポーネントのpublicなAPIではないリアクティブプロパティです。
 このプロパティは対応する要素の属性を持ちません。
 そして、コンポーネントの外側からアクセスされることを意図していません。
@@ -208,7 +208,7 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 インターナルリアクティブステートはパブリックリアクティブプロパティと同じ動作をします。
 インターナルリアクティブステートに指定することができるプロパティオプションは<code>hasChanged</code>のみです。</p>
 <p><code>@state</code>デコレータはminifierにプロパティ名が変更可能であるというヒントを与えます。</p>
-<h2 id="プロパティが変更されると何が起きるか"><a class="anchor" href="#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a></h2>
+<h2 id="プロパティが変更されると何が起きるか"><a href="#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a></h2>
 <p>プロパティの変更はリアクティブアップデートサイクル(reactive update cycle)を発動します。
 それはコンポーネントがテンプレートを再レンダリングすることを引き起こします。</p>
 <p>プロパティが変更されると、下記の順番で処理が実行されます。</p>
@@ -228,17 +228,17 @@ JavaScriptでは上記のようにprivateもしくはprotectedであるプロパ
 <p>リアクティブアップデートサイクルのフックは多数あります。それらを変更することができます。
 詳しくは<a class="Link" href="https://lit.dev/docs/components/lifecycle/#reactive-update-cycle">リアクティブアップデートサイクル</a>を見てください。</p>
 <p>プロパティの変更判定の詳しい情報は<a class="Link" href="#変更判定の変更">変更判定の変更</a>を見てください。</p>
-<h3 id="プロパティでオブジェクトや配列を扱う際の注意点"><a class="anchor" href="#プロパティでオブジェクトや配列を扱う際の注意点">プロパティでオブジェクトや配列を扱う際の注意点</a></h3>
+<h3 id="プロパティでオブジェクトや配列を扱う際の注意点"><a href="#プロパティでオブジェクトや配列を扱う際の注意点">プロパティでオブジェクトや配列を扱う際の注意点</a></h3>
 <p>プロパティの値がオブジェクトもしくは配列の場合、その参照を変更しないと更新は発動しません。
 プロパティの値がオブジェクトもしくは配列の場合、下記の2つの方法で操作することができます。</p>
-<h4 id="値の置き換える"><a class="anchor" href="#値の置き換える">値の置き換える</a></h4>
+<h4 id="値の置き換える"><a href="#値の置き換える">値の置き換える</a></h4>
 <p>オブジェクトや配列をイミュータブル(immutable)として扱います。
 下記のように、<code>myArray</code>から要素を削除する場合に新しい配列を作成します。</p>
 <pre><code class="language-js">this.myArray = this.myArray.filter((_, i) =&gt; i !== indexToRemove);
 </code></pre>
 <p>この例ではシンプルなデータを扱っていますが、
 複雑なオブジェクトを扱う場合は<a class="Link" href="https://immerjs.github.io/immer/">Immer</a>のようなイミュータブルにデータを扱うためのライブラリを使うと可読性を保つことができるかもしれません。</p>
-<h4 id="手動で更新を発動する"><a class="anchor" href="#手動で更新を発動する">手動で更新を発動する</a></h4>
+<h4 id="手動で更新を発動する"><a href="#手動で更新を発動する">手動で更新を発動する</a></h4>
 <p>下記のようにデータを変更して直接的に更新を発動するために<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html#requestUpdate(name___PropertyKey,_oldValue___unknown,_options___PropertyDeclaration%3Cunknown,_unknown%3E)__void">requestUpdate()</a>を実行します。</p>
 <pre><code class="language-js">this.myArray.splice(indexToRemove, 1);
 this.requestUpdate();
@@ -255,7 +255,7 @@ this.requestUpdate();
 データを変更するすべてのコンポーネントを特定して、各コンポーネントで<code>requestUpdate()</code>を実行する必要があります。
 そうしないと、コンポーネントが期待通り更新されないかもしれません。
 このようなコンポーネントがアプリケーションに広がっている場合、管理が大変です。</p>
-<h2 id="属性"><a class="anchor" href="#属性">属性</a></h2>
+<h2 id="属性"><a href="#属性">属性</a></h2>
 <p>JavaScriptのコードでコンポーネントへの入力として、
 コンポーネントインスタンスのプロパティもしくはエクスプレッションを使うことで、
 コンポーネントのプロパティにJavaScriptのデータをセットすることができます。
@@ -271,7 +271,7 @@ reflectオプションをセットするとプロパティが変更されると�
 <li>要素の属性の値をコンポーネントのプロパティにセットする際は属性の値はプロパティの型に合わせて変換する必要があります。</li>
 <li>コンポーネントのプロパティを要素の属性にセットする際はプロパティの値を文字列に変換する必要があります。</li>
 </ul>
-<h3 id="attributeオプション"><a class="anchor" href="#attributeオプション">attributeオプション</a></h3>
+<h3 id="attributeオプション"><a href="#attributeオプション">attributeオプション</a></h3>
 <p>デフォルトでLitはすべてのパブリックリアクティブプロパティに対応する属性を作成します。
 プロパティ名をすべて小文字にしたものが相互変換する属性名になります。</p>
 <pre><code class="language-ts">// 相互変換する属性名はmyvalueになります。
@@ -323,7 +323,7 @@ constructor() {
 <p>下記のようにマークアップで相互変換する属性に値をセットすることによってコンポーネントのプロパティの初期値をセットすることができます。</p>
 <pre><code class="language-html">&lt;my-element myvalue="99"&gt;&lt;/my-element&gt;
 </code></pre>
-<h3 id="デフォルトプロパティコンバータ"><a class="anchor" href="#デフォルトプロパティコンバータ">デフォルトプロパティコンバータ</a></h3>
+<h3 id="デフォルトプロパティコンバータ"><a href="#デフォルトプロパティコンバータ">デフォルトプロパティコンバータ</a></h3>
 <p>Litのデフォルトプロパティコンバータは<code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Array</code>、<code>Object</code>をプロパティの型として取り扱います。</p>
 <p>デフォルトプロパティコンバータを使うには、プロパティに<code>type</code>プロパティオプションをセットします。</p>
 <pre><code class="language-ts">// デフォルトプロパティコンバータを使います。
@@ -343,7 +343,7 @@ constructor() {
 <p>デフォルトプロパティコンバータもしくはカスタムプロパティコンバータをプロパティにセットしない場合、
 デフォルトで<code>type: String</code>がセットされます。</p>
 <p>各デフォルトプロパティコンバータの動作を下記の表で説明します。</p>
-<h4 id="要素の属性からコンポーネントのプロパティへ"><a class="anchor" href="#要素の属性からコンポーネントのプロパティへ">要素の属性からコンポーネントのプロパティへ</a></h4>
+<h4 id="要素の属性からコンポーネントのプロパティへ"><a href="#要素の属性からコンポーネントのプロパティへ">要素の属性からコンポーネントのプロパティへ</a></h4>
 <table>
 <thead>
 <tr>
@@ -371,7 +371,7 @@ constructor() {
 <p><code>Boolean</code>以外の場合で 
 要素に対応する属性がない場合、
 プロパティはデフォルトの値もしくはデフォルトの値がセットされていない場合は<code>undefined</code>になります。</p>
-<h4 id="コンポーネントのプロパティから要素の属性へ"><a class="anchor" href="#コンポーネントのプロパティから要素の属性へ">コンポーネントのプロパティから要素の属性へ</a></h4>
+<h4 id="コンポーネントのプロパティから要素の属性へ"><a href="#コンポーネントのプロパティから要素の属性へ">コンポーネントのプロパティから要素の属性へ</a></h4>
 <table>
 <thead>
 <tr>
@@ -392,7 +392,7 @@ constructor() {
 <td align="left">プロパティがnullもしくはundefinedでない場合、属性に<code>JSON.stringify(propertyValue)</code>をセットします。<br>プロパティの値がnullもしくはundefinedの場合、要素から属性を削除します。</td>
 </tr>
 </tbody></table>
-<h3 id="カスタムプロパティコンバータ"><a class="anchor" href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a></h3>
+<h3 id="カスタムプロパティコンバータ"><a href="#カスタムプロパティコンバータ">カスタムプロパティコンバータ</a></h3>
 <p>カスタムプロパティコンバータはプロパティの宣言時にプロパティオプションの<code>converter</code>オプションでセットすることができます。</p>
 <pre><code class="language-js">myProp: {
   converter: // カスタムプロパティコンバータ
@@ -423,7 +423,7 @@ constructor() {
 </code></pre>
 <p><code>toAttribute</code>をセットされていないプロパティは、デフォルトのコンバータが適用されます。</p>
 <p><code>toAttribute</code>が<code>null</code>もしくは<code>undefined</code>を返すと属性が削除されます。</p>
-<h3 id="reflectオプション"><a class="anchor" href="#reflectオプション">reflectオプション</a></h3>
+<h3 id="reflectオプション"><a href="#reflectオプション">reflectオプション</a></h3>
 <p>コンポーネントのプロパティが変更されると、それに<a class="Link" href="#attributeオプション">対応する要素の属性</a>に反映できるように設定することができます。
 反映された要素の属性はCSSセレクタに使うことができるので便利です。</p>
 <pre><code class="language-js">// nameプロパティの値は属性に反映されます。
@@ -464,7 +464,7 @@ class MyElement extends LitElement {
 <p>更新している間、Litはステートの反映を確認します。
 プロパティの変更が属性に反映されて、属性の変更がプロパティを更新することで無限ループが発生する可能性があると不安に思うかもしれません。
 これを防ぐために、Litはプロパティや属性がセットされると確認します。</p>
-<h2 id="カスタムプロパティアクセサ"><a class="anchor" href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></h2>
+<h2 id="カスタムプロパティアクセサ"><a href="#カスタムプロパティアクセサ">カスタムプロパティアクセサ</a></h2>
 <p>デフォルトでLitElementはすべてのリアクティブプロパティに対してセッタ/ゲッタのペアを生成します。
 プロパティをセットする毎にセッタが実行されます。</p>
 <pre><code class="language-ts">// プロパティの宣言
@@ -488,7 +488,7 @@ this.greeting = 'Hola'; // 生成されたgreetingのプロパティアクセサ
 </code></pre>
 <p>生成されたアクセサは自動的に<code>requestUpdate()</code>を実行します。
 そして、更新中でない場合、更新を開始します。</p>
-<h3 id="カスタムプロパティアクセサを作成する"><a class="anchor" href="#カスタムプロパティアクセサを作成する">カスタムプロパティアクセサを作成する</a></h3>
+<h3 id="カスタムプロパティアクセサを作成する"><a href="#カスタムプロパティアクセサを作成する">カスタムプロパティアクセサを作成する</a></h3>
 <p>下記のようにプロパティのゲッタとセッタを変更することで、プロパティを取得する処理やセットする処理を変更することができます。</p>
 <pre><code class="language-ts">private _prop = 0;
 
@@ -518,7 +518,7 @@ get prop() { return this._prop; }
 要素が更新された後に実行される処理を変更したい場合は<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#updated()"><code>updated</code></a>コールバックを使うことを推奨します。</p>
 <p>クラスでプロパティに対するアクセサが定義されている場合、Litはそれらをデフォルトのアクセサで上書きしません。
 クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。</p>
-<h3 id="noAccessorオプション"><a class="anchor" href="#noAccessorオプション">noAccessorオプション</a></h3>
+<h3 id="noAccessorオプション"><a href="#noAccessorオプション">noAccessorオプション</a></h3>
 <p>クラスでプロパティを定義してそのプロパティに対するアクセサが定義されていない場合、スーパークラスでプロパティとアクセサが定義されていてもLitはデフォルトのアクセサを使います。
 この場合でスーパークラスで定義されたアクセサを使うには<code>noAccessor</code>に<code>true</code>をセットします。</p>
 <pre><code class="language-js">static properties = {
@@ -526,7 +526,7 @@ get prop() { return this._prop; }
 };
 </code></pre>
 <p>クラスでアクセサを定義している場合、<code>noAccessor</code>をセットする必要はありません。</p>
-<h2 id="変更判定の変更"><a class="anchor" href="#変更判定の変更">変更判定の変更</a></h2>
+<h2 id="変更判定の変更"><a href="#変更判定の変更">変更判定の変更</a></h2>
 <p>リアクティブプロパティに値をセットすると<code>hasChanged()</code>が実行されます。</p>
 <p><code>hasChanged</code>はプロパティの1つ前の値と現在の値を比較します。そして、プロパティが変更されたかどうか判定します。
 <code>hasChanged()</code>がtrueを返すと、更新が既にスケジュールされていない場合、Litは要素の更新を開始します。
@@ -577,11 +577,11 @@ class MyElement extends LitElement {
 }
 </code></pre>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

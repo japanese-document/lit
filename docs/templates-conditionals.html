@@ -61,12 +61,12 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="条件"><a class="anchor" href="#条件">条件</a></h1>
+      <h1 id="条件"><a href="#条件">条件</a></h1>
 <p>Litは通常のJavaScriptの表現を使うことができるので、
 <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">conditional operators</a>、関数の実行、<code>if</code>文や<code>switch</code>文のような標準のJavaScriptの制御機能を使って条件に応じてコンテンツをレンダリングすることができます。</p>
 <p>JavaScriptの条件文を使ってネストしたテンプレートエクスプレッションを組み合わせることができます。
 <a class="Link" href="https://lit.dev/docs/api/templates/#TemplateResult">テンプレートに変換した結果</a>を変数に保存してそれを別の場所で使うことができます。</p>
-<h2 id="三項演算子を使う"><a class="anchor" href="#三項演算子を使う">三項演算子を使う</a></h2>
+<h2 id="三項演算子を使う"><a href="#三項演算子を使う">三項演算子を使う</a></h2>
 <p>下記のように三項演算子を使って条件に応じてテンプレートを構築することができます。</p>
 <pre><code class="language-ts">render() {
   return this.userName
@@ -74,7 +74,7 @@
     : html`Please log in &lt;button&gt;Login&lt;/button&gt;`;
 }
 </code></pre>
-<h2 id="if文を使う"><a class="anchor" href="#if文を使う">if文を使う</a></h2>
+<h2 id="if文を使う"><a href="#if文を使う">if文を使う</a></h2>
 <p>下記のようにif文を使って条件に応じてテンプレートを構築することができます。</p>
 <pre><code class="language-ts">render() {
   let message;
@@ -98,7 +98,7 @@ render() {
   return html`&lt;p&gt;${this.getUserMessage()}&lt;/p&gt;`;
 }
 </code></pre>
-<h2 id="cacheディレクティブを使ってDOMをキャッシュする"><a class="anchor" href="#cacheディレクティブを使ってDOMをキャッシュする">cacheディレクティブを使ってDOMをキャッシュする</a></h2>
+<h2 id="cacheディレクティブを使ってDOMをキャッシュする"><a href="#cacheディレクティブを使ってDOMをキャッシュする">cacheディレクティブを使ってDOMをキャッシュする</a></h2>
 <p>ほとんどの場合、JavaScriptの条件文で充分ですが、
 複雑で大規模なテンプレートを切り替える場合、各テンプレートからDOMを再生成するコストを節約したいと思うでしょう。</p>
 <p>そんな時は<code>cache</code>ディレクティブの出番です。
@@ -111,7 +111,7 @@ render() {
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-directives.html#cache">cacheディレクティブ</a>を見てください。</p>
-<h2 id="条件に応じて何もレンダリングしない"><a class="anchor" href="#条件に応じて何もレンダリングしない">条件に応じて何もレンダリングしない</a></h2>
+<h2 id="条件に応じて何もレンダリングしない"><a href="#条件に応じて何もレンダリングしない">条件に応じて何もレンダリングしない</a></h2>
 <p>条件に応じて何もレンダリングしないことがあるでしょう。
 何もレンダリングしないことはchild expressionsでよくあります。
 たまにattribute expressionsでもあります。</p>
@@ -128,11 +128,11 @@ render() {
 <pre><code class="language-ts">html`&lt;button aria-label="${this.ariaLabel || nothing}"&gt;&lt;/button&gt;`
 </code></pre>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

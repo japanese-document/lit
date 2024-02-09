@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="コンポーネントを組み合わせる"><a class="anchor" href="#コンポーネントを組み合わせる">コンポーネントを組み合わせる</a></h1>
+      <h1 id="コンポーネントを組み合わせる"><a href="#コンポーネントを組み合わせる">コンポーネントを組み合わせる</a></h1>
 <p>複雑な処理を分かりやすくして、コードを適切な単位に分割する一般的な方法はコンポーネントに分割してそれらを組み合わせることです。
 これはシンプルで小さいコンポーネントを組み合わせて大きくて複雑なコンポーネントを構築することを意味します。
 Imagine you've been tasked with implementing a screen of UI:</p>
@@ -78,7 +78,7 @@ Imagine you've been tasked with implementing a screen of UI:</p>
     `;
 }
 </code></pre>
-<h2 id="良いコンポーネントとは"><a class="anchor" href="#良いコンポーネントとは">良いコンポーネントとは</a></h2>
+<h2 id="良いコンポーネントとは"><a href="#良いコンポーネントとは">良いコンポーネントとは</a></h2>
 <p>When deciding how to break up functionality, there are several things that help identify when to make a new component. A piece of UI may be a good candidate for a component if one or more of the following applies:</p>
 <ul>
 <li>It has its own state.</li>
@@ -88,7 +88,7 @@ Imagine you've been tasked with implementing a screen of UI:</p>
 <li>It has a well-defined API.</li>
 </ul>
 <p>Reusable controls like buttons, checkboxes, and input fields can make great components. But more complex UI pieces like drawers and carousels are also great candidates for componentization.</p>
-<h2 id="Passing_data_up_and_down_the_tree"><a class="anchor" href="#Passing_data_up_and_down_the_tree">Passing data up and down the tree</a></h2>
+<h2 id="Passing_data_up_and_down_the_tree"><a href="#Passing_data_up_and_down_the_tree">Passing data up and down the tree</a></h2>
 <p>When exchanging data with subcomponents, the general rule is to follow the model of the DOM: <em>properties down</em>, <em>events up</em>.</p>
 <ul>
 <li><p>Properties down. Setting properties on a subcomponent is usually preferable to calling methods on the subcomponent. It's easy to set properties in Lit templates and other declarative template systems.</p>
@@ -111,14 +111,14 @@ Imagine you've been tasked with implementing a screen of UI:</p>
 <li>The <code>my-menu</code> element fires a semantic event indicating that the selection has changed. This event might be called <code>selected-item-changed</code>, for example. Since this event is part of the API for <code>my-menu</code>, it should be semantically meaningful in that context.</li>
 </ul>
 <p>For more information on dispatching and listening for events, see <a class="Link" href="/docs/v3/components/events/">Events</a>.</p>
-<h2 id="Passing_data_across_the_tree"><a class="anchor" href="#Passing_data_across_the_tree">Passing data across the tree</a></h2>
+<h2 id="Passing_data_across_the_tree"><a href="#Passing_data_across_the_tree">Passing data across the tree</a></h2>
 <p>Properties down and events up is a good rule to start with. But what if you need to exchange data between two components that don't have a direct descendant relationship? For example, two components that are siblings in the shadow tree?</p>
 <p>One solution to this problem is to use the <em>mediator pattern</em>. In the mediator pattern, peer components don't communicate with each other directly. Instead, interactions are <em>mediated</em> by a third party.</p>
 <p>A simple way to implement the mediator pattern is by having the owning component handle events from its children, and in turn update the state of its children as necessary by passing changed data back down the tree. By adding a mediator, you can pass data across the tree using the familiar events-up, properties-down principle.</p>
 <p>In the following example, the mediator element listens for events from the input and button elements in its shadow DOM. It controls the enabled state of the button so the user can only click <strong>Submit</strong> when there's text in the input.</p>
 <p>{% playground-example "v3-docs/composition/mediator-pattern" "mediator-element.ts" %}</p>
 <p>Other mediator patterns include flux/Redux-style patterns where a store mediates changes and updates components via subscriptions. Having components directly subscribe to changes can help avoid needing every parent to pass along all data required by its children.</p>
-<h2 id="Light_DOM_children"><a class="anchor" href="#Light_DOM_children">Light DOM children</a></h2>
+<h2 id="Light_DOM_children"><a href="#Light_DOM_children">Light DOM children</a></h2>
 <p>In addition to the nodes in your shadow DOM, you can render child nodes provided by the component user, like the standard <code>&lt;select&gt;</code> element can take a set of <code>&lt;option&gt;</code> elements as children and render them as menu items.</p>
 <p>Child nodes are sometimes referred to as "light DOM" to distinguish them from the component's shadow DOM. For example:</p>
 <pre><code class="language-html">&lt;top-bar&gt;
@@ -131,11 +131,11 @@ Imagine you've been tasked with implementing a screen of UI:</p>
 <p>The component has control over whether and where the child nodes are rendered, using the <code>&lt;slot&gt;</code> element in its shadow DOM. And it can receive notifications when child nodes are added and removed by listening for the <code>slotchange</code> event.</p>
 <p>For more information, see the sections on <a class="Link" href="/docs/v3/components/shadow-dom/#slots">rendering children with slots</a> and <a class="Link" href="/docs/v3/components/shadow-dom/#accessing-slotted-children">accessing slotted children</a>.</p>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

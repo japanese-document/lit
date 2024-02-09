@@ -147,8 +147,9 @@ table {
   margin: auto;
 }
 
-.markdown-body :is(h1, h2, h3, h4, h5, h6) .anchor {
+.markdown-body :is(h1, h2, h3, h4, h5, h6) a {
   user-select: text;
+  color: #000;
 }
 
 /* MIT © GitHub */

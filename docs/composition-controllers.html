@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="リアクティブコントローラ"><a class="anchor" href="#リアクティブコントローラ">リアクティブコントローラ</a></h1>
+      <h1 id="リアクティブコントローラ"><a href="#リアクティブコントローラ">リアクティブコントローラ</a></h1>
 <p>Lit2はリアクティブコントローラというコードの再利用と構成のための新しいコンセプトを導入しました。</p>
 <p>リアクティブコントローラを使うと、コンポーネントにリアクティブアップデートサイクルに対するフックを加えることができます。
 そして、コンポーネントに追加する機能に必要な動作とステートをひとまとめにして、それを複数のコンポーネントの定義で共用することができます。</p>
@@ -114,7 +114,7 @@ const timeFormat = new Intl.DateTimeFormat('en-US', {
 The main difference is that they have their own identity and don't add to the component's prototype,
 which helps contain their APIs and lets you use multiple controller instances per host component.
 詳しくは<a class="Link" href="https://lit.dev/docs/composition/overview/#controllers-and-mixins">コントローラとミックスイン</a>を見てください。</p>
-<h2 id="コントローラを使う"><a class="anchor" href="#コントローラを使う">コントローラを使う</a></h2>
+<h2 id="コントローラを使う"><a href="#コントローラを使う">コントローラを使う</a></h2>
 <p>以下のようにコントローラを生成します。通常、コントローラのインスタンスはコンポーネント内で生成され格納されます。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   private clock = new ClockController(this, 1000);
@@ -132,12 +132,12 @@ which helps contain their APIs and lets you use multiple controller instances pe
   }
 </code></pre>
 <p>コントローラのAPIの仕様に関しては<a class="Link" href="https://lit.dev/docs/api/controllers/">こちら</a>を見てください。</p>
-<h2 id="コントローラを実装する"><a class="anchor" href="#コントローラを実装する">コントローラを実装する</a></h2>
+<h2 id="コントローラを実装する"><a href="#コントローラを実装する">コントローラを実装する</a></h2>
 <p>リアクティブコントローラはホストコンポーネントに結びつけられるオブジェクトです。
 リアクティブコントローラには1つ以上のホストライフサイクルコールバックもしくはホストコンポーネントを操作する処理を実装します。
 リアクティブコントローラを実装する方法はいろいろありますが、
 ここではクラスを使ってコンストラクタで初期化処理を行ってメソッドでライフサイクルを実装します。</p>
-<h3 id="コントローラの初期化"><a class="anchor" href="#コントローラの初期化">コントローラの初期化</a></h3>
+<h3 id="コントローラの初期化"><a href="#コントローラの初期化">コントローラの初期化</a></h3>
 <p><code>host.addController(this)</code>でコントローラをホストコンポーネントに登録します。
 通常、コントローラはホストコンポーネントを操作するためにホストコンポーネントの参照を保持します。</p>
 <pre><code class="language-ts">class ClockController implements ReactiveController {
@@ -164,7 +164,7 @@ which helps contain their APIs and lets you use multiple controller instances pe
 </code></pre>
 <p>コントローラをホストコンポーネントに登録すると、
 コントローラに実装したホストコンポーネントに対するライフサイクルコールバックが有効になります。</p>
-<h3 id="ライフサイクル"><a class="anchor" href="#ライフサイクル">ライフサイクル</a></h3>
+<h3 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h3>
 <p><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>型のリアクティブコントローラライフサイクルメソッドはリアクティブアップデートライフサイクルのサブセットです。
 LitElementはそのライフサイクルイベントの際、結びつけられているコントローラのリアクティブコントローラライフサイクルメソッドを実行します。
 リアクティブコントローラライフサイクルメソッドの実装はオプションです。</p>
@@ -192,7 +192,7 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 </li>
 </ul>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-lifecycle.html#リアクティブアップデートサイクル">リアクティブアップデートサイクル</a>を見てください。</p>
-<h3 id="ReactiveControllerHost_API"><a class="anchor" href="#ReactiveControllerHost_API">ReactiveControllerHost API</a></h3>
+<h3 id="ReactiveControllerHost_API"><a href="#ReactiveControllerHost_API">ReactiveControllerHost API</a></h3>
 <p>リアクティブコントローラホストはコントローラを追加して更新をリクエストする小さいAPIを持ちます。
 そして、結びついたコントローラのライフサイクルメソッドを実行します。</p>
 <p>以下にリアクティブコントローラホストのAPIを簡潔に示します。</p>
@@ -203,7 +203,7 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 <li><code>updateComplete: Promise&lt;boolean&gt;</code></li>
 </ul>
 <p><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveControllerHost">ReactiveControllerHost</a>型だけではなく<code>HTMLElement</code>、<code>ReactiveElement</code>、<code>LitElement</code>をコントローラと結びつけることもできます。それだけてはなく、コントローラをcustom elementsや他のインターフェイスと結びつけることもできます。</p>
-<h3 id="コントローラを組み合わせてコントローラを生成する"><a class="anchor" href="#コントローラを組み合わせてコントローラを生成する">コントローラを組み合わせてコントローラを生成する</a></h3>
+<h3 id="コントローラを組み合わせてコントローラを生成する"><a href="#コントローラを組み合わせてコントローラを生成する">コントローラを組み合わせてコントローラを生成する</a></h3>
 <p>コントローラを組み合わせてコントローラを定義することができます。
 下記のように子コントローラにホストコンポーネントを渡します。</p>
 <pre><code class="language-ts">class DualClockController implements ReactiveController {
@@ -219,7 +219,7 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
   get time2() { return this.clock2.value; }
 }
 </code></pre>
-<h3 id="コントローラとディレクティブ"><a class="anchor" href="#コントローラとディレクティブ">コントローラとディレクティブ</a></h3>
+<h3 id="コントローラとディレクティブ"><a href="#コントローラとディレクティブ">コントローラとディレクティブ</a></h3>
 <p>コントローラとディレクティブを組み合わせることはとても応用範囲が広いテクニックです。
 特にアニメーションディレクティブようなレンダリングの前後で動作が必要なディレクティブや
 テンプレート内の特定の要素を参照する必要があるコントローラです。</p>
@@ -229,12 +229,12 @@ LitElementはそのライフサイクルイベントの際、結びつけられ�
 <li>ディレクティブを持つコントローラ。これはホストコンポーネントのテンプレート内で使用する1つ以上のディレクティブを生成します。</li>
 </ul>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/templates-custom-directives.html">カスタムディレクティブ</a>を見てください。</p>
-<h4 id="コントローラディレクティブ"><a class="anchor" href="#コントローラディレクティブ">コントローラディレクティブ</a></h4>
+<h4 id="コントローラディレクティブ"><a href="#コントローラディレクティブ">コントローラディレクティブ</a></h4>
 <p>リアクティブコントローラはホストコンポーネントのフィールドに格納する必要はありません。
 ホストコンポーネントの<code>addController()</code>で結びつけられるものがコントローラです。
 ディレクティブはコントローラにすることができます。
 ディレクティブをコントローラにするとディレクティブはホストコンポーネントのライフサイクルにフックすることが可能になります。</p>
-<h4 id="ディレクティブを持つコントローラ"><a class="anchor" href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></h4>
+<h4 id="ディレクティブを持つコントローラ"><a href="#ディレクティブを持つコントローラ">ディレクティブを持つコントローラ</a></h4>
 <p>ディレクティブは単独の関数である必要はありません。
 コントローラのようなオブジェクトのメソッドでも可能です。
 これはコントローラがテンプレート内の特定の要素を産量する必要がある場合で使います。</p>
@@ -265,15 +265,15 @@ export class ResizeController {
   }
 }
 </code></pre>
-<h2 id="ユースケース"><a class="anchor" href="#ユースケース">ユースケース</a></h2>
+<h2 id="ユースケース"><a href="#ユースケース">ユースケース</a></h2>
 <p>リアクティブコントローラの用途は多岐にわたります。
 リアクティブコントローラはユーザ入力やステートマネジメントやリモートAPIのような外部リソースをコンポーネントに接続する良い方法です。
 次に一般的なユースケースを示します。</p>
-<h3 id="外部入力"><a class="anchor" href="#外部入力">外部入力</a></h3>
+<h3 id="外部入力"><a href="#外部入力">外部入力</a></h3>
 <p>リアクティブコントローラは外部入力に接続することに使うことができます。
 外部入力の例はキーボードイベントやマウスイベント、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">リサイズオブザーバ</a>、<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">ミューテーションオブザーバ</a>があります。
 コントローラはレンダリング時に現在の入力値を用意して、入力値が変わるとホストコンポーネントを更新することができます。</p>
-<h4 id="例__MouseMoveController"><a class="anchor" href="#例__MouseMoveController">例: MouseMoveController</a></h4>
+<h4 id="例__MouseMoveController"><a href="#例__MouseMoveController">例: MouseMoveController</a></h4>
 <p>下記の例はホストコンポーネントがDOMツリーに接続したり切断した時にコントローラがセットアップしたりクリーンアップする方法と入力値が変更した時に更新する方法を説明しています。</p>
 <pre><code class="language-ts">import {LitElement, html, ReactiveControllerHost} from 'lit';
 import {customElement} from 'lit/decorators.js';
@@ -317,7 +317,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="非同期タスク"><a class="anchor" href="#非同期タスク">非同期タスク</a></h3>
+<h3 id="非同期タスク"><a href="#非同期タスク">非同期タスク</a></h3>
 <p>長い時間がかかる計算やネットワークI/Oのような非同期タスクは通常、時間の経過とともにステートが変化します。
 非同期タスクのステートが変化した時、それをホストコンポーネントに通知する必要があります。</p>
 <p>コントローラはコンポーネント内でタスクの実行とステートの管理を簡単にする優れた方法です。
@@ -414,11 +414,11 @@ export class MyElement extends LitElement {
 }
 </code></pre>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>
