@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="レンダリング"><a class="anchor" href="#レンダリング">レンダリング</a></h1>
+      <h1 id="レンダリング"><a href="#レンダリング">レンダリング</a></h1>
 <p>レンダリングはコンポーネントにテンプレートを追加することで定義します。
 テンプレートにはエクスプレッション(expressions)を含めることができます。
 それは動的なコンテンツのプレースホルダです。</p>
@@ -82,7 +82,7 @@ class MyElement extends LitElement {
 エクスプレッションを使って要素にテキストコンテンツ、属性、プロパティ、イベントリスナをセットすることができます。
 <code>render()</code>メソッドにJavaScriptの処理を記述することもできます。
 例えば、エクスプレッションで使うローカル変数を作成することができます。</p>
-<h2 id="レンダリング可能な値"><a class="anchor" href="#レンダリング可能な値">レンダリング可能な値</a></h2>
+<h2 id="レンダリング可能な値"><a href="#レンダリング可能な値">レンダリング可能な値</a></h2>
 <p>通常、Litコンポーネントの<code>render()</code>メソッドは<code>TemplateResult</code>オブジェクト(<code>html</code>タグ関数の戻り値と同じ型)を1つ返します。
 それ以外にも、<code>render()</code>メソッドはLitがレンダリング可能な下記の値を返すことができます。</p>
 <ul>
@@ -96,7 +96,7 @@ class MyElement extends LitElement {
 1点だけある違いはchild expressionsは<code>SVGTemplateResult</code>をレンダリングすることができます。
 これは<a class="Link" href="https://japanese-document.github.io/lit/api-templates.html#svg(strings__TemplateStringsArray,_values__Array)__TemplateResult"><code>svg</code></a>で生成します。
 <code>SVGTemplateResult</code>は<code>&lt;svg&gt;</code>要素の子要素としてのみレンダリングすることができます。</p>
-<h2 id="render()メソッドの注意点"><a class="anchor" href="#render()メソッドの注意点">render()メソッドの注意点</a></h2>
+<h2 id="render()メソッドの注意点"><a href="#render()メソッドの注意点">render()メソッドの注意点</a></h2>
 <p>Litのレンダリング機構を活用するためには、
 <code>render()</code>メソッドは以下のガイドラインに従う必要があります。</p>
 <ul>
@@ -111,7 +111,7 @@ class MyElement extends LitElement {
 代わりにコンポーネントのステートをプロパティに保存して、テンプレートでそれらが反映されるようにします。</p>
 <p>例えば、コンポーネントがイベントを受け取ってUIにそれを反映したい場合、イベントリスナで直接DOMを操作するのではなくリアクティブプロパティに値をセットしてそれを<code>render()</code>で使います。</p>
 <p>詳しくは<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を見てください。</p>
-<h2 id="テンプレートを組み合わせる"><a class="anchor" href="#テンプレートを組み合わせる">テンプレートを組み合わせる</a></h2>
+<h2 id="テンプレートを組み合わせる"><a href="#テンプレートを組み合わせる">テンプレートを組み合わせる</a></h2>
 <p>テンプレートを組み合わせてテンプレートを作成できます。
 以下の例は<code>&lt;my-page&gt;</code>コンポーネントのテンプレートはヘッダー、フッター、メインコンテントのテンプレートを組み合わせて作られています。</p>
 <pre><code>import {LitElement, html} from 'lit';
@@ -192,7 +192,7 @@ class MyPage extends LitElement {
   }
 }
 </code></pre>
-<h2 id="テンプレートがレンダリングされるタイミング"><a class="anchor" href="#テンプレートがレンダリングされるタイミング">テンプレートがレンダリングされるタイミング</a></h2>
+<h2 id="テンプレートがレンダリングされるタイミング"><a href="#テンプレートがレンダリングされるタイミング">テンプレートがレンダリングされるタイミング</a></h2>
 <p>初回のレンダリングの後、
 コンポーネントのリアクティブプロパティが変更されるとアップデートサイクルが始動して、
 コンポーネントが再レンダリングされます。</p>
@@ -204,25 +204,25 @@ Litテンプレートは文字列に値を埋め込んでいるだけに見え�
 Litはそれを解析して静的なHTMLを1回生成します。
 それ以降は効率的に更新するためにエクスプレッション内の変更された値のみを更新します。</p>
 <p>アップデートサイクルの詳細は<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html#プロパティが変更されると何が起きるか">プロパティが変更されると何が起きるか</a>を見てください。</p>
-<h2 id="DOMのカプセル化"><a class="anchor" href="#DOMのカプセル化">DOMのカプセル化</a></h2>
+<h2 id="DOMのカプセル化"><a href="#DOMのカプセル化">DOMのカプセル化</a></h2>
 <p>LitはコンポーネントがレンダリングしたDOMをShadow DOMを使ってカプセル化します。
 Shadow DOMはメインのdocumentツリーとは別の独立したDOMツリーを持ちます。
 Shadow DOMはweb componentsのコア機能の1つです。Shadow DOMは相互運用性(interoperability)やスタイルのカプセル化等の利益をもたらします。</p>
 <p>Shadow DOMの詳しい内容は<a class="Link" href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM v1: Self-Contained Web Components
 </a>にあります。</p>
 <p>コンポーネントでのShadow DOMの動作ついての詳細は<a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Working with shadow DOM</a>を見てください。</p>
-<h2 id="関連情報"><a class="anchor" href="#関連情報">関連情報</a></h2>
+<h2 id="関連情報"><a href="#関連情報">関連情報</a></h2>
 <ul>
 <li><a class="Link" href="https://lit.dev/docs/components/shadow-dom/">Shadow DOM</a></li>
 <li><a class="Link" href="https://lit.dev/docs/templates/overview/">Templates overview</a></li>
 <li><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html">Template expressions</a></li>
 </ul>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

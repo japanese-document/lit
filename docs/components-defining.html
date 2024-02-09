@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="定義"><a class="anchor" href="#定義">定義</a></h1>
+      <h1 id="定義"><a href="#定義">定義</a></h1>
 <p>Litコンポーネントは<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a>を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。</p>
 <pre><code class="language-ts">@customElement('simple-greeting')
 export class SimpleGreeting extends LitElement { /* ... */ }
@@ -72,7 +72,7 @@ export class SimpleGreeting extends LitElement { /* ... */ }
 <pre><code class="language-js">export class SimpleGreeting extends LitElement { /* ... */  }
 customElements.define('simple-greeting', SimpleGreeting);
 </code></pre>
-<h2 id="LitコンポーネントはHTML要素です"><a class="anchor" href="#LitコンポーネントはHTML要素です">LitコンポーネントはHTML要素です</a></h2>
+<h2 id="LitコンポーネントはHTML要素です"><a href="#LitコンポーネントはHTML要素です">LitコンポーネントはHTML要素です</a></h2>
 <p>Litコンポーネントを定義すると<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements</a>が定義されます。
 つまり、その定義された要素はbuilt-in要素のように使うことができます。</p>
 <pre><code class="language-html">&lt;simple-greeting name="Markup"&gt;&lt;/simple-greeting&gt;
@@ -84,7 +84,7 @@ customElements.define('simple-greeting', SimpleGreeting);
 正確には、<code>LitElement</code>は<code>ReactiveElement</code>を継承しています。
 <code>ReactiveElement</code>は<code>HTMLElement</code>を継承して<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を実装しています。</p>
 <p><img loading="lazy" height="377" width="448" src="https://japanese-document.github.io/lit/images/lit-element-inheritance.png" alt="lit-element-inheritance.png"></p>
-<h2 id="TypeScriptの型を提供する"><a class="anchor" href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
+<h2 id="TypeScriptの型を提供する"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
 <p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
 例えば、<code>document.createElement('img')</code>は<code>src: string</code>プロパティを持つ<code>HTMLImageElement</code>を返します。
 Custom elementsは下記のように<code>HTMLElementTagNameMap</code>に加えることによってbuilt-in要素と同じように取り扱われます。</p>
@@ -108,11 +108,11 @@ myElement.aNumber = 10;
 <p>TypeScriptで定義したすべての要素を<code>HTMLElementTagNameMap</code>に追加することや
 npmにパッケージ公開する際は必ず<code>.d.ts</code>でそれらを提供することを推奨します。</p>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">License</a></h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
+<h2 id="License"><a href="#License">License</a></h2>
+<h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
+<h3 id="Other"><a href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>
