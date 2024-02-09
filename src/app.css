@@ -150,6 +150,7 @@ table {
 .markdown-body :is(h1, h2, h3, h4, h5, h6) a {
   user-select: text;
   color: #000;
+  -webkit-user-drag: none;
 }
 
 /* MIT © GitHub */
