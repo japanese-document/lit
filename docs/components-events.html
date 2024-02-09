@@ -61,7 +61,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="イベント"><a class="anchor" href="#イベント">#</a>イベント</h1>
+      <h1 id="イベント"><a class="anchor" href="#イベント">イベント</a></h1>
 <p>イベントは要素が変化を伝える標準的な方法です。
 通常、それらの変化はユーザのインタラクションから発生します。
 例えば、button要素はユーザにクリックされたときにclickイベントをdispatchします。
@@ -72,12 +72,12 @@ popup要素はポップアップが開いたり閉じたりするときにイベ
 <p>JavaScriptのコードはイベントをリッスンしてイベントに紐づいた処理を実行することができます。
 例えばtoolbar要素はメニューの項目が選択された時、リストをフィルタリングするでしょう。
 login要素はログインボタンがクリックされるとログイン処理を実行するでしょう。</p>
-<h2 id="イベントリスニング"><a class="anchor" href="#イベントリスニング">#</a>イベントリスニング</h2>
+<h2 id="イベントリスニング"><a class="anchor" href="#イベントリスニング">イベントリスニング</a></h2>
 <p>LitはWeb標準の<code>addEventListener</code> APIだけでなく、宣言的な方法でも要素にイベントリスナを加えることができます。</p>
-<h3 id="テンプレートでイベントリスナを加える"><a class="anchor" href="#テンプレートでイベントリスナを加える">#</a>テンプレートでイベントリスナを加える</h3>
+<h3 id="テンプレートでイベントリスナを加える"><a class="anchor" href="#テンプレートでイベントリスナを加える">テンプレートでイベントリスナを加える</a></h3>
 <p><a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>を使うとコンポーネントのテンプレートで要素にイベントリスナを加えることができます。
 この宣言的な方法で付与されるイベントリスナはテンプレートがレンダリングされる時に要素に加えられます。</p>
-<h4 id="イベントリスナのオプションを設定する"><a class="anchor" href="#イベントリスナのオプションを設定する">#</a>イベントリスナのオプションを設定する</h4>
+<h4 id="イベントリスナのオプションを設定する"><a class="anchor" href="#イベントリスナのオプションを設定する">イベントリスナのオプションを設定する</a></h4>
 <p>宣言的な方法で付与されるイベントリスナに(<code>passive</code>や<code>capture</code>のような)オプションを設定するには<code>@eventOptions</code>を使います。
 <code>@eventOptions</code>に渡すobjectは<code>addEventListener</code>の<code>options</code>パラメータと同じ役割です。</p>
 <pre><code class="language-js">import {LitElement, html} from 'lit';
@@ -94,7 +94,7 @@ private _handleTouchStart(e) { console.log(e.type) }
   return html`&lt;button @click=${{handleEvent: () =&gt; this.onClick(), once: true}}&gt;click&lt;/button&gt;`
 }
 </code></pre>
-<h3 id="コンポーネントもしくはshadow_rootにイベントリスナを追加する"><a class="anchor" href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">#</a>コンポーネントもしくはshadow rootにイベントリスナを追加する</h3>
+<h3 id="コンポーネントもしくはshadow_rootにイベントリスナを追加する"><a class="anchor" href="#コンポーネントもしくはshadow_rootにイベントリスナを追加する">コンポーネントもしくはshadow rootにイベントリスナを追加する</a></h3>
 <p>コンポーネントにWeb標準の<code>addEventListener</code>メソッドを使ってコンポーネント自身にイベントリスナを追加します。
 詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener()</a>を見てください。</p>
 <p>コンポーネントのコンストラクタはコンポーネントにイベントリスナを追加することに適した場所です。</p>
@@ -141,7 +141,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="他の要素にイベントリスナを追加する"><a class="anchor" href="#他の要素にイベントリスナを追加する">#</a>他の要素にイベントリスナを追加する</h3>
+<h3 id="他の要素にイベントリスナを追加する"><a class="anchor" href="#他の要素にイベントリスナを追加する">他の要素にイベントリスナを追加する</a></h3>
 <p>コンポーネント自身とテンプレートにあるDOM以外の要素(例: <code>window</code>、<code>document</code>、メインのDOMツリー上にある要素)にイベントリスナを追加したい場合、
 <code>connectedCallback</code>でイベントリスナを追加します。そして、<code>disconnectedCallback</code>でイベントリスナを削除します。</p>
 <ul>
@@ -160,11 +160,11 @@ disconnectedCallback() {
 }
 </code></pre>
 <p><code>connectedCallback</code> and <code>disconnectedCallback</code>の詳しい情報は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks">lifecycle callbacks</a>を見てください。</p>
-<h3 id="パフォーマンスの向上"><a class="anchor" href="#パフォーマンスの向上">#</a>パフォーマンスの向上</h3>
+<h3 id="パフォーマンスの向上"><a class="anchor" href="#パフォーマンスの向上">パフォーマンスの向上</a></h3>
 <p>通常、イベントリスナを追加する処理はとても高速なので、パフォーマンス上の問題になりません。
 しかし、高頻度で使用され、多くのイベントリスナを持つコンポーネントでは、
 <a class="Link" href="#Event_delegation">event delegation</a>を使ってイベントリスナを削減してレンダリング後に<a class="Link" href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a>ことで初回レンダリングのパフォーマンスを向上させることができます。</p>
-<h4 id="Event_delegation"><a class="anchor" href="#Event_delegation">#</a>Event delegation</h4>
+<h4 id="Event_delegation"><a class="anchor" href="#Event_delegation">Event delegation</a></h4>
 <p>event delegationを用いるとイベントリスナーを削減することができるのでパフォーマンスを向上させることができます。
 また、イベントの処理を集約することができるのでコードを削減することができます。
 Event delegationはイベントバブリング時のみを取り扱います。
@@ -172,7 +172,7 @@ Event delegationはイベントバブリング時のみを取り扱います。
 <p>イベントバブリング時はイベントが発生した要素の祖先の要素にイベントが伝播します。
 このことを利用するには祖先の要素にイベントリスナを追加して、どの子孫要素からバブリングによってイベントがdispatchされたか知る必要があります。
 <code>Event</code>インスタンスの<code>target</code>プロパティでどの子孫要素からイベントがdispatchされたか特定することができます。</p>
-<h4 id="非同期でイベントリスナを追加する"><a class="anchor" href="#非同期でイベントリスナを追加する">#</a>非同期でイベントリスナを追加する</h4>
+<h4 id="非同期でイベントリスナを追加する"><a class="anchor" href="#非同期でイベントリスナを追加する">非同期でイベントリスナを追加する</a></h4>
 <p>レンダリング後にイベントリスナを追加するには、<code>firstUpdated</code>メソッドを使います。
 これはコンポーネントの初回に更新でテンプレートが最初にレンダリングされた後に実行されるLitのライフサイクルコールバックです。</p>
 <p><code>firstUpdated</code>コールバックはコンポーネントの初回の更新で<code>render</code>メソッドを実行した後とブラウザが描画する前の間に実行されます。
@@ -184,7 +184,7 @@ Event delegationはイベントバブリング時のみを取り扱います。
   this.addEventListener('click', this._handleClick);
 }
 </code></pre>
-<h3 id="イベントリスナのthis"><a class="anchor" href="#イベントリスナのthis">#</a>イベントリスナの<code>this</code></h3>
+<h3 id="イベントリスナのthis"><a class="anchor" href="#イベントリスナのthis">イベントリスナの<code>this</code></a></h3>
 <p>テンプレート内で<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>(<code>@</code>)を使って宣言的に追加されたイベントリスナは自動的にコンポーネントがbindされます。</p>
 <p>だから、下記のように宣言的に追加されたイベントハンドラでは<code>this</code>でコンポーネントインスタンスを参照することができます。</p>
 <pre><code class="language-js">class MyElement extends LitElement {
@@ -209,7 +209,7 @@ Event delegationはイベントバブリング時のみを取り扱います。
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">thisのドキュメント</a>を見てください。</p>
-<h3 id="ループするテンプレートでイベントを取り扱う"><a class="anchor" href="#ループするテンプレートでイベントを取り扱う">#</a>ループするテンプレートでイベントを取り扱う</h3>
+<h3 id="ループするテンプレートでイベントを取り扱う"><a class="anchor" href="#ループするテンプレートでイベントを取り扱う">ループするテンプレートでイベントを取り扱う</a></h3>
 <p>下記のように、テンプレートでループを使って要素を生成する場合、イベントバブリングを利用して<a class="Link" href="#Event_delegation">event delegation</a>を使うと便利です。
 イベントバブリングしないイベント(focus)の場合、ループで生成される各要素にイベントリスナを加えます。</p>
 <pre><code class="language-ts">import {LitElement, html} from 'lit';
@@ -242,9 +242,9 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="イベントリスナを削除する"><a class="anchor" href="#イベントリスナを削除する">#</a>イベントリスナを削除する</h3>
+<h3 id="イベントリスナを削除する"><a class="anchor" href="#イベントリスナを削除する">イベントリスナを削除する</a></h3>
 <p><code>null</code>、<code>undefined</code>、<code>nothing</code>を<a class="Link" href="https://japanese-document.github.io/lit/templates-expressions.html#Event_listener_expressions">Event listener expressions</a>に渡すと、既存のイベントリスナは削除されます。</p>
-<h2 id="イベントをdispatchする"><a class="anchor" href="#イベントをdispatchする">#</a>イベントをdispatchする</h2>
+<h2 id="イベントをdispatchする"><a class="anchor" href="#イベントをdispatchする">イベントをdispatchする</a></h2>
 <p>すべてのDOM Nodeは<code>dispatchEvent</code>メソッドでイベントをdispatchすることができます。
 下記のように、第1引数にイベントタイプと第2引数にオプションを指定してEventインスタンスを生成します。
 それを<code>dispatchEvent</code>に渡します。</p>
@@ -255,7 +255,7 @@ myElement.dispatchEvent(event);
 この設定をしないと<a class="Link" href="#Event_delegation">event delegation</a>を行うことができません。</p>
 <p><code>composed</code>オプションを<code>true</code>にするとイベントをdispatchした要素が所属しているShadow DOMツリーの外にもイベントが伝播します。</p>
 <p>詳しくは<a class="Link" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">EventTarget.dispatchEvent()</a>を見てください。</p>
-<h3 id="どんなときイベントをdispatchするべきか"><a class="anchor" href="#どんなときイベントをdispatchするべきか">#</a>どんなときイベントをdispatchするべきか</h3>
+<h3 id="どんなときイベントをdispatchするべきか"><a class="anchor" href="#どんなときイベントをdispatchするべきか">どんなときイベントをdispatchするべきか</a></h3>
 <p>イベントのdispatchはユーザの操作もしくはコンポーネントのステート(state)の非同期的な変更時に実行されるべきです。
 Webのネイティブ要素がそうであるように、コードでコンポーネントのプロパティもしくは属性を変更した時にイベントをdispatchするべきではありません。</p>
 <p>例えば、input要素にユーザが入力したら<code>change</code>イベントがdispatchされます。
@@ -314,7 +314,7 @@ class MyListener extends LitElement {
   &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
 &lt;/my-listener&gt;
 </code></pre>
-<h3 id="要素の更新の後にイベントをdispatchする"><a class="anchor" href="#要素の更新の後にイベントをdispatchする">#</a>要素の更新の後にイベントをdispatchする</h3>
+<h3 id="要素の更新の後にイベントをdispatchする"><a class="anchor" href="#要素の更新の後にイベントをdispatchする">要素の更新の後にイベントをdispatchする</a></h3>
 <p>ほとんどの場合、イベントは要素の更新とレンダリングの後に発生するべきです。
 これはユーザの操作から生じたレンダリング結果の変化を伝播するためのイベントの場合は必須です。
 この場合、ステートの変更の後、イベントをdispatchする前にコンポーネントの<code>updateComplete</code> Promiseをawaitします。</p>
@@ -371,12 +371,12 @@ class MyListener extends LitElement {
   &lt;my-dispatcher&gt;&lt;/my-dispatcher&gt;
 &lt;/my-listener&gt;
 </code></pre>
-<h3 id="EventとCustomEventを扱う"><a class="anchor" href="#EventとCustomEventを扱う">#</a>EventとCustomEventを扱う</h3>
+<h3 id="EventとCustomEventを扱う"><a class="anchor" href="#EventとCustomEventを扱う">EventとCustomEventを扱う</a></h3>
 <p>イベントは<code>Event</code>もしくは<code>CustomEvent</code>です。どちらを使っても良いです。
 <code>CustomEvent</code>を使う場合、イベントのデータは<code>detail</code>プロパティにセットします。
 <code>Event</code>を使う場合、<code>Event</code>クラスのサブクラスを作成します。そして、それにAPIを追加します。</p>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event</a>と<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">CustomEvent</a>を見てください。</p>
-<h4 id="CustomEventの使い方"><a class="anchor" href="#CustomEventの使い方">#</a>CustomEventの使い方</h4>
+<h4 id="CustomEventの使い方"><a class="anchor" href="#CustomEventの使い方">CustomEventの使い方</a></h4>
 <pre><code class="language-js">const event = new CustomEvent('my-event', {
   detail: {
     message: 'Something important happened'
@@ -385,7 +385,7 @@ class MyListener extends LitElement {
 
 this.dispatchEvent(event);
 </code></pre>
-<h4 id="Eventの使い方"><a class="anchor" href="#Eventの使い方">#</a>Eventの使い方</h4>
+<h4 id="Eventの使い方"><a class="anchor" href="#Eventの使い方">Eventの使い方</a></h4>
 <pre><code class="language-js">class MyEvent extends Event {
   constructor(message) {
     super();
@@ -397,11 +397,11 @@ this.dispatchEvent(event);
 const event = new MyEvent('Something important happened');
 this.dispatchEvent(event);
 </code></pre>
-<h2 id="Shadow_DOMでイベントを扱う"><a class="anchor" href="#Shadow_DOMでイベントを扱う">#</a>Shadow DOMでイベントを扱う</h2>
+<h2 id="Shadow_DOMでイベントを扱う"><a class="anchor" href="#Shadow_DOMでイベントを扱う">Shadow DOMでイベントを扱う</a></h2>
 <p>Shadow DOMでイベントを取り扱う場合の注意点があります。
 Shadow DOMはshadow要素に関する詳細を外部に公開せずカプセル化します。
 Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要素に渡しません。</p>
-<h3 id="Composedイベント"><a class="anchor" href="#Composedイベント">#</a>Composedイベント</h3>
+<h3 id="Composedイベント"><a class="anchor" href="#Composedイベント">Composedイベント</a></h3>
 <p>デフォルトでshadow root内でdispatchされた上記で作成したイベントはshadow rootの外には伝播しません。
 イベントがshadow domの外にも伝播するには<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed"><code>composed</code>プロパティ</a>を<code>true</code>にします。
 通常、DOMツリーのすべてのNodeにイベントを伝播するために<code>composed</code>と一緒に<code>bubbles</code>も<code>true</code>にします。</p>
@@ -419,7 +419,7 @@ Shadow DOMから生じたイベントはshadow要素の詳細を外部のDOM要�
 イベントはイベントをdispatchした要素からDOMツリー上のshadow rootを含む要素まで伝播します。</p>
 <p>すべてのマウスイベント、タッチイベント、キーボードイベントを含むほとんどの標準のユーザーインターフェースイベントでは<code>bubbles</code>と<code>composed</code>が両方有効です。
 詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">こちら</a>を見てください。</p>
-<h3 id="Eventのtargetプロパティ"><a class="anchor" href="#Eventのtargetプロパティ">#</a>Eventのtargetプロパティ</h3>
+<h3 id="Eventのtargetプロパティ"><a class="anchor" href="#Eventのtargetプロパティ">Eventのtargetプロパティ</a></h3>
 <p>shadow rootもしくはその祖先要素のイベントリスナで、
 shadow root内でdispatchされた<a class="Link" href="#Composedイベント">Composedイベント</a>のtargetプロパティはDOMツリー上のshadow rootを含む要素になっています。
 Litコンポーネントはshadow root内にレンダリングされるので、
@@ -444,7 +444,7 @@ Litコンポーネント内からdispatchされたComposedイベントはLitコ�
 }
 </code></pre>
 <p>詳しくは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">composedPath</a>を見てください。</p>
-<h2 id="イベントディスパッチャーとイベントリスナ間でデータをやり取りする"><a class="anchor" href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">#</a>イベントディスパッチャーとイベントリスナ間でデータをやり取りする</h2>
+<h2 id="イベントディスパッチャーとイベントリスナ間でデータをやり取りする"><a class="anchor" href="#イベントディスパッチャーとイベントリスナ間でデータをやり取りする">イベントディスパッチャーとイベントリスナ間でデータをやり取りする</a></h2>
 <p>イベントはイベントの発信元からイベントリスナに変化を通知するために使われます。
 そして、イベントリスナから発信元へそのイベントの返信することにも使うことができます。</p>
 <p>これをする1つの方法はEventインスタンスに発信元のコンポーネントを操作するためのAPIを用意することです。
@@ -512,11 +512,11 @@ class MyDispatcher extends LitElement {
 // &lt;/my-listener&gt;
 </code></pre>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<h2 id="License"><a class="anchor" href="#License">License</a></h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>

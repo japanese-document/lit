@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/data-tasks.html" />
     <meta property="og:title" content="Async Tasks" />
-    <meta property="og:description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同" />
+    <meta property="og:description" content="概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="#概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同" />
+    <meta name="description" content="概要コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。そのようなデータはサーバやデータベースから取得されるでしょう。より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。Litのリアクティブアップデートライフサイクルは非同期でプロパティの変更をまとめて処理します。一方、Litテンプレートは常に同期処理を行います。テンプレートで使われるデータはレンダリング時に読み込み可能である必要があります。Litコンポーネントで非同期データをレンダリングするには、データが使用可能になるまで待機して、読み込み可能にするためにそれを保存して、データを同期" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>Async Tasks</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
@@ -61,8 +61,8 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="Async_Tasks"><a class="anchor" href="#Async_Tasks">#</a>Async Tasks</h1>
-<h2 id="概要"><a class="anchor" href="#概要">#</a>概要</h2>
+      <h1 id="Async_Tasks"><a class="anchor" href="#Async_Tasks">Async Tasks</a></h1>
+<h2 id="概要"><a class="anchor" href="#概要">概要</a></h2>
 <p>コンポーネントは非同期でのみ利用可能なデータをレンダリングする必要があることがあるでしょう。
 そのようなデータはサーバやデータベースから取得されるでしょう。
 より一般的に言うと非同期のAPIを使って取得もしくは計算されるでしょう。</p>
@@ -74,7 +74,7 @@ Litコンポーネントで非同期データをレンダリングするには�
 <p><code>@lit/task</code>パッケージにこの非同期データを扱う処理を扱うための<code>Task</code>リアクティブコントローラを用意しています。</p>
 <p><code>Task</code>はasyncの<code>task</code>関数を受け取って、手動または<code>args</code>が変更されたときに自動的に<code>task</code>関数を実行するコントローラです。
 <code>Task</code>は<code>task</code>関数の結果を保存します。そして、<code>task</code>関数が完了した際にその結果をレンダリングしてホストコンポーネントを更新します。</p>
-<h3 id="例"><a class="anchor" href="#例">#</a>例</h3>
+<h3 id="例"><a class="anchor" href="#例">例</a></h3>
 <p>下記は<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch()</code></a>を使ってHTTP APIを利用する<code>Task</code>の例です。
 このAPIは<code>productId</code>変数が変更される毎に実行されます。
 そして、コンポーネントはfetch中にローディングメッセージをレンダリングします。</p>
@@ -104,7 +104,7 @@ class MyElement extends LitElement {
   }
 }
 </code></pre>
-<h3 id="機能"><a class="anchor" href="#機能">#</a>機能</h3>
+<h3 id="機能"><a class="anchor" href="#機能">機能</a></h3>
 <p>タスク(Task)は非同期での処理を適切に遂行するために以下のような補助をしてくれます。</p>
 <ul>
 <li>ホストコンポーネントが更新される時、タスク(task)の引数の更新処理をします。</li>
@@ -118,7 +118,7 @@ class MyElement extends LitElement {
 </ul>
 <p>タスクを使うと非同期データ(Async data)を処理するための同じようなコードを複数回書かなくてすみます。
 そして、競合状態や他のエッジケースを確実に制御することができます。</p>
-<h2 id="非同期データ(Async_data)"><a class="anchor" href="#非同期データ(Async_data)">#</a>非同期データ(Async data)</h2>
+<h2 id="非同期データ(Async_data)"><a class="anchor" href="#非同期データ(Async_data)">非同期データ(Async data)</a></h2>
 <p>非同期データ(Async data)はすぐに利用することはできませんが、将来のある時点では利用できるかもしれないデータです。
 For example, instead of a value like a string or an object that's usable synchronously, a promise provides a value in the future.</p>
 <p>Async data is usually returned from an async API, which can come in a few forms:</p>
@@ -129,14 +129,14 @@ For example, instead of a value like a string or an object that's usable synchro
 <li>Libraries like observables and signals</li>
 </ul>
 <p>The Task controller deals in promises, so no matter the shape of your async API you can adapt it to promises to use with Task.</p>
-<h2 id="タスク(Task)"><a class="anchor" href="#タスク(Task)">#</a>タスク(Task)</h2>
+<h2 id="タスク(Task)"><a class="anchor" href="#タスク(Task)">タスク(Task)</a></h2>
 <p>At the core of the Task controller is the concept of a "task" itself.</p>
 <p>A task is an async operation which does some work to produce data and return it in a Promise. A task can be in a few different states (initial, pending, complete, and error) and can take parameters.</p>
 <p>A task is a generic concept and could represent any async operation. They apply best when there is a request/response structure, such as a network fetch, database query, or waiting for a single event in response to some action. They're less applicable to spontaneous or streaming operations like an open-ended stream of events, a streaming database response, etc.</p>
-<h2 id="Installation"><a class="anchor" href="#Installation">#</a>Installation</h2>
+<h2 id="Installation"><a class="anchor" href="#Installation">Installation</a></h2>
 <pre><code class="language-bash">npm install @lit/task
 </code></pre>
-<h2 id="Usage"><a class="anchor" href="#Usage">#</a>Usage</h2>
+<h2 id="Usage"><a class="anchor" href="#Usage">Usage</a></h2>
 <p><code>Task</code> is a <a class="Link" href="/docs/v3/composition/controllers/">reactive controller</a>, so it can respond to and trigger updates to Lit's reactive update lifecycle.</p>
 <p>You'll generally have one Task object for each logical task that your component needs to perform. Install tasks as fields on your class:</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
@@ -147,7 +147,7 @@ For example, instead of a value like a string or an object that's usable synchro
 <pre><code class="language-ts">this._task.status;
 this._task.value;
 </code></pre>
-<h3 id="The_task_function"><a class="anchor" href="#The_task_function">#</a>The task function</h3>
+<h3 id="The_task_function"><a class="anchor" href="#The_task_function">The task function</a></h3>
 <p>The most critical part of a task declaration is the <em>task function</em>. This is the function that does the actual work.</p>
 <p>The task function is given in the <code>task</code> option. The Task controller will automatically call the task function with arguments, which are supplied with a separate <code>args</code> callback. Arguments are checked for changes and the task function is only called if the arguments have changed.</p>
 <p>The task function takes the task arguments as an <em>array</em> passed as the first parameter, and an options argument as the second parameter:</p>
@@ -162,7 +162,7 @@ this._task.value;
 <p>{% aside "positive" "no-header" %}</p>
 <p>Write the <code>task</code> and <code>args</code> functions as arrow functions so that the <code>this</code> reference points to the host element.</p>
 <p>{% endaside %}</p>
-<h3 id="Task_status"><a class="anchor" href="#Task_status">#</a>Task status</h3>
+<h3 id="Task_status"><a class="anchor" href="#Task_status">Task status</a></h3>
 <p>Tasks can be in one of four states:</p>
 <ul>
 <li><code>INITIAL</code>: The task has not been run</li>
@@ -189,7 +189,7 @@ this._task.value;
 <li><code>error</code>: the current error of the task, if it has errored.</li>
 <li><code>render()</code>: a method that chooses a callback to run based on the current status.</li>
 </ul>
-<h3 id="Rendering_Tasks"><a class="anchor" href="#Rendering_Tasks">#</a>Rendering Tasks</h3>
+<h3 id="Rendering_Tasks"><a class="anchor" href="#Rendering_Tasks">Rendering Tasks</a></h3>
 <p>The simplest and most common API to use to render a task is <code>task.render()</code>, since it chooses the right code to run and provides it the relevant data.</p>
 <p><code>render()</code> takes a config object with an optional callback for each task status:</p>
 <ul>
@@ -210,11 +210,11 @@ this._task.value;
     `;
   }
 </code></pre>
-<h3 id="Running_tasks"><a class="anchor" href="#Running_tasks">#</a>Running tasks</h3>
+<h3 id="Running_tasks"><a class="anchor" href="#Running_tasks">Running tasks</a></h3>
 <p>By default, Tasks will run any time the arguments change. This is controlled by the <code>autoRun</code> option, which defaults to <code>true</code>.</p>
-<h4 id="Auto-run"><a class="anchor" href="#Auto-run">#</a>Auto-run</h4>
+<h4 id="Auto-run"><a class="anchor" href="#Auto-run">Auto-run</a></h4>
 <p>In <em>auto-run</em> mode, the task will call the <code>args</code> function when the host has updated, compare the args to the previous args, and invoke the task function if they have changed. A task without <code>args</code> defined is in manual mode.</p>
-<h4 id="Manual_mode"><a class="anchor" href="#Manual_mode">#</a>Manual mode</h4>
+<h4 id="Manual_mode"><a class="anchor" href="#Manual_mode">Manual mode</a></h4>
 <p>If <code>autoRun</code> is set to false, the task will be in <em>manual</em> mode. In manual mode you can run the task by calling the <code>.run()</code> method, possibly from an event handler:</p>
 <p>{% switchable-sample %}</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
@@ -270,7 +270,7 @@ this._task.value;
 <pre><code class="language-ts">this._task.run('arg1', 'arg2');
 </code></pre>
 <p>If arguments are not provided to <code>run()</code>, they are gathered from the <code>args</code> callback.</p>
-<h3 id="Aborting_tasks"><a class="anchor" href="#Aborting_tasks">#</a>Aborting tasks</h3>
+<h3 id="Aborting_tasks"><a class="anchor" href="#Aborting_tasks">Aborting tasks</a></h3>
 <p>A task function can be called while previous task runs are still pending. In these cases the result of the pending task runs will be ignored, and you should try to cancel any outstanding work or network I/O in order to save resources.</p>
 <p>You can do with with the <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal"><code>AbortSignal</code></a> that is passed in the <code>signal</code> property of the second argument to the task function. When a pending task run is superseded by a new run, the <code>AbortSignal</code> that was passed to the pending run is aborted to signal the task run to cancel any pending work.</p>
 <p><code>AbortSignal</code> doesn't cancel any work automatically - it is just a signal. To cancel some work you must either do it yourself by checking the signal, or forward the signal to another API that accepts <code>AbortSignal</code>s like <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/fetch"><code>fetch()</code></a> or <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>.</p>
@@ -315,7 +315,7 @@ this._task.value;
   });
 </code></pre>
 <p>{% endswitchable-sample %}</p>
-<h3 id="Task_chaining"><a class="anchor" href="#Task_chaining">#</a>Task chaining</h3>
+<h3 id="Task_chaining"><a class="anchor" href="#Task_chaining">Task chaining</a></h3>
 <p>Sometimes you want to run one task when another task completes.
 This can be useful if the tasks have different arguments so that the chained task may run without the first task running again.
 In this case it'll use the first task like a cache. To do this you can use the value of a task as an argument to another task:</p>
@@ -369,11 +369,11 @@ In this case it'll use the first task like a cache. To do this you can use the v
 </code></pre>
 <p>{% endswitchable-sample %}</p>
 <hr>
-<h2 id="License"><a class="anchor" href="#License">#</a>License</h2>
-<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">#</a>Japanese part</h3>
+<h2 id="License"><a class="anchor" href="#License">License</a></h2>
+<h3 id="Japanese_part"><a class="anchor" href="#Japanese_part">Japanese part</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution-NonCommercial 4.0 International Public License</a></p>
 <p>Copyright (c) 2022 38elements</p>
-<h3 id="Other"><a class="anchor" href="#Other">#</a>Other</h3>
+<h3 id="Other"><a class="anchor" href="#Other">Other</a></h3>
 <p><a class="Link" href="https://creativecommons.org/licenses/by/3.0/deed.en">Creative Commons Attribution 3.0 Unported</a></p>
 <p>Copyright (c) 2020 Google LLC. All rights reserved.</p>
 <p>BSD 3-Clause License</p>
