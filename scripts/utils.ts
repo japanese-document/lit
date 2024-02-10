@@ -22,6 +22,8 @@ export function createHash(text: string) {
 }
 
 export async function createPageData(markDownFileName: string): Promise<Page> {
+  console.log(markDownFileName)
+  console.dir(readFile)
   const content = await readFile(markDownFileName, 'utf8')
   const [meta, md] = getMetaAndMd(content)
   const title = createTitle(md)
@@ -206,4 +208,9 @@ export function createIndexPage(layout: string, indexItems: IndexItem[]) {
   }, `# ${INDEX_PAGE_HEADER}\n`)
   const body = marked.parse(md) as string
   return createHTML(layout, INDEX_PAGE_TITLE, body, INDEX_PAGE_DESCRIPTION, BASE_URL, CSS_PATH, '', '')
+}
+
+export function createHtmlFileDir(dir: string, sourceDir: string, outputDir: string) {
+  const prefixDirCount = sourceDir.length + '/'.length
+  return `${outputDir}/${dir.slice(prefixDirCount)}`
 }

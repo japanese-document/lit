@@ -1,4 +1,5 @@
 import { jest } from '@jest/globals'
+import { createHtmlFileDir } from './utils.js'
 jest.unstable_mockModule('node:fs/promises', () => ({ readFile: jest.fn() }))
 const { readFile } = await import ('node:fs/promises')
 const { createTitle, createDescription, getMetaAndMd, createURL, createHash, createIndexItems, createPageData } = await import('./utils.js')
@@ -134,5 +135,12 @@ describe('createIndexItems', () => {
       { title: 'title0', url: 'https://example.com/0' },
       { meta: { header: { name: 'name0', order: 0 }, order: 0 }, title: 'title1', url: 'https://example.com/1' }
     )
+  })
+})
+
+describe('createHtmlFileDir', () => {
+  test('output', () => {
+    const dir = createHtmlFileDir('foo/bar', 'foo', 'baz')
+    expect(dir).toBe('baz/bar')
   })
 })
