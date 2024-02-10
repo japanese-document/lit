@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { createTitle, getMarkDownFileNames, getMetaAndMd, createURL, createPage, createIndexPage,
-  createIndexItems, createIndexMenu, createHeaderList, createPages } from './utils.js'
+  createIndexItems, createIndexMenu, createHeaderList, createPages, createHtmlFileDir } from './utils.js'
 import { INDEX_PAGE_LAYOUT, OUTPUT_DIR, PAGE_LAYOUT, SOURCE_DIR, SINGLE_PAGE } from './const.js'
 
 const markDownFileNames = await getMarkDownFileNames()
@@ -22,8 +22,7 @@ async function createPageHtmlFile(
   const url = createURL(dir, name)
   const headerList = createHeaderList(md)
   const page = await createPage(pageLayout, md, title, url, indexMenu, headerList)
-  const prefixDirCount = sourceDir.length + 1
-  const dirPath = `${outputDir}/${dir.slice(prefixDirCount)}`
+  const dirPath = createHtmlFileDir(dir, sourceDir, outputDir)
   if (!existsSync(dirPath)) {
     await mkdir(dirPath)
   }
