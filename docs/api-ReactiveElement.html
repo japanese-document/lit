@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="twitter:card" content="summary" />
-    <meta property="og:url" content="https://japanese-document.github.io/lit/components-defining.html" />
-    <meta property="og:title" content="定義" />
-    <meta property="og:description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }@customElementデコレータはcustomElements.defineを実行する処理の省略した表現です。これはCustom Element classをブラウザに登録します。そして、要素名(この場合はsimple-greeting)をそれに関連付けます。JavaScriptを使ってい" />
+    <meta property="og:url" content="https://japanese-document.github.io/lit/api-ReactiveElement.html" />
+    <meta property="og:title" content="ReactiveElement" />
+    <meta property="og:description" content="LicenseJapanese partCreative Commons Attribution-NonCommercial 4.0 International Public LicenseCopyright (c) 2022 38elementsOtherCreative Commons Attribution 3.0 UnportedCopyright (c) 2020 Google LLC. All rights reserved.BSD 3-Clause LicenseCopyright (c) 2020 Google LLC. All rights reserved.Redistri" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="LitコンポーネントはLitElementを拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。@customElement('simple-greeting')export class SimpleGreeting extends LitElement { /* ... */ }@customElementデコレータはcustomElements.defineを実行する処理の省略した表現です。これはCustom Element classをブラウザに登録します。そして、要素名(この場合はsimple-greeting)をそれに関連付けます。JavaScriptを使ってい" />
+    <meta name="description" content="LicenseJapanese partCreative Commons Attribution-NonCommercial 4.0 International Public LicenseCopyright (c) 2022 38elementsOtherCreative Commons Attribution 3.0 UnportedCopyright (c) 2020 Google LLC. All rights reserved.BSD 3-Clause LicenseCopyright (c) 2020 Google LLC. All rights reserved.Redistri" />
     <meta name="Hatena::Bookmark" content="nocomment" />
-    <title>定義</title>
+    <title>ReactiveElement</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
     <link rel="stylesheet" href="/lit/app.css?v=001" type="text/css"  media="all" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9VVC74WWF"></script>
@@ -62,52 +62,7 @@
       </details>
     </nav></div>
     <main class="main markdown-body">
-      <h1 id="定義"><a href="#定義">定義</a></h1>
-<p>Litコンポーネントは<a class="Link" href="https://japanese-document.github.io/lit/api-LitElement.html">LitElement</a>を拡張したクラスを生成して、そのクラスをブラウザに登録することで定義します。</p>
-<pre><code class="language-ts">@customElement('simple-greeting')
-export class SimpleGreeting extends LitElement { /* ... */ }
-</code></pre>
-<p><code>@customElement</code>デコレータは<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define"><code>customElements.define</code></a>を実行する処理の省略した表現です。
-これはCustom Element classをブラウザに登録します。そして、要素名(この場合は<code>simple-greeting</code>)をそれに関連付けます。</p>
-<p>JavaScriptを使っていたりデコレータを使わない場合は直接<code>defined()</code>を実行します。</p>
-<pre><code class="language-js">export class SimpleGreeting extends LitElement { /* ... */  }
-customElements.define('simple-greeting', SimpleGreeting);
-</code></pre>
-<h2 id="LitコンポーネントはHTML要素です"><a href="#LitコンポーネントはHTML要素です">LitコンポーネントはHTML要素です</a></h2>
-<p>Litコンポーネントを定義すると<a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements</a>が定義されます。
-つまり、その定義された要素はbuilt-in要素のように使うことができます。</p>
-<pre><code class="language-html">&lt;simple-greeting name="Markup"&gt;&lt;/simple-greeting&gt;
-</code></pre>
-<pre><code class="language-js">const greeting = document.createElement('simple-greeting');
-</code></pre>
-<p><code>LitElement</code>クラスは<code>HTMLElement</code>のサブクラスです。
-だから、LitコンポーネントはWeb標準の<code>HTMLElement</code>のプロパティとメソッドをすべて継承します。
-正確には、<code>LitElement</code>は<code>ReactiveElement</code>を継承しています。
-<code>ReactiveElement</code>は<code>HTMLElement</code>を継承して<a class="Link" href="https://japanese-document.github.io/lit/components-properties.html">リアクティブプロパティ</a>を実装しています。</p>
-<p><img loading="lazy" height="377" width="448" src="https://japanese-document.github.io/lit/images/lit-element-inheritance.png" alt="lit-element-inheritance.png"></p>
-<h2 id="TypeScriptの型を提供する"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></h2>
-<p>TypeScriptはタグ名に基づいて特定のDOM APIが返すクラスを推論します。
-例えば、<code>document.createElement('img')</code>は<code>src: string</code>プロパティを持つ<code>HTMLImageElement</code>を返します。
-Custom elementsは下記のように<code>HTMLElementTagNameMap</code>に加えることによってbuilt-in要素と同じように取り扱われます。</p>
-<pre><code class="language-ts">@customElement('my-element')
-export class MyElement extends LitElement {
-  @property({type: Number})
-  aNumber: number = 5;
-  /* ... */
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    "my-element": MyElement;
-  }
-}
-</code></pre>
-<p>これによって、以下のコードは適切に型チェックされます。</p>
-<pre><code class="language-ts">const myElement = document.createElement('my-element');
-myElement.aNumber = 10;
-</code></pre>
-<p>TypeScriptで定義したすべての要素を<code>HTMLElementTagNameMap</code>に追加することや
-npmにパッケージ公開する際は必ず<code>.d.ts</code>でそれらを提供することを推奨します。</p>
+      <h1 id="ReactiveElement"><a href="#ReactiveElement">ReactiveElement</a></h1>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -145,9 +100,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
     </main>
-    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#定義">定義</a></p>
-<p class="h2"><a href="#LitコンポーネントはHTML要素です">LitコンポーネントはHTML要素です</a></p>
-<p class="h2"><a href="#TypeScriptの型を提供する">TypeScriptの型を提供する</a></p>
+    <div class="right-side"><nav class="header-list"><p class="h1"><a href="#ReactiveElement">ReactiveElement</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
