@@ -22,8 +22,6 @@ export function createHash(text: string) {
 }
 
 export async function createPageData(markDownFileName: string): Promise<Page> {
-  console.log(markDownFileName)
-  console.dir(readFile)
   const content = await readFile(markDownFileName, 'utf8')
   const [meta, md] = getMetaAndMd(content)
   const title = createTitle(md)
