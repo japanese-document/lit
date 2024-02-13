@@ -2,6 +2,12 @@
 ---
 # ReactiveElement
 
+## class ReactiveElement
+
+Base element class which manages element properties and attributes.
+When properties change, the update method is asynchronously called.
+This method should be supplied by subclassers to render updates as desired.
+
 
 ---
 
