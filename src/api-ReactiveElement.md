@@ -5,7 +5,7 @@
 ## class ReactiveElement
 
 要素のプロパティや属性を取り扱う要素のベースクラスです。
-When properties change, the update method is asynchronously called.
+プロパティが変更されると、updateメソッドが非同期で実行されます。
 This method should be supplied by subclassers to render updates as desired.
 
 
