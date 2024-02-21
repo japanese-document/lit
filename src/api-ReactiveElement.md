@@ -6,7 +6,7 @@
 
 要素のプロパティや属性を取り扱う要素のベースクラスです。
 プロパティが変更されると、updateメソッドが非同期で実行されます。
-This method should be supplied by subclassers to render updates as desired.
+更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。
 
 
 ---
