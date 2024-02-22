@@ -8,6 +8,12 @@
 プロパティが変更されると、updateメソッドが非同期で実行されます。
 更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。
 
+### Import
+
+```
+import { ReactiveElement } from 'lit';
+```
+
 
 ---
 
