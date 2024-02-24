@@ -14,6 +14,9 @@
 import { ReactiveElement } from 'lit';
 ```
 
+### Attributes
+
+#### attributeChangedCallback(name: string, _old: null | string, value: null | string): void
 
 ---
 
