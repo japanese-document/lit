@@ -18,6 +18,14 @@ import { ReactiveElement } from 'lit';
 
 #### attributeChangedCallback(name: string, _old: null | string, value: null | string): void
 
+Synchronizes property values when attributes change.
+
+Specifically, when an attribute is set, the corresponding property is set.
+You should rarely need to implement this callback.
+If this method is overridden, `super.attributeChangedCallback(name, _old, value)` must be called.
+
+See [responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes) on MDN for more information about the `attributeChangedCallback`.
+
 ---
 
 ## License
