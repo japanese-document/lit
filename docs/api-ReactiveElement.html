@@ -6,10 +6,10 @@
     <meta name="twitter:card" content="summary" />
     <meta property="og:url" content="https://japanese-document.github.io/lit/api-ReactiveElement.html" />
     <meta property="og:title" content="ReactiveElement" />
-    <meta property="og:description" content="class ReactiveElement要素のプロパティや属性を取り扱う要素のベースクラスです。プロパティが変更されると、updateメソッドが非同期で実行されます。更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。Importimport { ReactiveElement } from 'lit';AttributesattributeChangedCallback(name: string, _old: null | string, value: null | string): voidLicenseJapanese partCreative Com" />
+    <meta property="og:description" content="class ReactiveElement要素のプロパティや属性を取り扱う要素のベースクラスです。プロパティが変更されると、updateメソッドが非同期で実行されます。更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。Importimport { ReactiveElement } from 'lit';AttributesattributeChangedCallback(name: string, _old: null | string, value: null | string): voidSynchronizes property values whe" />
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/42838312?s=400" />
     <meta name="theme-color" content="#f1f7fe" />
-    <meta name="description" content="class ReactiveElement要素のプロパティや属性を取り扱う要素のベースクラスです。プロパティが変更されると、updateメソッドが非同期で実行されます。更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。Importimport { ReactiveElement } from 'lit';AttributesattributeChangedCallback(name: string, _old: null | string, value: null | string): voidLicenseJapanese partCreative Com" />
+    <meta name="description" content="class ReactiveElement要素のプロパティや属性を取り扱う要素のベースクラスです。プロパティが変更されると、updateメソッドが非同期で実行されます。更新のレンダリング処理を変更したい場合はupdateメソッドをサブクラスで実装します。Importimport { ReactiveElement } from 'lit';AttributesattributeChangedCallback(name: string, _old: null | string, value: null | string): voidSynchronizes property values whe" />
     <meta name="Hatena::Bookmark" content="nocomment" />
     <title>ReactiveElement</title>
     <link rel="icon" type="image/png" href="/lit/images/favicon.png" />
@@ -72,6 +72,11 @@
 </code></pre>
 <h3 id="Attributes"><a href="#Attributes">Attributes</a></h3>
 <h4 id="attributeChangedCallback(name__string,__old__null_|_string,_value__null_|_string)__void"><a href="#attributeChangedCallback(name__string,__old__null_|_string,_value__null_|_string)__void">attributeChangedCallback(name: string, _old: null | string, value: null | string): void</a></h4>
+<p>Synchronizes property values when attributes change.</p>
+<p>Specifically, when an attribute is set, the corresponding property is set.
+You should rarely need to implement this callback.
+If this method is overridden, <code>super.attributeChangedCallback(name, _old, value)</code> must be called.</p>
+<p>See <a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes">responding to attribute changes</a> on MDN for more information about the <code>attributeChangedCallback</code>.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
