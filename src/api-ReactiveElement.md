@@ -19,7 +19,7 @@ import { ReactiveElement } from 'lit';
 #### attributeChangedCallback(name: string, _old: null | string, value: null | string): void
 
 要素の属性の値が変化した時、プロパティの値をそれと同期させます。
-Specifically, when an attribute is set, the corresponding property is set.
+具体的に言うと要素の属性がセットされるとそれに対応するプロパティがセットされます。
 You should rarely need to implement this callback.
 If this method is overridden, `super.attributeChangedCallback(name, _old, value)` must be called.
 
