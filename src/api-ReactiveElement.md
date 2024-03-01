@@ -20,8 +20,8 @@ import { ReactiveElement } from 'lit';
 
 要素の属性の値が変化した時、プロパティの値をそれと同期させます。
 具体的に言うと要素の属性がセットされるとそれに対応するプロパティがセットされます。
-You should rarely need to implement this callback.
-If this method is overridden, `super.attributeChangedCallback(name, _old, value)` must be called.
+このメソッドを実装することはほとんどありません。
+このメソッドをオーバーライドする際は、オーバーライドしたメソッド内で`super.attributeChangedCallback(name, _old, value)`を実行する必要があります。
 
 See [responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes) on MDN for more information about the `attributeChangedCallback`.
 
