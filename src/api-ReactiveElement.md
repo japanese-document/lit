@@ -23,7 +23,7 @@ import { ReactiveElement } from 'lit';
 このメソッドを実装することはほとんどありません。
 このメソッドをオーバーライドする際は、オーバーライドしたメソッド内で`super.attributeChangedCallback(name, _old, value)`を実行する必要があります。
 
-See [responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes) on MDN for more information about the `attributeChangedCallback`.
+`attributeChangedCallback`に関する詳しい情報は[responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes)を見てください。
 
 ---
 
