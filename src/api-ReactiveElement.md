@@ -25,6 +25,10 @@ import { ReactiveElement } from 'lit';
 
 `attributeChangedCallback`に関する詳しい情報は[responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes)を見てください。
 
+#### static observedAttributes: Array<string>
+
+Returns a list of attributes corresponding to the registered properties.
+
 ---
 
 ## License
