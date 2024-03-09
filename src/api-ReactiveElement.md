@@ -27,7 +27,7 @@ import { ReactiveElement } from 'lit';
 
 #### static observedAttributes: Array<string>
 
-Returns a list of attributes corresponding to the registered properties.
+登録されているプロパティに対応する属性のリストを返します。
 
 ---
 
