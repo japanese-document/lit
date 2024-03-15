@@ -33,7 +33,7 @@ import { ReactiveElement } from 'lit';
 
 #### addController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void
 
-Registers a ReactiveController to participate in the element's reactive update cycle.
+[リアクティブコントローラ](https://japanese-document.github.io/lit/composition-controllers.html)を要素のリアクティブアップデートサイクルに組み込みます。
 The element automatically calls into any registered controllers during its lifecycle callbacks.
 If the element is connected when addController() is called,
 the controller's hostConnected() callback will be immediately called.
