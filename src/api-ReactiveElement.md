@@ -35,8 +35,8 @@ import { ReactiveElement } from 'lit';
 
 [リアクティブコントローラ](https://japanese-document.github.io/lit/composition-controllers.html)を要素のリアクティブアップデートサイクルに組み込みます。
 要素はライフサイクルコールバックに対応したコントローラを自動的に実行します。
-If the element is connected when addController() is called,
-the controller's hostConnected() callback will be immediately called.
+`addController()`が実行されたとき要素がdocumentに接続している場合、
+即座にcontrollerの`hostConnected()`が実行されます。
 
 ---
 
