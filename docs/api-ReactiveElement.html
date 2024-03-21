@@ -82,9 +82,11 @@
 <h3 id="Controllers"><a href="#Controllers">Controllers</a></h3>
 <h4 id="addController(controller__ReactiveController)__void"><a href="#addController(controller__ReactiveController)__void">addController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
 <p><a class="Link" href="https://japanese-document.github.io/lit/composition-controllers.html">リアクティブコントローラ</a>を要素のリアクティブアップデートサイクルに組み込みます。
-要素はライフサイクルコールバックに対応したコントローラを自動的に実行します。
+要素はライフサイクルコールバックに対応したコントローラのフックメソッドを自動的に実行します。
 <code>addController()</code>が実行されたとき要素がdocumentに接続している場合、
 即座にcontrollerの<code>hostConnected()</code>が実行されます。</p>
+<h4 id="removeController(controller__ReactiveController)__void"><a href="#removeController(controller__ReactiveController)__void">removeController(controller: </a><a class="Link" href="https://lit.dev/docs/api/controllers/#ReactiveController">ReactiveController</a>): void</h4>
+<p>Removes a ReactiveController from the element.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -130,6 +132,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_observedAttributes__Array">static observedAttributes: Array</a></p>
 <p class="h3"><a href="#Controllers">Controllers</a></p>
 <p class="h4"><a href="#addController(controller__ReactiveController)__void">addController(controller: ReactiveController): void</a></p>
+<p class="h4"><a href="#removeController(controller__ReactiveController)__void">removeController(controller: ReactiveController): void</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>

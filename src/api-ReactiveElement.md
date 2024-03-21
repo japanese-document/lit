@@ -34,9 +34,15 @@ import { ReactiveElement } from 'lit';
 #### addController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void
 
 [リアクティブコントローラ](https://japanese-document.github.io/lit/composition-controllers.html)を要素のリアクティブアップデートサイクルに組み込みます。
-要素はライフサイクルコールバックに対応したコントローラを自動的に実行します。
+要素はライフサイクルコールバックに対応したコントローラのフックメソッドを自動的に実行します。
 `addController()`が実行されたとき要素がdocumentに接続している場合、
 即座にcontrollerの`hostConnected()`が実行されます。
+
+#### removeController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void
+
+Removes a ReactiveController from the element.
+
+
 
 ---
 
