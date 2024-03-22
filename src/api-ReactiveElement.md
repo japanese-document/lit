@@ -42,7 +42,36 @@ import { ReactiveElement } from 'lit';
 
 Removes a ReactiveController from the element.
 
+### Dev mode
 
+#### static disableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
+
+Disable the given warning category for this class.
+This method only exists in development builds, so it should be accessed with a guard like.
+
+```
+// Disable for all ReactiveElement subclasses
+ReactiveElement.disableWarning?.('migration');
+// Disable for only MyElement and subclasses
+MyElement.disableWarning?.('migration');
+```
+
+#### static enabledWarnings?: Array<[WarningKind](https://lit.dev/docs/api/misc#WarningKind)>
+
+Read or set all the enabled warning categories for this class.
+This property is only used in development builds.
+
+#### enableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc#WarningKind)) => void
+
+Enable the given warning category for this class.
+This method only exists in development builds, so it should be accessed with a guard like.
+
+```
+// Enable for all ReactiveElement subclasses
+ReactiveElement.enableWarning?.('migration');
+// Enable for only MyElement and subclasses
+MyElement.enableWarning?.('migration');
+```
 
 ---
 
