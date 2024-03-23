@@ -40,7 +40,7 @@ import { ReactiveElement } from 'lit';
 
 #### removeController(controller: [ReactiveController](https://lit.dev/docs/api/controllers/#ReactiveController)): void
 
-Removes a ReactiveController from the element.
+要素から指定したリアクティブコントローラを削除します。
 
 ### Dev mode
 
