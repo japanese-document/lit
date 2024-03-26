@@ -46,7 +46,7 @@ import { ReactiveElement } from 'lit';
 
 #### static disableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
 
-Disable the given warning category for this class.
+クラスにセットされている指定した警告カテゴリを無効にします。
 This method only exists in development builds, so it should be accessed with a guard like.
 
 ```
