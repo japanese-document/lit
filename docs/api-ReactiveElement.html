@@ -90,7 +90,8 @@
 <h3 id="Dev_mode"><a href="#Dev_mode">Dev mode</a></h3>
 <h4 id="static_disableWarning___(warningKind__WarningKind)___-_void"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>クラスにセットされている指定した警告カテゴリを無効にします。
-This method only exists in development builds, so it should be accessed with a guard like.</p>
+このメソッドはdevelopmentビルドにのみ存在します。
+たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。</p>
 <pre><code>// Disable for all ReactiveElement subclasses
 ReactiveElement.disableWarning?.('migration');
 // Disable for only MyElement and subclasses
@@ -101,7 +102,8 @@ MyElement.disableWarning?.('migration');
 This property is only used in development builds.</p>
 <h4 id="enableWarning___(warningKind__WarningKind)___-_void"><a href="#enableWarning___(warningKind__WarningKind)___-_void">enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc#WarningKind">WarningKind</a>) =&gt; void</h4>
 <p>Enable the given warning category for this class.
-This method only exists in development builds, so it should be accessed with a guard like.</p>
+このメソッドはdevelopmentビルドにのみ存在します。
+たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。</p>
 <pre><code>// Enable for all ReactiveElement subclasses
 ReactiveElement.enableWarning?.('migration');
 // Enable for only MyElement and subclasses

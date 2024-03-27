@@ -47,7 +47,8 @@ import { ReactiveElement } from 'lit';
 #### static disableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
 
 クラスにセットされている指定した警告カテゴリを無効にします。
-This method only exists in development builds, so it should be accessed with a guard like.
+このメソッドはdevelopmentビルドにのみ存在します。
+たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。
 
 ```
 // Disable for all ReactiveElement subclasses
@@ -64,7 +65,8 @@ This property is only used in development builds.
 #### enableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc#WarningKind)) => void
 
 Enable the given warning category for this class.
-This method only exists in development builds, so it should be accessed with a guard like.
+このメソッドはdevelopmentビルドにのみ存在します。
+たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。
 
 ```
 // Enable for all ReactiveElement subclasses
