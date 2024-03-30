@@ -92,9 +92,9 @@
 <p>クラスにセットされている指定した警告カテゴリを無効にします。
 このメソッドはdevelopmentビルドにのみ存在します。
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。</p>
-<pre><code>// Disable for all ReactiveElement subclasses
+<pre><code>// ReactiveElementのすべてのサブクラスで無効にします。
 ReactiveElement.disableWarning?.('migration');
-// Disable for only MyElement and subclasses
+// MyElementとそのサブクラスのみで無効にします。
 MyElement.disableWarning?.('migration');
 </code></pre>
 <h4 id="static_enabledWarnings___Array-_WarningKind_-"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc#WarningKind">WarningKind</a>&gt;</h4>
