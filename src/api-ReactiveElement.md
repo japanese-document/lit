@@ -51,9 +51,9 @@ import { ReactiveElement } from 'lit';
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。
 
 ```
-// Disable for all ReactiveElement subclasses
+// ReactiveElementのすべてのサブクラスで無効にします。
 ReactiveElement.disableWarning?.('migration');
-// Disable for only MyElement and subclasses
+// MyElementとそのサブクラスのみで無効にします。
 MyElement.disableWarning?.('migration');
 ```
 
