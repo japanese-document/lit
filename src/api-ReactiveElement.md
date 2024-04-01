@@ -46,7 +46,7 @@ import { ReactiveElement } from 'lit';
 
 #### static disableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc/#WarningKind)) => void
 
-クラスにセットされている指定した警告カテゴリを無効にします。
+指定した警告カテゴリをクラスに対して無効化します。
 このメソッドはdevelopmentビルドにのみ存在します。
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。
 
@@ -59,19 +59,19 @@ MyElement.disableWarning?.('migration');
 
 #### static enabledWarnings?: Array<[WarningKind](https://lit.dev/docs/api/misc#WarningKind)>
 
-Read or set all the enabled warning categories for this class.
-This property is only used in development builds.
+クラスで有効な警告カテゴリです。
+このプロパティはdevelopmentビルドのみ使用することができます。
 
 #### enableWarning?: (warningKind: [WarningKind](https://lit.dev/docs/api/misc#WarningKind)) => void
 
-Enable the given warning category for this class.
+指定した警告カテゴリをクラスに適用して有効にします。
 このメソッドはdevelopmentビルドにのみ存在します。
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。
 
 ```
-// Enable for all ReactiveElement subclasses
+// ReactiveElementのすべてのサブクラスで有効にします。
 ReactiveElement.enableWarning?.('migration');
-// Enable for only MyElement and subclasses
+// MyElementとそのサブクラスのみで有効にします。
 MyElement.enableWarning?.('migration');
 ```
 
