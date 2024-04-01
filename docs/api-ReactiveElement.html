@@ -89,7 +89,7 @@
 <p>要素から指定したリアクティブコントローラを削除します。</p>
 <h3 id="Dev_mode"><a href="#Dev_mode">Dev mode</a></h3>
 <h4 id="static_disableWarning___(warningKind__WarningKind)___-_void"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc/#WarningKind">WarningKind</a>) =&gt; void</h4>
-<p>クラスにセットされている指定した警告カテゴリを無効にします。
+<p>指定した警告カテゴリをクラスに対して無効化します。
 このメソッドはdevelopmentビルドにのみ存在します。
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。</p>
 <pre><code>// ReactiveElementのすべてのサブクラスで無効にします。
@@ -98,15 +98,15 @@ ReactiveElement.disableWarning?.('migration');
 MyElement.disableWarning?.('migration');
 </code></pre>
 <h4 id="static_enabledWarnings___Array-_WarningKind_-"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array&lt;</a><a class="Link" href="https://lit.dev/docs/api/misc#WarningKind">WarningKind</a>&gt;</h4>
-<p>Read or set all the enabled warning categories for this class.
-This property is only used in development builds.</p>
+<p>クラスで有効な警告カテゴリです。
+このプロパティはdevelopmentビルドのみ使用することができます。</p>
 <h4 id="enableWarning___(warningKind__WarningKind)___-_void"><a href="#enableWarning___(warningKind__WarningKind)___-_void">enableWarning?: (warningKind: </a><a class="Link" href="https://lit.dev/docs/api/misc#WarningKind">WarningKind</a>) =&gt; void</h4>
-<p>Enable the given warning category for this class.
+<p>指定した警告カテゴリをクラスに適用して有効にします。
 このメソッドはdevelopmentビルドにのみ存在します。
 たから、このメソッドを使用する時は下記のような予防策を講じると良いでしょう。</p>
-<pre><code>// Enable for all ReactiveElement subclasses
+<pre><code>// ReactiveElementのすべてのサブクラスで有効にします。
 ReactiveElement.enableWarning?.('migration');
-// Enable for only MyElement and subclasses
+// MyElementとそのサブクラスのみで有効にします。
 MyElement.enableWarning?.('migration');
 </code></pre>
 <hr>
