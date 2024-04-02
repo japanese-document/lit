@@ -109,6 +109,11 @@ ReactiveElement.enableWarning?.('migration');
 // MyElementとそのサブクラスのみで有効にします。
 MyElement.enableWarning?.('migration');
 </code></pre>
+<h3 id="Lifecycle"><a href="#Lifecycle">Lifecycle</a></h3>
+<h4 id="connectedCallback()__void"><a href="#connectedCallback()__void">connectedCallback(): void</a></h4>
+<p>On first connection, creates the element's renderRoot, sets up element styling, and enables updating.</p>
+<h4 id="disconnectedCallback()__void"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></h4>
+<p>Allows for super.disconnectedCallback() in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -159,6 +164,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
 <p class="h4"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array</a></p>
 <p class="h4"><a href="#enableWarning___(warningKind__WarningKind)___-_void">enableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
+<p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
+<p class="h4"><a href="#connectedCallback()__void">connectedCallback(): void</a></p>
+<p class="h4"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
