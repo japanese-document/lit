@@ -75,6 +75,16 @@ ReactiveElement.enableWarning?.('migration');
 MyElement.enableWarning?.('migration');
 ```
 
+### Lifecycle
+
+#### connectedCallback(): void
+
+On first connection, creates the element's renderRoot, sets up element styling, and enables updating.
+
+#### disconnectedCallback(): void
+
+Allows for super.disconnectedCallback() in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.
+
 ---
 
 ## License
