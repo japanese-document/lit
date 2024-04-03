@@ -79,7 +79,7 @@ MyElement.enableWarning?.('migration');
 
 #### connectedCallback(): void
 
-On first connection, creates the element's renderRoot, sets up element styling, and enables updating.
+初回の接続時、要素のrenderRootを生成して、要素にスタイルを適用して、更新を有効にします。
 
 #### disconnectedCallback(): void
 
