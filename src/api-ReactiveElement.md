@@ -83,7 +83,40 @@ MyElement.enableWarning?.('migration');
 
 #### disconnectedCallback(): void
 
-Allows for super.disconnectedCallback() in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.
+Allows for `super.disconnectedCallback()` in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.
+
+### Other
+
+#### static addInitializer(initializer: [Initializer](https://lit.dev/docs/api/misc/#Initializer)): void
+
+This is useful for code that runs against a ReactiveElement subclass, such as a decorator, that needs to do work for each instance, such as setting up a ReactiveController.
+
+```ts
+const myDecorator = (target: typeof ReactiveElement, key: string) => {
+  target.addInitializer((instance: ReactiveElement) => {
+    // This is run during construction of the element
+    new MyController(instance);
+  });
+}
+```
+
+Decorating a field will then cause each instance to run an initializer that adds a controller:
+
+```ts
+class MyElement extends LitElement {
+  @myDecorator foo;
+}
+```
+
+Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass. Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.
+
+#### static finalize(): boolean
+
+Creates property accessors for registered properties, sets up element styling, and ensures any superclasses are also finalized. Returns true if the element was finalized.
+
+#### static finalized: boolean
+
+Marks class as having finished creating properties.
 
 ---
 

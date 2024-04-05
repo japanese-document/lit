@@ -113,7 +113,27 @@ MyElement.enableWarning?.('migration');
 <h4 id="connectedCallback()__void"><a href="#connectedCallback()__void">connectedCallback(): void</a></h4>
 <p>初回の接続時、要素のrenderRootを生成して、要素にスタイルを適用して、更新を有効にします。</p>
 <h4 id="disconnectedCallback()__void"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></h4>
-<p>Allows for super.disconnectedCallback() in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.</p>
+<p>Allows for <code>super.disconnectedCallback()</code> in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.</p>
+<h3 id="Other"><a href="#Other">Other</a></h3>
+<h4 id="static_addInitializer(initializer__Initializer)__void"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: </a><a class="Link" href="https://lit.dev/docs/api/misc/#Initializer">Initializer</a>): void</h4>
+<p>This is useful for code that runs against a ReactiveElement subclass, such as a decorator, that needs to do work for each instance, such as setting up a ReactiveController.</p>
+<pre><code class="language-ts">const myDecorator = (target: typeof ReactiveElement, key: string) =&gt; {
+  target.addInitializer((instance: ReactiveElement) =&gt; {
+    // This is run during construction of the element
+    new MyController(instance);
+  });
+}
+</code></pre>
+<p>Decorating a field will then cause each instance to run an initializer that adds a controller:</p>
+<pre><code class="language-ts">class MyElement extends LitElement {
+  @myDecorator foo;
+}
+</code></pre>
+<p>Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass. Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.</p>
+<h4 id="static_finalize()__boolean"><a href="#static_finalize()__boolean">static finalize(): boolean</a></h4>
+<p>Creates property accessors for registered properties, sets up element styling, and ensures any superclasses are also finalized. Returns true if the element was finalized.</p>
+<h4 id="static_finalized__boolean"><a href="#static_finalized__boolean">static finalized: boolean</a></h4>
+<p>Marks class as having finished creating properties.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -167,6 +187,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
 <p class="h4"><a href="#connectedCallback()__void">connectedCallback(): void</a></p>
 <p class="h4"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></p>
+<p class="h3"><a href="#Other">Other</a></p>
+<p class="h4"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: Initializer): void</a></p>
+<p class="h4"><a href="#static_finalize()__boolean">static finalize(): boolean</a></p>
+<p class="h4"><a href="#static_finalized__boolean">static finalized: boolean</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
