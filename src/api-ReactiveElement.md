@@ -75,7 +75,7 @@ ReactiveElement.enableWarning?.('migration');
 MyElement.enableWarning?.('migration');
 ```
 
-### Lifecycle
+### ライフサイクル
 
 #### connectedCallback(): void
 
@@ -85,11 +85,11 @@ MyElement.enableWarning?.('migration');
 
 Allows for `super.disconnectedCallback()` in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.
 
-### Other
+### その他
 
 #### static addInitializer(initializer: [Initializer](https://lit.dev/docs/api/misc/#Initializer)): void
 
-This is useful for code that runs against a ReactiveElement subclass, such as a decorator, that needs to do work for each instance, such as setting up a ReactiveController.
+これはReactiveElementのサブクラスでデコレータのようにReactiveControllerの設定をReactiveElementインスタンス毎に処理を行う必要がある場合に使います。
 
 ```ts
 const myDecorator = (target: typeof ReactiveElement, key: string) => {
