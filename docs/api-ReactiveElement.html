@@ -109,14 +109,14 @@ ReactiveElement.enableWarning?.('migration');
 // MyElementとそのサブクラスのみで有効にします。
 MyElement.enableWarning?.('migration');
 </code></pre>
-<h3 id="Lifecycle"><a href="#Lifecycle">Lifecycle</a></h3>
+<h3 id="ライフサイクル"><a href="#ライフサイクル">ライフサイクル</a></h3>
 <h4 id="connectedCallback()__void"><a href="#connectedCallback()__void">connectedCallback(): void</a></h4>
 <p>初回の接続時、要素のrenderRootを生成して、要素にスタイルを適用して、更新を有効にします。</p>
 <h4 id="disconnectedCallback()__void"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></h4>
 <p>Allows for <code>super.disconnectedCallback()</code> in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.</p>
-<h3 id="Other"><a href="#Other">Other</a></h3>
+<h3 id="その他"><a href="#その他">その他</a></h3>
 <h4 id="static_addInitializer(initializer__Initializer)__void"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: </a><a class="Link" href="https://lit.dev/docs/api/misc/#Initializer">Initializer</a>): void</h4>
-<p>This is useful for code that runs against a ReactiveElement subclass, such as a decorator, that needs to do work for each instance, such as setting up a ReactiveController.</p>
+<p>これはReactiveElementのサブクラスでデコレータのようにReactiveControllerの設定をReactiveElementインスタンス毎に処理を行う必要がある場合に使います。</p>
 <pre><code class="language-ts">const myDecorator = (target: typeof ReactiveElement, key: string) =&gt; {
   target.addInitializer((instance: ReactiveElement) =&gt; {
     // This is run during construction of the element
@@ -184,10 +184,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_disableWarning___(warningKind__WarningKind)___-_void">static disableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
 <p class="h4"><a href="#static_enabledWarnings___Array-_WarningKind_-">static enabledWarnings?: Array</a></p>
 <p class="h4"><a href="#enableWarning___(warningKind__WarningKind)___-_void">enableWarning?: (warningKind: WarningKind) =&gt; void</a></p>
-<p class="h3"><a href="#Lifecycle">Lifecycle</a></p>
+<p class="h3"><a href="#ライフサイクル">ライフサイクル</a></p>
 <p class="h4"><a href="#connectedCallback()__void">connectedCallback(): void</a></p>
 <p class="h4"><a href="#disconnectedCallback()__void">disconnectedCallback(): void</a></p>
-<p class="h3"><a href="#Other">Other</a></p>
+<p class="h3"><a href="#その他">その他</a></p>
 <p class="h4"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: Initializer): void</a></p>
 <p class="h4"><a href="#static_finalize()__boolean">static finalize(): boolean</a></p>
 <p class="h4"><a href="#static_finalized__boolean">static finalized: boolean</a></p>
