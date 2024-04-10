@@ -89,7 +89,7 @@ Allows for `super.disconnectedCallback()` in extensions while reserving the poss
 
 #### static addInitializer(initializer: [Initializer](https://lit.dev/docs/api/misc/#Initializer)): void
 
-これはReactiveElementのサブクラスでデコレータのようにReactiveControllerの設定をReactiveElementインスタンス毎に処理を行う必要がある場合に使います。
+これはReactiveElementのサブクラスで使います。これは例えば下記のようにデコレータのようにReactiveControllerの設定をインスタンス毎に処理を行う必要がある場合に使います。
 
 ```ts
 const myDecorator = (target: typeof ReactiveElement, key: string) => {
