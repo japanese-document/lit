@@ -116,10 +116,10 @@ MyElement.enableWarning?.('migration');
 <p>Allows for <code>super.disconnectedCallback()</code> in extensions while reserving the possibility of making non-breaking feature additions when disconnecting at some point in the future.</p>
 <h3 id="その他"><a href="#その他">その他</a></h3>
 <h4 id="static_addInitializer(initializer__Initializer)__void"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: </a><a class="Link" href="https://lit.dev/docs/api/misc/#Initializer">Initializer</a>): void</h4>
-<p>これはReactiveElementのサブクラスで使います。これは例えば下記のようにデコレータのようにReactiveControllerの設定をインスタンス毎に処理を行う必要がある場合に使います。</p>
+<p>これはReactiveElementのサブクラスで使います。例えば、下記のようにデコレータのようにReactiveControllerの設定をインスタンス毎に処理を行う必要がある場合に使います。</p>
 <pre><code class="language-ts">const myDecorator = (target: typeof ReactiveElement, key: string) =&gt; {
   target.addInitializer((instance: ReactiveElement) =&gt; {
-    // This is run during construction of the element
+    // これは要素の生成時に実行されます。
     new MyController(instance);
   });
 }
