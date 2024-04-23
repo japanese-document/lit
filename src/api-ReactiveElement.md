@@ -100,7 +100,7 @@ const myDecorator = (target: typeof ReactiveElement, key: string) => {
 }
 ```
 
-Decorating a field will then cause each instance to run an initializer that adds a controller:
+上記のデコレータを下記のようにフィールドに付与するとインスタンス単位でコントローラを追加するイニシャライザを実行します。
 
 ```ts
 class MyElement extends LitElement {
