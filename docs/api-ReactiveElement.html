@@ -124,7 +124,7 @@ MyElement.enableWarning?.('migration');
   });
 }
 </code></pre>
-<p>Decorating a field will then cause each instance to run an initializer that adds a controller:</p>
+<p>上記のデコレータを下記のようにフィールドに付与するとインスタンス単位でコントローラを追加するイニシャライザを実行します。</p>
 <pre><code class="language-ts">class MyElement extends LitElement {
   @myDecorator foo;
 }
