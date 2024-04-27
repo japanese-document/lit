@@ -129,7 +129,9 @@ MyElement.enableWarning?.('migration');
   @myDecorator foo;
 }
 </code></pre>
-<p>Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass. Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.</p>
+<p>イニシャライザ(Initializers)はコンストラクタ毎に保存されます。
+サブクラスにイニシャライザを追加してもスーパークラスにイニシャライザは追加されません。
+Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.</p>
 <h4 id="static_finalize()__boolean"><a href="#static_finalize()__boolean">static finalize(): boolean</a></h4>
 <p>Creates property accessors for registered properties, sets up element styling, and ensures any superclasses are also finalized. Returns true if the element was finalized.</p>
 <h4 id="static_finalized__boolean"><a href="#static_finalized__boolean">static finalized: boolean</a></h4>
