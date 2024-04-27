@@ -108,7 +108,9 @@ class MyElement extends LitElement {
 }
 ```
 
-Initializers are stored per-constructor. Adding an initializer to a subclass does not add it to a superclass. Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.
+イニシャライザ(Initializers)はコンストラクタ毎に保存されます。
+サブクラスにイニシャライザを追加してもスーパークラスにイニシャライザは追加されません。
+Since initializers are run in constructors, initializers will run in order of the class hierarchy, starting with superclasses and progressing to the instance's class.
 
 #### static finalize(): boolean
 
