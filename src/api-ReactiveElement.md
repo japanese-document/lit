@@ -118,7 +118,25 @@ Creates property accessors for registered properties, sets up element styling, a
 
 #### static finalized: boolean
 
-Marks class as having finished creating properties.
+プロパティの生成が完了しているかどうかを示すフラグ
+
+### プロパティ
+
+#### static createProperty(name: PropertyKey, options?: [PropertyDeclaration](https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration)): void
+
+Creates a property accessor on the element prototype if one does not exist and stores a PropertyDeclaration for the property with the given options. The property setter calls the property's hasChanged property option or uses a strict identity check to determine whether or not to request an update.
+This method may be overridden to customize properties; however, when doing so, it's important to call super.createProperty to ensure the property is setup correctly. This method calls getPropertyDescriptor internally to get a descriptor to install. To customize what properties do when they are get or set, override getPropertyDescriptor. To customize the options for a property, implement createProperty like this:
+
+```
+static createProperty(name, options) {
+  options = Object.assign(options, {myOption: true});
+  super.createProperty(name, options);
+}
+```
+
+#### elementProperties: PropertyDeclarationMap
+
+Memoized list of all element properties, including any superclass properties. Created lazily on user subclasses when finalizing the class.
 
 ---
 

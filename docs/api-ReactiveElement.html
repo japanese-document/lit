@@ -135,7 +135,18 @@ MyElement.enableWarning?.('migration');
 <h4 id="static_finalize()__boolean"><a href="#static_finalize()__boolean">static finalize(): boolean</a></h4>
 <p>Creates property accessors for registered properties, sets up element styling, and ensures any superclasses are also finalized. Returns true if the element was finalized.</p>
 <h4 id="static_finalized__boolean"><a href="#static_finalized__boolean">static finalized: boolean</a></h4>
-<p>Marks class as having finished creating properties.</p>
+<p>プロパティの生成が完了しているかどうかを示すフラグ</p>
+<h3 id="プロパティ"><a href="#プロパティ">プロパティ</a></h3>
+<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>): void</h4>
+<p>Creates a property accessor on the element prototype if one does not exist and stores a PropertyDeclaration for the property with the given options. The property setter calls the property's hasChanged property option or uses a strict identity check to determine whether or not to request an update.
+This method may be overridden to customize properties; however, when doing so, it's important to call super.createProperty to ensure the property is setup correctly. This method calls getPropertyDescriptor internally to get a descriptor to install. To customize what properties do when they are get or set, override getPropertyDescriptor. To customize the options for a property, implement createProperty like this:</p>
+<pre><code>static createProperty(name, options) {
+  options = Object.assign(options, {myOption: true});
+  super.createProperty(name, options);
+}
+</code></pre>
+<h4 id="elementProperties__PropertyDeclarationMap"><a href="#elementProperties__PropertyDeclarationMap">elementProperties: PropertyDeclarationMap</a></h4>
+<p>Memoized list of all element properties, including any superclass properties. Created lazily on user subclasses when finalizing the class.</p>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -193,6 +204,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_addInitializer(initializer__Initializer)__void">static addInitializer(initializer: Initializer): void</a></p>
 <p class="h4"><a href="#static_finalize()__boolean">static finalize(): boolean</a></p>
 <p class="h4"><a href="#static_finalized__boolean">static finalized: boolean</a></p>
+<p class="h3"><a href="#プロパティ">プロパティ</a></p>
+<p class="h4"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void">static createProperty(name: PropertyKey, options?: PropertyDeclaration): void</a></p>
+<p class="h4"><a href="#elementProperties__PropertyDeclarationMap">elementProperties: PropertyDeclarationMap</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
