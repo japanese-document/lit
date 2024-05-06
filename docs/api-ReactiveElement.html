@@ -137,7 +137,7 @@ MyElement.enableWarning?.('migration');
 <h4 id="static_finalized__boolean"><a href="#static_finalized__boolean">static finalized: boolean</a></h4>
 <p>プロパティの生成が完了しているかどうかを示すフラグ</p>
 <h3 id="プロパティ"><a href="#プロパティ">プロパティ</a></h3>
-<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>): void</h4>
+<h4 id="static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void">static createProperty(name: PropertyKey, options?: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): void</h4>
 <p>Creates a property accessor on the element prototype if one does not exist and stores a PropertyDeclaration for the property with the given options. The property setter calls the property's hasChanged property option or uses a strict identity check to determine whether or not to request an update.
 This method may be overridden to customize properties; however, when doing so, it's important to call super.createProperty to ensure the property is setup correctly. This method calls getPropertyDescriptor internally to get a descriptor to install. To customize what properties do when they are get or set, override getPropertyDescriptor. To customize the options for a property, implement createProperty like this:</p>
 <pre><code>static createProperty(name, options) {
@@ -145,8 +145,27 @@ This method may be overridden to customize properties; however, when doing so, i
   super.createProperty(name, options);
 }
 </code></pre>
-<h4 id="elementProperties__PropertyDeclarationMap"><a href="#elementProperties__PropertyDeclarationMap">elementProperties: PropertyDeclarationMap</a></h4>
+<h4 id="static_elementProperties__PropertyDeclarationMap"><a href="#static_elementProperties__PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></h4>
 <p>Memoized list of all element properties, including any superclass properties. Created lazily on user subclasses when finalizing the class.</p>
+<h4 id="static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: </a><a class="Link" href="https://lit.dev/docs/api/ReactiveElement/#PropertyDeclaration">PropertyDeclaration</a>&lt;unknown, unknown&gt;): undefined | PropertyDescriptor</h4>
+<p>Returns a property descriptor to be defined on the given named property. If no descriptor is returned, the property will not become an accessor. </p>
+<pre><code class="language-js">class MyElement extends LitElement {
+  static getPropertyDescriptor(name, key, options) {
+    const defaultDescriptor =
+        super.getPropertyDescriptor(name, key, options);
+    const setter = defaultDescriptor.set;
+    return {
+      get: defaultDescriptor.get,
+      set(value) {
+        setter.call(this, value);
+        // custom action.
+      },
+      configurable: true,
+      enumerable: true
+    }
+  }
+}
+</code></pre>
 <hr>
 <h2 id="License"><a href="#License">License</a></h2>
 <h3 id="Japanese_part"><a href="#Japanese_part">Japanese part</a></h3>
@@ -205,8 +224,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <p class="h4"><a href="#static_finalize()__boolean">static finalize(): boolean</a></p>
 <p class="h4"><a href="#static_finalized__boolean">static finalized: boolean</a></p>
 <p class="h3"><a href="#プロパティ">プロパティ</a></p>
-<p class="h4"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration)__void">static createProperty(name: PropertyKey, options?: PropertyDeclaration): void</a></p>
-<p class="h4"><a href="#elementProperties__PropertyDeclarationMap">elementProperties: PropertyDeclarationMap</a></p>
+<p class="h4"><a href="#static_createProperty(name__PropertyKey,_options___PropertyDeclaration-_unknown,_unknown_-)__void">static createProperty(name: PropertyKey, options?: PropertyDeclaration): void</a></p>
+<p class="h4"><a href="#static_elementProperties__PropertyDeclarationMap">static elementProperties: PropertyDeclarationMap</a></p>
+<p class="h4"><a href="#static_getPropertyDescriptor(name__PropertyKey,_key__string_|_symbol,_options__PropertyDeclaration-_unknown,_unknown_-)__undefined_|_PropertyDescriptor">static getPropertyDescriptor(name: PropertyKey, key: string | symbol, options: PropertyDeclaration): undefined | PropertyDescriptor</a></p>
 <p class="h2"><a href="#License">License</a></p>
 <p class="h3"><a href="#Japanese_part">Japanese part</a></p>
 <p class="h3"><a href="#Other">Other</a></p></nav></div>
